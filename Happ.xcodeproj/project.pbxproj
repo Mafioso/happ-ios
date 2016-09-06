@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
-		525A8AAA1D7D4023002C6F46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* ViewController.swift */; };
+		525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* LoginController.swift */; };
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		525A8AA91D7D4023002C6F46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		525A8AA91D7D4023002C6F46 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		525A8AAC1D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,14 +54,38 @@
 		525A8AA61D7D4023002C6F46 /* Happ */ = {
 			isa = PBXGroup;
 			children = (
-				525A8AA71D7D4023002C6F46 /* AppDelegate.swift */,
-				525A8AA91D7D4023002C6F46 /* ViewController.swift */,
+				525A8ABA1D7E87CE002C6F46 /* Controllers */,
+				525A8ABB1D7E87D4002C6F46 /* Views */,
 				525A8AAB1D7D4023002C6F46 /* Main.storyboard */,
+				525A8AB91D7E87B4002C6F46 /* Supporting Files */,
+			);
+			path = Happ;
+			sourceTree = "<group>";
+		};
+		525A8AB91D7E87B4002C6F46 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				525A8AA71D7D4023002C6F46 /* AppDelegate.swift */,
 				525A8AAE1D7D4023002C6F46 /* Assets.xcassets */,
 				525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */,
 				525A8AB31D7D4023002C6F46 /* Info.plist */,
 			);
-			path = Happ;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		525A8ABB1D7E87D4002C6F46 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				525A8AAA1D7D4023002C6F46 /* ViewController.swift in Sources */,
+				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +274,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hack.team.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -261,6 +286,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hack.team.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
