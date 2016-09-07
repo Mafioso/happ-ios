@@ -29,7 +29,11 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.translucent = true
+        self.navigationController!.view.backgroundColor = UIColor.clearColor()
+
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
         signInButton.layer.cornerRadius = 5
         signInButton.layer.masksToBounds = true
@@ -54,10 +58,7 @@ class LoginController: UIViewController {
         passwordTextField.leftView = leftView2
         passwordTextField.leftViewMode = UITextFieldViewMode.Always
         
-        
-        
-        
-        
+    
 
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
