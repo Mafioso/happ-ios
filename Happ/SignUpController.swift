@@ -32,42 +32,14 @@ class SignUpController: UIViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
         
-        
         signUpButton.layer.cornerRadius = 5
         signUpButton.layer.masksToBounds = true
-        
-        
-        // textfield icon position
-        let leftImageView1 = UIImageView()
-        leftImageView1.image = UIImage(named: "username-icon")
-        let leftView1 = UIView()
-        leftView1.addSubview(leftImageView1)
-        leftView1.frame = CGRectMake(0, 0, 20, 20)
-        leftImageView1.frame = CGRectMake(3, 0, 16, 16)
-        usernameTextField.leftView = leftView1
-        usernameTextField.leftViewMode = UITextFieldViewMode.Always
-        
-        let leftImageView2 = UIImageView()
-        leftImageView2.image = UIImage(named: "password-icon")
-        let leftView2 = UIView()
-        leftView2.addSubview(leftImageView2)
-        leftView2.frame = CGRectMake(0, 0, 20, 20)
-        leftImageView2.frame = CGRectMake(3, 0, 15, 15)
-        passwordTextField.leftView = leftView2
-        passwordTextField.leftViewMode = UITextFieldViewMode.Always
-        
-        let leftImageView3 = UIImageView()
-        leftImageView3.image = UIImage(named: "password-icon")
-        let leftView3 = UIView()
-        leftView3.addSubview(leftImageView3)
-        leftView3.frame = CGRectMake(0, 0, 20, 20)
-        leftImageView3.frame = CGRectMake(3, 0, 15, 15)
-        repeatPasswordTextField.leftView = leftView3
-        repeatPasswordTextField.leftViewMode = UITextFieldViewMode.Always
-        
-        
-        
-        
+
+        usernameTextField.addLeftViewImage("username-icon", size: 16)
+        passwordTextField.addLeftViewImage("password-icon", size: 15)
+        repeatPasswordTextField.addLeftViewImage("password-icon", size: 15)
+
+
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
@@ -119,21 +91,12 @@ class SignUpController: UIViewController {
         
         self.constraintSignInFormBottom.active = false
     }
-    
-    
+
+
     func dismissKeyboard() {
         view.endEditing(true)
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

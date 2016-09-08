@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PromiseKit
+import SwiftyJSON
 
 
 class LoginController: UIViewController {
@@ -16,16 +18,47 @@ class LoginController: UIViewController {
     @IBOutlet weak var constraintSignInToBottomContainer: NSLayoutConstraint!
 
     @IBOutlet weak var viewBottomContainer: UIView!
+    @IBOutlet weak var viewSignInFormSpinner: UIView!
+    @IBOutlet weak var viewSignInFormButton: UIView!
     @IBOutlet weak var appLogoImageView: UIImageView!
-    
+
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var enterWithFbButton: UIButton!
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    
-    
+
+
+    // actions
+    @IBAction func clickedSignInButton(sender: UIButton) {
+        if  let username = usernameTextField.text,
+            let password = passwordTextField.text {
+
+            self.displayFormSpinner()
+
+            PostSignIn(username, password: password)
+                .then { _ -> Promise<JSON> in
+                    return Get("users/current/", parameters: nil)
+                }
+                .then { data -> Void in
+                    let userData = data.dictionaryValue
+                    print(".done.Get.users/current", userData["username"]?.stringValue)
+                }
+                .always {
+                    self.displayFormButton()
+                }
+                .error { e in
+                    self.displayAlertView(e)
+                }
+        }
+    }
+
+
+    // constants
+    let placeholderUsername = "Username"
+    let placeholderPassword = "Password"
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,33 +70,17 @@ class LoginController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
         signInButton.layer.cornerRadius = 5
         signInButton.layer.masksToBounds = true
-        
-        
-        // textfield icon position 
-        let leftImageView1 = UIImageView()
-        leftImageView1.image = UIImage(named: "username-icon")
-        let leftView1 = UIView()
-        leftView1.addSubview(leftImageView1)
-        leftView1.frame = CGRectMake(0, 0, 20, 20)
-        leftImageView1.frame = CGRectMake(3, 0, 16, 16)
-        usernameTextField.leftView = leftView1
-        usernameTextField.leftViewMode = UITextFieldViewMode.Always
-        
-        let leftImageView2 = UIImageView()
-        leftImageView2.image = UIImage(named: "password-icon")
-        let leftView2 = UIView()
-        leftView2.addSubview(leftImageView2)
-        leftView2.frame = CGRectMake(0, 0, 20, 20)
-        leftImageView2.frame = CGRectMake(3, 0, 15, 15)
-        passwordTextField.leftView = leftView2
-        passwordTextField.leftViewMode = UITextFieldViewMode.Always
-        
-    
+
+        usernameTextField.addLeftViewImage("username-icon", size: 16)
+        usernameTextField.placeholder = placeholderUsername
+        passwordTextField.addLeftViewImage("password-icon", size: 15)
+        passwordTextField.placeholder = placeholderPassword
+
 
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
-        
+
         // init
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -80,7 +97,7 @@ class LoginController: UIViewController {
         // remove observer
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
+
     override func viewDidLayoutSubviews() {
         let path = UIBezierPath(roundedRect:enterWithFbButton.bounds,
                                 byRoundingCorners:[.TopRight, .BottomRight],
@@ -88,6 +105,23 @@ class LoginController: UIViewController {
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.CGPath
         enterWithFbButton.layer.mask = maskLayer
+    }
+
+    
+    func displayFormSpinner() {
+        UIView.transitionFromView(self.viewSignInFormButton,
+                                  toView: self.viewSignInFormSpinner,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+    }
+
+    func displayFormButton() {
+        UIView.transitionFromView(self.viewSignInFormSpinner,
+                                  toView: self.viewSignInFormButton,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
     }
 
 
@@ -103,13 +137,11 @@ class LoginController: UIViewController {
     }
 
     func keyboardWillHide(notification: NSNotification) {
-
         self.viewBottomContainer.hidden = false
         self.constraintSignInToBottomContainer.active = true
-
+        
         self.constraintSignInFormBottom.active = false
     }
-
 
     func dismissKeyboard() {
         view.endEditing(true)

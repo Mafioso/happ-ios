@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
 		525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* LoginController.swift */; };
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
+		52DD590E1D807E5D007E19E9 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UIUtils.swift */; };
 		B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */; };
 		B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */; };
 		B4FBF1FE1D80150100C0E08B /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4FBF1F51D80150100C0E08B /* SF-UI-Display-Black.otf */; };
@@ -23,9 +25,11 @@
 		B4FBF2041D80150100C0E08B /* SF-UI-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4FBF1FB1D80150100C0E08B /* SF-UI-Display-Semibold.otf */; };
 		B4FBF2051D80150100C0E08B /* SF-UI-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4FBF1FC1D80150100C0E08B /* SF-UI-Display-Thin.otf */; };
 		B4FBF2061D80150100C0E08B /* SF-UI-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4FBF1FD1D80150100C0E08B /* SF-UI-Display-Ultralight.otf */; };
+		EA904B86E06E4B888483A2AC /* Pods_Happ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F09CD227B477C346B2B17BC2 /* Pods_Happ.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		525A8AA91D7D4023002C6F46 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -33,6 +37,8 @@
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		525A8AB31D7D4023002C6F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52DD590D1D807E5D007E19E9 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+SubstituteFont.swift"; sourceTree = "<group>"; };
 		B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B4FBF1F51D80150100C0E08B /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-UI-Display-Black.otf"; path = "Happ/Resources/SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
@@ -44,6 +50,8 @@
 		B4FBF1FB1D80150100C0E08B /* SF-UI-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-UI-Display-Semibold.otf"; path = "Happ/Resources/SF-UI-Display-Semibold.otf"; sourceTree = "<group>"; };
 		B4FBF1FC1D80150100C0E08B /* SF-UI-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-UI-Display-Thin.otf"; path = "Happ/Resources/SF-UI-Display-Thin.otf"; sourceTree = "<group>"; };
 		B4FBF1FD1D80150100C0E08B /* SF-UI-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-UI-Display-Ultralight.otf"; path = "Happ/Resources/SF-UI-Display-Ultralight.otf"; sourceTree = "<group>"; };
+		E07E2D02365C57873BD4BAD9 /* Pods-Happ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.debug.xcconfig"; sourceTree = "<group>"; };
+		F09CD227B477C346B2B17BC2 /* Pods_Happ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Happ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,18 +59,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA904B86E06E4B888483A2AC /* Pods_Happ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03F87955DE275FEADA27D681 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F09CD227B477C346B2B17BC2 /* Pods_Happ.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B288F55FE6BC365F41DC971 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E07E2D02365C57873BD4BAD9 /* Pods-Happ.debug.xcconfig */,
+				9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		525025441D801DA40074E6B5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				525025451D801E2A0074E6B5 /* Requests.swift */,
+				52DD590D1D807E5D007E19E9 /* UIUtils.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		525A8A9B1D7D4023002C6F46 = {
 			isa = PBXGroup;
 			children = (
 				B4FBF1A71D7ED87900C0E08B /* Resources */,
 				525A8AA61D7D4023002C6F46 /* Happ */,
 				525A8AA51D7D4023002C6F46 /* Products */,
+				3B288F55FE6BC365F41DC971 /* Pods */,
+				03F87955DE275FEADA27D681 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +114,7 @@
 		525A8AA61D7D4023002C6F46 /* Happ */ = {
 			isa = PBXGroup;
 			children = (
+				525025441D801DA40074E6B5 /* Helpers */,
 				525A8ABA1D7E87CE002C6F46 /* Controllers */,
 				525A8ABB1D7E87D4002C6F46 /* Views */,
 				525A8AAB1D7D4023002C6F46 /* Main.storyboard */,
@@ -144,9 +182,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 525A8AB61D7D4023002C6F46 /* Build configuration list for PBXNativeTarget "Happ" */;
 			buildPhases = (
+				E4B51B99561F070FDB2A8E2C /* [CP] Check Pods Manifest.lock */,
 				525A8AA01D7D4023002C6F46 /* Sources */,
 				525A8AA11D7D4023002C6F46 /* Frameworks */,
 				525A8AA21D7D4023002C6F46 /* Resources */,
+				92ECE782AEB92BC1D28AE5CF /* [CP] Embed Pods Frameworks */,
+				0A627518EBC79DCAB2C7A64D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -212,6 +253,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A627518EBC79DCAB2C7A64D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92ECE782AEB92BC1D28AE5CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4B51B99561F070FDB2A8E2C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		525A8AA01D7D4023002C6F46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -220,6 +309,8 @@
 				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
+				52DD590E1D807E5D007E19E9 /* UIUtils.swift in Sources */,
+				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +422,7 @@
 		};
 		525A8AB71D7D4023002C6F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E07E2D02365C57873BD4BAD9 /* Pods-Happ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happ/Info.plist;
@@ -343,6 +435,7 @@
 		};
 		525A8AB81D7D4023002C6F46 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Happ/Info.plist;
