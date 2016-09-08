@@ -54,11 +54,6 @@ class LoginController: UIViewController {
     }
 
 
-    // constants
-    let placeholderUsername = "Username"
-    let placeholderPassword = "Password"
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,9 +67,7 @@ class LoginController: UIViewController {
         signInButton.layer.masksToBounds = true
 
         usernameTextField.addLeftViewImage("username-icon", size: 16)
-        usernameTextField.placeholder = placeholderUsername
         passwordTextField.addLeftViewImage("password-icon", size: 15)
-        passwordTextField.placeholder = placeholderPassword
 
 
         // init observers
@@ -107,7 +100,7 @@ class LoginController: UIViewController {
         enterWithFbButton.layer.mask = maskLayer
     }
 
-    
+
     func displayFormSpinner() {
         UIView.transitionFromView(self.viewSignInFormButton,
                                   toView: self.viewSignInFormSpinner,

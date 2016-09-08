@@ -7,24 +7,52 @@
 //
 
 import UIKit
+import PromiseKit
+import SwiftyJSON
+
 
 class SignUpController: UIViewController {
 
-    @IBOutlet weak var constraintSignInFormBottom: NSLayoutConstraint!
-    @IBOutlet weak var constraintSignInToBottomContainer: NSLayoutConstraint!
-    
+    // outlets
+    @IBOutlet weak var constraintSignUpFormBottom: NSLayoutConstraint!
+    @IBOutlet weak var constraintSignUpToBottomContainer: NSLayoutConstraint!
+
+
     @IBOutlet weak var bottomContainerView: UIView!
+    @IBOutlet weak var viewSignUpFormSpinner: UIView!
+    @IBOutlet weak var viewSignUpFormButton: UIView!
     @IBOutlet weak var enterWithFbButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
-    
-    
+
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var repeatPasswordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     
     
-    
-    
+
+    // actions
+    @IBAction func clickedSignUpButton(sender: UIButton) {
+        if  let username = usernameTextField.text,
+            let password = passwordTextField.text {
+
+            self.displayFormSpinner()
+            PostSignUp(username, password: password, email: emailTextField.text)
+                .then { _ -> Promise<JSON> in
+                    return Get("users/current/", parameters: nil)
+                }
+                .then { data -> Void in
+                    let userData = data.dictionaryValue
+                    print(".done.Get.users/current", userData["username"]?.stringValue)
+                }
+                .always {
+                    self.displayFormButton()
+                }
+                .error { e in
+                    self.displayAlertView(e)
+            }
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +65,8 @@ class SignUpController: UIViewController {
 
         usernameTextField.addLeftViewImage("username-icon", size: 16)
         passwordTextField.addLeftViewImage("password-icon", size: 15)
-        repeatPasswordTextField.addLeftViewImage("password-icon", size: 15)
+        //TODO: add icon
+        //emailTextField.addLeftViewImage("password-icon", size: 15)
 
 
         // init observers
@@ -47,8 +76,6 @@ class SignUpController: UIViewController {
         // init
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,32 +98,48 @@ class SignUpController: UIViewController {
         maskLayer.path = path.CGPath
         enterWithFbButton.layer.mask = maskLayer
     }
-    
-    
+
+
+    func displayFormSpinner() {
+        UIView.transitionFromView(self.viewSignUpFormButton,
+                                  toView: self.viewSignUpFormSpinner,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+    }
+
+    func displayFormButton() {
+        UIView.transitionFromView(self.viewSignUpFormSpinner,
+                                  toView: self.viewSignUpFormButton,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+    }
+
+
     func keyboardWillShow(notification: NSNotification) {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         self.bottomContainerView.hidden = true
-        self.constraintSignInToBottomContainer.active = false
+        //self.constraintSignUpToBottomContainer.active = false
         
-        self.constraintSignInFormBottom.constant  = keyboardFrame.size.height + 20
-        self.constraintSignInFormBottom.active = true
+        self.constraintSignUpFormBottom.constant  = keyboardFrame.size.height + 20
+        self.constraintSignUpFormBottom.active = true
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        
+
         self.bottomContainerView.hidden = false
-        self.constraintSignInToBottomContainer.active = true
-        
-        self.constraintSignInFormBottom.active = false
+        //self.constraintSignUpToBottomContainer.active = true
+
+        self.constraintSignUpFormBottom.active = false
     }
 
 
     func dismissKeyboard() {
         view.endEditing(true)
     }
-
 
 
 }

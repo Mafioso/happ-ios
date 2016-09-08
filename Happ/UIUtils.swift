@@ -27,7 +27,7 @@ extension UITextField {
 
 extension UIViewController {
     func displayAlertView(body: String) {
-        let alert = UIAlertController(title: "Ошибка", message: body, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Error 🤕", message: body, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -36,8 +36,6 @@ extension UIViewController {
         let reqError = error as! RequestError,
             body = reqError.description
 
-        let alert = UIAlertController(title: "Ошибка", message: body, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.displayAlertView(body)
     }
 }
