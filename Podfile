@@ -9,6 +9,7 @@ target 'Happ' do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
   pod 'PromiseKit', '~> 3.4'
+  pod 'SimpleKeychain'
   # pod 'JSONWebToken'
 
 

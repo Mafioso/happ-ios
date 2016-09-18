@@ -14,7 +14,6 @@ import PromiseKit
 
 let Host = "http://happ.westeurope.cloudapp.azure.com"
 let HostAPI = Host + "/api/v1/"
-var AccessToken: String?
 
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {
@@ -46,40 +45,12 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
         "Accept": "application/json"
     ]
     if isAuthenticated {
-        headers.merge(["Authorization": "JWT " + AccessToken!])
+        let accessToken = UserService.getCredential()
+        headers.merge(["Authorization": "JWT " + accessToken!])
     }
     return headers
 }
 
-
-
-func PostSignIn(username: String, password: String) -> Promise<Void> {
-    let parameters = [
-        "username": username,
-        "password": password
-    ]
-    
-    return Post("auth/login/", parameters: parameters, isAuthenticated: false)
-        .then { data in
-            AccessToken = data["token"].stringValue
-        }
-}
-
-
-func PostSignUp(username: String, password: String, email: String?) -> Promise<Void> {
-    var parameters = [
-        "username": username,
-        "password": password
-    ]
-    if email != nil {
-        parameters.merge(["email": email!])
-    }
-
-    return Post("auth/register/", parameters: parameters, isAuthenticated: false)
-        .then { data in
-            AccessToken = data["token"].stringValue
-        }
-}
 
 
 func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: Bool = true) -> Promise<JSON> {

@@ -36,7 +36,7 @@ class LoginController: UIViewController {
 
             self.displayFormSpinner()
 
-            PostSignIn(username, password: password)
+            UserService.signIn(username, password: password)
                 .then { _ -> Promise<JSON> in
                     return Get("users/current/", parameters: nil)
                 }

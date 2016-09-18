@@ -36,7 +36,7 @@ class SignUpController: UIViewController {
             let password = passwordTextField.text {
 
             self.displayFormSpinner()
-            PostSignUp(username, password: password, email: emailTextField.text)
+            UserService.signUp(username, password: password, email: emailTextField.text)
                 .then { _ -> Promise<JSON> in
                     return Get("users/current/", parameters: nil)
                 }
@@ -53,7 +53,7 @@ class SignUpController: UIViewController {
         }
     }
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

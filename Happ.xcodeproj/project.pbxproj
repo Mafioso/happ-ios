@@ -13,6 +13,7 @@
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
+		52A3C2C91D8F212E00C31F3F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2C81D8F212E00C31F3F /* UserService.swift */; };
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
 		B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */; };
@@ -38,6 +39,7 @@
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		525A8AB31D7D4023002C6F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52A3C2C81D8F212E00C31F3F /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		52DD590D1D807E5D007E19E9 /* UtilsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsUI.swift; sourceTree = "<group>"; };
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
 		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,8 +100,8 @@
 		525A8A9B1D7D4023002C6F46 = {
 			isa = PBXGroup;
 			children = (
-				B4FBF1A71D7ED87900C0E08B /* Resources */,
 				525A8AA61D7D4023002C6F46 /* Happ */,
+				B4FBF1A71D7ED87900C0E08B /* Resources */,
 				525A8AA51D7D4023002C6F46 /* Products */,
 				3B288F55FE6BC365F41DC971 /* Pods */,
 				03F87955DE275FEADA27D681 /* Frameworks */,
@@ -118,8 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				525025441D801DA40074E6B5 /* Helpers */,
-				525A8ABA1D7E87CE002C6F46 /* Controllers */,
-				525A8ABB1D7E87D4002C6F46 /* Views */,
+				52A3C2C71D8F20EB00C31F3F /* Services */,
+				52A3C2C61D8F20C600C31F3F /* Model */,
+				52A3C2C51D8F20BF00C31F3F /* ModelView */,
+				52A3C2C41D8F20B500C31F3F /* View */,
 				525A8AAB1D7D4023002C6F46 /* Main.storyboard */,
 				525A8AB91D7E87B4002C6F46 /* Supporting Files */,
 				B4FBF1D81D7FBD5C00C0E08B /* Extensions */,
@@ -152,6 +156,37 @@
 			children = (
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		52A3C2C41D8F20B500C31F3F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				525A8ABB1D7E87D4002C6F46 /* Views */,
+				525A8ABA1D7E87CE002C6F46 /* Controllers */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		52A3C2C51D8F20BF00C31F3F /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ModelView;
+			sourceTree = "<group>";
+		};
+		52A3C2C61D8F20C600C31F3F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		52A3C2C71D8F20EB00C31F3F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				52A3C2C81D8F212E00C31F3F /* UserService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		B4FBF1A71D7ED87900C0E08B /* Resources */ = {
@@ -317,6 +352,7 @@
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */,
+				52A3C2C91D8F212E00C31F3F /* UserService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

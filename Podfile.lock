@@ -19,19 +19,22 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.5.1):
     - PromiseKit/CorePromise
+  - SimpleKeychain (0.7.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - PromiseKit (~> 3.4)
+  - SimpleKeychain
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
+  SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: a9f15e6131f1322a30ea13970922cbb1efcdea4b
+PODFILE CHECKSUM: c1ca62eba1fbc4ed72544043411be916ebe396bb
 
 COCOAPODS: 1.0.1
