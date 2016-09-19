@@ -10,6 +10,7 @@ target 'Happ' do
   pod 'SwiftyJSON'
   pod 'PromiseKit', '~> 3.4'
   pod 'SimpleKeychain'
+  pod 'RealmSwift'
   # pod 'JSONWebToken'
 
 

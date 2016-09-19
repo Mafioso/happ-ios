@@ -13,6 +13,9 @@ import SwiftyJSON
 
 class LoginController: UIViewController {
 
+    private let viewModel: SignInViewModel
+
+
     // outlets
     @IBOutlet weak var constraintSignInFormBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintSignInToBottomContainer: NSLayoutConstraint!
@@ -30,20 +33,17 @@ class LoginController: UIViewController {
 
 
     // actions
+    @IBAction func clickedSignUpButton(sender: UIButton) {
+        self.viewModel.clickedSignUp()
+
+    }
     @IBAction func clickedSignInButton(sender: UIButton) {
         if  let username = usernameTextField.text,
             let password = passwordTextField.text {
 
-            self.displayFormSpinner()
 
-            UserService.signIn(username, password: password)
-                .then { _ -> Promise<JSON> in
-                    return Get("users/current/", parameters: nil)
-                }
-                .then { data -> Void in
-                    let userData = data.dictionaryValue
-                    print(".done.Get.users/current", userData["username"]?.stringValue)
-                }
+            self.displayFormSpinner()
+            self.viewModel.clickedSignIn(username, password)
                 .always {
                     self.displayFormButton()
                 }
@@ -53,6 +53,11 @@ class LoginController: UIViewController {
         }
     }
 
+
+    init(viewModel: SignInViewModel) {
+        self.viewModel = viewModel
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

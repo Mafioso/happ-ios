@@ -43,6 +43,20 @@ class UserService {
     }
 
 
+    class func isCredentialAvailable() -> Promise<Bool> {
+        // check for valid credential,
+        // fetch updated if was expired
+        
+        return Promise { fulfill, reject in
+            if let credential = UserService.getCredential() {
+                // check here
+                fulfill(true)
+            } else {
+                fulfill(false)
+            }
+        }
+    }
+
     class func getCredential() -> String? {
         let jwt = A0SimpleKeychain().stringForKey(keyJWT)
         return jwt
