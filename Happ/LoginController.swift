@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class LoginController: UIViewController {
 
-    private let viewModel: SignInViewModel
+    var viewModel: SignInViewModel!
 
 
     // outlets
@@ -35,37 +35,31 @@ class LoginController: UIViewController {
     // actions
     @IBAction func clickedSignUpButton(sender: UIButton) {
         self.viewModel.clickedSignUp()
-
     }
     @IBAction func clickedSignInButton(sender: UIButton) {
         if  let username = usernameTextField.text,
             let password = passwordTextField.text {
-
-
+            
+            
             self.displayFormSpinner()
-            self.viewModel.clickedSignIn(username, password)
+            self.viewModel.clickedSignIn(username, password: password)
                 .always {
                     self.displayFormButton()
                 }
                 .error { e in
                     self.displayAlertView(e)
-                }
+            }
         }
     }
 
 
-    init(viewModel: SignInViewModel) {
-        self.viewModel = viewModel
-    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController!.navigationBar.translucent = true
-        self.navigationController!.view.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
         signInButton.layer.cornerRadius = 5
@@ -74,7 +68,9 @@ class LoginController: UIViewController {
         usernameTextField.addLeftViewImage("username-icon", size: 16)
         passwordTextField.addLeftViewImage("password-icon", size: 15)
 
+        print(".LoginController.viewDidLoad", self.viewModel)
 
+        
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);

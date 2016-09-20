@@ -6,12 +6,23 @@ target 'Happ' do
   use_frameworks!
 
   # Pods for Happ
-  pod 'Alamofire', '~> 3.4'
-  pod 'SwiftyJSON'
   pod 'PromiseKit', '~> 3.4'
-  pod 'SimpleKeychain'
   pod 'RealmSwift'
+  pod 'Alamofire', '~> 3.4'
+  
+  pod 'SwiftyJSON'
+  pod 'ObjectMapper', '~> 1.3'
+  pod 'ObjectMapper+Realm'
+
+  pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
   # pod 'JSONWebToken'
 
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '2.3' # or '3.0'
+        end
+    end
+  end
 
 end

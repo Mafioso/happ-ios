@@ -12,13 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navigationCoordinator: NavigationCoordinator!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
+
+
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let navController = UINavigationController()
         
-        
+        self.navigationCoordinator = NavigationCoordinator(navigationController: navController)
+        self.navigationCoordinator.start()
+
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
 
         return true
     }

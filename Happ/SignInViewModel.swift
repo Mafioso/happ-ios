@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftyJSON
+import PromiseKit
 
 
 
@@ -16,27 +18,25 @@ class SignInViewModel {
     var navigateFeed: NavigationFunc
 
 
+    init() {
+        
+    }
+
+
     //MARK: - Events
     var didUpdate: (() -> Void)?
 
 
     //MARK: - Inputs
-    func clickedSignIn(username: String, password: String) -> Promise<NSNull> {
+    func clickedSignIn(username: String, password: String) -> Promise<Void> {
         return UserService.signIn(username, password: password)
-            .then { _ -> Promise<JSON> in
-                self.navigateFeed()
-            }
-            .then { _ -> Promise<JSON> in
-                return Get("users/current/", parameters: nil)
-            }
             .then { data -> Void in
-                let userData = data.dictionaryValue
-                print(".done.Get.users/current", userData["username"]?.stringValue)
+                self.navigateFeed!()
             }
     }
 
     func clickedSignUp() {
-        self.navigateSignUp()
+        self.navigateSignUp!()
     }
 
 }

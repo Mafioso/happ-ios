@@ -12,11 +12,22 @@ import PromiseKit
 
 class FeedViewModel {
     
+    
+    init() {
+        EventService.fetchFromServer()
+            .then { _ -> Void in
+                EventService.getEvents().forEach({ model in
+                    print(".event", model)
+                })
+            }
+    }
+
+    
     //MARK: - Events
     var didUpdate: (() -> Void)?
     
     
     //MARK: - Inputs
-    
+   
     
 }

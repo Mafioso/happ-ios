@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BlC-l3-FZA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -17,7 +17,7 @@
         <!--Login Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="LoginController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -204,7 +204,7 @@
                                                     <color key="titleColor" red="0.23921568627450979" green="0.65490196078431373" blue="0.61960784313725492" alpha="0.59966346153846151" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickedSignInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vmj-5g-UlQ"/>
+                                                    <action selector="clickedSignInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="koS-aj-tCw"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -329,7 +329,7 @@
                                                     </attributedString>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickedSignUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o17-mV-ViU"/>
+                                                    <action selector="clickedSignUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="myP-KH-oJO"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -352,10 +352,10 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="5rN-VK-qMj"/>
-                                                <exclude reference="LQu-qE-V4e"/>
-                                                <exclude reference="bqd-01-gFU"/>
                                                 <exclude reference="ERv-EW-jBl"/>
                                                 <exclude reference="Toj-nw-HUS"/>
+                                                <exclude reference="LQu-qE-V4e"/>
+                                                <exclude reference="bqd-01-gFU"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -365,10 +365,10 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="5rN-VK-qMj"/>
-                                                <include reference="LQu-qE-V4e"/>
-                                                <include reference="bqd-01-gFU"/>
                                                 <include reference="ERv-EW-jBl"/>
                                                 <include reference="Toj-nw-HUS"/>
+                                                <include reference="LQu-qE-V4e"/>
+                                                <include reference="bqd-01-gFU"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -470,17 +470,17 @@
                                             <mask key="constraints">
                                                 <exclude reference="1XS-NG-fC0"/>
                                                 <exclude reference="G59-Dr-edd"/>
-                                                <exclude reference="MzP-AW-DwL"/>
-                                                <exclude reference="O2S-Xm-lyn"/>
-                                                <exclude reference="Qdu-Zl-xJQ"/>
-                                                <exclude reference="T9C-UJ-xWR"/>
-                                                <exclude reference="lfV-Zk-Z8c"/>
                                                 <exclude reference="DFx-wY-crf"/>
                                                 <exclude reference="Fsd-IY-Ogj"/>
                                                 <exclude reference="JPg-s1-ADF"/>
                                                 <exclude reference="JVs-IC-m37"/>
                                                 <exclude reference="43B-7W-TEr"/>
                                                 <exclude reference="gR4-r4-OKh"/>
+                                                <exclude reference="MzP-AW-DwL"/>
+                                                <exclude reference="O2S-Xm-lyn"/>
+                                                <exclude reference="Qdu-Zl-xJQ"/>
+                                                <exclude reference="T9C-UJ-xWR"/>
+                                                <exclude reference="lfV-Zk-Z8c"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -492,17 +492,17 @@
                                             <mask key="constraints">
                                                 <include reference="1XS-NG-fC0"/>
                                                 <exclude reference="G59-Dr-edd"/>
-                                                <include reference="MzP-AW-DwL"/>
-                                                <exclude reference="O2S-Xm-lyn"/>
-                                                <include reference="Qdu-Zl-xJQ"/>
-                                                <exclude reference="T9C-UJ-xWR"/>
-                                                <include reference="lfV-Zk-Z8c"/>
                                                 <include reference="DFx-wY-crf"/>
                                                 <include reference="Fsd-IY-Ogj"/>
                                                 <exclude reference="JPg-s1-ADF"/>
                                                 <exclude reference="JVs-IC-m37"/>
                                                 <include reference="43B-7W-TEr"/>
                                                 <include reference="gR4-r4-OKh"/>
+                                                <include reference="MzP-AW-DwL"/>
+                                                <exclude reference="O2S-Xm-lyn"/>
+                                                <include reference="Qdu-Zl-xJQ"/>
+                                                <exclude reference="T9C-UJ-xWR"/>
+                                                <include reference="lfV-Zk-Z8c"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -630,73 +630,50 @@
                         <outlet property="viewBottomContainer" destination="sxR-Zi-AZh" id="y9k-i7-xAp"/>
                         <outlet property="viewSignInFormButton" destination="JwK-QV-qH7" id="7Tw-GK-Ufj"/>
                         <outlet property="viewSignInFormSpinner" destination="aHb-yH-DQy" id="Ola-vm-Dyc"/>
-                        <segue destination="6kA-Uh-CYf" kind="show" identifier="signUp" id="naf-4d-zCy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.5" y="234"/>
+            <point key="canvasLocation" x="1680" y="233"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="3BR-be-Ntt">
+        <!--Feed Collection View Controller-->
+        <scene sceneID="UbB-iR-LZG">
             <objects>
-                <viewController id="gXz-6J-hOt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Utf-6a-Eba"/>
-                        <viewControllerLayoutGuide type="bottom" id="fYH-rZ-9Dy"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rPw-Y6-Hxy">
+                <collectionViewController storyboardIdentifier="FeedPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="60L-Yy-vkh" customClass="FeedCollectionViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="nMK-Iv-K2p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="1qR-Hu-OUS"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K07-jd-7Ie" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="buQ-4x-B3e">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="s5K-3V-fS0">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="60L-Yy-vkh" id="zOO-Hd-bdX"/>
+                            <outlet property="delegate" destination="60L-Yy-vkh" id="dzA-sS-VDC"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sHZ-p7-IVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="826.5" y="1613"/>
-        </scene>
-        <!--Item 1-->
-        <scene sceneID="cxb-kN-ZIF">
-            <objects>
-                <viewController id="j8O-ef-Oh7" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="axP-qY-mtI"/>
-                        <viewControllerLayoutGuide type="bottom" id="opE-bM-woP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PsC-Je-Obd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="FcH-9p-Idx"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vvh-b1-xF1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="826.5" y="953"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="VP9-cx-Bte">
-            <objects>
-                <tabBarController id="Tiu-GS-4qm" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="vQC-ZX-alS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="j8O-ef-Oh7" kind="relationship" relationship="viewControllers" id="xG8-ji-miJ"/>
-                        <segue destination="gXz-6J-hOt" kind="relationship" relationship="viewControllers" id="Q4a-wz-xjn"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IKp-wM-W0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-103.5" y="1283"/>
+            <point key="canvasLocation" x="1680" y="973"/>
         </scene>
         <!--Sign Up Controller-->
         <scene sceneID="Wa8-2P-dtH">
             <objects>
-                <viewController id="6kA-Uh-CYf" customClass="SignUpController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6kA-Uh-CYf" customClass="SignUpController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iGs-EW-5Tc"/>
                         <viewControllerLayoutGuide type="bottom" id="sci-7S-ePg"/>
@@ -1229,24 +1206,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFp-Tf-BWr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1674" y="234"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="lDa-3X-wBr">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BlC-l3-FZA" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="b68-2T-zGb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5WZ-3v-kFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-91.5" y="234"/>
+            <point key="canvasLocation" x="2503" y="233"/>
         </scene>
     </scenes>
     <resources>

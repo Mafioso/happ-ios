@@ -16,3 +16,16 @@ extension Dictionary {
         }
     }
 }
+
+
+
+enum HappDateFormats: String {
+    case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
+}
+
+func dateParseFrom(format: HappDateFormats, value: String) -> NSDate {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = format.rawValue
+    return dateFormatter.dateFromString(value)!
+}
+

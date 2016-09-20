@@ -16,33 +16,47 @@ typealias NavigationFunc = (() -> Void)?
 class NavigationCoordinator {
     
     private let navigationController: UINavigationController
-    
+    private let storyboard: UIStoryboard
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
     }
-    
+
     func start() {
         UserService.isCredentialAvailable()
             .then { result in result ? self.showFeed() : self.showSignIn() }
     }
 
     func showSignIn() {
-        let viewModel = SignInViewModel()
-        viewModel.navigateSignUp = self.showSignUp()
-        viewModel.navigateFeed = self.showFeed()
+        print(".nav.showSignIn")
 
-        let viewController = LoginController(viewModel: viewModel)
-        self.navigationController.pushViewController(viewController, animated: true)
+        let viewModel = SignInViewModel()
+        viewModel.navigateSignUp = self.showSignUp
+        viewModel.navigateFeed = self.showFeed
+
+        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
+        viewController.viewModel = viewModel
+
+        self.navigationController.viewControllers = [viewController]
     }
 
     func showSignUp() {
         // TODO
+
+        print(".nav.showSignUp", self.navigationController.viewControllers)
+
+        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
+        self.navigationController.pushViewController(viewController, animated: true)
     }
 
     func showFeed() {
-        let viewModel = FeedViewModel
-        let viewController = FeedViewController(viewModel: viewModel)
-        self.navigationController.showViewController(viewController, sender: self)
+        print(".nav.showFeed")
+
+        let viewModel = FeedViewModel()
+        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
+        viewController.viewModel = viewModel
+        self.navigationController.viewControllers = [viewController]
     }
 }
 

@@ -9,7 +9,8 @@
 import Foundation
 import SwiftyJSON
 import PromiseKit
-import SimpleKeychain
+import KeychainSwift
+
 
 let keyJWT = "auth0-jwt"
 
@@ -22,7 +23,7 @@ class UserService {
         ]
 
         return Post("auth/login/", parameters: parameters, isAuthenticated: false)
-            .then { data in
+            .then { data -> Void in
                 UserService.storeCredential(data)
             }
     }
@@ -35,18 +36,16 @@ class UserService {
         if email != nil {
             parameters.merge(["email": email!])
         }
-        
+
         return Post("auth/register/", parameters: parameters, isAuthenticated: false)
-            .then { data in
+            .then { data  -> Void in
                 UserService.storeCredential(data)
             }
     }
 
 
+    // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
-        // check for valid credential,
-        // fetch updated if was expired
-        
         return Promise { fulfill, reject in
             if let credential = UserService.getCredential() {
                 // check here
@@ -58,13 +57,13 @@ class UserService {
     }
 
     class func getCredential() -> String? {
-        let jwt = A0SimpleKeychain().stringForKey(keyJWT)
+        let jwt = KeychainSwift().get(keyJWT)
         return jwt
     }
 
     private class func storeCredential(data: JSON) {
         let jwt = data["token"].stringValue
-        A0SimpleKeychain().setString(jwt, forKey: keyJWT)
+        KeychainSwift().set(jwt, forKey: keyJWT)
     }
     
 }
