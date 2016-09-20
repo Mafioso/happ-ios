@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import SwiftyJSON
 import PromiseKit
 import RealmSwift
+import ObjectMapper
+import ObjectMapper_Realm
 
 
 class EventService {
@@ -18,32 +19,16 @@ class EventService {
 
 
     class func fetchFromServer() -> Promise<Void> {
-        return Get(endpoint, parameters: nil)
-            .then { paginateData -> Void in
-                let results = paginateData.dictionaryValue["results"]!.arrayValue
-
-                let data = EventModel.clearRawData(results[0])
-                print(".fetchFromServer.SUCCESS!!")
-
-
-                results.forEach() { res in
-                    let data = EventModel.clearRawData(res)
-                    var inst = EventModel()
-                    data.forEach({ key, value in
-                        print("..", key, value, inst)
-
-                        inst.setValue(value, forKey: key)
-                    })
-                }
-                /*
+        return Get(endpoint, parameters: nil, isPaginated: true)
+            .then { data -> Void in
+                let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    results.forEach() { res in
-                        let data = EventModel.clearRawData(res)
-                        realm.create(EventModel.self, value: data, update: true)
+                    results.forEach() { event in
+                        let inst = Mapper<EventModel>().map(event)
+                        realm.add(inst!, update: true)
                     }
                 }
-                */
             }
     }
 

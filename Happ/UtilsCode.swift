@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 
 extension Dictionary {
@@ -21,11 +22,30 @@ extension Dictionary {
 
 enum HappDateFormats: String {
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+
+    func getFormatter() -> NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = self.rawValue
+        return formatter
+    }
+
+    func toString(date: NSDate) -> String {
+        return self.getFormatter().stringFromDate(date)
+    }
+
+    func toDate(value: String) -> NSDate? {
+        return self.getFormatter().dateFromString(value)
+    }
 }
 
-func dateParseFrom(format: HappDateFormats, value: String) -> NSDate {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = format.rawValue
-    return dateFormatter.dateFromString(value)!
-}
+
+let HappDateTransformer = TransformOf<NSDate, String>(fromJSON: { (value: String?) -> NSDate? in
+    return (value == nil) ? nil : HappDateFormats.ISOFormat.toDate(value!)
+    }, toJSON: { (value: NSDate?) -> String? in
+        return  (value == nil) ? nil : HappDateFormats.ISOFormat.toString(value!)
+})
+
+
+
 

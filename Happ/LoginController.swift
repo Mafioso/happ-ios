@@ -8,7 +8,6 @@
 
 import UIKit
 import PromiseKit
-import SwiftyJSON
 
 
 class LoginController: UIViewController {

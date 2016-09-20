@@ -9,11 +9,8 @@ target 'Happ' do
   pod 'PromiseKit', '~> 3.4'
   pod 'RealmSwift'
   pod 'Alamofire', '~> 3.4'
-  
-  pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 1.3'
   pod 'ObjectMapper+Realm'
-
   pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
   # pod 'JSONWebToken'
 

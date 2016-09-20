@@ -29,7 +29,6 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
-  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -38,7 +37,6 @@ DEPENDENCIES:
   - ObjectMapper+Realm
   - PromiseKit (~> 3.4)
   - RealmSwift
-  - SwiftyJSON
 
 EXTERNAL SOURCES:
   KeychainSwift:
@@ -59,8 +57,7 @@ SPEC CHECKSUMS:
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 78ee5bf73263b732def9e00647e9798ec1ed8dc6
+PODFILE CHECKSUM: ea8ec37f9e9a69821ee9f1985fcd5004dcfdeef0
 
 COCOAPODS: 1.0.1

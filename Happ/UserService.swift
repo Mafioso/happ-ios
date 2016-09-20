@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import PromiseKit
 import KeychainSwift
 
@@ -23,8 +22,8 @@ class UserService {
         ]
 
         return Post("auth/login/", parameters: parameters, isAuthenticated: false)
-            .then { data -> Void in
-                UserService.storeCredential(data)
+            .then { (data: AnyObject) -> Void in
+                UserService.storeCredential(data as! [String : AnyObject])
             }
     }
 
@@ -38,8 +37,8 @@ class UserService {
         }
 
         return Post("auth/register/", parameters: parameters, isAuthenticated: false)
-            .then { data  -> Void in
-                UserService.storeCredential(data)
+            .then { (data: AnyObject) -> Void in
+                UserService.storeCredential(data as! [String : AnyObject])
             }
     }
 
@@ -61,8 +60,8 @@ class UserService {
         return jwt
     }
 
-    private class func storeCredential(data: JSON) {
-        let jwt = data["token"].stringValue
+    private class func storeCredential(data: [String: AnyObject]) {
+        let jwt = data["token"] as! String
         KeychainSwift().set(jwt, forKey: keyJWT)
     }
     

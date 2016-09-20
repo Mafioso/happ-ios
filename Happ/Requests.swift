@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 import PromiseKit
 
 
@@ -53,20 +52,18 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
 
 
 
-func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: Bool = true) -> Promise<JSON> {
+func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
-        
         let url = HostAPI + endpoint
 
         Alamofire
             .request(.POST, url, headers: getRequestHeaders(isAuthenticated), parameters: parameters, encoding: .JSON)
             .validate()
             .responseJSON { response in
+
                 switch response.result {
                 case .Success:
-                    let swiftedJSON = JSON(response.result.value!)
-                    resolve(swiftedJSON)
-
+                    resolve(response.result.value!)
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
@@ -75,19 +72,17 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
                         reject(RequestError.UnknownError)
                     }
                 }
-                
+
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
-        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
 
 }
 
 
-func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<JSON> {
+func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool = false) -> Promise<AnyObject> {
     return Promise { resolve, reject in
-
         let url = HostAPI + endpoint
 
         Alamofire
@@ -96,9 +91,13 @@ func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<JSON> {
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    let swiftedJSON = JSON(response.result.value!)
-                    resolve(swiftedJSON)
-
+                    if isPaginated {
+                        let paginatedResponse = response.result.value as! NSDictionary
+                        let results = paginatedResponse["results"] as! [AnyObject]
+                        resolve(results)
+                    } else {
+                        resolve(response.result.value!)
+                    }
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
@@ -109,8 +108,7 @@ func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<JSON> {
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-            }
-
+        }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
 }

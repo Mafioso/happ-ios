@@ -8,7 +8,6 @@
 
 import UIKit
 import PromiseKit
-import SwiftyJSON
 
 
 class SignUpController: UIViewController {
@@ -37,12 +36,12 @@ class SignUpController: UIViewController {
 
             self.displayFormSpinner()
             UserService.signUp(username, password: password, email: emailTextField.text)
-                .then { _ -> Promise<JSON> in
+                .then { _ -> Promise<AnyObject> in
                     return Get("users/current/", parameters: nil)
                 }
                 .then { data -> Void in
-                    let userData = data.dictionaryValue
-                    print(".done.Get.users/current", userData["username"]?.stringValue)
+                    let userData = data as! [String: String]
+                    print(".done.Get.users/current", userData["username"])
                 }
                 .always {
                     self.displayFormButton()

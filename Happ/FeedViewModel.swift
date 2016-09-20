@@ -11,8 +11,8 @@ import PromiseKit
 
 
 class FeedViewModel {
-    
-    
+
+
     init() {
         EventService.fetchFromServer()
             .then { _ -> Void in
@@ -22,7 +22,7 @@ class FeedViewModel {
             }
     }
 
-    
+
     //MARK: - Events
     var didUpdate: (() -> Void)?
     
