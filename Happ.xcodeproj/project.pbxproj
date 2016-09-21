@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5210D1141D9052D1000A7C47 /* FeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210D1131D9052D1000A7C47 /* FeedCollectionViewController.swift */; };
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
+		5239C37E1D92434700F66E31 /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C37C1D92434700F66E31 /* EventCollectionCell.swift */; };
+		5239C37F1D92434700F66E31 /* EventCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5239C37D1D92434700F66E31 /* EventCollectionCell.xib */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
 		525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* LoginController.swift */; };
@@ -43,6 +45,8 @@
 		5210D1161D90557B000A7C47 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		5239C37C1D92434700F66E31 /* EventCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
+		5239C37D1D92434700F66E31 /* EventCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCollectionCell.xib; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 		525A8ABB1D7E87D4002C6F46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5239C37C1D92434700F66E31 /* EventCollectionCell.swift */,
+				5239C37D1D92434700F66E31 /* EventCollectionCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 				525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */,
 				525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */,
 				B4FBF2051D80150100C0E08B /* SF-UI-Display-Thin.otf in Resources */,
+				5239C37F1D92434700F66E31 /* EventCollectionCell.xib in Resources */,
 				B4FBF1FE1D80150100C0E08B /* SF-UI-Display-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +385,7 @@
 			files = (
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
 				5210D1141D9052D1000A7C47 /* FeedCollectionViewController.swift in Sources */,
+				5239C37E1D92434700F66E31 /* EventCollectionCell.swift in Sources */,
 				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
