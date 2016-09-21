@@ -16,11 +16,16 @@ typealias NavigationFunc = (() -> Void)?
 class NavigationCoordinator {
     
     private let navigationController: UINavigationController
-    private let storyboard: UIStoryboard
+    private let authStoryboard: UIStoryboard
+    private let mainStoryboard: UIStoryboard
+    private let eventStoryboard: UIStoryboard
+
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        self.authStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
+        self.eventStoryboard = UIStoryboard(name: "Event", bundle: nil)
     }
 
     func start() {
@@ -35,7 +40,7 @@ class NavigationCoordinator {
         viewModel.navigateSignUp = self.showSignUp
         viewModel.navigateFeed = self.showFeed
 
-        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
+        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
         viewController.viewModel = viewModel
 
         self.navigationController.viewControllers = [viewController]
@@ -46,7 +51,7 @@ class NavigationCoordinator {
 
         print(".nav.showSignUp", self.navigationController.viewControllers)
 
-        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
+        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
@@ -54,7 +59,7 @@ class NavigationCoordinator {
         print(".nav.showFeed")
 
         let viewModel = FeedViewModel()
-        let viewController = self.storyboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
+        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
         viewController.viewModel = viewModel
         self.navigationController.viewControllers = [viewController]
     }

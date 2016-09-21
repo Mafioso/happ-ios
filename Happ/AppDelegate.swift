@@ -20,12 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 
 
+        if self.window?.rootViewController != nil {
+            return true
+        }
+
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let navController = UINavigationController()
         
         self.navigationCoordinator = NavigationCoordinator(navigationController: navController)
         self.navigationCoordinator.start()
-
+        
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
 
