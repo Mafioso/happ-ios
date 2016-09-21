@@ -19,13 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 
+        
+        if let currentRootController = self.window?.rootViewController {
+            return true
+        }
 
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let navController = UINavigationController()
         
         self.navigationCoordinator = NavigationCoordinator(navigationController: navController)
         self.navigationCoordinator.start()
-
+        
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
 
