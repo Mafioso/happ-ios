@@ -32,7 +32,7 @@ class EventService {
             }
     }
 
-    class func getEvents() -> Results<EventModel> {
+    class func getStoredEvents() -> Results<EventModel> {
         let realm = try! Realm()
         return realm.objects(EventModel)
     }

@@ -22,6 +22,7 @@ extension Dictionary {
 
 enum HappDateFormats: String {
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    case EventOnFeed = "MMMM d, H:mm a"
 
 
     func getFormatter() -> NSDateFormatter {

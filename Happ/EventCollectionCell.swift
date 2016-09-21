@@ -23,13 +23,28 @@ class EventCollectionCell: UICollectionViewCell {
 
     // actions
     @IBAction func clickedLikeButton(sender: UIButton) {
+        self.onClickLikeButton?(event: self.event!)
     }
-    
-    
-    
+
+
+    private var event: EventModel?
+    var onClickLikeButton: ((event: EventModel) -> (Void))?
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+
+    func setup(event: EventModel) {
+        labelTitle.text = event.title
+        // TODO fetch category
+        // viewCategory.backgroundColor = event.type.color
+        labelCategory.text = String(event.type)
+        labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
+        labelPrice.text = event.getPrice(.MinPrice)
+
+        self.event = event
+    }
 }

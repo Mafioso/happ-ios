@@ -47,9 +47,7 @@ class NavigationCoordinator {
     }
 
     func showSignUp() {
-        // TODO
-
-        print(".nav.showSignUp", self.navigationController.viewControllers)
+        print(".nav.showSignUp")
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
         self.navigationController.pushViewController(viewController, animated: true)

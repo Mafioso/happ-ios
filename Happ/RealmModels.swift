@@ -128,6 +128,29 @@ class AuthorPhoneModel: Object, Mappable {
 
 
 
+enum EventModelPriceTypes {
+    case MinPrice
+    case MaxPrice
+    
+    func format(value: Int?, currency: CurrencyModel) -> String {
+        switch self {
+        case .MinPrice:
+            if value == nil {
+                return "FREE"
+            } else {
+                return format(value!) + " " + currency.name
+            }
+        case .MaxPrice:
+            return format(value!) + " " + currency.name
+        }
+    }
+
+    func format(value: Int) -> String {
+        // TODO add real formatting
+        return String(value)
+    }
+}
+
 
 class EventModel: Object, Mappable {
     dynamic var id = ""
@@ -188,5 +211,18 @@ class EventModel: Object, Mappable {
 
     override static func primaryKey() -> String? {
         return "id"
+    }
+
+
+    func getPrice(priceType: EventModelPriceTypes) -> String {
+        var price: Int?
+        switch priceType {
+        case .MinPrice:
+            price = self.min_price.value
+        case .MaxPrice:
+            price = self.max_price.value
+        }
+
+        return priceType.format(price, currency: self.currency!)
     }
 }
