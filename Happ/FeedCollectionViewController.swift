@@ -12,6 +12,7 @@ import Foundation
 
 private let reuseIdentifier = "Cell"
 
+
 class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     
@@ -20,6 +21,8 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
             self.bindToViewModel()
         }
     }
+    private var sizingCellNew: EventCollectionCell!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +31,11 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         // self.clearsSelectionOnViewWillAppear = false
 
         // init
-        self.collectionView!.registerNib(UINib(nibName: "EventCollectionCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        // prepare for cell sizing
+        let sizingNibNew = NSBundle.mainBundle().loadNibNamed(EventCollectionCell.nibName, owner: self, options: nil)! as NSArray
+        self.sizingCellNew = (sizingNibNew.objectAtIndex(0) as? EventCollectionCell)!
+
 
         self.viewModelDidUpdate()
     }
@@ -55,6 +62,8 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+
+
         return CGSizeMake(collectionView.bounds.size.width, 233)
     }
 

@@ -10,7 +10,7 @@
         <scene sceneID="UbB-iR-LZG">
             <objects>
                 <collectionViewController storyboardIdentifier="FeedPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="60L-Yy-vkh" customClass="FeedCollectionViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" pagingEnabled="YES" dataMode="prototypes" id="nMK-Iv-K2p">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="nMK-Iv-K2p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
