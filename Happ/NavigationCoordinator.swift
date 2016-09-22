@@ -35,8 +35,7 @@ class NavigationCoordinator {
 
     func showSignIn() {
         print(".nav.showSignIn")
-
-        let viewModel = SignInViewModel()
+        let viewModel = AuthenticationViewModel()
         viewModel.navigateSignUp = self.showSignUp
         viewModel.navigateFeed = self.showFeed
 
@@ -48,15 +47,18 @@ class NavigationCoordinator {
 
     func showSignUp() {
         print(".nav.showSignUp")
+        let viewModel = AuthenticationViewModel()
+        viewModel.navigateFeed = self.showFeed
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
+        viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
     func showFeed() {
         print(".nav.showFeed")
-
         let viewModel = FeedViewModel()
+        
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
         viewController.viewModel = viewModel
         self.navigationController.viewControllers = [viewController]

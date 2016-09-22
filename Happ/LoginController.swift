@@ -12,7 +12,7 @@ import PromiseKit
 
 class LoginController: UIViewController {
 
-    var viewModel: SignInViewModel!
+    var viewModel: AuthenticationViewModel!
 
 
     // outlets
@@ -38,8 +38,7 @@ class LoginController: UIViewController {
     @IBAction func clickedSignInButton(sender: UIButton) {
         if  let username = usernameTextField.text,
             let password = passwordTextField.text {
-            
-            
+
             self.displayFormSpinner()
             self.viewModel.clickedSignIn(username, password: password)
                 .always {
@@ -67,9 +66,7 @@ class LoginController: UIViewController {
         usernameTextField.addLeftViewImage("username-icon", size: 16)
         passwordTextField.addLeftViewImage("password-icon", size: 15)
 
-        print(".LoginController.viewDidLoad", self.viewModel)
 
-        
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
