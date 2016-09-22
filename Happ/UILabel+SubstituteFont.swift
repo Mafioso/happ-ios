@@ -14,7 +14,7 @@ extension UILabel {
     
     var substituteFontName : String {
         get { return self.font.fontName }
-        set { self.font = UIFont(name: newValue, size: self.font.pointSize) }
+        set { self.font = UIFont(name: "SF UI Text", size: self.font.pointSize) }
     }
     
 }
