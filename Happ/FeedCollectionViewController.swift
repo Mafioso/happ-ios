@@ -21,7 +21,6 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
             self.bindToViewModel()
         }
     }
-    private var sizingCellNew: EventCollectionCell!
 
 
     override func viewDidLoad() {
@@ -30,12 +29,8 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // init
-        self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        // prepare for cell sizing
-        let sizingNibNew = NSBundle.mainBundle().loadNibNamed(EventCollectionCell.nibName, owner: self, options: nil)! as NSArray
-        self.sizingCellNew = (sizingNibNew.objectAtIndex(0) as? EventCollectionCell)!
 
+        self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
         self.viewModelDidUpdate()
     }
@@ -91,33 +86,16 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let event = self.viewModel.events[indexPath.row]
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+        self.viewModel.clickedOnEvent(event)
     }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
+
+
+
+
+
+

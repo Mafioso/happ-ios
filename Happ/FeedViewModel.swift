@@ -14,6 +14,8 @@ class FeedViewModel {
 
     var events: [EventModel] = []
 
+    var navigateEventDetails: NavigationFuncWithID
+
 
     init() {
         // get from DB
@@ -35,7 +37,9 @@ class FeedViewModel {
     func clickedLikeOnEvent(event: EventModel) {
         print(".FeedViewModel.inputs.clickedLikeOnEvent", event.id)
     }
-
+    func clickedOnEvent(event: EventModel) {
+        self.navigateEventDetails!(id: event.id)
+    }
 
     private func getFiltered() -> [EventModel] {
         return Array(EventService.getStoredEvents())

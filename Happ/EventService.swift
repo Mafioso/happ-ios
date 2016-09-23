@@ -36,5 +36,12 @@ class EventService {
         let realm = try! Realm()
         return realm.objects(EventModel)
     }
+
+    class func getByID(id: String) -> EventModel? {
+        let realm = try! Realm()
+        let result = realm.objects(EventModel.self)
+                        .filter("id == %@", id)
+        return result.first
+    }
     
 }

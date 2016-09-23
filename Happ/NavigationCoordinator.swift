@@ -11,6 +11,7 @@ import PromiseKit
 
 
 typealias NavigationFunc = (() -> Void)?
+typealias NavigationFuncWithID = ((id: String) -> Void)?
 
 
 class NavigationCoordinator {
@@ -58,10 +59,21 @@ class NavigationCoordinator {
     func showFeed() {
         print(".nav.showFeed")
         let viewModel = FeedViewModel()
-        
+        viewModel.navigateEventDetails = self.showEventDetails
+
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
         viewController.viewModel = viewModel
         self.navigationController.viewControllers = [viewController]
     }
+
+    func showEventDetails(forID: String) {
+        let viewModel = EventViewModel(forID: forID)
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
+        viewController.viewModel = viewModel
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
 }
+
+
 
