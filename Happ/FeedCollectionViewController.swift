@@ -29,6 +29,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
+        self.displayNavigationBar()
 
         self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
@@ -51,7 +52,6 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         self.collectionView?.reloadData()
     }
 
-    
 
     // MARK: UICollectionViewDelegateFlowLayout
     
@@ -95,6 +95,37 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
 }
 
 
+
+extension FeedCollectionViewController {
+    
+    private func displayNavigationBar() {
+        // Create the navigation bar
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 20, self.view.frame.size.width, 44)) // Offset by 20 pixels vertically to take the status bar into account
+        navigationBar.backgroundColor = UIColor.whiteColor()
+
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "Title"
+        
+        // Create left and right button for navigation item
+        let leftButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedCollectionViewController.handleClickOnMenu))
+        let rightButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
+
+        // Create two buttons for the navigation item
+        navigationItem.leftBarButtonItem = leftButton
+        navigationItem.rightBarButtonItem = rightButton
+        
+        // Assign the navigation item to the navigation bar
+        navigationBar.items = [navigationItem]
+        
+        // Make the navigation bar a subview of the current view controller
+        self.view.addSubview(navigationBar)
+    }
+
+    func handleClickOnMenu() {
+        self.viewModel.displaySlideMenu!()
+    }
+}
 
 
 

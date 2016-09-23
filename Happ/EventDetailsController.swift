@@ -48,7 +48,7 @@ class EventDetailsController: UIViewController {
         gradient.frame = viewSecondContainer.bounds
         gradient.colors = [UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0).CGColor, UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.3).CGColor]
         viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
-        
+
 
         self.viewModelDidUpdate()
     }

@@ -30,6 +30,7 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - SlideMenuControllerSwift (2.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -39,16 +40,23 @@ DEPENDENCIES:
   - ObjectMapper+Realm
   - PromiseKit (~> 3.4)
   - RealmSwift
+  - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.3`)
 
 EXTERNAL SOURCES:
   KeychainSwift:
     :branch: swift_2_3
     :git: https://github.com/marketplacer/keychain-swift.git
+  SlideMenuControllerSwift:
+    :branch: swift2.3
+    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
 
 CHECKOUT OPTIONS:
   KeychainSwift:
     :commit: bd1f7dd023fb26f92a5a94d44e6450aa44dacc29
     :git: https://github.com/marketplacer/keychain-swift.git
+  SlideMenuControllerSwift:
+    :commit: cd6d807f5ee69091e9d1301779a05f6e9a2e5173
+    :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
@@ -60,7 +68,8 @@ SPEC CHECKSUMS:
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
 
-PODFILE CHECKSUM: 1854dbf326cdd9513d0a2009b1147bb3e1c79c8c
+PODFILE CHECKSUM: 7fe383e9129dd4ab9a579b339bae815df91e2e70
 
 COCOAPODS: 1.0.1

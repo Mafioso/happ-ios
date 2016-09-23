@@ -15,6 +15,7 @@ class FeedViewModel {
     var events: [EventModel] = []
 
     var navigateEventDetails: NavigationFuncWithID
+    var displaySlideMenu: NavigationFunc
 
 
     init() {

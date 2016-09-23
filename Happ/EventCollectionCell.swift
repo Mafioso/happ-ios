@@ -44,7 +44,7 @@ class EventCollectionCell: UICollectionViewCell {
         labelTitle.text = event.title
         // TODO fetch category
         // viewCategory.backgroundColor = event.type.color
-        labelCategory.text = String(event.type)
+        labelCategory.text = event.interests.first?.title
         labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         labelPrice.text = event.getPrice(.MinPrice)
         labelStatLikes.text = formatStatValue(event.votes_num)

@@ -618,6 +618,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="VtQ-KI-qKl"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="appLogoImageView" destination="HUy-HZ-iah" id="ju0-Vm-Vex"/>
@@ -1157,6 +1158,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="bottomContainerView" destination="2h8-6l-UpK" id="iRY-qe-55s"/>
                         <outlet property="constraintSignUpFormBottom" destination="M04-wT-gf0" id="hge-iK-WVO"/>
