@@ -15,7 +15,7 @@ private let reuseIdentifier = "Cell"
 
 class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    
+
     var viewModel: FeedViewModel! {
         didSet {
             self.bindToViewModel()
@@ -45,7 +45,6 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         // Dispose of any resources that can be recreated.
     }
 
-    
 
     private func bindToViewModel() {
         self.viewModel.didUpdate = { [weak self] _ in

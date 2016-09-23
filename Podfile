@@ -11,6 +11,7 @@ target 'Happ' do
   pod 'Alamofire', '~> 3.4'
   pod 'ObjectMapper', '~> 1.3'
   pod 'ObjectMapper+Realm'
+  pod 'HanekeSwift'
   pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
   # pod 'JSONWebToken'
 

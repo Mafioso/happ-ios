@@ -45,7 +45,8 @@ class UserService {
 
     // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
-        UserService.deleteCredential()
+
+        //  UserService.deleteCredential()
         return Promise { fulfill, reject in
             if let credential = UserService.getCredential() {
                 // check here

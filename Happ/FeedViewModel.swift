@@ -13,11 +13,11 @@ import PromiseKit
 class FeedViewModel {
 
     var events: [EventModel] = []
-    
+
 
     init() {
         // get from DB
-        self.events = self.getFiltered()
+        //self.events = self.getFiltered()
 
         EventService.fetchFromServer()
             .then { _ -> Void in

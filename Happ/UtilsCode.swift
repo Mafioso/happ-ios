@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import RealmSwift
 
 
 extension Dictionary {
@@ -18,6 +19,10 @@ extension Dictionary {
     }
 }
 
+
+func formatStatValue(value: Int) -> String {
+    return String(value)
+}
 
 
 enum HappDateFormats: String {
@@ -46,6 +51,54 @@ let HappDateTransformer = TransformOf<NSDate, String>(fromJSON: { (value: String
     }, toJSON: { (value: NSDate?) -> String? in
         return  (value == nil) ? nil : HappDateFormats.ISOFormat.toString(value!)
 })
+
+
+
+// gist source: https://gist.github.com/Jerrot/fe233a94c5427a4ec29b
+class ArrayTransform<T:RealmSwift.Object where T:Mappable> : TransformType {
+    typealias Object = List<T>
+    typealias JSON = Array<AnyObject>
+
+    let mapper = Mapper<T>()
+
+    func transformFromJSON(value: AnyObject?) -> List<T>? {
+        var result = List<T>()
+        if let tempArr = value as! Array<AnyObject>? {
+            for entry in tempArr {
+                let mapper = Mapper<T>()
+                let model : T = mapper.map(entry)!
+                result.append(model)
+            }
+        }
+        return result
+    }
+
+    func transformToJSON(value: Object?) -> JSON? {
+        var results = [AnyObject]()
+        if let value = value {
+            for obj in value {
+                let json = mapper.toJSON(obj)
+                results.append(json)
+            }
+        }
+        return results
+    }
+}
+
+
+private let ArrayStringTransformerSeparator = "#NEXT_VALUE#"
+let ArrayStringTransformer = TransformOf<String, [String]>(fromJSON: { (value: [String]?) -> String? in
+    var result = ""
+    if value != nil {
+        result = value!.joinWithSeparator(ArrayStringTransformerSeparator)
+    }
+    return result
+
+    }, toJSON: { (value: String?) -> [String]? in
+        let result = value?.componentsSeparatedByString(ArrayStringTransformerSeparator)
+        return result!
+})
+
 
 
 

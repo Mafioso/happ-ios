@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.5.0)
+  - HanekeSwift (0.10.1)
   - KeychainSwift (3.0.16)
   - ObjectMapper (1.4.0)
   - ObjectMapper+Realm (0.1):
@@ -32,6 +33,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - HanekeSwift
   - KeychainSwift (from `https://github.com/marketplacer/keychain-swift.git`, branch `swift_2_3`)
   - ObjectMapper (~> 1.3)
   - ObjectMapper+Realm
@@ -50,6 +52,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
   ObjectMapper+Realm: dbcf666c2081d82dc527b054c574b9f3777df060
@@ -58,6 +61,6 @@ SPEC CHECKSUMS:
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
 
-PODFILE CHECKSUM: ea8ec37f9e9a69821ee9f1985fcd5004dcfdeef0
+PODFILE CHECKSUM: 1854dbf326cdd9513d0a2009b1147bb3e1c79c8c
 
 COCOAPODS: 1.0.1

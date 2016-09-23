@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Haneke
+
+
 
 class EventCollectionCell: UICollectionViewCell {
 
@@ -44,10 +47,15 @@ class EventCollectionCell: UICollectionViewCell {
         labelCategory.text = String(event.type)
         labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         labelPrice.text = event.getPrice(.MinPrice)
+        labelStatLikes.text = formatStatValue(event.votes_num)
+
+        if let imageURL = event.images[0] {
+            imageCover.hnk_setImageFromURL(imageURL)
+        }
 
         self.event = event
     }
-    
+
 
     func preferredLayoutSizeFittingSize(targetSize: CGSize)-> CGSize {
         let originalFrame = self.frame
