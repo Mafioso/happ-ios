@@ -10,9 +10,6 @@
         <array key="SF-UI-Display-Heavy.otf">
             <string>SFUIDisplay-Heavy</string>
         </array>
-        <array key="SF-UI-Text-Light.otf">
-            <string>SFUIText-Light</string>
-        </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
@@ -533,211 +530,6 @@
             <point key="canvasLocation" x="3960.8000000000002" y="635.53223388305855"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="MPh-hp-i4C">
-            <objects>
-                <viewController id="e20-wZ-WFg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="epp-qR-7T9"/>
-                        <viewControllerLayoutGuide type="bottom" id="XJP-2V-Hwm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HWy-32-i0d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZb-dc-hkG">
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdR-VS-lk9" userLabel="First Upper View">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fK8-Fc-TdS">
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                </variation>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Art Fest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9i-d6-Ppy">
-                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
-                                                <color key="textColor" red="0.29789532864652413" green="0.29945499005305043" blue="0.29945499005305043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
-                                                </variation>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTY-Io-JEy">
-                                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="gTY-Io-JEy" firstAttribute="top" secondItem="p9i-d6-Ppy" secondAttribute="bottom" constant="3" id="ACX-NR-kkG"/>
-                                            <constraint firstAttribute="trailing" secondItem="gTY-Io-JEy" secondAttribute="trailing" constant="14" id="GEb-Pk-3Qc"/>
-                                            <constraint firstAttribute="bottom" secondItem="gTY-Io-JEy" secondAttribute="bottom" constant="14" id="Peq-sS-5Qh"/>
-                                            <constraint firstItem="fK8-Fc-TdS" firstAttribute="top" secondItem="kdR-VS-lk9" secondAttribute="top" constant="21" id="XjQ-4l-rDW"/>
-                                            <constraint firstItem="fK8-Fc-TdS" firstAttribute="leading" secondItem="kdR-VS-lk9" secondAttribute="leading" constant="10" id="dZX-l2-BYA"/>
-                                            <constraint firstItem="gTY-Io-JEy" firstAttribute="top" secondItem="fK8-Fc-TdS" secondAttribute="bottom" constant="3" id="dov-ro-6ts"/>
-                                            <constraint firstAttribute="trailing" secondItem="p9i-d6-Ppy" secondAttribute="trailing" constant="15" id="g9j-Fb-jKq"/>
-                                            <constraint firstItem="gTY-Io-JEy" firstAttribute="leading" secondItem="kdR-VS-lk9" secondAttribute="leading" constant="11" id="iEz-I1-aAn"/>
-                                            <constraint firstAttribute="height" constant="60" id="nFT-52-uIc"/>
-                                            <constraint firstItem="p9i-d6-Ppy" firstAttribute="top" secondItem="kdR-VS-lk9" secondAttribute="top" constant="21" id="oWE-Iq-Iyy"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obB-rm-Ho1" userLabel="Second Upper View">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3z-OL-tvF">
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                </variation>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Art Fest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ry-z9-Y0L">
-                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
-                                                <color key="textColor" red="0.29789532860000001" green="0.29945499009999998" blue="0.29945499009999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="17"/>
-                                                </variation>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7US-2S-w5F">
-                                                <color key="backgroundColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="59" id="3p8-FU-zQI"/>
-                                            <constraint firstItem="g3z-OL-tvF" firstAttribute="top" secondItem="obB-rm-Ho1" secondAttribute="top" constant="21" id="AeT-4V-xOd"/>
-                                            <constraint firstItem="7US-2S-w5F" firstAttribute="leading" secondItem="obB-rm-Ho1" secondAttribute="leading" constant="10" id="Dxp-9F-KMV"/>
-                                            <constraint firstItem="7US-2S-w5F" firstAttribute="top" secondItem="5Ry-z9-Y0L" secondAttribute="bottom" constant="3" id="Sl2-bl-85a"/>
-                                            <constraint firstAttribute="bottom" secondItem="7US-2S-w5F" secondAttribute="bottom" constant="13" id="Uku-Wr-pIE"/>
-                                            <constraint firstAttribute="trailing" secondItem="7US-2S-w5F" secondAttribute="trailing" constant="15" id="WY1-1N-e97"/>
-                                            <constraint firstItem="5Ry-z9-Y0L" firstAttribute="top" secondItem="obB-rm-Ho1" secondAttribute="top" constant="21" id="WxU-sI-obc"/>
-                                            <constraint firstItem="7US-2S-w5F" firstAttribute="top" secondItem="g3z-OL-tvF" secondAttribute="bottom" constant="3" id="laN-Pw-f1j"/>
-                                            <constraint firstItem="g3z-OL-tvF" firstAttribute="leading" secondItem="obB-rm-Ho1" secondAttribute="leading" constant="10" id="vjh-Kn-HAc"/>
-                                            <constraint firstAttribute="trailing" secondItem="5Ry-z9-Y0L" secondAttribute="trailing" constant="15" id="yOT-O2-JfM"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EmA-f8-mgd" userLabel="Middle Desc View">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9n-sZ-GD8">
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                </variation>
-                                            </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BOW-4j-lre">
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="196" id="hCQ-lo-rOl"/>
-                                                </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="BOW-4j-lre" secondAttribute="trailing" constant="8" id="2pF-Ld-qqa"/>
-                                            <constraint firstAttribute="bottom" secondItem="BOW-4j-lre" secondAttribute="bottom" constant="14" id="93O-jB-rkX"/>
-                                            <constraint firstItem="BOW-4j-lre" firstAttribute="top" secondItem="k9n-sZ-GD8" secondAttribute="bottom" constant="5" id="A3C-qk-zES"/>
-                                            <constraint firstAttribute="height" constant="240" id="FsC-VL-aQ7"/>
-                                            <constraint firstItem="BOW-4j-lre" firstAttribute="leading" secondItem="EmA-f8-mgd" secondAttribute="leading" constant="8" id="KKC-1p-uB9"/>
-                                            <constraint firstItem="k9n-sZ-GD8" firstAttribute="top" secondItem="EmA-f8-mgd" secondAttribute="top" constant="5" id="NrQ-6Q-sDp"/>
-                                            <constraint firstItem="k9n-sZ-GD8" firstAttribute="leading" secondItem="EmA-f8-mgd" secondAttribute="leading" constant="10" id="Q55-Tp-lDg"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLs-lI-F7F" userLabel="Bottom View">
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6J-oZ-QNg">
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="gvi-Ib-1rS"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                <size key="titleShadowOffset" width="1" height="0.0"/>
-                                                <state key="normal" title="Select Category">
-                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                </variation>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="n9v-Ng-XQ6"/>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="n9v-Ng-XQ6" secondAttribute="bottom" constant="7" id="9I9-fr-F1A"/>
-                                            <constraint firstAttribute="trailing" secondItem="n9v-Ng-XQ6" secondAttribute="trailing" constant="8" id="KZj-69-NpO"/>
-                                            <constraint firstAttribute="trailing" secondItem="a6J-oZ-QNg" secondAttribute="trailing" id="Q5Y-yc-VqU"/>
-                                            <constraint firstItem="n9v-Ng-XQ6" firstAttribute="top" secondItem="mLs-lI-F7F" secondAttribute="top" constant="7" id="Ymh-d6-jPN"/>
-                                            <constraint firstItem="a6J-oZ-QNg" firstAttribute="top" secondItem="mLs-lI-F7F" secondAttribute="top" id="puk-Bh-ke9"/>
-                                            <constraint firstAttribute="height" constant="44" id="u7f-PP-zWm"/>
-                                            <constraint firstItem="a6J-oZ-QNg" firstAttribute="leading" secondItem="mLs-lI-F7F" secondAttribute="leading" constant="10" id="ueO-PZ-67S"/>
-                                            <constraint firstAttribute="bottom" secondItem="a6J-oZ-QNg" secondAttribute="bottom" id="yI4-oR-ljV"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJY-Sr-7EV">
-                                        <color key="backgroundColor" red="0.43529411759999997" green="0.89411764709999997" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="sSc-th-YLz"/>
-                                            <constraint firstAttribute="width" constant="375" id="zxv-KU-EU5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
-                                        <state key="normal" title="NEXT">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="kdR-VS-lk9" firstAttribute="top" secondItem="MZb-dc-hkG" secondAttribute="top" constant="45" id="6wM-bS-hLT"/>
-                                    <constraint firstItem="kdR-VS-lk9" firstAttribute="width" secondItem="MZb-dc-hkG" secondAttribute="width" id="CF3-c1-URk"/>
-                                    <constraint firstItem="mLs-lI-F7F" firstAttribute="top" secondItem="EmA-f8-mgd" secondAttribute="bottom" constant="33" id="Hje-71-E14"/>
-                                    <constraint firstItem="lJY-Sr-7EV" firstAttribute="leading" secondItem="MZb-dc-hkG" secondAttribute="leading" id="L1g-Cn-ORI"/>
-                                    <constraint firstItem="lJY-Sr-7EV" firstAttribute="top" secondItem="mLs-lI-F7F" secondAttribute="bottom" constant="100" id="Oyj-jk-LaT"/>
-                                    <constraint firstItem="mLs-lI-F7F" firstAttribute="width" secondItem="MZb-dc-hkG" secondAttribute="width" id="P3E-JP-nk2"/>
-                                    <constraint firstAttribute="trailing" secondItem="obB-rm-Ho1" secondAttribute="trailing" id="PYR-Tw-zqU"/>
-                                    <constraint firstItem="obB-rm-Ho1" firstAttribute="leading" secondItem="MZb-dc-hkG" secondAttribute="leading" id="U3H-dl-OS7"/>
-                                    <constraint firstItem="EmA-f8-mgd" firstAttribute="top" secondItem="obB-rm-Ho1" secondAttribute="bottom" constant="33" id="X20-Vu-IYP"/>
-                                    <constraint firstItem="EmA-f8-mgd" firstAttribute="leading" secondItem="MZb-dc-hkG" secondAttribute="leading" id="ZNy-GY-zcQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="kdR-VS-lk9" secondAttribute="trailing" id="ZnB-Vv-YPw"/>
-                                    <constraint firstItem="lJY-Sr-7EV" firstAttribute="width" secondItem="MZb-dc-hkG" secondAttribute="width" id="ahZ-Do-Nbe"/>
-                                    <constraint firstItem="EmA-f8-mgd" firstAttribute="width" secondItem="MZb-dc-hkG" secondAttribute="width" id="axG-d2-UOS"/>
-                                    <constraint firstAttribute="bottom" secondItem="lJY-Sr-7EV" secondAttribute="bottom" constant="1" id="jk2-av-eu8"/>
-                                    <constraint firstItem="obB-rm-Ho1" firstAttribute="width" secondItem="MZb-dc-hkG" secondAttribute="width" id="l5Y-G9-xqu"/>
-                                    <constraint firstItem="obB-rm-Ho1" firstAttribute="top" secondItem="kdR-VS-lk9" secondAttribute="bottom" constant="1" id="lNo-UH-giw"/>
-                                    <constraint firstAttribute="trailing" secondItem="mLs-lI-F7F" secondAttribute="trailing" id="nNZ-2N-gO3"/>
-                                    <constraint firstItem="mLs-lI-F7F" firstAttribute="leading" secondItem="MZb-dc-hkG" secondAttribute="leading" id="qLs-wp-j4N"/>
-                                    <constraint firstItem="kdR-VS-lk9" firstAttribute="leading" secondItem="MZb-dc-hkG" secondAttribute="leading" id="yzM-u2-xUY"/>
-                                    <constraint firstAttribute="trailing" secondItem="EmA-f8-mgd" secondAttribute="trailing" id="zh0-2x-JeM"/>
-                                    <constraint firstAttribute="trailing" secondItem="lJY-Sr-7EV" secondAttribute="trailing" id="zxb-Zf-yIE"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="MZb-dc-hkG" secondAttribute="trailing" id="BlG-WS-qLx"/>
-                            <constraint firstItem="MZb-dc-hkG" firstAttribute="top" secondItem="HWy-32-i0d" secondAttribute="top" id="ULd-Zb-gEP"/>
-                            <constraint firstItem="MZb-dc-hkG" firstAttribute="leading" secondItem="HWy-32-i0d" secondAttribute="leading" id="UVQ-gd-gfs"/>
-                            <constraint firstItem="XJP-2V-Hwm" firstAttribute="top" secondItem="MZb-dc-hkG" secondAttribute="bottom" id="ry2-uO-kVZ"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OgD-RT-3uN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6220" y="1872"/>
-        </scene>
-        <!--View Controller-->
         <scene sceneID="SDC-pJ-xud">
             <objects>
                 <viewController id="7rf-mB-cOu" sceneMemberID="viewController">
@@ -804,7 +596,12 @@ to upload photos press buttons below</string>
                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="10"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happ-icon" translatesAutoresizingMaskIntoConstraints="NO" id="PZ1-SI-mJq"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happ-icon" translatesAutoresizingMaskIntoConstraints="NO" id="PZ1-SI-mJq">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="133" id="Pl2-SZ-3bX"/>
+                                            <constraint firstAttribute="width" constant="128" id="ae3-sJ-KuS"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -852,7 +649,7 @@ to upload photos press buttons below</string>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQC-J1-llk">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="4kf-Ns-4Dy"/>
+                                    <constraint firstAttribute="height" constant="431" id="4kf-Ns-4Dy"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="Pfz-PQ-eKk" kind="embed" id="rbd-lj-UCL"/>
@@ -869,13 +666,13 @@ to upload photos press buttons below</string>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96854287385940552" green="0.96868163347244263" blue="0.96851247549057007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="TQC-J1-llk" secondAttribute="trailing" id="Xa4-Hq-ECM"/>
                             <constraint firstItem="aoG-P7-XEc" firstAttribute="leading" secondItem="712-Gt-gEi" secondAttribute="leading" id="duP-Jo-lNW"/>
                             <constraint firstItem="TQC-J1-llk" firstAttribute="leading" secondItem="712-Gt-gEi" secondAttribute="leading" id="gb9-zx-cE0"/>
                             <constraint firstItem="TQC-J1-llk" firstAttribute="top" secondItem="g6C-Mf-hlv" secondAttribute="bottom" constant="28" id="kWL-g8-f0j"/>
-                            <constraint firstItem="aoG-P7-XEc" firstAttribute="top" secondItem="TQC-J1-llk" secondAttribute="bottom" constant="64" id="p0o-Pp-AUX"/>
+                            <constraint firstItem="aoG-P7-XEc" firstAttribute="top" relation="lessThanOrEqual" secondItem="TQC-J1-llk" secondAttribute="bottom" constant="133" id="p0o-Pp-AUX"/>
                             <constraint firstItem="eOU-6a-SyB" firstAttribute="top" secondItem="aoG-P7-XEc" secondAttribute="bottom" id="puh-yZ-M1E"/>
                             <constraint firstAttribute="trailing" secondItem="aoG-P7-XEc" secondAttribute="trailing" id="qfq-sJ-bfy"/>
                         </constraints>
@@ -889,8 +686,8 @@ to upload photos press buttons below</string>
         <scene sceneID="hWu-UR-vCU">
             <objects>
                 <tableViewController id="Pfz-PQ-eKk" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Fq-Wc-icW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Fq-Wc-icW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -1238,7 +1035,7 @@ to upload photos press buttons below</string>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P7t-Yj-xhA">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="WpI-Xo-UOw"/>
+                                    <constraint firstAttribute="height" constant="490" id="WpI-Xo-UOw"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="D6Q-ss-tHQ" kind="embed" id="836-gG-njI"/>
@@ -1255,12 +1052,12 @@ to upload photos press buttons below</string>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96854287385940552" green="0.96868163347244263" blue="0.96851247549057007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ThA-n7-Amh" firstAttribute="top" secondItem="vz1-j1-xxP" secondAttribute="bottom" id="BPi-zr-RDo"/>
-                            <constraint firstItem="P7t-Yj-xhA" firstAttribute="top" secondItem="wP0-r3-u92" secondAttribute="bottom" constant="59" id="ELh-ak-Q6A"/>
+                            <constraint firstItem="P7t-Yj-xhA" firstAttribute="top" relation="lessThanOrEqual" secondItem="wP0-r3-u92" secondAttribute="bottom" constant="49" id="ELh-ak-Q6A"/>
                             <constraint firstAttribute="trailing" secondItem="vz1-j1-xxP" secondAttribute="trailing" id="Wfn-ct-Jo5"/>
-                            <constraint firstItem="vz1-j1-xxP" firstAttribute="top" secondItem="P7t-Yj-xhA" secondAttribute="bottom" constant="33" id="Yjr-1M-jDw"/>
+                            <constraint firstItem="vz1-j1-xxP" firstAttribute="top" relation="lessThanOrEqual" secondItem="P7t-Yj-xhA" secondAttribute="bottom" constant="53" id="Yjr-1M-jDw"/>
                             <constraint firstItem="P7t-Yj-xhA" firstAttribute="leading" secondItem="3q8-fL-Lrw" secondAttribute="leading" id="gWx-Ze-hDL"/>
                             <constraint firstItem="vz1-j1-xxP" firstAttribute="leading" secondItem="3q8-fL-Lrw" secondAttribute="leading" id="yWz-Fx-6ID"/>
                             <constraint firstAttribute="trailing" secondItem="P7t-Yj-xhA" secondAttribute="trailing" id="yef-qo-UTn"/>
@@ -1269,14 +1066,14 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTF-5l-8dm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3961" y="1308"/>
+            <point key="canvasLocation" x="3960.8000000000002" y="1307.4962518740631"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="olB-At-qMS">
             <objects>
                 <tableViewController id="D6Q-ss-tHQ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gob-BN-WlI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gob-BN-WlI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -1355,9 +1152,8 @@ to upload photos press buttons below</string>
                                             <frame key="frameInset" width="375" height="189"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EvL-Oq-Q26">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add description text here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EvL-Oq-Q26">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1409,7 +1205,6 @@ to upload photos press buttons below</string>
     </scenes>
     <resources>
         <image name="arrow-down-icon" width="21" height="13"/>
-        <image name="arrow-right" width="8" height="13"/>
         <image name="bg-event" width="375" height="667"/>
         <image name="big-location" width="100" height="100"/>
         <image name="calendar-icon" width="17" height="17"/>
