@@ -23,7 +23,7 @@
 		52A3C2C91D8F212E00C31F3F /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2C81D8F212E00C31F3F /* UserService.swift */; };
 		52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */; };
 		52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */; };
-		52A3C2D11D8F8FA000C31F3F /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2D01D8F8FA000C31F3F /* SignInViewModel.swift */; };
+		52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */; };
 		52A3C2D31D8FB13D00C31F3F /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2D21D8FB13D00C31F3F /* FeedViewModel.swift */; };
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
@@ -79,7 +79,7 @@
 		52A3C2C81D8F212E00C31F3F /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
-		52A3C2D01D8F8FA000C31F3F /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		52A3C2D21D8FB13D00C31F3F /* FeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		52DD590D1D807E5D007E19E9 /* UtilsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsUI.swift; sourceTree = "<group>"; };
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		52A3C2C51D8F20BF00C31F3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				52A3C2D01D8F8FA000C31F3F /* SignInViewModel.swift */,
+				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
 				52A3C2D21D8FB13D00C31F3F /* FeedViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 			);
@@ -474,7 +474,7 @@
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
-				52A3C2D11D8F8FA000C31F3F /* SignInViewModel.swift in Sources */,
+				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
 				B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */,
 				52A3C2C91D8F212E00C31F3F /* UserService.swift in Sources */,
 				52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */,
@@ -615,7 +615,7 @@
 				INFOPLIST_FILE = Happ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hack.team.Happ;
+				PRODUCT_BUNDLE_IDENTIFIER = kz.hackteam.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
 			};
@@ -632,7 +632,7 @@
 				INFOPLIST_FILE = Happ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hack.team.Happ;
+				PRODUCT_BUNDLE_IDENTIFIER = kz.hackteam.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
 			};

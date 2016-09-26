@@ -12,13 +12,20 @@ import PromiseKit
 
 class FeedViewModel {
 
+    var events: [EventModel] = []
+
+    var navigateEventDetails: NavigationFuncWithID
+    var displaySlideMenu: NavigationFunc
+
 
     init() {
+        // get from DB
+        //self.events = self.getFiltered()
+
         EventService.fetchFromServer()
             .then { _ -> Void in
-                EventService.getEvents().forEach({ model in
-                    print(".event", model)
-                })
+                self.events = self.getFiltered()
+                self.didUpdate?()
             }
     }
 
@@ -26,8 +33,17 @@ class FeedViewModel {
     //MARK: - Events
     var didUpdate: (() -> Void)?
     
-    
+
     //MARK: - Inputs
-   
+    func clickedLikeOnEvent(event: EventModel) {
+        print(".FeedViewModel.inputs.clickedLikeOnEvent", event.id)
+    }
+    func clickedOnEvent(event: EventModel) {
+        self.navigateEventDetails!(id: event.id)
+    }
+
+    private func getFiltered() -> [EventModel] {
+        return Array(EventService.getStoredEvents())
+    }
     
 }

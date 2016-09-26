@@ -11,8 +11,10 @@ target 'Happ' do
   pod 'Alamofire', '~> 3.4'
   pod 'ObjectMapper', '~> 1.3'
   pod 'ObjectMapper+Realm'
+  pod 'HanekeSwift'
   pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
-  # pod 'JSONWebToken'
+  pod 'SlideMenuControllerSwift', git: "https://github.com/dekatotoro/SlideMenuControllerSwift.git", branch: "swift2.3"
+
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

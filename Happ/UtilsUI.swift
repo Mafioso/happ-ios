@@ -33,10 +33,11 @@ extension UIViewController {
     }
 
     func displayAlertView(error: ErrorType) {
-        let reqError = error as! RequestError,
-            body = reqError.description
-
-        self.displayAlertView(body)
+        if let reqError = error as? RequestError {
+            self.displayAlertView(reqError.description)
+        } else {
+            self.displayAlertView(error)
+        }
     }
 }
 

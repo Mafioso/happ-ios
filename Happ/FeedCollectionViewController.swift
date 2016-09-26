@@ -12,19 +12,28 @@ import Foundation
 
 private let reuseIdentifier = "Cell"
 
-class FeedCollectionViewController: UICollectionViewController {
 
-    
-    var viewModel: FeedViewModel!
+class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    
+
+    var viewModel: FeedViewModel! {
+        didSet {
+            self.bindToViewModel()
+        }
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Do any additional setup after loading the view.
+        self.displayNavigationBar()
+
+        self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+
+        self.viewModelDidUpdate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,22 +42,43 @@ class FeedCollectionViewController: UICollectionViewController {
     }
 
 
+    private func bindToViewModel() {
+        self.viewModel.didUpdate = { [weak self] _ in
+            self?.viewModelDidUpdate()
+        }
+    }
+
+    func viewModelDidUpdate() {
+        self.collectionView?.reloadData()
+    }
+
+
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+
+
+        return CGSizeMake(collectionView.bounds.size.width, 233)
+    }
+
+
     // MARK: UICollectionViewDataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return self.viewModel.events.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-        
-        // configure cell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventCollectionCell
 
+        // configure cell
+        let event = self.viewModel.events[indexPath.row]
+        cell.setup(event)
+        cell.onClickLikeButton = self.viewModel.clickedLikeOnEvent
         
         return cell
     }
@@ -56,33 +86,47 @@ class FeedCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let event = self.viewModel.events[indexPath.row]
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
+        self.viewModel.clickedOnEvent(event)
     }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
+
+
+
+extension FeedCollectionViewController {
+    
+    private func displayNavigationBar() {
+        // Create the navigation bar
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 20, self.view.frame.size.width, 44)) // Offset by 20 pixels vertically to take the status bar into account
+        navigationBar.backgroundColor = UIColor.whiteColor()
+
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "Title"
+        
+        // Create left and right button for navigation item
+        let leftButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedCollectionViewController.handleClickOnMenu))
+        let rightButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
+
+        // Create two buttons for the navigation item
+        navigationItem.leftBarButtonItem = leftButton
+        navigationItem.rightBarButtonItem = rightButton
+        
+        // Assign the navigation item to the navigation bar
+        navigationBar.items = [navigationItem]
+        
+        // Make the navigation bar a subview of the current view controller
+        self.view.addSubview(navigationBar)
+    }
+
+    func handleClickOnMenu() {
+        self.viewModel.displaySlideMenu!()
+    }
+}
+
+
+
+

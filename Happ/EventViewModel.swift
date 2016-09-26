@@ -10,3 +10,31 @@ import Foundation
 import PromiseKit
 
 
+
+class EventViewModel {
+
+    var eventID: Int?
+    var event: EventModel?
+
+    
+    init() {
+        
+    }
+
+    convenience init(forID: String) {
+        self.init()
+        self.event = EventService.getByID(forID)
+        
+        print("..", forID, event)
+
+    }
+
+
+    //MARK: - Events
+    var didUpdate: (() -> Void)?
+    
+    
+    //MARK: - Inputs
+
+    
+}

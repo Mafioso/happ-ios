@@ -11,7 +11,7 @@ import PromiseKit
 
 
 
-class SignInViewModel {
+class AuthenticationViewModel {
     
     var navigateSignUp: NavigationFunc
     var navigateFeed: NavigationFunc
@@ -33,9 +33,15 @@ class SignInViewModel {
                 self.navigateFeed!()
             }
     }
-
+    func clickedSignUp(username: String, password: String, email: String?) -> Promise<Void> {
+        return UserService.signUp(username, password: password, email: email)
+            .then { data -> Void in
+                self.navigateFeed!()
+            }
+    }
     func clickedSignUp() {
         self.navigateSignUp!()
     }
+
 
 }

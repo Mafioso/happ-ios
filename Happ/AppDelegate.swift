@@ -24,15 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let navController = UINavigationController()
-        
-        self.navigationCoordinator = NavigationCoordinator(navigationController: navController)
+        self.window?.rootViewController = UINavigationController()
+        self.navigationCoordinator = NavigationCoordinator(window: self.window!)
         self.navigationCoordinator.start()
-        
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
 
         return true
     }

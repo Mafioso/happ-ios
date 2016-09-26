@@ -11,7 +11,10 @@ import PromiseKit
 
 
 class SignUpController: UIViewController {
+    
+    var viewModel: AuthenticationViewModel!
 
+    
     // outlets
     @IBOutlet weak var constraintSignUpFormBottom: NSLayoutConstraint!
     @IBOutlet weak var constraintSignUpToBottomContainer: NSLayoutConstraint!
@@ -26,23 +29,16 @@ class SignUpController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    
-    
+
 
     // actions
     @IBAction func clickedSignUpButton(sender: UIButton) {
         if  let username = usernameTextField.text,
             let password = passwordTextField.text {
+            let email: String? = emailTextField.text
 
             self.displayFormSpinner()
-            UserService.signUp(username, password: password, email: emailTextField.text)
-                .then { _ -> Promise<AnyObject> in
-                    return Get("users/current/", parameters: nil)
-                }
-                .then { data -> Void in
-                    let userData = data as! [String: String]
-                    print(".done.Get.users/current", userData["username"])
-                }
+            self.viewModel.clickedSignUp(username, password: password, email: email)
                 .always {
                     self.displayFormButton()
                 }
