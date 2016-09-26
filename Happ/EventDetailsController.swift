@@ -25,6 +25,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var imageBackground: UIImageView!
 
 
+    
     @IBOutlet weak var labelCategory: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelPriceRange: UILabel!

@@ -11,9 +11,11 @@ import Foundation
 
 
 private let reuseIdentifier = "Cell"
+private let segueEmbeddedTableID = "embeddedTable"
 
 
-class FeedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
     var viewModel: FeedViewModel! {
@@ -22,16 +24,26 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
 
+    // outlets
+    
+    // actions
+
+    // variables
+    var tableView: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         self.displayNavigationBar()
 
-        self.collectionView!.registerNib(UINib(nibName: EventCollectionCell.nibName, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        print(".viewDidLoad")
+
+        self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        tableView.estimatedRowHeight = 265
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         self.viewModelDidUpdate()
     }
@@ -39,6 +51,13 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueEmbeddedTableID {
+            let destController = segue.destinationViewController as! UITableViewController
+            self.tableView = destController.tableView
+        }
     }
 
 
@@ -49,31 +68,24 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
     }
 
     func viewModelDidUpdate() {
-        self.collectionView?.reloadData()
+        self.tableView.reloadData()
     }
 
 
-    // MARK: UICollectionViewDelegateFlowLayout
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    // MARK: UITableViewDataSource
 
-
-        return CGSizeMake(collectionView.bounds.size.width, 233)
-    }
-
-
-    // MARK: UICollectionViewDataSource
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.events.count
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let eventsCount = self.viewModel.events.count
+        print(".FeedViewController.numberOfRow", eventsCount)
+        return eventsCount
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventCollectionCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventTableCell
 
         // configure cell
         let event = self.viewModel.events[indexPath.row]
@@ -82,13 +94,12 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
         
         return cell
     }
-    
-    
-    // MARK: UICollectionViewDelegate
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+    // MARK: UITableViewDelegate
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.events[indexPath.row]
-
         self.viewModel.clickedOnEvent(event)
     }
 
@@ -96,7 +107,7 @@ class FeedCollectionViewController: UICollectionViewController, UICollectionView
 
 
 
-extension FeedCollectionViewController {
+extension FeedViewController {
     
     private func displayNavigationBar() {
         // Create the navigation bar
@@ -108,7 +119,7 @@ extension FeedCollectionViewController {
         navigationItem.title = "Title"
         
         // Create left and right button for navigation item
-        let leftButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedCollectionViewController.handleClickOnMenu))
+        let leftButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
         let rightButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
 
         // Create two buttons for the navigation item

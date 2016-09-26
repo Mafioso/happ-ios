@@ -91,6 +91,7 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool =
             .responseJSON { response in
                 switch response.result {
                 case .Success:
+
                     if isPaginated {
                         let paginatedResponse = response.result.value as! NSDictionary
                         let results = paginatedResponse["results"] as! [AnyObject]

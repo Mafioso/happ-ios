@@ -19,11 +19,14 @@ class EventService {
 
 
     class func fetchFromServer() -> Promise<Void> {
-        return Get(endpoint, parameters: nil, isPaginated: true)
+        return Get(endpoint + "feed/", parameters: nil, isPaginated: true)
             .then { data -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
+                    // TODO: remove line below
+                    realm.deleteAll()
+
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
                         realm.add(inst!, update: true)
@@ -34,7 +37,8 @@ class EventService {
 
     class func getStoredEvents() -> Results<EventModel> {
         let realm = try! Realm()
-        return realm.objects(EventModel)
+        let events = realm.objects(EventModel)
+        return events
     }
 
     class func getByID(id: String) -> EventModel? {
