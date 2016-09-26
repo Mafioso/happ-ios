@@ -11,6 +11,19 @@ import PromiseKit
 import SlideMenuControllerSwift
 
 
+/*
+ auth:   SignIn     ->  SignUp      ->  profile.SelectCity  ->  main.Feed
+                    ->  main.Feed
+ 
+ main:   Feed       ->  event.EventDetails
+                    ->  event.EventForm
+                    ->  event.EventsManage
+                    ->  profile.Profile
+ 
+ profile: Profile   ->  profile.SelectCity
+*/
+
+
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
 
@@ -23,17 +36,6 @@ class NavigationCoordinator {
     private let mainStoryboard: UIStoryboard
     private let eventStoryboard: UIStoryboard
 
-    /*
-        auth:   SignIn  ->  SignUp      ->  profile.SelectCity  ->  main.Feed
-                        ->  main.Feed
-
-        main:   Feed    ->  event.EventDetails
-                        ->  event.EventForm
-                        ->  event.EventsManage
-                        ->  profile.Profile
-
-        profile: Profile    ->  profile.SelectCity
-    */
 
     init(window: UIWindow) {
         self.window = window
@@ -57,8 +59,7 @@ class NavigationCoordinator {
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
         viewController.viewModel = viewModel
 
-        self.navigationController = UINavigationController()
-        self.navigationController.viewControllers = [viewController]
+        self.navigationController = UINavigationController(rootViewController: viewController)
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
@@ -83,11 +84,10 @@ class NavigationCoordinator {
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
         viewController.viewModel = viewModel
 
-
+        self.navigationController = UINavigationController(rootViewController: viewController)
         // init Slide menu
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu")
-
-        let slideMenuController = SlideMenuController(mainViewController: viewController, leftMenuViewController: menuViewController)
+        let slideMenuController = SlideMenuController(mainViewController: self.navigationController, leftMenuViewController: menuViewController)
         self.window.rootViewController = slideMenuController
         self.window.makeKeyAndVisible()
     }

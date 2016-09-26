@@ -39,6 +39,16 @@ extension UIViewController {
             self.displayAlertView(error)
         }
     }
+
+    func extMakeNavBarTransparent() {
+        if let navBar = self.navigationController?.navigationBar {
+            navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+            navBar.shadowImage = UIImage()
+            navBar.barTintColor = UIColor.clearColor()
+            navBar.tintColor = UIColor.whiteColor()
+            navBar.translucent = true
+        }
+    }
 }
 
 

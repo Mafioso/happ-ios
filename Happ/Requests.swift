@@ -20,6 +20,7 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
     case NoInternet
     case BadRequest = -6003
     case BadResponse = -1017
+    case NoResponseIsTimedOut = -1001
     case UnknownError
 
     var description: String {
@@ -30,6 +31,8 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
             return "cannot parse response"
         case .NoInternet:
             return "No Internet =( \n Please, check connection."
+        case .NoResponseIsTimedOut:
+            return "The request timed out"
         case .SignInIncorrect:
             return "Incorrect username or password"
         case .UnknownError:

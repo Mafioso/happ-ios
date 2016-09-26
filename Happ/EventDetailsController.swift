@@ -50,10 +50,11 @@ class EventDetailsController: UIViewController {
         gradient.colors = [UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0).CGColor, UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.3).CGColor]
         viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
 
+        //self.extMakeNavBarTransparent()
 
         self.viewModelDidUpdate()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         let h = UIScreen.mainScreen().bounds.size.height
         constraintHeightOfFirstContainer.constant = h

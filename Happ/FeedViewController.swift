@@ -35,15 +35,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.displayNavigationBar()
 
-        print(".viewDidLoad")
+        self.displayNavigationBar()
 
         self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        tableView.estimatedRowHeight = 265
-        tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 265
+        self.tableView.rowHeight = UITableViewAutomaticDimension
 
         self.viewModelDidUpdate()
     }
@@ -97,7 +96,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
     // MARK: UITableViewDelegate
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.events[indexPath.row]
         self.viewModel.clickedOnEvent(event)
@@ -110,27 +109,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 extension FeedViewController {
     
     private func displayNavigationBar() {
-        // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 20, self.view.frame.size.width, 44)) // Offset by 20 pixels vertically to take the status bar into account
-        navigationBar.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
 
-        // Create a navigation item with a title
-        let navigationItem = UINavigationItem()
-        navigationItem.title = "Title"
+        let menuButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
+        let filterButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
         
-        // Create left and right button for navigation item
-        let leftButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
-        let rightButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
-
-        // Create two buttons for the navigation item
-        navigationItem.leftBarButtonItem = leftButton
-        navigationItem.rightBarButtonItem = rightButton
-        
-        // Assign the navigation item to the navigation bar
-        navigationBar.items = [navigationItem]
-        
-        // Make the navigation bar a subview of the current view controller
-        self.view.addSubview(navigationBar)
+        self.navigationItem.leftBarButtonItem = menuButton
+        self.navigationItem.rightBarButtonItem = filterButton
     }
 
     func handleClickOnMenu() {

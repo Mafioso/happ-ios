@@ -20,7 +20,7 @@ class FeedViewModel {
 
     init() {
         // get from DB
-        // self.events = self.getFiltered()
+        self.events = self.getFiltered()
 
         EventService.fetchFromServer()
             .then { _ -> Void in
