@@ -70,6 +70,7 @@ class EventDetailsController: UIViewController {
             }
 
             labelTitle.text = event.title
+            labelCategory.text = event.interests.first?.title
             labelSecondTitle.text = event.title
             labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         }
