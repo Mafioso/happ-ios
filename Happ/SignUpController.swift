@@ -58,10 +58,7 @@ class SignUpController: UIViewController {
         signUpButton.layer.cornerRadius = 5
         signUpButton.layer.masksToBounds = true
 
-        usernameTextField.addLeftViewImage("username-icon", size: 16)
-        passwordTextField.addLeftViewImage("password-icon", size: 15)
-        //TODO: add icon
-        //emailTextField.addLeftViewImage("password-icon", size: 15)
+    
 
 
         // init observers
