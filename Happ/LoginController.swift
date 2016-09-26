@@ -68,8 +68,6 @@ class LoginController: UIViewController {
         signInButton.layer.cornerRadius = 5
         signInButton.layer.masksToBounds = true
 
-        
-
 
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
@@ -108,6 +106,7 @@ class LoginController: UIViewController {
                                   duration: 0.5,
                                   options: UIViewAnimationOptions.ShowHideTransitionViews,
                                   completion: nil)
+            viewSignInFormSpinner.superview
     }
 
     func displayFormButton() {

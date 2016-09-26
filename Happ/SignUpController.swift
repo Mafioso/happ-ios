@@ -58,8 +58,6 @@ class SignUpController: UIViewController {
         signUpButton.layer.cornerRadius = 5
         signUpButton.layer.masksToBounds = true
 
-    
-
 
         // init observers
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);

@@ -42,11 +42,11 @@ extension UIViewController {
 
     func extMakeNavBarTransparent() {
         if let navBar = self.navigationController?.navigationBar {
-            navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+            navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             navBar.shadowImage = UIImage()
-            navBar.barTintColor = UIColor.clearColor()
-            navBar.tintColor = UIColor.whiteColor()
             navBar.translucent = true
+            navBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.view.backgroundColor = UIColor.clearColor()
         }
     }
 }
