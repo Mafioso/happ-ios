@@ -112,8 +112,8 @@ extension FeedViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
 
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
-        let filterButton = UIBarButtonItem(title: "Right", style: .Plain, target: self, action: nil)
-        
+        let filterButton = UIBarButtonItem(image: UIImage(named: "filter-icon"), style: .Plain, target: self, action: nil)
+
         self.navigationItem.leftBarButtonItem = menuButton
         self.navigationItem.rightBarButtonItem = filterButton
     }

@@ -55,17 +55,20 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clearColor()
+        if let navBar = self.navigationController?.navigationBar {
+            navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+            navBar.shadowImage = UIImage()
+            navBar.translucent = true
+            self.navigationController?.view.backgroundColor = UIColor.clearColor()
+            navBar.tintColor = UIColor.whiteColor()
+        }
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
+
         signInButton.layer.cornerRadius = 5
         signInButton.layer.masksToBounds = true
 
-        usernameTextField.addLeftViewImage("username-icon", size: 16)
-        passwordTextField.addLeftViewImage("password-icon", size: 15)
+        
 
 
         // init observers
