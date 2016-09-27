@@ -12,7 +12,8 @@ import PromiseKit
 
 
 let Host = "http://happ.westeurope.cloudapp.azure.com"
-let HostAPI = Host + "/api/v1/"
+let HostLocal = "http://127.0.0.1:8000"
+let HostAPI = HostLocal + "/api/v1/"
 
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {
@@ -71,9 +72,10 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
                     } else {
-                        print(".Post.error", endpoint, parameters, error, error.code)
+                        // print(".Post.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
                     }
+                    print(".Post.error", endpoint, parameters, error, error.code)
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false

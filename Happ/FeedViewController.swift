@@ -25,8 +25,17 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     // outlets
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var buttonFilter: UIButton!
+    @IBOutlet weak var buttonSort: UIButton!
+
     // actions
+    @IBAction func clickedButtonFilter(sender: UIButton) {
+    }
+    @IBAction func clickedButtonSort(sender: UIButton) {
+        self.displaySelectSort()
+    }
+
 
     // variables
     var tableView: UITableView!
@@ -37,6 +46,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
         self.displayNavigationBar()
+        self.displaySearchBar()
 
         self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.tableView.dataSource = self
@@ -89,8 +99,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // configure cell
         let event = self.viewModel.events[indexPath.row]
         cell.setup(event)
-        cell.onClickLikeButton = self.viewModel.clickedLikeOnEvent
-        
+        cell.onClickLikeButton = self.viewModel.onClickLike
+
         return cell
     }
 
@@ -99,7 +109,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.events[indexPath.row]
-        self.viewModel.clickedOnEvent(event)
+        self.viewModel.onClickEvent(event)
     }
 
 }
@@ -112,14 +122,50 @@ extension FeedViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
 
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
-        let filterButton = UIBarButtonItem(image: UIImage(named: "filter-icon"), style: .Plain, target: self, action: nil)
 
         self.navigationItem.leftBarButtonItem = menuButton
-        self.navigationItem.rightBarButtonItem = filterButton
     }
 
     func handleClickOnMenu() {
         self.viewModel.displaySlideMenu!()
+    }
+}
+
+
+extension FeedViewController: UISearchBarDelegate {
+
+    // MARK: Search
+
+    private func displaySearchBar() {
+        self.definesPresentationContext = true
+        searchBar.delegate = self
+    }
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.viewModel.onSearchUpdate(searchText)
+    }
+
+
+    // MARK: Sort
+
+    func displaySelectSort() {
+        let currentSort = self.viewModel.sort
+
+        let popupSelectController = UIAlertController(title: "Sort by", message: nil, preferredStyle: .ActionSheet)
+
+        let actionByDate = UIAlertAction(title: EventSortType.ByDate.getSelectOptionTitle(currentSort), style: .Default, handler: {_ in
+            self.viewModel.onChangeSort(.ByDate)
+        })
+        let actionByPopular = UIAlertAction(title: EventSortType.ByPopular.getSelectOptionTitle(currentSort), style: .Default, handler: {_ in
+            self.viewModel.onChangeSort(.ByPopular)
+        })
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+
+        popupSelectController.addAction(actionByDate)
+        popupSelectController.addAction(actionByPopular)
+        popupSelectController.addAction(actionCancel)
+
+        self.presentViewController(popupSelectController, animated: true, completion: nil)
     }
 }
 

@@ -11,6 +11,41 @@ import ObjectMapper
 import RealmSwift
 
 
+enum EventSortType {
+    case ByDate
+    case ByPopular
+    
+    func getSelectOptionTitle(currentSort: EventSortType) -> String {
+        var title: String
+        switch self {
+        case .ByDate:
+            title = "Date"
+        case .ByPopular:
+            title = "Popular"
+        }
+        return title + (self == currentSort ? " ✔︎" : "")
+    }
+
+    func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
+        let date1 = event1.start_datetime
+        let date2 = event2.start_datetime
+        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1!, toDate: date2!, options: [])
+        let isSameDay = diff.day == 0
+
+        switch self {
+        case .ByDate:
+            if isSameDay {
+                return false
+            }
+            return true
+        case .ByPopular:
+            return false
+        }
+    }
+}
+
+
+
 class AuthorModel: Object, Mappable {
     dynamic var id = ""
     dynamic var fn: String?
@@ -35,7 +70,6 @@ class CurrencyModel: Object, Mappable {
     dynamic var id = ""
     dynamic var name = ""
 
-    
     required convenience init?(_ map: Map) {
         self.init()
     }
@@ -100,7 +134,7 @@ class InterestModel: Object, Mappable {
 enum EventModelPriceTypes {
     case MinPrice
     case MaxPrice
-    
+
     func format(value: Int?, currency: CurrencyModel) -> String {
         switch self {
         case .MinPrice:
@@ -217,6 +251,8 @@ class EventModel: Object, Mappable {
 
     // functions
     func getPrice(priceType: EventModelPriceTypes) -> String {
+        let currency = self.currency == nil ? CurrencyModel(value: ["0", "KZT"]) : self.currency!
+
         var price: Int?
         switch priceType {
         case .MinPrice:
@@ -225,6 +261,6 @@ class EventModel: Object, Mappable {
             price = self.max_price.value
         }
 
-        return priceType.format(price, currency: self.currency!)
+        return priceType.format(price, currency: currency)
     }
 }

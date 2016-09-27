@@ -23,10 +23,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPK-zV-arc" userLabel="FIX: Container View Bug">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCg-Mf-aBd" userLabel="Header View">
+                                <subviews>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="M3D-0j-KhO">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="TF1-n4-Vu8"/>
+                                        </constraints>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    </searchBar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdu-lY-oCm">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="F6B-Yf-xnl"/>
+                                            <constraint firstAttribute="height" constant="20" id="Ry7-Yk-8In"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="light-tab"/>
+                                        <connections>
+                                            <action selector="clickedButtonSort:" destination="Wdp-17-kb6" eventType="touchUpInside" id="4fs-Je-8en"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9o-nQ-Bqw">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="NEF-xz-Ngo"/>
+                                            <constraint firstAttribute="height" constant="20" id="wGg-XI-KKE"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="filter-icon"/>
+                                        <connections>
+                                            <action selector="clickedButtonFilter:" destination="Wdp-17-kb6" eventType="touchUpInside" id="gad-QT-D8S"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" id="avJ-UM-0IF"/>
+                                    <constraint firstItem="M9o-nQ-Bqw" firstAttribute="leading" secondItem="Pdu-lY-oCm" secondAttribute="trailing" constant="8" id="6yR-g3-yVN"/>
+                                    <constraint firstAttribute="trailing" secondItem="M9o-nQ-Bqw" secondAttribute="trailing" constant="8" id="EMl-KC-teX"/>
+                                    <constraint firstItem="Pdu-lY-oCm" firstAttribute="centerY" secondItem="sCg-Mf-aBd" secondAttribute="centerY" id="Hhg-Rb-yNN"/>
+                                    <constraint firstItem="M3D-0j-KhO" firstAttribute="top" secondItem="sCg-Mf-aBd" secondAttribute="top" id="IZ9-zM-ciQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="M3D-0j-KhO" secondAttribute="trailing" constant="64" id="NXD-OJ-Uo3"/>
+                                    <constraint firstAttribute="height" constant="44" id="aGq-Bq-3xy"/>
+                                    <constraint firstItem="M9o-nQ-Bqw" firstAttribute="centerY" secondItem="sCg-Mf-aBd" secondAttribute="centerY" id="n92-x1-485"/>
+                                    <constraint firstItem="M3D-0j-KhO" firstAttribute="leading" secondItem="sCg-Mf-aBd" secondAttribute="leading" id="vBL-HD-cQD"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1Z-h8-8Q3">
@@ -37,26 +72,31 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z1Z-h8-8Q3" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" id="Rg5-Sr-fmP"/>
+                            <constraint firstAttribute="trailing" secondItem="sCg-Mf-aBd" secondAttribute="trailing" id="5lN-l5-1Ag"/>
+                            <constraint firstItem="sCg-Mf-aBd" firstAttribute="leading" secondItem="3vW-FT-dNV" secondAttribute="leading" id="QhQ-LB-pEy"/>
                             <constraint firstItem="Ra7-A0-6a4" firstAttribute="top" secondItem="z1Z-h8-8Q3" secondAttribute="bottom" id="Wt2-lV-gY8"/>
+                            <constraint firstItem="sCg-Mf-aBd" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" id="gxa-Ky-Ym1"/>
                             <constraint firstAttribute="trailing" secondItem="z1Z-h8-8Q3" secondAttribute="trailing" id="iBs-Yz-BFA"/>
-                            <constraint firstAttribute="trailing" secondItem="xPK-zV-arc" secondAttribute="trailing" id="t83-nH-BGh"/>
-                            <constraint firstItem="xPK-zV-arc" firstAttribute="leading" secondItem="3vW-FT-dNV" secondAttribute="leading" id="vxq-Pb-AqK"/>
-                            <constraint firstItem="xPK-zV-arc" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" id="xx9-uA-kFm"/>
+                            <constraint firstItem="z1Z-h8-8Q3" firstAttribute="top" secondItem="sCg-Mf-aBd" secondAttribute="bottom" id="xJD-w9-ZDr"/>
                             <constraint firstItem="z1Z-h8-8Q3" firstAttribute="leading" secondItem="3vW-FT-dNV" secondAttribute="leading" id="zcC-Cu-Hay"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonFilter" destination="M9o-nQ-Bqw" id="TMO-MY-PIM"/>
+                        <outlet property="buttonSort" destination="Pdu-lY-oCm" id="TPs-hj-AYI"/>
+                        <outlet property="searchBar" destination="M3D-0j-KhO" id="7dU-51-P9J"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVV-JZ-gTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="973"/>
+            <point key="canvasLocation" x="1685.5999999999999" y="972.86356821589209"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Events Table-->
         <scene sceneID="fbc-Gb-CvA">
             <objects>
-                <tableViewController id="PBJ-PG-Iae" sceneMemberID="viewController">
+                <tableViewController title="Events Table" id="PBJ-PG-Iae" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="256" sectionHeaderHeight="28" sectionFooterHeight="28" id="L14-VN-bBS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -69,10 +109,10 @@
             </objects>
             <point key="canvasLocation" x="2590" y="973"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Menu-->
         <scene sceneID="Q7K-cN-YPG">
             <objects>
-                <tableViewController storyboardIdentifier="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HD7-SU-WAO" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Menu" title="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HD7-SU-WAO" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LV5-4B-Fvh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -293,6 +333,8 @@
     </scenes>
     <resources>
         <image name="edit-icon" width="32" height="32"/>
+        <image name="filter-icon" width="28" height="28"/>
+        <image name="light-tab" width="31" height="33"/>
         <image name="side-bar-image" width="266" height="214"/>
     </resources>
 </document>

@@ -100,7 +100,7 @@ class NavigationCoordinator {
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
     }
-    
+
 
     func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
