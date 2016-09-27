@@ -12,14 +12,15 @@ import SlideMenuControllerSwift
 
 
 /*
- auth:   SignIn     ->  SignUp      ->  profile.SelectCity  ->  main.Feed
+ auth:   SignIn     ->  SignUp      ->  profile.SelectCityInterest  ->  profile.SelectCity
+                                                                    ->  main.Feed
                     ->  main.Feed
- 
+
  main:   Feed       ->  event.EventDetails
                     ->  event.EventForm
                     ->  event.EventsManage
                     ->  profile.Profile
- 
+
  profile: Profile   ->  profile.SelectCity
 */
 
@@ -35,6 +36,7 @@ class NavigationCoordinator {
     private let authStoryboard: UIStoryboard
     private let mainStoryboard: UIStoryboard
     private let eventStoryboard: UIStoryboard
+    private let profileStoryboard: UIStoryboard
 
 
     init(window: UIWindow) {
@@ -43,10 +45,11 @@ class NavigationCoordinator {
         self.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.authStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
         self.eventStoryboard = UIStoryboard(name: "Event", bundle: nil)
+        self.profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
     }
 
     func start() {
-        UserService.isCredentialAvailable()
+        AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
     }
 
@@ -67,6 +70,7 @@ class NavigationCoordinator {
     func showSignUp() {
         print(".nav.showSignUp")
         let viewModel = AuthenticationViewModel()
+        viewModel.navigateSelectCityInterests = self.startSelectCityInterests
         viewModel.navigateFeed = self.startFeed
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
@@ -101,7 +105,30 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
+    func startSelectCityInterests() {
+        print(".profile.showSelectCityInterests")
+        let viewModel = SelectCityInterestsViewModel()
+        viewModel.navigateSelectCity = self.showSelectCity(viewModel)
 
+        let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCityInterests") as! SelectCityInterestsViewController
+        viewController.viewModel = viewModel
+
+        self.navigationController = UINavigationController(rootViewController: viewController)
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+    }
+
+    func showSelectCity(parentViewModel: SelectCityInterestsViewModel) -> NavigationFunc {
+        return {
+            print(".profile.showSelectCity")
+            
+            let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+
+    
     func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.openLeft()

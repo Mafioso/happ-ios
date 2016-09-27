@@ -48,7 +48,7 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
         "Accept": "application/json"
     ]
     if isAuthenticated {
-        let accessToken = UserService.getCredential()
+        let accessToken = AuthenticationService.getCredential()
         headers.merge(["Authorization": "JWT " + accessToken!])
     }
     return headers
@@ -85,6 +85,29 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
 
 }
 
+func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = true) -> Promise<Void> {
+    return Promise { resolve, reject in
+        let url = HostAPI + endpoint
+        let headers = getRequestHeaders(isAuthenticated)
+
+        let nsURL = NSURL(string: url)
+        let request = NSMutableURLRequest(URL: nsURL!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = parametersJSON
+        headers.forEach({ request.setValue($0.1, forHTTPHeaderField: $0.0) })
+
+        Alamofire
+            .request(request)
+            .validate()
+            .response { response -> Void in
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+}
+
+
 
 func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool = false) -> Promise<AnyObject> {
     return Promise { resolve, reject in
@@ -96,7 +119,6 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool =
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-
                     if isPaginated {
                         let paginatedResponse = response.result.value as! NSDictionary
                         let results = paginatedResponse["results"] as! [AnyObject]
@@ -104,6 +126,7 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool =
                     } else {
                         resolve(response.result.value!)
                     }
+
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
