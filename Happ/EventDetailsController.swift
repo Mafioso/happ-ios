@@ -25,6 +25,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var imageBackground: UIImageView!
 
 
+    
     @IBOutlet weak var labelCategory: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelPriceRange: UILabel!
@@ -49,10 +50,11 @@ class EventDetailsController: UIViewController {
         gradient.colors = [UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0).CGColor, UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.3).CGColor]
         viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
 
+        //self.extMakeNavBarTransparent()
 
         self.viewModelDidUpdate()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         let h = UIScreen.mainScreen().bounds.size.height
         constraintHeightOfFirstContainer.constant = h
@@ -68,6 +70,7 @@ class EventDetailsController: UIViewController {
             }
 
             labelTitle.text = event.title
+            labelCategory.text = event.interests.first?.title
             labelSecondTitle.text = event.title
             labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         }

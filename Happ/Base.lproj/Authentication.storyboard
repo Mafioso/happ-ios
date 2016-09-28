@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -84,12 +84,12 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u58-nd-pLy" userLabel="Fields View">
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-g6-Idv">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="G9w-g6-Idv">
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="U1M-d0-YP5"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.59990384615384618" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                 <variation key="default">
@@ -103,12 +103,12 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-XD-fc0">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="V1t-XD-fc0">
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="kQh-Vw-NaA"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.60200721153846148" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <variation key="default">
@@ -166,7 +166,7 @@
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHb-yH-DQy" userLabel="Spinner View">
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-qE-sdu"/>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bB1-qE-sdu"/>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -695,12 +695,12 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpN-uQ-arD" userLabel="Fields View">
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="BaG-yH-hJr">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="BaG-yH-hJr">
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="7Yl-fZ-7tJ"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.59990384620000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                                 <variation key="default">
@@ -714,12 +714,12 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email (optional)" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="8ZZ-2Q-gdA">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email (optional)" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="8ZZ-2Q-gdA">
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="6hh-Ja-8uF"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.60200721150000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <variation key="default">
@@ -733,12 +733,12 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qQb-aO-tTa">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qQb-aO-tTa">
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="mK1-4U-5la"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.60200721150000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.76646351440000005" green="0.76646351440000005" blue="0.76646351440000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Medium" family="SF UI Display" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <variation key="default">
@@ -809,7 +809,7 @@
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3q-HL-Usz" userLabel="Spinner View">
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4R1-g0-ugN"/>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4R1-g0-ugN"/>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>

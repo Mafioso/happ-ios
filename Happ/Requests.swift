@@ -12,7 +12,8 @@ import PromiseKit
 
 
 let Host = "http://happ.westeurope.cloudapp.azure.com"
-let HostAPI = Host + "/api/v1/"
+let HostLocal = "http://127.0.0.1:8000"
+let HostAPI = HostLocal + "/api/v1/"
 
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {
@@ -20,6 +21,7 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
     case NoInternet
     case BadRequest = -6003
     case BadResponse = -1017
+    case NoResponseIsTimedOut = -1001
     case UnknownError
 
     var description: String {
@@ -30,6 +32,8 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
             return "cannot parse response"
         case .NoInternet:
             return "No Internet =( \n Please, check connection."
+        case .NoResponseIsTimedOut:
+            return "The request timed out"
         case .SignInIncorrect:
             return "Incorrect username or password"
         case .UnknownError:
@@ -44,7 +48,7 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
         "Accept": "application/json"
     ]
     if isAuthenticated {
-        let accessToken = UserService.getCredential()
+        let accessToken = AuthenticationService.getCredential()
         headers.merge(["Authorization": "JWT " + accessToken!])
     }
     return headers
@@ -68,9 +72,10 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
                     } else {
-                        print(".Post.error", endpoint, parameters, error, error.code)
+                        // print(".Post.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
                     }
+                    print(".Post.error", endpoint, parameters, error, error.code)
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -79,6 +84,29 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
     }
 
 }
+
+func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = true) -> Promise<Void> {
+    return Promise { resolve, reject in
+        let url = HostAPI + endpoint
+        let headers = getRequestHeaders(isAuthenticated)
+
+        let nsURL = NSURL(string: url)
+        let request = NSMutableURLRequest(URL: nsURL!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = parametersJSON
+        headers.forEach({ request.setValue($0.1, forHTTPHeaderField: $0.0) })
+
+        Alamofire
+            .request(request)
+            .validate()
+            .response { response -> Void in
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+}
+
 
 
 func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool = false) -> Promise<AnyObject> {
@@ -98,6 +126,7 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool =
                     } else {
                         resolve(response.result.value!)
                     }
+
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)

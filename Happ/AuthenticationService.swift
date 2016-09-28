@@ -1,5 +1,5 @@
 //
-//  UserService.swift
+//  AuthenticationService.swift
 //  Happ
 //
 //  Created by MacBook Pro on 9/19/16.
@@ -13,7 +13,7 @@ import KeychainSwift
 
 let keyJWT = "auth0-jwt"
 
-class UserService {
+class AuthenticationService {
 
     class func signIn(username: String, password: String) -> Promise<Void> {
         let parameters = [
@@ -23,7 +23,7 @@ class UserService {
 
         return Post("auth/login/", parameters: parameters, isAuthenticated: false)
             .then { (data: AnyObject) -> Void in
-                UserService.storeCredential(data as! [String : AnyObject])
+                self.storeCredential(data as! [String : AnyObject])
             }
     }
 
@@ -38,18 +38,15 @@ class UserService {
 
         return Post("auth/register/", parameters: parameters, isAuthenticated: false)
             .then { (data: AnyObject) -> Void in
-                UserService.storeCredential(data as! [String : AnyObject])
+                self.storeCredential(data as! [String : AnyObject])
             }
     }
 
 
     // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
-
-        UserService.deleteCredential()
-
         return Promise { fulfill, reject in
-            if let credential = UserService.getCredential() {
+            if let credential = self.getCredential() {
                 // check here
                 fulfill(true)
             } else {
@@ -57,6 +54,7 @@ class UserService {
             }
         }
     }
+
 
     class func getCredential() -> String? {
         let jwt = KeychainSwift().get(keyJWT)
@@ -68,7 +66,7 @@ class UserService {
         KeychainSwift().set(jwt, forKey: keyJWT)
     }
 
-    class func deleteCredential() {
+    private class func deleteCredential() {
         KeychainSwift().clear()
     }
 }

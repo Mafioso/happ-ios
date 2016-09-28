@@ -11,6 +11,20 @@ import PromiseKit
 import SlideMenuControllerSwift
 
 
+/*
+ auth:   SignIn     ->  SignUp      ->  profile.SelectCityInterest  ->  profile.SelectCity
+                                                                    ->  main.Feed
+                    ->  main.Feed
+
+ main:   Feed       ->  event.EventDetails
+                    ->  event.EventForm
+                    ->  event.EventsManage
+                    ->  profile.Profile
+
+ profile: Profile   ->  profile.SelectCity
+*/
+
+
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
 
@@ -22,18 +36,8 @@ class NavigationCoordinator {
     private let authStoryboard: UIStoryboard
     private let mainStoryboard: UIStoryboard
     private let eventStoryboard: UIStoryboard
+    private let profileStoryboard: UIStoryboard
 
-    /*
-        auth:   SignIn  ->  SignUp      ->  profile.SelectCity  ->  main.Feed
-                        ->  main.Feed
-
-        main:   Feed    ->  event.EventDetails
-                        ->  event.EventForm
-                        ->  event.EventsManage
-                        ->  profile.Profile
-
-        profile: Profile    ->  profile.SelectCity
-    */
 
     init(window: UIWindow) {
         self.window = window
@@ -41,11 +45,22 @@ class NavigationCoordinator {
         self.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.authStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
         self.eventStoryboard = UIStoryboard(name: "Event", bundle: nil)
+        self.profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
     }
 
     func start() {
-        UserService.isCredentialAvailable()
+
+        self.startSelectCityInterests()
+        
+        /*
+        AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
+        */
+    }
+
+    func goBack() {
+        print(".nav.goBack")
+        self.navigationController.popViewControllerAnimated(true)
     }
 
     func startSignIn() {
@@ -57,8 +72,7 @@ class NavigationCoordinator {
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
         viewController.viewModel = viewModel
 
-        self.navigationController = UINavigationController()
-        self.navigationController.viewControllers = [viewController]
+        self.navigationController = UINavigationController(rootViewController: viewController)
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
@@ -66,6 +80,7 @@ class NavigationCoordinator {
     func showSignUp() {
         print(".nav.showSignUp")
         let viewModel = AuthenticationViewModel()
+        viewModel.navigateSelectCityInterests = self.startSelectCityInterests
         viewModel.navigateFeed = self.startFeed
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
@@ -80,14 +95,13 @@ class NavigationCoordinator {
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
 
-        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedCollectionViewController
+        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
         viewController.viewModel = viewModel
 
-
+        self.navigationController = UINavigationController(rootViewController: viewController)
         // init Slide menu
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu")
-
-        let slideMenuController = SlideMenuController(mainViewController: viewController, leftMenuViewController: menuViewController)
+        let slideMenuController = SlideMenuController(mainViewController: self.navigationController, leftMenuViewController: menuViewController)
         self.window.rootViewController = slideMenuController
         self.window.makeKeyAndVisible()
     }
@@ -100,7 +114,31 @@ class NavigationCoordinator {
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
     }
-    
+
+    func startSelectCityInterests() {
+        print(".profile.showSelectCityInterests")
+        let viewModel = SelectCityInterestsViewModel()
+        viewModel.navigateSelectCity = self.showSelectCity(viewModel)
+
+        let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCityInterests") as! SelectCityInterestsViewController
+        viewController.viewModel = viewModel
+
+        self.navigationController = UINavigationController(rootViewController: viewController)
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+    }
+
+    func showSelectCity(parentViewModel: SelectCityInterestsViewModel) -> NavigationFunc {
+        return {
+            print(".profile.showSelectCity")
+            parentViewModel.navigateBack = self.goBack
+
+            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+
 
     func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
