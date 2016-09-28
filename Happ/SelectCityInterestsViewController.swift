@@ -29,6 +29,9 @@ class SelectCityInterestsViewController: UIViewController {
     @IBAction func clickedSelectCity(sender: UIButton) {
         self.viewModel.onClickSelectCity()
     }
+    @IBAction func clickedChangeCity(sender: UIButton) {
+        self.viewModel.onClickSelectCity()
+    }
 
 
     // constants
