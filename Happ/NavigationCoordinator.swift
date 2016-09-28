@@ -51,7 +51,7 @@ class NavigationCoordinator {
     func start() {
 
         self.startSelectCityInterests()
-        
+
         /*
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
