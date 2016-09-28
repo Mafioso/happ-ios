@@ -58,6 +58,11 @@ class NavigationCoordinator {
         */
     }
 
+    func goBack() {
+        print(".nav.goBack")
+        self.navigationController.popViewControllerAnimated(true)
+    }
+
     func startSignIn() {
         print(".nav.showSignIn")
         let viewModel = AuthenticationViewModel()
@@ -126,6 +131,7 @@ class NavigationCoordinator {
     func showSelectCity(parentViewModel: SelectCityInterestsViewModel) -> NavigationFunc {
         return {
             print(".profile.showSelectCity")
+            parentViewModel.navigateBack = self.goBack
 
             let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
             viewController.viewModel = parentViewModel

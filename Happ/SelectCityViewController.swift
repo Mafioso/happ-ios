@@ -20,12 +20,10 @@ class SelectCityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.initDisplaySelectButton()
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -34,10 +32,12 @@ class SelectCityViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    
+
     private func bindToViewModel() {
-        self.viewModel.didUpdateCities = { [weak self] _ in
-            self?.tableView.reloadData()
+        self.viewModel.didUpdate = { [weak self] (updateType: SelectCityInterestsDidUpdateTypes) in
+            if updateType == .CitiesList {
+                self?.tableView.reloadData()
+            }
         }
     }
 
@@ -54,7 +54,6 @@ class SelectCityViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let city = self.viewModel.cities[indexPath.row]
-        print("here", indexPath.row, city)
 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         cell.textLabel!.text = city.name
@@ -62,6 +61,32 @@ class SelectCityViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.updateDisplaySelectButton()
+    }
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        self.updateDisplaySelectButton()
+    }
 
 
+    private func initDisplaySelectButton() {
+        let buttonSelect = UIBarButtonItem(title: "Select", style: UIBarButtonItemStyle.Done, target: self, action: #selector(clickedSelectButton))
+        self.navigationItem.rightBarButtonItem = buttonSelect
+    }
+
+    private func updateDisplaySelectButton() {
+        let isSelected = (self.tableView.indexPathForSelectedRow != nil)
+        self.navigationItem.rightBarButtonItem!.enabled = isSelected
+    }
+
+    func clickedSelectButton() {
+        let selectedIndexPath = self.tableView.indexPathForSelectedRow!
+        let selectedCity = self.viewModel.cities[selectedIndexPath.row]
+        self.viewModel.onSelectCity(selectedCity)
+    }
 }
+
+
+

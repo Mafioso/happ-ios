@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SelectCityAndCategory-->
+        <!--Select City Interests View Controller-->
         <scene sceneID="dve-hw-uvU">
             <objects>
-                <viewController storyboardIdentifier="SelectCityInterests" title="SelectCityAndCategory" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9EA-yd-sU2" customClass="SelectCityInterestsViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectCityInterests" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9EA-yd-sU2" customClass="SelectCityInterestsViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tcl-eJ-v7L"/>
                         <viewControllerLayoutGuide type="bottom" id="xUH-AL-KaR"/>
@@ -23,18 +23,47 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkz-ag-4VQ" userLabel="Select City View">
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMT-ds-3GA">
-                                                <state key="normal" title="Select city"/>
-                                                <connections>
-                                                    <action selector="clickedSelectCity:" destination="9EA-yd-sU2" eventType="touchUpInside" id="irS-jt-AvQ"/>
-                                                </connections>
-                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9C-Lf-xjz" userLabel="City View">
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2j-S2-Vck">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="c2j-S2-Vck" firstAttribute="centerX" secondItem="n9C-Lf-xjz" secondAttribute="centerX" id="8NG-mV-MPx"/>
+                                                    <constraint firstAttribute="height" constant="128" id="hO2-LA-8So"/>
+                                                    <constraint firstItem="c2j-S2-Vck" firstAttribute="centerY" secondItem="n9C-Lf-xjz" secondAttribute="centerY" id="l63-pj-JJQ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LiI-Qr-Noq" userLabel="No City View">
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMT-ds-3GA">
+                                                        <frame key="frameInset" minX="151" minY="49" width="72" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Select city"/>
+                                                        <connections>
+                                                            <action selector="clickedSelectCity:" destination="9EA-yd-sU2" eventType="touchUpInside" id="irS-jt-AvQ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="GtB-24-Gbj"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="600" id="9J2-2m-XeV"/>
-                                            <constraint firstItem="AMT-ds-3GA" firstAttribute="centerX" secondItem="xkz-ag-4VQ" secondAttribute="centerX" id="CNf-Of-F1B"/>
-                                            <constraint firstItem="AMT-ds-3GA" firstAttribute="centerY" secondItem="xkz-ag-4VQ" secondAttribute="centerY" id="gEr-ME-Nqk"/>
+                                            <constraint firstAttribute="trailing" secondItem="n9C-Lf-xjz" secondAttribute="trailing" id="RoG-95-nKN"/>
+                                            <constraint firstItem="LiI-Qr-Noq" firstAttribute="top" secondItem="xkz-ag-4VQ" secondAttribute="top" constant="236" id="VfT-il-6TQ"/>
+                                            <constraint firstItem="n9C-Lf-xjz" firstAttribute="leading" secondItem="xkz-ag-4VQ" secondAttribute="leading" id="bYy-pf-UnA"/>
+                                            <constraint firstItem="LiI-Qr-Noq" firstAttribute="leading" secondItem="xkz-ag-4VQ" secondAttribute="leading" id="gO9-T3-TYd"/>
+                                            <constraint firstItem="n9C-Lf-xjz" firstAttribute="top" secondItem="xkz-ag-4VQ" secondAttribute="top" constant="236" id="gTS-i6-vx3"/>
+                                            <constraint firstAttribute="trailing" secondItem="LiI-Qr-Noq" secondAttribute="trailing" id="lqe-lh-HvA"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKY-mp-gow" userLabel="Select Category View">
@@ -161,7 +190,10 @@
                     <connections>
                         <outlet property="constraintsSelectCityHeight" destination="9J2-2m-XeV" id="rhg-Wu-NpK"/>
                         <outlet property="constraintsSelectInterestsHeight" destination="R0t-gG-KVK" id="2Bc-I0-Sif"/>
+                        <outlet property="labelYourCityIs" destination="c2j-S2-Vck" id="h8Y-Gg-fys"/>
                         <outlet property="tableInterests" destination="ocf-8t-Lyc" id="igc-IM-wzN"/>
+                        <outlet property="viewCity" destination="n9C-Lf-xjz" id="xoR-V2-std"/>
+                        <outlet property="viewNoCity" destination="LiI-Qr-Noq" id="hFk-zv-YKR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VI2-Mh-uvI" userLabel="First Responder" sceneMemberID="firstResponder"/>

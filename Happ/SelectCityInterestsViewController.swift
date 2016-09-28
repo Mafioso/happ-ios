@@ -20,6 +20,9 @@ class SelectCityInterestsViewController: UIViewController {
     @IBOutlet weak var constraintsSelectCityHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintsSelectInterestsHeight: NSLayoutConstraint!
     @IBOutlet weak var tableInterests: UITableView!
+    @IBOutlet weak var viewCity: UIView!
+    @IBOutlet weak var viewNoCity: UIView!
+    @IBOutlet weak var labelYourCityIs: UILabel!
 
 
     // actions
@@ -43,8 +46,17 @@ class SelectCityInterestsViewController: UIViewController {
 
         self.tableInterests.dataSource = self
         self.tableInterests.delegate = self
+        
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if self.viewModel.selectedCity != nil {
+            self.displaySelectedCityView()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -61,9 +73,20 @@ class SelectCityInterestsViewController: UIViewController {
 
 
     private func bindToViewModel() {
-        self.viewModel.didUpdateInterests = { [weak self] _ in
-            self?.tableInterests.reloadData()
+        self.viewModel.didUpdate = { [weak self] (updateType: SelectCityInterestsDidUpdateTypes) in
+            switch updateType {
+            case .InterestsList:
+                self?.tableInterests.reloadData()
+            default:
+                break
+            }
         }
+    }
+
+    private func displaySelectedCityView() {
+        print(".displaySelectedCityView")
+        self.labelYourCityIs.text = self.viewModel.selectedCity!.name
+        UIView.transitionFromView(self.viewNoCity, toView: self.viewCity, duration: 0.3, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
     }
 
 }

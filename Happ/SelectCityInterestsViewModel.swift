@@ -10,12 +10,20 @@ import Foundation
 import PromiseKit
 
 
+enum SelectCityInterestsDidUpdateTypes {
+    case CitiesList
+    case InterestsList
+    case SelectedCity
+}
+
 class SelectCityInterestsViewModel {
 
     var cities: [CityModel] = []
     var interests: [InterestModel] = []
+    var selectedCity: CityModel?
 
     var navigateSelectCity: NavigationFunc
+    var navigateBack: NavigationFunc
 
 
     init() {
@@ -28,20 +36,19 @@ class SelectCityInterestsViewModel {
             .then { _ -> Void in
                 self.cities = self.getCities()
                 //print(".fetch.cities.Done", self.cities)
-                self.didUpdateCities?()
+                self.didUpdate?(.CitiesList)
         }
         ProfileService.fetchInterestsFromServer()
             .then { _ -> Void in
                 self.interests = self.getInterests()
                 //print(".fetch.interests.Done", self.interests)
-                self.didUpdateInterests?()
+                self.didUpdate?(.InterestsList)
         }
     }
 
 
     //MARK: - Events
-    var didUpdateCities: (() -> Void)?
-    var didUpdateInterests: (() -> Void)?
+    var didUpdate: (((SelectCityInterestsDidUpdateTypes)) -> Void)?
 
 
     //MARK: - Inputs
@@ -50,6 +57,14 @@ class SelectCityInterestsViewModel {
     }
     func onClickSelectCity() {
         self.navigateSelectCity!()
+    }
+    func onSelectCity(city: CityModel) {
+        
+        print(".onSelectCity", city, self.navigateBack)
+
+        self.selectedCity = city
+        self.navigateBack!()
+        //self.didUpdate?(.SelectedCity)
     }
 
 
