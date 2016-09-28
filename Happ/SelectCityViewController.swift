@@ -54,7 +54,8 @@ class SelectCityViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let city = self.viewModel.cities[indexPath.row]
-        
+        print("here", indexPath.row, city)
+
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         cell.textLabel!.text = city.name
         cell.detailTextLabel!.text = city.country_name

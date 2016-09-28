@@ -76,16 +76,16 @@ extension SelectCityInterestsViewController: UITableViewDataSource, UITableViewD
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.getNumberOfInterests()
+        let count = self.getNumberOfInterests()
+        return count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let interest = self.getInterest(indexPath)
-        
+
         let cell = self.tableInterests.dequeueReusableCellWithIdentifier(cellInterestID, forIndexPath: indexPath) as! InterestCell
-        // cell.imageCover =
         cell.labelInterest.text = interest.title
+        // cell.imageCover =
 
         return cell
     }

@@ -231,9 +231,9 @@
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
 				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
+				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
 				5210D1131D9052D1000A7C47 /* FeedViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
-				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

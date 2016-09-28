@@ -45,7 +45,6 @@ class AuthenticationService {
 
     // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
-
         return Promise { fulfill, reject in
             if let credential = self.getCredential() {
                 // check here

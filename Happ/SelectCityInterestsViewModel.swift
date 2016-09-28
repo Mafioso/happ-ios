@@ -20,18 +20,20 @@ class SelectCityInterestsViewModel {
 
     init() {
         // get from local DB
-        self.cities = self.getCities()
-        self.interests = self.getInterests()
+        //self.cities = self.getCities()
+        //self.interests = self.getInterests()
 
         // update from Server
         ProfileService.fetchCitiesFromServer()
             .then { _ -> Void in
                 self.cities = self.getCities()
+                //print(".fetch.cities.Done", self.cities)
                 self.didUpdateCities?()
         }
         ProfileService.fetchInterestsFromServer()
             .then { _ -> Void in
                 self.interests = self.getInterests()
+                //print(".fetch.interests.Done", self.interests)
                 self.didUpdateInterests?()
         }
     }

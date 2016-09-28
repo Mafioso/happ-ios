@@ -49,8 +49,13 @@ class NavigationCoordinator {
     }
 
     func start() {
+
+        self.startSelectCityInterests()
+        
+        /*
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
+        */
     }
 
     func startSignIn() {
@@ -121,14 +126,14 @@ class NavigationCoordinator {
     func showSelectCity(parentViewModel: SelectCityInterestsViewModel) -> NavigationFunc {
         return {
             print(".profile.showSelectCity")
-            
-            let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
+
+            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
             viewController.viewModel = parentViewModel
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
 
-    
+
     func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.openLeft()
