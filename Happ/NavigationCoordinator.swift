@@ -16,7 +16,7 @@ import SlideMenuControllerSwift
                                                                     ->  main.Feed
                     ->  main.Feed
 
- main:   Feed       ->  event.EventDetails
+ main:  vared       ->  event.EventDetails
                     ->  event.EventForm
                     ->  event.EventsManage
                     ->  profile.Profile
@@ -50,17 +50,23 @@ class NavigationCoordinator {
 
     func start() {
 
-        self.startSelectCityInterests()
-        
-        /*
+        //self.startSelectCityInterests()
+
+        // TODO: uncomment
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
-        */
+        
     }
 
     func goBack() {
         print(".nav.goBack")
         self.navigationController.popViewControllerAnimated(true)
+    }
+    
+    func logOut() {
+        print(".nav.LogOut")
+        AuthenticationService.logOut()
+        self.start()
     }
 
     func startSignIn() {
@@ -99,10 +105,7 @@ class NavigationCoordinator {
         viewController.viewModel = viewModel
 
         self.navigationController = UINavigationController(rootViewController: viewController)
-        // init Slide menu
-        let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu")
-        let slideMenuController = SlideMenuController(mainViewController: self.navigationController, leftMenuViewController: menuViewController)
-        self.window.rootViewController = slideMenuController
+        self.window.rootViewController = self.initSlideMenu(navigationController)
         self.window.makeKeyAndVisible()
     }
 
@@ -140,10 +143,23 @@ class NavigationCoordinator {
     }
 
 
-    func displaySlideMenu() {
+    private func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.openLeft()
         }
+    }
+
+    private func initSlideMenu(rootView: UIViewController) -> SlideMenuController {
+        let viewModel = MenuViewModel()
+        viewModel.navigateFeed = self.startFeed
+        viewModel.navigateLogout = self.logOut
+
+
+        let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
+        menuViewController.viewModel = viewModel
+
+        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController)
+        return slideMenuController
     }
 }
 

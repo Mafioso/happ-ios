@@ -35,6 +35,8 @@
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
 		B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */; };
+		B4E7B70A1D9B8E6E004B8B78 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */; };
+		B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */; };
 		B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */; };
 		B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */; };
 		B4FE0C991D92575A0081310F /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4FE0C821D92575A0081310F /* SF-UI-Display-Black.otf */; };
@@ -99,6 +101,8 @@
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
 		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
+		B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+SubstituteFont.swift"; sourceTree = "<group>"; };
 		B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B4FE0C821D92575A0081310F /* SF-UI-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-UI-Display-Black.otf"; path = "Happ/Resources/SF-UI-Display-Black.otf"; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
 				5210D1131D9052D1000A7C47 /* FeedViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
+				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 				52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */,
 				52A3C2D21D8FB13D00C31F3F /* FeedViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
+				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -486,9 +492,11 @@
 				B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */,
 				52B012401D9ADD9C0061F083 /* InterestCell.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
+				B4E7B70A1D9B8E6E004B8B78 /* MenuViewModel.swift in Sources */,
 				5210D1141D9052D1000A7C47 /* FeedViewController.swift in Sources */,
 				5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */,
 				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
+				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
 				52B012421D9ADDB30061F083 /* SubInterestCell.swift in Sources */,

@@ -14,6 +14,7 @@ import ObjectMapper
 
 class ProfileService {
 
+    static let endpointUser = "users/"
     static let endpointCity = "cities/"
     static let endpointInterest = "interests/"
 
@@ -53,6 +54,24 @@ class ProfileService {
     }
 
 
+    class func fetchUserProfile() -> Promise<Void> {
+        let url = endpointUser + "current/"
+        return Get(url, parameters: nil)
+            .then { data -> Void in
+                let result = data as! AnyObject
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.deleteAll()
+                    let user = Mapper<UserModel>().map(result)
+                    
+                    print(".fetchUserProfile.done", result, user)
+
+                    realm.add(user!, update: true)
+                }
+        }
+    }
+
+
     class func postSetCity(cityID: String) -> Promise<Void> {
         let url = endpointCity + cityID + "/set/"
         return Post(url, parameters: nil)
@@ -76,6 +95,12 @@ class ProfileService {
         let realm = try! Realm()
         let events = realm.objects(InterestModel)//.sort(sort.isOrderedBeforeFunc)
         return events
+    }
+
+    class func getUserProfile() -> UserModel {
+        let realm = try! Realm()
+        let user = realm.objects(InterestModel).first
+        return user!
     }
 }
 
