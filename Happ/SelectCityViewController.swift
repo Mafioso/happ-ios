@@ -15,32 +15,35 @@ class SelectCityViewController: UITableViewController {
             self.bindToViewModel()
         }
     }
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.navigationBar.hidden = false
+        self.extMakeNavBarTransparent()
 
         self.initDisplaySelectButton()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-
-    private func bindToViewModel() {
-        self.viewModel.didUpdate = { [weak self] (updateType: SelectCityInterestsDidUpdateTypes) in
-            if updateType == .CitiesList {
-                self?.tableView.reloadData()
-            }
+        // set selections for already selected city
+        if let city = self.viewModel.selectedCity {
+            let atRow = self.viewModel.cities.indexOf(city)
+            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            self.updateDisplaySelectButton()
         }
     }
 
+
+    private func bindToViewModel() {
+        // do nothing
+    }
+
+
+    // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -61,7 +64,7 @@ class SelectCityViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.updateDisplaySelectButton()
     }
@@ -73,6 +76,7 @@ class SelectCityViewController: UITableViewController {
 
     private func initDisplaySelectButton() {
         let buttonSelect = UIBarButtonItem(title: "Select", style: UIBarButtonItemStyle.Done, target: self, action: #selector(clickedSelectButton))
+        buttonSelect.enabled = false
         self.navigationItem.rightBarButtonItem = buttonSelect
     }
 

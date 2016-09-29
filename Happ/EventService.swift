@@ -24,13 +24,20 @@ class EventService {
             .then { data -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
-                try! realm.write {
-                    // TODO: remove line below
-                    realm.deleteAll()
 
+                // 1. delete exists
+                try! realm.write {
+                    let exists = realm.objects(EventModel)
+                    realm.delete(exists)
+                }
+
+                // print(".here", realm.objects(EventModel).count)
+
+                // 2. add new
+                try! realm.write {
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
-                        realm.add(inst!, update: true)
+                        realm.add(inst!, update: true) // `update: true` - not required
                     }
                 }
             }

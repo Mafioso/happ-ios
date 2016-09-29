@@ -24,9 +24,11 @@ class ProfileService {
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    // TODO: remove line below
-                    realm.deleteAll()
+                    // 1. delete exists
+                    let exists = realm.objects(CityModel)
+                    realm.delete(exists)
 
+                    // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<CityModel>().map(city)
                         realm.add(inst!, update: true)
@@ -41,9 +43,11 @@ class ProfileService {
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    // TODO: remove line below
-                    realm.deleteAll()
-                    
+                    // 1. delete exists
+                    let exists = realm.objects(InterestModel)
+                    realm.delete(exists)
+
+                    // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<InterestModel>().map(city)
                         realm.add(inst!, update: true)
@@ -55,8 +59,7 @@ class ProfileService {
 
     class func postSetCity(cityID: String) -> Promise<Void> {
         let url = endpointCity + cityID + "/set/"
-        return Post(url, parameters: nil)
-            .then {_ -> Void in }
+        return Post(url, parametersJSON: nil)
     }
 
     class func postSetInterest(interestIDs: [String]) -> Promise<Void> {

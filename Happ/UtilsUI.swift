@@ -45,7 +45,7 @@ extension UIViewController {
             navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             navBar.shadowImage = UIImage()
             navBar.translucent = true
-            navBar.tintColor = UIColor.whiteColor()
+            navBar.tintColor = UIColor.grayColor()
             self.navigationController?.view.backgroundColor = UIColor.clearColor()
         }
     }

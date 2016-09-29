@@ -10,20 +10,22 @@ import Foundation
 import PromiseKit
 
 
-enum SelectCityInterestsDidUpdateTypes {
-    case CitiesList
-    case InterestsList
-    case SelectedCity
-}
-
 class SelectCityInterestsViewModel {
 
     var cities: [CityModel] = []
     var interests: [InterestModel] = []
+
     var selectedCity: CityModel?
+    var selectedInterests: [InterestModel: [InterestModel]?] = [:]
+    /*
+        [Interest1: nil]    <- not selected
+        [Interest1: []]     <- selected all SubInterests
+        [Interest1: [SubInterest1, SubInterest2]]   <- selected some of SubInterests
+    */
 
     var navigateSelectCity: NavigationFunc
     var navigateBack: NavigationFunc
+    var navigateFeed: NavigationFunc
 
 
     init() {
@@ -31,40 +33,65 @@ class SelectCityInterestsViewModel {
         //self.cities = self.getCities()
         //self.interests = self.getInterests()
 
+
         // update from Server
         ProfileService.fetchCitiesFromServer()
             .then { _ -> Void in
                 self.cities = self.getCities()
-                //print(".fetch.cities.Done", self.cities)
-                self.didUpdate?(.CitiesList)
         }
         ProfileService.fetchInterestsFromServer()
             .then { _ -> Void in
+                print(".fetchInterestsFromServer.done")
+
                 self.interests = self.getInterests()
-                //print(".fetch.interests.Done", self.interests)
-                self.didUpdate?(.InterestsList)
+                self.didUpdate?()
         }
     }
 
 
     //MARK: - Events
-    var didUpdate: (((SelectCityInterestsDidUpdateTypes)) -> Void)?
+    var didUpdate: (() -> Void)?
 
 
     //MARK: - Inputs
     func onSelectInterest(interest: InterestModel) {
-        // TODO insert SubInterest cell below selected Interest
+        let isSelected = (self.selectedInterests[interest] != nil)
+        if !isSelected {
+            self.selectedInterests.updateValue([], forKey: interest)
+        } else {
+            self.selectedInterests[interest] = nil
+        }
+        self.didUpdate?()
     }
     func onClickSelectCity() {
         self.navigateSelectCity!()
     }
     func onSelectCity(city: CityModel) {
-        
-        print(".onSelectCity", city, self.navigateBack)
-
         self.selectedCity = city
         self.navigateBack!()
-        //self.didUpdate?(.SelectedCity)
+    }
+    func onClickDone() {
+        if let selCity = self.selectedCity where self.selectedInterests.count != 0 {
+            let selInterestIds = self.selectedInterests
+                                    .filter({ $0.1 != nil })
+                                    .map({ $0.0.id })
+
+            ProfileService.postSetCity(selCity.id)
+            ProfileService.postSetInterest(selInterestIds)
+            self.navigateFeed!()
+
+            /*
+            firstly {
+                ProfileService.postSetCity(selCity.id)
+            }.then {
+                ProfileService.postSetInterest(selInterestIds)
+            }.then { _ -> Void in
+                self.navigateFeed!()
+            }.error({ error in
+                print("...error", error)
+            })
+            */
+        }
     }
 
 

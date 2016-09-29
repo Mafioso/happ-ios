@@ -50,12 +50,10 @@ class NavigationCoordinator {
 
     func start() {
 
-        self.startSelectCityInterests()
+        // self.startSelectCityInterests()
 
-        /*
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
-        */
     }
 
     func goBack() {
@@ -119,6 +117,7 @@ class NavigationCoordinator {
         print(".profile.showSelectCityInterests")
         let viewModel = SelectCityInterestsViewModel()
         viewModel.navigateSelectCity = self.showSelectCity(viewModel)
+        viewModel.navigateFeed = self.startFeed
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCityInterests") as! SelectCityInterestsViewController
         viewController.viewModel = viewModel

@@ -13,6 +13,7 @@ class InterestCell: UITableViewCell {
     // outlets
     @IBOutlet weak var imageCover: UIImageView!
     @IBOutlet weak var labelInterest: UILabel!
+    @IBOutlet weak var viewIsSelected: UILabel!
     
     
     
