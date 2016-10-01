@@ -26,21 +26,21 @@ extension UITextField {
 }
 
 extension UIViewController {
-    func displayAlertView(body: String) {
+    func extDisplayAlertView(body: String) {
         let alert = UIAlertController(title: "Error 🤕", message: body, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    func displayAlertView(error: ErrorType) {
+    func extDisplayAlertView(error: ErrorType) {
         if let reqError = error as? RequestError {
-            self.displayAlertView(reqError.description)
+            self.extDisplayAlertView(reqError.description)
         } else {
-            self.displayAlertView(error)
+            self.extDisplayAlertView(error)
         }
     }
 
-    func extMakeNavBarTransparent() {
+    func extMakeNavBarWhite() {
         if let navBar = self.navigationController?.navigationBar {
             navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             navBar.shadowImage = UIImage()
@@ -48,6 +48,10 @@ extension UIViewController {
             navBar.tintColor = UIColor.grayColor()
             self.navigationController?.view.backgroundColor = UIColor.clearColor()
         }
+    }
+    
+    func extMakeNavBarTransparent() {
+        // TODO
     }
 }
 

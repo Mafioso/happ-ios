@@ -11,40 +11,66 @@ import ObjectMapper
 import RealmSwift
 
 
-enum EventSortType {
-    case ByDate
-    case ByPopular
-    
-    func getSelectOptionTitle(currentSort: EventSortType) -> String {
-        var title: String
-        switch self {
-        case .ByDate:
-            title = "Date"
-        case .ByPopular:
-            title = "Popular"
-        }
-        return title + (self == currentSort ? " ✔︎" : "")
+class SettingsDictModel: Object, Mappable {
+    // notifications
+    dynamic var language: String?
+    dynamic var city: CityModel?
+    dynamic var currency: CurrencyModel?
+
+    required convenience init?(_ map: Map) {
+        self.init()
     }
 
-    func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
-        let date1 = event1.start_datetime
-        let date2 = event2.start_datetime
-        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1!, toDate: date2!, options: [])
-        let isSameDay = diff.day == 0
-
-        switch self {
-        case .ByDate:
-            if isSameDay {
-                return false
-            }
-            return true
-        case .ByPopular:
-            return false
-        }
+    func mapping(map: Map) {
+        language    <- map["language"]
+        city        <- map["city"]
+        currency    <- map["currency"]
     }
 }
 
 
+class UserModel: Object, Mappable {
+    dynamic var id = ""
+    var interests = List<InterestModel>()
+    dynamic var settings: SettingsDictModel?
+    dynamic var date_created: NSDate?
+    dynamic var date_edited: NSDate?
+    dynamic var username = ""
+    dynamic var fullname = ""
+    dynamic var email = ""
+    dynamic var phone = ""
+    dynamic var date_of_birth: NSDate?
+    dynamic var gender = 0
+    dynamic var ogranization = false
+    dynamic var is_active = false
+    dynamic var last_login: NSDate?
+
+
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+
+    func mapping(map: Map) {
+        id              <- map["id"]
+        settings        <- map["settings"]
+        interests       <- (map["interests"], ArrayTransform<InterestModel>())
+        date_created    <- (map["date_created"], HappDateTransformer)
+        date_edited     <- (map["date_edited"], HappDateTransformer)
+        username        <- map["username"]
+        fullname        <- map["fullname"]
+        email           <- map["email"]
+        phone           <- map["phone"]
+        date_of_birth   <- (map["date_of_birth"], HappDateTransformer)
+        gender          <- map["gender"]
+        ogranization    <- map["ogranization"]
+        is_active       <- map["is_active"]
+        last_login   <- (map["last_login"], HappDateTransformer)
+    }
+
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
 
 class AuthorModel: Object, Mappable {
     dynamic var id = ""

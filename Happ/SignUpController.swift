@@ -43,7 +43,7 @@ class SignUpController: UIViewController {
                     self.displayFormButton()
                 }
                 .error { e in
-                    self.displayAlertView(e)
+                    self.extDisplayAlertView(e)
             }
         }
     }

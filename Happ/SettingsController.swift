@@ -8,29 +8,69 @@
 
 import UIKit
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, UITableViewDelegate {
+
+    var viewModel: SettingsViewModel!
+
+    
+    let segueEmbeddedTableID = "embeddedTable"
+    var embeddedTable: UITableView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-gradient")!)
 
-        // Do any additional setup after loading the view.
+        self.embeddedTable.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.extMakeNavBarTransparent()
+    }
+
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueEmbeddedTableID {
+            let dest = segue.destinationViewController as! UITableViewController
+            self.embeddedTable = dest.tableView
+        }
+    }
+
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(".settings.selectedRow", indexPath.section, indexPath.row)
+
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                self.viewModel.navigateSelectCity?()
+            case 1:
+                self.viewModel.navigateSelectLanguage?()
+            case 2:
+                self.viewModel.navigateSelectCurrency?()
+            case 3:
+                self.viewModel.navigateSelectNotifications?()
+            default:
+                break
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                self.viewModel.navigateContact?()
+            case 1:
+                self.viewModel.navigateHelp?()
+            case 2:
+                self.viewModel.navigateTerms?()
+            default:
+                break
+            }
+        default:
+            break
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

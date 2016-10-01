@@ -85,7 +85,7 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
 
 }
 
-func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = true) -> Promise<Void> {
+func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         let headers = getRequestHeaders(isAuthenticated)
@@ -99,8 +99,19 @@ func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = tru
         Alamofire
             .request(request)
             .validate()
-            .response { response -> Void in
-                
+            .validate(statusCode: [405])
+            .response { (request, response, data, error) in
+                if error == nil {
+                    resolve(NSNull())
+                } else {
+                    if let reqErrorType = RequestError(rawValue: error!.code) {
+                        reject(reqErrorType)
+                    } else {
+                        // print(".Post.error", endpoint, parameters, error, error.code)
+                        reject(RequestError.UnknownError)
+                    }
+                }
+
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -112,9 +123,22 @@ func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = tru
 func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool = false) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
+        let request: Request!
+        
+        // create Request
+        if parameters == nil {
+            let nsURL = NSURL(string: url)
+            let headers = getRequestHeaders()
+            let nsRequest = NSMutableURLRequest(URL: nsURL!)
+            nsRequest.HTTPMethod = "GET"
+            headers.forEach({ nsRequest.setValue($0.1, forHTTPHeaderField: $0.0) })
+            request = Alamofire.request(nsRequest)
+        } else {
+            request = Alamofire.request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
+        }
 
-        Alamofire
-            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
+        // work with Response
+        request
             .validate()
             .responseJSON { response in
                 switch response.result {

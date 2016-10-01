@@ -35,13 +35,13 @@ class SelectCityInterestsViewModel {
 
 
         // update from Server
-        ProfileService.fetchCitiesFromServer()
+        ProfileService.fetchCities()
             .then { _ -> Void in
                 self.cities = self.getCities()
         }
-        ProfileService.fetchInterestsFromServer()
+        ProfileService.fetchInterests()
             .then { _ -> Void in
-                print(".fetchInterestsFromServer.done")
+                print(".fetchInterests.done")
 
                 self.interests = self.getInterests()
                 self.didUpdate?()
@@ -76,15 +76,15 @@ class SelectCityInterestsViewModel {
                                     .filter({ $0.1 != nil })
                                     .map({ $0.0.id })
 
-            ProfileService.postSetCity(selCity.id)
-            ProfileService.postSetInterest(selInterestIds)
+            ProfileService.setCity(selCity.id)
+            ProfileService.setInterests(selInterestIds)
             self.navigateFeed!()
 
             /*
             firstly {
-                ProfileService.postSetCity(selCity.id)
+                ProfileService.setCity(selCity.id)
             }.then {
-                ProfileService.postSetInterest(selInterestIds)
+                ProfileService.setInterests(selInterestIds)
             }.then { _ -> Void in
                 self.navigateFeed!()
             }.error({ error in

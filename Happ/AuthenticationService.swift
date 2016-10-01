@@ -42,7 +42,15 @@ class AuthenticationService {
             }
     }
 
-
+    class func updatePassword(oldPassword: String, newPassword: String) -> Promise<AnyObject> {
+        let params = [
+            "old_password": oldPassword,
+            "new_password": newPassword
+        ]
+        return Post("auth/password/change", parameters: params, isAuthenticated: true)
+    }
+    
+    
     // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
         return Promise { fulfill, reject in
@@ -55,12 +63,15 @@ class AuthenticationService {
         }
     }
 
-
+    class func logOut() {
+        self.deleteCredential()
+    }
+    
     class func getCredential() -> String? {
         let jwt = KeychainSwift().get(keyJWT)
         return jwt
     }
-
+    
     private class func storeCredential(data: [String: AnyObject]) {
         let jwt = data["token"] as! String
         KeychainSwift().set(jwt, forKey: keyJWT)

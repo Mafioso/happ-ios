@@ -16,7 +16,7 @@ import SlideMenuControllerSwift
                                                                     ->  main.Feed
                     ->  main.Feed
 
- main:   Feed       ->  event.EventDetails
+ main:  vared       ->  event.EventDetails
                     ->  event.EventForm
                     ->  event.EventsManage
                     ->  profile.Profile
@@ -49,9 +49,7 @@ class NavigationCoordinator {
     }
 
     func start() {
-
-        // self.startSelectCityInterests()
-
+        //self.startSelectCityInterests()
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.startFeed() : self.startSignIn() }
     }
@@ -59,6 +57,12 @@ class NavigationCoordinator {
     func goBack() {
         print(".nav.goBack")
         self.navigationController.popViewControllerAnimated(true)
+    }
+
+    func logOut() {
+        print(".nav.LogOut")
+        AuthenticationService.logOut()
+        self.start()
     }
 
     func startSignIn() {
@@ -97,10 +101,7 @@ class NavigationCoordinator {
         viewController.viewModel = viewModel
 
         self.navigationController = UINavigationController(rootViewController: viewController)
-        // init Slide menu
-        let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu")
-        let slideMenuController = SlideMenuController(mainViewController: self.navigationController, leftMenuViewController: menuViewController)
-        self.window.rootViewController = slideMenuController
+        self.window.rootViewController = self.initSlideMenu(navigationController)
         self.window.makeKeyAndVisible()
     }
 
@@ -138,15 +139,68 @@ class NavigationCoordinator {
         }
     }
 
+    func showSettings() {
+        print(".profile.showSettings")
+        let viewModel = SettingsViewModel()
+        viewModel.navigateSelectCurrency = self.showSelectCurrency(viewModel)
+        // viewModel.navigateSelectCity = TODO
 
-    func displaySlideMenu() {
+        let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Settings") as! SettingsController
+        viewController.viewModel = viewModel
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+
+    func showSelectCurrency(parentViewModel: SettingsViewModel) -> NavigationFunc {
+        return {
+            print(".profile.showSelectCurrency")
+            parentViewModel.navigateBack = self.goBack
+
+            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCurrency") as! SelectCurrencyViewController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+
+    func showProfile() {
+        let viewModel = ProfileViewModel()
+        viewModel.navigateBack = self.goBack
+
+        let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
+        viewController.viewModel = viewModel
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+
+
+    private func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.openLeft()
         }
     }
+
+    private func hideSlideMenu() {
+        if let slideMenu = self.window.rootViewController as? SlideMenuController {
+            slideMenu.closeLeft()
+        }
+    }
+
+    private func hideSlideMenu(navigate: NavigationFunc) -> NavigationFunc {
+        return {
+            navigate?()
+            self.hideSlideMenu()
+        }
+    }
+
+    private func initSlideMenu(rootView: UIViewController) -> SlideMenuController {
+        let viewModel = MenuViewModel()
+        viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
+        viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
+        viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
+        viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
+
+        let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
+        menuViewController.viewModel = viewModel
+
+        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController)
+        return slideMenuController
+    }
 }
-
-
-
-
-

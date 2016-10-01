@@ -1,18 +1,18 @@
 //
-//  SelectCityViewController.swift
+//  SelectCurrencyViewController.swift
 //  Happ
 //
-//  Created by MacBook Pro on 9/28/16.
+//  Created by MacBook Pro on 9/30/16.
 //  Copyright © 2016 Sattar Stamkulov. All rights reserved.
 //
 
 import UIKit
 
-class SelectCityViewController: UITableViewController {
+class SelectCurrencyViewController: UITableViewController {
 
-    var viewModel: SelectCityInterestsViewModel!
+    var viewModel: SettingsViewModel!
 
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,13 +24,10 @@ class SelectCityViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.updateTableWithSelected()
     }
 
-
-
-    // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -38,16 +35,14 @@ class SelectCityViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.viewModel.cities.count
+        return self.viewModel.currencies.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let city = self.viewModel.cities[indexPath.row]
+        let currency = self.viewModel.currencies[indexPath.row]
 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = city.name
-        cell.detailTextLabel!.text = city.country_name
+        cell.textLabel!.text = currency.name
 
         return cell
     }
@@ -55,10 +50,11 @@ class SelectCityViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.updateDisplaySelectButton()
     }
-    
+
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         self.updateDisplaySelectButton()
     }
+
 
 
     private func initDisplaySelectButton() {
@@ -73,9 +69,9 @@ class SelectCityViewController: UITableViewController {
     }
 
     private func updateTableWithSelected() {
-        // set selections for already selected city
-        if let city = self.viewModel.selectedCity {
-            let atRow = self.viewModel.cities.indexOf(city)
+        // set selections for already selected currency
+        if let currency = self.viewModel.userSettings.currency {
+            let atRow = self.viewModel.currencies.indexOf(currency)
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             self.updateDisplaySelectButton()
         }
@@ -84,10 +80,8 @@ class SelectCityViewController: UITableViewController {
 
     func clickedSelectButton() {
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
-        let selectedCity = self.viewModel.cities[selectedIndexPath.row]
-        self.viewModel.onSelectCity(selectedCity)
+        let currency = self.viewModel.currencies[selectedIndexPath.row]
+        self.viewModel.onSelectCurrency(currency)
     }
+
 }
-
-
-

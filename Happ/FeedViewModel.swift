@@ -10,6 +10,39 @@ import Foundation
 import PromiseKit
 
 
+enum EventSortType {
+    case ByDate
+    case ByPopular
+    
+    func getSelectOptionTitle(currentSort: EventSortType) -> String {
+        var title: String
+        switch self {
+        case .ByDate:
+            title = "Date"
+        case .ByPopular:
+            title = "Popular"
+        }
+        return title + (self == currentSort ? " ✔︎" : "")
+    }
+    
+    func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
+        let date1 = event1.start_datetime
+        let date2 = event2.start_datetime
+        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1!, toDate: date2!, options: [])
+        let isSameDay = diff.day == 0
+        
+        switch self {
+        case .ByDate:
+            if isSameDay {
+                return false
+            }
+            return true
+        case .ByPopular:
+            return false
+        }
+    }
+}
+
 
 class FeedViewModel {
 
