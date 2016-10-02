@@ -33,7 +33,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func clickedButtonFilter(sender: UIButton) {
     }
     @IBAction func clickedButtonSort(sender: UIButton) {
-        self.displaySelectSort()
+        
     }
 
 
@@ -46,7 +46,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
         self.displayNavigationBar()
-        self.displaySearchBar()
 
         self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
         self.tableView.dataSource = self
@@ -86,9 +85,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let eventsCount = self.viewModel.events.count
+        let eventsCount = self.viewModel.getEventsCount()
         print(".FeedViewController.numberOfRow", eventsCount)
         return eventsCount
     }
@@ -97,18 +96,23 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventTableCell
 
         // configure cell
-        let event = self.viewModel.events[indexPath.row]
+        let event = self.viewModel.getEventAt(indexPath)
         cell.setup(event)
         cell.onClickLikeButton = self.viewModel.onClickLike
+
+        // paginating
+        if indexPath.row == self.viewModel.getEventsCount() - 1 {
+            self.viewModel.loadNextPage()
+        }
 
         return cell
     }
 
 
     // MARK: UITableViewDelegate
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let event = self.viewModel.events[indexPath.row]
+        let event = self.viewModel.getEventAt(indexPath)
         self.viewModel.onClickEvent(event)
     }
 
@@ -132,42 +136,6 @@ extension FeedViewController {
 }
 
 
-extension FeedViewController: UISearchBarDelegate {
-
-    // MARK: Search
-
-    private func displaySearchBar() {
-        self.definesPresentationContext = true
-        searchBar.delegate = self
-    }
-
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel.onSearchUpdate(searchText)
-    }
-
-
-    // MARK: Sort
-
-    func displaySelectSort() {
-        let currentSort = self.viewModel.sort
-
-        let popupSelectController = UIAlertController(title: "Sort by", message: nil, preferredStyle: .ActionSheet)
-
-        let actionByDate = UIAlertAction(title: EventSortType.ByDate.getSelectOptionTitle(currentSort), style: .Default, handler: {_ in
-            self.viewModel.onChangeSort(.ByDate)
-        })
-        let actionByPopular = UIAlertAction(title: EventSortType.ByPopular.getSelectOptionTitle(currentSort), style: .Default, handler: {_ in
-            self.viewModel.onChangeSort(.ByPopular)
-        })
-        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-
-        popupSelectController.addAction(actionByDate)
-        popupSelectController.addAction(actionByPopular)
-        popupSelectController.addAction(actionCancel)
-
-        self.presentViewController(popupSelectController, animated: true, completion: nil)
-    }
-}
 
 
 

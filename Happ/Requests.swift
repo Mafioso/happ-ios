@@ -120,36 +120,16 @@ func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = tru
 
 
 
-func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool = false) -> Promise<AnyObject> {
+func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
-        let request: Request!
-        
-        // create Request
-        if parameters == nil {
-            let nsURL = NSURL(string: url)
-            let headers = getRequestHeaders()
-            let nsRequest = NSMutableURLRequest(URL: nsURL!)
-            nsRequest.HTTPMethod = "GET"
-            headers.forEach({ nsRequest.setValue($0.1, forHTTPHeaderField: $0.0) })
-            request = Alamofire.request(nsRequest)
-        } else {
-            request = Alamofire.request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
-        }
-
-        // work with Response
+        let request = createRequest(url, parameters: parameters)
         request
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    if isPaginated {
-                        let paginatedResponse = response.result.value as! NSDictionary
-                        let results = paginatedResponse["results"] as! [AnyObject]
-                        resolve(results)
-                    } else {
-                        resolve(response.result.value!)
-                    }
+                    resolve(response.result.value!)
 
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
@@ -164,6 +144,53 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, isPaginated: Bool =
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
+}
+
+func GetPaginated(endpoint: String, parameters: [String: AnyObject]?) -> Promise<(AnyObject, Bool)> {
+    return Promise { resolve, reject in
+        let url = HostAPI + endpoint
+        let request = createRequest(url, parameters: parameters)
+        request
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success:
+                    let paginatedResponse = response.result.value as! NSDictionary
+                    let results = paginatedResponse["results"] as! [AnyObject]
+                    let isLastPage = paginatedResponse["next"] is NSNull
+                    resolve((results, isLastPage))
+
+                case .Failure(let error):
+                    if let reqErrorType = RequestError(rawValue: error.code) {
+                        reject(reqErrorType)
+                    } else {
+                        print(".Get.error", endpoint, parameters, error, error.code)
+                        reject(RequestError.UnknownError)
+                    }
+                }
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+}
+
+
+
+private func createRequest(url: String, parameters: [String: AnyObject]?) -> Request {
+    // create Request
+    var  request: Request!
+    if parameters == nil {
+        let nsURL = NSURL(string: url)
+        let headers = getRequestHeaders()
+        let nsRequest = NSMutableURLRequest(URL: nsURL!)
+        nsRequest.HTTPMethod = "GET"
+        headers.forEach({ nsRequest.setValue($0.1, forHTTPHeaderField: $0.0) })
+        request = Alamofire.request(nsRequest)
+    } else {
+        request = Alamofire.request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
+    }
+    return request
 }
 
 

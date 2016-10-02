@@ -21,8 +21,8 @@ class ProfileService {
 
 
     class func fetchCities() -> Promise<Void> {
-        return Get(endpointCity, parameters: nil, isPaginated: true)
-            .then { data -> Void in
+        return GetPaginated(endpointCity, parameters: nil)
+            .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
@@ -40,8 +40,8 @@ class ProfileService {
     }
 
     class func fetchInterests() -> Promise<Void> {
-        return Get(endpointInterest, parameters: nil, isPaginated: true)
-            .then { data -> Void in
+        return GetPaginated(endpointInterest, parameters: nil)
+            .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
@@ -77,8 +77,8 @@ class ProfileService {
     }
 
     class func fetchCurrencies() -> Promise<Void> {
-        return Get(endpointCurrencies, parameters: nil, isPaginated: true)
-            .then { data -> Void in
+        return GetPaginated(endpointCurrencies, parameters: nil)
+            .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {

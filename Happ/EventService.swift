@@ -17,22 +17,28 @@ class EventService {
 
     static let endpoint = "events/"
 
+    static var isLastPageOfFeed: Bool = false
+    static var isLastPageOfFavourites: Bool = false
 
-    class func fetchFromServer() -> Promise<Void> {
-        let feedEndpoint = endpoint //+ "feed/" TODO
-        return Get(feedEndpoint, parameters: nil, isPaginated: true)
-            .then { data -> Void in
+
+    class func fetchFeed(page: Int = 1) -> Promise<Void> {
+        let feedEndpoint = endpoint + "?page=\(page)"
+        //+ "feed/" TODO
+        return GetPaginated(feedEndpoint, parameters: nil)
+            .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
 
-                // 1. delete exists
-                try! realm.write {
-                    let exists = realm.objects(EventModel)
-                    realm.delete(exists)
+                if page == 1 {
+                    // 1. delete exists
+                    try! realm.write {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
                 }
 
-                // print(".here", realm.objects(EventModel).count)
 
+                self.isLastPageOfFeed = isLastPage
                 // 2. add new
                 try! realm.write {
                     results.forEach() { event in
@@ -43,19 +49,11 @@ class EventService {
             }
     }
 
-    class func getStoredEvents(sort: EventSortType) -> Results<EventModel> {
+    class func getFeed() -> Results<EventModel> {
         let realm = try! Realm()
-        let events = realm.objects(EventModel)//.sort(sort.isOrderedBeforeFunc)
+        let events = realm.objects(EventModel)
         return events
     }
-    class func getStoredEvents(search: String, sort: EventSortType) -> Results<EventModel> {
-        let searchFilter = NSPredicate(format: "title CONTAINS %@", search)
-
-        let events = EventService.getStoredEvents(sort)
-                        .filter(searchFilter)
-        return events
-    }
-
 
     class func getByID(id: String) -> EventModel? {
         let realm = try! Realm()
