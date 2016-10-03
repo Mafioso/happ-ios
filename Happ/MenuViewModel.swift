@@ -21,12 +21,7 @@ class MenuViewModel {
     var navigateLogout: NavigationFunc
 
     init() {
-        user = UserModel()
-
-        ProfileService.fetchUserProfile()
-            .then { _ -> Void in
-                self.user = ProfileService.getUserProfile()
-            }
+        self.user = self.getUserProfile()
 
     }
       
@@ -34,4 +29,15 @@ class MenuViewModel {
 
     //NOTE:  there is no inputs, 
     // navigate functions are called directly inside MenuViewController
+    
+
+    private func getUserProfile() -> UserModel {
+        ProfileService
+            .fetchUserProfile()
+            .then {
+                self.user = ProfileService.getUserProfile()
+        }
+        
+        return ProfileService.getUserProfile()
+    }
 }

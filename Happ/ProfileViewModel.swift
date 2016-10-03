@@ -29,16 +29,19 @@ class ProfileViewModel {
     //MARK: - Inputs
     func onSave(values: [String: AnyObject]) -> Promise<AnyObject> {
         return ProfileService.updateUserProfile(values)
+            .then { _ -> AnyObject in
+                self.navigateBack!()
+                return NSNull()
+        }
     }
     func onSave(values: [String: AnyObject], passwordValues: [String: AnyObject]) -> Promise<AnyObject> {
         return self.onSave(values)
             .then { _ in
-                let oldPassword = passwordValues[ProfileControllerFields.PasswordCurrent.rawValue] as! String
-                let newPassword = passwordValues[ProfileControllerFields.PasswordNew.rawValue] as! String
+                let oldPassword = passwordValues["old_password"] as! String
+                let newPassword = passwordValues["new_password"] as! String
                 return AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
         }
     }
-
 
 
     private func getUserProfile() -> UserModel {

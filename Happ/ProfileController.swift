@@ -8,42 +8,6 @@
 
 import UIKit
 
-enum ProfileControllerFields: String {
-    case FullName = "fullname"
-    case Email = "email"
-    case PasswordCurrent = "old_password"
-    case PasswordNew = "new_password"
-    case PasswordNewRetype = "_retype_password"
-
-
-    func getIndexPath() -> NSIndexPath {
-        switch self {
-        case .FullName:
-            return NSIndexPath(forRow: 0, inSection: 0)
-        case .Email:
-            return NSIndexPath(forRow: 1, inSection: 0)
-        case .PasswordCurrent:
-            return NSIndexPath(forRow: 0, inSection: 2)
-        case .PasswordNew:
-            return NSIndexPath(forRow: 1, inSection: 2)
-        case .PasswordNewRetype:
-            return NSIndexPath(forRow: 0, inSection: 2)
-        }
-    }
-
-    static func forAll() -> [ProfileControllerFields] {
-        return [.FullName, .Email, .PasswordCurrent, .PasswordNew, .PasswordNewRetype]
-    }
-    
-    static func forAllProfile() -> [ProfileControllerFields] {
-        return [.FullName, .Email]
-    }
-    
-    static func forAllPassword() -> [ProfileControllerFields] {
-        return [.PasswordCurrent, .PasswordNew, .PasswordNewRetype]
-    }
-
-}
 
 
 class ProfileController: UIViewController {
@@ -57,23 +21,38 @@ class ProfileController: UIViewController {
 
     // outlets
     @IBOutlet weak var imageProfileImage: UIImageView!
-    
+    @IBOutlet weak var textFieldFullName: UITextField!
+    @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var viewPasswordFormDeactive: UIView!
+    @IBOutlet weak var viewPasswordFormActive: UIView!
+    @IBOutlet weak var textFieldPasswordOld: UITextField!
+    @IBOutlet weak var textFieldPasswordNew: UITextField!
+    @IBOutlet weak var textFieldPasswordNewRetype: UITextField!
+
+
     // actions
+    @IBAction func clickedEditPhotoButton(sender: UIButton) {
+    }
+    @IBAction func clickedChangePasswordButton(sender: UIButton) {
+        self.isChangePassword = true
+    }
     @IBAction func clickedSaveButton(sender: UIButton) {
-        let values = self.getNonEmptyFieldValues(ProfileControllerFields.forAllProfile())
-        print(".here", values)
-        self.viewModel.onSave(values)
-        //TODO
-        //self.viewModel.onSave(<#T##values: [String : AnyObject]##[String : AnyObject]#>, passwordValues: <#T##[String : AnyObject]#>)
+        self.collectValuesAndSave()
     }
 
 
-    // constants
-    let segueEmbeddedTable = "embeddedTable"
-    let tagNumberOfTextField = 1
-
     // variables
-    var tableView: UITableView!
+    var isChangePassword = false {
+        didSet {
+            if isChangePassword {
+                UIView.transitionFromView(viewPasswordFormDeactive, toView: viewPasswordFormActive, duration: 0.3, options: UIViewAnimationOptions.CurveEaseOut, completion: nil)
+
+            } else {
+                UIView.transitionFromView(viewPasswordFormActive, toView: viewPasswordFormDeactive, duration: 0.3, options: UIViewAnimationOptions.CurveEaseOut, completion: nil)
+            }
+        }
+    }
+
 
 
     override func viewDidLoad() {
@@ -85,50 +64,50 @@ class ProfileController: UIViewController {
 
         self.prefilFieldValues()
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == segueEmbeddedTable {
-            let dest = segue.destinationViewController as! UITableViewController
-            self.tableView = dest.tableView
-        }
-    }
-
 
     private func bindToViewModel() {
         self.viewModel.didUpdate = { [weak self] _ in
             self?.prefilFieldValues()
+            self?.isChangePassword = false
         }
     }
 
 
     private func prefilFieldValues() {
         let profile = self.viewModel.userProfile
-        self._setValueOf(.FullName, value: profile.fullname)
-        self._setValueOf(.Email, value: profile.email)
+        textFieldFullName.text = profile.fullname
+        textFieldEmail.text = profile.email
     }
 
-    private func getNonEmptyFieldValues(fields: [ProfileControllerFields]) -> [String: String] {
-        var values: [String: String] = [:]
-        fields.forEach { fieldType in
-            if let fieldValue = self._getValueOf(fieldType) {
-                values.updateValue(fieldValue, forKey: fieldType.rawValue)
+    private func collectValuesAndSave() {
+        let values: [String: AnyObject] = [
+            "fullname": textFieldFullName.text!,
+            "email": textFieldEmail.text!
+        ]
+
+        print(".here", self.isChangePassword, values)
+
+        if self.isChangePassword {
+            self.viewModel.onSave(values)
+
+        } else {
+            if textFieldPasswordNew.text != textFieldPasswordNewRetype.text {
+                self.displayAlertPasswordRetypeMismatch()
+                return
             }
+
+            let passwords: [String: AnyObject] = [
+                "old_password": textFieldPasswordOld.text!,
+                "new_password": textFieldPasswordNew.text!
+            ]
+            self.viewModel.onSave(values, passwordValues: passwords)
         }
-        return values
     }
-    private func _getValueOf(fieldType: ProfileControllerFields) -> String? {
-        return self.__getTextFieldOf(fieldType).text
+
+    private func displayAlertPasswordRetypeMismatch() {
+        self.extDisplayAlertView("Password does not match the confirm password")
     }
-    private func _setValueOf(fieldType: ProfileControllerFields, value: String) -> Void {
-        self.__getTextFieldOf(fieldType).text = value
-    }
-    private func __getTextFieldOf(fieldType: ProfileControllerFields) -> UITextField {
-        let indexPath = fieldType.getIndexPath()
-        print("..here", indexPath.section, indexPath.row)
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
-        let textField = cell?.viewWithTag(tagNumberOfTextField) as! UITextField
-        return textField
-    }
-    
+
 }
 
 
