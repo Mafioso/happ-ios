@@ -388,6 +388,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vvV-Ig-MCH" id="v7Q-q3-7vh">
                                             <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ycA-Gx-5Mi">
+                                                    <frame key="frameInset" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </searchBar>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.015686274510000001" green="0.023529411760000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
@@ -423,20 +430,29 @@
                                             <frame key="frameInset" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qgm-6k-qen">
-                                                    <segments>
-                                                        <segment title="By date"/>
-                                                        <segment title="By popularity"/>
-                                                    </segments>
-                                                    <color key="tintColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmu-2V-dWC">
+                                                    <frame key="frameInset" minX="88" minY="17" width="52" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                                    <state key="normal" title="By date">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBL-d8-gV7">
+                                                    <frame key="frameInset" minX="190" minY="17" width="86" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                                    <state key="normal" title="By popularity">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="qgm-6k-qen" secondAttribute="bottom" constant="11" id="9Ed-xn-DJ5"/>
-                                                <constraint firstItem="qgm-6k-qen" firstAttribute="top" secondItem="3Uy-sW-CYZ" secondAttribute="topMargin" constant="10" id="am0-QW-JUN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qgm-6k-qen" secondAttribute="trailing" constant="77" id="nZG-AQ-fFV"/>
-                                                <constraint firstItem="qgm-6k-qen" firstAttribute="leading" secondItem="3Uy-sW-CYZ" secondAttribute="leadingMargin" constant="77" id="pkn-6j-SCF"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.015686274510000001" green="0.023529411760000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
@@ -471,21 +487,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K4v-Jx-P1y" id="ihj-iN-DTO">
                                             <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="but-x3-0LX">
-                                                    <segments>
-                                                        <segment title="Free"/>
-                                                        <segment title="All"/>
-                                                    </segments>
-                                                    <color key="tintColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="but-x3-0LX" secondAttribute="trailing" constant="85" id="IyA-qO-tzX"/>
-                                                <constraint firstItem="but-x3-0LX" firstAttribute="top" secondItem="ihj-iN-DTO" secondAttribute="top" constant="7" id="gJE-Bg-x8a"/>
-                                                <constraint firstItem="but-x3-0LX" firstAttribute="leading" secondItem="ihj-iN-DTO" secondAttribute="leading" constant="85" id="oEp-8J-YeZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="but-x3-0LX" secondAttribute="bottom" constant="9" id="qJ7-wi-fWB"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.015686274510000001" green="0.023529411760000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
