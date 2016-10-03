@@ -104,15 +104,14 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="xOB-EO-afB" firstAttribute="top" secondItem="Gxh-iG-GhC" secondAttribute="top" constant="3" id="A5s-wX-i6y"/>
-                                                            <constraint firstAttribute="bottom" secondItem="xOB-EO-afB" secondAttribute="bottom" constant="1" id="C75-Lq-C9O"/>
-                                                            <constraint firstItem="xOB-EO-afB" firstAttribute="leading" secondItem="hWC-ev-jg1" secondAttribute="trailing" constant="19" id="ZO6-Ro-gnP"/>
+                                                            <constraint firstItem="xOB-EO-afB" firstAttribute="centerY" secondItem="Gxh-iG-GhC" secondAttribute="centerY" id="DX9-77-1KZ"/>
                                                             <constraint firstItem="hWC-ev-jg1" firstAttribute="leading" secondItem="Gxh-iG-GhC" secondAttribute="leading" constant="3" id="cy8-ZE-s2j"/>
                                                             <constraint firstItem="hWC-ev-jg1" firstAttribute="top" secondItem="Gxh-iG-GhC" secondAttribute="top" constant="2" id="hg2-B5-m4m"/>
                                                             <constraint firstAttribute="bottom" secondItem="hWC-ev-jg1" secondAttribute="bottom" constant="1" id="uYA-gC-exr"/>
+                                                            <constraint firstItem="xOB-EO-afB" firstAttribute="leading" secondItem="Gxh-iG-GhC" secondAttribute="leading" constant="32" id="vSL-H9-bRa"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-Hk-RK2">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-Hk-RK2" userLabel="date">
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="745" text="3 - 30 сентября - 12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TlS-ne-ujP">
                                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
@@ -126,15 +125,14 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="TlS-ne-ujP" secondAttribute="bottom" constant="2" id="2XH-MD-Uyg"/>
-                                                            <constraint firstItem="TlS-ne-ujP" firstAttribute="leading" secondItem="cGP-cF-2gv" secondAttribute="trailing" constant="15" id="39B-KU-C2I"/>
-                                                            <constraint firstItem="cGP-cF-2gv" firstAttribute="leading" secondItem="CoR-Hk-RK2" secondAttribute="leading" id="JJl-gw-q2Z"/>
+                                                            <constraint firstItem="TlS-ne-ujP" firstAttribute="centerY" secondItem="CoR-Hk-RK2" secondAttribute="centerY" id="1xU-hZ-qrP"/>
+                                                            <constraint firstItem="cGP-cF-2gv" firstAttribute="leading" secondItem="CoR-Hk-RK2" secondAttribute="leading" constant="-8" id="JJl-gw-q2Z"/>
                                                             <constraint firstAttribute="bottom" secondItem="cGP-cF-2gv" secondAttribute="bottom" constant="3" id="Pkx-p7-f2f"/>
-                                                            <constraint firstItem="TlS-ne-ujP" firstAttribute="top" secondItem="CoR-Hk-RK2" secondAttribute="top" constant="2" id="jYx-Jf-Jp0"/>
+                                                            <constraint firstItem="TlS-ne-ujP" firstAttribute="leading" secondItem="CoR-Hk-RK2" secondAttribute="leading" constant="32" id="Wm3-Z2-Zyn"/>
                                                             <constraint firstItem="cGP-cF-2gv" firstAttribute="top" secondItem="CoR-Hk-RK2" secondAttribute="top" constant="3" id="r8V-Gy-qyO"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8p-Dx-pcn">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8p-Dx-pcn" userLabel="location">
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="г.Алматы, Ботанический Сад " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9C-3Y-JeU">
                                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Light" family="SF UI Display" pointSize="14"/>
@@ -153,11 +151,10 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="U9C-3Y-JeU" secondAttribute="bottom" constant="11" id="Aqq-UU-KdY"/>
                                                             <constraint firstItem="ibj-6M-f7h" firstAttribute="leading" secondItem="I8p-Dx-pcn" secondAttribute="leading" constant="3" id="AuZ-7t-bAR"/>
-                                                            <constraint firstItem="U9C-3Y-JeU" firstAttribute="top" secondItem="I8p-Dx-pcn" secondAttribute="top" constant="2" id="R9R-vw-DMn"/>
-                                                            <constraint firstItem="U9C-3Y-JeU" firstAttribute="leading" secondItem="ibj-6M-f7h" secondAttribute="trailing" constant="18" id="e58-QP-nSR"/>
-                                                            <constraint firstAttribute="bottom" secondItem="ibj-6M-f7h" secondAttribute="bottom" constant="11" id="g3J-IA-UaV"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ibj-6M-f7h" secondAttribute="bottom" constant="1" id="g3J-IA-UaV"/>
+                                                            <constraint firstItem="U9C-3Y-JeU" firstAttribute="centerY" secondItem="I8p-Dx-pcn" secondAttribute="centerY" id="g4d-Nj-wSX"/>
+                                                            <constraint firstItem="U9C-3Y-JeU" firstAttribute="leading" secondItem="I8p-Dx-pcn" secondAttribute="leading" constant="32" id="qo0-LD-Cfh"/>
                                                             <constraint firstItem="ibj-6M-f7h" firstAttribute="top" secondItem="I8p-Dx-pcn" secondAttribute="top" constant="-2" id="whT-cs-7Aw"/>
                                                         </constraints>
                                                     </view>
@@ -165,7 +162,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="CoR-Hk-RK2" firstAttribute="top" secondItem="Gxh-iG-GhC" secondAttribute="bottom" constant="1" id="0H5-J2-QgG"/>
-                                                    <constraint firstAttribute="bottom" secondItem="I8p-Dx-pcn" secondAttribute="bottom" constant="19" id="7dj-Xm-rbe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="I8p-Dx-pcn" secondAttribute="bottom" constant="29" id="7dj-Xm-rbe"/>
                                                     <constraint firstItem="CoR-Hk-RK2" firstAttribute="leading" secondItem="zRy-x6-V8n" secondAttribute="leading" id="Aas-rR-igs"/>
                                                     <constraint firstItem="CoR-Hk-RK2" firstAttribute="top" secondItem="Gxh-iG-GhC" secondAttribute="bottom" constant="1" id="Ayl-Mh-q4s"/>
                                                     <constraint firstItem="I8p-Dx-pcn" firstAttribute="leading" secondItem="zRy-x6-V8n" secondAttribute="leading" id="HQK-5e-9Fm"/>
@@ -182,7 +179,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9w-36-4dK" userLabel="Bottom view">
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXy-8o-Fyx">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXy-8o-Fyx" userLabel="Down page button">
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="29" id="Nah-Pd-iXi"/>
                                                         </constraints>
@@ -196,13 +193,6 @@
                                                         <state key="normal" title="   I Want to go" image="calendar-icon">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                                <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="clickedActionOnFirstContainer:" destination="msH-F3-xGR" eventType="touchUpInside" id="EQk-05-uYf"/>
                                                         </connections>
@@ -450,6 +440,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1400"/>
                     <connections>
+                        <outlet property="buttonWantToGo" destination="Fsh-na-6fG" id="fSe-yT-pCb"/>
                         <outlet property="constraintHeightOfFirstContainer" destination="qU5-Gx-sFZ" id="aMG-2Y-Lei"/>
                         <outlet property="constraintHeightOfSecondContainer" destination="urv-oV-ok4" id="UOI-md-x4W"/>
                         <outlet property="imageBackground" destination="3LS-V4-s1s" id="R7M-J8-vy5"/>
@@ -1222,11 +1213,11 @@ to upload photos press buttons below</string>
         <image name="arrow-down-icon" width="21" height="13"/>
         <image name="bg-event" width="375" height="667"/>
         <image name="big-location" width="100" height="100"/>
-        <image name="calendar-icon" width="17" height="17"/>
+        <image name="calendar-icon" width="32" height="28"/>
         <image name="camera-icon" width="20" height="14"/>
         <image name="happ-icon" width="128" height="133"/>
-        <image name="location-icon" width="11" height="15"/>
+        <image name="location-icon" width="18" height="26"/>
         <image name="photo-icon" width="19" height="15"/>
-        <image name="price-icon" width="10" height="17"/>
+        <image name="price-icon" width="30" height="60"/>
     </resources>
 </document>

@@ -36,6 +36,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var labelSecondTitle: UILabel!
     @IBOutlet weak var labelSecondDescription: UILabel!
     
+    @IBOutlet weak var buttonWantToGo: UIButton!
     
     @IBAction func clickedActionOnFirstContainer(sender: UIButton) {
     }
@@ -51,6 +52,11 @@ class EventDetailsController: UIViewController {
         viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
 
         //self.extMakeNavBarTransparent()
+        //button customization
+        buttonWantToGo.layer.borderColor = UIColor.whiteColor().CGColor
+        buttonWantToGo.layer.borderWidth = 1
+        buttonWantToGo.layer.cornerRadius = 5
+        buttonWantToGo.layer.masksToBounds = true
 
         self.viewModelDidUpdate()
     }
