@@ -26,6 +26,7 @@ class FeedFiltersController: UIViewController {
 
 
     @IBAction func clickedSaveButton(sender: UIButton) {
+        self.collectSaveBack()
     }
 
 
@@ -37,6 +38,19 @@ class FeedFiltersController: UIViewController {
     }
 
 
+    private func collectSaveBack() {
+        let search: String? = self.searchBar.text
+        var sortBy: FeedSortType = .ByDate
+        var onlyFree: Bool
+
+        if self.segmentSortBy.selectedSegmentIndex == 1 {
+            sortBy = .ByPopular
+        }
+        onlyFree = self.radioIsFree.on
+
+        let filters = FeedFiltersState(search: search, sortBy: sortBy, onlyFree: onlyFree, dateFrom: nil, dateTo: nil)
+        self.viewModel.onChangeFilters(filters)
+    }
 }
 
 

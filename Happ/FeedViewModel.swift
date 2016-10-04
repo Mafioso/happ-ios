@@ -10,21 +10,10 @@ import Foundation
 import PromiseKit
 
 
-/*
-enum EventSortType {
+enum FeedSortType {
     case ByDate
     case ByPopular
-    
-    func getSelectOptionTitle(currentSort: EventSortType) -> String {
-        var title: String
-        switch self {
-        case .ByDate:
-            title = "Date"
-        case .ByPopular:
-            title = "Popular"
-        }
-        return title + (self == currentSort ? " ✔︎" : "")
-    }
+
     
     func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
         let date1 = event1.start_datetime
@@ -43,34 +32,47 @@ enum EventSortType {
         }
     }
 }
-*/
-
 
 enum FeedTabs {
     case Feed
     case Favourite
 }
 
+
+struct FeedFiltersState {
+    var search: String?
+    var sortBy: FeedSortType
+    var onlyFree: Bool
+    var dateFrom: NSDate?
+    var dateTo: NSDate?
+}
+
+
 struct FeedState {
     var tab: FeedTabs
     var events: [EventModel]
     var page: Int
-    // var filtersModel: TODO
+    var filters: FeedFiltersState
 }
 
 
 class FeedViewModel {
 
-    var state = FeedState(tab: .Feed, events: Array(EventService.getFeed()), page: 1)
+    var state: FeedState
 
     var navigateEventDetails: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
     var displaySlideFeedFilters: NavigationFunc
+    var hideSlideFeedFilters: NavigationFunc
 
 
     init() {
-        
+        let filtersState = FeedFiltersState(search: nil, sortBy: .ByDate, onlyFree: false, dateFrom: nil, dateTo: nil)
+        self.state = FeedState(tab: .Feed, events: [], page: 1, filters: filtersState)
+
+        self.state.events = self.getEvents()
     }
+
 
     //MARK: - Events
     var didUpdate: (() -> Void)?
@@ -113,7 +115,27 @@ class FeedViewModel {
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails!(id: event.id)
     }
+    func onChangeFilters(newState: FeedFiltersState) {
+        self.state.filters = newState
+        self.state.events = self.getEvents()
+        self.hideSlideFeedFilters!() // return to FeedViewController
+        self.didUpdate!()
+    }
 
+
+    func getEvents() -> [EventModel] {
+        var events = EventService.getFeed()
+        let filters = self.state.filters
+        
+        if filters.search != nil {
+            events = events.filter("title CONTAINS %@", filters.search!)
+        }
+        if filters.onlyFree {
+            events = events.filter("min_price == nil")
+        }
+
+        return Array(events)
+    }
 
     func getEventAt(indexPath: NSIndexPath) -> EventModel {
         return self.state.events[indexPath.row]
@@ -124,12 +146,12 @@ class FeedViewModel {
     private func fetchFeedEvents() {
         EventService.fetchFeed(self.state.page)
             .then { _ -> Void in
-                self.state.events = Array(EventService.getFeed())
-                self.didUpdate?()
+                self.state.events = self.getEvents()
+                self.didUpdate!()
         }
     }
 
-    
+
 }
 
 

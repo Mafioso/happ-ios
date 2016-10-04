@@ -97,6 +97,7 @@ class NavigationCoordinator {
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
+        viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
 
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
         viewController.viewModel = viewModel
@@ -214,10 +215,10 @@ class NavigationCoordinator {
     }
     private func hideSlideFeedFilters() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
-            slideMenu.closeLeft()
+            slideMenu.closeRight()
         }
     }
-    
+
 
     private func initSlideMenu(rootView: UIViewController, rightMenu: UIViewController) -> SlideMenuController {
         let viewModel = MenuViewModel()
