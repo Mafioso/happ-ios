@@ -65,6 +65,7 @@ class FeedViewModel {
 
     var navigateEventDetails: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
+    var displaySlideFeedFilters: NavigationFunc
 
 
     init() {

@@ -24,49 +24,21 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
+    
     // outlets
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var buttonFilter: UIButton!
-    @IBOutlet weak var buttonSort: UIButton!
+    @IBOutlet weak var tableView: UITableView!
 
-    // actions
-    @IBAction func clickedButtonFilter(sender: UIButton) {
-    }
-    @IBAction func clickedButtonSort(sender: UIButton) {
-        
-    }
-
-
-    // variables
-    var tableView: UITableView!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         self.displayNavigationBar()
-
-        self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.estimatedRowHeight = 265
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.initTableView()
 
         self.viewModelDidUpdate()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == segueEmbeddedTableID {
-            let destController = segue.destinationViewController as! UITableViewController
-            self.tableView = destController.tableView
-        }
-    }
 
 
     private func bindToViewModel() {
@@ -77,6 +49,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func viewModelDidUpdate() {
         self.tableView.reloadData()
+    }
+
+
+    private func initTableView() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+
+        self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.estimatedRowHeight = 265
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 
 
@@ -125,13 +107,21 @@ extension FeedViewController {
     private func displayNavigationBar() {
         self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
 
-        let menuButton = UIBarButtonItem(image: UIImage(named: "menu-tab"), style: .Plain, target: self, action: #selector(FeedViewController.handleClickOnMenu))
+        let menuNavButton = UIBarButtonItem(image: UIImage(named: "burger-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickMenuNavbutton))
+        let filterNavitem = UIBarButtonItem(image: UIImage(named: "filter-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickFiltersNavbutton))
 
-        self.navigationItem.leftBarButtonItem = menuButton
+        self.navigationItem.leftBarButtonItem = menuNavButton
+        self.navigationItem.rightBarButtonItem = filterNavitem
+
+        self.extMakeNavBarWhite()
     }
 
-    func handleClickOnMenu() {
+    func onClickMenuNavbutton() {
         self.viewModel.displaySlideMenu!()
+    }
+
+    func onClickFiltersNavbutton() {
+        self.viewModel.displaySlideFeedFilters!()
     }
 }
 

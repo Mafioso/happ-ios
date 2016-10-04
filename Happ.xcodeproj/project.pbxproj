@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5210D1141D9052D1000A7C47 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5210D1131D9052D1000A7C47 /* FeedViewController.swift */; };
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
+		522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */; };
 		52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52357AC11D9AFF5000586459 /* SelectCityViewController.swift */; };
 		5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C37C1D92434700F66E31 /* EventTableCell.swift */; };
 		5239C37F1D92434700F66E31 /* EventTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5239C37D1D92434700F66E31 /* EventTableCell.xib */; };
@@ -78,6 +79,7 @@
 		5210D1161D90557B000A7C47 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFiltersController.swift; sourceTree = "<group>"; };
 		52357AC11D9AFF5000586459 /* SelectCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewController.swift; sourceTree = "<group>"; };
 		5239C37C1D92434700F66E31 /* EventTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		5239C37D1D92434700F66E31 /* EventTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableCell.xib; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
 				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
 				5210D1131D9052D1000A7C47 /* FeedViewController.swift */,
+				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
@@ -523,6 +526,7 @@
 				52B012421D9ADDB30061F083 /* SubInterestCell.swift in Sources */,
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
+				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,

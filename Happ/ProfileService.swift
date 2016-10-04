@@ -71,7 +71,6 @@ class ProfileService {
                     // 2. add new
                     let user = Mapper<UserModel>().map(result)
                     realm.add(user!)
-                    print(".fetchUserProfile.done", result, user)
                 }
         }
     }
@@ -91,7 +90,6 @@ class ProfileService {
                         let item = Mapper<CurrencyModel>().map(currencyData)
                         realm.add(item!)
                     }
-                    print(".fetchCurrencies.done", results)
                 }
         }
     }

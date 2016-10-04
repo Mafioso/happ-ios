@@ -96,12 +96,17 @@ class NavigationCoordinator {
         let viewModel = FeedViewModel()
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
 
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
         viewController.viewModel = viewModel
+        
+        let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        filtersViewController.viewModel = viewModel
+
 
         self.navigationController = UINavigationController(rootViewController: viewController)
-        self.window.rootViewController = self.initSlideMenu(navigationController)
+        self.window.rootViewController = self.initSlideMenu(navigationController, rightMenu: filtersViewController)
         self.window.makeKeyAndVisible()
     }
 
@@ -190,21 +195,31 @@ class NavigationCoordinator {
             slideMenu.openLeft()
         }
     }
+    private func displaySlideFeedFilters() {
+        if let slideMenu = self.window.rootViewController as? SlideMenuController {
+            slideMenu.openRight()
+        }
+    }
 
     private func hideSlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.closeLeft()
         }
     }
-
     private func hideSlideMenu(navigate: NavigationFunc) -> NavigationFunc {
         return {
             navigate?()
             self.hideSlideMenu()
         }
     }
+    private func hideSlideFeedFilters() {
+        if let slideMenu = self.window.rootViewController as? SlideMenuController {
+            slideMenu.closeLeft()
+        }
+    }
+    
 
-    private func initSlideMenu(rootView: UIViewController) -> SlideMenuController {
+    private func initSlideMenu(rootView: UIViewController, rightMenu: UIViewController) -> SlideMenuController {
         let viewModel = MenuViewModel()
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
@@ -214,7 +229,7 @@ class NavigationCoordinator {
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModel = viewModel
 
-        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController)
+        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController, rightMenuViewController: rightMenu)
         return slideMenuController
     }
 }
