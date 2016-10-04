@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import PromiseKit
 
 
 extension UITextField {
@@ -26,10 +27,12 @@ extension UITextField {
 }
 
 extension UIViewController {
-    func extDisplayAlertView(body: String) {
-        let alert = UIAlertController(title: "Error 🤕", message: body, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+    func extDisplayAlertView(body: String, title: String = "Error 🤕") -> Promise<Void> {
+        return Promise { resolve, reject in
+            let alert = UIAlertController(title: title, message: body, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: {_ in resolve()}))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     func extDisplayAlertView(error: ErrorType) {
@@ -39,6 +42,7 @@ extension UIViewController {
             self.extDisplayAlertView(error)
         }
     }
+
 
     func extMakeNavBarWhite() {
         if let navBar = self.navigationController?.navigationBar {
@@ -53,7 +57,20 @@ extension UIViewController {
     func extMakeNavBarTransparent() {
         // TODO
     }
+
+    
+    func extHideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.extDismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func extDismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+
 }
+
 
 
 

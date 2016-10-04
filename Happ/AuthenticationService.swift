@@ -47,15 +47,16 @@ class AuthenticationService {
             "old_password": oldPassword,
             "new_password": newPassword
         ]
-        return Post("auth/password/change", parameters: params, isAuthenticated: true)
+        let paramsData = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
+        return Post("auth/password/change/", parametersJSON: paramsData)
     }
-    
-    
+
+
     // check for valid credential, fetch updated if was expired
     class func isCredentialAvailable() -> Promise<Bool> {
         return Promise { fulfill, reject in
             if let credential = self.getCredential() {
-                // check here
+                // TODO check here
                 fulfill(true)
             } else {
                 fulfill(false)

@@ -15,6 +15,7 @@ class ProfileViewModel {
     var userProfile: UserModel!
 
     var navigateBack: NavigationFunc
+    var navigateChangePassword: NavigationFunc
     
 
     init() {
@@ -27,20 +28,13 @@ class ProfileViewModel {
 
 
     //MARK: - Inputs
-    func onSave(values: [String: AnyObject]) -> Promise<AnyObject> {
+    func onChangeProfile(values: [String: AnyObject]) -> Promise<AnyObject> {
         return ProfileService.updateUserProfile(values)
-            .then { _ -> AnyObject in
-                self.navigateBack!()
-                return NSNull()
-        }
     }
-    func onSave(values: [String: AnyObject], passwordValues: [String: AnyObject]) -> Promise<AnyObject> {
-        return self.onSave(values)
-            .then { _ in
-                let oldPassword = passwordValues["old_password"] as! String
-                let newPassword = passwordValues["new_password"] as! String
-                return AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
-        }
+    func onChangePassword(values: [String: AnyObject]) -> Promise<AnyObject> {
+        let oldPassword = values["old_password"] as! String
+        let newPassword = values["new_password"] as! String
+        return AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
     }
 
 
@@ -54,3 +48,6 @@ class ProfileViewModel {
         return ProfileService.getUserProfile()
     }
 }
+
+
+
