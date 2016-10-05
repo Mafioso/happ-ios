@@ -21,7 +21,6 @@ class EventTableCell: UITableViewCell {
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelPrice: UILabel!
     @IBOutlet weak var labelStatViews: UILabel!
-    @IBOutlet weak var labelStatLikes: UILabel!
 
 
     // actions
@@ -48,7 +47,7 @@ class EventTableCell: UITableViewCell {
         labelCategory.text = event.interests.first?.title
         labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         labelPrice.text = event.getPrice(.MinPrice)
-        labelStatLikes.text = formatStatValue(event.votes_num)
+        labelStatViews.text = formatStatValue(event.votes_num)
 
         if let imageURL = event.images[0] {
             imageCover.hnk_setImageFromURL(imageURL)

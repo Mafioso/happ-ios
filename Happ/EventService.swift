@@ -20,6 +20,18 @@ class EventService {
     static var isLastPageOfFeed: Bool = false
     static var isLastPageOfFavourites: Bool = false
 
+    
+    class func setLike(eventID: String, value: Bool) -> Promise<AnyObject> {
+        var url = endpoint + eventID
+        url += (value == true) ? "/upvote/" : "/downvote/"
+        return Post(url, parametersJSON: nil)
+    }
+
+    class func setFavourite(eventID: String, value: Bool) -> Promise<AnyObject> {
+        var url = endpoint + eventID
+        url += (value == true) ? "/fav/" : "/unfav/"
+        return Post(url, parametersJSON: nil)
+    }
 
     class func fetchFeed(page: Int = 1) -> Promise<Void> {
         let feedEndpoint = endpoint + "?page=\(page)"

@@ -14,21 +14,22 @@ enum FeedSortType {
     case ByDate
     case ByPopular
 
-    
     func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
-        let date1 = event1.start_datetime
-        let date2 = event2.start_datetime
-        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1!, toDate: date2!, options: [])
+        let date1 = event1.start_datetime!
+        let date2 = event2.start_datetime!
+        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1, toDate: date2, options: [])
         let isSameDay = diff.day == 0
-        
-        switch self {
-        case .ByDate:
-            if isSameDay {
-                return false
+        let isLater = date1.laterDate(date2).isEqualToDate(date1)
+
+        if isSameDay {
+            switch self {
+            case .ByDate:
+                return isLater
+            case .ByPopular:
+                return event1.votes_num > event2.votes_num
             }
-            return true
-        case .ByPopular:
-            return false
+        } else {
+            return isLater
         }
     }
 }
@@ -108,9 +109,13 @@ class FeedViewModel {
     }
     func onClickLike(event: EventModel) {
         print(".FeedViewModel.inputs.onClickLike", event.id)
+        EventService.setLike(event.id, value: !event.is_upvoted)
+        self.didUpdate!()
     }
     func onClickFavourite(event: EventModel) {
         print(".FeedViewModel.inputs.onClickFavourite", event.id)
+        EventService.setFavourite(event.id, value: !event.is_in_favourites)
+        self.didUpdate!()
     }
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails!(id: event.id)
@@ -126,15 +131,14 @@ class FeedViewModel {
     func getEvents() -> [EventModel] {
         var events = EventService.getFeed()
         let filters = self.state.filters
-        
+
         if filters.search != nil {
             events = events.filter("title CONTAINS %@", filters.search!)
         }
         if filters.onlyFree {
             events = events.filter("min_price == nil")
         }
-
-        return Array(events)
+        return events.sort(filters.sortBy.isOrderedBeforeFunc)
     }
 
     func getEventAt(indexPath: NSIndexPath) -> EventModel {

@@ -373,7 +373,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-3T-jIr">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="750" constant="121" id="WIU-XE-QKk"/>
+                                            <constraint firstAttribute="height" priority="750" constant="88" id="WIU-XE-QKk"/>
                                         </constraints>
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
