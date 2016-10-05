@@ -24,8 +24,6 @@ class EventViewModel {
     convenience init(forID: String) {
         self.init()
         self.event = EventService.getByID(forID)
-        
-        print("..", forID, event)
 
     }
 

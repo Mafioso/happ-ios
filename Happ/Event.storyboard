@@ -338,7 +338,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NgT-si-5YT" firstAttribute="top" secondItem="v1z-s7-odd" secondAttribute="bottom" id="3BV-jz-mdI"/>
                             <constraint firstItem="v1z-s7-odd" firstAttribute="top" secondItem="TkT-RW-hbZ" secondAttribute="top" id="Mig-tb-Pvi"/>
@@ -346,6 +346,7 @@
                             <constraint firstAttribute="trailing" secondItem="v1z-s7-odd" secondAttribute="trailing" id="o7X-1Y-0pq"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1400"/>
                     <connections>
@@ -361,6 +362,7 @@
                         <outlet property="labelSecondDescription" destination="HRU-f2-fOh" id="kEY-IT-cZe"/>
                         <outlet property="labelSecondTitle" destination="FUp-9W-G5l" id="HBT-y9-NJ2"/>
                         <outlet property="labelTitle" destination="FIT-gc-bjC" id="Z6Q-5o-UqX"/>
+                        <outlet property="scrollView" destination="v1z-s7-odd" id="v6F-i0-7Tu"/>
                         <outlet property="viewFirstContainer" destination="QlE-BQ-Ufy" id="JjT-Bp-MjF"/>
                         <outlet property="viewSecondContainer" destination="Vb2-r4-6fE" id="SWf-cz-H1C"/>
                     </connections>

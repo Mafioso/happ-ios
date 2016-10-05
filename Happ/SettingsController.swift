@@ -28,9 +28,15 @@ class SettingsController: UIViewController, UITableViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeNavBarTransparent()
+        self.extMakeNavBarTransparent(UIColor.whiteColor())
+        self.extMakeStatusBarWhite()
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.extMakeStatusBarDefault()
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == segueEmbeddedTableID {

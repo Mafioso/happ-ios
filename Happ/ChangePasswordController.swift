@@ -29,6 +29,11 @@ class ChangePasswordController: UIViewController {
         
         self.extHideKeyboardWhenTappedAround()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.extMakeNavBarTransparent()
+    }
 
 
     private func collectValidateSave() {

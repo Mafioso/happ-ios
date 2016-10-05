@@ -46,18 +46,26 @@ extension UIViewController {
 
     func extMakeNavBarWhite() {
         if let navBar = self.navigationController?.navigationBar {
+            self.extMakeNavBarTransparent()
+        }
+    }
+    func extMakeNavBarTransparent(tintColor: UIColor = UIColor.grayColor()) {
+        if let navBar = self.navigationController?.navigationBar {
             navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
             navBar.shadowImage = UIImage()
             navBar.translucent = true
-            navBar.tintColor = UIColor.grayColor()
-            self.navigationController?.view.backgroundColor = UIColor.clearColor()
+            navBar.tintColor = tintColor
         }
-    }
-    
-    func extMakeNavBarTransparent() {
-        // TODO
+        self.navigationController!.view.backgroundColor = UIColor.clearColor()
     }
 
+    func extMakeStatusBarWhite() {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+    }
+    func extMakeStatusBarDefault() {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+    }
+    
     
     func extHideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.extDismissKeyboard))

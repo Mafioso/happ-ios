@@ -33,12 +33,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.displayNavigationBar()
+        self.initNavigationBarItems()
         self.initTableView()
 
         self.viewModelDidUpdate()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
+        self.extMakeNavBarWhite()
+    }
 
 
     private func bindToViewModel() {
@@ -104,16 +108,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 extension FeedViewController {
     
-    private func displayNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
-
+    private func initNavigationBarItems() {
         let menuNavButton = UIBarButtonItem(image: UIImage(named: "burger-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickMenuNavbutton))
         let filterNavitem = UIBarButtonItem(image: UIImage(named: "filter-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickFiltersNavbutton))
 
         self.navigationItem.leftBarButtonItem = menuNavButton
         self.navigationItem.rightBarButtonItem = filterNavitem
-
-        self.extMakeNavBarWhite()
     }
 
     func onClickMenuNavbutton() {

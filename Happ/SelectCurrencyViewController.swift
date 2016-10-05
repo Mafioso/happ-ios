@@ -25,6 +25,8 @@ class SelectCurrencyViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.extMakeNavBarTransparent()
+
         self.updateTableWithSelected()
     }
 

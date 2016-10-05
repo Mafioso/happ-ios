@@ -18,6 +18,7 @@ class EventDetailsController: UIViewController {
 
 
     // outlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewFirstContainer: UIView!
     @IBOutlet weak var viewSecondContainer: UIView!
     @IBOutlet weak var constraintHeightOfFirstContainer: NSLayoutConstraint!
@@ -45,13 +46,13 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = viewSecondContainer.bounds
         gradient.colors = [UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0).CGColor, UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.3).CGColor]
         viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
 
-        //self.extMakeNavBarTransparent()
         //button customization
         buttonWantToGo.layer.borderColor = UIColor.whiteColor().CGColor
         buttonWantToGo.layer.borderWidth = 1
@@ -62,11 +63,21 @@ class EventDetailsController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.extMakeNavBarTransparent(UIColor.whiteColor())
+        self.extMakeStatusBarWhite()
+
         let h = UIScreen.mainScreen().bounds.size.height
         constraintHeightOfFirstContainer.constant = h
         constraintHeightOfSecondContainer.constant = h
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
 
+        self.extMakeStatusBarDefault()
+    }
+    
 
     func viewModelDidUpdate() {
         if let event = viewModel.event {

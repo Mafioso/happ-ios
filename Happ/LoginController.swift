@@ -54,14 +54,10 @@ class LoginController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // style
         
-        if let navBar = self.navigationController?.navigationBar {
-            navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-            navBar.shadowImage = UIImage()
-            navBar.translucent = true
-            self.navigationController?.view.backgroundColor = UIColor.clearColor()
-            navBar.tintColor = UIColor.whiteColor()
-        }
+        self.extMakeNavBarTransparent(UIColor.whiteColor())
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
 

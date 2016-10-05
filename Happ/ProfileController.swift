@@ -45,9 +45,16 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.extMakeNavBarTransparent(UIColor.whiteColor())
+        self.extMakeStatusBarWhite()
+
         self.prefilFieldValues()
     }
-
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.extMakeStatusBarDefault()
+    }
 
     private func bindToViewModel() {
         self.viewModel.didUpdate = { [weak self] _ in
