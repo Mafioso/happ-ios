@@ -13,47 +13,66 @@ import Haneke
 
 class EventTableCell: UITableViewCell {
 
-    // outlets
+    var viewModel: EventViewModel! {
+        didSet {
+            self.bindToViewModel()
+            self.viewModelDidUpdate()
+        }
+    }
 
+
+    // outlets
     @IBOutlet weak var imageCover: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelCategory: UILabel!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelPrice: UILabel!
-    @IBOutlet weak var labelStatViews: UILabel!
+    @IBOutlet weak var labelUpvotesCount: UILabel!
 
 
     // actions
-    @IBAction func clickedLikeButton(sender: UIButton) {
-        self.onClickLikeButton?(event: self.event!)
+    @IBAction func clickedUpvote(sender: UIButton) {
+        self.viewModel.onClickLike()
+    }
+    @IBAction func clickedFavourite(sender: UIButton) {
+        self.viewModel.onClickFavourite()
+    }
+    @IBAction func clickedMoreButton(sender: UIButton) {
+        self.viewModel.onClickDisplayMoreActions()
     }
 
-
+    // constants
     static let nibName = "EventTableCell"
-    private var event: EventModel?
-    var onClickLikeButton: ((event: EventModel) -> (Void))?
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+
+        //self.viewModelDidUpdate()
     }
 
 
-    func setup(event: EventModel) {
+    private func bindToViewModel() {
+        self.viewModel.didUpdate = { [weak self] _ in
+            self?.viewModelDidUpdate()
+        }
+    }
+
+    func viewModelDidUpdate() {
+        let event = self.viewModel.event
+
         labelTitle.text = event.title
-        // TODO fetch category
-        // viewCategory.backgroundColor = event.type.color
+        // TODO viewCategory.backgroundColor = event.type.color
         labelCategory.text = event.interests.first?.title
         labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         labelPrice.text = event.getPrice(.MinPrice)
-        labelStatViews.text = formatStatValue(event.votes_num)
+        labelUpvotesCount.text = formatStatValue(event.votes_num)
 
         if let imageURL = event.images[0] {
             imageCover.hnk_setImageFromURL(imageURL)
         }
-
-        self.event = event
     }
+
 
 }

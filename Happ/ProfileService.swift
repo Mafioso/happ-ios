@@ -70,7 +70,7 @@ class ProfileService {
 
                     // 2. add new
                     let user = Mapper<UserModel>().map(result)
-                    realm.add(user!)
+                    realm.add(user!, update: true)
                 }
         }
     }
@@ -138,6 +138,12 @@ class ProfileService {
         let realm = try! Realm()
         let user = realm.objects(UserModel).first
         return user!
+    }
+
+    class func isUserProfileExists() -> Bool {
+        let realm = try! Realm()
+        let users = realm.objects(UserModel)
+        return users.count > 0
     }
     
     

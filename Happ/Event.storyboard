@@ -245,9 +245,11 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vb2-r4-6fE" userLabel="Second View">
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCD-gX-RHf" userLabel="Upper view">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCD-gX-RHf" userLabel="Upper view">
+                                                <frame key="frameInset" minX="10" minY="22" width="355" height="202"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUp-9W-G5l">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUp-9W-G5l">
+                                                        <frame key="frameInset" minY="57" width="255" height="125"/>
                                                         <string key="text">ГОРОДСКОЙ
 ПИКНИК
 В  БОТАНИЧЕСКОМ
@@ -270,12 +272,12 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="FUp-9W-G5l" firstAttribute="top" secondItem="y4n-qA-TAB" secondAttribute="bottom" constant="16" id="5M5-4k-tD4"/>
+                                                    <constraint firstItem="FUp-9W-G5l" firstAttribute="top" secondItem="y4n-qA-TAB" secondAttribute="bottom" constant="8" id="5M5-4k-tD4"/>
                                                     <constraint firstAttribute="bottom" secondItem="FUp-9W-G5l" secondAttribute="bottom" constant="4" id="7vi-zf-Tjb"/>
+                                                    <constraint firstItem="y4n-qA-TAB" firstAttribute="top" secondItem="QCD-gX-RHf" secondAttribute="top" constant="32" id="ASN-Pz-Uv1"/>
                                                     <constraint firstAttribute="trailing" secondItem="FUp-9W-G5l" secondAttribute="trailing" constant="100" id="Hzz-3s-Q6C"/>
                                                     <constraint firstItem="y4n-qA-TAB" firstAttribute="leading" secondItem="QCD-gX-RHf" secondAttribute="leading" id="fq9-Ru-81a"/>
                                                     <constraint firstItem="FUp-9W-G5l" firstAttribute="leading" secondItem="QCD-gX-RHf" secondAttribute="leading" id="gMM-YB-uMW"/>
-                                                    <constraint firstAttribute="height" constant="186" id="sXM-4c-7tK"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pd1-5P-r5j" userLabel="Description View">
@@ -287,17 +289,13 @@
                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="13"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.92207870015337423" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=compact">
-                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="13"/>
-                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="HRU-f2-fOh" firstAttribute="top" secondItem="pd1-5P-r5j" secondAttribute="top" constant="8" id="20k-c3-pa9"/>
-                                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="HRU-f2-fOh" secondAttribute="bottom" constant="45" id="DaK-xz-4Jv"/>
-                                                    <constraint firstAttribute="height" constant="181" id="PIh-bZ-EmW"/>
                                                     <constraint firstItem="HRU-f2-fOh" firstAttribute="leading" secondItem="pd1-5P-r5j" secondAttribute="leading" id="WYP-HS-dYe"/>
+                                                    <constraint firstAttribute="bottom" secondItem="HRU-f2-fOh" secondAttribute="bottom" id="htZ-jG-ApP"/>
                                                     <constraint firstAttribute="trailing" secondItem="HRU-f2-fOh" secondAttribute="trailing" constant="16" id="wQr-gc-UQb"/>
                                                 </constraints>
                                             </view>
@@ -317,8 +315,9 @@
                                             <constraint firstItem="QCD-gX-RHf" firstAttribute="leading" secondItem="Vb2-r4-6fE" secondAttribute="leading" constant="10" id="5AO-oE-dvC"/>
                                             <constraint firstAttribute="trailing" secondItem="pd1-5P-r5j" secondAttribute="trailing" constant="8" id="Q2h-eS-SLt"/>
                                             <constraint firstAttribute="trailing" secondItem="QCD-gX-RHf" secondAttribute="trailing" constant="10" id="Q4s-IL-nyQ"/>
-                                            <constraint firstItem="QCD-gX-RHf" firstAttribute="top" secondItem="Vb2-r4-6fE" secondAttribute="top" constant="5" id="QVu-E4-ZyW"/>
+                                            <constraint firstItem="QCD-gX-RHf" firstAttribute="top" secondItem="Vb2-r4-6fE" secondAttribute="top" constant="22" id="QVu-E4-ZyW"/>
                                             <constraint firstItem="pd1-5P-r5j" firstAttribute="top" secondItem="QCD-gX-RHf" secondAttribute="bottom" constant="10" id="ZQa-qm-Lyn"/>
+                                            <constraint firstItem="wrU-bU-3Gx" firstAttribute="top" secondItem="pd1-5P-r5j" secondAttribute="bottom" constant="32" id="atA-n8-KFG"/>
                                             <constraint firstAttribute="bottom" secondItem="wrU-bU-3Gx" secondAttribute="bottom" constant="10" id="cmb-9V-YDo"/>
                                             <constraint firstItem="pd1-5P-r5j" firstAttribute="leading" secondItem="Vb2-r4-6fE" secondAttribute="leading" constant="8" id="dk5-07-E0c"/>
                                             <constraint firstAttribute="trailing" secondItem="wrU-bU-3Gx" secondAttribute="trailing" id="gyx-fy-JVq"/>
@@ -369,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dS-VA-sJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2658" y="1638"/>
+            <point key="canvasLocation" x="2656.8000000000002" y="1637.1814092953525"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="SDC-pJ-xud">

@@ -86,9 +86,13 @@ class EventDetailsController: UIViewController {
                 imageBackground.hnk_setImageFromURL(image)
             }
 
+            let interestName = event.interests.first?.title
+            labelCategory.text = interestName
+            labelSecondCategory.text = interestName
+
             labelTitle.text = event.title
-            labelCategory.text = event.interests.first?.title
             labelSecondTitle.text = event.title
+            labelSecondDescription.text = event.description_text
             labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         }
     }

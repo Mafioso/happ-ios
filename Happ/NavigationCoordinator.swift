@@ -49,9 +49,8 @@ class NavigationCoordinator {
     }
 
     func start() {
-        //self.startSelectCityInterests()
         AuthenticationService.isCredentialAvailable()
-            .then { result in result ? self.startFeed() : self.startSignIn() }
+            .then { result in result ? self.checkUserProfile(self.startFeed) : self.startSignIn() }
     }
 
     func goBack() {
@@ -98,7 +97,7 @@ class NavigationCoordinator {
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
         viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
-
+        
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
         viewController.viewModel = viewModel
         
@@ -190,6 +189,15 @@ class NavigationCoordinator {
         }
     }
 
+
+    private func checkUserProfile(next: () -> (Void)) {
+        if ProfileService.isUserProfileExists() {
+            next()
+        } else {
+            ProfileService.fetchUserProfile()
+                .then { next() }
+        }
+    }
 
     private func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {

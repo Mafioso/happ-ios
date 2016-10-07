@@ -17,7 +17,6 @@ class SettingsViewModel {
 
 
     var navigateSelectCity: NavigationFunc
-    var navigateSelectLanguage: NavigationFunc
     var navigateSelectCurrency: NavigationFunc
     var navigateSelectNotifications: NavigationFunc
 

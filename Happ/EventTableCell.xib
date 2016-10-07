@@ -48,6 +48,9 @@
                                                             <constraint firstAttribute="height" constant="4" id="qpD-09-kWi"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="menu icon"/>
+                                                        <connections>
+                                                            <action selector="clickedMoreButton:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="ace-yr-4vx"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pt2-Wk-ozw">
                                                         <constraints>
@@ -55,6 +58,9 @@
                                                             <constraint firstAttribute="width" constant="15" id="Kjz-8s-Al6"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="gray-like"/>
+                                                        <connections>
+                                                            <action selector="clickedUpvote:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="KBn-zw-oes"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQW-z6-TIY">
                                                         <constraints>
@@ -72,6 +78,9 @@
                                                         <state key="normal" backgroundImage="gray-bookmark">
                                                             <color key="titleColor" red="0.67189593280000004" green="0.67189593280000004" blue="0.67189593280000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="clickedFavourite:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="DOF-S9-rXG"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40k" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUa-9w-vxD">
                                                         <constraints>
@@ -209,8 +218,8 @@
                 <outlet property="labelCategory" destination="XIV-2O-98Z" id="q0A-KX-vnd"/>
                 <outlet property="labelDate" destination="9YZ-aJ-Jeq" id="U71-UF-o3c"/>
                 <outlet property="labelPrice" destination="GQW-z6-TIY" id="F1i-YQ-e3Z"/>
-                <outlet property="labelStatViews" destination="NUa-9w-vxD" id="Wp0-qG-SDk"/>
                 <outlet property="labelTitle" destination="MS1-jz-Kj9" id="XoV-T9-oRY"/>
+                <outlet property="labelUpvotesCount" destination="NUa-9w-vxD" id="LWK-9z-dEe"/>
             </connections>
             <point key="canvasLocation" x="-26.5" y="49.5"/>
         </tableViewCell>

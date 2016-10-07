@@ -55,10 +55,8 @@ class SettingsController: UIViewController, UITableViewDelegate {
             case 0:
                 self.viewModel.navigateSelectCity?()
             case 1:
-                self.viewModel.navigateSelectLanguage?()
-            case 2:
                 self.viewModel.navigateSelectCurrency?()
-            case 3:
+            case 2:
                 self.viewModel.navigateSelectNotifications?()
             default:
                 break

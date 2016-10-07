@@ -19,7 +19,7 @@ class ProfileViewModel {
     
 
     init() {
-        self.userProfile = self.getUserProfile()
+        self.userProfile = ProfileService.getUserProfile()
     }
 
 
@@ -30,6 +30,10 @@ class ProfileViewModel {
     //MARK: - Inputs
     func onChangeProfile(values: [String: AnyObject]) -> Promise<AnyObject> {
         return ProfileService.updateUserProfile(values)
+            .then { anypromise in
+                self.userProfile = ProfileService.getUserProfile()
+                return anypromise as! Promise<AnyObject>
+        }
     }
     func onChangePassword(values: [String: AnyObject]) -> Promise<AnyObject> {
         let oldPassword = values["old_password"] as! String
@@ -37,16 +41,6 @@ class ProfileViewModel {
         return AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
     }
 
-
-    private func getUserProfile() -> UserModel {
-        ProfileService
-            .fetchUserProfile()
-            .then {
-                self.userProfile = ProfileService.getUserProfile()
-        }
-
-        return ProfileService.getUserProfile()
-    }
 }
 
 

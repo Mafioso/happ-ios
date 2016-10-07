@@ -28,7 +28,9 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
     // actions
     @IBAction func clickedEditPhotoButton(sender: UIButton) {
+        self.displayChangePhotoActions()
     }
+
     @IBAction func clickedChangePasswordButton(sender: UIButton) {
         self.viewModel.navigateChangePassword!()
     }
@@ -82,6 +84,15 @@ class ProfileController: UIViewController, UITextFieldDelegate {
             .error { err in
                 self.extDisplayAlertView(err)
         }
+    }
+    
+    private func displayChangePhotoActions() {
+        let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
+        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default, handler: nil)
+        let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default, handler: nil)
+        actionList.addAction(actionTakePhoto)
+        actionList.addAction(actionOpenGalery)
+        self.presentViewController(actionList, animated: true, completion: nil)
     }
 
 

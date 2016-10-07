@@ -71,7 +71,7 @@ class FeedViewModel {
         let filtersState = FeedFiltersState(search: nil, sortBy: .ByDate, onlyFree: false, dateFrom: nil, dateTo: nil)
         self.state = FeedState(tab: .Feed, events: [], page: 1, filters: filtersState)
 
-        self.state.events = self.getEvents()
+        self.fetchFeedEvents()
     }
 
 
@@ -106,16 +106,6 @@ class FeedViewModel {
                 break
             }
         }
-    }
-    func onClickLike(event: EventModel) {
-        print(".FeedViewModel.inputs.onClickLike", event.id)
-        EventService.setLike(event.id, value: !event.is_upvoted)
-        self.didUpdate!()
-    }
-    func onClickFavourite(event: EventModel) {
-        print(".FeedViewModel.inputs.onClickFavourite", event.id)
-        EventService.setFavourite(event.id, value: !event.is_in_favourites)
-        self.didUpdate!()
     }
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails!(id: event.id)
