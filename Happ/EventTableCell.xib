@@ -44,10 +44,10 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHi-hy-wV3">
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="15" id="mbc-br-Haz"/>
-                                                            <constraint firstAttribute="height" constant="4" id="qpD-09-kWi"/>
+                                                            <constraint firstAttribute="width" constant="4" id="mbc-br-Haz"/>
+                                                            <constraint firstAttribute="height" constant="15" id="qpD-09-kWi"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="menu icon"/>
+                                                        <state key="normal" backgroundImage="dot-menu-icon"/>
                                                         <connections>
                                                             <action selector="clickedMoreButton:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="ace-yr-4vx"/>
                                                         </connections>
@@ -75,7 +75,7 @@
                                                             <constraint firstAttribute="width" constant="15" id="YVl-wB-eeM"/>
                                                             <constraint firstAttribute="height" constant="15" id="mzB-xL-dUW"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="gray-bookmark">
+                                                        <state key="normal" backgroundImage="fav-icon">
                                                             <color key="titleColor" red="0.67189593280000004" green="0.67189593280000004" blue="0.67189593280000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
@@ -226,8 +226,10 @@
     </objects>
     <resources>
         <image name="bg-feed" width="375" height="180"/>
-        <image name="gray-bookmark" width="28" height="30"/>
+        <image name="dot-menu-icon" width="12" height="54"/>
+        <image name="fav-icon" width="36" height="36"/>
         <image name="gray-like" width="22" height="22"/>
-        <image name="menu icon" width="36" height="10"/>
+        <image name="like-icon" width="22" height="22"/>
+        <image name="watched-icon" width="36" height="22"/>
     </resources>
 </document>
