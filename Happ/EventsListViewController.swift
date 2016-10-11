@@ -1,5 +1,5 @@
 //
-//  FeedCollectionViewController.swift
+//  EventsListCollectionViewController.swift
 //  Happ
 //
 //  Created by MacBook Pro on 9/19/16.
@@ -15,10 +15,10 @@ private let segueEmbeddedTableID = "embeddedTable"
 
 
 
-class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EventsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
-    var viewModel: FeedViewModel! {
+    var viewModel: EventsListViewModel! {
         didSet {
             self.bindToViewModel()
         }
@@ -27,6 +27,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // outlets
     @IBOutlet weak var tableView: UITableView!
+    
 
 
 
@@ -36,7 +37,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.initNavigationBarItems()
         self.initTableView()
 
-        self.viewModelDidUpdate()
+        // self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,7 +75,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let eventsCount = self.viewModel.getEventsCount()
-        print(".FeedViewController.numberOfRow", eventsCount)
+        print(".numberOfRow", eventsCount)
         return eventsCount
     }
 
@@ -118,6 +119,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.getEventAt(indexPath)
+        print(".didSelect", indexPath.row, event.title)
         self.viewModel.onClickEvent(event)
     }
 
@@ -125,11 +127,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
 
-extension FeedViewController {
+extension EventsListViewController {
     
     private func initNavigationBarItems() {
-        let menuNavButton = UIBarButtonItem(image: UIImage(named: "burger-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickMenuNavbutton))
-        let filterNavitem = UIBarButtonItem(image: UIImage(named: "filter-menu"), style: .Plain, target: self, action: #selector(FeedViewController.onClickFiltersNavbutton))
+        let menuNavButton = UIBarButtonItem(image: UIImage(named: "burger-menu"), style: .Plain, target: self, action: #selector(EventsListViewController.onClickMenuNavbutton))
+        let filterNavitem = UIBarButtonItem(image: UIImage(named: "filter-menu"), style: .Plain, target: self, action: #selector(EventsListViewController.onClickFiltersNavbutton))
 
         self.navigationItem.leftBarButtonItem = menuNavButton
         self.navigationItem.rightBarButtonItem = filterNavitem

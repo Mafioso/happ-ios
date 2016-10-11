@@ -12,10 +12,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Feed View Controller-->
+        <!--Events List View Controller-->
         <scene sceneID="AW4-AO-7F8">
             <objects>
-                <viewController storyboardIdentifier="FeedPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wdp-17-kb6" customClass="FeedViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Wdp-17-kb6" customClass="EventsListViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pz7-b4-xU8"/>
                         <viewControllerLayoutGuide type="bottom" id="Ra7-A0-6a4"/>
@@ -46,7 +46,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="SZJ-UZ-6vH" id="0MF-js-yTL"/>
+                        <outlet property="tableView" destination="SZJ-UZ-6vH" id="JM8-2i-es2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVV-JZ-gTD" userLabel="First Responder" sceneMemberID="firstResponder"/>

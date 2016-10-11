@@ -31,12 +31,14 @@ typealias NavigationFuncWithID = ((id: String) -> Void)?
 
 class NavigationCoordinator {
 
-    private let window: UIWindow
-    private var navigationController: UINavigationController!
     private let authStoryboard: UIStoryboard
     private let mainStoryboard: UIStoryboard
     private let eventStoryboard: UIStoryboard
     private let profileStoryboard: UIStoryboard
+
+    private let window: UIWindow
+    private var navigationController: UINavigationController!
+    private var tabBarController: UITabBarController!
 
 
     init(window: UIWindow) {
@@ -91,24 +93,76 @@ class NavigationCoordinator {
 
 
     func startFeed() {
-        print(".nav.showFeed")
-        let viewModel = FeedViewModel()
+        print(".nav.tab.start")
+
+        // init Tab bar
+        let tabBarController = UITabBarController()
+        //      tab controllers
+        let tabExplore = UINavigationController()
+        let tabMap = UINavigationController()
+        let tabFeed = UINavigationController()
+        let tabFavourite = UINavigationController()
+        let tabChat = UINavigationController()
+        //      tab items
+        let tabItemSoon = UITabBarItem(title: "Soon..", image: nil, selectedImage: nil)
+        let tabItemFeed = UITabBarItem(title: "Feed", image: UIImage(named: "tabs-tab"), selectedImage: UIImage(named: "tabs-tab"))
+        let tabItemFavourite = UITabBarItem(title: "Favourite", image: UIImage(named: "bookmark-icon"), selectedImage: UIImage(named: "bookmark-icon"))
+        tabExplore.tabBarItem = tabItemSoon
+        tabMap.tabBarItem = tabItemSoon
+        tabFeed.tabBarItem = tabItemFeed
+        tabFavourite.tabBarItem = tabItemFavourite
+        tabChat.tabBarItem = tabItemSoon
+        //      tab add
+        tabBarController.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite, tabChat]
+
+
+        // init Sidebar
+        self.window.rootViewController = self.initSlidebar(tabBarController)
+        self.window.makeKeyAndVisible()
+
+        // show Feed
+        self.navigationController = nil
+        self.tabBarController = tabBarController
+        self.showFeed()
+    }
+
+    func showFeed() {
+        self.showEventsList(.Feed)
+    }
+    func showFavourite() {
+        self.showEventsList(.Favourite)
+    }
+    func showMyEvents() {
+        self.showEventsList(.MyEvents)
+    }
+
+    func showEventsList(scope: EventsListScope) {
+        print(".nav.tab.showEventsList")
+
+        let viewModel = EventsListViewModel(scope: scope)
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
         viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
-        
-        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedPage") as! FeedViewController
+
+        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
-        
+
         let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
+        self.setRightSlidebar(filtersViewController)
 
+        if scope == .Feed || scope == .Favourite {
+            let tabIndex = (scope == .Feed) ? 2 : 3
+            self.tabBarController.selectedIndex = tabIndex
+            self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+            self.navigationController.viewControllers = [viewController]
 
-        self.navigationController = UINavigationController(rootViewController: viewController)
-        self.window.rootViewController = self.initSlideMenu(navigationController, rightMenu: filtersViewController)
-        self.window.makeKeyAndVisible()
+        } else {
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
     }
+
 
     func showEventDetails(forID: String) {
         print(".nav.showEventDetails [forID=\(forID)]")
@@ -228,17 +282,21 @@ class NavigationCoordinator {
     }
 
 
-    private func initSlideMenu(rootView: UIViewController, rightMenu: UIViewController) -> SlideMenuController {
+    private func initSlidebar(rootView: UIViewController) -> SlideMenuController {
         let viewModel = MenuViewModel()
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
-        viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
+        viewModel.navigateFeed = self.hideSlideMenu(self.showFeed)
         viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
 
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModel = viewModel
 
-        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController, rightMenuViewController: rightMenu)
+        let slideMenuController = SlideMenuController(mainViewController: rootView, leftMenuViewController: menuViewController)
         return slideMenuController
+    }
+    private func setRightSlidebar(rightView: UIViewController) {
+        let slidebar = self.window.rootViewController as! SlideMenuController
+        slidebar.changeRightViewController(rightView, closeRight: true)
     }
 }

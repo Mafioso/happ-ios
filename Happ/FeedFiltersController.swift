@@ -10,7 +10,7 @@ import UIKit
 
 class FeedFiltersController: UIViewController {
 
-    var viewModel: FeedViewModel!
+    var viewModel: EventsListViewModel!
 
     
     // outlets
@@ -40,7 +40,7 @@ class FeedFiltersController: UIViewController {
 
     private func collectSaveBack() {
         let search: String? = self.searchBar.text
-        var sortBy: FeedSortType = .ByDate
+        var sortBy: EventsListSortType = .ByDate
         var onlyFree: Bool
 
         if self.segmentSortBy.selectedSegmentIndex == 1 {
@@ -48,7 +48,7 @@ class FeedFiltersController: UIViewController {
         }
         onlyFree = self.radioIsFree.on
 
-        let filters = FeedFiltersState(search: search, sortBy: sortBy, onlyFree: onlyFree, dateFrom: nil, dateTo: nil)
+        let filters = EventsListFiltersState(search: search, sortBy: sortBy, onlyFree: onlyFree, dateFrom: nil, dateTo: nil)
         self.viewModel.onChangeFilters(filters)
     }
 }

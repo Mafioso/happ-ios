@@ -1,5 +1,5 @@
 //
-//  FeedViewModel.swift
+//  EventsListViewModel.swift
 //  Happ
 //
 //  Created by MacBook Pro on 9/19/16.
@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 
-enum FeedSortType {
+enum EventsListSortType {
     case ByDate
     case ByPopular
 
@@ -34,32 +34,33 @@ enum FeedSortType {
     }
 }
 
-enum FeedTabs {
+enum EventsListScope {
     case Feed
     case Favourite
+    case MyEvents
 }
 
 
-struct FeedFiltersState {
+struct EventsListFiltersState {
     var search: String?
-    var sortBy: FeedSortType
+    var sortBy: EventsListSortType
     var onlyFree: Bool
     var dateFrom: NSDate?
     var dateTo: NSDate?
 }
 
 
-struct FeedState {
-    var tab: FeedTabs
+struct EventsListState {
+    var scope: EventsListScope
     var events: [EventModel]
     var page: Int
-    var filters: FeedFiltersState
+    var filters: EventsListFiltersState
 }
 
 
-class FeedViewModel {
+class EventsListViewModel {
 
-    var state: FeedState
+    var state: EventsListState
 
     var navigateEventDetails: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
@@ -67,11 +68,10 @@ class FeedViewModel {
     var hideSlideFeedFilters: NavigationFunc
 
 
-    init() {
-        let filtersState = FeedFiltersState(search: nil, sortBy: .ByDate, onlyFree: false, dateFrom: nil, dateTo: nil)
-        self.state = FeedState(tab: .Feed, events: [], page: 1, filters: filtersState)
-
-        self.fetchFeedEvents()
+    init(scope: EventsListScope) {
+        let filtersState = EventsListFiltersState(search: nil, sortBy: .ByDate, onlyFree: false, dateFrom: nil, dateTo: nil)
+        self.state = EventsListState(scope: scope, events: [], page: 0, filters: filtersState)
+        self.loadNextPage() // will load first page
     }
 
 
@@ -81,7 +81,7 @@ class FeedViewModel {
 
     //MARK: - Inputs
     func loadNextPage() {
-        switch self.state.tab {
+        switch self.state.scope {
         case .Feed:
             if !EventService.isLastPageOfFeed {
                 self.state.page += 1
@@ -92,25 +92,14 @@ class FeedViewModel {
                 self.state.page += 1
                 // self.fetchFavouriteEvents() TODO
             }
-        }
-    }
-    func onChangeTab(tab: FeedTabs) {
-        if self.state.tab != tab {
-            self.state.tab = tab
-            self.state.page = 0
-            switch tab {
-            case .Feed:
-                self.fetchFeedEvents()
-            case .Favourite:
-                // self.fetchFavouriteEvents() TODO
-                break
-            }
+        case .MyEvents:
+            break
         }
     }
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails!(id: event.id)
     }
-    func onChangeFilters(newState: FeedFiltersState) {
+    func onChangeFilters(newState: EventsListFiltersState) {
         self.state.filters = newState
         self.state.events = self.getEvents()
         self.hideSlideFeedFilters!() // return to FeedViewController
@@ -130,13 +119,14 @@ class FeedViewModel {
         }
         return events.sort(filters.sortBy.isOrderedBeforeFunc)
     }
-
     func getEventAt(indexPath: NSIndexPath) -> EventModel {
         return self.state.events[indexPath.row]
     }
     func getEventsCount() -> Int {
         return self.state.events.count
     }
+
+
     private func fetchFeedEvents() {
         EventService.fetchFeed(self.state.page)
             .then { _ -> Void in
