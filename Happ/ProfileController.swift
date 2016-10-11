@@ -90,8 +90,10 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
         let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default, handler: nil)
         let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default, handler: nil)
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         actionList.addAction(actionTakePhoto)
         actionList.addAction(actionOpenGalery)
+        actionList.addAction(actionCancel)
         self.presentViewController(actionList, animated: true, completion: nil)
     }
 

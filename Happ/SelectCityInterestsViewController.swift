@@ -136,7 +136,7 @@ extension SelectCityInterestsViewController: UITableViewDataSource, UITableViewD
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = self.getNumberOfInterests()
+        let count = min(6, self.getNumberOfInterests())
         return count
     }
 
