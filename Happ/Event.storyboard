@@ -861,7 +861,7 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fh6-BM-cQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4690.3999999999996" y="1308.3958020989505"/>
+            <point key="canvasLocation" x="7110" y="1287"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="eEm-Tv-6qZ">
@@ -908,7 +908,7 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yuz-Wh-cCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5428" y="1307"/>
+            <point key="canvasLocation" x="6406" y="1287"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="hWu-UR-vCU">
@@ -1124,7 +1124,7 @@ to upload photos press buttons below</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDS-XL-au8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5428" y="1948"/>
+            <point key="canvasLocation" x="6406" y="1960"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="7MW-gi-XzM">
@@ -1466,7 +1466,7 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiM-7w-6Fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4108" y="1306.5967016491754"/>
+            <point key="canvasLocation" x="5742" y="2066"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="TeV-2r-tyw">
@@ -1690,7 +1690,7 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQw-EV-n6M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4834.3999999999996" y="1301.1994002998501"/>
+            <point key="canvasLocation" x="5001" y="1287"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Zkw-wu-Js7">
@@ -1943,7 +1943,7 @@ to upload photos press buttons below</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQn-Ud-Adr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5517.6000000000004" y="1300.2998500749627"/>
+            <point key="canvasLocation" x="5742" y="1287"/>
         </scene>
     </scenes>
     <resources>
