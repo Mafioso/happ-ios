@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import RealmSwift
 
 
 enum EventsListSortType {
@@ -83,15 +84,17 @@ class EventsListViewModel {
     func loadNextPage() {
         switch self.state.scope {
         case .Feed:
-            if !EventService.isLastPageOfFeed {
-                self.state.page += 1
-                self.fetchFeedEvents()
+            if self.state.page != 0 && EventService.isLastPageOfFeed {
+                return
             }
+            self.state.page += 1
+            self.fetchFeedEvents()
         case .Favourite:
-            if !EventService.isLastPageOfFavourites {
-                self.state.page += 1
-                // self.fetchFavouriteEvents() TODO
+            if self.state.page != 0 && EventService.isLastPageOfFavourites {
+                return
             }
+            self.state.page += 1
+            self.fetchFavouriteEvents()
         case .MyEvents:
             break
         }
@@ -108,9 +111,28 @@ class EventsListViewModel {
 
 
     func getEvents() -> [EventModel] {
-        var events = EventService.getFeed()
+        var events: Results<EventModel>!
+        switch self.state.scope {
+        case .Feed:
+            events = EventService.getFeed()
+        case .Favourite:
+            events = EventService.getFavourite()
+        case .MyEvents:
+            break
+        }
+        return self.filterEvents(events)
+    }
+    func getEventAt(indexPath: NSIndexPath) -> EventModel {
+        return self.state.events[indexPath.row]
+    }
+    func getEventsCount() -> Int {
+        return self.state.events.count
+    }
+    
+    
+    private func filterEvents(events: Results<EventModel>) -> [EventModel] {
+        var events = events
         let filters = self.state.filters
-
         if filters.search != nil {
             events = events.filter("title CONTAINS %@", filters.search!)
         }
@@ -118,12 +140,6 @@ class EventsListViewModel {
             events = events.filter("min_price == nil")
         }
         return events.sort(filters.sortBy.isOrderedBeforeFunc)
-    }
-    func getEventAt(indexPath: NSIndexPath) -> EventModel {
-        return self.state.events[indexPath.row]
-    }
-    func getEventsCount() -> Int {
-        return self.state.events.count
     }
 
 
@@ -134,7 +150,13 @@ class EventsListViewModel {
                 self.didUpdate!()
         }
     }
-
+    private func fetchFavouriteEvents() {
+        EventService.fetchFavourite(self.state.page)
+            .then { _ -> Void in
+                self.state.events = self.getEvents()
+                self.didUpdate!()
+        }
+    }
 
 }
 

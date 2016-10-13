@@ -286,9 +286,9 @@
 		52A3C2C51D8F20BF00C31F3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
 				52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */,
+				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,

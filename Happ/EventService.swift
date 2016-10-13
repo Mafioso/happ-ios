@@ -34,8 +34,7 @@ class EventService {
     }
 
     class func fetchFeed(page: Int = 1) -> Promise<Void> {
-        let feedEndpoint = endpoint + "?page=\(page)"
-        //+ "feed/" TODO
+        let feedEndpoint = endpoint + "feed/" + "?page=\(page)"
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
@@ -49,7 +48,6 @@ class EventService {
                     }
                 }
 
-
                 self.isLastPageOfFeed = isLastPage
                 // 2. add new
                 try! realm.write {
@@ -60,10 +58,42 @@ class EventService {
                 }
             }
     }
+    class func fetchFavourite(page: Int = 1) -> Promise<Void> {
+        let feedEndpoint = endpoint + "favourites/" + "?page=\(page)"
+        return GetPaginated(feedEndpoint, parameters: nil)
+            .then { (data, isLastPage) -> Void in
+                let results = data as! [AnyObject]
+                let realm = try! Realm()
+                
+                if page == 1 {
+                    // 1. delete exists
+                    try! realm.write {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
+                }
+
+                self.isLastPageOfFeed = isLastPage
+                // 2. add new
+                try! realm.write {
+                    results.forEach() { event in
+                        let inst = Mapper<EventModel>().map(event)
+                        realm.add(inst!, update: true) // `update: true` - not required
+                    }
+                }
+        }
+    }
 
     class func getFeed() -> Results<EventModel> {
         let realm = try! Realm()
         let events = realm.objects(EventModel)
+        return events
+    }
+    class func getFavourite() -> Results<EventModel> {
+        let realm = try! Realm()
+        let events = realm
+                        .objects(EventModel)
+                        .filter("is_in_favourites == true")
         return events
     }
 
