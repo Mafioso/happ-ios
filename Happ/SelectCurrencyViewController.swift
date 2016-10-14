@@ -16,16 +16,11 @@ class SelectCurrencyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.hidden = false
-        self.extMakeNavBarWhite()
-
-        self.initDisplaySelectButton()
+        self.initNavigationBarItems()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.extMakeNavBarTransparent()
 
         self.updateTableWithSelected()
     }
@@ -86,4 +81,13 @@ class SelectCurrencyViewController: UITableViewController {
         self.viewModel.onSelectCurrency(currency)
     }
 
+
+    private func initNavigationBarItems() {
+        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
+        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarBack)
+    }
+    func handleClickNavBarBack() {
+        self.viewModel.navigateBack?()
+    }
 }

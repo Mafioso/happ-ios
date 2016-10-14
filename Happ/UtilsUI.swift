@@ -11,6 +11,52 @@ import UIKit
 import PromiseKit
 
 
+enum HappNavBarItemPosition {
+    case Left
+    case Right
+}
+
+class HappNavBarItem: UIView {
+
+    var position: HappNavBarItemPosition
+    var button: UIButton
+
+
+    init(position: HappNavBarItemPosition, icon: String) {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+
+        var btnIcon: UIImage
+        switch icon {
+        case "back":
+           let tmpIcon = UIImage(named: "arrow-location")!
+            btnIcon = UIImage(CGImage: tmpIcon.CGImage!, scale: tmpIcon.scale, orientation: UIImageOrientation.UpMirrored)
+        default:
+            btnIcon = UIImage(named: icon)!
+        }
+
+        var frame: CGRect
+        switch position {
+        case .Left:
+            frame = CGRect(x: 16, y: 20, width: 44, height: 44)
+        case .Right:
+            frame = CGRect(x: Int(screenSize.width)-60, y: 20, width: 44, height: 44)
+        }
+
+        let button = UIButton(type: .Custom)
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        button.setImage(btnIcon, forState: .Normal)
+
+        self.button = button
+        self.position = position
+        super.init(frame: frame)
+        self.addSubview(button)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 extension UITextField {
     func addLeftViewImage(name: String, size: CGFloat = 15) {
         let leftImageView1 = UIImageView()

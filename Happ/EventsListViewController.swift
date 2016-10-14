@@ -30,21 +30,22 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     
 
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("here", self.view.bounds, self.view)
-        
+        /*
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let frame = CGRect(x: 0, y: 20, width: Int(screenSize.width), height: 44)
+        let navBar = UIView(frame: frame)
+        navBar.backgroundColor = UIColor(white: 1, alpha: 0.7)
+        */
+
         self.initNavigationBarItems()
         self.initTableView()
-        
-        // self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.edgesForExtendedLayout = UIRectEdge.None
         self.extMakeNavBarTransparent()
     }
 
@@ -69,7 +70,7 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-
+    
     // MARK: UITableViewDataSource
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -133,19 +134,20 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 extension EventsListViewController {
     
     private func initNavigationBarItems() {
-        let menuNavButton = UIBarButtonItem(image: UIImage(named: "burger-menu"), style: .Plain, target: self, action: #selector(EventsListViewController.onClickMenuNavbutton))
-        let filterNavitem = UIBarButtonItem(image: UIImage(named: "filter-menu"), style: .Plain, target: self, action: #selector(EventsListViewController.onClickFiltersNavbutton))
+        let navBarMenu = HappNavBarItem(position: .Left, icon: "burger-menu")
+        navBarMenu.button.addTarget(self, action: #selector(handleClickNavBarMenu), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarMenu)
 
-        self.navigationItem.leftBarButtonItem = menuNavButton
-        self.navigationItem.rightBarButtonItem = filterNavitem
+        let navBarFilter = HappNavBarItem(position: .Right, icon: "filter-menu")
+        navBarFilter.button.addTarget(self, action: #selector(handleClickNavBarFilter), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarFilter)
     }
 
-    func onClickMenuNavbutton() {
-        self.viewModel.displaySlideMenu!()
+    func handleClickNavBarFilter() {
+        self.viewModel.displaySlideFeedFilters?()
     }
-
-    func onClickFiltersNavbutton() {
-        self.viewModel.displaySlideFeedFilters!()
+    func handleClickNavBarMenu() {
+        self.viewModel.displaySlideMenu?()
     }
 }
 

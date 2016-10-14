@@ -14,7 +14,9 @@ class EventViewModel {
 
     var event: EventModel!
 
-    
+    var navigateBack: NavigationFunc
+
+
     init() {
         
     }

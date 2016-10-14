@@ -42,12 +42,12 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.initNavigationBarItems()
         self.extHideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeNavBarTransparent(UIColor.whiteColor())
         self.extMakeStatusBarWhite()
 
         self.prefilFieldValues()
@@ -98,6 +98,14 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 
 
+    private func initNavigationBarItems() {
+        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
+        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarBack)
+    }
+    func handleClickNavBarBack() {
+        self.viewModel.navigateBack?()
+    }
 }
 
 

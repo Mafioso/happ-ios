@@ -20,6 +20,7 @@ class SettingsController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.initNavigationBarItems()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-gradient")!)
 
         self.embeddedTable.delegate = self
@@ -77,4 +78,14 @@ class SettingsController: UIViewController, UITableViewDelegate {
         }
     }
     
+    
+    
+    private func initNavigationBarItems() {
+        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
+        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarBack)
+    }
+    func handleClickNavBarBack() {
+        self.viewModel.navigateBack?()
+    }
 }

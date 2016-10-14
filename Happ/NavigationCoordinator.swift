@@ -35,16 +35,15 @@ class HappTabBarController: UITabBarController {
     var navigateFeedTab: NavigationFunc = nil
     var navigateFavouriteTab: NavigationFunc = nil
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // tab controllers
-        let tabExplore = UINavigationController()
-        let tabMap = UINavigationController()
-        let tabFeed = UINavigationController()
-        let tabFavourite = UINavigationController()
-        let tabChat = UINavigationController()
+        let tabExplore = HappNavigationController()
+        let tabMap = HappNavigationController()
+        let tabFeed = HappNavigationController()
+        let tabFavourite = HappNavigationController()
+        let tabChat = HappNavigationController()
 
         // tab items
         let tabItemExplore = UITabBarItem(title: "Explore", image: nil, selectedImage: nil)
@@ -52,6 +51,7 @@ class HappTabBarController: UITabBarController {
         let tabItemFeed = UITabBarItem(title: "Feed", image: UIImage(named: "tabs-tab"), selectedImage: UIImage(named: "tabs-tab"))
         let tabItemFavourite = UITabBarItem(title: "Favourite", image: UIImage(named: "bookmark-icon"), selectedImage: UIImage(named: "bookmark-icon"))
         let tabItemChat = UITabBarItem(title: "Chat", image: nil, selectedImage: nil)
+
         tabExplore.tabBarItem = tabItemExplore
         tabMap.tabBarItem = tabItemMap
         tabFeed.tabBarItem = tabItemFeed
@@ -60,6 +60,7 @@ class HappTabBarController: UITabBarController {
 
         // add them
         self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite, tabChat]
+        self.hidesBottomBarWhenPushed = true
 
     }
 
@@ -76,6 +77,13 @@ class HappTabBarController: UITabBarController {
     }
 }
 
+class HappNavigationController: UINavigationController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationBarHidden = true
+    }
+}
 
 
 class NavigationCoordinator {
@@ -173,7 +181,7 @@ class NavigationCoordinator {
     }
 
     func showEventsList(scope: EventsListScope) {
-        print(".nav.tab.showEventsList")
+        print(".nav.tab.showEventsList", scope)
 
         let viewModel = EventsListViewModel(scope: scope)
         viewModel.navigateEventDetails = self.showEventDetails
@@ -184,10 +192,10 @@ class NavigationCoordinator {
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
 
-        // add filters to sidebar
+        // init filters to sidebar
         let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
-        //      recreate sidebar
+        // recreate sidebar
         let menuController = self.initMenuController()
         let sidebar = SlideMenuController(
             mainViewController: self.tabBarController,
@@ -212,6 +220,7 @@ class NavigationCoordinator {
     func showEventDetails(forID: String) {
         print(".nav.showEventDetails [forID=\(forID)]")
         let viewModel = EventViewModel(forID: forID)
+        viewModel.navigateBack = self.goBack
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel
@@ -246,18 +255,19 @@ class NavigationCoordinator {
     func showSettings() {
         print(".profile.showSettings")
         let viewModel = SettingsViewModel()
+        viewModel.navigateBack = self.goBack
         viewModel.navigateSelectCurrency = self.showSelectCurrency(viewModel)
         // viewModel.navigateSelectCity = TODO
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Settings") as! SettingsController
         viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
     func showSelectCurrency(parentViewModel: SettingsViewModel) -> NavigationFunc {
         return {
             print(".profile.showSelectCurrency")
-            parentViewModel.navigateBack = self.goBack
 
             let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCurrency") as! SelectCurrencyViewController
             viewController.viewModel = parentViewModel
@@ -273,6 +283,7 @@ class NavigationCoordinator {
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
         viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(viewController, animated: true)
     }
 

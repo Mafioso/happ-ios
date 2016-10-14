@@ -48,8 +48,6 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.automaticallyAdjustsScrollViewInsets = false
-
         [buttonInfoDate, buttonInfoPrice, buttonInfoLocation]
             .forEach { button in
                 //button.layer.cornerRadius = 0.5 * button.bounds.size.width
@@ -63,20 +61,14 @@ class EventDetailsController: UIViewController {
                 button.layer.masksToBounds = true
         }
 
-        /*
-        buttonWantToGo.layer.borderColor = UIColor.whiteColor().CGColor
-        buttonWantToGo.layer.borderWidth = 1
-        buttonWantToGo.layer.cornerRadius = 5
-        buttonWantToGo.layer.masksToBounds = true
-        */
 
+        self.initNavigationBarItems()
         self.viewModelDidUpdate()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeNavBarTransparent(UIColor.whiteColor())
         self.extMakeStatusBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
@@ -107,8 +99,24 @@ class EventDetailsController: UIViewController {
             self?.viewModelDidUpdate()
         }
     }
-}
 
+
+    private func initNavigationBarItems() {
+        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
+        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarBack)
+        
+        let navBarFavourite = HappNavBarItem(position: .Right, icon: "fav-icon")
+        navBarFavourite.button.addTarget(self, action: #selector(handleClickNavBarFavourite), forControlEvents: .TouchUpInside)
+        self.view.addSubview(navBarFavourite)
+    }
+    func handleClickNavBarFavourite() {
+        // todo
+    }
+    func handleClickNavBarBack() {
+        self.viewModel.navigateBack?()
+    }
+}
 
 
 
