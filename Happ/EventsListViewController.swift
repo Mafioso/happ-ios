@@ -34,15 +34,18 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("here", self.view.bounds, self.view)
+        
         self.initNavigationBarItems()
         self.initTableView()
-
+        
         // self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeNavBarWhite()
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extMakeNavBarTransparent()
     }
 
 

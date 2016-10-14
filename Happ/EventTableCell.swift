@@ -23,9 +23,11 @@ class EventTableCell: UITableViewCell {
 
     // outlets
     @IBOutlet weak var imageCover: UIImageView!
+    @IBOutlet weak var viewDetailsContainer: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelCategory: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelDateTime: UILabel!
+    @IBOutlet weak var labelPlace: UILabel!
     @IBOutlet weak var labelPrice: UILabel!
     @IBOutlet weak var labelUpvotesCount: UILabel!
 
@@ -63,11 +65,12 @@ class EventTableCell: UITableViewCell {
         let event = self.viewModel.event
 
         labelTitle.text = event.title
-        // TODO viewCategory.backgroundColor = event.type.color
         labelCategory.text = event.interests.first?.title
-        labelDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
+        // TODO viewDetailsContainer.backgroundColor =
+        labelPlace.text = event.address
         labelPrice.text = event.getPrice(.MinPrice)
         labelUpvotesCount.text = formatStatValue(event.votes_num)
+        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(event.start_datetime!)) - \(HappDateFormats.OnlyTime.toString(event.end_datetime!))"
 
         if let imageURL = event.images[0] {
             imageCover.hnk_setImageFromURL(imageURL)

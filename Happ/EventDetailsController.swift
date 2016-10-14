@@ -18,46 +18,57 @@ class EventDetailsController: UIViewController {
 
 
     // outlets
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var viewFirstContainer: UIView!
-    @IBOutlet weak var viewSecondContainer: UIView!
-    @IBOutlet weak var constraintHeightOfFirstContainer: NSLayoutConstraint!
-    @IBOutlet weak var constraintHeightOfSecondContainer: NSLayoutConstraint!
     @IBOutlet weak var imageBackground: UIImageView!
-
-
-    
-    @IBOutlet weak var labelCategory: UILabel!
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelPriceRange: UILabel!
+    @IBOutlet weak var labelPriceMinimum: UILabel!
     @IBOutlet weak var labelDateRange: UILabel!
     @IBOutlet weak var labelLocation: UILabel!
-
-    @IBOutlet weak var labelSecondCategory: UILabel!
-    @IBOutlet weak var labelSecondTitle: UILabel!
-    @IBOutlet weak var labelSecondDescription: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var labelAuthorName: UILabel!
+    @IBOutlet weak var labelAuthorDetails: UILabel!
+    @IBOutlet weak var imageAuthorPhoto: UIImageView!
     
+    @IBOutlet weak var buttonInfoDate: UIButton!
+    @IBOutlet weak var buttonInfoPrice: UIButton!
+    @IBOutlet weak var buttonInfoLocation: UIButton!
+    @IBOutlet weak var buttonUpvote: UIButton!
     @IBOutlet weak var buttonWantToGo: UIButton!
-    
-    @IBAction func clickedActionOnFirstContainer(sender: UIButton) {
+
+    @IBOutlet weak var tableViewInfo: UITableView!
+
+    // actions
+    @IBAction func clickedWantToGoButton(sender: UIButton) {
     }
+    @IBAction func clickedUpvote(sender: UIButton) {
+    }
+    
+    
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = viewSecondContainer.bounds
-        gradient.colors = [UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 155.0/255.0, alpha: 1.0).CGColor, UIColor(red: 51.0/255.0, green: 51.0/255.0, blue: 51.0/255.0, alpha: 0.3).CGColor]
-        viewSecondContainer.layer.insertSublayer(gradient, atIndex: 0)
 
-        //button customization
+        [buttonInfoDate, buttonInfoPrice, buttonInfoLocation]
+            .forEach { button in
+                //button.layer.cornerRadius = 0.5 * button.bounds.size.width
+                //button.clipsToBounds = true
+
+                //button.layer.masksToBounds = true
+        }
+        [buttonUpvote, buttonWantToGo]
+            .forEach { button in
+                button.layer.cornerRadius = 20
+                button.layer.masksToBounds = true
+        }
+
+        /*
         buttonWantToGo.layer.borderColor = UIColor.whiteColor().CGColor
         buttonWantToGo.layer.borderWidth = 1
         buttonWantToGo.layer.cornerRadius = 5
         buttonWantToGo.layer.masksToBounds = true
+        */
 
         self.viewModelDidUpdate()
     }
@@ -67,10 +78,6 @@ class EventDetailsController: UIViewController {
 
         self.extMakeNavBarTransparent(UIColor.whiteColor())
         self.extMakeStatusBarWhite()
-
-        let h = UIScreen.mainScreen().bounds.size.height
-        constraintHeightOfFirstContainer.constant = h
-        constraintHeightOfSecondContainer.constant = h
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -86,14 +93,12 @@ class EventDetailsController: UIViewController {
                 imageBackground.hnk_setImageFromURL(image)
             }
 
-            let interestName = event.interests.first?.title
-            labelCategory.text = interestName
-            labelSecondCategory.text = interestName
-
             labelTitle.text = event.title
-            labelSecondTitle.text = event.title
-            labelSecondDescription.text = event.description_text
+            labelDescription.text = event.description_text
+            // TODO
             labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
+            labelLocation.text = event.address
+            labelPriceMinimum.text = event.getPrice(.MinPrice)
         }
     }
 

@@ -24,24 +24,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4B-TA-scQ" userLabel="IT FIX XCODE BUG WITH TABLE">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="2w0-kB-BOi"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SZJ-UZ-6vH">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="X4B-TA-scQ" firstAttribute="leading" secondItem="3vW-FT-dNV" secondAttribute="leading" id="3ih-nt-xwh"/>
                             <constraint firstAttribute="trailing" secondItem="SZJ-UZ-6vH" secondAttribute="trailing" id="5O6-dq-eNI"/>
-                            <constraint firstItem="X4B-TA-scQ" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" id="Bzc-ae-Iqt"/>
                             <constraint firstItem="Ra7-A0-6a4" firstAttribute="top" secondItem="SZJ-UZ-6vH" secondAttribute="bottom" id="EyD-t8-kvX"/>
-                            <constraint firstAttribute="trailing" secondItem="X4B-TA-scQ" secondAttribute="trailing" id="Sl1-82-ghv"/>
-                            <constraint firstItem="SZJ-UZ-6vH" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" constant="1" id="ojJ-GC-fgz"/>
+                            <constraint firstItem="SZJ-UZ-6vH" firstAttribute="top" secondItem="Pz7-b4-xU8" secondAttribute="bottom" id="ojJ-GC-fgz"/>
                             <constraint firstItem="SZJ-UZ-6vH" firstAttribute="leading" secondItem="3vW-FT-dNV" secondAttribute="leading" id="soY-8Y-Vcg"/>
                         </constraints>
                     </view>
@@ -378,21 +369,21 @@
                                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDisplayDate" textLabel="ugt-HG-yXa" detailTextLabel="jDt-6q-osZ" style="IBUITableViewCellStyleValue1" id="bob-LU-JAN">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="1000" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bob-LU-JAN" id="CYL-LF-8jN">
-                                                    <frame key="frameInset" width="342" height="43"/>
+                                                    <frame key="frameInset" width="818" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ugt-HG-yXa">
-                                                            <frame key="frameInset" minX="15" minY="14" width="34" height="17"/>
+                                                            <frame key="frameInset" minX="164" minY="14" width="34" height="17"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jDt-6q-osZ">
-                                                            <frame key="frameInset" minX="294" minY="12" width="46" height="20"/>
+                                                            <frame key="frameInset" minX="772" minY="12" width="46" height="20"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

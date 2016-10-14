@@ -248,12 +248,12 @@
 		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
 				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
 				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
+				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,

@@ -48,6 +48,7 @@ extension UIViewController {
         if let navBar = self.navigationController?.navigationBar {
             self.extMakeNavBarTransparent()
         }
+        self.navigationController!.view.backgroundColor = UIColor.whiteColor()
     }
     func extMakeNavBarTransparent(tintColor: UIColor = UIColor.grayColor()) {
         if let navBar = self.navigationController?.navigationBar {
