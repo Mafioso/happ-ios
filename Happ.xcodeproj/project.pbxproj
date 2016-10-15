@@ -26,6 +26,9 @@
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
 		52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52899B191D90099A005AD79E /* RealmModels.swift */; };
 		529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529046B91D9BB40B00BFB06A /* SettingsController.swift */; };
+		52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */; };
+		52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */; };
+		52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */; };
 		52A3C2C91D8F212E00C31F3F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */; };
 		52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */; };
 		52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */; };
@@ -99,6 +102,9 @@
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		52899B191D90099A005AD79E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		529046B91D9BB40B00BFB06A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSelectCityController.swift; sourceTree = "<group>"; };
+		52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityPrototype.swift; sourceTree = "<group>"; };
+		52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewModel.swift; sourceTree = "<group>"; };
 		52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
 				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
@@ -258,6 +265,7 @@
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
+				52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
 				5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */,
 			);
@@ -290,6 +298,7 @@
 			children = (
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
 				52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */,
+				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
@@ -531,16 +540,19 @@
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
 				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
+				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
+				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52B012481D9AEE5B0061F083 /* SelectCityInterestsViewController.swift in Sources */,
 				5270B6561DA377CE0028C9D1 /* ChangePasswordController.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
 				52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
+				52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */,
 				527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */,
 				52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */,
 				B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */,

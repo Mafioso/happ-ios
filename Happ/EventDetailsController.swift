@@ -29,6 +29,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var imageAuthorPhoto: UIImageView!
     
     @IBOutlet weak var buttonInfoDate: UIButton!
+    @IBOutlet weak var viewHighlightInfoPrice: UIView!
     @IBOutlet weak var buttonInfoPrice: UIButton!
     @IBOutlet weak var buttonInfoLocation: UIButton!
     @IBOutlet weak var buttonUpvote: UIButton!
@@ -48,24 +49,22 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        [buttonInfoDate, buttonInfoPrice, buttonInfoLocation]
-            .forEach { button in
-                //button.layer.cornerRadius = 0.5 * button.bounds.size.width
-                //button.clipsToBounds = true
-
-                //button.layer.masksToBounds = true
+        self.initNavigationBarItems()
+        self.viewModelDidUpdate()
+    }
+    override func viewDidLayoutSubviews() {
+        [buttonInfoDate, buttonInfoPrice, buttonInfoLocation, viewHighlightInfoPrice]
+            .forEach { circle in
+                circle.layer.cornerRadius = 0.5 * circle.bounds.size.width
+                circle.layer.borderWidth = 0.0
+                circle.clipsToBounds = true
         }
         [buttonUpvote, buttonWantToGo]
             .forEach { button in
                 button.layer.cornerRadius = 20
                 button.layer.masksToBounds = true
         }
-
-
-        self.initNavigationBarItems()
-        self.viewModelDidUpdate()
     }
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -102,11 +101,11 @@ class EventDetailsController: UIViewController {
 
 
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
+        let navBarBack = HappNavBarItem(position: .Left, icon: "nav-arrow-back")
         navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarBack)
-        
-        let navBarFavourite = HappNavBarItem(position: .Right, icon: "fav-icon")
+
+        let navBarFavourite = HappNavBarItem(position: .Right, icon: "star-shadow")
         navBarFavourite.button.addTarget(self, action: #selector(handleClickNavBarFavourite), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarFavourite)
     }

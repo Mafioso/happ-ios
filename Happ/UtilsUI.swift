@@ -11,6 +11,16 @@ import UIKit
 import PromiseKit
 
 
+extension UIColor {
+    class func happOrangeColor() -> UIColor {
+        return UIColor(red:1.00, green:0.41, blue:0.11, alpha:1.0)
+    }
+    class func happOrangeBlinkColor() -> UIColor {
+        return UIColor(red:1.00, green:0.41, blue:0.11, alpha:0.2)
+    }
+}
+
+
 enum HappNavBarItemPosition {
     case Left
     case Right
@@ -37,9 +47,9 @@ class HappNavBarItem: UIView {
         var frame: CGRect
         switch position {
         case .Left:
-            frame = CGRect(x: 16, y: 20, width: 44, height: 44)
+            frame = CGRect(x: 16, y: 36, width: 44, height: 44)
         case .Right:
-            frame = CGRect(x: Int(screenSize.width)-60, y: 20, width: 44, height: 44)
+            frame = CGRect(x: Int(screenSize.width)-60, y: 36, width: 44, height: 44)
         }
 
         let button = UIButton(type: .Custom)
@@ -89,30 +99,20 @@ extension UIViewController {
         }
     }
 
-
-    func extMakeNavBarWhite() {
-        if let navBar = self.navigationController?.navigationBar {
-            self.extMakeNavBarTransparent()
-        }
-        self.navigationController!.view.backgroundColor = UIColor.whiteColor()
-    }
-    func extMakeNavBarTransparent(tintColor: UIColor = UIColor.grayColor()) {
-        if let navBar = self.navigationController?.navigationBar {
-            navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-            navBar.shadowImage = UIImage()
-            navBar.translucent = true
-            navBar.tintColor = tintColor
-        }
-        self.navigationController!.view.backgroundColor = UIColor.clearColor()
-    }
-
     func extMakeStatusBarWhite() {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        // set background color
+        let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.mainScreen().bounds.width), height: 20))
+        statusBarBackground.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.2)
+        statusBarBackground.tag = 920
+        self.view.addSubview(statusBarBackground)
     }
     func extMakeStatusBarDefault() {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        // remove background
+        self.view.viewWithTag(920)?.removeFromSuperview()
     }
-    
+
     
     func extHideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.extDismissKeyboard))

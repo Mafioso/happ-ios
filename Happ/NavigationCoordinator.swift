@@ -30,7 +30,7 @@ typealias NavigationFuncWithID = ((id: String) -> Void)?
 
 
 
-class HappTabBarController: UITabBarController {
+class HappMainTabBarController: UITabBarController {
 
     var navigateFeedTab: NavigationFunc = nil
     var navigateFavouriteTab: NavigationFunc = nil
@@ -38,30 +38,32 @@ class HappTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // tab controllers
+        self.tabBar.tintColor = UIColor.happOrangeColor()
+
         let tabExplore = HappNavigationController()
         let tabMap = HappNavigationController()
         let tabFeed = HappNavigationController()
         let tabFavourite = HappNavigationController()
         let tabChat = HappNavigationController()
 
-        // tab items
-        let tabItemExplore = UITabBarItem(title: "Explore", image: nil, selectedImage: nil)
-        let tabItemMap = UITabBarItem(title: "Map", image: nil, selectedImage: nil)
-        let tabItemFeed = UITabBarItem(title: "Feed", image: UIImage(named: "tabs-tab"), selectedImage: UIImage(named: "tabs-tab"))
-        let tabItemFavourite = UITabBarItem(title: "Favourite", image: UIImage(named: "bookmark-icon"), selectedImage: UIImage(named: "bookmark-icon"))
-        let tabItemChat = UITabBarItem(title: "Chat", image: nil, selectedImage: nil)
+        tabExplore.tabBarItem = UITabBarItem(title: "Explore",
+                                          image: UIImage(named: "tab-explore"),
+                                          selectedImage: nil)
+        tabMap.tabBarItem = UITabBarItem(title: "Map",
+                                      image: UIImage(named: "tab-map"),
+                                      selectedImage: nil)
+        tabFeed.tabBarItem = UITabBarItem(title: "Feed",
+                                       image: UIImage(named: "tab-feed"),
+                                       selectedImage: nil)
+        tabFavourite.tabBarItem = UITabBarItem(title: "Favourite",
+                                            image: UIImage(named: "tab-favourite"),
+                                            selectedImage: nil)
+        tabChat.tabBarItem = UITabBarItem(title: "Chat",
+                                       image: UIImage(named: "tab-chat"),
+                                       selectedImage: nil)
 
-        tabExplore.tabBarItem = tabItemExplore
-        tabMap.tabBarItem = tabItemMap
-        tabFeed.tabBarItem = tabItemFeed
-        tabFavourite.tabBarItem = tabItemFavourite
-        tabChat.tabBarItem = tabItemChat
-
-        // add them
         self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite, tabChat]
         self.hidesBottomBarWhenPushed = true
-
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -95,7 +97,7 @@ class NavigationCoordinator {
 
     private let window: UIWindow
     private var navigationController: UINavigationController!
-    private var tabBarController: HappTabBarController!
+    private var tabBarController: UITabBarController!
 
 
     init(window: UIWindow) {
@@ -153,19 +155,20 @@ class NavigationCoordinator {
         print(".nav.tab.start")
 
         // init Tab bar
-        self.tabBarController = HappTabBarController()
-        self.tabBarController.navigateFeedTab = self.showFeed
-        self.tabBarController.navigateFavouriteTab = self.showFavourite
+        let mainTabBar = HappMainTabBarController()
+        mainTabBar.navigateFeedTab = self.showFeed
+        mainTabBar.navigateFavouriteTab = self.showFavourite
 
         // init Sidebar
         let menuController = self.initMenuController()
         let sidebar = SlideMenuController(
-            mainViewController: self.tabBarController,
+            mainViewController: mainTabBar,
             leftMenuViewController: menuController)
         self.window.rootViewController = sidebar
         self.window.makeKeyAndVisible()
 
         // show Feed
+        self.tabBarController = mainTabBar
         self.navigationController = nil
         self.showFeed()
     }
@@ -344,7 +347,8 @@ class NavigationCoordinator {
         viewModel.navigateFeed = self.hideSlideMenu(self.showFeed)
         viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
-        
+        viewModel.navigateBack = self.hideSlideMenu
+
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModel = viewModel
         

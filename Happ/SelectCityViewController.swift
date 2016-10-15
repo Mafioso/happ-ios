@@ -16,9 +16,6 @@ class SelectCityViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.hidden = false
-        self.extMakeNavBarWhite()
-
         self.initDisplaySelectButton()
     }
 

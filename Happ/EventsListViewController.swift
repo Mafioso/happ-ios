@@ -29,7 +29,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,8 +44,13 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.extMakeNavBarTransparent()
+        
+        self.extMakeStatusBarWhite()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.extMakeStatusBarDefault()
     }
 
 
@@ -134,11 +138,11 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 extension EventsListViewController {
     
     private func initNavigationBarItems() {
-        let navBarMenu = HappNavBarItem(position: .Left, icon: "burger-menu")
+        let navBarMenu = HappNavBarItem(position: .Left, icon: "nav-menu")
         navBarMenu.button.addTarget(self, action: #selector(handleClickNavBarMenu), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarMenu)
 
-        let navBarFilter = HappNavBarItem(position: .Right, icon: "filter-menu")
+        let navBarFilter = HappNavBarItem(position: .Right, icon: "nav-filter")
         navBarFilter.button.addTarget(self, action: #selector(handleClickNavBarFilter), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarFilter)
     }

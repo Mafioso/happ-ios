@@ -56,9 +56,6 @@ class LoginController: UIViewController {
         super.viewDidLoad()
 
         // style
-        
-        self.extMakeNavBarTransparent(UIColor.whiteColor())
-
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-image")!)
 
         signInButton.layer.cornerRadius = 5

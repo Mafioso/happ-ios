@@ -9,10 +9,26 @@
 import Foundation
 
 
+enum MenuViewModelScope {
+    case ChangeCity
+    case Normal
+
+    func opposite() -> MenuViewModelScope {
+        switch self {
+        case .Normal:
+            return .ChangeCity
+        case .ChangeCity:
+            return .Normal
+        }
+    }
+}
+
 class MenuViewModel {
 
     var user: UserModel!
+    var scope: MenuViewModelScope = .Normal
 
+    var navigateBack: NavigationFunc
     var navigateProfile: NavigationFunc
     var navigateFeed: NavigationFunc
     var navigateSelectInterests: NavigationFunc
@@ -26,9 +42,13 @@ class MenuViewModel {
     }
 
     //MARK: - Inputs
+    func onChangeScope(scope: MenuViewModelScope) {
+        self.scope = scope
+        self.didUpdate?()
+    }
 
-    //NOTE:  there is no inputs, 
-    // navigate functions are called directly inside MenuViewController
-    
+    //MARK: - Events
+    var didUpdate: (() -> Void)?
+
 
 }
