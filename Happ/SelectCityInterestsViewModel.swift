@@ -96,7 +96,8 @@ class SelectCityInterestsViewModel {
 
 
     private func getCities() -> [CityModel] {
-        return Array(ProfileService.getCitiesStored())
+        let cities = ProfileService.getCitiesStored()
+        return Array(cities)
     }
 
     private func getInterests() -> [InterestModel] {

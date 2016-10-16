@@ -67,7 +67,7 @@ class SelectCurrencyViewController: UITableViewController {
 
     private func updateTableWithSelected() {
         // set selections for already selected currency
-        if let currency = self.viewModel.userSettings.currency {
+        if let currency = self.viewModel.currency {
             let atRow = self.viewModel.currencies.indexOf(currency)
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             self.updateDisplaySelectButton()

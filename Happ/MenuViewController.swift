@@ -12,9 +12,14 @@ import Haneke
 
 class MenuViewController: UIViewController, UITableViewDelegate {
 
-    var viewModel: MenuViewModel! {
+    var viewModelMenu: MenuViewModel! {
         didSet {
             self.bindToViewModel()
+        }
+    }
+    var viewModelSelectCity: SelectCityViewModel! {
+        didSet {
+            self.bindToSelectCityViewModel()
         }
     }
 
@@ -32,7 +37,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     // action
     @IBAction func clickedChangeProfile(sender: UIButton) {
-        self.viewModel.navigateProfile?()
+        self.viewModelMenu.navigateProfile?()
     }
 
     // constants
@@ -41,12 +46,11 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     // variables
     var tableMenuActions: UITableView!
-    var viewControllerSelectCity: MenuSelectCityController!
+    var tableViewControllerSelectCity: MenuSelectCityController!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         self.initNavigationBarItems()
         
@@ -54,29 +58,30 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
 
 
-        if let user = self.viewModel.user {
+        if let user = self.viewModelMenu.user {
             // TODO
             // let imageURL = NSURL(user...)
             // imageUserPhoto.hnk_setImageFromURL(imageURL)
             imageUserPhoto.image = UIImage(named: "bg-feed")
             labelUserFullname.text = user.fullname
         }
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-        labelChangeCity.text = "Almaty" // TODO
+        let highlightedIndexPath = NSIndexPath(forRow: self.viewModelMenu.highlight.rawValue, inSection: 0)
+        self.tableMenuActions.selectRowAtIndexPath(highlightedIndexPath, animated: true, scrollPosition: .None)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == segueEmbeddedTableMenu {
             let dest = segue.destinationViewController as! UITableViewController
             self.tableMenuActions = dest.tableView
-            // init Menu state
             self.tableMenuActions.delegate = self
         }
         if segue.identifier == segueEmbeddedSelectCity {
             let dest = segue.destinationViewController as! MenuSelectCityController
-            self.viewControllerSelectCity = dest
-            // init SelectCity state
-            self.viewControllerSelectCity.viewModel = SelectCityViewModel()
-            self.viewControllerSelectCity.handleSelect = self.onSelectCity
+            self.tableViewControllerSelectCity = dest
+            self.tableViewControllerSelectCity.viewModel = self.viewModelSelectCity
         }
     }
 
@@ -84,18 +89,31 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     func viewModelDidUpdate() {
         self.updateScopeViews()
     }
+    func viewModelSelectCityDidLoad() {
+        labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
+    }
+
     private func bindToViewModel() {
-        self.viewModel.didUpdate = { [weak self] _ in
+        self.viewModelMenu.didUpdate = { [weak self] _ in
             self?.viewModelDidUpdate()
+        }
+    }
+    func bindToSelectCityViewModel() {
+        self.viewModelSelectCity.didLoad = { [weak self] _ in
+            self?.viewModelSelectCityDidLoad()
+        }
+        self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
+            self?.onChangeCity()
         }
     }
 
     
+
     func updateScopeViews() {
-        switch self.viewModel.scope {
+        switch self.viewModelMenu.scope {
         case .Normal:
             UIView.transitionFromView(viewSelectCity, toView: viewMenu, duration: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            labelChangeCity.text = "Almaty" //self.viewModel.user.city.name TODO
+            labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
 
             UIView.animateWithDuration(0.25, animations: {
                 self.iconChangeCity.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
@@ -111,43 +129,21 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         }
     }
 
-
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                self.viewModel.navigateFeed?()
-            case 1:
-                self.viewModel.navigateSelectInterests?()
-            case 2:
-                self.viewModel.navigateEventPlanner?()
-            default:
-                break
-            }
-        case 1:
-            switch indexPath.row {
-            case 1:
-                self.viewModel.navigateSettings?()
-            case 2:
-                self.viewModel.navigateLogout?()
-            default:
-                break
-            }
-        default:
-            break
-        }
+        print(".menu.selectAction")
+        let action = MenuActions(rawValue: indexPath.section * 10 + indexPath.row)!
+        self.viewModelMenu.onClickAction(action)
     }
-
     func onClickChangeCity() {
-        print(".tap")
-        self.viewModel.onChangeScope(self.viewModel.scope.opposite())
+        print(".menu.changeScope")
+        let newScope = self.viewModelMenu.scope.opposite()
+        self.viewModelMenu.onChangeScope(newScope)
+    }
+    func onChangeCity() {
+        print(".menu.changeCity")
+        self.viewModelMenu.onChangeScope(.Normal)
     }
 
-    func onSelectCity(city: CityModel) {
-        print(".here", city)
-    }
 }
 
 
@@ -159,7 +155,7 @@ extension MenuViewController {
         self.view.addSubview(navBarBack)
     }
     func handleClickNavBack() {
-        self.viewModel.navigateBack?()
+        self.viewModelMenu.navigateBack?()
     }
 }
 

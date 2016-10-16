@@ -15,8 +15,11 @@ extension UIColor {
     class func happOrangeColor() -> UIColor {
         return UIColor(red:1.00, green:0.41, blue:0.11, alpha:1.0)
     }
-    class func happOrangeBlinkColor() -> UIColor {
-        return UIColor(red:1.00, green:0.41, blue:0.11, alpha:0.2)
+    class func happOrangeHighlightColor() -> UIColor {
+        return UIColor(red:1.00, green:0.41, blue:0.11, alpha:0.04)
+    }
+    class func happBlackHalfTextColor() -> UIColor {
+        return UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.56)
     }
 }
 
@@ -64,6 +67,26 @@ class HappNavBarItem: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+extension UITableViewCell {
+    func extSetHighlighted() {
+        self.textLabel?.backgroundColor = UIColor.clearColor()
+        self.textLabel?.textColor = UIColor.happOrangeColor()
+        self.backgroundColor = UIColor.happOrangeHighlightColor()
+
+        let imageHapp = UIImage(named: "icon-happ-orange")
+        let imageViewHapp = UIImageView(image: imageHapp)
+        imageViewHapp.frame = CGRect(x: 16, y: 13, width: 24, height: 24)
+        imageViewHapp.tag = 924
+        self.addSubview(imageViewHapp)
+    }
+    func extUnsetHighlighted() {
+        self.textLabel?.textColor = UIColor.happBlackHalfTextColor()
+        self.backgroundColor = UIColor.clearColor()
+        self.viewWithTag(924)?.removeFromSuperview()
     }
 }
 

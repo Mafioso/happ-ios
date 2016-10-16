@@ -255,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
+				52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */,
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
 				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
@@ -265,7 +266,6 @@
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
-				52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
 				5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */,
 			);

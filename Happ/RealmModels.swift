@@ -14,8 +14,8 @@ import RealmSwift
 class SettingsDictModel: Object, Mappable {
     // notifications
     dynamic var language: String?
-    dynamic var city: CityModel?
-    dynamic var currency: CurrencyModel?
+    dynamic var city_id: String?
+    dynamic var currency_id: String?
 
     required convenience init?(_ map: Map) {
         self.init()
@@ -23,8 +23,8 @@ class SettingsDictModel: Object, Mappable {
 
     func mapping(map: Map) {
         language    <- map["language"]
-        city        <- map["city"]
-        currency    <- map["currency"]
+        city_id        <- map["city"]
+        currency_id    <- map["currency"]
     }
 }
 

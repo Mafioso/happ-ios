@@ -13,6 +13,7 @@ import Foundation
 class SettingsViewModel {
 
     var userSettings: SettingsDictModel!
+    var currency: CurrencyModel? // TODO load from GetCurrency
     var currencies: [CurrencyModel] = []
 
 

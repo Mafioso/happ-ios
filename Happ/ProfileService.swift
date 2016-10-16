@@ -39,6 +39,24 @@ class ProfileService {
         }
     }
 
+    class func fetchCity(id: String) -> Promise<Void> {
+        return Get(endpointCity + id + "/", parameters: nil)
+            .then { result -> Void in
+                let realm = try! Realm()
+                try! realm.write {
+                    let inst = Mapper<CityModel>().map(result)
+                    realm.add(inst!, update: true)
+
+                    print(".fetchCity", result, inst)
+                }
+        }
+    }
+    class func fetchUserCity() -> Promise<Void> {
+        let user = self.getUserProfile()
+        let cityID = user.settings!.city_id!
+        return self.fetchCity(cityID)
+    }
+
     class func fetchInterests() -> Promise<Void> {
         return GetPaginated(endpointInterest, parameters: nil)
             .then { (data, isLastPage) -> Void in
@@ -138,6 +156,17 @@ class ProfileService {
         let realm = try! Realm()
         let user = realm.objects(UserModel).first
         return user!
+    }
+
+    class func getUserCity() -> CityModel? {
+        let realm = try! Realm()
+        let result = realm.objects(CityModel)
+
+        let user = self.getUserProfile()
+        let settings = user.settings!
+        let city = result.filter("id == %@", settings.city_id!).first
+
+        return city
     }
 
     class func isUserProfileExists() -> Bool {

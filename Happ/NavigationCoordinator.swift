@@ -159,17 +159,9 @@ class NavigationCoordinator {
         mainTabBar.navigateFeedTab = self.showFeed
         mainTabBar.navigateFavouriteTab = self.showFavourite
 
-        // init Sidebar
-        let menuController = self.initMenuController()
-        let sidebar = SlideMenuController(
-            mainViewController: mainTabBar,
-            leftMenuViewController: menuController)
-        self.window.rootViewController = sidebar
-        self.window.makeKeyAndVisible()
-
-        // show Feed
         self.tabBarController = mainTabBar
         self.navigationController = nil
+
         self.showFeed()
     }
 
@@ -195,11 +187,13 @@ class NavigationCoordinator {
         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
 
-        // init filters to sidebar
+
+        // init sidebar
         let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
-        // recreate sidebar
-        let menuController = self.initMenuController()
+        
+        let menuController = self.initMenuController(.Feed)
+
         let sidebar = SlideMenuController(
             mainViewController: self.tabBarController,
             leftMenuViewController: menuController,
@@ -341,8 +335,10 @@ class NavigationCoordinator {
     }
 
 
-    private func initMenuController() -> MenuViewController {
+    private func initMenuController(highlight: MenuActions) -> MenuViewController {
         let viewModel = MenuViewModel()
+        let viewModelSelectCity = SelectCityViewModel()
+        viewModel.highlight = highlight
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.showFeed)
         viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
@@ -350,8 +346,9 @@ class NavigationCoordinator {
         viewModel.navigateBack = self.hideSlideMenu
 
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
-        menuViewController.viewModel = viewModel
-        
+        menuViewController.viewModelMenu = viewModel
+        menuViewController.viewModelSelectCity = viewModelSelectCity
+
         return menuViewController
     }
 }

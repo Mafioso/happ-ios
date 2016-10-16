@@ -12,12 +12,25 @@ import UIKit
 
 class MenuSelectCityController: SelectCityPrototype {
     
-    var handleSelect: ((CityModel) -> Void)?
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let city = self.viewModel.cities[indexPath.row]
-        self.viewModel.onSelectCity(city)
-        self.handleSelect?(city)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let searchBar = self.tableView.tableHeaderView as! UISearchBar
+        searchBar.placeholder = "Find city..."
     }
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+        if  let selectedCity = self.viewModel.selectedCity,
+            let selectedRow = self.viewModel.cities.indexOf(selectedCity)
+            where selectedRow == indexPath.row {
+
+            cell.extSetHighlighted()
+
+        } else {
+            cell.extUnsetHighlighted()
+        }
+    }
+
 
 }
