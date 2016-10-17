@@ -70,11 +70,11 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.delegate = self
 
         self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-        self.tableView.estimatedRowHeight = 265
+        self.tableView.estimatedRowHeight = EventTableCell.estimatedHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 
-    
+
     // MARK: UITableViewDataSource
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -35,6 +35,7 @@
 		<string>SF-UI-Text-Bolditalic.otf</string>
 		<string>SF-UI-Text-Medium.otf</string>
 		<string>SF-UI-Text-Regular</string>
+		<string>WienLight_Normal.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

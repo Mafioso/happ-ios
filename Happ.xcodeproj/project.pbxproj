@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
 		522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */; };
+		523483CB1DB48BD0009B8204 /* WienLight_Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523483CA1DB48BD0009B8204 /* WienLight_Normal.ttf */; };
 		52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52357AC11D9AFF5000586459 /* SelectCityViewController.swift */; };
 		5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C37C1D92434700F66E31 /* EventTableCell.swift */; };
 		5239C37F1D92434700F66E31 /* EventTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5239C37D1D92434700F66E31 /* EventTableCell.xib */; };
@@ -83,6 +84,7 @@
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFiltersController.swift; sourceTree = "<group>"; };
+		523483CA1DB48BD0009B8204 /* WienLight_Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WienLight_Normal.ttf; sourceTree = "<group>"; };
 		52357AC11D9AFF5000586459 /* SelectCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewController.swift; sourceTree = "<group>"; };
 		5239C37C1D92434700F66E31 /* EventTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		5239C37D1D92434700F66E31 /* EventTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableCell.xib; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		B4FBF1A71D7ED87900C0E08B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				523483CA1DB48BD0009B8204 /* WienLight_Normal.ttf */,
 				B4E215C31DAF764C00144E78 /* SF-UI-Display-Black.otf */,
 				B4E215C41DAF764C00144E78 /* SF-UI-Display-Bold.otf */,
 				B4E215C51DAF764C00144E78 /* SF-UI-Display-Heavy.otf */,
@@ -437,6 +440,7 @@
 				B4E215ED1DAF764C00144E78 /* SF-UI-Text-Semibold.otf in Resources */,
 				B4E215E91DAF764C00144E78 /* SF-UI-Text-Medium.otf in Resources */,
 				B4E215E31DAF764C00144E78 /* SF-UI-Text-Bold.otf in Resources */,
+				523483CB1DB48BD0009B8204 /* WienLight_Normal.ttf in Resources */,
 				B4E215DF1DAF764C00144E78 /* SF-UI-Display-Regular.otf in Resources */,
 				B4E215DA1DAF764C00144E78 /* SF-UI-Display-Black.otf in Resources */,
 				B4E215F01DAF764C00144E78 /* SF-UI-Text-UltrathinItalic.otf in Resources */,

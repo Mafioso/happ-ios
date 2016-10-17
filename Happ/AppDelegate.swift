@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 
-
         if self.window?.rootViewController != nil {
             return true
         }

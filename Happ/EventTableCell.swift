@@ -10,6 +10,32 @@ import UIKit
 import Haneke
 
 
+enum EventColors: String {
+    case A = "57ea237de93ff50030ff22ba"
+    case B = "57ea237de93ff50030ff22df"
+    case C = "57ea237de93ff50030ff22b2"
+    case D = "57ea237de93ff50030ff22b3"
+    case E = "57ea237de93ff50030ff22d4"
+
+    func color() -> UIColor {
+        var hex: String
+        switch self {
+        case A:
+            hex = "3E3E3E"
+        case B:
+            hex = "7C7670"
+        case C:
+            hex = "0F1624"
+        case D:
+            hex = "7A8290"
+        case E:
+            hex = "DBCEBE"
+        }
+        return UIColor(hexString: "#"+hex)
+    }
+}
+
+
 
 class EventTableCell: UITableViewCell {
 
@@ -45,6 +71,7 @@ class EventTableCell: UITableViewCell {
 
     // constants
     static let nibName = "EventTableCell"
+    static let estimatedHeight = CGFloat(integerLiteral: 420)
 
 
     override func awakeFromNib() {
@@ -70,8 +97,11 @@ class EventTableCell: UITableViewCell {
         labelPlace.text = event.address
         labelPrice.text = event.getPrice(.MinPrice)
         labelUpvotesCount.text = formatStatValue(event.votes_num)
-        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(event.start_datetime!)) - \(HappDateFormats.OnlyTime.toString(event.end_datetime!))"
+        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(event.start_datetime!)) — \(HappDateFormats.OnlyTime.toString(event.end_datetime!))"
 
+        if let eventColor = EventColors(rawValue: event.id) {
+            viewDetailsContainer.backgroundColor = eventColor.color()
+        }
         if let imageURL = event.images[0] {
             imageCover.hnk_setImageFromURL(imageURL)
         }
