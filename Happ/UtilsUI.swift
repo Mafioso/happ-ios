@@ -80,8 +80,7 @@ class HappNavBarItem: UIView {
         var btnIcon: UIImage
         switch icon {
         case "back":
-           let tmpIcon = UIImage(named: "arrow-location")!
-            btnIcon = UIImage(CGImage: tmpIcon.CGImage!, scale: tmpIcon.scale, orientation: UIImageOrientation.UpMirrored)
+            btnIcon = UIImage(named: "nav-arrow-back")!
         default:
             btnIcon = UIImage(named: icon)!
         }

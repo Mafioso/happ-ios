@@ -112,7 +112,7 @@ class EventDetailsController: UIViewController {
 
 
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "nav-arrow-back")
+        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
         navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarBack)
 

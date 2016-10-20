@@ -45,6 +45,8 @@
 		52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */; };
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
+		52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */; };
+		52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */; };
 		B476D76A1DAF75CF00598CB8 /* 2279.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B476D7691DAF75CF00598CB8 /* 2279.ttf */; };
 		B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */; };
 		B4E215DA1DAF764C00144E78 /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4E215C31DAF764C00144E78 /* SF-UI-Display-Black.otf */; };
@@ -122,6 +124,8 @@
 		52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		52DD590D1D807E5D007E19E9 /* UtilsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsUI.swift; sourceTree = "<group>"; };
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
+		52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewModel.swift; sourceTree = "<group>"; };
+		52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewControllers.swift; sourceTree = "<group>"; };
 		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		B476D7691DAF75CF00598CB8 /* 2279.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2279.ttf; path = Happ/Resources/2279.ttf; sourceTree = "<group>"; };
 		B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
 				5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */,
+				52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
+				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -547,7 +553,9 @@
 				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
+				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
+				52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,

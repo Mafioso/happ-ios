@@ -30,6 +30,15 @@ typealias NavigationFuncWithID = ((id: String) -> Void)?
 
 
 
+class HappNavigationController: UINavigationController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationBarHidden = true
+    }
+}
+
+
 class HappMainTabBarController: UITabBarController {
 
     var navigateFeedTab: NavigationFunc = nil
@@ -44,7 +53,7 @@ class HappMainTabBarController: UITabBarController {
         let tabMap = HappNavigationController()
         let tabFeed = HappNavigationController()
         let tabFavourite = HappNavigationController()
-        let tabChat = HappNavigationController()
+        // let tabChat = HappNavigationController()
 
         tabExplore.tabBarItem = UITabBarItem(title: "Explore",
                                           image: UIImage(named: "tab-explore"),
@@ -58,11 +67,12 @@ class HappMainTabBarController: UITabBarController {
         tabFavourite.tabBarItem = UITabBarItem(title: "Favourite",
                                             image: UIImage(named: "tab-favourite"),
                                             selectedImage: nil)
-        tabChat.tabBarItem = UITabBarItem(title: "Chat",
+        /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
                                        image: UIImage(named: "tab-chat"),
                                        selectedImage: nil)
+        */
 
-        self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite, tabChat]
+        self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite]//, tabChat]
         self.hidesBottomBarWhenPushed = true
     }
 
@@ -79,13 +89,57 @@ class HappMainTabBarController: UITabBarController {
     }
 }
 
-class HappNavigationController: UINavigationController {
+
+class HappManagerTabBarController: UITabBarController {
+    
+    var navigateMyEventsTab: NavigationFunc = nil
+    var navigateAddEventTab: NavigationFunc = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationBarHidden = true
+
+        self.tabBar.tintColor = UIColor.happOrangeColor()
+
+        let tabAnalytics = HappNavigationController()
+        let tabProFunctions = HappNavigationController()
+        let tabMyEvents = HappNavigationController()
+        let tabAddEvent = HappNavigationController()
+        // let tabChat = HappNavigationController()
+
+        tabAnalytics.tabBarItem = UITabBarItem(title: "Analytics",
+                                             image: UIImage(named: "tab-analytics"),
+                                             selectedImage: nil)
+        tabProFunctions.tabBarItem = UITabBarItem(title: "Pro-Functions",
+                                         image: UIImage(named: "tab-profunctions"),
+                                         selectedImage: nil)
+        tabMyEvents.tabBarItem = UITabBarItem(title: "My Events",
+                                          image: UIImage(named: "tab-feed"),
+                                          selectedImage: nil)
+        tabAddEvent.tabBarItem = UITabBarItem(title: "Add Event",
+                                               image: UIImage(named: "tab-favourite"),
+                                               selectedImage: nil)
+        /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
+         image: UIImage(named: "tab-chat"),
+         selectedImage: nil)
+         */
+
+        self.viewControllers = [tabAnalytics, tabProFunctions, tabMyEvents, tabAddEvent]//, tabChat]
+        self.hidesBottomBarWhenPushed = true
+    }
+
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+        let selectedAt = tabBar.items!.indexOf(item)!
+        switch selectedAt {
+        case 2:
+            self.navigateMyEventsTab?()
+        case 3:
+            self.navigateAddEventTab?()
+        default:
+            break
+        }
     }
 }
+
 
 
 class NavigationCoordinator {
@@ -151,18 +205,40 @@ class NavigationCoordinator {
     }
 
 
+    func startMainTab(showMainController: NavigationFunc) -> NavigationFunc {
+        return {
+            print(".nav.mainTab")
+
+            let mainTabBar = HappMainTabBarController()
+            mainTabBar.navigateFeedTab = self.showFeed
+            mainTabBar.navigateFavouriteTab = self.showFavourite
+            
+            self.tabBarController = mainTabBar
+            self.navigationController = nil
+            
+            showMainController!()
+        }
+    }
+    func startManagerTab(showMainController: NavigationFunc) -> NavigationFunc {
+        return {
+            print(".nav.managerTab")
+            
+            let managerTabBar = HappManagerTabBarController()
+            managerTabBar.navigateMyEventsTab = self.showMyEvents
+            managerTabBar.navigateAddEventTab = self.startEventManage
+
+            self.tabBarController = managerTabBar
+            self.navigationController = nil
+            
+            showMainController!()
+        }
+    }
+
+    func startMyEvents() {
+        self.startManagerTab(self.showMyEvents)!()
+    }
     func startFeed() {
-        print(".nav.tab.start")
-
-        // init Tab bar
-        let mainTabBar = HappMainTabBarController()
-        mainTabBar.navigateFeedTab = self.showFeed
-        mainTabBar.navigateFavouriteTab = self.showFavourite
-
-        self.tabBarController = mainTabBar
-        self.navigationController = nil
-
-        self.showFeed()
+        self.startMainTab(self.showFeed)!()
     }
 
     func showFeed() {
@@ -176,7 +252,7 @@ class NavigationCoordinator {
     }
 
     func showEventsList(scope: EventsListScope) {
-        print(".nav.tab.showEventsList", scope)
+        print(".nav.mainTab.showEventsList", scope)
 
         let viewModel = EventsListViewModel(scope: scope)
         viewModel.navigateEventDetails = self.showEventDetails
@@ -209,7 +285,9 @@ class NavigationCoordinator {
             self.navigationController.viewControllers = [viewController]
 
         } else {
-            self.navigationController.pushViewController(viewController, animated: true)
+            self.tabBarController.selectedIndex = 2
+            self.navigationController = self.tabBarController.viewControllers![2] as! UINavigationController
+            self.navigationController.viewControllers = [viewController]
         }
     }
 
@@ -228,7 +306,7 @@ class NavigationCoordinator {
         print(".profile.showSelectCityInterests")
         let viewModel = SelectCityInterestsViewModel()
         viewModel.navigateSelectCity = self.showSelectCity(viewModel)
-        viewModel.navigateFeed = self.startFeed
+        //viewModel.navigateFeed = self.startFeed
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCityInterests") as! SelectCityInterestsViewController
         viewController.viewModel = viewModel
@@ -296,6 +374,29 @@ class NavigationCoordinator {
         }
     }
 
+    func startEventManage() {
+        let viewModel = EventManageViewModel()
+        viewModel.navigateBack = self.startMyEvents
+        viewModel.navigateNext = self.showEventManageSecondPage(viewModel)
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+
+        self.navigationController = UINavigationController(rootViewController: viewController)
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+    }
+
+    func showEventManageSecondPage(parentViewModel: EventManageViewModel) -> NavigationFunc {
+        return {
+            let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("addEvent2") as! EventManageSecondPageViewController
+            viewController.viewModel = parentViewModel
+
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+
 
     private func checkUserProfile(next: () -> (Void)) {
         if ProfileService.isUserProfileExists() {
@@ -340,7 +441,8 @@ class NavigationCoordinator {
         let viewModelSelectCity = SelectCityViewModel()
         viewModel.highlight = highlight
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
-        viewModel.navigateFeed = self.hideSlideMenu(self.showFeed)
+        viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
+        viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)
         viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
         viewModel.navigateBack = self.hideSlideMenu
