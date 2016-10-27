@@ -23,6 +23,12 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var imageProfileImage: UIImageView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var textFieldPhone: UITextField!
+    @IBOutlet weak var textFieldBirthday: UITextField!
+    @IBOutlet weak var segmentedFieldGender: UISegmentedControl!
+    @IBOutlet weak var textFieldPasswordOld: UITextField!
+    @IBOutlet weak var textFieldPasswordNew: UITextField!
+    @IBOutlet weak var textFieldPasswordConfirm: UITextField!
 
 
 
@@ -30,12 +36,8 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBAction func clickedEditPhotoButton(sender: UIButton) {
         self.displayChangePhotoActions()
     }
-
-    @IBAction func clickedChangePasswordButton(sender: UIButton) {
-        self.viewModel.navigateChangePassword!()
-    }
     @IBAction func clickedSaveButton(sender: UIButton) {
-        self.collectSave()
+        self.validatedSave()
     }
 
 
@@ -71,20 +73,36 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         textFieldEmail.text = profile.email
     }
 
-    private func collectSave() {
+    private func validatedSave() {
         let values: [String: AnyObject] = [
             "fullname": textFieldFullName.text!,
-            "email": textFieldEmail.text!
+            "email": textFieldEmail.text!,
+            "old_password": textFieldPasswordOld.text!,
+            "new_password": textFieldPasswordNew.text!,
+            "confirm_password": textFieldPasswordConfirm.text!,
         ]
 
-        self.viewModel.onChangeProfile(values)
-            .then { _ -> Void in
+        self.viewModel.onSave(values)
+            .then { _ in
                 self.extDisplayAlertView("Saved Successfully", title: "Done!")
             }
             .error { err in
-                self.extDisplayAlertView(err)
-        }
+                if let profileError = err as? ProfileErrorTypes {
+                    switch profileError {
+                    case .BadConfirm:
+                        self.extDisplayAlertView("Password does not match the confirm password", title: "Warning")
+                    case .BadPassword:
+                        self.extDisplayAlertView("Check your passwords and repeat", title: "Warning")
+                    case .BadValues:
+                        self.extDisplayAlertView(err)
+                    }
+
+                } else {
+                    self.extDisplayAlertView(err)
+                }
+            }
     }
+
     
     private func displayChangePhotoActions() {
         let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
@@ -96,7 +114,6 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         actionList.addAction(actionCancel)
         self.presentViewController(actionList, animated: true, completion: nil)
     }
-
 
     private func initNavigationBarItems() {
         let navBarBack = HappNavBarItem(position: .Left, icon: "back")

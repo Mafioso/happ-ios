@@ -354,7 +354,6 @@ class NavigationCoordinator {
         print(".profile.showProfile")
         let viewModel = ProfileViewModel()
         viewModel.navigateBack = self.goBack
-        viewModel.navigateChangePassword = self.showChangePassword(viewModel)
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
         viewController.viewModel = viewModel
@@ -362,17 +361,6 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
-    func showChangePassword(parentViewModel: ProfileViewModel) -> NavigationFunc {
-        return {
-            print(".profile.showChangePassword")
-            parentViewModel.navigateBack = self.goBack
-
-            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("ChangePassword") as! ChangePasswordController
-            viewController.viewModel = parentViewModel
-            self.navigationController.pushViewController(viewController, animated: true)
-            
-        }
-    }
 
     func startEventManage() {
         let viewModel = EventManageViewModel()

@@ -21,7 +21,6 @@
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
-		5270B6561DA377CE0028C9D1 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */; };
 		527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */; };
 		527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */; };
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
@@ -100,7 +99,6 @@
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		525A8AB31D7D4023002C6F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -273,7 +271,6 @@
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
-				5270B6551DA377CE0028C9D1 /* ChangePasswordController.swift */,
 				52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */,
 			);
 			name = Controllers;
@@ -560,7 +557,6 @@
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52B012481D9AEE5B0061F083 /* SelectCityInterestsViewController.swift in Sources */,
-				5270B6561DA377CE0028C9D1 /* ChangePasswordController.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
 				52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
