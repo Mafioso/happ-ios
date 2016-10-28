@@ -150,7 +150,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 extension MenuViewController {
 
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "cross-shadow")
+        let navBarBack = HappNavBarItem(position: .Left, icon: "nav-close-shadow")
         navBarBack.button.addTarget(self, action: #selector(handleClickNavBack), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarBack)
     }

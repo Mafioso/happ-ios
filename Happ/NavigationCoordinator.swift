@@ -156,6 +156,7 @@ class NavigationCoordinator {
 
     init(window: UIWindow) {
         self.window = window
+        self.window.windowLevel = UIWindowLevelNormal
 
         self.mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.authStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
@@ -222,7 +223,7 @@ class NavigationCoordinator {
     func startManagerTab(showMainController: NavigationFunc) -> NavigationFunc {
         return {
             print(".nav.managerTab")
-            
+
             let managerTabBar = HappManagerTabBarController()
             managerTabBar.navigateMyEventsTab = self.showMyEvents
             managerTabBar.navigateAddEventTab = self.startEventManage
@@ -267,7 +268,7 @@ class NavigationCoordinator {
         // init sidebar
         let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
-        
+
         let menuController = self.initMenuController(.Feed)
 
         let sidebar = SlideMenuController(
@@ -327,37 +328,55 @@ class NavigationCoordinator {
         }
     }
 
-    func showSettings() {
-        print(".profile.showSettings")
+    func startSettings() {
+        print(".start.Settings")
         let viewModel = SettingsViewModel()
-        viewModel.navigateBack = self.goBack
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.navigateProfile = self.showProfile
         viewModel.navigateSelectCurrency = self.showSelectCurrency(viewModel)
-        // viewModel.navigateSelectCity = TODO
-
+        viewModel.navigateSelectNotifications = self.showSelectNotifications(viewModel)
+ 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Settings") as! SettingsController
         viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
-        self.navigationController.pushViewController(viewController, animated: true)
-    }
+        
+        self.tabBarController = nil
+        self.navigationController = UINavigationController()
+        self.navigationController.viewControllers = [viewController]
 
+        let menuController = self.initMenuController(.Settings)
+        let sidebar = SlideMenuController(
+            mainViewController: self.navigationController,
+            leftMenuViewController: menuController)
+        self.window.rootViewController = sidebar
+        self.window.makeKeyAndVisible()
+    }
     func showSelectCurrency(parentViewModel: SettingsViewModel) -> NavigationFunc {
         return {
-            print(".profile.showSelectCurrency")
+            print(".settings.showSelectCurrency")
+            parentViewModel.navigateBack = self.goBack
 
             let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCurrency") as! SelectCurrencyViewController
             viewController.viewModel = parentViewModel
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
+    func showSelectNotifications(parentViewModel: SettingsViewModel) -> NavigationFunc {
+        return {
+            print(".settings.showSelectNotifications")
+            parentViewModel.navigateBack = self.goBack
 
+            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectNotifications") as! SelectNotificationsViewController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
     func showProfile() {
-        print(".profile.showProfile")
+        print(".settings.showProfile")
         let viewModel = ProfileViewModel()
         viewModel.navigateBack = self.goBack
 
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Profile") as! ProfileController
         viewController.viewModel = viewModel
-        viewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
@@ -431,7 +450,7 @@ class NavigationCoordinator {
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
         viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)
-        viewModel.navigateSettings = self.hideSlideMenu(self.showSettings)
+        viewModel.navigateSettings = self.hideSlideMenu(self.startSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
         viewModel.navigateBack = self.hideSlideMenu
 

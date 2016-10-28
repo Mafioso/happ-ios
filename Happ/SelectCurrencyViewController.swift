@@ -10,19 +10,30 @@ import UIKit
 
 class SelectCurrencyViewController: UITableViewController {
 
-    var viewModel: SettingsViewModel!
+    var viewModel: SettingsViewModel!  {
+        didSet {
+            self.bindToViewModel()
+        }
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.initNavigationBarItems()
+        self.viewModelDidUpdate()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
 
+
+    func viewModelDidUpdate() {
         self.updateTableWithSelected()
+    }
+
+    private func bindToViewModel() {
+        self.viewModel.didCurrencyUpdate = { [weak self] _ in
+            self?.viewModelDidUpdate()
+        }
     }
 
 
@@ -30,11 +41,9 @@ class SelectCurrencyViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.currencies.count
     }
-
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let currency = self.viewModel.currencies[indexPath.row]
 
@@ -43,51 +52,36 @@ class SelectCurrencyViewController: UITableViewController {
 
         return cell
     }
-
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.updateDisplaySelectButton()
-    }
-
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        self.updateDisplaySelectButton()
-    }
-
-
-
-    private func initDisplaySelectButton() {
-        let buttonSelect = UIBarButtonItem(title: "Select", style: UIBarButtonItemStyle.Done, target: self, action: #selector(clickedSelectButton))
-        buttonSelect.enabled = false
-        self.navigationItem.rightBarButtonItem = buttonSelect
-    }
-
-    private func updateDisplaySelectButton() {
-        let isSelected = (self.tableView.indexPathForSelectedRow != nil)
-        self.navigationItem.rightBarButtonItem!.enabled = isSelected
-    }
-
-    private func updateTableWithSelected() {
-        // set selections for already selected currency
-        if let currency = self.viewModel.currency {
-            let atRow = self.viewModel.currencies.indexOf(currency)
-            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
-            self.updateDisplaySelectButton()
-        }
-    }
-
-
-    func clickedSelectButton() {
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
         let currency = self.viewModel.currencies[selectedIndexPath.row]
         self.viewModel.onSelectCurrency(currency)
     }
 
 
+
+    private func updateTableWithSelected() {
+        if let currency = self.viewModel.state.currency {
+            // select row
+            let atRow = self.viewModel.currencies.indexOf(currency)
+            self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            // enable Save button
+            self.navigationItem.rightBarButtonItem!.enabled = true
+
+        } else {
+            self.navigationItem.rightBarButtonItem!.enabled = false
+        }
+    }
+
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
-        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarBack)
+        self.navigationItem.title = "Change Currency"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: #selector(handleClickNavBarSave))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()
+    }
+    func handleClickNavBarSave() {
+        self.viewModel.onSaveCurrency()
     }
 }

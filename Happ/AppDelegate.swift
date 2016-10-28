@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = UINavigationController()
         self.navigationCoordinator = NavigationCoordinator(window: self.window!)
         self.navigationCoordinator.start()
+        
+        application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+        application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
 
         return true
     }

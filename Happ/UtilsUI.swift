@@ -21,6 +21,9 @@ extension UIColor {
     class func happBlackHalfTextColor() -> UIColor {
         return UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.56)
     }
+    class func happBlackQuarterTextColor() -> UIColor {
+        return UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.38)
+    }
 }
 
 
@@ -77,13 +80,7 @@ class HappNavBarItem: UIView {
     init(position: HappNavBarItemPosition, icon: String) {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
 
-        var btnIcon: UIImage
-        switch icon {
-        case "back":
-            btnIcon = UIImage(named: "nav-arrow-back")!
-        default:
-            btnIcon = UIImage(named: icon)!
-        }
+        let btnIcon = UIImage(named: icon)!
 
         var frame: CGRect
         switch position {
@@ -158,6 +155,26 @@ extension UIViewController {
         } else {
             self.extDisplayAlertView(error)
         }
+    }
+
+    func extMakeNavBarTransparrent(color: UIColor = UIColor.happBlackQuarterTextColor()) {
+        if let navbar = self.navigationController?.navigationBar {
+            navbar.barTintColor = UIColor.clearColor()
+            navbar.tintColor = color
+
+            let titleProp: NSDictionary = [NSForegroundColorAttributeName: color]
+            navbar.titleTextAttributes = titleProp as? [String : AnyObject]
+
+            navbar.translucent = true
+            navbar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+            navbar.shadowImage = UIImage()
+        }
+    }
+    func extMakeNavBarHidden() {
+        self.navigationController?.navigationBar.hidden = true
+    }
+    func extMakeNavBarVisible() {
+        self.navigationController?.navigationBar.hidden = false
     }
 
     func extMakeStatusBarWhite() {

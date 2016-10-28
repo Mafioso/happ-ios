@@ -29,6 +29,7 @@
 		52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */; };
 		52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */; };
 		52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */; };
+		52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */; };
 		52A3C2C91D8F212E00C31F3F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */; };
 		52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */; };
 		52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */; };
@@ -107,6 +108,7 @@
 		52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSelectCityController.swift; sourceTree = "<group>"; };
 		52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityPrototype.swift; sourceTree = "<group>"; };
 		52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewModel.swift; sourceTree = "<group>"; };
+		52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNotificationsViewController.swift; sourceTree = "<group>"; };
 		52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
+				52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
 				52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */,
@@ -537,6 +540,7 @@
 				5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */,
 				52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */,
 				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
+				52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */,
 				529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */,
 				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,

@@ -138,11 +138,11 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 extension EventsListViewController {
     
     private func initNavigationBarItems() {
-        let navBarMenu = HappNavBarItem(position: .Left, icon: "nav-menu")
+        let navBarMenu = HappNavBarItem(position: .Left, icon: "nav-menu-shadow")
         navBarMenu.button.addTarget(self, action: #selector(handleClickNavBarMenu), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarMenu)
 
-        let navBarFilter = HappNavBarItem(position: .Right, icon: "nav-filter")
+        let navBarFilter = HappNavBarItem(position: .Right, icon: "nav-filter-shadow")
         navBarFilter.button.addTarget(self, action: #selector(handleClickNavBarFilter), forControlEvents: .TouchUpInside)
         self.view.addSubview(navBarFilter)
     }

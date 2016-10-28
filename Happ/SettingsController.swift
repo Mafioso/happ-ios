@@ -12,36 +12,30 @@ class SettingsController: UIViewController, UITableViewDelegate {
 
     var viewModel: SettingsViewModel!
 
-    
+
+    // constants
     let segueEmbeddedTableID = "embeddedTable"
-    var embeddedTable: UITableView!
 
-
+    // variables
+    var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
+
         self.initNavigationBarItems()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg-gradient")!)
-
-        self.embeddedTable.delegate = self
     }
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeStatusBarWhite()
+        self.extMakeNavBarTransparrent()
     }
-
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.extMakeStatusBarDefault()
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == segueEmbeddedTableID {
-            let dest = segue.destinationViewController as! UITableViewController
-            self.embeddedTable = dest.tableView
+        if segue.identifier == self.segueEmbeddedTableID {
+            let destController = segue.destinationViewController as! UITableViewController
+            self.tableView = destController.tableView
         }
     }
 
@@ -49,42 +43,34 @@ class SettingsController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print(".settings.selectedRow", indexPath.section, indexPath.row)
 
-        switch indexPath.section {
+        switch indexPath.row {
         case 0:
-            switch indexPath.row {
-            case 0:
-                self.viewModel.navigateSelectCity?()
-            case 1:
-                self.viewModel.navigateSelectCurrency?()
-            case 2:
-                self.viewModel.navigateSelectNotifications?()
-            default:
-                break
-            }
+            self.viewModel.navigateProfile?()
+        case 1:
+            self.viewModel.navigateSelectNotifications?()
         case 2:
-            switch indexPath.row {
-            case 0:
-                self.viewModel.navigateContact?()
-            case 1:
-                self.viewModel.navigateHelp?()
-            case 2:
-                self.viewModel.navigateTerms?()
-            default:
-                break
-            }
+            self.viewModel.navigateCitiesManager?()
+        case 3:
+            self.viewModel.navigateSelectCurrency?()
+        case 4:
+            self.viewModel.navigateContact?()
+        case 5:
+            self.viewModel.navigateHelp?()
+        case 6:
+            self.viewModel.navigateTerms?()
+        case 7:
+            self.viewModel.navigatePolicy?()
         default:
             break
         }
     }
-    
-    
-    
+
+
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
-        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarBack)
+        self.navigationItem.title = "Settings"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickNavBarMenu))
     }
-    func handleClickNavBarBack() {
-        self.viewModel.navigateBack?()
+    func handleClickNavBarMenu() {
+        self.viewModel.displaySlideMenu?()
     }
 }

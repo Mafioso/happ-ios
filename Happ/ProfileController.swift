@@ -44,19 +44,22 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.automaticallyAdjustsScrollViewInsets = false
+
         self.initNavigationBarItems()
         self.extHideKeyboardWhenTappedAround()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeStatusBarWhite()
-
         self.prefilFieldValues()
+
+        self.extMakeStatusBarWhite()
+        self.extMakeNavBarTransparrent(UIColor.whiteColor())
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         self.extMakeStatusBarDefault()
     }
 
@@ -103,7 +106,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
             }
     }
 
-    
+
     private func displayChangePhotoActions() {
         let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
         let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default, handler: nil)
@@ -116,9 +119,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 
     private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "back")
-        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarBack)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()

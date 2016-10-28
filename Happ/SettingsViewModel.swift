@@ -9,38 +9,82 @@
 import Foundation
 
 
+enum SettingsNotificationTypes {
+    case NewInterests
+    case EventUpdates
+    case Chat
+    case AppUpdates
+}
+
+
+class SettingsState {
+    
+    var currency: CurrencyModel?
+    var notificationsState: [SettingsNotificationTypes: Bool]
+    
+    init() { // TODO set from UserSettings
+        self.currency = nil
+        self.notificationsState = [
+            SettingsNotificationTypes.NewInterests: false,
+            SettingsNotificationTypes.EventUpdates: false,
+            SettingsNotificationTypes.Chat: false,
+            SettingsNotificationTypes.AppUpdates: false
+        ]
+    }
+}
 
 class SettingsViewModel {
 
     var userSettings: SettingsDictModel!
-    var currency: CurrencyModel? // TODO load from GetCurrency
     var currencies: [CurrencyModel] = []
+    var state: SettingsState
 
-
-    var navigateSelectCity: NavigationFunc
-    var navigateSelectCurrency: NavigationFunc
+    var navigateProfile: NavigationFunc
     var navigateSelectNotifications: NavigationFunc
-
+    var navigateCitiesManager: NavigationFunc
+    var navigateSelectCurrency: NavigationFunc
     var navigateContact: NavigationFunc
     var navigateHelp: NavigationFunc
     var navigateTerms: NavigationFunc
-    
+    var navigatePolicy: NavigationFunc
+
     var navigateBack: NavigationFunc
+    var displaySlideMenu: NavigationFunc
 
 
     init() {
+        self.state = SettingsState()
+
         self.userSettings = self.getUserSettings()
         self.currencies = self.getCurrencies()
     }
 
+    //MARK: - Events
+    var didCurrencyUpdate: (() -> Void)?
+    var didNotificationsUpdate: (() -> Void)?
+
 
     //MARK: - Inputs
     func onSelectCurrency(currency: CurrencyModel) {
+        self.state.currency = currency
+        self.didCurrencyUpdate?()
+    }
+    func onSelectNotification(notification: SettingsNotificationTypes) {
+        let oldValue = self.state.notificationsState[notification]!
+        self.state.notificationsState.updateValue(!oldValue, forKey: notification)
+        self.didNotificationsUpdate?()
+    }
+    func onSaveCurrency() {
+        let currency = self.state.currency!
         ProfileService.setCurrency(currency.id)
             .then {_ -> Void in
                 self.userSettings = self.getUserSettings()
-                self.navigateBack!()
+                self.navigateBack?()
         }
+    }
+    func onSaveNotifications() {
+        // TODO
+        self.navigateBack?()
     }
 
 
