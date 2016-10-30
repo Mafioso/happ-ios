@@ -44,10 +44,13 @@ enum EventsListScope {
 
 struct EventsListFiltersState {
     var search: String?
-    var sortBy: EventsListSortType
-    var onlyFree: Bool
     var dateFrom: NSDate?
     var dateTo: NSDate?
+    // for scope: .Feed, .Favourite
+    var sortBy: EventsListSortType
+    var onlyFree: Bool
+    // for scope: .MyEvents
+    var statusMap: [EventModelStatusTypes: Bool]?
 }
 
 
@@ -70,7 +73,7 @@ class EventsListViewModel {
 
 
     init(scope: EventsListScope) {
-        let filtersState = EventsListFiltersState(search: nil, sortBy: .ByDate, onlyFree: false, dateFrom: nil, dateTo: nil)
+        let filtersState = EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, sortBy: .ByDate, onlyFree: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
         self.state = EventsListState(scope: scope, events: [], page: 0, filters: filtersState)
         self.loadNextPage() // will load first page
     }
@@ -128,8 +131,8 @@ class EventsListViewModel {
     func getEventsCount() -> Int {
         return self.state.events.count
     }
-    
-    
+
+
     private func filterEvents(events: Results<EventModel>) -> [EventModel] {
         var events = events
         let filters = self.state.filters
@@ -139,6 +142,7 @@ class EventsListViewModel {
         if filters.onlyFree {
             events = events.filter("min_price == nil")
         }
+        // TODO filters.statusMap
         return events.sort(filters.sortBy.isOrderedBeforeFunc)
     }
 

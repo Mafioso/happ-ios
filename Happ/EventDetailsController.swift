@@ -40,6 +40,9 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var tableViewInfo: UITableView!
 
     // actions
+    @IBAction func clickedBackNavItem(sender: UIButton) {
+        self.viewModel.navigateBack?()
+    }
     @IBAction func clickedWantToGoButton(sender: UIButton) {
     }
     @IBAction func clickedUpvote(sender: UIButton) {
@@ -50,7 +53,6 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initNavigationBarItems()
         self.tableViewInfo.dataSource = self
 
         self.viewModelDidUpdate()
@@ -111,21 +113,6 @@ class EventDetailsController: UIViewController {
     }
 
 
-    private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "nav-back-shadow")
-        navBarBack.button.addTarget(self, action: #selector(handleClickNavBarBack), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarBack)
-
-        let navBarFavourite = HappNavBarItem(position: .Right, icon: "icon-star-shadow")
-        navBarFavourite.button.addTarget(self, action: #selector(handleClickNavBarFavourite), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarFavourite)
-    }
-    func handleClickNavBarFavourite() {
-        // todo
-    }
-    func handleClickNavBarBack() {
-        self.viewModel.navigateBack?()
-    }
 }
 
 

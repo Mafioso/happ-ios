@@ -180,6 +180,13 @@ enum EventModelPriceTypes {
     }
 }
 
+enum EventModelStatusTypes: Int {
+    case Active
+    case Inactive
+    case OnReview
+    case Finished
+}
+
 
 class EventModel: Object, Mappable {
     dynamic var id = ""
@@ -288,5 +295,8 @@ class EventModel: Object, Mappable {
         }
 
         return priceType.format(price, currency: currency)
+    }
+    func getStatus() -> EventModelStatusTypes {
+        return EventModelStatusTypes(rawValue: self.status)!
     }
 }

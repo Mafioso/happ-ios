@@ -48,7 +48,7 @@ class FeedFiltersController: UIViewController {
         }
         onlyFree = self.radioIsFree.on
 
-        let filters = EventsListFiltersState(search: search, sortBy: sortBy, onlyFree: onlyFree, dateFrom: nil, dateTo: nil)
+        let filters = EventsListFiltersState(search: search, dateFrom: nil, dateTo: nil,  sortBy: sortBy, onlyFree: onlyFree, statusMap: nil)
         self.viewModel.onChangeFilters(filters)
     }
 }

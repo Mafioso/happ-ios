@@ -20,11 +20,11 @@ enum SettingsNotificationTypes {
 class SettingsState {
     
     var currency: CurrencyModel?
-    var notificationsState: [SettingsNotificationTypes: Bool]
-    
+    var notificationsMap: [SettingsNotificationTypes: Bool]
+
     init() { // TODO set from UserSettings
         self.currency = nil
-        self.notificationsState = [
+        self.notificationsMap = [
             SettingsNotificationTypes.NewInterests: false,
             SettingsNotificationTypes.EventUpdates: false,
             SettingsNotificationTypes.Chat: false,
@@ -70,8 +70,8 @@ class SettingsViewModel {
         self.didCurrencyUpdate?()
     }
     func onSelectNotification(notification: SettingsNotificationTypes) {
-        let oldValue = self.state.notificationsState[notification]!
-        self.state.notificationsState.updateValue(!oldValue, forKey: notification)
+        let oldValue = self.state.notificationsMap[notification]!
+        self.state.notificationsMap.updateValue(!oldValue, forKey: notification)
         self.didNotificationsUpdate?()
     }
     func onSaveCurrency() {

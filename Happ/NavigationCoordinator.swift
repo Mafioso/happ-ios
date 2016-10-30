@@ -261,15 +261,21 @@ class NavigationCoordinator {
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
         viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
 
-        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
 
 
         // init sidebar
-        let filtersViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
 
-        let menuController = self.initMenuController(.Feed)
+        var menuController: MenuViewController
+        switch scope {
+        case .Feed, .Favourite:
+            menuController = self.initMenuController(.Feed)
+        case .MyEvents:
+            menuController = self.initMenuController(.EventPlanner)
+        }
 
         let sidebar = SlideMenuController(
             mainViewController: self.tabBarController,
@@ -444,9 +450,8 @@ class NavigationCoordinator {
 
 
     private func initMenuController(highlight: MenuActions) -> MenuViewController {
-        let viewModel = MenuViewModel()
+        let viewModel = MenuViewModel(highlight: highlight)
         let viewModelSelectCity = SelectCityViewModel()
-        viewModel.highlight = highlight
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
         viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)

@@ -35,8 +35,8 @@ enum MenuActions: Int {
 
 class MenuViewModel {
 
-    var user: UserModel!
-    var highlight: MenuActions!
+    var user: UserModel
+    var highlight: MenuActions
     var scope: MenuViewModelScope = .Normal
 
     var navigateBack: NavigationFunc
@@ -47,7 +47,8 @@ class MenuViewModel {
     var navigateSettings: NavigationFunc
     var navigateLogout: NavigationFunc
 
-    init() {
+    init(highlight: MenuActions) {
+        self.highlight = highlight
         self.user = ProfileService.getUserProfile()
     }
 

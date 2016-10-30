@@ -36,6 +36,9 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
 
     // action
+    @IBAction func clickedCloseButton(sender: UIButton) {
+        self.viewModelMenu.navigateBack?()
+    }
     @IBAction func clickedChangeProfile(sender: UIButton) {
         self.viewModelMenu.navigateProfile?()
     }
@@ -52,19 +55,15 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initNavigationBarItems()
         
         let tappableGesture = UITapGestureRecognizer(target: self, action: #selector(onClickChangeCity))
         self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
 
-
-        if let user = self.viewModelMenu.user {
-            // TODO
-            // let imageURL = NSURL(user...)
-            // imageUserPhoto.hnk_setImageFromURL(imageURL)
-            imageUserPhoto.image = UIImage(named: "bg-feed")
-            labelUserFullname.text = user.fullname
-        }
+        // TODO
+        // let imageURL = NSURL(user...)
+        // imageUserPhoto.hnk_setImageFromURL(imageURL)
+        imageUserPhoto.image = UIImage(named: "bg-feed")
+        labelUserFullname.text = self.viewModelMenu.user.fullname
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -88,6 +87,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     func viewModelDidUpdate() {
         self.updateScopeViews()
+        self.tableMenuActions.reloadData()
     }
     func viewModelSelectCityDidLoad() {
         labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
@@ -108,6 +108,17 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     }
 
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+        if  let action = MenuActions(rawValue: indexPath.section * 10 + indexPath.row)
+            where action == self.viewModelMenu.highlight {
+            cell.extSetHighlighted()
+        } else {
+            cell.extUnsetHighlighted()
+        }
+        
+    }
+
 
     func updateScopeViews() {
         switch self.viewModelMenu.scope {
@@ -144,19 +155,6 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         self.viewModelMenu.onChangeScope(.Normal)
     }
 
-}
-
-
-extension MenuViewController {
-
-    private func initNavigationBarItems() {
-        let navBarBack = HappNavBarItem(position: .Left, icon: "nav-close-shadow")
-        navBarBack.button.addTarget(self, action: #selector(handleClickNavBack), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarBack)
-    }
-    func handleClickNavBack() {
-        self.viewModelMenu.navigateBack?()
-    }
 }
 
 

@@ -1081,6 +1081,9 @@
                                 <state key="normal" title="SAVE">
                                     <color key="titleColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="clickedSaveButton:" destination="TSJ-Nh-GtS" eventType="touchUpInside" id="rYG-Dn-Dfq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1104,7 +1107,7 @@
         <scene sceneID="UqY-Ob-zDc">
             <objects>
                 <tableViewController id="soR-gW-d2I" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AW6-Qy-uKJ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AW6-Qy-uKJ">
                         <rect key="frame" x="0.0" y="0.0" width="311" height="172"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1116,7 +1119,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I93-e6-q4q" id="PSV-sy-9MM">
-                                            <frame key="frameInset" width="311" height="43"/>
+                                            <frame key="frameInset" width="311" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW INTERESTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7h-aA-slw">
@@ -1129,10 +1132,10 @@
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="A33-XK-vMH" secondAttribute="trailing" id="9rz-Bd-Nqf"/>
                                                 <constraint firstItem="T7h-aA-slw" firstAttribute="leading" secondItem="PSV-sy-9MM" secondAttribute="leadingMargin" id="GW6-cF-fU6"/>
                                                 <constraint firstItem="T7h-aA-slw" firstAttribute="centerY" secondItem="PSV-sy-9MM" secondAttribute="centerY" id="Tqv-2F-aK8"/>
                                                 <constraint firstItem="A33-XK-vMH" firstAttribute="centerY" secondItem="PSV-sy-9MM" secondAttribute="centerY" id="loN-A4-lFw"/>
+                                                <constraint firstAttribute="trailing" secondItem="A33-XK-vMH" secondAttribute="trailing" constant="8" id="ypX-xE-OCU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1140,7 +1143,7 @@
                                         <rect key="frame" x="0.0" y="44" width="311" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0tN-gD-DPl" id="ouz-8v-6N8">
-                                            <frame key="frameInset" width="311" height="43"/>
+                                            <frame key="frameInset" width="311" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT UPDATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bt-Mu-h9g">
@@ -1156,7 +1159,7 @@
                                                 <constraint firstItem="2bt-Mu-h9g" firstAttribute="leading" secondItem="ouz-8v-6N8" secondAttribute="leadingMargin" id="J9a-rG-twh"/>
                                                 <constraint firstItem="6BP-iY-rch" firstAttribute="centerY" secondItem="ouz-8v-6N8" secondAttribute="centerY" id="Tn3-nO-1fQ"/>
                                                 <constraint firstItem="2bt-Mu-h9g" firstAttribute="centerY" secondItem="ouz-8v-6N8" secondAttribute="centerY" id="fZs-nx-iVW"/>
-                                                <constraint firstAttribute="trailing" secondItem="6BP-iY-rch" secondAttribute="trailing" id="mwD-ya-F94"/>
+                                                <constraint firstAttribute="trailing" secondItem="6BP-iY-rch" secondAttribute="trailing" constant="8" id="mwD-ya-F94"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1164,7 +1167,7 @@
                                         <rect key="frame" x="0.0" y="88" width="311" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="27x-S0-yz9" id="d73-kr-UG4">
-                                            <frame key="frameInset" width="311" height="43"/>
+                                            <frame key="frameInset" width="311" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHAT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ta-BN-WDb">
@@ -1179,7 +1182,7 @@
                                             <constraints>
                                                 <constraint firstItem="TUe-uo-kNi" firstAttribute="centerY" secondItem="d73-kr-UG4" secondAttribute="centerY" id="CkQ-l8-rDO"/>
                                                 <constraint firstItem="9Ta-BN-WDb" firstAttribute="centerY" secondItem="d73-kr-UG4" secondAttribute="centerY" id="XPA-JP-9qK"/>
-                                                <constraint firstAttribute="trailing" secondItem="TUe-uo-kNi" secondAttribute="trailing" id="aNA-Zf-FAT"/>
+                                                <constraint firstAttribute="trailing" secondItem="TUe-uo-kNi" secondAttribute="trailing" constant="8" id="aNA-Zf-FAT"/>
                                                 <constraint firstItem="9Ta-BN-WDb" firstAttribute="leading" secondItem="d73-kr-UG4" secondAttribute="leadingMargin" id="or8-KB-oki"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1188,7 +1191,7 @@
                                         <rect key="frame" x="0.0" y="132" width="311" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdN-Jz-0Lm" id="CDf-MA-nBU">
-                                            <frame key="frameInset" width="311" height="43"/>
+                                            <frame key="frameInset" width="311" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APP UPDATES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7Z-ut-RWX">
@@ -1203,7 +1206,7 @@
                                             <constraints>
                                                 <constraint firstItem="r7Z-ut-RWX" firstAttribute="centerY" secondItem="CDf-MA-nBU" secondAttribute="centerY" id="1hW-m4-CMV"/>
                                                 <constraint firstItem="tPQ-wz-hgr" firstAttribute="centerY" secondItem="CDf-MA-nBU" secondAttribute="centerY" id="3L3-Zb-KB4"/>
-                                                <constraint firstAttribute="trailing" secondItem="tPQ-wz-hgr" secondAttribute="trailing" id="IBh-uj-9Y3"/>
+                                                <constraint firstAttribute="trailing" secondItem="tPQ-wz-hgr" secondAttribute="trailing" constant="8" id="IBh-uj-9Y3"/>
                                                 <constraint firstItem="r7Z-ut-RWX" firstAttribute="leading" secondItem="CDf-MA-nBU" secondAttribute="leadingMargin" id="TZZ-6o-vKg"/>
                                             </constraints>
                                         </tableViewCellContentView>

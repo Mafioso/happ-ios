@@ -28,18 +28,20 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     // outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // actions
+    @IBAction func clickedMenuNavItem(sender: UIButton) {
+        self.viewModel.displaySlideMenu?()
+    }
+    @IBAction func clickedFiltersNavItem(sender: UIButton) {
+        self.viewModel.displaySlideFeedFilters?()
+    }
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /*
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let frame = CGRect(x: 0, y: 20, width: Int(screenSize.width), height: 44)
-        let navBar = UIView(frame: frame)
-        navBar.backgroundColor = UIColor(white: 1, alpha: 0.7)
-        */
 
-        self.initNavigationBarItems()
         self.initTableView()
     }
     override func viewWillAppear(animated: Bool) {
@@ -134,26 +136,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 }
 
 
-
-extension EventsListViewController {
-    
-    private func initNavigationBarItems() {
-        let navBarMenu = HappNavBarItem(position: .Left, icon: "nav-menu-shadow")
-        navBarMenu.button.addTarget(self, action: #selector(handleClickNavBarMenu), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarMenu)
-
-        let navBarFilter = HappNavBarItem(position: .Right, icon: "nav-filter-shadow")
-        navBarFilter.button.addTarget(self, action: #selector(handleClickNavBarFilter), forControlEvents: .TouchUpInside)
-        self.view.addSubview(navBarFilter)
-    }
-
-    func handleClickNavBarFilter() {
-        self.viewModel.displaySlideFeedFilters?()
-    }
-    func handleClickNavBarMenu() {
-        self.viewModel.displaySlideMenu?()
-    }
-}
 
 
 

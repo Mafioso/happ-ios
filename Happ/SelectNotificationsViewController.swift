@@ -18,6 +18,12 @@ class SelectNotificationsViewController: UIViewController, UITableViewDelegate {
     }
     
 
+    // outlets
+    @IBAction func clickedSaveButton(sender: UIButton) {
+        self.handleClickSave()
+    }
+
+    
     // constants
     let segueEmbeddedTableID = "embeddedTable"
     
@@ -29,6 +35,7 @@ class SelectNotificationsViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
 
         self.tableView.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
 
         self.initNavigationBarItems()
         self.viewModelDidUpdate()
@@ -72,7 +79,7 @@ class SelectNotificationsViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         print("..selectNotifications.willDisplay", indexPath.row)
 
-        let notifs = self.viewModel.state.notificationsState
+        let notifs = self.viewModel.state.notificationsMap
         let cellSwitch = cell.viewWithTag(1) as! UISwitch
 
         switch indexPath.row {
