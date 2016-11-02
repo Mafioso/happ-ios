@@ -10,7 +10,7 @@ import UIKit
 
 class SelectCityViewController: UITableViewController {
 
-    var viewModel: SelectCityInterestsViewModel!
+    var viewModel: SelectCityViewModel!
 
 
     override func viewDidLoad() {

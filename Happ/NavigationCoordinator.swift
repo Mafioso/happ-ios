@@ -197,7 +197,7 @@ class NavigationCoordinator {
     func showSignUp() {
         print(".nav.showSignUp")
         let viewModel = AuthenticationViewModel()
-        viewModel.navigateSelectCityInterests = self.startSelectCityInterests
+        //viewModel.navigateSelectCityInterests = self.startSelectCityInterests
         viewModel.navigateFeed = self.startFeed
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
@@ -309,6 +309,7 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
+    /*
     func startSelectCityInterests() {
         print(".profile.showSelectCityInterests")
         let viewModel = SelectCityInterestsViewModel()
@@ -322,8 +323,45 @@ class NavigationCoordinator {
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
+    */
 
-    func showSelectCity(parentViewModel: SelectCityInterestsViewModel) -> NavigationFunc {
+    func showSelectInterest(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol)  -> NavigationFunc {
+        return {
+            let viewModel = SelectInterestsViewModel(scope: scope, parentViewModel: parentViewModel)
+
+            switch scope {
+            case .MenuChangeInterests:
+                viewModel.displaySlideMenu = self.displaySlideMenu
+            case .NextToMenuChangeCity, .EventManage:
+                viewModel.navigateBack = self.goBack
+            case .NextToSelectCity:
+                break // do nothing
+            }
+
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectInterests") as! SelectInterestsController
+            viewController.viewModel = viewModel
+
+            switch scope {
+            case .MenuChangeInterests:
+                self.tabBarController = nil
+                self.navigationController = UINavigationController(rootViewController: viewController)
+                // init sidebar
+                let menuController = self.initMenuController(.SelectInterests)
+                let sidebar = SlideMenuController(
+                    mainViewController: self.navigationController,
+                    leftMenuViewController: menuController)
+                self.window.rootViewController = sidebar
+                self.window.makeKeyAndVisible()
+
+            case .EventManage:
+                self.navigationController.pushViewController(viewController, animated: true)
+            default: // TODO
+                break
+            }
+        }
+    }
+
+    func showSelectCity(parentViewModel: SelectCityViewModel) -> NavigationFunc {
         return {
             print(".profile.showSelectCity")
             parentViewModel.navigateBack = self.goBack
@@ -344,10 +382,9 @@ class NavigationCoordinator {
  
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Settings") as! SettingsController
         viewController.viewModel = viewModel
-        
+
         self.tabBarController = nil
-        self.navigationController = UINavigationController()
-        self.navigationController.viewControllers = [viewController]
+        self.navigationController = UINavigationController(rootViewController: viewController)
 
         let menuController = self.initMenuController(.Settings)
         let sidebar = SlideMenuController(
@@ -454,6 +491,9 @@ class NavigationCoordinator {
         let viewModelSelectCity = SelectCityViewModel()
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
+        viewModel.navigateSelectInterests = self.hideSlideMenu(
+            self.showSelectInterest(.MenuChangeInterests, parentViewModel: viewModelSelectCity)
+        )
         viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)
         viewModel.navigateSettings = self.hideSlideMenu(self.startSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)

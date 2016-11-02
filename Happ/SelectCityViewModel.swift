@@ -21,11 +21,12 @@ class SelectCityViewModel {
 
     init() {
         print(".selectCityVM.init")
+
         self.fetchCities().then { _ -> Void in
-            print(".selectCityVM.fetchCities.done")
+            print(".selectCityVM.fetchCities.done", self.cities.count)
             self.fetchUserCity()
                 .then { _ -> Void in
-                    print(".selectCityVM.fetchUserCity.done", self.didUpdate)
+                    print(".selectCityVM.fetchUserCity.done", self.selectedCity?.name)
                     self.didLoad?()
                     self.didUpdate?()
             }
@@ -83,6 +84,33 @@ class SelectCityViewModel {
         }
     }
 
+}
+
+
+extension SelectCityViewModel: SelectInterestsVMProtocol {
+    func selectInterestsIsAllowsMultipleSelection() -> Bool {
+        return true
+    }
+    func selectInterestsGetTitle() -> String {
+        print("..selectInterestHeader.getTitle", self.selectedCity?.name)
+        return self.selectedCity!.name
+    }
+    func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
+        switch scope {
+        case .MenuChangeInterests:
+            // TODO NOW!
+            break
+
+        case .NextToSelectCity:
+            // self.navigate?
+            break // TODO
+        case .NextToMenuChangeCity:
+            // self.navigate?
+            break // TODO
+        default:
+            break
+        }
+    }
 }
 
 

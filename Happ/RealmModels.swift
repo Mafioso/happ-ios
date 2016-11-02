@@ -133,8 +133,8 @@ class CityModel: Object, Mappable {
 
 class InterestModel: Object, Mappable {
     dynamic var id = ""
-    // TODO: convert to `dynamic var parent: InterestModel?`
-    // let children = List<InterestModel>()
+    dynamic var parent_id: String?
+    var children = List<InterestModel>()
     dynamic var title = ""
     dynamic var color = "FF0000"
 
@@ -145,8 +145,8 @@ class InterestModel: Object, Mappable {
 
     func mapping(map: Map) {
         id          <- map["id"]
-        // parent      <- map["parent"]
-        // children    <- (map["children"], ListTransform<InterestModel>())
+        parent_id   <- map["parent"]
+        children    <- (map["children"], ArrayTransform<InterestModel>())
         title       <- map["title"]
         color       <- map["color"]
     }

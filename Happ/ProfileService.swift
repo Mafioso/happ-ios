@@ -16,7 +16,6 @@ class ProfileService {
 
     static let endpointUser = "users/current/"
     static let endpointCity = "cities/"
-    static let endpointInterest = "interests/"
     static let endpointCurrencies = "currencies/"
 
 
@@ -55,25 +54,6 @@ class ProfileService {
         let user = self.getUserProfile()
         let cityID = user.settings!.city_id!
         return self.fetchCity(cityID)
-    }
-
-    class func fetchInterests() -> Promise<Void> {
-        return GetPaginated(endpointInterest, parameters: nil)
-            .then { (data, isLastPage) -> Void in
-                let results = data as! [AnyObject]
-                let realm = try! Realm()
-                try! realm.write {
-                    // 1. delete exists
-                    let exists = realm.objects(InterestModel)
-                    realm.delete(exists)
-
-                    // 2. add new
-                    results.forEach() { city in
-                        let inst = Mapper<InterestModel>().map(city)
-                        realm.add(inst!, update: true)
-                    }
-                }
-        }
     }
 
     class func fetchUserProfile() -> Promise<Void> {
@@ -118,12 +98,6 @@ class ProfileService {
         return Post(url, parametersJSON: nil)
     }
 
-    class func setInterests(interestIDs: [String]) -> Promise<AnyObject> {
-        let url = endpointInterest + "set/"
-        let data = try! NSJSONSerialization.dataWithJSONObject(interestIDs, options: [])
-        return Post(url, parametersJSON: data)
-    }
-
     class func setCurrency(currencyID: String) -> Promise<AnyObject> {
         let url = endpointCurrencies + currencyID + "/set/"
         return Post(url, parametersJSON: nil)
@@ -137,12 +111,6 @@ class ProfileService {
     class func getCitiesStored() -> Results<CityModel> {
         let realm = try! Realm()
         let result = realm.objects(CityModel)//.sort(sort.isOrderedBeforeFunc)
-        return result
-    }
-
-    class func getInterestsStored() -> Results<InterestModel> {
-        let realm = try! Realm()
-        let result = realm.objects(InterestModel)//.sort(sort.isOrderedBeforeFunc)
         return result
     }
 

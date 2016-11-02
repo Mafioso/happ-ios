@@ -16,9 +16,31 @@ class EventManageViewModel {
     var navigateNext: NavigationFunc
     var navigateSubmit: NavigationFunc
 
+    var event: EventModel
+    var isEditing: Bool
+
 
     init() {
-       
+        self.event = EventModel()
+        self.isEditing = false
+    }
+    init(event: EventModel) {
+        self.event = event
+        self.isEditing = true
     }
 
+}
+
+
+extension EventManageViewModel: SelectInterestsVMProtocol {
+    func selectInterestsIsAllowsMultipleSelection() -> Bool {
+        return false
+    }
+    func selectInterestsGetTitle() -> String {
+        return self.event.title
+    }
+    func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
+        // TODO
+        // self.event.interests = selectedInterests
+    }
 }

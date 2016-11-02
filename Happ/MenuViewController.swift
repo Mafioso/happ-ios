@@ -93,6 +93,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
     }
 
+
     private func bindToViewModel() {
         self.viewModelMenu.didUpdate = { [weak self] _ in
             self?.viewModelDidUpdate()

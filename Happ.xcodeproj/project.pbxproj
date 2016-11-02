@@ -35,11 +35,9 @@
 		52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */; };
 		52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */; };
 		52B0123E1D9AD5970061F083 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B0123D1D9AD5970061F083 /* Profile.storyboard */; };
-		52B012401D9ADD9C0061F083 /* InterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B0123F1D9ADD9C0061F083 /* InterestCell.swift */; };
-		52B012421D9ADDB30061F083 /* SubInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B012411D9ADDB30061F083 /* SubInterestCell.swift */; };
 		52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B012431D9AE19F0061F083 /* ProfileService.swift */; };
-		52B012461D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */; };
-		52B012481D9AEE5B0061F083 /* SelectCityInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */; };
+		52C2EC681DC8B03500156652 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC671DC8B03500156652 /* InterestService.swift */; };
+		52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */; };
 		52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D190961D9FF4B300608B02 /* ProfileController.swift */; };
 		52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */; };
 		52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */; };
@@ -47,6 +45,9 @@
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
 		52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */; };
 		52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */; };
+		52F65F8F1DC75475005E751E /* SelectInterestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F8E1DC75475005E751E /* SelectInterestsController.swift */; };
+		52F65F911DC75E10005E751E /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */; };
+		52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */; };
 		B476D76A1DAF75CF00598CB8 /* 2279.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B476D7691DAF75CF00598CB8 /* 2279.ttf */; };
 		B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */; };
 		B4E215DA1DAF764C00144E78 /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4E215C31DAF764C00144E78 /* SF-UI-Display-Black.otf */; };
@@ -114,11 +115,9 @@
 		52A3C2CE1D8F8B4000C31F3F /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		52B0123D1D9AD5970061F083 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		52B0123F1D9ADD9C0061F083 /* InterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestCell.swift; sourceTree = "<group>"; };
-		52B012411D9ADDB30061F083 /* SubInterestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubInterestCell.swift; sourceTree = "<group>"; };
 		52B012431D9AE19F0061F083 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
-		52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityInterestsViewModel.swift; sourceTree = "<group>"; };
-		52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityInterestsViewController.swift; sourceTree = "<group>"; };
+		52C2EC671DC8B03500156652 /* InterestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
+		52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsHeader.swift; sourceTree = "<group>"; };
 		52D190961D9FF4B300608B02 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +125,9 @@
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
 		52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewModel.swift; sourceTree = "<group>"; };
 		52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewControllers.swift; sourceTree = "<group>"; };
+		52F65F8E1DC75475005E751E /* SelectInterestsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsController.swift; sourceTree = "<group>"; };
+		52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
+		52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsViewModel.swift; sourceTree = "<group>"; };
 		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		B476D7691DAF75CF00598CB8 /* 2279.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2279.ttf; path = Happ/Resources/2279.ttf; sourceTree = "<group>"; };
 		B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
@@ -264,8 +266,8 @@
 				52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */,
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
-				52B012471D9AEE5B0061F083 /* SelectCityInterestsViewController.swift */,
 				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
+				52F65F8E1DC75475005E751E /* SelectInterestsController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
 				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
@@ -284,8 +286,8 @@
 			children = (
 				5239C37C1D92434700F66E31 /* EventTableCell.swift */,
 				5239C37D1D92434700F66E31 /* EventTableCell.xib */,
-				52B0123F1D9ADD9C0061F083 /* InterestCell.swift */,
-				52B012411D9ADDB30061F083 /* SubInterestCell.swift */,
+				52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */,
+				52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
-				52B012451D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift */,
 				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
@@ -312,6 +313,7 @@
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
 				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
+				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -330,6 +332,7 @@
 				52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */,
 				5212E69C1D9029DC00729CC8 /* EventService.swift */,
 				52B012431D9AE19F0061F083 /* ProfileService.swift */,
+				52C2EC671DC8B03500156652 /* InterestService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -534,41 +537,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */,
-				52B012401D9ADD9C0061F083 /* InterestCell.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
 				B4E7B70A1D9B8E6E004B8B78 /* MenuViewModel.swift in Sources */,
 				5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */,
 				52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */,
 				525A8AAA1D7D4023002C6F46 /* LoginController.swift in Sources */,
+				52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */,
+				52C2EC681DC8B03500156652 /* InterestService.swift in Sources */,
 				52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */,
 				529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */,
 				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
 				527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */,
-				52B012421D9ADDB30061F083 /* SubInterestCell.swift in Sources */,
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
 				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
+				52F65F911DC75E10005E751E /* InterestCollectionViewCell.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
 				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
+				52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */,
 				52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
-				52B012481D9AEE5B0061F083 /* SelectCityInterestsViewController.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
 				52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
 				52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */,
 				527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */,
 				52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */,
+				52F65F8F1DC75475005E751E /* SelectInterestsController.swift in Sources */,
 				B4FBF1E01D7FD7CB00C0E08B /* SignUpController.swift in Sources */,
-				52B012461D9AEBAC0061F083 /* SelectCityInterestsViewModel.swift in Sources */,
 				52A3C2C91D8F212E00C31F3F /* AuthenticationService.swift in Sources */,
 				52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */,
 			);
