@@ -39,8 +39,7 @@ class SelectInterestsController: UIViewController {
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-
-        // TODO self.viewModelDidUpdate()
+        self.initLongPressGesture()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -58,6 +57,10 @@ class SelectInterestsController: UIViewController {
         print(".SelectInterestsController.viewModelDidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
         self.collectionView.reloadData()
         self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
+        
+        if let longPressedInterest = self.viewModel.longPressedInterest {
+            self.viewModel.popoverSelectSubinterests?()
+        }
     }
 
     private func bindToViewModel() {
@@ -69,6 +72,37 @@ class SelectInterestsController: UIViewController {
         }
     }
 
+
+    private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
+        return self.viewModel.interests[indexPath.row]
+    }
+}
+
+
+extension SelectInterestsController: UIGestureRecognizerDelegate {
+
+    func onLongPressCell(gesture : UILongPressGestureRecognizer!) {
+        print("...", gesture)
+
+        if gesture.state != .Ended {
+            return
+        }
+        let p = gesture.locationInView(self.collectionView)
+        if let indexPath = self.collectionView.indexPathForItemAtPoint(p) {
+            self.viewModel.onLongPress(self.getInterestBy(indexPath))
+            
+        } else {
+            print("couldn't find index path")
+        }
+    }
+
+    private func initLongPressGesture() {
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.onLongPressCell))
+        lpgr.minimumPressDuration = 0.3
+        lpgr.delaysTouchesBegan = true
+        lpgr.delegate = self
+        self.collectionView.addGestureRecognizer(lpgr)
+    }
 }
 
 
@@ -91,6 +125,11 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.viewModel.onScroll(Int(scrollView.contentOffset.y))
     }
+    
+    // init event on click
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.viewModel.onSelectInterest(self.getInterestBy(indexPath))
+    }
 
     // fill with data
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -101,14 +140,15 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         print("..numberOfItems", self.viewModel.interests.count)
         return self.viewModel.interests.count
     }
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cellID = "cell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! InterestCollectionViewCell
 
-        let interest = self.viewModel.interests[indexPath.row]
+        let interest = self.getInterestBy(indexPath)
         cell.labelName.text = interest.title
+        // TODO:
         // cell.viewFooter.backgroundColor = UIColor(hexString: "#"+interest.color)
         // cell.imagePhoto.hnk_setImageFromURL()
 
@@ -134,7 +174,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
 
         return cell
     }
-    
+
 }
 
 

@@ -61,6 +61,10 @@ class SelectCityViewModel {
         }
         return Array(cities)
     }
+    private func getUserCity() -> CityModel? {
+        return ProfileService.getUserCity()
+    }
+
 
     private func fetchCities() -> Promise<Void> {
         return ProfileService.fetchCities()
@@ -68,9 +72,8 @@ class SelectCityViewModel {
                 self.cities = self.getCities()
         }
     }
-
     private func fetchUserCity() -> Promise<Void> {
-        if let city = ProfileService.getUserCity() {
+        if let city = self.getUserCity() {
             self.selectedCity = city
             return Promise().asVoid()
 
@@ -92,8 +95,7 @@ extension SelectCityViewModel: SelectInterestsVMProtocol {
         return true
     }
     func selectInterestsGetTitle() -> String {
-        print("..selectInterestHeader.getTitle", self.selectedCity?.name)
-        return self.selectedCity!.name
+        return self.getUserCity()!.name
     }
     func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
         switch scope {

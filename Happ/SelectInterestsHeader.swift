@@ -35,7 +35,7 @@ class SelectInterestsHeader: UICollectionReusableView {
         self.labelForName.text = self.viewModel.getTitle()
 
         if self.viewModel.scope == .MenuChangeInterests {
-            self.buttonNavMenu.hidden = false
+            self.buttonNavMenu.hidden = !self.viewModel.isHeaderVisible
         } else {
             self.buttonNavMenu.hidden = true
         }

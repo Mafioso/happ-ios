@@ -327,8 +327,8 @@ class NavigationCoordinator {
 
     func showSelectInterest(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol)  -> NavigationFunc {
         return {
+            // init VM
             let viewModel = SelectInterestsViewModel(scope: scope, parentViewModel: parentViewModel)
-
             switch scope {
             case .MenuChangeInterests:
                 viewModel.displaySlideMenu = self.displaySlideMenu
@@ -338,9 +338,15 @@ class NavigationCoordinator {
                 break // do nothing
             }
 
+            // init V
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectInterests") as! SelectInterestsController
             viewController.viewModel = viewModel
 
+            // add V into VM func
+            viewModel.popoverSelectSubinterests = self.showSelectSubinterests(viewModel, target: viewController)
+
+
+            // add V to Navigation
             switch scope {
             case .MenuChangeInterests:
                 self.tabBarController = nil
@@ -358,6 +364,22 @@ class NavigationCoordinator {
             default: // TODO
                 break
             }
+        }
+    }
+    func showSelectSubinterests(parentViewModel: SelectInterestsViewModel, target: UIViewController) -> NavigationFunc {
+        return {
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
+            // viewController.parentViewModel = parentViewModel
+
+            viewController.modalPresentationStyle = .OverCurrentContext
+            let windowsBounds = UIScreen.mainScreen().bounds
+            viewController.preferredContentSize = CGSizeMake(windowsBounds.width, windowsBounds.height - 164)
+            let popoverViewController = viewController.popoverPresentationController
+            popoverViewController?.permittedArrowDirections = .Any
+            //popoverViewController?.delegate = target
+            popoverViewController?.sourceView = target.view
+            popoverViewController?.sourceRect = CGRectMake(100, 100, 0, 0)
+            target.presentViewController(viewController, animated: true, completion: nil)
         }
     }
 

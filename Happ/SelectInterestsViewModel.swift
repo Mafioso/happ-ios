@@ -36,6 +36,7 @@ class SelectInterestsViewModel {
     var isHeaderVisible: Bool
 
     var interests: [InterestModel] = []
+    var longPressedInterest: InterestModel?
     var selectedInterests: [InterestModel: [InterestModel]] = [:]
     /*
      [Interest1: nil]    <- not selected
@@ -45,6 +46,7 @@ class SelectInterestsViewModel {
 
     var navigateBack: NavigationFunc
     var displaySlideMenu: NavigationFunc
+    var popoverSelectSubinterests: NavigationFunc
 
 
     init(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol) {
@@ -102,6 +104,10 @@ class SelectInterestsViewModel {
         }
         self.didUpdate?()
     }
+    func onLongPress(interest: InterestModel) {
+        self.longPressedInterest = interest
+        self.didUpdate?()
+    }
     func onSelectSubinterest(subinterest: InterestModel) {
         if !self.isAllowsMultipleSelection() { // clear all previous values
             self.selectedInterests = [:]
@@ -138,7 +144,8 @@ class SelectInterestsViewModel {
             return false
         }
     }
-
+    
+    
 
     func getTitle() -> String {
         return self.parentViewModel.selectInterestsGetTitle()
