@@ -369,7 +369,7 @@ class NavigationCoordinator {
     func showSelectSubinterests(parentViewModel: SelectInterestsViewModel, target: UIViewController) -> NavigationFunc {
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
-            // viewController.parentViewModel = parentViewModel
+            viewController.viewModel = parentViewModel
 
             viewController.modalPresentationStyle = .OverCurrentContext
             let windowsBounds = UIScreen.mainScreen().bounds

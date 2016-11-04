@@ -18,6 +18,7 @@ class InterestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var viewSelectionInfo: UIView!
     @IBOutlet weak var viewSelectedAll: UIView!
     @IBOutlet weak var viewSelectedSome: UIView!
+    @IBOutlet weak var viewUnfocus: UIView!
     @IBOutlet weak var labelSelectedSomeText: UILabel!
     
     

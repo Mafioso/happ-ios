@@ -113,7 +113,7 @@ class SelectInterestsViewModel {
             self.selectedInterests = [:]
         }
         
-        if let interest = InterestService.getParent(subinterest) {
+        if let interest = InterestService.getParentOf(subinterest) {
             if var selectedSubinterests = self.selectedInterests[interest] {
                 selectedSubinterests.append(subinterest)
                 self.selectedInterests.updateValue(selectedSubinterests, forKey: interest)
@@ -138,14 +138,13 @@ class SelectInterestsViewModel {
         }
     }
     func isSubinterestSelected(subinterest: InterestModel) -> Bool {
-        if let interest = InterestService.getParent(subinterest) {
+        if let interest = InterestService.getParentOf(subinterest) {
             return self.selectedInterests[interest]?.indexOf(subinterest) != 0
         } else {
             return false
         }
     }
-    
-    
+
 
     func getTitle() -> String {
         return self.parentViewModel.selectInterestsGetTitle()

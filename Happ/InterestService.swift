@@ -47,7 +47,7 @@ class InterestService {
         return result
     }
 
-    static func getParent(interest: InterestModel) -> InterestModel? {
+    static func getParentOf(interest: InterestModel) -> InterestModel? {
         if let id = interest.parent_id {
             let realm = try! Realm()
             return realm
@@ -57,6 +57,9 @@ class InterestService {
         } else {
             return nil
         }
+    }
+    static func getSubinterestsOf(interest: InterestModel) -> [InterestModel] {
+        return Array(interest.children)
     }
 
 }

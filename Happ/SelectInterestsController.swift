@@ -57,8 +57,10 @@ class SelectInterestsController: UIViewController {
         print(".SelectInterestsController.viewModelDidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
         self.collectionView.reloadData()
         self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
-        
+
         if let longPressedInterest = self.viewModel.longPressedInterest {
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
             self.viewModel.popoverSelectSubinterests?()
         }
     }
@@ -135,12 +137,10 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("..numberOfItems", self.viewModel.interests.count)
         return self.viewModel.interests.count
     }
-
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cellID = "cell"
@@ -170,6 +170,13 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
                 cell.viewSelectedAll,
                 toView: cell.viewSelectedSome,
                 duration: 0.3, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+        }
+
+        if  let focusedInterest = self.viewModel.longPressedInterest
+            where self.viewModel.interests.indexOf(focusedInterest) != indexPath.row {
+            cell.viewUnfocus.hidden = false
+        } else {
+            cell.viewUnfocus.hidden = true
         }
 
         return cell
