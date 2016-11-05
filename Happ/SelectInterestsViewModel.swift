@@ -47,6 +47,7 @@ class SelectInterestsViewModel {
     var navigateBack: NavigationFunc
     var displaySlideMenu: NavigationFunc
     var popoverSelectSubinterests: NavigationFunc
+    var closePopover: NavigationFunc
 
 
     init(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol) {
@@ -121,6 +122,7 @@ class SelectInterestsViewModel {
                 self.selectedInterests[interest] = [subinterest]
             }
         }
+        self.didUpdate?()
     }
 
 

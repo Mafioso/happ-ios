@@ -84,15 +84,13 @@ class SelectInterestsController: UIViewController {
 extension SelectInterestsController: UIGestureRecognizerDelegate {
 
     func onLongPressCell(gesture : UILongPressGestureRecognizer!) {
-        print("...", gesture)
-
         if gesture.state != .Ended {
             return
         }
         let p = gesture.locationInView(self.collectionView)
         if let indexPath = self.collectionView.indexPathForItemAtPoint(p) {
             self.viewModel.onLongPress(self.getInterestBy(indexPath))
-            
+
         } else {
             print("couldn't find index path")
         }
@@ -147,7 +145,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! InterestCollectionViewCell
 
         let interest = self.getInterestBy(indexPath)
-        cell.labelName.text = interest.title
+        cell.labelName.text = interest.title.uppercaseString
         // TODO:
         // cell.viewFooter.backgroundColor = UIColor(hexString: "#"+interest.color)
         // cell.imagePhoto.hnk_setImageFromURL()

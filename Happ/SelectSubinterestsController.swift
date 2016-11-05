@@ -23,7 +23,7 @@ class SelectSubinterestsController: UIViewController {
 
     // actions
     @IBAction func clickedClose(sender: UIButton) {
-        self.viewModel.navigateBack?()
+        self.viewModel.closePopover?()
     }
 
 
@@ -77,11 +77,14 @@ extension SelectSubinterestsController: UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let subinterest = self.getSubinterestBy(indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = subinterest.title
+
+        cell.textLabel!.text = subinterest.title.uppercaseString
         if self.viewModel.isSubinterestSelected(subinterest) {
             cell.imageView?.hidden = false
+            cell.textLabel?.textColor = UIColor.happOrangeColor()
         } else {
             cell.imageView?.hidden = true
+            cell.textLabel?.textColor = UIColor.happBlackHalfTextColor()
         }
         return cell
     }

@@ -371,6 +371,7 @@ class NavigationCoordinator {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
             viewController.viewModel = parentViewModel
 
+
             viewController.modalPresentationStyle = .OverCurrentContext
             let windowsBounds = UIScreen.mainScreen().bounds
             viewController.preferredContentSize = CGSizeMake(windowsBounds.width, windowsBounds.height - 164)
@@ -380,6 +381,10 @@ class NavigationCoordinator {
             popoverViewController?.sourceView = target.view
             popoverViewController?.sourceRect = CGRectMake(100, 100, 0, 0)
             target.presentViewController(viewController, animated: true, completion: nil)
+
+            viewController.viewModel.closePopover = {
+                viewController.removeFromParentViewController()
+            }
         }
     }
 
