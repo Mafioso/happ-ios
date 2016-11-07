@@ -23,7 +23,8 @@ class SelectSubinterestsController: UIViewController {
 
     // actions
     @IBAction func clickedClose(sender: UIButton) {
-        self.viewModel.closePopover?()
+        self.viewModel.onClosePopoverSelectSubinterests()
+        self.extBackOnPopover()
     }
 
 
@@ -43,17 +44,22 @@ class SelectSubinterestsController: UIViewController {
         let superDidUpdate: (() -> ())? = self.viewModel.didUpdate
         self.viewModel.didUpdate = { [weak self] _ in
             superDidUpdate?()
-            
-            self?.viewModelDidUpdate()
+
+            if self?.presentingViewController != nil {
+                self?.viewModelDidUpdate()
+            }
         }
     }
     private func getSubinterestBy(indexPath: NSIndexPath) -> InterestModel {
         return self.getSubinterests()[indexPath.row]
     }
     private func getSubinterests() -> [InterestModel] {
-        let interest = self.viewModel.longPressedInterest!
-        let subinterests = InterestService.getSubinterestsOf(interest)
-        return subinterests
+        if let interest = self.viewModel.longPressedInterest {
+            let subinterests = InterestService.getSubinterestsOf(interest)
+            return subinterests
+        } else {
+            return []
+        }
     }
 
 }

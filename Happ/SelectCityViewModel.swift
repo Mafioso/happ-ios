@@ -17,6 +17,7 @@ class SelectCityViewModel {
     var search: String?
 
     var navigateBack: NavigationFunc
+    var navigateFeed: NavigationFunc
 
 
     init() {
@@ -100,7 +101,7 @@ extension SelectCityViewModel: SelectInterestsVMProtocol {
     func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
         switch scope {
         case .MenuChangeInterests:
-            // TODO NOW!
+            self.navigateFeed?()
             break
 
         case .NextToSelectCity:

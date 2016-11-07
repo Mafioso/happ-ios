@@ -343,7 +343,7 @@ class NavigationCoordinator {
             viewController.viewModel = viewModel
 
             // add V into VM func
-            viewModel.popoverSelectSubinterests = self.showSelectSubinterests(viewModel, target: viewController)
+            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewModel, target: viewController)
 
 
             // add V to Navigation
@@ -366,7 +366,7 @@ class NavigationCoordinator {
             }
         }
     }
-    func showSelectSubinterests(parentViewModel: SelectInterestsViewModel, target: UIViewController) -> NavigationFunc {
+    func showPopupSelectSubinterests(parentViewModel: SelectInterestsViewModel, target: UIViewController) -> NavigationFunc {
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
             viewController.viewModel = parentViewModel
@@ -381,10 +381,6 @@ class NavigationCoordinator {
             popoverViewController?.sourceView = target.view
             popoverViewController?.sourceRect = CGRectMake(100, 100, 0, 0)
             target.presentViewController(viewController, animated: true, completion: nil)
-
-            viewController.viewModel.closePopover = {
-                viewController.removeFromParentViewController()
-            }
         }
     }
 
@@ -515,7 +511,10 @@ class NavigationCoordinator {
 
     private func initMenuController(highlight: MenuActions) -> MenuViewController {
         let viewModel = MenuViewModel(highlight: highlight)
+        
         let viewModelSelectCity = SelectCityViewModel()
+        viewModelSelectCity.navigateFeed = self.startFeed
+
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
         viewModel.navigateSelectInterests = self.hideSlideMenu(

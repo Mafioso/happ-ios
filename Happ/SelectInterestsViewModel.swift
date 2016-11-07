@@ -44,10 +44,10 @@ class SelectInterestsViewModel {
      [Interest1: [SubInterest1, SubInterest2]]   <- selected some of SubInterests
      */
 
+    
     var navigateBack: NavigationFunc
     var displaySlideMenu: NavigationFunc
-    var popoverSelectSubinterests: NavigationFunc
-    var closePopover: NavigationFunc
+    var navPopoverSelectSubinterests: NavigationFunc
 
 
     init(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol) {
@@ -105,23 +105,33 @@ class SelectInterestsViewModel {
         }
         self.didUpdate?()
     }
-    func onLongPress(interest: InterestModel) {
+    func onLongPressInterest(interest: InterestModel) {
         self.longPressedInterest = interest
         self.didUpdate?()
     }
     func onSelectSubinterest(subinterest: InterestModel) {
-        if !self.isAllowsMultipleSelection() { // clear all previous values
-            self.selectedInterests = [:]
-        }
-        
         if let interest = InterestService.getParentOf(subinterest) {
+            if !self.isAllowsMultipleSelection() { // clear all previous values
+                self.selectedInterests = [:]
+            }
+
             if var selectedSubinterests = self.selectedInterests[interest] {
-                selectedSubinterests.append(subinterest)
+                if let indexOfSubinterest = selectedSubinterests.indexOf(subinterest) {
+                    selectedSubinterests.removeAtIndex(indexOfSubinterest)
+                } else {
+                    selectedSubinterests.append(subinterest)
+                }
                 self.selectedInterests.updateValue(selectedSubinterests, forKey: interest)
             } else {
                 self.selectedInterests[interest] = [subinterest]
             }
+            
+            self.didUpdate?()
         }
+    }
+    func onClosePopoverSelectSubinterests() {
+        print("..onClose")
+        self.longPressedInterest = nil
         self.didUpdate?()
     }
 
@@ -141,7 +151,7 @@ class SelectInterestsViewModel {
     }
     func isSubinterestSelected(subinterest: InterestModel) -> Bool {
         if let interest = InterestService.getParentOf(subinterest) {
-            return self.selectedInterests[interest]?.indexOf(subinterest) != 0
+            return self.selectedInterests[interest]?.indexOf(subinterest) != nil
         } else {
             return false
         }

@@ -101,6 +101,15 @@ extension UITextField {
 }
 
 extension UIViewController {
+    
+    func extBackOnPopover() {
+        if let tmpController = self.presentingViewController {
+            self.dismissViewControllerAnimated(false, completion: {()->Void in
+                tmpController.dismissViewControllerAnimated(false, completion: nil)
+            })
+        }
+    }
+
     func extDisplayAlertView(body: String, title: String = "Error 🤕") -> Promise<Void> {
         return Promise { resolve, reject in
             let alert = UIAlertController(title: title, message: body, preferredStyle: .Alert)
@@ -160,8 +169,6 @@ extension UIViewController {
     func extDismissKeyboard() {
         view.endEditing(true)
     }
-    
-
 }
 
 

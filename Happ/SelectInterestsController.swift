@@ -54,14 +54,15 @@ class SelectInterestsController: UIViewController {
 
 
     func viewModelDidUpdate() {
-        print(".SelectInterestsController.viewModelDidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
+        print(".viewModelDidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
         self.collectionView.reloadData()
         self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
 
         if let longPressedInterest = self.viewModel.longPressedInterest {
             self.collectionView.reloadData()
-            self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
-            self.viewModel.popoverSelectSubinterests?()
+            let indexOfInterest = self.viewModel.interests.indexOf(longPressedInterest)!
+            self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: indexOfInterest, inSection: 0), atScrollPosition: .Top, animated: true)
+            self.viewModel.navPopoverSelectSubinterests?()
         }
     }
 
@@ -89,7 +90,7 @@ extension SelectInterestsController: UIGestureRecognizerDelegate {
         }
         let p = gesture.locationInView(self.collectionView)
         if let indexPath = self.collectionView.indexPathForItemAtPoint(p) {
-            self.viewModel.onLongPress(self.getInterestBy(indexPath))
+            self.viewModel.onLongPressInterest(self.getInterestBy(indexPath))
 
         } else {
             print("couldn't find index path")
@@ -170,6 +171,8 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
                 duration: 0.3, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
         }
 
+        //when some interest long pressed
+        //unfocus all cells except longPressedInterest
         if  let focusedInterest = self.viewModel.longPressedInterest
             where self.viewModel.interests.indexOf(focusedInterest) != indexPath.row {
             cell.viewUnfocus.hidden = false
