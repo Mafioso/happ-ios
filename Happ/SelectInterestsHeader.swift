@@ -18,8 +18,11 @@ class SelectInterestsHeader: UICollectionReusableView {
 
 
     // outlets
+    @IBOutlet weak var viewForMultipleSelection: UIView!
+    @IBOutlet weak var viewForSingleSelection: UIView!
     @IBOutlet weak var labelForName: UILabel!
     @IBOutlet weak var buttonNavMenu: UIButton!
+    @IBOutlet weak var buttonSelectAll: UIButton!
 
 
     // actions
@@ -32,7 +35,14 @@ class SelectInterestsHeader: UICollectionReusableView {
 
 
     func viewModelDidUpdate() {
-        self.labelForName.text = self.viewModel.getTitle()
+        if self.viewModel.isAllowsMultipleSelection() {
+            self.viewForMultipleSelection.hidden = false
+            self.viewForSingleSelection.hidden = true
+            self.labelForName.text = self.viewModel.getTitle()
+        } else {
+            self.viewForMultipleSelection.hidden = true
+            self.viewForSingleSelection.hidden = false
+        }
 
         if self.viewModel.scope == .MenuChangeInterests {
             self.buttonNavMenu.hidden = !self.viewModel.isHeaderVisible

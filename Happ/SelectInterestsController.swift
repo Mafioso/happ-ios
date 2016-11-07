@@ -21,9 +21,11 @@ class SelectInterestsController: UIViewController {
     
     // outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var constraintCollectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintCollectionViewToBottom: NSLayoutConstraint!
     @IBOutlet weak var buttonNavMenuSecond: UIButton!
     @IBOutlet weak var buttonSave: UIButton!
-    
+
 
     // actions
     @IBAction func clickedSave(sender: UIButton) {
@@ -54,16 +56,11 @@ class SelectInterestsController: UIViewController {
 
 
     func viewModelDidUpdate() {
-        print(".viewModelDidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
-        self.collectionView.reloadData()
-        self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
+        print(".VMdidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
 
-        if let longPressedInterest = self.viewModel.longPressedInterest {
-            self.collectionView.reloadData()
-            let indexOfInterest = self.viewModel.interests.indexOf(longPressedInterest)!
-            self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: indexOfInterest, inSection: 0), atScrollPosition: .Top, animated: true)
-            self.viewModel.navPopoverSelectSubinterests?()
-        }
+        self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
+        self.collectionView.reloadData()
+        self.willDisplayPopoverSelectSubinterests()
     }
 
     private func bindToViewModel() {
@@ -74,8 +71,42 @@ class SelectInterestsController: UIViewController {
             self?.viewModelDidUpdate()
         }
     }
+    private func willDisplayPopoverSelectSubinterests() {
+        if self.getHeightConstraint() == nil {
+            // minimize collectionView to able scroll to the bottom
+            self.createHeightConstraint()
+        }
 
+        if  let longPressedInterest = self.viewModel.longPressedInterest,
+            let indexOfInterest = self.viewModel.interests.indexOf(longPressedInterest) {
 
+            // enable constraint
+            self.getHeightConstraint()?.active = true
+            self.view.updateConstraintsIfNeeded()
+            self.view.layoutIfNeeded()
+
+            // scroll
+            let indexPath = NSIndexPath(forRow: indexOfInterest, inSection: 0)
+            self.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+
+            // popover
+            self.viewModel.navPopoverSelectSubinterests?()
+        } else {
+            self.getHeightConstraint()?.active = false
+            self.view.updateConstraintsIfNeeded()
+            self.view.layoutIfNeeded()
+        }
+    }
+    private func getHeightConstraint() -> NSLayoutConstraint? {
+        return self.collectionView.constraints.filter { $0.identifier == "height" }.first
+    }
+    private func createHeightConstraint() {
+        let heightConstraint = NSLayoutConstraint(item: self.collectionView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 184)
+        heightConstraint.identifier = "height"
+        heightConstraint.active = true
+        self.collectionView.addConstraint(heightConstraint)
+        self.collectionView.updateConstraints()
+    }
     private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
         return self.viewModel.interests[indexPath.row]
     }
@@ -121,6 +152,13 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         headerView.viewModel = self.viewModel
         return headerView
     }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if self.viewModel.isAllowsMultipleSelection() {
+            return CGSize(width: collectionView.frame.width, height: 118)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 44)
+        }
+    }
 
     // init event on scroll
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -141,7 +179,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         return self.viewModel.interests.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
+
         let cellID = "cell"
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! InterestCollectionViewCell
 
@@ -155,20 +193,32 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         case .NonSelected:
             cell.viewSelectionInfo.hidden = true
 
+            cell.viewSelectedOne.hidden = true
+            cell.viewSelectedSome.hidden = true
+            cell.viewSelectedAll.hidden = true
+
+        case .SelectedOne:
+            cell.viewSelectionInfo.hidden = false
+
+            cell.viewSelectedOne.hidden = false
+            cell.viewSelectedSome.hidden = true
+            cell.viewSelectedAll.hidden = true
+
         case .SelectedAll:
             cell.viewSelectionInfo.hidden = false
-            UIView.transitionFromView(
-                cell.viewSelectedSome,
-                toView: cell.viewSelectedAll,
-                duration: 0.3, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+
+            cell.viewSelectedOne.hidden = true
+            cell.viewSelectedSome.hidden = true
+            cell.viewSelectedAll.hidden = false
 
         case .SelectedSome(let numberOfSelected, let count):
             cell.viewSelectionInfo.hidden = false
+
+            cell.viewSelectedOne.hidden = true
+            cell.viewSelectedSome.hidden = false
+            cell.viewSelectedAll.hidden = true
+
             cell.labelSelectedSomeText.text = "\(numberOfSelected)/\(count)"
-            UIView.transitionFromView(
-                cell.viewSelectedAll,
-                toView: cell.viewSelectedSome,
-                duration: 0.3, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
         }
 
         //when some interest long pressed

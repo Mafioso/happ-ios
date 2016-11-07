@@ -389,6 +389,9 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w3d-I6-H7b">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="999" constant="184" identifier="height" id="siv-Sa-m7w" userLabel="DON'T DELETE height = 184"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="sxD-EH-Lhf">
                                     <size key="itemSize" width="124" height="164"/>
                                     <size key="headerReferenceSize" width="375" height="138"/>
@@ -432,6 +435,22 @@
                                                                         <constraint firstAttribute="height" constant="20" id="cnD-oY-0e8"/>
                                                                     </constraints>
                                                                 </view>
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U14-aF-fXy" userLabel="Selected One">
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-Cl-6JM">
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="13.41" id="9Hi-SO-HGP"/>
+                                                                                <constraint firstAttribute="width" constant="17.5" id="YcX-Kh-t2Q"/>
+                                                                            </constraints>
+                                                                            <state key="normal" backgroundImage="icon-selected"/>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="QXZ-Cl-6JM" firstAttribute="centerX" secondItem="U14-aF-fXy" secondAttribute="centerX" id="KJZ-yG-3wR"/>
+                                                                        <constraint firstItem="QXZ-Cl-6JM" firstAttribute="centerY" secondItem="U14-aF-fXy" secondAttribute="centerY" id="Tgm-2z-cw3"/>
+                                                                        <constraint firstAttribute="height" constant="20" id="pdY-qX-qCL"/>
+                                                                    </constraints>
+                                                                </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9D9-0w-48a" userLabel="Selected Some">
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykh-no-VBs">
@@ -459,12 +478,15 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="9D9-0w-48a" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="5F2-bq-mQa"/>
+                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="Jc4-TM-UWR"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="Q2a-aP-70A"/>
+                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="width" secondItem="mOq-7K-1lv" secondAttribute="width" id="WZz-Pg-m9G"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="XB0-FW-3lA"/>
                                                                 <constraint firstItem="9D9-0w-48a" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="bQA-cH-sXb"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Zoz-2U-Z1i" secondAttribute="trailing" id="fkw-uc-izs"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Zoz-2U-Z1i" secondAttribute="bottom" id="rad-g3-8mj"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="width" secondItem="mOq-7K-1lv" secondAttribute="width" id="tPL-eZ-TmH"/>
+                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="wMV-P1-ZHw"/>
                                                                 <constraint firstItem="Zoz-2U-Z1i" firstAttribute="leading" secondItem="mOq-7K-1lv" secondAttribute="leading" id="ybf-bI-7m0"/>
                                                                 <constraint firstItem="Zoz-2U-Z1i" firstAttribute="top" secondItem="mOq-7K-1lv" secondAttribute="top" id="ztv-UB-ocm"/>
                                                             </constraints>
@@ -522,6 +544,7 @@
                                             <outlet property="labelSelectedSomeText" destination="ykh-no-VBs" id="wGT-zO-1ZC"/>
                                             <outlet property="viewFooter" destination="CHJ-ed-a3R" id="wY0-WC-WLt"/>
                                             <outlet property="viewSelectedAll" destination="eeo-4e-RY0" id="8lx-LQ-UPx"/>
+                                            <outlet property="viewSelectedOne" destination="U14-aF-fXy" id="RXi-Dj-pry"/>
                                             <outlet property="viewSelectedSome" destination="9D9-0w-48a" id="hVb-dl-bOd"/>
                                             <outlet property="viewSelectionInfo" destination="mOq-7K-1lv" id="nE4-Ki-40N"/>
                                             <outlet property="viewUnfocus" destination="0lM-Hc-5HO" id="nIQ-eI-JjS"/>
@@ -532,25 +555,52 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interests for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm3-YA-3YG">
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY/EVENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-st-2mB">
-                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H94-vl-h04" userLabel="Select All Interests">
-                                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                            <state key="normal" title="Select All Interests" image="icon-selected-all-orange">
-                                                <color key="titleColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="clickedSelectAll:" destination="5dc-ht-cTC" eventType="touchUpInside" id="aMU-kS-lrI"/>
-                                            </connections>
-                                        </button>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msP-bj-tGZ" userLabel="for Multiple">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interests for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm3-YA-3YG">
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CITY/EVENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-st-2mB">
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H94-vl-h04" userLabel="Select All Interests">
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                    <state key="normal" title="Select All Interests" image="icon-selected-all-orange">
+                                                        <color key="titleColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="clickedSelectAll:" destination="5dc-ht-cTC" eventType="touchUpInside" id="aMU-kS-lrI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Nm3-YA-3YG" firstAttribute="top" secondItem="msP-bj-tGZ" secondAttribute="top" constant="15" id="HBW-JL-fwY"/>
+                                                <constraint firstItem="H94-vl-h04" firstAttribute="centerX" secondItem="msP-bj-tGZ" secondAttribute="centerX" constant="-15" id="Rar-Sl-pQP"/>
+                                                <constraint firstAttribute="bottom" secondItem="H94-vl-h04" secondAttribute="bottom" constant="22" id="bBw-Oh-nfk"/>
+                                                <constraint firstItem="IZ1-st-2mB" firstAttribute="centerX" secondItem="msP-bj-tGZ" secondAttribute="centerX" constant="-15" id="gd3-xu-YHh"/>
+                                                <constraint firstItem="Nm3-YA-3YG" firstAttribute="centerX" secondItem="msP-bj-tGZ" secondAttribute="centerX" constant="-15" id="ifn-Re-ZIo"/>
+                                                <constraint firstItem="IZ1-st-2mB" firstAttribute="top" secondItem="Nm3-YA-3YG" secondAttribute="bottom" constant="4" id="ro3-WU-TKh"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqd-ab-Ouq" userLabel="for Single">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMf-lK-kDh">
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="centerX" secondItem="fqd-ab-Ouq" secondAttribute="centerX" constant="-15" id="7G3-e1-Frs"/>
+                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="top" secondItem="fqd-ab-Ouq" secondAttribute="top" constant="15" id="Va2-dP-GgK"/>
+                                            </constraints>
+                                        </view>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgz-qQ-6h4" userLabel="NavMenuGray">
                                             <state key="normal" image="nav-menu-gray"/>
                                             <connections>
@@ -561,19 +611,29 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="Cgz-qQ-6h4" firstAttribute="top" secondItem="5dc-ht-cTC" secondAttribute="top" constant="16" id="1Xf-gH-7NZ"/>
-                                        <constraint firstItem="Nm3-YA-3YG" firstAttribute="top" secondItem="5dc-ht-cTC" secondAttribute="top" constant="16" id="5wM-7e-U4t"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="H94-vl-h04" secondAttribute="bottom" constant="22" id="JsO-W5-dBg"/>
-                                        <constraint firstItem="H94-vl-h04" firstAttribute="centerX" secondItem="5dc-ht-cTC" secondAttribute="centerX" id="LaZ-bV-jee"/>
-                                        <constraint firstItem="IZ1-st-2mB" firstAttribute="top" secondItem="Nm3-YA-3YG" secondAttribute="bottom" constant="4" id="PpV-R8-RLE"/>
-                                        <constraint firstItem="Nm3-YA-3YG" firstAttribute="centerX" secondItem="5dc-ht-cTC" secondAttribute="centerX" id="SZZ-2a-qEl"/>
+                                        <constraint firstItem="msP-bj-tGZ" firstAttribute="top" secondItem="5dc-ht-cTC" secondAttribute="top" id="3s7-YS-2EU"/>
+                                        <constraint firstAttribute="trailing" secondItem="fqd-ab-Ouq" secondAttribute="trailing" id="DDz-va-MBt"/>
+                                        <constraint firstAttribute="bottom" secondItem="msP-bj-tGZ" secondAttribute="bottom" id="HSC-gU-IKN"/>
+                                        <constraint firstAttribute="bottom" secondItem="fqd-ab-Ouq" secondAttribute="bottom" id="Rcw-2l-FEB"/>
+                                        <constraint firstItem="msP-bj-tGZ" firstAttribute="leading" secondItem="Cgz-qQ-6h4" secondAttribute="trailing" id="WpZ-9W-wV4"/>
+                                        <constraint firstItem="fqd-ab-Ouq" firstAttribute="leading" secondItem="Cgz-qQ-6h4" secondAttribute="trailing" id="clX-JB-UWR"/>
                                         <constraint firstItem="Cgz-qQ-6h4" firstAttribute="leading" secondItem="5dc-ht-cTC" secondAttribute="leading" constant="16" id="dKM-AK-7Qx"/>
-                                        <constraint firstItem="IZ1-st-2mB" firstAttribute="centerX" secondItem="5dc-ht-cTC" secondAttribute="centerX" id="g9a-OT-Ouu"/>
+                                        <constraint firstItem="fqd-ab-Ouq" firstAttribute="top" secondItem="5dc-ht-cTC" secondAttribute="top" id="fMT-MI-rhT"/>
+                                        <constraint firstAttribute="trailing" secondItem="msP-bj-tGZ" secondAttribute="trailing" id="tO1-IE-W0r"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="buttonNavMenu" destination="Cgz-qQ-6h4" id="jvT-AA-Vaa"/>
+                                        <outlet property="buttonSelectAll" destination="H94-vl-h04" id="40W-TO-hfH"/>
                                         <outlet property="labelForName" destination="IZ1-st-2mB" id="qW8-Am-IH2"/>
+                                        <outlet property="viewForMultipleSelection" destination="msP-bj-tGZ" id="h4D-mu-51e"/>
+                                        <outlet property="viewForSingleSelection" destination="fqd-ab-Ouq" id="83n-hc-CX4"/>
                                     </connections>
                                 </collectionReusableView>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="siv-Sa-m7w"/>
+                                    </mask>
+                                </variation>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j77-8F-3fM" userLabel="NavMenuWhite">
                                 <state key="normal" image="nav-menu-shadow"/>
@@ -603,7 +663,7 @@
                             <constraint firstAttribute="trailing" secondItem="w3d-I6-H7b" secondAttribute="trailing" id="GL0-JI-6h7"/>
                             <constraint firstItem="w3d-I6-H7b" firstAttribute="top" secondItem="jLw-tS-04u" secondAttribute="top" id="Zt6-WQ-X02"/>
                             <constraint firstItem="j77-8F-3fM" firstAttribute="leading" secondItem="jLw-tS-04u" secondAttribute="leading" constant="6" id="aAa-u4-1rZ"/>
-                            <constraint firstItem="mZV-2d-hXs" firstAttribute="top" secondItem="w3d-I6-H7b" secondAttribute="bottom" id="dZc-ww-f7X"/>
+                            <constraint firstItem="mZV-2d-hXs" firstAttribute="top" secondItem="w3d-I6-H7b" secondAttribute="bottom" priority="750" identifier="toBottom" id="dZc-ww-f7X" userLabel="DON'T DELETE Bottom Layout Guide.top = Collection View.bottom @750"/>
                             <constraint firstItem="w3d-I6-H7b" firstAttribute="leading" secondItem="jLw-tS-04u" secondAttribute="leading" id="rnk-GK-Y9y"/>
                             <constraint firstItem="ig2-wv-KEy" firstAttribute="centerX" secondItem="jLw-tS-04u" secondAttribute="centerX" id="vC2-pe-abf"/>
                             <constraint firstItem="j77-8F-3fM" firstAttribute="top" secondItem="u9r-Ee-7i3" secondAttribute="bottom" constant="16" id="x3M-BR-lvY"/>
@@ -613,6 +673,8 @@
                         <outlet property="buttonNavMenuSecond" destination="j77-8F-3fM" id="yUi-sj-LCc"/>
                         <outlet property="buttonSave" destination="ig2-wv-KEy" id="qtA-2A-Alo"/>
                         <outlet property="collectionView" destination="w3d-I6-H7b" id="Qj8-6w-gg8"/>
+                        <outlet property="constraintCollectionViewHeight" destination="siv-Sa-m7w" id="Hil-rw-92b"/>
+                        <outlet property="constraintCollectionViewToBottom" destination="dZc-ww-f7X" id="GWz-NR-hzL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnD-BQ-52g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -656,14 +718,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subinterest Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2n7-FB-h6t">
-                                                    <frame key="frameInset" minX="40" width="320" height="44"/>
+                                                    <frame key="frameInset" minX="48" width="312" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                     <color key="textColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="icon-selected-orange" id="oME-8O-tLT">
-                                                    <frame key="frameInset" minX="15" minY="19" width="10" height="5"/>
+                                                    <frame key="frameInset" minX="15" minY="15" width="18" height="14"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -699,7 +761,7 @@
         <image name="icon-selected" width="18" height="14"/>
         <image name="icon-selected-all" width="24" height="14"/>
         <image name="icon-selected-all-orange" width="24" height="14"/>
-        <image name="icon-selected-orange" width="10" height="5"/>
+        <image name="icon-selected-orange" width="18" height="14"/>
         <image name="nav-close-shadow" width="32" height="36"/>
         <image name="nav-menu-gray" width="18" height="12"/>
         <image name="nav-menu-shadow" width="38" height="35"/>

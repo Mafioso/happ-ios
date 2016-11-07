@@ -11,6 +11,7 @@ import Foundation
 
 enum InterestSelectionTypes {
     case NonSelected
+    case SelectedOne
     case SelectedAll
     case SelectedSome(numberOfSelected: Int, count: Int)
 }
@@ -72,8 +73,11 @@ class SelectInterestsViewModel {
 
     //MARK: - Inputs
     func onSelectAll() {
-        // TODO
-        print("__selectInterests.onSelectAll")
+        self.selectedInterests = [:]
+        self.interests.forEach { interest in
+            self.selectedInterests.updateValue([], forKey: interest)
+        }
+        self.didUpdate?()
     }
     func onSave() {
         let selectedInterestsMap: [[InterestModel]] = self.selectedInterests
@@ -93,11 +97,11 @@ class SelectInterestsViewModel {
         }
     }
     func onSelectInterest(interest: InterestModel) {
+        let isSelected = self.selectedInterests.keys.contains(interest)
         if !self.isAllowsMultipleSelection() { // clear all previous values
             self.selectedInterests = [:]
         }
 
-        let isSelected = (self.selectedInterests[interest] != nil)
         if !isSelected {
             self.selectedInterests.updateValue([], forKey: interest)
         } else {
@@ -139,6 +143,8 @@ class SelectInterestsViewModel {
     func getInterestSelectionTypeFor(interest: InterestModel) -> InterestSelectionTypes {
         if let selectedSubinterests = self.selectedInterests[interest] {
             if selectedSubinterests.isEmpty {
+                return .SelectedOne
+            } else if selectedSubinterests.count == interest.children.count {
                 return .SelectedAll
             } else {
                 return .SelectedSome(
@@ -161,7 +167,7 @@ class SelectInterestsViewModel {
     func getTitle() -> String {
         return self.parentViewModel.selectInterestsGetTitle()
     }
-    private func isAllowsMultipleSelection() -> Bool {
+    func isAllowsMultipleSelection() -> Bool {
         return self.parentViewModel.selectInterestsIsAllowsMultipleSelection()
     }
     private func getInterests() -> [InterestModel] {
