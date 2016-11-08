@@ -23,8 +23,8 @@
         <scene sceneID="ITn-aH-97i">
             <objects>
                 <tableViewController id="eYT-ZX-ZYZ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vLF-xa-Ajk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vLF-xa-Ajk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -285,6 +285,11 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vS-GM-xXm" userLabel="Menu View">
                                         <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcE-bM-dY8">
+                                                <connections>
+                                                    <segue destination="eYT-ZX-ZYZ" kind="embed" identifier="embeddedTableMenu" id="FBs-r6-XBU"/>
+                                                </connections>
+                                            </containerView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Koa-cf-tNc" userLabel="Footer View">
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HAPP V2.0 © All Rights Reserved, 2016" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gw-ov-CEj">
@@ -300,14 +305,6 @@
                                                     <constraint firstItem="5Gw-ov-CEj" firstAttribute="centerX" secondItem="Koa-cf-tNc" secondAttribute="centerX" id="uCW-fD-ez6"/>
                                                 </constraints>
                                             </view>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcE-bM-dY8">
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="264" id="rv6-3n-8Pw"/>
-                                                </constraints>
-                                                <connections>
-                                                    <segue destination="eYT-ZX-ZYZ" kind="embed" identifier="embeddedTableMenu" id="FBs-r6-XBU"/>
-                                                </connections>
-                                            </containerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -315,6 +312,7 @@
                                             <constraint firstItem="Koa-cf-tNc" firstAttribute="leading" secondItem="6vS-GM-xXm" secondAttribute="leading" id="HUg-RA-NZg"/>
                                             <constraint firstAttribute="bottom" secondItem="Koa-cf-tNc" secondAttribute="bottom" constant="9" id="OW0-gt-DKb"/>
                                             <constraint firstAttribute="trailing" secondItem="fcE-bM-dY8" secondAttribute="trailing" id="dff-QH-dSw"/>
+                                            <constraint firstItem="Koa-cf-tNc" firstAttribute="top" secondItem="fcE-bM-dY8" secondAttribute="bottom" id="kTX-KS-uhc"/>
                                             <constraint firstItem="fcE-bM-dY8" firstAttribute="top" secondItem="6vS-GM-xXm" secondAttribute="top" constant="16" id="nq3-iV-ZoL"/>
                                             <constraint firstAttribute="trailing" secondItem="Koa-cf-tNc" secondAttribute="trailing" id="qLB-uW-yMO"/>
                                         </constraints>
@@ -373,7 +371,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="798" y="973"/>
+            <point key="canvasLocation" x="797.60000000000002" y="972.86356821589209"/>
         </scene>
         <!--Select Interests Controller-->
         <scene sceneID="CaN-Hh-vOv">
@@ -389,9 +387,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="w3d-I6-H7b">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="184" identifier="height" id="siv-Sa-m7w" userLabel="DON'T DELETE height = 184"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1.5" minimumInteritemSpacing="1.5" id="sxD-EH-Lhf">
                                     <size key="itemSize" width="124" height="164"/>
                                     <size key="headerReferenceSize" width="375" height="138"/>
@@ -555,6 +550,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqd-ab-Ouq" userLabel="for Single">
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMf-lK-kDh">
+                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="centerX" secondItem="fqd-ab-Ouq" secondAttribute="centerX" constant="-15" id="7G3-e1-Frs"/>
+                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="top" secondItem="fqd-ab-Ouq" secondAttribute="top" constant="15" id="Va2-dP-GgK"/>
+                                            </constraints>
+                                        </view>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="msP-bj-tGZ" userLabel="for Multiple">
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interests for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nm3-YA-3YG">
@@ -587,24 +596,10 @@
                                                 <constraint firstItem="IZ1-st-2mB" firstAttribute="top" secondItem="Nm3-YA-3YG" secondAttribute="bottom" constant="4" id="ro3-WU-TKh"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqd-ab-Ouq" userLabel="for Single">
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMf-lK-kDh">
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="centerX" secondItem="fqd-ab-Ouq" secondAttribute="centerX" constant="-15" id="7G3-e1-Frs"/>
-                                                <constraint firstItem="lMf-lK-kDh" firstAttribute="top" secondItem="fqd-ab-Ouq" secondAttribute="top" constant="15" id="Va2-dP-GgK"/>
-                                            </constraints>
-                                        </view>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgz-qQ-6h4" userLabel="NavMenuGray">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgz-qQ-6h4" userLabel="NavMenuGray">
                                             <state key="normal" image="nav-menu-gray"/>
                                             <connections>
-                                                <action selector="clickedNavMenu:" destination="5dc-ht-cTC" eventType="touchUpInside" id="Fob-4d-baz"/>
+                                                <action selector="clickedNavItem:" destination="5dc-ht-cTC" eventType="touchUpInside" id="chi-Zu-pVK"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -622,23 +617,18 @@
                                         <constraint firstAttribute="trailing" secondItem="msP-bj-tGZ" secondAttribute="trailing" id="tO1-IE-W0r"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="buttonNavMenu" destination="Cgz-qQ-6h4" id="jvT-AA-Vaa"/>
+                                        <outlet property="buttonNavItem" destination="Cgz-qQ-6h4" id="Pca-NK-hI1"/>
                                         <outlet property="buttonSelectAll" destination="H94-vl-h04" id="40W-TO-hfH"/>
                                         <outlet property="labelForName" destination="IZ1-st-2mB" id="qW8-Am-IH2"/>
                                         <outlet property="viewForMultipleSelection" destination="msP-bj-tGZ" id="h4D-mu-51e"/>
                                         <outlet property="viewForSingleSelection" destination="fqd-ab-Ouq" id="83n-hc-CX4"/>
                                     </connections>
                                 </collectionReusableView>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="siv-Sa-m7w"/>
-                                    </mask>
-                                </variation>
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j77-8F-3fM" userLabel="NavMenuWhite">
                                 <state key="normal" image="nav-menu-shadow"/>
                                 <connections>
-                                    <action selector="clickedNavMenuSecond:" destination="HWM-BF-Q0Z" eventType="touchUpInside" id="Ud8-YU-GKB"/>
+                                    <action selector="clickedNavItemSecond:" destination="HWM-BF-Q0Z" eventType="touchUpInside" id="OY5-td-4PK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.96999999999999997" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ig2-wv-KEy">
@@ -670,11 +660,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="buttonNavMenuSecond" destination="j77-8F-3fM" id="yUi-sj-LCc"/>
+                        <outlet property="buttonNavItemSecond" destination="j77-8F-3fM" id="ORT-lM-qZ8"/>
                         <outlet property="buttonSave" destination="ig2-wv-KEy" id="qtA-2A-Alo"/>
                         <outlet property="collectionView" destination="w3d-I6-H7b" id="Qj8-6w-gg8"/>
-                        <outlet property="constraintCollectionViewHeight" destination="siv-Sa-m7w" id="Hil-rw-92b"/>
-                        <outlet property="constraintCollectionViewToBottom" destination="dZc-ww-f7X" id="GWz-NR-hzL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnD-BQ-52g" userLabel="First Responder" sceneMemberID="firstResponder"/>

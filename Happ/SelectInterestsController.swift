@@ -17,22 +17,18 @@ class SelectInterestsController: UIViewController {
         }
     }
     
-    
-    
+
     // outlets
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var constraintCollectionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var constraintCollectionViewToBottom: NSLayoutConstraint!
-    @IBOutlet weak var buttonNavMenuSecond: UIButton!
+    @IBOutlet weak var buttonNavItemSecond: UIButton!
     @IBOutlet weak var buttonSave: UIButton!
-
 
     // actions
     @IBAction func clickedSave(sender: UIButton) {
-        self.viewModel.navigateBack?()
+        self.viewModel.onClickSave()
     }
-    @IBAction func clickedNavMenuSecond(sender: UIButton) {
-        self.viewModel.displaySlideMenu?()
+    @IBAction func clickedNavItemSecond(sender: UIButton) {
+        self.viewModel.onClickNavItem()
     }
 
 
@@ -41,6 +37,7 @@ class SelectInterestsController: UIViewController {
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.initNavItems()
         self.initLongPressGesture()
     }
     override func viewWillAppear(animated: Bool) {
@@ -56,10 +53,10 @@ class SelectInterestsController: UIViewController {
 
 
     func viewModelDidUpdate() {
-        print(".VMdidUpdate", self.viewModel.interests.count, self.viewModel.isHeaderVisible)
+        print(".VMdidUpdate", self.viewModel.interests.count)
 
-        self.buttonNavMenuSecond.hidden = self.viewModel.isHeaderVisible
         self.collectionView.reloadData()
+        self.updateNavItems()
         self.willDisplayPopoverSelectSubinterests()
     }
 
@@ -69,6 +66,26 @@ class SelectInterestsController: UIViewController {
             superDidUpdate?()
 
             self?.viewModelDidUpdate()
+        }
+    }
+    
+
+    private func initNavItems() {
+        switch self.viewModel.scope {
+        case .MenuChangeInterests:
+            self.buttonNavItemSecond.setImage(UIImage(named: "nav-menu-shadow"), forState: .Normal)
+        case .EventManage:
+            self.buttonNavItemSecond.setImage(UIImage(named: "nav-back-shadow"), forState: .Normal)
+        default:
+            break
+        }
+    }
+    private func updateNavItems() {
+        switch self.viewModel.scope {
+        case .MenuChangeInterests, .EventManage:
+            self.buttonNavItemSecond.hidden = self.viewModel.isHeaderVisible
+        default:
+            self.buttonNavItemSecond.hidden = true
         }
     }
     private func willDisplayPopoverSelectSubinterests() {

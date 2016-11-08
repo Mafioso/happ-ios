@@ -72,6 +72,20 @@ class SelectInterestsViewModel {
 
 
     //MARK: - Inputs
+    func onClickNavItem() {
+        switch self.scope {
+        case .MenuChangeInterests:
+            self.displaySlideMenu?()
+        case .EventManage:
+            self.navigateBack?()
+        default:
+            break
+        }
+    }
+    func onClickSave() {
+        // TODO
+        self.navigateBack?()
+    }
     func onSelectAll() {
         self.selectedInterests = [:]
         self.interests.forEach { interest in

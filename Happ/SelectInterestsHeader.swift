@@ -21,7 +21,7 @@ class SelectInterestsHeader: UICollectionReusableView {
     @IBOutlet weak var viewForMultipleSelection: UIView!
     @IBOutlet weak var viewForSingleSelection: UIView!
     @IBOutlet weak var labelForName: UILabel!
-    @IBOutlet weak var buttonNavMenu: UIButton!
+    @IBOutlet weak var buttonNavItem: UIButton!
     @IBOutlet weak var buttonSelectAll: UIButton!
 
 
@@ -29,12 +29,14 @@ class SelectInterestsHeader: UICollectionReusableView {
     @IBAction func clickedSelectAll(sender: UIButton) {
         self.viewModel.onSelectAll()
     }
-    @IBAction func clickedNavMenu(sender: UIButton) {
-        self.viewModel.displaySlideMenu?()
+    @IBAction func clickedNavItem(sender: UIButton) {
+        self.viewModel.onClickNavItem()
     }
 
+    
 
     func viewModelDidUpdate() {
+        // init
         if self.viewModel.isAllowsMultipleSelection() {
             self.viewForMultipleSelection.hidden = false
             self.viewForSingleSelection.hidden = true
@@ -43,11 +45,14 @@ class SelectInterestsHeader: UICollectionReusableView {
             self.viewForMultipleSelection.hidden = true
             self.viewForSingleSelection.hidden = false
         }
+        self.initNavItems()
+        
 
+        // update
         if self.viewModel.scope == .MenuChangeInterests {
-            self.buttonNavMenu.hidden = !self.viewModel.isHeaderVisible
+            self.buttonNavItem.hidden = !self.viewModel.isHeaderVisible
         } else {
-            self.buttonNavMenu.hidden = true
+            self.buttonNavItem.hidden = true
         }
     }
 
@@ -59,5 +64,18 @@ class SelectInterestsHeader: UICollectionReusableView {
             self?.viewModelDidUpdate()
         }
     }
-    
+
+
+    private func initNavItems() {
+        switch self.viewModel.scope {
+        case .MenuChangeInterests:
+            self.buttonNavItem.setImage(UIImage(named: "nav-menu-gray"), forState: .Normal)
+        case .EventManage:
+            self.buttonNavItem.setImage(UIImage(named: "nav-back-gray"), forState: .Normal)
+        default:
+            break
+        }
+    }
 }
+
+

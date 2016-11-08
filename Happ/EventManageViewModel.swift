@@ -15,6 +15,7 @@ class EventManageViewModel {
     var navigateBack: NavigationFunc
     var navigateNext: NavigationFunc
     var navigateSubmit: NavigationFunc
+    var navigateSelectInterest: NavigationFunc
 
     var event: EventModel
     var isEditing: Bool
@@ -42,5 +43,7 @@ extension EventManageViewModel: SelectInterestsVMProtocol {
     func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
         // TODO
         // self.event.interests = selectedInterests
+        self.navigateBack?()
     }
 }
+

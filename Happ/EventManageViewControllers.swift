@@ -15,14 +15,11 @@ class PrototypeEventManageViewController: UIViewController {
     var viewModel: EventManageViewModel!
 
 
-    func handleCloseButton() {
-        self.viewModel.navigateBack?()
-    }
     func handlePresentationButton() {
         // TODO
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,9 +27,8 @@ class PrototypeEventManageViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.happBlackHalfTextColor()
     }
 
-    
+
     private func initNavBarItems() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-cross"), style: .Plain, target: self, action: #selector(handleCloseButton))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-presentation"), style: .Plain, target: self, action: #selector(handlePresentationButton))
     }
 }
@@ -43,6 +39,10 @@ class PrototypeEventManageViewController: UIViewController {
 class EventManageFirstPageViewController: PrototypeEventManageViewController {
 
 
+    // actions
+    @IBAction func clickedSelectInterestButton(sender: UIButton) {
+        self.viewModel.navigateSelectInterest?()
+    }
     @IBAction func clickedNextButton(sender: UIButton) {
         self.viewModel.navigateNext?()
     }
@@ -52,6 +52,16 @@ class EventManageFirstPageViewController: PrototypeEventManageViewController {
         super.viewDidLoad()
 
 
+    }
+    override func initNavBarItems() {
+        super.initNavBarItems()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-cross-gray"), style: .Plain, target: self, action: #selector(handleCloseNavItem))
+    }
+
+
+    func handleCloseNavItem() {
+        self.viewModel.navigateBack?()
     }
 
 }
@@ -70,7 +80,17 @@ class EventManageSecondPageViewController: PrototypeEventManageViewController {
         super.viewDidLoad()
         
     }
-    
+    override func initNavBarItems() {
+        super.initNavBarItems()
+
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-cross-gray"), style: .Plain, target: self, action: #selector(handleBackNavItem))
+    }
+
+
+    func handleBackNavItem() {
+        self.viewModel.navigateBack?()
+    }
+
 }
 
 

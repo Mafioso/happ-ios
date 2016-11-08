@@ -371,7 +371,6 @@ class NavigationCoordinator {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
             viewController.viewModel = parentViewModel
 
-
             viewController.modalPresentationStyle = .OverCurrentContext
             let windowsBounds = UIScreen.mainScreen().bounds
             viewController.preferredContentSize = CGSizeMake(windowsBounds.width, windowsBounds.height - 164)
@@ -451,6 +450,7 @@ class NavigationCoordinator {
         let viewModel = EventManageViewModel()
         viewModel.navigateBack = self.startMyEvents
         viewModel.navigateNext = self.showEventManageSecondPage(viewModel)
+        viewModel.navigateSelectInterest = self.showSelectInterest(.EventManage, parentViewModel: viewModel)
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
         viewController.viewModel = viewModel
