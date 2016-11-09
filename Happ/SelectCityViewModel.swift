@@ -10,19 +10,34 @@ import Foundation
 import PromiseKit
 
 
-class SelectCityViewModel {
 
-    var cities: [CityModel] = []
-    var selectedCity: CityModel?
-    var search: String?
+class SelectCityOnSetupViewModel: SelectCityViewModelPrototype {
 
     var navigateBack: NavigationFunc
+
+    override init() {
+        super.init()
+    }
+
+}
+
+
+class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVMProtocol {
+
     var navigateFeed: NavigationFunc
 
+    override init() {
+        super.init()
+    }
 
-    init() {
-        print(".selectCityVM.init")
+    override func onSelectCity(city: CityModel) {
+        super.onSelectCity(city)
 
+        //TODO ProfileService.setCity(city.id)
+    }
+
+
+    override private func willLoad() {
         self.fetchCities().then { _ -> Void in
             print(".selectCityVM.fetchCities.done", self.cities.count)
             self.fetchUserCity()
@@ -32,6 +47,51 @@ class SelectCityViewModel {
                     self.didUpdate?()
             }
         }
+    }
+    private func getUserCity() -> CityModel? {
+        return ProfileService.getUserCity()
+    }
+    private func fetchUserCity() -> Promise<Void> {
+        if let city = self.getUserCity() {
+            self.selectedCity = city
+            return Promise().asVoid()
+            
+        } else {
+            return ProfileService.fetchUserCity()
+                .then { _ -> Void in
+                    self.selectedCity = ProfileService.getUserCity()
+                    self.cities = self.getCities() // get updated data from local DB
+                    self.didUpdate?()
+            }
+        }
+    }
+
+
+    // for implement SelectInterestsVMProtocol:
+    func selectInterestsIsAllowsMultipleSelection() -> Bool {
+        return true
+    }
+    func selectInterestsGetTitle() -> String {
+        return self.getUserCity()!.name
+    }
+    func selectInterestsOnSave(selectedInterests: [InterestModel]) {
+        self.navigateFeed?()
+    }
+}
+
+
+
+class SelectCityViewModelPrototype {
+
+    var cities: [CityModel] = []
+    var selectedCity: CityModel?
+    var search: String?
+
+
+    init() {
+        print(".selectCityVM.init")
+
+        self.willLoad()
     }
 
 
@@ -44,7 +104,6 @@ class SelectCityViewModel {
     //MARK: - Inputs
     func onSelectCity(city: CityModel) {
         self.selectedCity = city
-        // ProfileService.setCity(city.id) TODO
         self.didSelectCity?(city)
         self.didUpdate?()
     }
@@ -55,6 +114,13 @@ class SelectCityViewModel {
     }
 
 
+    private func willLoad() {
+        self.fetchCities().then { _ -> Void in
+            print(".selectCityVM.fetchCities.done", self.cities.count)
+            self.didLoad?()
+            self.didUpdate?()
+        }
+    }
     private func getCities() -> [CityModel] {
         var cities = ProfileService.getCitiesStored()
         if self.search != nil {
@@ -62,10 +128,6 @@ class SelectCityViewModel {
         }
         return Array(cities)
     }
-    private func getUserCity() -> CityModel? {
-        return ProfileService.getUserCity()
-    }
-
 
     private func fetchCities() -> Promise<Void> {
         return ProfileService.fetchCities()
@@ -73,48 +135,9 @@ class SelectCityViewModel {
                 self.cities = self.getCities()
         }
     }
-    private func fetchUserCity() -> Promise<Void> {
-        if let city = self.getUserCity() {
-            self.selectedCity = city
-            return Promise().asVoid()
-
-        } else {
-            return ProfileService.fetchUserCity()
-                .then { _ -> Void in
-                    self.selectedCity = ProfileService.getUserCity()
-                    self.cities = self.getCities() // get updated data from local DB
-                    self.didUpdate?()
-            }
-        }
-    }
 
 }
 
-
-extension SelectCityViewModel: SelectInterestsVMProtocol {
-    func selectInterestsIsAllowsMultipleSelection() -> Bool {
-        return true
-    }
-    func selectInterestsGetTitle() -> String {
-        return self.getUserCity()!.name
-    }
-    func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
-        switch scope {
-        case .MenuChangeInterests:
-            self.navigateFeed?()
-            break
-
-        case .NextToSelectCity:
-            // self.navigate?
-            break // TODO
-        case .NextToMenuChangeCity:
-            // self.navigate?
-            break // TODO
-        default:
-            break
-        }
-    }
-}
 
 
 

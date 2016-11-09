@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
+		522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */; };
+		522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */; };
+		522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD5601DD1E7320080BEBE /* SetupCityController.swift */; };
 		522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */; };
 		523483CB1DB48BD0009B8204 /* WienLight_Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 523483CA1DB48BD0009B8204 /* WienLight_Normal.ttf */; };
-		52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52357AC11D9AFF5000586459 /* SelectCityViewController.swift */; };
 		5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239C37C1D92434700F66E31 /* EventTableCell.swift */; };
 		5239C37F1D92434700F66E31 /* EventTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5239C37D1D92434700F66E31 /* EventTableCell.xib */; };
 		5239C3831D925D5D00F66E31 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3811D925D5D00F66E31 /* Authentication.storyboard */; };
@@ -26,7 +28,7 @@
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
 		52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52899B191D90099A005AD79E /* RealmModels.swift */; };
 		529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529046B91D9BB40B00BFB06A /* SettingsController.swift */; };
-		52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */; };
+		52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */; };
 		52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */; };
 		52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */; };
 		52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */; };
@@ -87,9 +89,11 @@
 		5210D1161D90557B000A7C47 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityAndInterestsViewModel.swift; sourceTree = "<group>"; };
+		522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnSetupController.swift; sourceTree = "<group>"; };
+		522CD5601DD1E7320080BEBE /* SetupCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityController.swift; sourceTree = "<group>"; };
 		522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFiltersController.swift; sourceTree = "<group>"; };
 		523483CA1DB48BD0009B8204 /* WienLight_Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WienLight_Normal.ttf; sourceTree = "<group>"; };
-		52357AC11D9AFF5000586459 /* SelectCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewController.swift; sourceTree = "<group>"; };
 		5239C37C1D92434700F66E31 /* EventTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		5239C37D1D92434700F66E31 /* EventTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableCell.xib; sourceTree = "<group>"; };
 		5239C3821D925D5D00F66E31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
@@ -107,7 +111,7 @@
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		52899B191D90099A005AD79E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		529046B91D9BB40B00BFB06A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSelectCityController.swift; sourceTree = "<group>"; };
+		52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnMenuController.swift; sourceTree = "<group>"; };
 		52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityPrototype.swift; sourceTree = "<group>"; };
 		52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewModel.swift; sourceTree = "<group>"; };
 		52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNotificationsViewController.swift; sourceTree = "<group>"; };
@@ -265,10 +269,11 @@
 			isa = PBXGroup;
 			children = (
 				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
-				52941C2B1DB1DFCB00A1CB57 /* MenuSelectCityController.swift */,
+				52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */,
+				522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */,
 				525A8AA91D7D4023002C6F46 /* LoginController.swift */,
 				B4FBF1DF1D7FD7CB00C0E08B /* SignUpController.swift */,
-				52357AC11D9AFF5000586459 /* SelectCityViewController.swift */,
+				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				52F65F8E1DC75475005E751E /* SelectInterestsController.swift */,
 				52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
@@ -309,14 +314,15 @@
 			isa = PBXGroup;
 			children = (
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
+				522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */,
 				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */,
+				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
 				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
-				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -550,10 +556,12 @@
 				52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */,
 				529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */,
 				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,
+				522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */,
 				52AF59AD1DCA781A002037FE /* SelectSubinterestsController.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
 				527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */,
+				522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */,
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
 				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
@@ -570,9 +578,9 @@
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
-				52357AC21D9AFF5000586459 /* SelectCityViewController.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
-				52941C2C1DB1DFCB00A1CB57 /* MenuSelectCityController.swift in Sources */,
+				52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */,
+				522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */,
 				527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */,
 				52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */,
 				52F65F8F1DC75475005E751E /* SelectInterestsController.swift in Sources */,

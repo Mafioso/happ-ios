@@ -10,29 +10,37 @@ import Foundation
 import UIKit
 
 
-class SelectCityPrototype: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
 
-    
-    var viewModel: SelectCityViewModel! {
+
+    var viewModel: SelectCityViewModelPrototype! {
         didSet {
             self.bindToViewModel()
         }
     }
     
+    
+    // variables
+    var searchController: UISearchController!
+
+    // constants
     let identifierCell = "cell"
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // init Search bar
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
-        searchController.searchBar.searchBarStyle = .Minimal
-        searchController.dimsBackgroundDuringPresentation = false
-        self.definesPresentationContext = true
-        self.tableView.tableHeaderView = searchController.searchBar
+        self.searchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            // controller.searchBar.delegate = self
+            controller.searchBar.searchBarStyle = .Minimal
+            controller.dimsBackgroundDuringPresentation = false
+            self.definesPresentationContext = true
+            self.tableView.tableHeaderView = controller.searchBar
+            return controller
+        })()
 
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
@@ -83,13 +91,11 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating, UISea
         self.viewModel.onSelectCity(city)
     }
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print(".searchBar.textDidChange", searchText)
-        self.viewModel.onChangeSearch(searchText)
-    }
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        print(".updateSearch", searchController.searchBar.text)
+        let searchText = searchController.searchBar.text
+        print(".updateSearch", searchText)
+        self.viewModel.onChangeSearch(searchText)
     }
 
 }

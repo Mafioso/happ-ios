@@ -40,7 +40,7 @@ extension EventManageViewModel: SelectInterestsVMProtocol {
     func selectInterestsGetTitle() -> String {
         return self.event.title
     }
-    func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) {
+    func selectInterestsOnSave(selectedInterests: [InterestModel]) {
         // TODO
         // self.event.interests = selectedInterests
         self.navigateBack?()

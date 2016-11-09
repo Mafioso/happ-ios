@@ -25,7 +25,7 @@ class SelectInterestsController: UIViewController {
 
     // actions
     @IBAction func clickedSave(sender: UIButton) {
-        self.viewModel.onClickSave()
+        self.viewModel.onSave()
     }
     @IBAction func clickedNavItemSecond(sender: UIButton) {
         self.viewModel.onClickNavItem()

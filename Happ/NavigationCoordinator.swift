@@ -165,8 +165,11 @@ class NavigationCoordinator {
     }
 
     func start() {
+        self.startSetupCityAndInterests()
+        /*
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.checkUserProfile(self.startFeed) : self.startSignIn() }
+        */
     }
 
     func goBack() {
@@ -309,21 +312,6 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
-    /*
-    func startSelectCityInterests() {
-        print(".profile.showSelectCityInterests")
-        let viewModel = SelectCityInterestsViewModel()
-        viewModel.navigateSelectCity = self.showSelectCity(viewModel)
-        //viewModel.navigateFeed = self.startFeed
-
-        let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCityInterests") as! SelectCityInterestsViewController
-        viewController.viewModel = viewModel
-
-        self.navigationController = UINavigationController(rootViewController: viewController)
-        self.window.rootViewController = self.navigationController
-        self.window.makeKeyAndVisible()
-    }
-    */
 
     func showSelectInterest(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol)  -> NavigationFunc {
         return {
@@ -334,7 +322,7 @@ class NavigationCoordinator {
                 viewModel.displaySlideMenu = self.displaySlideMenu
             case .NextToMenuChangeCity, .EventManage:
                 viewModel.navigateBack = self.goBack
-            case .NextToSelectCity:
+            case .Setup:
                 break // do nothing
             }
 
@@ -359,7 +347,7 @@ class NavigationCoordinator {
                 self.window.rootViewController = sidebar
                 self.window.makeKeyAndVisible()
 
-            case .EventManage:
+            case .Setup, .EventManage:
                 self.navigationController.pushViewController(viewController, animated: true)
             default: // TODO
                 break
@@ -383,13 +371,33 @@ class NavigationCoordinator {
         }
     }
 
-    func showSelectCity(parentViewModel: SelectCityViewModel) -> NavigationFunc {
-        return {
-            print(".profile.showSelectCity")
-            parentViewModel.navigateBack = self.goBack
+    func startSetupCityAndInterests() {
+        print(".start.SetupCityAndInterests")
 
-            let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("SelectCity") as! SelectCityViewController
-            viewController.viewModel = parentViewModel
+        let viewModel = SetupCityAndInterestsViewModel()
+
+        let selectCityViewModel = SelectCityOnSetupViewModel()
+        selectCityViewModel.navigateBack = self.goBack
+
+        viewModel.navigateBack = self.goBack
+        viewModel.navigateSelectCity = self.showSetupSelectCity(selectCityViewModel)
+        viewModel.navigateSelectInterests = self.showSelectInterest(.Setup, parentViewModel: viewModel)
+        viewModel.navigateFeed = self.startFeed
+
+        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SetupCity") as! SetupCityController
+        viewController.viewModel = viewModel
+        viewController.viewModelSelectCity = selectCityViewModel
+
+        self.navigationController = UINavigationController(rootViewController: viewController)
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+    }
+    func showSetupSelectCity(viewModel: SelectCityOnSetupViewModel) -> NavigationFunc {
+        return {
+            print(".setup.showSetupSelectCity")
+
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
+            viewController.viewModel = viewModel
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
@@ -512,7 +520,7 @@ class NavigationCoordinator {
     private func initMenuController(highlight: MenuActions) -> MenuViewController {
         let viewModel = MenuViewModel(highlight: highlight)
         
-        let viewModelSelectCity = SelectCityViewModel()
+        let viewModelSelectCity = SelectCityOnMenuViewModel()
         viewModelSelectCity.navigateFeed = self.startFeed
 
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)

@@ -20,11 +20,11 @@ enum InterestSelectionTypes {
 protocol SelectInterestsVMProtocol {
     func selectInterestsIsAllowsMultipleSelection() -> Bool
     func selectInterestsGetTitle() -> String
-    func selectInterestsOnSave(scope: SelectInterestsScope, selectedInterests: [InterestModel]) -> Void
+    func selectInterestsOnSave(selectedInterests: [InterestModel]) -> Void
 }
 enum SelectInterestsScope {
     case EventManage
-    case NextToSelectCity
+    case Setup
     case MenuChangeInterests
     case NextToMenuChangeCity
 }
@@ -60,7 +60,7 @@ class SelectInterestsViewModel {
             .then { _ -> Void in
                 self.interests = self.getInterests()
 
-                print(".fetchInterests.done", self.interests.count, self.didUpdate)
+                print(".SelectInterestsVM.fetchInterests.done", self.interests.count, self.didUpdate)
                 self.didUpdate?()
         }
     }
@@ -82,10 +82,6 @@ class SelectInterestsViewModel {
             break
         }
     }
-    func onClickSave() {
-        // TODO
-        self.navigateBack?()
-    }
     func onSelectAll() {
         self.selectedInterests = [:]
         self.interests.forEach { interest in
@@ -101,7 +97,7 @@ class SelectInterestsViewModel {
         let selectedInterests: [InterestModel] = selectedInterestsMap.flatMap { $0 }
 
         print("..onSave", selectedInterests)
-        self.parentViewModel.selectInterestsOnSave(self.scope, selectedInterests:  selectedInterests)
+        self.parentViewModel.selectInterestsOnSave(selectedInterests)
     }
     func onScroll(offset: Int) {
         let isNowHeaderVisible = offset < 138

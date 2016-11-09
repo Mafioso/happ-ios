@@ -17,7 +17,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             self.bindToViewModel()
         }
     }
-    var viewModelSelectCity: SelectCityViewModel! {
+    var viewModelSelectCity: SelectCityOnMenuViewModel! {
         didSet {
             self.bindToSelectCityViewModel()
         }
@@ -49,7 +49,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     // variables
     var tableMenuActions: UITableView!
-    var tableViewControllerSelectCity: MenuSelectCityController!
+    var tableViewControllerSelectCity: SelectCityOnMenuController!
 
 
     override func viewDidLoad() {
@@ -78,7 +78,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             self.tableMenuActions.delegate = self
         }
         if segue.identifier == segueEmbeddedSelectCity {
-            let dest = segue.destinationViewController as! MenuSelectCityController
+            let dest = segue.destinationViewController as! SelectCityOnMenuController
             self.tableViewControllerSelectCity = dest
             self.tableViewControllerSelectCity.viewModel = self.viewModelSelectCity
         }

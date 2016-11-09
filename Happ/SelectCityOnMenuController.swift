@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-class MenuSelectCityController: SelectCityPrototype {
-    
+class SelectCityOnMenuController: SelectCityPrototype {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
