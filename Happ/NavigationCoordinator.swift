@@ -165,11 +165,8 @@ class NavigationCoordinator {
     }
 
     func start() {
-        self.startSetupCityAndInterests()
-        /*
         AuthenticationService.isCredentialAvailable()
             .then { result in result ? self.checkUserProfile(self.startFeed) : self.startSignIn() }
-        */
     }
 
     func goBack() {
@@ -184,10 +181,13 @@ class NavigationCoordinator {
     }
 
     func startSignIn() {
-        print(".nav.showSignIn")
+        print(".nav.startSignIn")
         let viewModel = AuthenticationViewModel()
-        viewModel.navigateSignUp = self.showSignUp
-        viewModel.navigateFeed = self.startFeed
+        viewModel.navigateSignUp = self.showSignUp(viewModel)
+        viewModel.navigateBack = self.goBack
+        viewModel.navigateSetup = self.startSetupCityAndInterests
+        // viewModel.navigateTerm
+        // viewModel.navigatePolicy
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
         viewController.viewModel = viewModel
@@ -196,18 +196,14 @@ class NavigationCoordinator {
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
-
-    func showSignUp() {
-        print(".nav.showSignUp")
-        let viewModel = AuthenticationViewModel()
-        //viewModel.navigateSelectCityInterests = self.startSelectCityInterests
-        viewModel.navigateFeed = self.startFeed
-
-        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
-        viewController.viewModel = viewModel
-        self.navigationController.pushViewController(viewController, animated: true)
+    func showSignUp(parentViewModel: AuthenticationViewModel) -> NavigationFunc {
+        return {
+            print(".nav.showSignUp")
+            let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
     }
-
 
     func startMainTab(showMainController: NavigationFunc) -> NavigationFunc {
         return {

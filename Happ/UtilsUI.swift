@@ -11,6 +11,17 @@ import UIKit
 import PromiseKit
 
 
+
+extension UIView {
+    func extRoundCorners(corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.CGPath
+        self.layer.mask = mask
+    }
+}
+
+
 extension UIColor {
     class func happOrangeColor() -> UIColor {
         return UIColor(red:1.00, green:0.41, blue:0.11, alpha:1.0)
