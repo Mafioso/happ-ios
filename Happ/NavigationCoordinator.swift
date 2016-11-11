@@ -41,15 +41,16 @@ class HappNavigationController: UINavigationController {
 
 class HappMainTabBarController: UITabBarController {
 
-    var navigateFeedTab: NavigationFunc = nil
-    var navigateFavouriteTab: NavigationFunc = nil
+    var navigateExploreTab: NavigationFunc
+    var navigateFeedTab: NavigationFunc
+    var navigateFavouriteTab: NavigationFunc
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor.happOrangeColor()
 
-        let tabExplore = HappNavigationController()
+        let tabExplore = UINavigationController()
         let tabMap = HappNavigationController()
         let tabFeed = HappNavigationController()
         let tabFavourite = HappNavigationController()
@@ -79,6 +80,8 @@ class HappMainTabBarController: UITabBarController {
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         let selectedAt = tabBar.items!.indexOf(item)!
         switch selectedAt {
+        case 0:
+            self.navigateExploreTab?()
         case 2:
             self.navigateFeedTab?()
         case 3:
@@ -166,7 +169,7 @@ class NavigationCoordinator {
 
     func start() {
         AuthenticationService.isCredentialAvailable()
-            .then { result in result ? self.checkUserProfile(self.startFeed) : self.startSignIn() }
+            .then { result in result ? self.updateUserProfile(self.startFeed) : self.startSignIn() }
     }
 
     func goBack() {
@@ -186,10 +189,11 @@ class NavigationCoordinator {
         viewModel.navigateSignUp = self.showSignUp(viewModel)
         viewModel.navigateBack = self.goBack
         viewModel.navigateSetup = self.startSetupCityAndInterests
+        viewModel.navigateFeed = self.startFeed
         // viewModel.navigateTerm
         // viewModel.navigatePolicy
 
-        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! LoginController
+        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! SignInController
         viewController.viewModel = viewModel
 
         self.navigationController = UINavigationController(rootViewController: viewController)
@@ -210,9 +214,10 @@ class NavigationCoordinator {
             print(".nav.mainTab")
 
             let mainTabBar = HappMainTabBarController()
+            mainTabBar.navigateExploreTab = self.showExplore
             mainTabBar.navigateFeedTab = self.showFeed
             mainTabBar.navigateFavouriteTab = self.showFavourite
-            
+
             self.tabBarController = mainTabBar
             self.navigationController = nil
             
@@ -295,6 +300,19 @@ class NavigationCoordinator {
             self.navigationController = self.tabBarController.viewControllers![2] as! UINavigationController
             self.navigationController.viewControllers = [viewController]
         }
+    }
+    func showExplore() {
+        let viewModel = EventsExploreViewModel()
+        viewModel.navigateEventDetails = self.showEventDetails
+        viewModel.displaySlideMenu = self.displaySlideMenu
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("Explore") as! EventsExploreViewController
+        viewController.viewModel = viewModel
+
+        let tabIndex = 0
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
     }
 
 
@@ -475,13 +493,18 @@ class NavigationCoordinator {
     }
 
 
-    private func checkUserProfile(next: () -> (Void)) {
+    private func updateUserProfile(next: () -> (Void)) {
+        /*
         if ProfileService.isUserProfileExists() {
             next()
         } else {
             ProfileService.fetchUserProfile()
                 .then { next() }
         }
+        */
+        ProfileService
+            .fetchUserProfile()
+            .then { next() }
     }
 
     private func displaySlideMenu() {

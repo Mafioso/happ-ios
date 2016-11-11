@@ -24,7 +24,7 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
 
-    
+
     // outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -126,7 +126,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
 
     // MARK: UITableViewDelegate
-
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.getEventAt(indexPath)
         print(".didSelect", indexPath.row, event.title)

@@ -23,6 +23,9 @@
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
+		52722F911DD4E49E00F31811 /* EventsExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */; };
+		52722F931DD4E80D00F31811 /* EventsExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52722F921DD4E80D00F31811 /* EventsExploreViewModel.swift */; };
+		52722F951DD4F1E300F31811 /* EventExploreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */; };
 		527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */; };
 		527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */; };
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
@@ -105,6 +108,9 @@
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		525A8AB31D7D4023002C6F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsExploreViewController.swift; sourceTree = "<group>"; };
+		52722F921DD4E80D00F31811 /* EventsExploreViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsExploreViewModel.swift; sourceTree = "<group>"; };
+		52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventExploreCollectionViewCell.swift; sourceTree = "<group>"; };
 		527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -275,6 +281,7 @@
 				52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
 				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
+				52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
@@ -293,6 +300,7 @@
 				5239C37D1D92434700F66E31 /* EventTableCell.xib */,
 				52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */,
 				52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */,
+				52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -315,6 +323,7 @@
 				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */,
 				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
+				52722F921DD4E80D00F31811 /* EventsExploreViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
@@ -565,6 +574,7 @@
 				52F65F911DC75E10005E751E /* InterestCollectionViewCell.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
 				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
+				52722F911DD4E49E00F31811 /* EventsExploreViewController.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
@@ -572,12 +582,14 @@
 				52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */,
 				52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
+				52722F951DD4F1E300F31811 /* EventExploreCollectionViewCell.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
 				52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */,
 				522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */,
+				52722F931DD4E80D00F31811 /* EventsExploreViewModel.swift in Sources */,
 				527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */,
 				52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */,
 				52F65F8F1DC75475005E751E /* SelectInterestsController.swift in Sources */,

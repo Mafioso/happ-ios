@@ -12,35 +12,37 @@ import PromiseKit
 
 
 class AuthenticationViewModel {
-    
+
     var navigateSignUp: NavigationFunc
-    var navigateSelectCityInterests: NavigationFunc
+    var navigateFeed: NavigationFunc
     var navigateSetup: NavigationFunc
     var navigateBack: NavigationFunc
 
 
     init() {
-        
     }
 
 
     //MARK: - Events
     var didUpdate: (() -> Void)?
-
+    var willDestroy: (() -> Void)?
 
     //MARK: - Inputs
     func onSignIn(username: String, password: String) -> Promise<Void> {
         return AuthenticationService.signIn(username, password: password)
             .then { data -> Void in
-                self.navigateSetup?()
+                self.willDestroy?()
+                self.navigateFeed?()
             }
     }
     func onSignUp(username: String, password: String) -> Promise<Void> {
         return AuthenticationService.signUp(username, password: password, email: nil)
             .then { data -> Void in
-                self.navigateSelectCityInterests?()
+                self.willDestroy?()
+                self.navigateSetup?()
             }
     }
 
-
 }
+
+

@@ -137,12 +137,22 @@ extension UIViewController {
         }
     }
 
-    func extMakeNavBarTransparrent(color: UIColor = UIColor.happBlackQuarterTextColor()) {
+    func extMakeNavBarWhite() {
+        if let navbar = self.navigationController?.navigationBar {
+            let textColor = UIColor.happBlackQuarterTextColor()
+            navbar.barTintColor = UIColor.whiteColor()
+            navbar.tintColor = textColor
+
+            let titleProp: NSDictionary = [NSForegroundColorAttributeName: textColor]
+            navbar.titleTextAttributes = titleProp as? [String : AnyObject]
+        }
+    }
+    func extMakeNavBarTransparrent(textColor: UIColor = UIColor.happBlackQuarterTextColor()) {
         if let navbar = self.navigationController?.navigationBar {
             navbar.barTintColor = UIColor.clearColor()
-            navbar.tintColor = color
+            navbar.tintColor = textColor
 
-            let titleProp: NSDictionary = [NSForegroundColorAttributeName: color]
+            let titleProp: NSDictionary = [NSForegroundColorAttributeName: textColor]
             navbar.titleTextAttributes = titleProp as? [String : AnyObject]
 
             navbar.translucent = true

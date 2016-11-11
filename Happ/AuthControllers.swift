@@ -30,7 +30,7 @@ class SignUpController: AuthController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
+
         // username
         viewFieldContainerUsername.layer.borderColor = UIColor.whiteColor().CGColor
         viewFieldContainerUsername.layer.borderWidth = 1
@@ -43,24 +43,6 @@ class SignUpController: AuthController {
         viewFieldContainerRepeatPassword.layer.borderWidth = 1
         viewFieldContainerRepeatPassword.extRoundCorners([.BottomLeft, .BottomRight], radius: 5)
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        print(".SignUp.vwA")
-
-        self.extMakeNavBarHidden()
-        self.extMakeStatusBarWhite()
-    }
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        print(".SignUp.vwD")
-
-        self.deinitObservers()
-        self.extMakeNavBarVisible()
-        self.extMakeStatusBarDefault()
-    }
-
 
 
     // overrides AuthController
@@ -68,9 +50,9 @@ class SignUpController: AuthController {
         if  let username = textFieldUsername.text,
             let password = textFieldPassword.text,
             let repeatPassword = textFieldRepeatPassword.text {
-            
-            if password == repeatPassword {
-                self.extDisplayAlertView("Passwords don't match")
+
+            if password != repeatPassword {
+                self.extDisplayAlertView("Passwords don't match", title: "Type again")
                 return
             }
 
@@ -83,13 +65,13 @@ class SignUpController: AuthController {
                     self.extDisplayAlertView(e)
             }
         } else {
-            self.extDisplayAlertView("Please, fill all fields")
+            self.extDisplayAlertView("Fill all fields", title: "One more ..")
         }
     }
 }
 
 
-class LoginController: AuthController {
+class SignInController: AuthController {
 
     // outlets
     @IBOutlet weak var viewFieldContainerUsername: UIView!
@@ -116,23 +98,6 @@ class LoginController: AuthController {
         viewFieldContainerPassword.layer.borderWidth = 1
         viewFieldContainerPassword.extRoundCorners([.BottomLeft, .BottomRight], radius: 5)
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print(".Login.vwA")
-
-        self.extMakeNavBarHidden()
-        self.extMakeStatusBarWhite()
-    }
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        print(".Login.vwD")
-        
-        self.deinitObservers()
-        self.extMakeNavBarVisible()
-        self.extMakeStatusBarDefault()
-    }
 
 
     // overrides AuthController
@@ -155,13 +120,18 @@ class LoginController: AuthController {
 
 class AuthController: UIViewController {
 
-    var viewModel: AuthenticationViewModel!
+    var viewModel: AuthenticationViewModel!  {
+        didSet {
+            self.bindToViewModel()
+        }
+    }
 
 
     // outlets
-    @IBOutlet weak var constraintSignInFormBottom: NSLayoutConstraint!
-    @IBOutlet weak var constraintSignInToBottomContainer: NSLayoutConstraint!
+    @IBOutlet weak var constraintFormToBottomLayout: NSLayoutConstraint!
+    @IBOutlet weak var constraintLogoToForm: NSLayoutConstraint!
 
+    @IBOutlet weak var viewLoginByFacebookContainer: UIView!
     @IBOutlet weak var viewBottomContainer: UIView!
     @IBOutlet weak var viewSignInFormSpinner: UIView!
     @IBOutlet weak var viewSignInFormButton: UIView!
@@ -177,6 +147,10 @@ class AuthController: UIViewController {
         self.handleAuthActionClick()
     }
 
+    // variables
+    let defaultFormToBottomConstant = CGFloat(142)
+    let defaultLogoToFormConstant = CGFloat(124)
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,23 +164,24 @@ class AuthController: UIViewController {
         buttonAuthAction.clipsToBounds = true
         viewEnterWithFBRight.extRoundCorners([.TopRight, .BottomRight], radius: 5)
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-
-    func displayFormSpinner() {
-        UIView.transitionFromView(self.viewSignInFormButton,
-                                  toView: self.viewSignInFormSpinner,
-                                  duration: 0.5,
-                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
-                                  completion: nil)
-            viewSignInFormSpinner.superview
+        self.extMakeNavBarHidden()
+        self.extMakeStatusBarWhite()
     }
 
-    func displayFormButton() {
-        UIView.transitionFromView(self.viewSignInFormSpinner,
-                                  toView: self.viewSignInFormButton,
-                                  duration: 0.5,
-                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
-                                  completion: nil)
+
+    func handleWillDestroy() {
+        self.deinitObservers()
+        self.extMakeNavBarVisible()
+        self.extMakeStatusBarDefault()
+    }
+
+    private func bindToViewModel() {
+        self.viewModel.willDestroy = { [weak self] _ in
+            self?.handleWillDestroy()
+        }
     }
 
 
@@ -216,11 +191,11 @@ class AuthController: UIViewController {
     private func initObservers() {
         // keyboard
         NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: #selector(LoginController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+            .addObserver(self, selector: #selector(AuthController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: #selector(LoginController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+            .addObserver(self, selector: #selector(AuthController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         // tap
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AuthController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
     private func deinitObservers() {
@@ -234,21 +209,40 @@ class AuthController: UIViewController {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
 
+        self.viewLoginByFacebookContainer.hidden = true
         self.viewBottomContainer.hidden = true
-        self.constraintSignInToBottomContainer.active = false
 
-        self.constraintSignInFormBottom.constant  = keyboardFrame.size.height + 20
-        self.constraintSignInFormBottom.active = true
+        constraintLogoToForm.constant = CGFloat(15)
+        constraintFormToBottomLayout.constant = keyboardFrame.size.height + 15
     }
-
     func keyboardWillHide(notification: NSNotification) {
+        self.viewLoginByFacebookContainer.hidden = false
         self.viewBottomContainer.hidden = false
-        self.constraintSignInToBottomContainer.active = true
-        
-        self.constraintSignInFormBottom.active = false
-    }
 
+        constraintLogoToForm.constant = self.defaultLogoToFormConstant
+        constraintFormToBottomLayout.constant = self.defaultFormToBottomConstant
+    }
     func dismissKeyboard() {
         view.endEditing(true)
     }
+
+
+    func displayFormSpinner() {
+        UIView.transitionFromView(self.viewSignInFormButton,
+                                  toView: self.viewSignInFormSpinner,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+    }
+    func displayFormButton() {
+        UIView.transitionFromView(self.viewSignInFormSpinner,
+                                  toView: self.viewSignInFormButton,
+                                  duration: 0.5,
+                                  options: UIViewAnimationOptions.ShowHideTransitionViews,
+                                  completion: nil)
+    }
 }
+
+
+
+

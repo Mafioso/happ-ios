@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.5.0)
   - HanekeSwift (0.10.1)
+  - Jibber-Framework (2.0.1)
   - KeychainSwift (3.0.16)
   - ObjectMapper (1.4.0)
   - ObjectMapper+Realm (0.1):
@@ -35,6 +36,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - HanekeSwift
+  - Jibber-Framework (~> 2.0.0)
   - KeychainSwift (from `https://github.com/marketplacer/keychain-swift.git`, branch `swift_2_3`)
   - ObjectMapper (~> 1.3)
   - ObjectMapper+Realm
@@ -61,6 +63,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  Jibber-Framework: 3e23ef010b68b226c0fca3e2cd44245110230795
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
   ObjectMapper+Realm: dbcf666c2081d82dc527b054c574b9f3777df060
@@ -70,6 +73,6 @@ SPEC CHECKSUMS:
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
 
-PODFILE CHECKSUM: 7fe383e9129dd4ab9a579b339bae815df91e2e70
+PODFILE CHECKSUM: d8b257d50b90d9bf88306a4561a1767e3126a5d9
 
 COCOAPODS: 1.0.1

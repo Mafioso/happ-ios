@@ -39,13 +39,16 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
 
     override private func willLoad() {
         self.fetchCities().then { _ -> Void in
-            print(".selectCityVM.fetchCities.done", self.cities.count)
+            print("..selectCity[VM].fetchCities.done", self.cities.count)
             self.fetchUserCity()
                 .then { _ -> Void in
-                    print(".selectCityVM.fetchUserCity.done", self.selectedCity?.name)
+                    print("..selectCity[VM].fetchUserCity.done", self.selectedCity?.name)
                     self.didLoad?()
                     self.didUpdate?()
-            }
+                }
+                .error { err in
+                    print("..selectCity[VM].fetchUserCity.fail", err)
+                }
         }
     }
     private func getUserCity() -> CityModel? {
@@ -75,7 +78,11 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
         return self.getUserCity()!.name
     }
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
-        self.navigateFeed?()
+        let interestIDs = selectedInterests.map { $0.id }
+        InterestService.setUserInterests(interestIDs)
+            .then { _ in
+                self.navigateFeed?()
+        }
     }
 }
 

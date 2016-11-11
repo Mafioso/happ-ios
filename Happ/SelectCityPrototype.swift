@@ -45,6 +45,7 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
 
+        self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,6 +54,7 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
     }
 
     func viewModelDidUpdate() {
+        print(".SelectCity[V].VMdidUpdate", self.viewModel.cities.count)
         self.tableView.reloadData()
     }
     private func bindToViewModel() {

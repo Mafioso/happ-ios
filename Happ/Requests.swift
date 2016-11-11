@@ -13,7 +13,7 @@ import PromiseKit
 
 let Host = "http://happ.westeurope.cloudapp.azure.com"
 let HostLocal = "http://127.0.0.1:8000"
-let HostAPI = HostLocal + "/api/v1/"
+let HostAPI = Host + "/api/v1/"
 
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {
@@ -101,7 +101,7 @@ func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = tru
             .validate()
             .validate(statusCode: [405])
             .response { (request, response, data, error) in
-                
+
                 print(".here", request, response)
 
                 if error == nil {

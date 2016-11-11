@@ -17,6 +17,9 @@ class SelectCityOnMenuController: SelectCityPrototype {
         
         let searchBar = self.tableView.tableHeaderView as! UISearchBar
         searchBar.placeholder = "Find city..."
+        
+
+        print("..SelectCityOnMenu[V]", self.viewModel.cities.count)
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

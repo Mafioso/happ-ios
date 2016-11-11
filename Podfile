@@ -16,6 +16,9 @@ target 'Happ' do
   pod 'SlideMenuControllerSwift', git: "https://github.com/dekatotoro/SlideMenuControllerSwift.git", branch: "swift2.3"
 
 
+  pod 'Jibber-Framework', '~> 2.0.0', :configurations => ['Debug']
+
+
   post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|

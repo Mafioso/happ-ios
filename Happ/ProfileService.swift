@@ -68,6 +68,7 @@ class ProfileService {
 
                     // 2. add new
                     let user = Mapper<UserModel>().map(result)
+                    print("...ProfileService.fetchUserProfile", user, user?.settings?.city_id)
                     realm.add(user!, update: true)
                 }
         }

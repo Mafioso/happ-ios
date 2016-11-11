@@ -74,11 +74,13 @@ class EventDetailsController: UIViewController {
         super.viewWillAppear(animated)
 
         self.extMakeStatusBarWhite()
+        self.extMakeNavBarHidden()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
         self.extMakeStatusBarDefault()
+        self.extMakeNavBarVisible()
     }
 
 

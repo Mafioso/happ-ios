@@ -24,7 +24,11 @@ class PrototypeEventManageViewController: UIViewController {
         super.viewDidLoad()
         
         self.initNavBarItems()
-        self.navigationController?.navigationBar.tintColor = UIColor.happBlackHalfTextColor()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.extMakeNavBarWhite()
     }
 
 
