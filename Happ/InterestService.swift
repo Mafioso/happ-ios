@@ -37,7 +37,7 @@ class InterestService {
 
     static func setUserInterests(interestIDs: [String]) -> Promise<AnyObject> {
         let url = endpointInterest + "set/"
-        let data = try! NSJSONSerialization.dataWithJSONObject(interestIDs, options: [])
+        let data = try! NSJSONSerialization.dataWithJSONObject(interestIDs, options: .PrettyPrinted)
         return Post(url, parametersJSON: data)
     }
 
@@ -48,7 +48,6 @@ class InterestService {
     }
 
     static func getParentOf(interest: InterestModel) -> InterestModel? {
-        print("..getParentOf interest.parent_id = ", interest.parent_id)
         if let id = interest.parent_id {
             let realm = try! Realm()
             return realm

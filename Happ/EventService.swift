@@ -85,7 +85,7 @@ class EventService {
         }
     }
     class func fetchExplore(page: Int = 1) -> Promise<Void> {
-        let paged = endpoint + "?page=\(page)"
+        let paged = endpoint + "favourites/" + "?page=\(page)"
         return GetPaginated(paged, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]

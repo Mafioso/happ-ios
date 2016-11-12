@@ -41,7 +41,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         self.initTableView()
     }
     override func viewWillAppear(animated: Bool) {
@@ -77,18 +76,16 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     }
 
 
-    // MARK: UITableViewDataSource
 
+    // MARK: UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let eventsCount = self.viewModel.getEventsCount()
         print(".numberOfRow", eventsCount)
         return eventsCount
     }
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventTableCell
 
@@ -115,7 +112,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         }
         cell.viewModel = eventViewModel
 
-
         // paginating
         if indexPath.row == self.viewModel.getEventsCount() - 3 {
             self.viewModel.loadNextPage()
@@ -123,7 +119,6 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
         return cell
     }
-
 
     // MARK: UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

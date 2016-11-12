@@ -94,7 +94,7 @@ class HappMainTabBarController: UITabBarController {
 
 
 class HappManagerTabBarController: UITabBarController {
-    
+
     var navigateMyEventsTab: NavigationFunc = nil
     var navigateAddEventTab: NavigationFunc = nil
 
@@ -105,7 +105,7 @@ class HappManagerTabBarController: UITabBarController {
 
         let tabAnalytics = HappNavigationController()
         let tabProFunctions = HappNavigationController()
-        let tabMyEvents = HappNavigationController()
+        let tabMyEvents = UINavigationController()
         let tabAddEvent = HappNavigationController()
         // let tabChat = HappNavigationController()
 
@@ -209,42 +209,64 @@ class NavigationCoordinator {
         }
     }
 
-    func startMainTab(showMainController: NavigationFunc) -> NavigationFunc {
-        return {
-            print(".nav.mainTab")
 
-            let mainTabBar = HappMainTabBarController()
-            mainTabBar.navigateExploreTab = self.showExplore
-            mainTabBar.navigateFeedTab = self.showFeed
-            mainTabBar.navigateFavouriteTab = self.showFavourite
+    func initMainTab() {
+        print(".nav.mainTab")
+        
+        let mainTabBar = HappMainTabBarController()
+        mainTabBar.navigateExploreTab = self.showExplore
+        mainTabBar.navigateFeedTab = self.showFeed
+        mainTabBar.navigateFavouriteTab = self.showFavourite
 
-            self.tabBarController = mainTabBar
-            self.navigationController = nil
-            
-            showMainController!()
+        self.tabBarController = mainTabBar
+        self.navigationController = nil
+    }
+    func initManagerTab() {
+        print(".nav.managerTab")
+
+        let managerTabBar = HappManagerTabBarController()
+        managerTabBar.navigateMyEventsTab = self.showMyEvents
+        managerTabBar.navigateAddEventTab = self.startEventManage
+
+        self.tabBarController = managerTabBar
+        self.navigationController = nil
+    }
+    func updateSlidebar(rightController: UIViewController? = nil) {
+        var menuController: MenuViewController
+        var slidebar: SlideMenuController
+
+        if self.tabBarController is HappMainTabBarController {
+            menuController = self.initMenuController(.Feed)
+        } else { //  if self.tabBarController is HappManagerTabBarController
+            menuController = self.initMenuController(.EventPlanner)
         }
-    }
-    func startManagerTab(showMainController: NavigationFunc) -> NavigationFunc {
-        return {
-            print(".nav.managerTab")
 
-            let managerTabBar = HappManagerTabBarController()
-            managerTabBar.navigateMyEventsTab = self.showMyEvents
-            managerTabBar.navigateAddEventTab = self.startEventManage
-
-            self.tabBarController = managerTabBar
-            self.navigationController = nil
-            
-            showMainController!()
+        if rightController != nil {
+            slidebar = SlideMenuController(
+                mainViewController: self.tabBarController,
+                leftMenuViewController: menuController,
+                rightMenuViewController: rightController!)
+        } else {
+            slidebar = SlideMenuController(
+                mainViewController: self.tabBarController,
+                leftMenuViewController: menuController)
         }
+
+        self.window.rootViewController = slidebar
+        self.window.makeKeyAndVisible()
     }
 
-    func startMyEvents() {
-        self.startManagerTab(self.showMyEvents)!()
-    }
     func startFeed() {
-        self.startMainTab(self.showFeed)!()
+        self.initMainTab()
+        self.updateSlidebar()
+        self.showFeed()
     }
+    func startMyEvents() {
+        self.initManagerTab()
+        self.updateSlidebar()
+        self.showMyEvents()
+    }
+
 
     func showFeed() {
         self.showEventsList(.Feed)
@@ -253,12 +275,19 @@ class NavigationCoordinator {
         self.showEventsList(.Favourite)
     }
     func showMyEvents() {
-        self.showEventsList(.MyEvents)
+        let viewModel = EventsListViewModel(scope: .Favourite)
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
+        viewController.viewModel = viewModel
+
+        self.tabBarController.selectedIndex = 2
+        self.navigationController = self.tabBarController.viewControllers![2] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
     }
 
     func showEventsList(scope: EventsListScope) {
-        print(".nav.mainTab.showEventsList", scope)
-
         let viewModel = EventsListViewModel(scope: scope)
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
@@ -268,38 +297,16 @@ class NavigationCoordinator {
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
 
+        let tabIndex = (scope == .Feed) ? 2 : 3
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
 
-        // init sidebar
+        // slidebar filter
         let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
         filtersViewController.viewModel = viewModel
-
-        var menuController: MenuViewController
-        switch scope {
-        case .Feed, .Favourite:
-            menuController = self.initMenuController(.Feed)
-        case .MyEvents:
-            menuController = self.initMenuController(.EventPlanner)
-        }
-
-        let sidebar = SlideMenuController(
-            mainViewController: self.tabBarController,
-            leftMenuViewController: menuController,
-            rightMenuViewController: filtersViewController)
-        self.window.rootViewController = sidebar
-        self.window.makeKeyAndVisible()
-
-
-        if scope == .Feed || scope == .Favourite {
-            let tabIndex = (scope == .Feed) ? 2 : 3
-            self.tabBarController.selectedIndex = tabIndex
-            self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
-            self.navigationController.viewControllers = [viewController]
-
-        } else {
-            self.tabBarController.selectedIndex = 2
-            self.navigationController = self.tabBarController.viewControllers![2] as! UINavigationController
-            self.navigationController.viewControllers = [viewController]
-        }
+        // update slidebar
+        self.updateSlidebar(filtersViewController)
     }
     func showExplore() {
         let viewModel = EventsExploreViewModel()
@@ -313,6 +320,8 @@ class NavigationCoordinator {
         self.tabBarController.selectedIndex = tabIndex
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
+
+        self.updateSlidebar() // to remove feedFilter
     }
 
 
@@ -324,6 +333,8 @@ class NavigationCoordinator {
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
+
+        self.updateSlidebar() // to remove feedFilter
     }
 
 

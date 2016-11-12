@@ -79,10 +79,13 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
     }
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
         let interestIDs = selectedInterests.map { $0.id }
+        self.navigateFeed?()
+        /*
         InterestService.setUserInterests(interestIDs)
             .then { _ in
                 self.navigateFeed?()
         }
+        */
     }
 }
 

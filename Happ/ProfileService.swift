@@ -45,8 +45,6 @@ class ProfileService {
                 try! realm.write {
                     let inst = Mapper<CityModel>().map(result)
                     realm.add(inst!, update: true)
-
-                    print(".fetchCity", result, inst)
                 }
         }
     }
@@ -68,7 +66,6 @@ class ProfileService {
 
                     // 2. add new
                     let user = Mapper<UserModel>().map(result)
-                    print("...ProfileService.fetchUserProfile", user, user?.settings?.city_id)
                     realm.add(user!, update: true)
                 }
         }

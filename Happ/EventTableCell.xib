@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="307" height="426"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oWQ-0b-H5S" id="1hg-BO-haP">
-                <frame key="frameInset" width="307" height="426"/>
+                <frame key="frameInset" width="307" height="425"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4P-8l-Kev">
@@ -67,7 +67,7 @@
                                                             <constraint firstAttribute="height" constant="20" id="45e-Mj-XcS"/>
                                                             <constraint firstAttribute="width" constant="20" id="CgE-sJ-uhO"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="icon-upvote"/>
+                                                        <state key="normal" backgroundImage="icon-upvote-active"/>
                                                         <connections>
                                                             <action selector="clickedUpvote:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="C3S-26-gGT"/>
                                                         </connections>
@@ -204,6 +204,6 @@
         <image name="bg-feed" width="375" height="180"/>
         <image name="icon-dots-menu" width="20" height="20"/>
         <image name="icon-star" width="20" height="20"/>
-        <image name="icon-upvote" width="20" height="20"/>
+        <image name="icon-upvote-active" width="20" height="20"/>
     </resources>
 </document>

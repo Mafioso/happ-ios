@@ -55,7 +55,9 @@ class EventsExploreViewController: UICollectionViewController {
     
     // size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(124, 164)
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        return CGSizeMake(screenSize.width*0.33, 164)
+        //return CGSizeMake(124, 164)
     }
     // data source
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -72,7 +74,9 @@ class EventsExploreViewController: UICollectionViewController {
         if let imageURL = event.images.first {
             cell.image.hnk_setImageFromURL(imageURL!)
         }
-        //cell.viewTitleContainer.backgroundColor =
+        if let eventColor = EventColors(rawValue: event.id) {
+            cell.viewTitleContainer.backgroundColor = eventColor.color()
+        }
 
         return cell
     }

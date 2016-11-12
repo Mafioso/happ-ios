@@ -184,8 +184,10 @@ enum EventModelStatusTypes: Int {
     case Active
     case Inactive
     case OnReview
+    case Rejected
     case Finished
 }
+
 
 
 class EventModel: Object, Mappable {

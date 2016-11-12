@@ -7,9 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="2279.ttf">
-            <string>WienLight</string>
-        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
@@ -18,6 +15,9 @@
         </array>
         <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
+        </array>
+        <array key="WienLight_Normal.ttf">
+            <string>WienLight</string>
         </array>
     </customFonts>
     <scenes>
@@ -956,7 +956,7 @@
                             <constraint firstItem="eOU-6a-SyB" firstAttribute="top" secondItem="aoG-P7-XEc" secondAttribute="bottom" constant="1" id="puh-yZ-M1E"/>
                             <constraint firstAttribute="trailing" secondItem="aoG-P7-XEc" secondAttribute="trailing" id="qfq-sJ-bfy"/>
                             <constraint firstItem="aoG-P7-XEc" firstAttribute="top" secondItem="lWp-yv-ivc" secondAttribute="bottom" id="si4-Yo-8Ss"/>
-                            <constraint firstItem="wSA-fa-9C6" firstAttribute="top" secondItem="g6C-Mf-hlv" secondAttribute="bottom" constant="34" id="vbB-4e-pJV"/>
+                            <constraint firstItem="wSA-fa-9C6" firstAttribute="top" secondItem="g6C-Mf-hlv" secondAttribute="bottom" constant="16" id="vbB-4e-pJV"/>
                             <constraint firstItem="m6F-pR-VhS" firstAttribute="top" secondItem="wSA-fa-9C6" secondAttribute="bottom" constant="32" id="vkK-jo-KWu"/>
                             <constraint firstItem="wSA-fa-9C6" firstAttribute="leading" secondItem="712-Gt-gEi" secondAttribute="leading" id="xfW-mx-zjb"/>
                         </constraints>
@@ -1668,7 +1668,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zww-yP-yra" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2255" y="2066"/>
+            <point key="canvasLocation" x="3694" y="1279"/>
         </scene>
         <!--Events Explore View Controller-->
         <scene sceneID="r6Q-gs-EfQ">
@@ -1678,7 +1678,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="nE1-jB-HgZ">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="nE1-jB-HgZ">
                             <size key="itemSize" width="124" height="164"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1711,7 +1711,7 @@
                                                     <string key="text">MASTER CLASS
 OF COOKING</string>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1748,7 +1748,25 @@ OF COOKING</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozY-QV-QtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2989.5999999999999" y="2067.6161919040483"/>
+            <point key="canvasLocation" x="1897" y="2066"/>
+        </scene>
+        <!--Events Manage View Controller-->
+        <scene sceneID="rvQ-Fn-euR">
+            <objects>
+                <tableViewController storyboardIdentifier="EventsManage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3rK-CQ-HF3" customClass="EventsManageViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eeS-fc-ubd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3rK-CQ-HF3" id="M44-dh-ynE"/>
+                            <outlet property="delegate" destination="3rK-CQ-HF3" id="0sD-ES-8Rk"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fBB-ie-Hbv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2778" y="2068"/>
         </scene>
         <!--Events List View Controller-->
         <scene sceneID="oXj-oC-Dx6">

@@ -34,6 +34,11 @@ class PrototypeEventManageViewController: UIViewController {
 
     private func initNavBarItems() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-presentation"), style: .Plain, target: self, action: #selector(handlePresentationButton))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-gray"), style: .Plain, target: self, action: #selector(handleBackNavItem))
+    }
+
+    func handleBackNavItem() {
+        self.viewModel.navigateBack?()
     }
 }
 
@@ -57,16 +62,6 @@ class EventManageFirstPageViewController: PrototypeEventManageViewController {
 
 
     }
-    override func initNavBarItems() {
-        super.initNavBarItems()
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-cross-gray"), style: .Plain, target: self, action: #selector(handleCloseNavItem))
-    }
-
-
-    func handleCloseNavItem() {
-        self.viewModel.navigateBack?()
-    }
 
 }
 
@@ -83,16 +78,6 @@ class EventManageSecondPageViewController: PrototypeEventManageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    }
-    override func initNavBarItems() {
-        super.initNavBarItems()
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-cross-gray"), style: .Plain, target: self, action: #selector(handleBackNavItem))
-    }
-
-
-    func handleBackNavItem() {
-        self.viewModel.navigateBack?()
     }
 
 }
