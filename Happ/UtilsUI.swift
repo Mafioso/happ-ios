@@ -22,6 +22,29 @@ extension UIView {
 }
 
 
+extension UIImage {
+    func blackAndWhiteCopy() -> UIImage {
+        let context = CIContext(options: nil)
+        let ciImage = CoreImage.CIImage(image: self)!
+
+        // Set image color to b/w
+        let bwFilter = CIFilter(name: "CIColorControls")!
+        bwFilter.setValuesForKeysWithDictionary([kCIInputImageKey:ciImage, kCIInputBrightnessKey:NSNumber(float: 0.0), kCIInputContrastKey:NSNumber(float: 1.1), kCIInputSaturationKey:NSNumber(float: 0.0)])
+        let bwFilterOutput = (bwFilter.outputImage)!
+
+        // Adjust exposure
+        let exposureFilter = CIFilter(name: "CIExposureAdjust")!
+        exposureFilter.setValuesForKeysWithDictionary([kCIInputImageKey:bwFilterOutput, kCIInputEVKey:NSNumber(float: 0.7)])
+        let exposureFilterOutput = (exposureFilter.outputImage)!
+
+        // Create UIImage from context
+        let bwCGIImage = context.createCGImage(exposureFilterOutput, fromRect: ciImage.extent)
+        let resultImage = UIImage(CGImage: bwCGIImage!, scale: 1.0, orientation: self.imageOrientation)
+
+        return resultImage
+    }
+}
+
 extension UIColor {
     class func happOrangeColor() -> UIColor {
         return UIColor(red:1.00, green:0.41, blue:0.11, alpha:1.0)
@@ -46,7 +69,7 @@ extension UIColor { // copyright https://gist.github.com/yannickl/16f0ed38f0698d
         if (hexString.hasPrefix("#")) {
             scanner.scanLocation = 1
         }
-        
+
         var color:UInt32 = 0
         scanner.scanHexInt(&color)
 

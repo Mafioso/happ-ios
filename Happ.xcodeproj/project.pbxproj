@@ -56,8 +56,8 @@
 		52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */; };
 		52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */; };
 		52FC8B091DD5DEC50032BBE4 /* EventsManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */; };
-		52FDB3841DD5CA4100E6B821 /* EventCompactTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDB3821DD5CA4100E6B821 /* EventCompactTableCell.swift */; };
-		52FDB3851DD5CA4100E6B821 /* EventCompactTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52FDB3831DD5CA4100E6B821 /* EventCompactTableCell.xib */; };
+		52FDB3841DD5CA4100E6B821 /* EventManageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */; };
+		52FDB3851DD5CA4100E6B821 /* EventManageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */; };
 		B476D76A1DAF75CF00598CB8 /* 2279.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B476D7691DAF75CF00598CB8 /* 2279.ttf */; };
 		B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */; };
 		B4E215DA1DAF764C00144E78 /* SF-UI-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B4E215C31DAF764C00144E78 /* SF-UI-Display-Black.otf */; };
@@ -145,8 +145,8 @@
 		52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsViewModel.swift; sourceTree = "<group>"; };
 		52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageViewModel.swift; sourceTree = "<group>"; };
 		52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageViewController.swift; sourceTree = "<group>"; };
-		52FDB3821DD5CA4100E6B821 /* EventCompactTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCompactTableCell.swift; sourceTree = "<group>"; };
-		52FDB3831DD5CA4100E6B821 /* EventCompactTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventCompactTableCell.xib; sourceTree = "<group>"; };
+		52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageTableCell.swift; sourceTree = "<group>"; };
+		52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventManageTableCell.xib; sourceTree = "<group>"; };
 		9C495CB03E150F798D310510 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		B476D7691DAF75CF00598CB8 /* 2279.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2279.ttf; path = Happ/Resources/2279.ttf; sourceTree = "<group>"; };
 		B4D931331D93A86B00E23C77 /* UIView+Gradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Gradient.swift"; sourceTree = "<group>"; };
@@ -307,8 +307,8 @@
 			children = (
 				5239C37C1D92434700F66E31 /* EventTableCell.swift */,
 				5239C37D1D92434700F66E31 /* EventTableCell.xib */,
-				52FDB3821DD5CA4100E6B821 /* EventCompactTableCell.swift */,
-				52FDB3831DD5CA4100E6B821 /* EventCompactTableCell.xib */,
+				52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */,
+				52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */,
 				52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */,
 				52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */,
 				52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */,
@@ -483,7 +483,7 @@
 				B4E215E51DAF764C00144E78 /* SF-UI-Text-Heavy.otf in Resources */,
 				B4E215E01DAF764C00144E78 /* SF-UI-Display-Semibold.otf in Resources */,
 				B476D76A1DAF75CF00598CB8 /* 2279.ttf in Resources */,
-				52FDB3851DD5CA4100E6B821 /* EventCompactTableCell.xib in Resources */,
+				52FDB3851DD5CA4100E6B821 /* EventManageTableCell.xib in Resources */,
 				B4E215E11DAF764C00144E78 /* SF-UI-Display-Thin.otf in Resources */,
 				B4E215DD1DAF764C00144E78 /* SF-UI-Display-Light.otf in Resources */,
 				B4E215E81DAF764C00144E78 /* SF-UI-Text-LightItalic.otf in Resources */,
@@ -564,7 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52FDB3841DD5CA4100E6B821 /* EventCompactTableCell.swift in Sources */,
+				52FDB3841DD5CA4100E6B821 /* EventManageTableCell.swift in Sources */,
 				B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */,
 				52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,

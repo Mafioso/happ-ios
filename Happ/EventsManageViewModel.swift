@@ -12,27 +12,41 @@ import PromiseKit
 
 
 
-class EventsManageViewModel {
+class EventsManageViewModel: EventsListViewModel { // TODO remove it
 
-    var navigateEventDetails: NavigationFuncWithID
-    var displaySlideMenu: NavigationFunc
+    // TODO uncomment
+    // var navigateEventDetails: NavigationFuncWithID
+    // var displaySlideMenu: NavigationFunc
     var displaySlideManageFilter: NavigationFunc
 
 
     // variables
-    var events: [EventModel]
+    // var events: [EventModel]
 
     init() {
-        self.events = []
-        
-        // self.loadNextPage()
+        super.init(scope: .Favourite)
     }
-    
+
     
     //MARK: - Events
-    var didUpdate: (() -> Void)?
+
+    // TODO uncomment
+    // var didUpdate: (() -> Void)?
 
 
     //MARK: - Inputs
-    
+    func onDelete(event: EventModel) {
+        print(".EvntsManageVM.onDelete")
+    }
+    func onShowHide(event: EventModel) {
+        print(".EvntsManageVM.onShowHide")
+    }
+    func onEdit(event: EventModel) {
+        print(".EvntsManageVM.onEdit")
+    }
+    func onShowDeniedDetails(event: EventModel) {
+        print(".EvntsManageVM.onShowDeniedDetails")
+    }
 }
+
+

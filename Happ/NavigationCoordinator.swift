@@ -275,9 +275,9 @@ class NavigationCoordinator {
         self.showEventsList(.Favourite)
     }
     func showMyEvents() {
-        let viewModel = EventsListViewModel(scope: .Favourite)
+        let viewModel = EventsManageViewModel()
         viewModel.displaySlideMenu = self.displaySlideMenu
-        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
+        viewModel.navigateEventDetails = self.showEventDetails
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
         viewController.viewModel = viewModel

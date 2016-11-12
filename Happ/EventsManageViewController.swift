@@ -12,7 +12,7 @@ import UIKit
 
 class EventsManageViewController: UITableViewController {
 
-    var viewModel: EventsListViewModel! {
+    var viewModel: EventsManageViewModel! {
         didSet {
             self.bindToViewModel()
         }
@@ -38,7 +38,7 @@ class EventsManageViewController: UITableViewController {
 
 
     func initTableView() {
-        self.tableView.registerNib(UINib(nibName: EventCompactTableCell.nibName, bundle: nil), forCellReuseIdentifier: "cell")
+        self.tableView.registerNib(UINib(nibName: EventManageTableCell.nibName, bundle: nil), forCellReuseIdentifier: "cell")
         self.tableView.rowHeight = CGFloat(125)
     }
 
@@ -70,30 +70,60 @@ class EventsManageViewController: UITableViewController {
         print("...events", self.viewModel.getEventsCount())
         return self.viewModel.getEventsCount()
     }
-
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventCompactTableCell
-
-        // configure cell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventManageTableCell
         let event = self.viewModel.getEventAt(indexPath)
-        
+        var cellInflator: EventManageTableCellInflator
+
+        // set cell data
         cell.labelTitle.text = event.title
         if let interest = event.interests.first {
             cell.labelInterest.text = interest.title
         }
+        cell.labelAddress.text = event.address
+        cell.labelPrice.text = event.getPrice(.Range)
+        cell.labelUpvoteCount.text = "\(event.votes_num)"
         if let url = event.images.first {
             cell.imageCover.hnk_setImageFromURL(url!)
         }
+        if let eventColor = EventColors(rawValue: event.id) {
+            cell.viewDetailsContainer.backgroundColor = eventColor.color()
+            cell.viewStatusBackground.backgroundColor = eventColor.color()
+        }
 
+        // set cell styles
         switch event.getStatus() {
         case .Active:
-            //cell.
-            break
-        default:
-            break
+            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Active, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .None)
+        case .Inactive:
+            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Inactive, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .None)
+        case .OnReview:
+            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .OnReview, statistic: false, detailsDenied: false, detailsNormal: true, styleFilter: .None)
+        case .Finished:
+            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: nil, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .BlackAndWhite)
+        case .Rejected:
+            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Rejected, statistic: false, detailsDenied: true, detailsNormal: false, styleFilter: .Red)
         }
+        cellInflator.updateCell(cell)
         
-        
+
+        // set handlers
+        cell.onClick = {[weak self] _ in
+            self?.viewModel.onClickEvent(event)
+        }
+        cell.onEdit = {[weak self] _ in
+            self?.viewModel.onEdit(event)
+        }
+        cell.onShowHide = {[weak self] _ in
+            self?.viewModel.onShowHide(event)
+        }
+        cell.onDelete = {[weak self] _ in
+            self?.viewModel.onDelete(event)
+        }
+        cell.onShowDeniedDetails = {[weak self] _ in
+            self?.viewModel.onShowDeniedDetails(event)
+        }
+
         return cell
     }
 }

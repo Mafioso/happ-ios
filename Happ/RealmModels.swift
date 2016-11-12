@@ -158,19 +158,36 @@ class InterestModel: Object, Mappable {
 
 
 enum EventModelPriceTypes {
+    case Range
     case MinPrice
     case MaxPrice
 
-    func format(value: Int?, currency: CurrencyModel) -> String {
+    func format(event: EventModel) -> String {
+        let currency = event.currency == nil ? CurrencyModel(value: ["0", "KZT"]) : event.currency!
+        let minValue = event.min_price.value
+        let maxValue = event.max_price.value
+
         switch self {
+        case .Range:
+            var ans: String
+            if minValue == nil {
+                ans = "FREE"
+            } else {
+                ans = format(minValue!)
+            }
+            if maxValue != nil {
+                ans += " — "
+                ans = format(maxValue!)
+            }
+            return ans
         case .MinPrice:
-            if value == nil {
+            if minValue == nil {
                 return "FREE"
             } else {
-                return format(value!) + " " + currency.name
+                return format(minValue!) + " " + currency.name
             }
         case .MaxPrice:
-            return format(value!) + " " + currency.name
+            return format(maxValue!) + " " + currency.name
         }
     }
 
@@ -181,13 +198,12 @@ enum EventModelPriceTypes {
 }
 
 enum EventModelStatusTypes: Int {
-    case Active
-    case Inactive
-    case OnReview
-    case Rejected
-    case Finished
+    case Active = 0
+    case Inactive = 1
+    case OnReview = 2
+    case Rejected = 3
+    case Finished = 4
 }
-
 
 
 class EventModel: Object, Mappable {
@@ -285,18 +301,8 @@ class EventModel: Object, Mappable {
 
 
     // functions
-    func getPrice(priceType: EventModelPriceTypes) -> String {
-        let currency = self.currency == nil ? CurrencyModel(value: ["0", "KZT"]) : self.currency!
-
-        var price: Int?
-        switch priceType {
-        case .MinPrice:
-            price = self.min_price.value
-        case .MaxPrice:
-            price = self.max_price.value
-        }
-
-        return priceType.format(price, currency: currency)
+    func getPrice(format: EventModelPriceTypes) -> String {
+        return format.format(self)
     }
     func getStatus() -> EventModelStatusTypes {
         return EventModelStatusTypes(rawValue: self.status)!
