@@ -29,6 +29,8 @@
 		527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */; };
 		527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */; };
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
+		52839C071DDAE19700B6EBD8 /* Default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52839C061DDAE19700B6EBD8 /* Default.plist */; };
+		52839C091DDAE9D200B6EBD8 /* EventsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */; };
 		52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52899B191D90099A005AD79E /* RealmModels.swift */; };
 		529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529046B91D9BB40B00BFB06A /* SettingsController.swift */; };
 		52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */; };
@@ -118,6 +120,8 @@
 		527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		52839C061DDAE19700B6EBD8 /* Default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Default.plist; sourceTree = "<group>"; };
+		52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsMapViewController.swift; sourceTree = "<group>"; };
 		52899B191D90099A005AD79E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		529046B91D9BB40B00BFB06A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnMenuController.swift; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */,
 				5210D1171D90F225000A7C47 /* Happ.entitlements */,
 				525A8AB31D7D4023002C6F46 /* Info.plist */,
+				52839C061DDAE19700B6EBD8 /* Default.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
 				52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */,
 				52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */,
+				52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
@@ -475,6 +481,7 @@
 			files = (
 				B4E215ED1DAF764C00144E78 /* SF-UI-Text-Semibold.otf in Resources */,
 				B4E215E91DAF764C00144E78 /* SF-UI-Text-Medium.otf in Resources */,
+				52839C071DDAE19700B6EBD8 /* Default.plist in Resources */,
 				B4E215E31DAF764C00144E78 /* SF-UI-Text-Bold.otf in Resources */,
 				523483CB1DB48BD0009B8204 /* WienLight_Normal.ttf in Resources */,
 				B4E215DF1DAF764C00144E78 /* SF-UI-Display-Regular.otf in Resources */,
@@ -574,6 +581,7 @@
 				525A8AAA1D7D4023002C6F46 /* AuthControllers.swift in Sources */,
 				52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */,
 				52C2EC681DC8B03500156652 /* InterestService.swift in Sources */,
+				52839C091DDAE9D200B6EBD8 /* EventsMapViewController.swift in Sources */,
 				52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */,
 				529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */,
 				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,

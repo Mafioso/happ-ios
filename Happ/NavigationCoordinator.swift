@@ -42,6 +42,7 @@ class HappNavigationController: UINavigationController {
 class HappMainTabBarController: UITabBarController {
 
     var navigateExploreTab: NavigationFunc
+    var navigateMapTab: NavigationFunc
     var navigateFeedTab: NavigationFunc
     var navigateFavouriteTab: NavigationFunc
 
@@ -51,7 +52,7 @@ class HappMainTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.happOrangeColor()
 
         let tabExplore = UINavigationController()
-        let tabMap = HappNavigationController()
+        let tabMap = UINavigationController()
         let tabFeed = HappNavigationController()
         let tabFavourite = HappNavigationController()
         // let tabChat = HappNavigationController()
@@ -82,6 +83,8 @@ class HappMainTabBarController: UITabBarController {
         switch selectedAt {
         case 0:
             self.navigateExploreTab?()
+        case 1:
+            self.navigateMapTab?()
         case 2:
             self.navigateFeedTab?()
         case 3:
@@ -215,6 +218,7 @@ class NavigationCoordinator {
         
         let mainTabBar = HappMainTabBarController()
         mainTabBar.navigateExploreTab = self.showExplore
+        mainTabBar.navigateMapTab = self.showMap
         mainTabBar.navigateFeedTab = self.showFeed
         mainTabBar.navigateFavouriteTab = self.showFavourite
 
@@ -321,6 +325,17 @@ class NavigationCoordinator {
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
 
+        self.updateSlidebar() // to remove feedFilter
+    }
+    func showMap() {
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsMap") as! EventsMapViewController
+
+        let tabIndex = 1
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
+
+        // TODO add own Filter
         self.updateSlidebar() // to remove feedFilter
     }
 

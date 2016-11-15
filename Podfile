@@ -11,9 +11,11 @@ target 'Happ' do
   pod 'Alamofire', '~> 3.4'
   pod 'ObjectMapper', '~> 1.3'
   pod 'ObjectMapper+Realm'
-  pod 'HanekeSwift'
+  pod 'HanekeSwift' # fetch&cache images by urls
   pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
   pod 'SlideMenuControllerSwift', git: "https://github.com/dekatotoro/SlideMenuControllerSwift.git", branch: "swift2.3"
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 
   pod 'Jibber-Framework', '~> 2.0.0', :configurations => ['Debug']

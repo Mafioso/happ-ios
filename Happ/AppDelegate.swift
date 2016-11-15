@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GoogleMaps
+import GooglePlaces
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 
-        /*
+        /* to Debug
         if self.window?.rootViewController != nil {
             return true
         }
@@ -32,6 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+
+        let apiKey = DefaultParameters.getValue(.GoogleMapApiKey) as! String
+        print("GOOGLE MAP API KEY = ", apiKey)
+        GMSServices.provideAPIKey(apiKey)
+        GMSPlacesClient.provideAPIKey(apiKey)
 
         return true
     }

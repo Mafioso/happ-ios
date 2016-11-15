@@ -11,6 +11,36 @@ import ObjectMapper
 import RealmSwift
 
 
+
+enum DefaultParametersKeyTypes: String {
+    case GoogleMapApiKey = "api_key_google_map"
+}
+
+class DefaultParameters {
+    static var sharedInstance = DefaultParameters()
+    
+    let plistFileName = "Default"
+    var dataDictionary: [String:AnyObject]
+
+    private init() {
+        var format = NSPropertyListFormat.XMLFormat_v1_0 //format of the property list
+        let plistPath:String? = NSBundle.mainBundle().pathForResource(plistFileName, ofType: "plist")! //the path of the data
+        let plistXML = NSFileManager.defaultManager().contentsAtPath(plistPath!)! //the data in XML format
+        do{ //convert the data to a dictionary and handle errors.
+            self.dataDictionary = try NSPropertyListSerialization.propertyListWithData(plistXML,options: .MutableContainersAndLeaves,format: &format)as! [String:AnyObject]
+        }
+        catch{ // error condition
+            print("Error reading plist: \(error), format: \(format)")
+            self.dataDictionary = [:]
+        }
+    }
+    static func getValue(forKey: DefaultParametersKeyTypes) -> AnyObject {
+        return DefaultParameters.sharedInstance.dataDictionary[forKey.rawValue]!
+    }
+}
+
+
+
 extension Dictionary {
     mutating func merge(dict2: Dictionary) {
         for key in dict2.keys {

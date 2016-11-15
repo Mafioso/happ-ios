@@ -1748,7 +1748,65 @@ OF COOKING</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozY-QV-QtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1897" y="2066"/>
+            <point key="canvasLocation" x="1282" y="2066"/>
+        </scene>
+        <!--Events Map View Controller-->
+        <scene sceneID="Y05-8q-Qap">
+            <objects>
+                <viewController storyboardIdentifier="EventsMap" useStoryboardIdentifierAsRestorationIdentifier="YES" id="E9d-Mk-oYc" customClass="EventsMapViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Smw-Vh-dlb"/>
+                        <viewControllerLayoutGuide type="bottom" id="yxN-0Y-4p1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fmV-7g-xPk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCu-W2-Z6s" userLabel="Map View">
+                                <color key="backgroundColor" red="0.32549019610000002" green="0.1019607843" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I43-9l-s6l" userLabel="Button background">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWv-nE-jDb">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ksx-4c-zGI"/>
+                                            <constraint firstAttribute="width" constant="50" id="c3F-f8-206"/>
+                                        </constraints>
+                                        <state key="normal" image="icon-locate"/>
+                                        <connections>
+                                            <action selector="clickedLocate:" destination="E9d-Mk-oYc" eventType="touchUpInside" id="JVE-rf-sug"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.28000000000000003" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="wWv-nE-jDb" firstAttribute="centerY" secondItem="I43-9l-s6l" secondAttribute="centerY" id="SWe-sq-KYh"/>
+                                    <constraint firstAttribute="width" constant="55" id="fVo-P0-Dlv"/>
+                                    <constraint firstAttribute="height" constant="55" id="ujH-2I-mxj"/>
+                                    <constraint firstItem="wWv-nE-jDb" firstAttribute="centerX" secondItem="I43-9l-s6l" secondAttribute="centerX" id="vdW-lw-kza"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OCu-W2-Z6s" firstAttribute="top" secondItem="Smw-Vh-dlb" secondAttribute="bottom" id="F9w-23-x9H"/>
+                            <constraint firstItem="OCu-W2-Z6s" firstAttribute="leading" secondItem="fmV-7g-xPk" secondAttribute="leading" id="iRV-5P-Ghz"/>
+                            <constraint firstItem="yxN-0Y-4p1" firstAttribute="top" secondItem="OCu-W2-Z6s" secondAttribute="bottom" id="kM9-GE-Uzy"/>
+                            <constraint firstAttribute="trailing" secondItem="OCu-W2-Z6s" secondAttribute="trailing" id="kxV-OC-gK8"/>
+                            <constraint firstItem="yxN-0Y-4p1" firstAttribute="top" secondItem="I43-9l-s6l" secondAttribute="bottom" constant="16" id="lnx-u7-Lu9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I43-9l-s6l" secondAttribute="trailing" constant="13" id="wk3-tq-wyW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonLocate" destination="wWv-nE-jDb" id="PxD-wI-ZRx"/>
+                        <outlet property="viewLocateBackground" destination="I43-9l-s6l" id="oTX-Nn-k5M"/>
+                        <outlet property="viewMap" destination="OCu-W2-Z6s" id="jPI-Xs-u17"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZBr-g0-ZkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="2067"/>
         </scene>
         <!--Events Manage View Controller-->
         <scene sceneID="rvQ-Fn-euR">
@@ -1825,9 +1883,10 @@ OF COOKING</string>
         <image name="icon-disclosure" width="8" height="13"/>
         <image name="icon-email" width="20" height="20"/>
         <image name="icon-expand-shadow" width="38" height="41"/>
+        <image name="icon-locate" width="25" height="25"/>
         <image name="icon-photography" width="53" height="39"/>
         <image name="icon-star" width="20" height="20"/>
-        <image name="icon-upvote" width="20" height="20"/>
+        <image name="icon-upvote" width="18" height="17"/>
         <image name="icon-web" width="20" height="20"/>
         <image name="map" width="16" height="21"/>
         <image name="message-bulb" width="20" height="20"/>
