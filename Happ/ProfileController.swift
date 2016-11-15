@@ -119,7 +119,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 
     private func initNavigationBarItems() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back-shadow"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()

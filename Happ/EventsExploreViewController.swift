@@ -74,8 +74,8 @@ class EventsExploreViewController: UICollectionViewController {
         if let imageURL = event.images.first {
             cell.image.hnk_setImageFromURL(imageURL!)
         }
-        if let eventColor = EventColors(rawValue: event.id) {
-            cell.viewTitleContainer.backgroundColor = eventColor.color()
+        if let color = event.color {
+            cell.viewTitleContainer.backgroundColor = UIColor(hexString: color)
         }
 
         return cell

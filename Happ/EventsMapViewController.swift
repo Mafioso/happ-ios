@@ -34,6 +34,7 @@ class EventsMapViewController: UIViewController {
         buttonLocate.extMakeCircle()
 
         self.initMap()
+        self.initNavBarItems()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,7 +74,14 @@ class EventsMapViewController: UIViewController {
             // TODO
         }
     }
-
+    private func initNavBarItems() {
+        self.navigationItem.title = "Events near you"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu-gray"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
+    }
+    func handleClickMenuNavItem() {
+       // self.viewModel.displaySlideMenu?() TODO uncomment
+    }
 }
 
 

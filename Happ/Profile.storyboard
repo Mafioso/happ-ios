@@ -272,7 +272,7 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFt-tW-WMc">
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-image" translatesAutoresizingMaskIntoConstraints="NO" id="Ih8-Cu-ax8"/>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="Ih8-Cu-ax8"/>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcX-47-5VO">
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="U2N-eW-BTh"/>
@@ -916,7 +916,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg-image" width="375" height="667"/>
+        <image name="bg-feed" width="375" height="180"/>
         <image name="icon-camera" width="50" height="40"/>
         <image name="icon-cities-orange" width="18" height="19"/>
         <image name="icon-faq-orange" width="20" height="20"/>

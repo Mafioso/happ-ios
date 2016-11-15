@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,7 +40,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D15-O0-CNA">
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="375" id="k7d-dM-mpa"/>
+                                                    <constraint firstAttribute="width" secondItem="D15-O0-CNA" secondAttribute="height" multiplier="1:1" id="0dm-s0-tT3"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVI-Sj-Ghf">
@@ -55,7 +56,7 @@
                                                     <action selector="clickedBackNavItem:" destination="ONx-gR-b0p" eventType="touchUpInside" id="BKt-Bd-jOC"/>
                                                 </connections>
                                             </button>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" numberOfPages="3" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="wre-SC-raT">
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" hidesForSinglePage="YES" numberOfPages="3" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="wre-SC-raT">
                                                 <color key="pageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
                                                 <color key="currentPageIndicatorTintColor" red="0.8980392157" green="0.36470588240000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             </pageControl>
@@ -72,7 +73,6 @@
                                             <constraint firstAttribute="bottom" secondItem="wre-SC-raT" secondAttribute="bottom" constant="13" id="p6C-WG-Acc"/>
                                             <constraint firstItem="YRf-V1-Mam" firstAttribute="leading" secondItem="yL6-8H-XO4" secondAttribute="leading" constant="16" id="tx0-rc-kLl"/>
                                             <constraint firstAttribute="trailing" secondItem="jVI-Sj-Ghf" secondAttribute="trailing" constant="16" id="yBV-ZO-2lj"/>
-                                            <constraint firstAttribute="height" constant="375" id="zgW-WI-mKI"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKq-8h-syE" userLabel="2">
@@ -209,6 +209,7 @@
                                                 <state key="normal" title="I Want To Go!" image="icon-star">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <state key="selected" title="I won't go" image="icon-star-active"/>
                                                 <connections>
                                                     <action selector="clickedWantToGoButton:" destination="ONx-gR-b0p" eventType="touchUpInside" id="nUj-kE-C0B"/>
                                                 </connections>
@@ -222,6 +223,7 @@
                                                 <state key="normal" title="1354" image="icon-upvote">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <state key="selected" image="icon-upvote-active"/>
                                                 <connections>
                                                     <action selector="clickedUpvote:" destination="ONx-gR-b0p" eventType="touchUpInside" id="Q7Q-hU-QUw"/>
                                                 </connections>
@@ -468,6 +470,7 @@
                         <outlet property="labelLocation" destination="jVj-n0-shs" id="Jvb-AI-x8C"/>
                         <outlet property="labelPriceMinimum" destination="z9K-6Z-ebi" id="sj1-2Y-1f5"/>
                         <outlet property="labelTitle" destination="xox-2H-npc" id="euz-mZ-inJ"/>
+                        <outlet property="pageControllImages" destination="wre-SC-raT" id="dwd-i9-Elq"/>
                         <outlet property="tableViewInfo" destination="dVj-4g-XZE" id="vhv-YO-r14"/>
                         <outlet property="viewContainerTitle" destination="SKq-8h-syE" id="vR5-lN-R08"/>
                         <outlet property="viewHighlightInfoPrice" destination="qoT-gu-SqK" id="ggP-1c-2oJ"/>
@@ -1674,7 +1677,7 @@
         <scene sceneID="r6Q-gs-EfQ">
             <objects>
                 <collectionViewController storyboardIdentifier="Explore" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V5t-Ey-1kH" customClass="EventsExploreViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WF8-24-nmu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WF8-24-nmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1886,7 +1889,9 @@ OF COOKING</string>
         <image name="icon-locate" width="25" height="25"/>
         <image name="icon-photography" width="53" height="39"/>
         <image name="icon-star" width="20" height="20"/>
+        <image name="icon-star-active" width="16" height="16"/>
         <image name="icon-upvote" width="18" height="17"/>
+        <image name="icon-upvote-active" width="20" height="20"/>
         <image name="icon-web" width="20" height="20"/>
         <image name="map" width="16" height="21"/>
         <image name="message-bulb" width="20" height="20"/>

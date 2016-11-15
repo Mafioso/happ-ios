@@ -10,33 +10,6 @@ import UIKit
 import Haneke
 
 
-enum EventColors: String {
-    case A = "57ea237de93ff50030ff22ba"
-    case B = "57ea237de93ff50030ff22df"
-    case C = "57ea237de93ff50030ff22b2"
-    case D = "57ea237de93ff50030ff22b3"
-    case E = "57ea237de93ff50030ff22d4"
-
-    func color() -> UIColor {
-        var hex: String
-        switch self {
-        case A:
-            hex = "3E3E3E"
-        case B:
-            hex = "7C7670"
-        case C:
-            hex = "0F1624"
-        case D:
-            hex = "7A8290"
-        case E:
-            hex = "DBCEBE"
-        }
-        return UIColor(hexString: "#"+hex)
-    }
-}
-
-
-
 class EventTableCell: UITableViewCell {
 
     var viewModel: EventViewModel! {
@@ -56,6 +29,8 @@ class EventTableCell: UITableViewCell {
     @IBOutlet weak var labelPlace: UILabel!
     @IBOutlet weak var labelPrice: UILabel!
     @IBOutlet weak var labelUpvotesCount: UILabel!
+    @IBOutlet weak var buttonUpvote: UIButton!
+    @IBOutlet weak var buttonFavourite: UIButton!
 
 
     // actions
@@ -99,8 +74,12 @@ class EventTableCell: UITableViewCell {
         labelUpvotesCount.text = formatStatValue(event.votes_num)
         labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(event.start_datetime!)) — \(HappDateFormats.OnlyTime.toString(event.end_datetime!))"
 
-        if let eventColor = EventColors(rawValue: event.id) {
-            viewDetailsContainer.backgroundColor = eventColor.color()
+        buttonUpvote.titleLabel!.text = String(event.votes_num)
+        buttonUpvote.selected = event.is_upvoted
+        buttonFavourite.selected = event.is_in_favourites
+
+        if let color = event.color {
+            viewDetailsContainer.backgroundColor = UIColor(hexString: color)
         }
         if let imageURL = event.images[0] {
             imageCover.hnk_setImageFromURL(imageURL)

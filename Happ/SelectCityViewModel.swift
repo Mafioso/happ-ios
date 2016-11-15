@@ -58,7 +58,7 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
         if let city = self.getUserCity() {
             self.selectedCity = city
             return Promise().asVoid()
-            
+
         } else {
             return ProfileService.fetchUserCity()
                 .then { _ -> Void in

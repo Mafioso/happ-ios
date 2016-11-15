@@ -14,7 +14,7 @@ import PromiseKit
 let Host = "http://happ.westeurope.cloudapp.azure.com"
 let HostLocal = "http://127.0.0.1:8000"
 let HostPC = "http://192.168.43.179:8000"
-let HostAPI = HostLocal + "/api/v1/"
+let HostAPI = Host + "/api/v1/"
 
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {

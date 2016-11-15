@@ -227,18 +227,18 @@ class EventModel: Object, Mappable {
     var max_price = RealmOptional<Int>()
     dynamic var address: String?
     dynamic var geopoint: NSData?
-
+    // phone
     dynamic var stored_phone_numbers: String = ""
     var phones: [String] {
         get {
             return ArrayStringTransformer.transformToJSON(self.stored_phone_numbers)!
         }
     }
-
+    // end: phone
     dynamic var email: String?
     dynamic var web_site: String?
     dynamic var votes_num = 0
-
+    // images
     dynamic var stored_images: String = "" // NOTE: array of urls are stored as single string by concating
     var images: [NSURL?] {
         get {
@@ -246,7 +246,8 @@ class EventModel: Object, Mappable {
             return urls.map({ NSURL(string:$0) })
         }
     }
-
+    // end: images
+    // city
     dynamic var id_of_city = ""
     var city: CityModel? {
         get {
@@ -254,6 +255,12 @@ class EventModel: Object, Mappable {
             return CityModel(value: ["1capital", "Kazakhstan", "Astana"])
         }
     }
+    // city end
+    dynamic var is_close_on_start = false
+    dynamic var registration_link: String?
+    dynamic var age_restriction = 0
+    dynamic var color: String?
+
 
 
     // Object
@@ -297,6 +304,10 @@ class EventModel: Object, Mappable {
         votes_num           <- map["votes_num"]
         stored_images       <- (map["images"], ArrayStringTransformer)
         id_of_city          <- map["id_of_city"]
+        is_close_on_start   <- map["close_on_start"]
+        registration_link   <- map["registration_link"]
+        age_restriction     <- map["age_restriction"]
+        color               <- map["color"]
     }
 
 
@@ -306,5 +317,19 @@ class EventModel: Object, Mappable {
     }
     func getStatus() -> EventModelStatusTypes {
         return EventModelStatusTypes(rawValue: self.status)!
+    }
+    func getUpvoteIcon() -> UIImage {
+        if self.is_upvoted {
+            return UIImage(named: "icon-upvote-active")!
+        } else {
+            return UIImage(named: "icon-upvote")!
+        }
+    }
+    func getFavIcon() -> UIImage {
+        if self.is_in_favourites {
+            return UIImage(named: "icon-star-active")!
+        } else {
+            return UIImage(named: "icon-star")!
+        }
     }
 }

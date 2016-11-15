@@ -6,14 +6,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="2279.ttf">
-            <string>WienLight</string>
-        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
+        </array>
+        <array key="WienLight_Normal.ttf">
+            <string>WienLight</string>
         </array>
     </customFonts>
     <objects>
@@ -52,22 +52,24 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wge-OF-jkj">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wge-OF-jkj">
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="jwn-r7-WwI"/>
                                                             <constraint firstAttribute="height" constant="20" id="vnl-jZ-8Wc"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="icon-star"/>
+                                                        <state key="normal" image="icon-star"/>
+                                                        <state key="selected" image="icon-star-active"/>
                                                         <connections>
                                                             <action selector="clickedFavourite:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="EKe-uZ-y6X"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A7-Xj-Pyc">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A7-Xj-Pyc">
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="45e-Mj-XcS"/>
                                                             <constraint firstAttribute="width" constant="20" id="CgE-sJ-uhO"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="icon-upvote-active"/>
+                                                        <state key="normal" image="icon-upvote"/>
+                                                        <state key="selected" image="icon-upvote-active"/>
                                                         <connections>
                                                             <action selector="clickedUpvote:" destination="oWQ-0b-H5S" eventType="touchUpInside" id="C3S-26-gGT"/>
                                                         </connections>
@@ -188,6 +190,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="buttonFavourite" destination="wge-OF-jkj" id="dK6-iA-o5v"/>
+                <outlet property="buttonUpvote" destination="1A7-Xj-Pyc" id="vnB-av-0S3"/>
                 <outlet property="imageCover" destination="boZ-24-qZD" id="if5-Gd-BEi"/>
                 <outlet property="labelCategory" destination="XIV-2O-98Z" id="q0A-KX-vnd"/>
                 <outlet property="labelDateTime" destination="3St-bq-Z3q" id="rks-au-Jlh"/>
@@ -204,6 +208,8 @@
         <image name="bg-feed" width="375" height="180"/>
         <image name="icon-dots-menu" width="20" height="20"/>
         <image name="icon-star" width="20" height="20"/>
+        <image name="icon-star-active" width="16" height="16"/>
+        <image name="icon-upvote" width="18" height="17"/>
         <image name="icon-upvote-active" width="20" height="20"/>
     </resources>
 </document>

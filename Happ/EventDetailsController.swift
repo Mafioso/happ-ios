@@ -19,6 +19,7 @@ class EventDetailsController: UIViewController {
 
     // outlets
     @IBOutlet weak var imageBackground: UIImageView!
+    @IBOutlet weak var pageControllImages: UIPageControl!
 
     @IBOutlet weak var viewContainerTitle: UIView!
     @IBOutlet weak var labelTitle: UILabel!
@@ -59,11 +60,7 @@ class EventDetailsController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         [buttonInfoDate, buttonInfoPrice, buttonInfoLocation, viewHighlightInfoPrice]
-            .forEach { circle in
-                circle.layer.cornerRadius = 0.5 * circle.bounds.size.width
-                circle.layer.borderWidth = 0.0
-                circle.clipsToBounds = true
-        }
+            .forEach { $0.extMakeCircle() }
         [buttonUpvote, buttonWantToGo]
             .forEach { button in
                 button.layer.cornerRadius = 20
@@ -86,17 +83,20 @@ class EventDetailsController: UIViewController {
 
     func viewModelDidUpdate() {
         if let event = viewModel.event {
+            let color = event.color != nil ? UIColor(hexString: event.color!) : view.backgroundColor
 
+            // TODO: change to images slider
             if let image = event.images[0] {
                 imageBackground.hnk_setImageFromURL(image)
             }
-            if let eventColor = EventColors(rawValue: event.id)?.color() {
-                [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { view in
-                    view.backgroundColor = eventColor
-                }
-                [labelPriceMinimum, labelLocation, labelDateRange].forEach { label in
-                    label.textColor = eventColor
-                }
+            pageControllImages.currentPage = 0
+            pageControllImages.numberOfPages = 1
+
+            [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { view in
+                view.backgroundColor = color
+            }
+            [labelPriceMinimum, labelLocation, labelDateRange].forEach { label in
+                label.textColor = color
             }
 
             labelTitle.text = event.title
@@ -105,6 +105,16 @@ class EventDetailsController: UIViewController {
             labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
             labelLocation.text = event.address
             labelPriceMinimum.text = event.getPrice(.MinPrice)
+
+            buttonUpvote.titleLabel!.text = String(event.votes_num)
+            buttonUpvote.selected = event.is_upvoted
+            if event.is_in_favourites {
+                buttonWantToGo.selected = true
+                buttonWantToGo.backgroundColor = color
+            } else {
+                buttonWantToGo.selected = false
+                buttonWantToGo.backgroundColor = UIColor.happOrangeColor()
+            }
         }
     }
 
@@ -131,18 +141,18 @@ extension EventDetailsController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let event = self.viewModel.event
-        var text: String?
+        var text: String? = nil
         var iconName: String?
 
         switch indexPath.row {
         case 0:
-            text = event?.web_site
+            text = event.web_site
             iconName = "icon-web"
         case 1:
-            text = event?.email
+            text = event.email
             iconName = "icon-email"
         case 2:
-            text = event?.phones.first
+            text = event.phones.first
             iconName = "icon-phone"
         default:
             break
@@ -160,7 +170,7 @@ extension EventDetailsController: UITableViewDataSource {
             iconView.tag = 924
             cell.addSubview(iconView)
         }
-        cell.textLabel?.text = text?.uppercaseString
+        cell.textLabel?.text = (text == nil || text!.isEmpty) ? "NO DATA" : text!.uppercaseString
 
         return cell
     }

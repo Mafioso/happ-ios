@@ -82,13 +82,14 @@ class EventsManageViewController: UITableViewController {
         }
         cell.labelAddress.text = event.address
         cell.labelPrice.text = event.getPrice(.Range)
-        cell.labelUpvoteCount.text = "\(event.votes_num)"
+        cell.labelUpvoteCount.text = String(event.votes_num)
+        cell.imageUpvoteIcon.image = event.getUpvoteIcon()
+        cell.imageFavIcon.image = event.getFavIcon()
         if let url = event.images.first {
             cell.imageCover.hnk_setImageFromURL(url!)
         }
-        if let eventColor = EventColors(rawValue: event.id) {
-            cell.viewDetailsContainer.backgroundColor = eventColor.color()
-            cell.viewStatusBackground.backgroundColor = eventColor.color()
+        if let color = event.color {
+            cell.viewDetailsContainer.backgroundColor = UIColor(hexString: color)
         }
 
         // set cell styles
