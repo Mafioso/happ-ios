@@ -93,8 +93,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5210D1151D90557B000A7C47 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		5210D1161D90557B000A7C47 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityAndInterestsViewModel.swift; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				525A8AAC1D7D4023002C6F46 /* Base */,
-				5210D1151D90557B000A7C47 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -646,7 +643,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				525A8AB11D7D4023002C6F46 /* Base */,
-				5210D1161D90557B000A7C47 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
