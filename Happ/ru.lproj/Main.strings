@@ -1,0 +1,45 @@
+/* Class = "UILabel"; text = "SETTINGS"; ObjectID = "EAA-hr-IBR"; */
+"EAA-hr-IBR.text" = "НАСТРОЙКИ";
+
+/* Class = "UILabel"; text = "FEED"; ObjectID = "FfI-9u-Xda"; */
+"FfI-9u-Xda.text" = "Лента";
+
+/* Class = "UIButton"; normalTitle = "Select All Interests"; ObjectID = "H94-vl-h04"; */
+"H94-vl-h04.normalTitle" = "Выбрать все";
+
+/* Class = "UILabel"; text = "EVENTS MANAGER"; ObjectID = "Mbf-cj-ADz"; */
+"Mbf-cj-ADz.text" = "УПРАВЛЕНИЕ МЕРОПРИЯТИЯМИ";
+
+/* Class = "UILabel"; text = "Select Interests for"; ObjectID = "Nm3-YA-3YG"; */
+"Nm3-YA-3YG.text" = "Выбрать Интересы для";
+
+/* Class = "UILabel"; text = "LOGOUT"; ObjectID = "U6u-4D-6z5"; */
+"U6u-4D-6z5.text" = "ВЫЙТИ";
+
+/* Class = "UILabel"; text = "CITY"; ObjectID = "Uw9-1z-mgP"; */
+"Uw9-1z-mgP.text" = "ГОРОД";
+
+/* Class = "UILabel"; text = "INTERESTS"; ObjectID = "aTY-RE-yAK"; */
+"aTY-RE-yAK.text" = "ИНТЕРЕСЫ";
+
+/* Class = "UILabel"; text = "click on city name to change it"; ObjectID = "cog-BP-ylE"; */
+"cog-BP-ylE.text" = "Нажмите на город, чтобы сменить";
+
+/* Class = "UILabel"; text = "NOT SELECTED"; ObjectID = "fcx-uA-hde"; */
+"fcx-uA-hde.text" = "НЕ ВЫБРАН";
+
+/* Class = "UILabel"; text = "Your City is"; ObjectID = "fhx-Is-Bb4"; */
+"fhx-Is-Bb4.text" = "Выбранный вами город";
+
+/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fpB-7M-Tyq"; */
+"fpB-7M-Tyq.normalTitle" = "ЗАКРЫТЬ";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "hV0-L1-ic1"; */
+"hV0-L1-ic1.normalTitle" = "СОХРАНИТЬ";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "ig2-wv-KEy"; */
+"ig2-wv-KEy.normalTitle" = "СОХРАНИТЬ";
+
+/* Class = "UILabel"; text = "Select Interest"; ObjectID = "lMf-lK-kDh"; */
+"lMf-lK-kDh.text" = "Выбрать Интересы";
+

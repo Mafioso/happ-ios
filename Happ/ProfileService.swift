@@ -12,6 +12,13 @@ import RealmSwift
 import ObjectMapper
 
 
+enum ProfileErrors: ErrorType {
+    case CityNotSelected
+    case InterestsNotSelected
+    case LanguageWasChanged(nowLanguage: String)
+}
+
+
 class ProfileService {
 
     static let endpointUser = "users/current/"
@@ -95,12 +102,14 @@ class ProfileService {
         let url = endpointCity + cityID + "/set/"
         return Post(url, parametersJSON: nil)
     }
-
     class func setCurrency(currencyID: String) -> Promise<AnyObject> {
         let url = endpointCurrencies + currencyID + "/set/"
         return Post(url, parametersJSON: nil)
     }
-
+    class func setLanguage(language: String) -> Promise<AnyObject> {
+        let url = endpointUser + "set/language/"
+        return Post(url, parameters: ["language": language])
+    }
     class func updateUserProfile(valuesDict: [String: AnyObject]) -> Promise<AnyObject> {
         return Post(endpointUser + "edit/", parameters: valuesDict)
     }
@@ -139,6 +148,43 @@ class ProfileService {
         let realm = try! Realm()
         let users = realm.objects(UserModel)
         return users.count > 0
+    }
+    
+    class func checkCityExists() -> Promise<Void> {
+        let profile = self.getUserProfile()
+        let settings = profile.settings!
+        
+        return Promise { resolve, reject in
+            if settings.city_id == nil {
+                reject(ProfileErrors.CityNotSelected)
+            } else {
+                resolve()
+            }
+        }
+    }
+    class func checkInterestsExist() -> Promise<Void> {
+        let profile = self.getUserProfile()
+
+        return Promise { resolve, reject in
+            if profile.interests.isEmpty {
+                reject(ProfileErrors.InterestsNotSelected)
+            } else {
+                resolve()
+            }
+        }
+    }
+    class func checkLanguageChange() -> Promise<Void> {
+        let profile = self.getUserProfile()
+        let settings = profile.settings!
+        let lang = getSystemLanguage()
+
+        return Promise { resolve, reject in
+            if settings.language != lang {
+                reject(ProfileErrors.LanguageWasChanged(nowLanguage: lang!))
+            } else {
+                resolve()
+            }
+        }
     }
     
     

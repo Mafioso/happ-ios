@@ -47,6 +47,7 @@
 		52C2EC681DC8B03500156652 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC671DC8B03500156652 /* InterestService.swift */; };
 		52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */; };
 		52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D190961D9FF4B300608B02 /* ProfileController.swift */; };
+		52D5E6C31DDC87530085665A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52D5E6C51DDC87530085665A /* InfoPlist.strings */; };
 		52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */; };
 		52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */; };
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
@@ -136,6 +137,10 @@
 		52C2EC671DC8B03500156652 /* InterestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
 		52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsHeader.swift; sourceTree = "<group>"; };
 		52D190961D9FF4B300608B02 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		52D5E6C41DDC87530085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		52D5E6C61DDC87540085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		52D5E6C71DDC87540085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		52D5E6C81DDC87550085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Authentication.strings; sourceTree = "<group>"; };
 		52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewModel.swift; sourceTree = "<group>"; };
 		52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		52DD590D1D807E5D007E19E9 /* UtilsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsUI.swift; sourceTree = "<group>"; };
@@ -270,6 +275,7 @@
 		525A8AB91D7E87B4002C6F46 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				52D5E6C51DDC87530085665A /* InfoPlist.strings */,
 				525A8AA71D7D4023002C6F46 /* AppDelegate.swift */,
 				525A8AAE1D7D4023002C6F46 /* Assets.xcassets */,
 				525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */,
@@ -506,6 +512,7 @@
 				B4E215DC1DAF764C00144E78 /* SF-UI-Display-Heavy.otf in Resources */,
 				525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */,
 				B4E215E61DAF764C00144E78 /* SF-UI-Text-HeavyItalic.otf in Resources */,
+				52D5E6C31DDC87530085665A /* InfoPlist.strings in Resources */,
 				5239C3851D925E8100F66E31 /* Event.storyboard in Resources */,
 				B4E215EA1DAF764C00144E78 /* SF-UI-Text-MediumItalic.otf in Resources */,
 				B4E215EC1DAF764C00144E78 /* SF-UI-Text-RegularItalic.otf in Resources */,
@@ -627,6 +634,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5239C3821D925D5D00F66E31 /* Base */,
+				52D5E6C81DDC87550085665A /* ru */,
 			);
 			name = Authentication.storyboard;
 			sourceTree = "<group>";
@@ -635,6 +643,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				525A8AAC1D7D4023002C6F46 /* Base */,
+				52D5E6C61DDC87540085665A /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -643,8 +652,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				525A8AB11D7D4023002C6F46 /* Base */,
+				52D5E6C71DDC87540085665A /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		52D5E6C51DDC87530085665A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52D5E6C41DDC87530085665A /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

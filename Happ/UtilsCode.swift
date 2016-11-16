@@ -40,6 +40,10 @@ class DefaultParameters {
 }
 
 
+func getSystemLanguage() -> String? {
+    return NSLocale.preferredLanguages()[0] as String?
+}
+
 
 extension Dictionary {
     mutating func merge(dict2: Dictionary) {

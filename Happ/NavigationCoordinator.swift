@@ -171,8 +171,46 @@ class NavigationCoordinator {
     }
 
     func start() {
-        AuthenticationService.isCredentialAvailable()
-            .then { result in result ? self.updateUserProfile(self.startFeed) : self.startSignIn() }
+        firstly {
+            AuthenticationService.checkCredentialAvailable()
+        }.then {
+            ProfileService.fetchUserProfile()
+        }.then {
+            self.updateUserLanguageIfNeeded()
+        }.then {
+            ProfileService.checkCityExists()
+        }.then {
+            ProfileService.checkInterestsExist()
+        }.error { err in
+            switch err {
+            case AuthenticationErrors.NoCredentials:
+                self.startSignIn()
+            case AuthenticationErrors.CredentialsExpired:
+                break
+            case ProfileErrors.CityNotSelected:
+                self.startSetupCityAndInterests()
+            case ProfileErrors.InterestsNotSelected:
+                self.startSetupCityAndInterests() // TODO move to Interests
+            default:
+                break
+            }
+        }
+    }
+    func updateUserLanguageIfNeeded() -> Promise<Void> {
+        return Promise { resolve, reject in
+            ProfileService.checkCityExists()
+                .then {
+                    resolve()
+                }.error { err in
+                    switch err {
+                    case ProfileErrors.LanguageWasChanged(let nowLanguage):
+                        ProfileService.setLanguage(nowLanguage)
+                        resolve()
+                    default:
+                        break
+                    }
+            }
+        }
     }
 
     func goBack() {
@@ -518,20 +556,6 @@ class NavigationCoordinator {
         }
     }
 
-
-    private func updateUserProfile(next: () -> (Void)) {
-        /*
-        if ProfileService.isUserProfileExists() {
-            next()
-        } else {
-            ProfileService.fetchUserProfile()
-                .then { next() }
-        }
-        */
-        ProfileService
-            .fetchUserProfile()
-            .then { next() }
-    }
 
     private func displaySlideMenu() {
         if let slideMenu = self.window.rootViewController as? SlideMenuController {

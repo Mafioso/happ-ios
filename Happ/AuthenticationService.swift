@@ -13,6 +13,12 @@ import KeychainSwift
 
 let keyJWT = "auth0-jwt"
 
+
+enum AuthenticationErrors: ErrorType {
+    case NoCredentials
+    case CredentialsExpired
+}
+
 class AuthenticationService {
 
     class func signIn(username: String, password: String) -> Promise<Void> {
@@ -53,13 +59,14 @@ class AuthenticationService {
 
 
     // check for valid credential, fetch updated if was expired
-    class func isCredentialAvailable() -> Promise<Bool> {
+    class func checkCredentialAvailable() -> Promise<Void> {
         return Promise { fulfill, reject in
             if let credential = self.getCredential() {
                 // TODO check here
-                fulfill(true)
+                // reject(AuthenticationErrors.CredentialsExpired)
+                fulfill()
             } else {
-                fulfill(false)
+                reject(AuthenticationErrors.NoCredentials)
             }
         }
     }
