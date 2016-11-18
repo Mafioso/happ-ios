@@ -37,8 +37,7 @@ class InterestService {
 
     static func setUserInterests(interestIDs: [String]) -> Promise<AnyObject> {
         let url = endpointInterest + "set/"
-        let data = try! NSJSONSerialization.dataWithJSONObject(interestIDs, options: .PrettyPrinted)
-        return Post(url, parametersJSON: data)
+        return Post(url, parametersAnyObject: interestIDs as AnyObject)
     }
 
     static func getAllStored() -> Results<InterestModel> {

@@ -22,43 +22,12 @@ enum ProfileErrors: ErrorType {
 class ProfileService {
 
     static let endpointUser = "users/current/"
-    static let endpointCity = "cities/"
     static let endpointCurrencies = "currencies/"
 
-
-    class func fetchCities() -> Promise<Void> {
-        return GetPaginated(endpointCity, parameters: nil)
-            .then { (data, isLastPage) -> Void in
-                let results = data as! [AnyObject]
-                let realm = try! Realm()
-                try! realm.write {
-                    // 1. delete exists
-                    let exists = realm.objects(CityModel)
-                    realm.delete(exists)
-
-                    // 2. add new
-                    results.forEach() { city in
-                        let inst = Mapper<CityModel>().map(city)
-                        realm.add(inst!, update: true)
-                    }
-                }
-        }
-    }
-
-    class func fetchCity(id: String) -> Promise<Void> {
-        return Get(endpointCity + id + "/", parameters: nil)
-            .then { result -> Void in
-                let realm = try! Realm()
-                try! realm.write {
-                    let inst = Mapper<CityModel>().map(result)
-                    realm.add(inst!, update: true)
-                }
-        }
-    }
     class func fetchUserCity() -> Promise<Void> {
         let user = self.getUserProfile()
         let cityID = user.settings!.city_id!
-        return self.fetchCity(cityID)
+        return CityService.fetchCity(cityID)
     }
 
     class func fetchUserProfile() -> Promise<Void> {
@@ -98,13 +67,9 @@ class ProfileService {
     }
 
 
-    class func setCity(cityID: String) -> Promise<AnyObject> {
-        let url = endpointCity + cityID + "/set/"
-        return Post(url, parametersJSON: nil)
-    }
     class func setCurrency(currencyID: String) -> Promise<AnyObject> {
         let url = endpointCurrencies + currencyID + "/set/"
-        return Post(url, parametersJSON: nil)
+        return Post(url, parametersAnyObject: nil)
     }
     class func setLanguage(language: String) -> Promise<AnyObject> {
         let url = endpointUser + "set/language/"
@@ -114,12 +79,6 @@ class ProfileService {
         return Post(endpointUser + "edit/", parameters: valuesDict)
     }
 
-
-    class func getCitiesStored() -> Results<CityModel> {
-        let realm = try! Realm()
-        let result = realm.objects(CityModel)//.sort(sort.isOrderedBeforeFunc)
-        return result
-    }
 
     class func getCurrenciesStored() -> Results<CurrencyModel> {
         let realm = try! Realm()
@@ -133,7 +92,7 @@ class ProfileService {
         return user!
     }
 
-    class func getUserCity() -> CityModel? {
+    class func getUserCity() -> CityModel {
         let realm = try! Realm()
         let result = realm.objects(CityModel)
 
@@ -141,7 +100,7 @@ class ProfileService {
         let settings = user.settings!
         let city = result.filter("id == %@", settings.city_id!).first
 
-        return city
+        return city!
     }
 
     class func isUserProfileExists() -> Bool {

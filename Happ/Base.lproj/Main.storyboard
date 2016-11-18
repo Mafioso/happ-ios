@@ -22,11 +22,12 @@
         <!--Table View Controller-->
         <scene sceneID="ITn-aH-97i">
             <objects>
-                <tableViewController id="eYT-ZX-ZYZ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vLF-xa-Ajk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="239"/>
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="eYT-ZX-ZYZ" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="vLF-xa-Ajk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="276"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="37"/>
                         <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="xRQ-DS-V0v">
@@ -290,18 +291,18 @@
                                                     <segue destination="eYT-ZX-ZYZ" kind="embed" identifier="embeddedTableMenu" id="FBs-r6-XBU"/>
                                                 </connections>
                                             </containerView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Koa-cf-tNc" userLabel="Footer View">
+                                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Koa-cf-tNc" userLabel="Footer View">
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HAPP V2.0 © All Rights Reserved, 2016" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gw-ov-CEj">
                                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="5Gw-ov-CEj" firstAttribute="top" secondItem="Koa-cf-tNc" secondAttribute="top" id="7M4-8S-4a8"/>
-                                                    <constraint firstAttribute="height" constant="28" id="hol-PT-icX"/>
+                                                    <constraint firstAttribute="height" constant="37" id="hol-PT-icX"/>
                                                     <constraint firstItem="5Gw-ov-CEj" firstAttribute="centerX" secondItem="Koa-cf-tNc" secondAttribute="centerX" id="uCW-fD-ez6"/>
                                                 </constraints>
                                             </view>
@@ -310,9 +311,8 @@
                                         <constraints>
                                             <constraint firstItem="fcE-bM-dY8" firstAttribute="leading" secondItem="6vS-GM-xXm" secondAttribute="leading" id="F7o-gx-KdD"/>
                                             <constraint firstItem="Koa-cf-tNc" firstAttribute="leading" secondItem="6vS-GM-xXm" secondAttribute="leading" id="HUg-RA-NZg"/>
-                                            <constraint firstAttribute="bottom" secondItem="Koa-cf-tNc" secondAttribute="bottom" constant="9" id="OW0-gt-DKb"/>
+                                            <constraint firstAttribute="bottom" secondItem="Koa-cf-tNc" secondAttribute="bottom" id="OW0-gt-DKb"/>
                                             <constraint firstAttribute="trailing" secondItem="fcE-bM-dY8" secondAttribute="trailing" id="dff-QH-dSw"/>
-                                            <constraint firstItem="Koa-cf-tNc" firstAttribute="top" secondItem="fcE-bM-dY8" secondAttribute="bottom" id="kTX-KS-uhc"/>
                                             <constraint firstItem="fcE-bM-dY8" firstAttribute="top" secondItem="6vS-GM-xXm" secondAttribute="top" constant="16" id="nq3-iV-ZoL"/>
                                             <constraint firstAttribute="trailing" secondItem="Koa-cf-tNc" secondAttribute="trailing" id="qLB-uW-yMO"/>
                                         </constraints>
@@ -334,6 +334,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="OyV-Nf-Iku" firstAttribute="leading" secondItem="CLz-xt-hfK" secondAttribute="leading" id="1ms-ih-AHO"/>
+                            <constraint firstItem="sM4-F6-VBR" firstAttribute="top" secondItem="fcE-bM-dY8" secondAttribute="bottom" id="8R1-Gy-4No"/>
                             <constraint firstAttribute="trailing" secondItem="OyV-Nf-Iku" secondAttribute="trailing" id="X4N-1u-zMb"/>
                             <constraint firstItem="sM4-F6-VBR" firstAttribute="top" secondItem="Mq2-hn-L7I" secondAttribute="bottom" id="gzO-sm-TEb"/>
                             <constraint firstItem="Mq2-hn-L7I" firstAttribute="top" secondItem="OyV-Nf-Iku" secondAttribute="bottom" id="iEG-A6-qd5"/>

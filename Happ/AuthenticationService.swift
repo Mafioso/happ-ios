@@ -53,8 +53,7 @@ class AuthenticationService {
             "old_password": oldPassword,
             "new_password": newPassword
         ]
-        let paramsData = try! NSJSONSerialization.dataWithJSONObject(params, options: [])
-        return Post("auth/password/change/", parametersJSON: paramsData)
+        return Post("auth/password/change/", parametersAnyObject: params as AnyObject)
     }
 
 

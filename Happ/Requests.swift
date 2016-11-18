@@ -46,7 +46,8 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
 
 func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
     var headers = [
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "Content-Type": "application/json"
     ]
     if isAuthenticated {
         let accessToken = AuthenticationService.getCredential()
@@ -86,7 +87,7 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
 
 }
 
-func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
+func Post(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         let headers = getRequestHeaders(isAuthenticated)
@@ -94,17 +95,20 @@ func Post(endpoint: String, parametersJSON: NSData?, isAuthenticated: Bool = tru
         let nsURL = NSURL(string: url)
         let request = NSMutableURLRequest(URL: nsURL!)
         request.HTTPMethod = "POST"
-        request.HTTPBody = parametersJSON
+        if parametersAnyObject == nil {
+            request.HTTPBody = nil
+        } else {
+            let jsonData = try! NSJSONSerialization.dataWithJSONObject(parametersAnyObject!, options: .PrettyPrinted)
+            request.HTTPBody = jsonData
+        }
         headers.forEach({ request.setValue($0.1, forHTTPHeaderField: $0.0) })
+
 
         Alamofire
             .request(request)
             .validate()
-            .validate(statusCode: [405])
+            .validate(statusCode: [204])
             .response { (request, response, data, error) in
-
-                print(".here", request, response)
-
                 if error == nil {
                     resolve(NSNull())
                 } else {

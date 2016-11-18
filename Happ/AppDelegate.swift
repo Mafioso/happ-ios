@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import SlideMenuControllerSwift
 
 
 @UIApplicationMain
@@ -20,27 +21,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 
-        /* to Debug
-        if self.window?.rootViewController != nil {
+        if self.window?.rootViewController != nil { // for Debuging single storyboard's vc
             return true
         }
-        */
+
+        if DeviceType.IS_IPHONE_5 || DeviceType.IS_IPHONE_4_OR_LESS {
+           SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
+        }
+        
+        application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+        application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
+
+        let apiKey = DefaultParameters.getValue(.GoogleMapApiKey) as! String
+        GMSServices.provideAPIKey(apiKey)
+        GMSPlacesClient.provideAPIKey(apiKey)
 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = UINavigationController()
         self.navigationCoordinator = NavigationCoordinator(window: self.window!)
         self.navigationCoordinator.start()
         
-        application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
-        application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-
-        let apiKey = DefaultParameters.getValue(.GoogleMapApiKey) as! String
-        print("GOOGLE MAP API KEY = ", apiKey)
-        GMSServices.provideAPIKey(apiKey)
-        GMSPlacesClient.provideAPIKey(apiKey)
-
         return true
     }
 

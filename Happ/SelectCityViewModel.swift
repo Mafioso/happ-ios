@@ -28,45 +28,20 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
 
     override init() {
         super.init()
+
+        self.selectedCity = self.getUserCity()
     }
 
     override func onSelectCity(city: CityModel) {
-        super.onSelectCity(city)
-
-        //TODO ProfileService.setCity(city.id)
-    }
-
-
-    override private func willLoad() {
-        self.fetchCities().then { _ -> Void in
-            print("..selectCity[VM].fetchCities.done", self.cities.count)
-            self.fetchUserCity()
-                .then { _ -> Void in
-                    print("..selectCity[VM].fetchUserCity.done", self.selectedCity?.name)
-                    self.didLoad?()
-                    self.didUpdate?()
-                }
-                .error { err in
-                    print("..selectCity[VM].fetchUserCity.fail", err)
-                }
+        CityService.setUserCity(city.id)
+            .then { _ in
+                super.onSelectCity(city)
         }
     }
-    private func getUserCity() -> CityModel? {
+
+
+    private func getUserCity() -> CityModel {
         return ProfileService.getUserCity()
-    }
-    private func fetchUserCity() -> Promise<Void> {
-        if let city = self.getUserCity() {
-            self.selectedCity = city
-            return Promise().asVoid()
-
-        } else {
-            return ProfileService.fetchUserCity()
-                .then { _ -> Void in
-                    self.selectedCity = ProfileService.getUserCity()
-                    self.cities = self.getCities() // get updated data from local DB
-                    self.didUpdate?()
-            }
-        }
     }
 
 
@@ -75,7 +50,7 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
         return true
     }
     func selectInterestsGetTitle() -> String {
-        return self.getUserCity()!.name
+        return self.getUserCity().name
     }
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
         let interestIDs = selectedInterests.map { $0.id }
@@ -93,6 +68,7 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
 
 class SelectCityViewModelPrototype {
 
+    var citiesPage: Int = 1
     var cities: [CityModel] = []
     var selectedCity: CityModel?
     var search: String?
@@ -122,6 +98,13 @@ class SelectCityViewModelPrototype {
         self.cities = self.getCities()
         self.didUpdate?()
     }
+    func onLoadNextPage() {
+        if self.citiesPage > 1 && CityService.isLastPage {
+            return
+        }
+        self.citiesPage += 1
+        self.fetchCities()
+    }
 
 
     private func willLoad() {
@@ -131,19 +114,19 @@ class SelectCityViewModelPrototype {
             self.didUpdate?()
         }
     }
+    private func fetchCities() -> Promise<Void> {
+        return CityService.fetchCities(self.citiesPage)
+            .then { _ -> Void in
+                self.cities = self.getCities()
+                self.didUpdate?()
+        }
+    }
     private func getCities() -> [CityModel] {
-        var cities = ProfileService.getCitiesStored()
+        var cities = CityService.getCities()
         if self.search != nil {
             cities = cities.filter("name CONTAINS %@", search!)
         }
         return Array(cities)
-    }
-
-    private func fetchCities() -> Promise<Void> {
-        return ProfileService.fetchCities()
-            .then { _ -> Void in
-                self.cities = self.getCities()
-        }
     }
 
 }

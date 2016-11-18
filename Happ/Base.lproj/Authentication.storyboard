@@ -75,123 +75,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ali-c0-Oob" userLabel="Login by Facebook View">
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQd-bu-fmV" userLabel="Facebook Login View">
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbM-nY-EeQ" userLabel="Right">
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create using Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0V9-JY-AVb">
-                                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="0.80334051724137934" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstItem="0V9-JY-AVb" firstAttribute="centerY" secondItem="nbM-nY-EeQ" secondAttribute="centerY" id="JB9-27-fVE"/>
-                                                    <constraint firstItem="0V9-JY-AVb" firstAttribute="centerX" secondItem="nbM-nY-EeQ" secondAttribute="centerX" id="Li4-lL-hzd"/>
-                                                    <constraint firstAttribute="height" constant="40" id="sEr-nt-Nbk"/>
-                                                </constraints>
-                                            </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="KEw-LQ-uer" userLabel="Left">
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Dno-fF-N6U"/>
-                                                    <constraint firstAttribute="width" constant="40" id="m7z-Vd-s9G"/>
-                                                </constraints>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="Dno-fF-N6U"/>
-                                                        <exclude reference="m7z-Vd-s9G"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="Dno-fF-N6U"/>
-                                                        <include reference="m7z-Vd-s9G"/>
-                                                    </mask>
-                                                </variation>
-                                            </imageView>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oho-ln-Ldz">
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="LjB-1O-ppi"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="LjB-1O-ppi"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="LjB-1O-ppi"/>
-                                                    </mask>
-                                                </variation>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="nbM-nY-EeQ" secondAttribute="bottom" id="0Ec-pP-xgf"/>
-                                            <constraint firstItem="KEw-LQ-uer" firstAttribute="leading" secondItem="lQd-bu-fmV" secondAttribute="leading" id="Fsd-IY-Ogj"/>
-                                            <constraint firstAttribute="bottom" secondItem="oho-ln-Ldz" secondAttribute="bottom" id="JUO-I1-ASG"/>
-                                            <constraint firstItem="oho-ln-Ldz" firstAttribute="leading" secondItem="lQd-bu-fmV" secondAttribute="leading" id="K2H-K6-qXw"/>
-                                            <constraint firstAttribute="bottom" secondItem="KEw-LQ-uer" secondAttribute="bottom" id="MT2-0D-njQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="oho-ln-Ldz" secondAttribute="trailing" id="Pcq-sC-RM9"/>
-                                            <constraint firstAttribute="trailing" secondItem="nbM-nY-EeQ" secondAttribute="trailing" id="Ph0-DY-ADe"/>
-                                            <constraint firstAttribute="height" constant="40" id="UEd-x2-5a4"/>
-                                            <constraint firstItem="nbM-nY-EeQ" firstAttribute="leading" secondItem="KEw-LQ-uer" secondAttribute="trailing" id="sTB-KL-CaM"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="subviews">
-                                                <exclude reference="KEw-LQ-uer"/>
-                                                <exclude reference="oho-ln-Ldz"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <exclude reference="Fsd-IY-Ogj"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact">
-                                            <mask key="subviews">
-                                                <include reference="KEw-LQ-uer"/>
-                                                <include reference="oho-ln-Ldz"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <include reference="Fsd-IY-Ogj"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daY-vR-TL9" userLabel="Separator View">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="— OR —" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewN-CN-8i6">
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="0p1-om-KRr"/>
-                                            <constraint firstItem="ewN-CN-8i6" firstAttribute="top" secondItem="daY-vR-TL9" secondAttribute="top" id="922-pb-dxn"/>
-                                            <constraint firstItem="ewN-CN-8i6" firstAttribute="leading" secondItem="daY-vR-TL9" secondAttribute="leading" constant="120" id="XVT-50-3iH"/>
-                                            <constraint firstItem="ewN-CN-8i6" firstAttribute="centerX" secondItem="daY-vR-TL9" secondAttribute="centerX" id="aMu-0b-Eyk"/>
-                                            <constraint firstAttribute="bottom" secondItem="ewN-CN-8i6" secondAttribute="bottom" id="bxk-Ij-mXr"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="daY-vR-TL9" secondAttribute="bottom" id="Dl5-I9-CoY"/>
-                                    <constraint firstAttribute="trailing" secondItem="lQd-bu-fmV" secondAttribute="trailing" id="Sw3-Rc-TRT"/>
-                                    <constraint firstItem="daY-vR-TL9" firstAttribute="centerX" secondItem="ali-c0-Oob" secondAttribute="centerX" id="TyM-hy-ZQY"/>
-                                    <constraint firstItem="lQd-bu-fmV" firstAttribute="leading" secondItem="ali-c0-Oob" secondAttribute="leading" id="VwI-7q-6A8"/>
-                                    <constraint firstItem="daY-vR-TL9" firstAttribute="top" secondItem="lQd-bu-fmV" secondAttribute="bottom" constant="15" id="XjZ-1K-uCv"/>
-                                    <constraint firstItem="lQd-bu-fmV" firstAttribute="top" secondItem="ali-c0-Oob" secondAttribute="top" id="qAk-Ef-kqp"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wyi-L8-lVD" userLabel="Form View">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="exY-11-7OZ" userLabel="Fields View">
@@ -331,7 +214,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickedAuthActionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0e1-vW-xbR"/>
+                                                    <action selector="clickedSignUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2fj-XD-edy"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -473,7 +356,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3o-5j-agM">
-                                <state key="normal" image="nav-back-shadow"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="S45-1r-tAQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="kmu-Mz-FrB"/>
+                                </constraints>
+                                <state key="normal" image="nav-back"/>
                                 <connections>
                                     <action selector="clickedBackNavItem:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tWf-7P-qh3"/>
                                 </connections>
@@ -481,21 +368,18 @@
                         </subviews>
                         <color key="backgroundColor" red="0.32549019610000002" green="0.1019607843" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="ali-c0-Oob" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3tD-DG-wuX"/>
-                            <constraint firstItem="D3o-5j-agM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="81t-uU-RJH"/>
+                            <constraint firstItem="D3o-5j-agM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="6" id="81t-uU-RJH"/>
                             <constraint firstAttribute="trailing" secondItem="t5S-tR-Sb7" secondAttribute="trailing" id="II8-5U-9ka"/>
                             <constraint firstItem="sxR-Zi-AZh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="Iuv-Ba-f2H"/>
-                            <constraint firstItem="Wyi-L8-lVD" firstAttribute="top" secondItem="t5S-tR-Sb7" secondAttribute="bottom" constant="124" id="ONJ-rn-Mt0"/>
-                            <constraint firstItem="Wyi-L8-lVD" firstAttribute="top" secondItem="ali-c0-Oob" secondAttribute="bottom" constant="15" id="PAJ-K5-6OU"/>
+                            <constraint firstItem="Wyi-L8-lVD" firstAttribute="top" secondItem="t5S-tR-Sb7" secondAttribute="bottom" constant="84" id="ONJ-rn-Mt0"/>
                             <constraint firstAttribute="trailing" secondItem="Wyi-L8-lVD" secondAttribute="trailing" constant="32" id="RmY-YY-d63"/>
                             <constraint firstAttribute="trailing" secondItem="sxR-Zi-AZh" secondAttribute="trailing" constant="32" id="Xfc-0Z-5kx"/>
                             <constraint firstItem="Wyi-L8-lVD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="YLi-n4-Pob"/>
-                            <constraint firstItem="ali-c0-Oob" firstAttribute="width" secondItem="Wyi-L8-lVD" secondAttribute="width" id="aav-f2-12d"/>
-                            <constraint firstItem="D3o-5j-agM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="c3d-3v-flD"/>
+                            <constraint firstItem="D3o-5j-agM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="6" id="c3d-3v-flD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sxR-Zi-AZh" secondAttribute="bottom" constant="30" id="gth-3f-pN9">
                                 <variation key="widthClass=compact" constant="6"/>
                             </constraint>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Wyi-L8-lVD" secondAttribute="bottom" constant="100" id="hVq-1f-zbU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Wyi-L8-lVD" secondAttribute="bottom" constant="140" id="hVq-1f-zbU"/>
                             <constraint firstItem="t5S-tR-Sb7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mnV-4E-Lsn"/>
                         </constraints>
                         <variation key="default">
@@ -535,26 +419,25 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="appLogoImageView" destination="HUy-HZ-iah" id="ju0-Vm-Vex"/>
-                        <outlet property="buttonAuthAction" destination="H5r-Q2-Gb7" id="qL0-Zj-veS"/>
+                        <outlet property="appNameHeightConstraint" destination="olK-cK-gTx" id="bi6-3U-rze"/>
+                        <outlet property="appNameImageView" destination="feX-pw-9TC" id="HQy-Gn-fya"/>
+                        <outlet property="buttonSignUp" destination="H5r-Q2-Gb7" id="fVs-j7-l94"/>
                         <outlet property="constraintFormToBottomLayout" destination="hVq-1f-zbU" id="TvE-Do-nAK"/>
                         <outlet property="constraintLogoToForm" destination="ONJ-rn-Mt0" id="5HP-Cx-gRE"/>
-                        <outlet property="enterWithFbButton" destination="oho-ln-Ldz" id="SBB-EO-vwC"/>
                         <outlet property="textFieldPassword" destination="LOf-S3-3QF" id="BGQ-4y-sa7"/>
                         <outlet property="textFieldRepeatPassword" destination="QKE-ZV-Tp0" id="0eX-Ix-yfn"/>
                         <outlet property="textFieldUsername" destination="fDq-qh-Ps0" id="4WF-Ni-DAJ"/>
                         <outlet property="viewBottomContainer" destination="sxR-Zi-AZh" id="y9k-i7-xAp"/>
-                        <outlet property="viewEnterWithFBRight" destination="nbM-nY-EeQ" id="Nyf-Iq-aWn"/>
                         <outlet property="viewFieldContainerPassword" destination="gj5-tW-DaT" id="dP3-Bu-jYS"/>
                         <outlet property="viewFieldContainerRepeatPassword" destination="kGl-wS-XlS" id="OPd-w7-SbG"/>
                         <outlet property="viewFieldContainerUsername" destination="sof-jN-70O" id="tbZ-4p-aS8"/>
-                        <outlet property="viewLoginByFacebookContainer" destination="ali-c0-Oob" id="mEf-F4-0ui"/>
                         <outlet property="viewSignInFormButton" destination="JwK-QV-qH7" id="7Tw-GK-Ufj"/>
                         <outlet property="viewSignInFormSpinner" destination="aHb-yH-DQy" id="Ola-vm-Dyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2524" y="509.59520239880067"/>
+            <point key="canvasLocation" x="-2452" y="510"/>
         </scene>
         <!--Sign In Controller-->
         <scene sceneID="eHo-Nu-icv">
@@ -835,7 +718,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clickedAuthActionButton:" destination="yE1-eK-aIX" eventType="touchUpInside" id="TW7-be-Kmg"/>
+                                                    <action selector="clickedLoginButton:" destination="yE1-eK-aIX" eventType="touchUpInside" id="fpW-tc-GJY"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1125,10 +1008,12 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="appLogoImageView" destination="iWg-em-GrW" id="Hkf-iQ-vQf"/>
-                        <outlet property="buttonAuthAction" destination="1J4-Rx-lRV" id="Aw6-JY-Di7"/>
+                        <outlet property="appNameHeightConstraint" destination="xd1-N6-L6L" id="tf8-JF-IlD"/>
+                        <outlet property="appNameImageView" destination="KEf-1i-UcS" id="bJs-XC-ZYe"/>
                         <outlet property="constraintFormToBottomLayout" destination="XWD-cG-7aF" id="iCw-zb-XuX"/>
                         <outlet property="constraintLogoToForm" destination="8ZG-CT-Lor" id="7eH-yd-kZ7"/>
                         <outlet property="enterWithFbButton" destination="OHd-mO-Gf5" id="LPs-vO-I2m"/>
+                        <outlet property="loginButton" destination="1J4-Rx-lRV" id="LwG-40-dku"/>
                         <outlet property="textFieldPassword" destination="7Lc-S0-8gx" id="p2u-jd-AY3"/>
                         <outlet property="textFieldUsername" destination="v59-X3-jNt" id="DTv-WU-tgc"/>
                         <outlet property="viewBottomContainer" destination="L5Q-Pc-Z9F" id="Obr-jy-7gC"/>
@@ -1149,6 +1034,6 @@
         <image name="facebook" width="40" height="40"/>
         <image name="icon-happ" width="124" height="128"/>
         <image name="icon-happ-text" width="105" height="38"/>
-        <image name="nav-back-shadow" width="34" height="38"/>
+        <image name="nav-back" width="16" height="16"/>
     </resources>
 </document>

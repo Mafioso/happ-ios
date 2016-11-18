@@ -55,21 +55,20 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         let tappableGesture = UITapGestureRecognizer(target: self, action: #selector(onClickChangeCity))
         self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
 
-        // TODO
-        // let imageURL = NSURL(user...)
-        // imageUserPhoto.hnk_setImageFromURL(imageURL)
-        imageUserPhoto.image = UIImage(named: "bg-feed")
-        labelUserFullname.text = self.viewModelMenu.user.fullname
+        self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
         let highlightedIndexPath = NSIndexPath(forRow: self.viewModelMenu.highlight.rawValue, inSection: 0)
         self.tableMenuActions.selectRowAtIndexPath(highlightedIndexPath, animated: true, scrollPosition: .None)
+    }
+    override func viewDidLayoutSubviews() {
+        let footerHeight = CGFloat(37)
+        self.tableMenuActions.contentSize.height = self.tableMenuActions.contentSize.height + footerHeight
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == segueEmbeddedTableMenu {
@@ -86,6 +85,11 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
 
     func viewModelDidUpdate() {
+        // let imageURL = NSURL(user...)
+        // imageUserPhoto.hnk_setImageFromURL(imageURL)
+        imageUserPhoto.image = UIImage(named: "bg-feed")
+        labelUserFullname.text = self.viewModelMenu.user.fullname
+
         self.updateScopeViews()
         self.tableMenuActions.reloadData()
     }
@@ -143,8 +147,9 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print(".menu.selectAction")
-        let action = MenuActions(rawValue: indexPath.section * 10 + indexPath.row)!
-        self.viewModelMenu.onClickAction(action)
+        if let action = MenuActions(rawValue: indexPath.section * 10 + indexPath.row) {
+            self.viewModelMenu.onClickAction(action)
+        }
     }
     func onClickChangeCity() {
         print(".menu.changeScope")

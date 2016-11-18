@@ -89,6 +89,10 @@ class SelectInterestsController: UIViewController {
         }
     }
     private func willDisplayPopoverSelectSubinterests() {
+        // to display popup over selected cell, we do:
+        // 1. Minimize CollectionView by adding Height Constraint
+        // 2. present ViewController as Popover
+
         if self.getHeightConstraint() == nil {
             // minimize collectionView to able scroll to the bottom
             self.createHeightConstraint()
@@ -118,7 +122,9 @@ class SelectInterestsController: UIViewController {
         return self.collectionView.constraints.filter { $0.identifier == "height" }.first
     }
     private func createHeightConstraint() {
-        let heightConstraint = NSLayoutConstraint(item: self.collectionView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 184)
+        let cellHeigh = self.getCellSize().height
+        let statusBarHeight = CGFloat(20)
+        let heightConstraint = NSLayoutConstraint(item: self.collectionView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeigh + statusBarHeight + 1)
         heightConstraint.identifier = "height"
         heightConstraint.active = true
         self.collectionView.addConstraint(heightConstraint)
@@ -126,6 +132,15 @@ class SelectInterestsController: UIViewController {
     }
     private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
         return self.viewModel.interests[indexPath.row]
+    }
+    private func getCellSize() -> CGSize {
+        if DeviceType.IS_IPHONE_4_OR_LESS || DeviceType.IS_IPHONE_5 {
+            return CGSizeMake(105, 140)
+        } else if DeviceType.IS_IPHONE_6 {
+            return CGSizeMake(124, 164)
+        } else { // DeviceType.IS_IPHONE_6P
+            return CGSizeMake(137, 182)
+        }
     }
 }
 
@@ -159,7 +174,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
 
     // init size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(124, 164)
+        return self.getCellSize()
     }
 
     // init header

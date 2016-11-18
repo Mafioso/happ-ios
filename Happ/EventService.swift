@@ -25,13 +25,13 @@ class EventService {
     class func setLike(eventID: String, value: Bool) -> Promise<AnyObject> {
         var url = endpoint + eventID
         url += (value == true) ? "/upvote/" : "/downvote/"
-        return Post(url, parametersJSON: nil)
+        return Post(url, parameters: nil)
     }
 
     class func setFavourite(eventID: String, value: Bool) -> Promise<AnyObject> {
         var url = endpoint + eventID
         url += (value == true) ? "/fav/" : "/unfav/"
-        return Post(url, parametersJSON: nil)
+        return Post(url, parameters: nil)
     }
 
     class func fetchFeed(page: Int = 1) -> Promise<Void> {

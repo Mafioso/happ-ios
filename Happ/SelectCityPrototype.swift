@@ -34,14 +34,14 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
         self.searchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
-            // controller.searchBar.delegate = self
             controller.searchBar.searchBarStyle = .Minimal
+            controller.searchBar.sizeToFit()
             controller.dimsBackgroundDuringPresentation = false
             self.definesPresentationContext = true
-            self.tableView.tableHeaderView = controller.searchBar
             return controller
         })()
 
+        self.tableView.tableHeaderView = self.searchController.searchBar
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
 

@@ -171,16 +171,19 @@ class NavigationCoordinator {
     }
 
     func start() {
-        firstly {
-            AuthenticationService.checkCredentialAvailable()
-        }.then {
-            ProfileService.fetchUserProfile()
-        }.then {
-            self.updateUserLanguageIfNeeded()
-        }.then {
-            ProfileService.checkCityExists()
-        }.then {
-            ProfileService.checkInterestsExist()
+        AuthenticationService.checkCredentialAvailable()
+        .then { _ -> Promise<Void> in
+            return ProfileService.fetchUserProfile()
+        }.then { _ -> Promise<Void> in
+            return ProfileService.checkCityExists()
+        }.then { _ -> Promise<Void> in
+            return ProfileService.fetchUserCity()
+        }.then { _ -> Promise<Void> in
+            return ProfileService.checkInterestsExist()
+        }.then { _ -> Promise<Void> in
+            return self.updateUserLanguageIfNeeded()
+        }.then { _ in
+            self.startFeed()
         }.error { err in
             switch err {
             case AuthenticationErrors.NoCredentials:
@@ -190,7 +193,7 @@ class NavigationCoordinator {
             case ProfileErrors.CityNotSelected:
                 self.startSetupCityAndInterests()
             case ProfileErrors.InterestsNotSelected:
-                self.startSetupCityAndInterests() // TODO move to Interests
+                self.startSetupOnlyInterests()
             default:
                 break
             }
@@ -198,7 +201,7 @@ class NavigationCoordinator {
     }
     func updateUserLanguageIfNeeded() -> Promise<Void> {
         return Promise { resolve, reject in
-            ProfileService.checkCityExists()
+            ProfileService.checkLanguageChange()
                 .then {
                     resolve()
                 }.error { err in
@@ -230,7 +233,7 @@ class NavigationCoordinator {
         viewModel.navigateSignUp = self.showSignUp(viewModel)
         viewModel.navigateBack = self.goBack
         viewModel.navigateSetup = self.startSetupCityAndInterests
-        viewModel.navigateFeed = self.startFeed
+        viewModel.navigateAfterLogin = self.start
         // viewModel.navigateTerm
         // viewModel.navigatePolicy
 
@@ -470,6 +473,20 @@ class NavigationCoordinator {
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
+    func startSetupOnlyInterests() { // same as `startSetupCityAndInterests`, but without SelectCity
+        print(".start.startSetupOnlyInterests")
+
+        let viewModel = SetupCityAndInterestsViewModel()
+        viewModel.navigateFeed = self.startFeed
+        viewModel.citySelected = ProfileService.getUserCity()
+
+        self.navigationController = UINavigationController()
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+
+        let runRootController = self.showSelectInterest(.Setup, parentViewModel: viewModel)!
+        runRootController()
+    }
     func showSetupSelectCity(viewModel: SelectCityOnSetupViewModel) -> NavigationFunc {
         return {
             print(".setup.showSetupSelectCity")
@@ -584,7 +601,6 @@ class NavigationCoordinator {
             slideMenu.closeRight()
         }
     }
-
 
     private func initMenuController(highlight: MenuActions) -> MenuViewController {
         let viewModel = MenuViewModel(highlight: highlight)

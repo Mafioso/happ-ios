@@ -52,12 +52,11 @@ class EventsExploreViewController: UICollectionViewController {
         }
     }
 
-    
+
     // size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        return CGSizeMake(screenSize.width*0.33, 164)
-        //return CGSizeMake(124, 164)
+        return CGSizeMake(min(124, screenSize.width*0.33), 164)
     }
     // data source
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

@@ -19,7 +19,7 @@
 		5239C3851D925E8100F66E31 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3841D925E8100F66E31 /* Event.storyboard */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
-		525A8AAA1D7D4023002C6F46 /* AuthControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* AuthControllers.swift */; };
+		525A8AAA1D7D4023002C6F46 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* SignInController.swift */; };
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
 		525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAE1D7D4023002C6F46 /* Assets.xcassets */; };
 		525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */; };
@@ -44,6 +44,8 @@
 		52AF59AD1DCA781A002037FE /* SelectSubinterestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */; };
 		52B0123E1D9AD5970061F083 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B0123D1D9AD5970061F083 /* Profile.storyboard */; };
 		52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B012431D9AE19F0061F083 /* ProfileService.swift */; };
+		52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */; };
+		52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA31DDF24D200CBDA1B /* CityService.swift */; };
 		52C2EC681DC8B03500156652 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC671DC8B03500156652 /* InterestService.swift */; };
 		52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */; };
 		52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D190961D9FF4B300608B02 /* ProfileController.swift */; };
@@ -108,7 +110,7 @@
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		525A8AA91D7D4023002C6F46 /* AuthControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthControllers.swift; sourceTree = "<group>"; };
+		525A8AA91D7D4023002C6F46 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		525A8AAC1D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		525A8AAE1D7D4023002C6F46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		525A8AB11D7D4023002C6F46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -134,6 +136,8 @@
 		52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSubinterestsController.swift; sourceTree = "<group>"; };
 		52B0123D1D9AD5970061F083 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		52B012431D9AE19F0061F083 /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		52B37CA31DDF24D200CBDA1B /* CityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
 		52C2EC671DC8B03500156652 /* InterestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
 		52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsHeader.swift; sourceTree = "<group>"; };
 		52D190961D9FF4B300608B02 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
@@ -292,7 +296,8 @@
 				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
 				52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */,
 				522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */,
-				525A8AA91D7D4023002C6F46 /* AuthControllers.swift */,
+				525A8AA91D7D4023002C6F46 /* SignInController.swift */,
+				52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */,
 				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				52F65F8E1DC75475005E751E /* SelectInterestsController.swift */,
 				52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */,
@@ -370,6 +375,7 @@
 				5212E69C1D9029DC00729CC8 /* EventService.swift */,
 				52B012431D9AE19F0061F083 /* ProfileService.swift */,
 				52C2EC671DC8B03500156652 /* InterestService.swift */,
+				52B37CA31DDF24D200CBDA1B /* CityService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -578,12 +584,13 @@
 			files = (
 				52FDB3841DD5CA4100E6B821 /* EventManageTableCell.swift in Sources */,
 				B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */,
+				52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */,
 				52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
 				B4E7B70A1D9B8E6E004B8B78 /* MenuViewModel.swift in Sources */,
 				5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */,
 				52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */,
-				525A8AAA1D7D4023002C6F46 /* AuthControllers.swift in Sources */,
+				525A8AAA1D7D4023002C6F46 /* SignInController.swift in Sources */,
 				52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */,
 				52C2EC681DC8B03500156652 /* InterestService.swift in Sources */,
 				52839C091DDAE9D200B6EBD8 /* EventsMapViewController.swift in Sources */,
@@ -605,6 +612,7 @@
 				52722F911DD4E49E00F31811 /* EventsExploreViewController.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
+				52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */,
 				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */,

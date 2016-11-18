@@ -22,7 +22,6 @@ class SetupCityAndInterestsViewModel {
 
     
     init() {
-        
     }
 
     //MARK: - Events
@@ -46,13 +45,17 @@ class SetupCityAndInterestsViewModel {
     }
 
     func onSaveCityPage() {
-        //TODO  ProfileService.setCity(self.citySelected.id)
-        self.navigateSelectInterests?()
+        CityService.setUserCity(self.citySelected!.id)
+            .then { _ in
+                self.navigateSelectInterests?()
+        }
     }
     func onSaveInterestsPage() {
         let interestIDs = self.interestsSelected.map{ $0.id }
-        //TODO  InterestService.setUserInterests(interestIDs)
-        self.navigateFeed?()
+        InterestService.setUserInterests(interestIDs)
+            .then { _ in
+                self.navigateFeed?()
+        }
     }
 }
 

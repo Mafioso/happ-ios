@@ -23,7 +23,7 @@ class SelectCityOnSetupController: SelectCityPrototype {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.extMakeNavBarTransparrent()
+        self.extMakeNavBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -42,6 +42,11 @@ class SelectCityOnSetupController: SelectCityPrototype {
 
         } else {
             cell.extUnsetHighlighted()
+        }
+
+        // paginating
+        if indexPath.row == self.viewModel.cities.count - 3 {
+            self.viewModel.onLoadNextPage()
         }
     }
 

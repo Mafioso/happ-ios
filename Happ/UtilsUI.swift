@@ -20,7 +20,7 @@ extension UIView {
         self.layer.mask = mask
     }
     func extMakeCircle() {
-        self.layer.cornerRadius = 0.5 * self.bounds.size.width
+        self.layer.cornerRadius = 0.5 * self.bounds.size.height
         self.layer.borderWidth = 0.0
         self.clipsToBounds = true
     }
