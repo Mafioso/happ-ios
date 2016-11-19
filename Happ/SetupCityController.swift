@@ -8,6 +8,7 @@
 
 
 import UIKit
+import GoogleMaps
 
 
 class SetupCityController: UIViewController {
@@ -28,6 +29,7 @@ class SetupCityController: UIViewController {
     @IBOutlet weak var buttonSave: UIButton!
     @IBOutlet weak var imageGeoIndicator: UIImageView!
     @IBOutlet weak var labelSelectedCityName: UILabel!
+    @IBOutlet weak var viewMap: GMSMapView!
 
     // actions
     @IBAction func clickedSave(sender: UIButton) {
@@ -45,17 +47,20 @@ class SetupCityController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.initMap()
         self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.extMakeNavBarHidden()
+        self.extMakeStatusBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.extMakeNavBarVisible()
+        self.extMakeStatusBarDefault()
     }
 
 
@@ -69,6 +74,27 @@ class SetupCityController: UIViewController {
         } else {
             self.labelSelectedCityName.text = self.selectedCityNamePlaceholder
             self.buttonSave.enabled = false
+        }
+        self.updateMap()
+    }
+
+
+    private func initMap() {
+        let camera = GMSCameraPosition.cameraWithLatitude(51.15092055, longitude: 71.4388595154859, zoom: 1)
+        self.viewMap.camera = camera
+        self.viewMap.settings.scrollGestures = false
+        self.viewMap.settings.zoomGestures = false
+        self.viewMap.settings.tiltGestures = false
+        self.viewMap.settings.rotateGestures = false
+    }
+    private func updateMap() {
+        if let city = self.viewModel.citySelected {
+            CityService.fetchCityLocation(city.id)
+                .then { data -> Void in
+                    let location = data as! CLLocation
+                    let updCamera = GMSCameraUpdate.setTarget(location.coordinate, zoom: 11)
+                    self.viewMap.animateWithCameraUpdate(updCamera)
+            }
         }
     }
 
@@ -86,8 +112,6 @@ class SetupCityController: UIViewController {
             self?.viewModel.onSelectCity(city)
         }
     }
-
-
 }
 
 

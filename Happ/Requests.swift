@@ -131,8 +131,8 @@ func Post(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated: Bo
 func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
-        let request = createRequest(url, parameters: parameters)
-        request
+        Alamofire
+            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -141,9 +141,9 @@ func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<AnyObjec
 
                 case .Failure(let error):
                     if let reqErrorType = RequestError(rawValue: error.code) {
-                        reject(reqErrorType)
+                        reject(reqErrorType as ErrorType)
                     } else {
-                        print(".Get.error", endpoint, parameters, error, error.code)
+                        print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
                         reject(RequestError.UnknownError)
                     }
                 }
@@ -154,11 +154,37 @@ func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<AnyObjec
     }
 }
 
+func GetCustom(url: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding, headers: [String: String]? = nil) -> Promise<AnyObject> {
+    return Promise { resolve, reject in
+        Alamofire
+            .request(.GET, url, headers: headers, parameters: parameters, encoding: paramsEncoding)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .Success:
+                    resolve(response.result.value!)
+                    
+                case .Failure(let error):
+                    if let reqErrorType = RequestError(rawValue: error.code) {
+                        reject(reqErrorType as ErrorType)
+                    } else {
+                        reject(RequestError.UnknownError)
+                    }
+                    print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
+                }
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+}
+
+
 func GetPaginated(endpoint: String, parameters: [String: AnyObject]?) -> Promise<(AnyObject, Bool)> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
-        let request = createRequest(url, parameters: parameters)
-        request
+        Alamofire
+            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -184,13 +210,13 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?) -> Promise
 }
 
 
-
-private func createRequest(url: String, parameters: [String: AnyObject]?) -> Request {
+/*
+private func createRequest(url: String, parameters: [String: AnyObject]?, customHeaders: [String: String]?) -> Request {
     // create Request
     var  request: Request!
     if parameters == nil {
         let nsURL = NSURL(string: url)
-        let headers = getRequestHeaders()
+        let headers = customHeaders == nil ? getRequestHeaders() : customHeaders // getRequestHeaders()
         let nsRequest = NSMutableURLRequest(URL: nsURL!)
         nsRequest.HTTPMethod = "GET"
         headers.forEach({ nsRequest.setValue($0.1, forHTTPHeaderField: $0.0) })
@@ -200,5 +226,4 @@ private func createRequest(url: String, parameters: [String: AnyObject]?) -> Req
     }
     return request
 }
-
-
+*/

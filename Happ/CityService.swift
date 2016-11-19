@@ -11,6 +11,7 @@ import PromiseKit
 import RealmSwift
 import ObjectMapper
 import ObjectMapper_Realm
+import GoogleMaps
 
 
 class CityService {
@@ -30,11 +31,20 @@ class CityService {
                 if page == 1 {
                     // 1. delete exists
                     //    except User City
-                    try! realm.write {
-                        let exists = realm.objects(EventModel)
-                        let userCity = ProfileService.getUserCity()
-                        let allExcepUserCity = exists.filter("id != %@", userCity.id)
-                        realm.delete(allExcepUserCity)
+                    ProfileService.checkCityExists()
+                        .then { _ -> Void in
+                            try! realm.write {
+                                let exists = realm.objects(EventModel)
+                                let userCity = ProfileService.getUserCity()
+                                let allExcepUserCity = exists.filter("id != %@", userCity.id)
+                                realm.delete(allExcepUserCity)
+                            }
+                        }
+                        .error { err in
+                            try! realm.write {
+                                let exists = realm.objects(EventModel)
+                                realm.delete(exists)
+                            }
                     }
                 }
 
@@ -58,6 +68,28 @@ class CityService {
                 }
         }
     }
+    class func fetchCityLocation(id: String) -> Promise<AnyObject?> {
+        let city = self.getCity(id)
+        let url = "http://nominatim.openstreetmap.org/search"
+        let params: [String: AnyObject] = [
+            "city": city.name,
+            "country": city.country_name,
+            "format": "json",
+            "addressdetails": 1
+        ]
+        return GetCustom(url, parameters: params, paramsEncoding: .URL, headers: [:])
+            .then { result -> AnyObject? in
+                if  let array = result as? NSArray,
+                    let firstObj = array.firstObject,
+                    let data = firstObj as? NSDictionary {
+
+                    let lat = Double(data.objectForKey("lat") as! String)!
+                    let long = Double(data.objectForKey("lon") as! String)!
+                    return CLLocation(latitude: lat, longitude: long)
+                }
+                return nil
+        }
+    }
 
     class func setUserCity(cityID: String) -> Promise<AnyObject> {
         let url = endpoint + cityID + "/set/"
@@ -70,6 +102,12 @@ class CityService {
         let result = realm.objects(CityModel)
         return result
     }
+    class func getCity(id: String) -> CityModel {
+        let realm = try! Realm()
+        let result = realm.objects(CityModel)
+        return result.filter("id == %@", id).first!
+    }
+
     
 }
 
