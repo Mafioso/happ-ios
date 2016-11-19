@@ -1677,7 +1677,7 @@
         <scene sceneID="r6Q-gs-EfQ">
             <objects>
                 <collectionViewController storyboardIdentifier="Explore" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V5t-Ey-1kH" customClass="EventsExploreViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WF8-24-nmu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WF8-24-nmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1765,7 +1765,7 @@ OF COOKING</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCu-W2-Z6s" userLabel="Map View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCu-W2-Z6s" userLabel="Map View" customClass="GMSMapView">
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.1019607843" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I43-9l-s6l" userLabel="Button background">
@@ -1777,6 +1777,7 @@ OF COOKING</string>
                                             <constraint firstAttribute="width" constant="50" id="c3F-f8-206"/>
                                         </constraints>
                                         <state key="normal" image="icon-locate"/>
+                                        <state key="selected" image="icon-locate-active"/>
                                         <connections>
                                             <action selector="clickedLocate:" destination="E9d-Mk-oYc" eventType="touchUpInside" id="JVE-rf-sug"/>
                                         </connections>
@@ -1886,7 +1887,8 @@ OF COOKING</string>
         <image name="icon-disclosure" width="8" height="13"/>
         <image name="icon-email" width="20" height="20"/>
         <image name="icon-expand-shadow" width="38" height="41"/>
-        <image name="icon-locate" width="25" height="25"/>
+        <image name="icon-locate" width="24" height="23"/>
+        <image name="icon-locate-active" width="25" height="25"/>
         <image name="icon-photography" width="53" height="39"/>
         <image name="icon-star" width="20" height="20"/>
         <image name="icon-star-active" width="16" height="16"/>

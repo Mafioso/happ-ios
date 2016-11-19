@@ -18,7 +18,7 @@ target 'Happ' do
   pod 'GooglePlaces'
 
 
-  pod 'Jibber-Framework', '~> 2.0.0', :configurations => ['Debug']
+  
 
 
   post_install do |installer|
