@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
+		52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */; };
+		52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F011DE1E3C800CECE3D /* EventOnMap.swift */; };
 		522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */; };
 		522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */; };
 		522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD5601DD1E7320080BEBE /* SetupCityController.swift */; };
@@ -98,6 +100,8 @@
 /* Begin PBXFileReference section */
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOnMap.xib; sourceTree = "<group>"; };
+		52136F011DE1E3C800CECE3D /* EventOnMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOnMap.swift; sourceTree = "<group>"; };
 		522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityAndInterestsViewModel.swift; sourceTree = "<group>"; };
 		522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnSetupController.swift; sourceTree = "<group>"; };
 		522CD5601DD1E7320080BEBE /* SetupCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityController.swift; sourceTree = "<group>"; };
@@ -296,9 +300,9 @@
 				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
 				52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */,
 				522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */,
+				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				525A8AA91D7D4023002C6F46 /* SignInController.swift */,
 				52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */,
-				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				52F65F8E1DC75475005E751E /* SelectInterestsController.swift */,
 				52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
@@ -324,6 +328,8 @@
 				5239C37D1D92434700F66E31 /* EventTableCell.xib */,
 				52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */,
 				52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */,
+				52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */,
+				52136F011DE1E3C800CECE3D /* EventOnMap.swift */,
 				52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */,
 				52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */,
 				52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */,
@@ -513,6 +519,7 @@
 				52B0123E1D9AD5970061F083 /* Profile.storyboard in Resources */,
 				B4E215EE1DAF764C00144E78 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				B4E215E71DAF764C00144E78 /* SF-UI-Text-Light.otf in Resources */,
+				52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */,
 				525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */,
 				B4E215DB1DAF764C00144E78 /* SF-UI-Display-Bold.otf in Resources */,
 				B4E215DC1DAF764C00144E78 /* SF-UI-Display-Heavy.otf in Resources */,
@@ -619,6 +626,7 @@
 				52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				52722F951DD4F1E300F31811 /* EventExploreCollectionViewCell.swift in Sources */,
+				52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,

@@ -35,13 +35,20 @@ class EventsMapViewController: UIViewController {
 
         self.initMap()
         self.initLocationManager()
+        self.displayUserCity()
         self.initNavBarItems()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
+        buttonLocate.extMakeCircle()
         viewLocateBackground.extMakeCircle()
-        //buttonLocate.extMakeCircle()
+
+        self.markers.forEach { marker in
+            let view = marker.iconView as! EventOnMap
+            view.viewRounded.extMakeCircle()
+            view.imageCover.extMakeCircle()
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,19 +70,37 @@ class EventsMapViewController: UIViewController {
 
 
     private func initMap() {
-        let camera = GMSCameraPosition.cameraWithLatitude(41.887, longitude: -87.622, zoom: 15.0)
+        let camera = GMSCameraPosition.cameraWithLatitude(41.887, longitude: -87.622, zoom: 1)
         self.viewMap.camera = camera
         self.viewMap.delegate = self
     }
     private func displayMarkers() {
-        // Creates a marker in the center of the map.
+
+        // create view
+        let eventOnMapView = NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
+        eventOnMapView.labelTitle.text = "Dostyk Plaza"
+        eventOnMapView.imageCover.hnk_setImageFromURL(NSURL(string: "https://lh6.googleusercontent.com/-G2hnr1-KAFI/V8sdan3RWnI/AAAAAAAAPA8/s78WdbvglKg84RsL2znVr8NLcqU_Mhq6wCJkC/s455-k-no/")!)
+        
+        // set constraints
+        NSLayoutConstraint(item: eventOnMapView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 39).active = true
+
+        // add to map
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        marker.position = CLLocationCoordinate2D(latitude: 43.233018, longitude: 76.955978)
+        marker.tracksViewChanges = true
+        marker.iconView = eventOnMapView
         marker.map = self.viewMap
 
         self.markers.append(marker)
+    }
+    private func displayUserCity() {
+        let userCity = ProfileService.getUserCity()
+        CityService.fetchCityLocation(userCity.id)
+            .then { data -> Void in
+                let location = data as! CLLocation
+                let updCamera = GMSCameraUpdate.setTarget(location.coordinate)
+                self.viewMap.moveCamera(updCamera)
+        }
     }
     private func updateLocateButton(isActive: Bool) {
         if isActive {
@@ -85,6 +110,7 @@ class EventsMapViewController: UIViewController {
         self.buttonLocate.selected = isActive
     }
 
+    
     private func initNavBarItems() {
         self.navigationItem.title = "Events near you"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
