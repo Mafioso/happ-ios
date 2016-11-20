@@ -9,11 +9,11 @@
 import Foundation
 
 
-enum MenuViewModelScope {
+enum MenuViewModelStateTypes {
     case ChangeCity
     case Normal
 
-    func opposite() -> MenuViewModelScope {
+    func opposite() -> MenuViewModelStateTypes {
         switch self {
         case .Normal:
             return .ChangeCity
@@ -24,7 +24,6 @@ enum MenuViewModelScope {
 }
 
 enum MenuActions: Int {
-
     case Feed = 0
     case SelectInterests = 1
     case EventPlanner = 2
@@ -36,7 +35,7 @@ enum MenuActions: Int {
 class MenuViewModel {
 
     var highlight: MenuActions
-    var scope: MenuViewModelScope = .Normal
+    var state: MenuViewModelStateTypes = .Normal
 
     var navigateBack: NavigationFunc
     var navigateProfile: NavigationFunc
@@ -51,11 +50,10 @@ class MenuViewModel {
     }
 
 
+    //MARK: - Events
+    var didUpdate: (() -> Void)?
+
     //MARK: - Inputs
-    func onChangeScope(scope: MenuViewModelScope) {
-        self.scope = scope
-        self.didUpdate?()
-    }
     func onClickAction(action: MenuActions) {
         switch action {
         case .Feed:
@@ -70,11 +68,20 @@ class MenuViewModel {
             self.navigateLogout?()
         }
     }
+    func onClickChangeCity() {
+        self.state = self.state.opposite()
+        self.didUpdate?()
+    }
+    func onChangeCity() {
+        self.state = .Normal
+        self.didUpdate?()
 
-    //MARK: - Events
-    var didUpdate: (() -> Void)?
+        if self.getUser().interests.isEmpty {
+            self.navigateSelectInterests?()
+        }
+    }
 
-    
+
 
     func getUser() -> UserModel {
         return ProfileService.getUserProfile()

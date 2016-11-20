@@ -103,11 +103,11 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     }
     func bindToSelectCityViewModel() {
         self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
-            self?.onChangeCity()
+            self?.viewModelMenu.onChangeCity()
         }
     }
 
-    
+
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
         if  let action = MenuActions(rawValue: indexPath.section * 10 + indexPath.row)
@@ -121,9 +121,9 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
 
     func updateScopeViews() {
-        switch self.viewModelMenu.scope {
+        switch self.viewModelMenu.state {
         case .Normal:
-            UIView.transitionFromView(viewSelectCity, toView: viewMenu, duration: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            UIView.transitionFromView(viewSelectCity, toView: viewMenu, duration: 0.5, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
 
             UIView.animateWithDuration(0.25, animations: {
@@ -131,7 +131,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             })
 
         case .ChangeCity:
-            UIView.transitionFromView(viewMenu, toView: viewSelectCity, duration: 0.0, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
+            UIView.transitionFromView(viewMenu, toView: viewSelectCity, duration: 0.5, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
             labelChangeCity.text = "select city"
 
             UIView.animateWithDuration(0.25, animations: {
@@ -147,13 +147,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         }
     }
     func onClickChangeCity() {
-        print(".menu.changeScope")
-        let newScope = self.viewModelMenu.scope.opposite()
-        self.viewModelMenu.onChangeScope(newScope)
-    }
-    func onChangeCity() {
-        print(".menu.changeCity")
-        self.viewModelMenu.onChangeScope(.Normal)
+        self.viewModelMenu.onClickChangeCity()
     }
 
 }
