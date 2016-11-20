@@ -36,6 +36,7 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
             controller.searchResultsUpdater = self
             controller.searchBar.searchBarStyle = .Minimal
             controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "Find city..."
             controller.dimsBackgroundDuringPresentation = false
             self.definesPresentationContext = true
             return controller
@@ -64,16 +65,13 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
     }
 
 
+    // fill with data
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return self.viewModel.cities.count
     }
-
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let city = self.viewModel.cities[indexPath.row]
 
@@ -88,9 +86,27 @@ class SelectCityPrototype: UITableViewController, UISearchResultsUpdating {
         return cell
     }
 
+    // handle select
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let city = self.viewModel.cities[indexPath.row]
         self.viewModel.onSelectCity(city)
+    }
+    // higlight and pagination
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if  let selectedCity = self.viewModel.selectedCity,
+            let selectedRow = self.viewModel.cities.indexOf(selectedCity)
+            where selectedRow == indexPath.row {
+            
+            cell.extSetHighlighted()
+        } else {
+            cell.extUnsetHighlighted()
+        }
+        
+        // paginating
+        if indexPath.row == self.viewModel.cities.count - 3 {
+            self.viewModel.onLoadNextPage()
+        }
     }
 
 

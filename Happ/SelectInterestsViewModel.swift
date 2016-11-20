@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 
 enum InterestSelectionTypes {
@@ -35,6 +36,7 @@ class SelectInterestsViewModel {
     var scope: SelectInterestsScope
     var parentViewModel: SelectInterestsVMProtocol
     var isHeaderVisible: Bool
+    var interestsPage: Int = 1
 
     var interests: [InterestModel] = []
     var longPressedInterest: InterestModel?
@@ -56,13 +58,13 @@ class SelectInterestsViewModel {
         self.parentViewModel = parentViewModel
         self.isHeaderVisible = true
 
-        InterestService.fetchFromServer()
-            .then { _ -> Void in
-                self.interests = self.getInterests()
-
-                print(".SelectInterestsVM.fetchInterests.done", self.interests.count, self.didUpdate)
-                self.didUpdate?()
+        if scope == .MenuChangeInterests {
+            let userProfile = ProfileService.getUserProfile()
+            let userInterests = Array(userProfile.interests)
+            self.selectedInterests = InterestService.getGroupedByParents(userInterests)
         }
+
+        self.fetchInterests() // load first page
     }
 
 
@@ -72,6 +74,13 @@ class SelectInterestsViewModel {
 
 
     //MARK: - Inputs
+    func onLoadNextPage() {
+        if self.interestsPage > 1 && CityService.isLastPage {
+            return
+        }
+        self.interestsPage += 1
+        self.fetchInterests()
+    }
     func onClickNavItem() {
         switch self.scope {
         case .MenuChangeInterests:
@@ -181,7 +190,14 @@ class SelectInterestsViewModel {
         return self.parentViewModel.selectInterestsIsAllowsMultipleSelection()
     }
     private func getInterests() -> [InterestModel] {
-        return Array(InterestService.getAllStored())
+        return Array(InterestService.getAllStored().filter("parent_id == nil"))
+    }
+    private func fetchInterests() -> Promise<Void> {
+        return InterestService.fetchFromServer(self.interestsPage)
+            .then { _ -> Void in
+                self.interests = self.getInterests()
+                self.didUpdate?()
+        }
     }
 }
 

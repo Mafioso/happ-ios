@@ -105,9 +105,6 @@ class SetupCityController: UIViewController {
         }
     }
     private func bindToSelectCityViewModel() {
-        self.viewModelSelectCity.didLoad = { [weak self] _ in
-            // self?.viewModelSelectCityDidLoad()
-        }
         self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
             self?.viewModel.onSelectCity(city)
         }

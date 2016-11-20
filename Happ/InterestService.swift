@@ -14,18 +14,25 @@ import ObjectMapper
 
 class InterestService {
 
-    static let endpointInterest = "interests/"
+    static let endpoint = "interests/"
 
-    static func fetchFromServer() -> Promise<Void> {
-        return GetPaginated(endpointInterest, parameters: nil)
+    static var isLastPage: Bool = false
+
+
+    static func fetchFromServer(page: Int = 1) -> Promise<Void> {
+        let pagedURL = endpoint + "?page=\(page)"
+        return GetPaginated(pagedURL, parameters: nil)
             .then { (data, isLastPage) -> Void in
+                self.isLastPage = isLastPage
+
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    // 1. delete exists
+                    /* 1. delete exists
                     let exists = realm.objects(InterestModel)
                     realm.delete(exists)
-                    
+                    */
+
                     // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<InterestModel>().map(city)
@@ -36,8 +43,14 @@ class InterestService {
     }
 
     static func setUserInterests(interestIDs: [String]) -> Promise<AnyObject> {
-        let url = endpointInterest + "set/"
+        let url = endpoint + "set/"
         return Post(url, parametersAnyObject: interestIDs as AnyObject)
+                .then { data in
+                    return ProfileService.fetchUserProfile()
+                        .then { userProfileData in
+                            return data
+                    }
+                }
     }
 
     static func getAllStored() -> Results<InterestModel> {
@@ -60,7 +73,30 @@ class InterestService {
     static func getSubinterestsOf(interest: InterestModel) -> [InterestModel] {
         return Array(interest.children)
     }
+    static func getGroupedByParents(interests: [InterestModel]) -> [InterestModel: [InterestModel]] {
+        var dict: [InterestModel: [InterestModel]] = [:]
+        interests
+            .filter { $0.parent_id == nil }
+            .forEach { dict.updateValue([], forKey: $0) }
+        dict.forEach { print(">>", $0.0.title, "all") }
+        interests
+            .filter { $0.parent_id != nil }
+            .forEach { subinterest in
+                let interest = self.getParentOf(subinterest)!
+                
+                print(">>", interest.title, ">", subinterest.title)
+
+                if var value = dict[interest] {
+                    value.append(subinterest)
+                    dict.updateValue(value, forKey: interest)
+                } else {
+                    dict.updateValue([subinterest], forKey: interest)
+                }
+        }
+        return dict
+    }
 
 }
+
 
 

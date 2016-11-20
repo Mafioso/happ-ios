@@ -88,25 +88,20 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         // let imageURL = NSURL(user...)
         // imageUserPhoto.hnk_setImageFromURL(imageURL)
         imageUserPhoto.image = UIImage(named: "bg-feed")
-        labelUserFullname.text = self.viewModelMenu.user.fullname
+        labelUserFullname.text = self.viewModelMenu.getUser().fullname
 
         self.updateScopeViews()
         self.tableMenuActions.reloadData()
-    }
-    func viewModelSelectCityDidLoad() {
-        labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
     }
 
 
     private func bindToViewModel() {
         self.viewModelMenu.didUpdate = { [weak self] _ in
             self?.viewModelDidUpdate()
+            self?.viewModelSelectCity.didUpdate?()
         }
     }
     func bindToSelectCityViewModel() {
-        self.viewModelSelectCity.didLoad = { [weak self] _ in
-            self?.viewModelSelectCityDidLoad()
-        }
         self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
             self?.onChangeCity()
         }

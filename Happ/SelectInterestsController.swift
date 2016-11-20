@@ -191,7 +191,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
             return CGSize(width: collectionView.frame.width, height: 44)
         }
     }
-
+    
     // init event on scroll
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.viewModel.onScroll(Int(scrollView.contentOffset.y))
@@ -200,6 +200,25 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
     // init event on click
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.viewModel.onSelectInterest(self.getInterestBy(indexPath))
+    }
+
+    // init pagination and react to longPressed
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = cell as! InterestCollectionViewCell
+        
+        //when some interest long pressed
+        //unfocus all cells except longPressedInterest
+        if  let focusedInterest = self.viewModel.longPressedInterest,
+            let focusedInterestIndex = self.viewModel.interests.indexOf(focusedInterest)
+            where indexPath.row == focusedInterestIndex {
+            cell.viewUnfocus.hidden = false
+        } else {
+            cell.viewUnfocus.hidden = true
+        }
+
+        if indexPath.row > self.viewModel.interests.count - 3 {
+            self.viewModel.onLoadNextPage()
+        }
     }
 
     // fill with data
@@ -251,15 +270,6 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
             cell.viewSelectedAll.hidden = true
 
             cell.labelSelectedSomeText.text = "\(numberOfSelected)/\(count)"
-        }
-
-        //when some interest long pressed
-        //unfocus all cells except longPressedInterest
-        if  let focusedInterest = self.viewModel.longPressedInterest
-            where self.viewModel.interests.indexOf(focusedInterest) != indexPath.row {
-            cell.viewUnfocus.hidden = false
-        } else {
-            cell.viewUnfocus.hidden = true
         }
 
         return cell

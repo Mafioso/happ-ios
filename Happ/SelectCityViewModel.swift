@@ -54,13 +54,10 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
     }
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
         let interestIDs = selectedInterests.map { $0.id }
-        self.navigateFeed?()
-        /*
         InterestService.setUserInterests(interestIDs)
             .then { _ in
                 self.navigateFeed?()
         }
-        */
     }
 }
 
@@ -83,7 +80,6 @@ class SelectCityViewModelPrototype {
 
     //MARK: - Events
     var didUpdate: (() -> Void)?
-    var didLoad: (() -> Void)?
     var didSelectCity: ((CityModel) -> Void)?
 
 
@@ -110,7 +106,6 @@ class SelectCityViewModelPrototype {
     private func willLoad() {
         self.fetchCities().then { _ -> Void in
             print(".selectCityVM.fetchCities.done", self.cities.count)
-            self.didLoad?()
             self.didUpdate?()
         }
     }

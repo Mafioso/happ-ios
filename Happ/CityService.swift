@@ -25,35 +25,28 @@ class CityService {
         let pagedURL = endpoint + "?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
             .then { (data, isLastPage) -> Void in
+                self.isLastPage = isLastPage
+
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
-
-                if page == 1 {
-                    // 1. delete exists
-                    //    except User City
-                    ProfileService.checkCityExists()
-                        .then { _ -> Void in
-                            try! realm.write {
-                                let exists = realm.objects(EventModel)
-                                let userCity = ProfileService.getUserCity()
-                                let allExcepUserCity = exists.filter("id != %@", userCity.id)
-                                realm.delete(allExcepUserCity)
-                            }
-                        }
-                        .error { err in
-                            try! realm.write {
-                                let exists = realm.objects(EventModel)
-                                realm.delete(exists)
-                            }
-                    }
-                }
-
-                self.isLastPage = isLastPage
-                // 3. add new
                 try! realm.write {
+                    /*
+                    if page == 1 {
+                        // 1.   delete exists
+                        var query = realm.objects(CityModel)
+                        //      except User's City
+                        let userProfile = ProfileService.getUserProfile()
+                        if let userCityID = userProfile.settings?.city_id {
+                            query = query.filter("id != %@", userCityID)
+                        }
+                        realm.delete(query)
+                    }
+                    */
+
+                    // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<CityModel>().map(city)
-                        realm.add(inst!, update: true) // `update: true` - not required
+                        realm.add(inst!, update: true)
                     }
                 }
         }
@@ -94,6 +87,12 @@ class CityService {
     class func setUserCity(cityID: String) -> Promise<AnyObject> {
         let url = endpoint + cityID + "/set/"
         return Post(url, parametersAnyObject: nil)
+                .then { data in
+                    return ProfileService.fetchUserProfile()
+                        .then { userProfileData in
+                            return data
+                    }
+                }
     }
 
 

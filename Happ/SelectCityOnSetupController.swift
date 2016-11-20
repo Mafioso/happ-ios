@@ -14,9 +14,6 @@ class SelectCityOnSetupController: SelectCityPrototype {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let searchBar = self.tableView.tableHeaderView as! UISearchBar
-        searchBar.placeholder = "Find city..."
 
         self.initNavBarItems()
     }
@@ -29,25 +26,6 @@ class SelectCityOnSetupController: SelectCityPrototype {
         super.viewWillDisappear(animated)
         
         self.extMakeNavBarVisible()
-    }
-
-
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-
-        if  let selectedCity = self.viewModel.selectedCity,
-            let selectedRow = self.viewModel.cities.indexOf(selectedCity)
-            where selectedRow == indexPath.row {
-
-            cell.extSetHighlighted()
-
-        } else {
-            cell.extUnsetHighlighted()
-        }
-
-        // paginating
-        if indexPath.row == self.viewModel.cities.count - 3 {
-            self.viewModel.onLoadNextPage()
-        }
     }
 
 

@@ -35,7 +35,6 @@ enum MenuActions: Int {
 
 class MenuViewModel {
 
-    var user: UserModel
     var highlight: MenuActions
     var scope: MenuViewModelScope = .Normal
 
@@ -49,8 +48,8 @@ class MenuViewModel {
 
     init(highlight: MenuActions) {
         self.highlight = highlight
-        self.user = ProfileService.getUserProfile()
     }
+
 
     //MARK: - Inputs
     func onChangeScope(scope: MenuViewModelScope) {
@@ -75,6 +74,11 @@ class MenuViewModel {
     //MARK: - Events
     var didUpdate: (() -> Void)?
 
+    
+
+    func getUser() -> UserModel {
+        return ProfileService.getUserProfile()
+    }
 
 }
 
