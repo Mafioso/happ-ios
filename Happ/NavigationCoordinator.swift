@@ -334,6 +334,7 @@ class NavigationCoordinator {
 
     func showEventsList(scope: EventsListScope) {
         let viewModel = EventsListViewModel(scope: scope)
+        //TODO uncomment -> viewModel.navigateEventDetails = self.showEventDetails
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
@@ -391,6 +392,16 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
 
         self.updateSlidebar() // to remove feedFilter
+    }
+    func showEventDetailsMap(forID: String) {
+        print(".nav.showEventDetailsMap [forID=\(forID)]")
+        let viewModel = EventOnMapViewModel(forID: forID)
+        viewModel.navigateBack = self.goBack
+        viewModel.navigateEventDetails = self.showEventDetails
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetailsMap") as! EventDetailsMapController
+        viewController.viewModel = viewModel
+        self.navigationController.pushViewController(viewController, animated: true)
     }
 
 

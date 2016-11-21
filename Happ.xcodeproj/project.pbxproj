@@ -10,6 +10,8 @@
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
 		52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */; };
 		52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F011DE1E3C800CECE3D /* EventOnMap.swift */; };
+		52136F041DE2BA1B00CECE3D /* EventDetailsMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */; };
+		52136F061DE2BC7600CECE3D /* EventOnMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */; };
 		522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */; };
 		522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */; };
 		522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD5601DD1E7320080BEBE /* SetupCityController.swift */; };
@@ -102,6 +104,8 @@
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOnMap.xib; sourceTree = "<group>"; };
 		52136F011DE1E3C800CECE3D /* EventOnMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOnMap.swift; sourceTree = "<group>"; };
+		52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsMapController.swift; sourceTree = "<group>"; };
+		52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOnMapViewModel.swift; sourceTree = "<group>"; };
 		522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityAndInterestsViewModel.swift; sourceTree = "<group>"; };
 		522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnSetupController.swift; sourceTree = "<group>"; };
 		522CD5601DD1E7320080BEBE /* SetupCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityController.swift; sourceTree = "<group>"; };
@@ -310,13 +314,14 @@
 				52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */,
 				52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */,
 				52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */,
+				52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */,
+				52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
 				527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */,
 				52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
-				52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				52722F921DD4E80D00F31811 /* EventsExploreViewModel.swift */,
 				52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
+				52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
@@ -617,6 +623,7 @@
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
 				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
 				52722F911DD4E49E00F31811 /* EventsExploreViewController.swift in Sources */,
+				52136F041DE2BA1B00CECE3D /* EventDetailsMapController.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */,
@@ -627,6 +634,7 @@
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				52722F951DD4F1E300F31811 /* EventExploreCollectionViewCell.swift in Sources */,
 				52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */,
+				52136F061DE2BC7600CECE3D /* EventOnMapViewModel.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
 				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
