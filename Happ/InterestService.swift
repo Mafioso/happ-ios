@@ -78,19 +78,16 @@ class InterestService {
         interests
             .filter { $0.parent_id == nil }
             .forEach { dict.updateValue([], forKey: $0) }
-        dict.forEach { print(">>", $0.0.title, "all") }
         interests
             .filter { $0.parent_id != nil }
             .forEach { subinterest in
-                let interest = self.getParentOf(subinterest)!
-                
-                print(">>", interest.title, ">", subinterest.title)
-
-                if var value = dict[interest] {
-                    value.append(subinterest)
-                    dict.updateValue(value, forKey: interest)
-                } else {
-                    dict.updateValue([subinterest], forKey: interest)
+                if let interest = self.getParentOf(subinterest) {
+                    if var value = dict[interest] {
+                        value.append(subinterest)
+                        dict.updateValue(value, forKey: interest)
+                    } else {
+                        dict.updateValue([subinterest], forKey: interest)
+                    }
                 }
         }
         return dict
