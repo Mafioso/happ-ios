@@ -39,20 +39,28 @@ class EventViewModel {
 
 
     //MARK: - Inputs
-    func onClickLike() {
-        print(".EventViewModel.inputs.onClickLike", self.event.id)
+    func onLike() {
+        print(".EventViewModel.onClickLike", self.event.id,
+              "\(self.event.is_upvoted) - \(self.event.is_in_favourites)")
+        
         EventService
             .setLike(self.event.id, value: !self.event.is_upvoted)
-            .then { _ in self.didUpdate?() }
+
+            .then { _ -> Void in
+                let _event = EventService.getByID(self.event.id)!
+                print("\(_event.is_upvoted) - \(_event.is_in_favourites)")
+
+                //self.didUpdate?()
+        }
     }
-    func onClickFavourite() {
-        print(".EventViewModel.inputs.onClickFavourite", self.event.id)
+    func onFavourite() {
+        print(".EventViewModel.onClickFavourite", self.event.id)
         EventService
             .setFavourite(self.event.id, value: !self.event.is_in_favourites)
             .then { _ in self.didUpdate?() }
     }
-    func onClickUnsubscribeFromInterest() {
-        print(".EventViewModel.inputs.onClickUnsubscribeFromInterest", self.event.id)
+    func onUnsubscribeFromInterest() {
+        print(".EventViewModel.onClickUnsubscribeFromInterest", self.event.id)
     }
     func onClickDisplayMoreActions() {
         self.displayMoreActionList?()

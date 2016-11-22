@@ -25,9 +25,8 @@ class ProfileViewModel {
 
 
     init() {
-        self.userProfile = ProfileService.getUserProfile()
+        self.setProfile()
     }
-
 
     //MARK: - Events
     var didUpdate: (() -> Void)?
@@ -36,52 +35,64 @@ class ProfileViewModel {
     //MARK: - Inputs
     func onSave(values: [String: AnyObject]) -> Promise<Void> {
         return Promise { resolve, reject in
-
-            func updatePassword() -> Bool {
-                if  let old = values["old_password"],
-                    let new = values["new_password"] {
-
-                    let oldPassword = old as! String
-                    let newPassword = new as! String
-                    let confirmPassword = values["confirm_password"] as! String
-
-                    if confirmPassword != newPassword {
-                        reject(ProfileErrorTypes.BadConfirm)
-                        return false
-                    }
-
-                    AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
-                        .then { _ in
-                            resolve()
-                        }
-                        .error { err in
-                            if  let reqError = err as? RequestError
-                                where reqError == RequestError.BadRequest {
-                                reject(ProfileErrorTypes.BadPassword)
-                            } else {
-                                reject(err)
-                            }
-                        }
-                    return true
+                firstly {
+                    return ProfileService.updateUserProfile(values)
                 }
-                return false
-            }
-
-            ProfileService.updateUserProfile(values)
-                .then { _ -> Void in
-                    self.userProfile = ProfileService.getUserProfile()
-
-                    if !updatePassword() {
-                        resolve()
-                    }
+                .then { _ -> Promise<Void> in
+                    return ProfileService.fetchUserProfile()
+                }
+                .then { _ -> Promise<Void> in
+                    //self.setProfile()
+                    return self.updatePassword(values)
+                }
+                .then { _ in
+                    resolve()
                 }
                 .error { err in
-                    reject(ProfileErrorTypes.BadValues)
+                    if let profileError = err as? ProfileErrorTypes {
+                        reject(profileError)
+                    } else {
+                        reject(ProfileErrorTypes.BadValues)
+                    }
                 }
         }
     }
 
 
+    private func updatePassword(values: [String: AnyObject]) -> Promise<Void> {
+        return Promise { resolve, reject in
+            if  let oldPassword = values["old_password"] as? String,
+                let newPassword = values["new_password"] as? String
+                where !newPassword.characters.isEmpty {
+
+                let confirmPassword = values["confirm_password"] as! String
+                if confirmPassword != newPassword {
+                    reject(ProfileErrorTypes.BadConfirm)
+                }
+
+                AuthenticationService.updatePassword(oldPassword, newPassword: newPassword)
+                    .then { _ in
+                        resolve()
+                    }
+                    .error { err in
+                        if  let reqError = err as? RequestError
+                            where reqError == RequestError.BadRequest {
+                            reject(ProfileErrorTypes.BadPassword)
+                        } else {
+                            reject(err)
+                        }
+                    }
+
+            } else {
+                resolve()
+            }
+        }
+    }
+
+    private func setProfile() {
+        self.userProfile = ProfileService.getUserProfile()
+        self.didUpdate?()
+    }
 }
 
 

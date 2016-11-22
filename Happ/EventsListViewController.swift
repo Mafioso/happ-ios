@@ -77,7 +77,7 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
 
 
-    // MARK: UITableViewDataSource
+    // fill with data
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -91,42 +91,47 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
         // configure cell
         let event = self.viewModel.getEventAt(indexPath)
-        let eventViewModel = EventViewModel(event: event)
-        eventViewModel.didUpdate = { [weak self] _ in
-            self?.viewModelDidUpdate()
-        }
-        eventViewModel.displayMoreActionList = { [weak self] _ in
-            let actionList = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-
-            if let interestName = event.interests.first?.title {
-                let actionUnsubscribe = UIAlertAction(title: "Unsubscribe from \"\(interestName)\"", style: .Default, handler: {_ in
-                    eventViewModel.onClickUnsubscribeFromInterest()
-                })
-                actionList.addAction(actionUnsubscribe)
+        cell.viewModel = {
+            let vm = EventViewModel(event: event)
+            vm.didUpdate = { [weak self] _ in
+                self?.viewModelDidUpdate()
             }
-
-            let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            actionList.addAction(actionCancel)
-
-            self?.presentViewController(actionList, animated: true, completion: nil)
-        }
-        cell.viewModel = eventViewModel
-
-        // paginating
-        if indexPath.row == self.viewModel.getEventsCount() - 3 {
-            self.viewModel.loadNextPage()
-        }
+            vm.displayMoreActionList = { [weak self] _ in
+                let actionList = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+                
+                if let interestName = event.interests.first?.title {
+                    let actionUnsubscribe = UIAlertAction(title: "Unsubscribe from \"\(interestName)\"", style: .Default, handler: {_ in
+                        vm.onUnsubscribeFromInterest()
+                    })
+                    actionList.addAction(actionUnsubscribe)
+                }
+                
+                let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                actionList.addAction(actionCancel)
+                
+                self?.presentViewController(actionList, animated: true, completion: nil)
+            }
+            return vm
+        }()
 
         return cell
     }
 
-    // MARK: UITableViewDelegate
+    // select event
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let event = self.viewModel.getEventAt(indexPath)
         print(".didSelect", indexPath.row, event.title)
         self.viewModel.onClickEvent(event)
     }
+    
+    // pagination
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
+        if indexPath.row == self.viewModel.getEventsCount() - 3 {
+            self.viewModel.loadNextPage()
+        }
+    }
+    
 }
 
 

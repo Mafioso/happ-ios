@@ -75,6 +75,9 @@ class EventsListViewModel {
     init(scope: EventsListScope) {
         let filtersState = EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, sortBy: .ByDate, onlyFree: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
         self.state = EventsListState(scope: scope, events: [], page: 0, filters: filtersState)
+        
+
+        self.getFromCache()
         self.loadNextPage() // will load first page
     }
 
@@ -113,6 +116,10 @@ class EventsListViewModel {
     }
 
 
+    func getFromCache() {
+        self.state.events = self.getEvents()
+        self.didUpdate?()
+    }
     func getEvents() -> [EventModel] {
         var events: Results<EventModel>!
         switch self.state.scope {

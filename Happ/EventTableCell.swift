@@ -14,7 +14,7 @@ class EventTableCell: UITableViewCell {
 
     var viewModel: EventViewModel! {
         didSet {
-            self.bindToViewModel()
+            // self.bindToViewModel()
             self.viewModelDidUpdate()
         }
     }
@@ -35,10 +35,10 @@ class EventTableCell: UITableViewCell {
 
     // actions
     @IBAction func clickedUpvote(sender: UIButton) {
-        self.viewModel.onClickLike()
+        self.viewModel.onLike()
     }
     @IBAction func clickedFavourite(sender: UIButton) {
-        self.viewModel.onClickFavourite()
+        self.viewModel.onFavourite()
     }
     @IBAction func clickedMoreButton(sender: UIButton) {
         self.viewModel.onClickDisplayMoreActions()
@@ -49,20 +49,15 @@ class EventTableCell: UITableViewCell {
     static let estimatedHeight = CGFloat(integerLiteral: 420)
 
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-
-        //self.viewModelDidUpdate()
-    }
-
-
+/*
     private func bindToViewModel() {
+        let superViewModel = self.viewModel.didUpdate
         self.viewModel.didUpdate = { [weak self] _ in
+            superViewModel?()
             self?.viewModelDidUpdate()
         }
     }
-
+*/
     func viewModelDidUpdate() {
         let event = self.viewModel.event
 

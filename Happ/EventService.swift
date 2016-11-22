@@ -22,16 +22,24 @@ class EventService {
     static var isLastPageOfExplore: Bool = false
 
 
-    class func setLike(eventID: String, value: Bool) -> Promise<AnyObject> {
+    class func setLike(eventID: String, value: Bool) -> Promise<Void> {
         var url = endpoint + eventID
         url += (value == true) ? "/upvote/" : "/downvote/"
         return Post(url, parameters: nil)
+                .then { _ -> Promise<Void> in
+                    print(".EventService.setLike.beforeFetch")
+                    return self.fetchEvent(eventID)
+                }
+                .then { print(".EventService.setLike.afterFetch!") }
     }
 
-    class func setFavourite(eventID: String, value: Bool) -> Promise<AnyObject> {
+    class func setFavourite(eventID: String, value: Bool) -> Promise<Void> {
         var url = endpoint + eventID
         url += (value == true) ? "/fav/" : "/unfav/"
         return Post(url, parameters: nil)
+                .then { _ in
+                    return self.fetchEvent(eventID)
+                }
     }
 
     class func fetchFeed(page: Int = 1) -> Promise<Void> {
@@ -108,6 +116,18 @@ class EventService {
                     }
                 }
         }
+    }
+    class func fetchEvent(id: String) -> Promise<Void> {
+        let url = endpoint + id + "/"
+        return Get(url, parameters: nil)
+            .then { result -> Void in
+                let realm = try! Realm()
+                try! realm.write {
+                    let inst = Mapper<EventModel>().map(result)
+                    realm.add(inst!, update: true)
+                }
+        }
+
     }
 
     class func getFeed() -> Results<EventModel> {

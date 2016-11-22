@@ -20,6 +20,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
 
     // outlets
+    @IBOutlet weak var constraintBottom: NSLayoutConstraint!
     @IBOutlet weak var imageProfileImage: UIImageView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -54,12 +55,14 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
         self.prefilFieldValues()
 
+        self.initObservers()
         self.extMakeStatusBarWhite()
         self.extMakeNavBarTransparrent(UIColor.whiteColor())
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
+        self.deinitObservers()
         self.extMakeStatusBarDefault()
     }
 
@@ -123,6 +126,40 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()
+    }
+    
+    
+    private func initObservers() {
+        // keyboard
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(SignInController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(SignInController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        // tap
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    private func deinitObservers() {
+        // remove observer
+        NSNotificationCenter.defaultCenter()
+            .removeObserver(self)
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.constraintBottom.constant = keyboardFrame.size.height
+        })
+    }
+    func keyboardWillHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.constraintBottom.constant = 0
+        })
+    }
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
