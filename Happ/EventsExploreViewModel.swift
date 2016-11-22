@@ -16,7 +16,7 @@ class EventsExploreViewModel {
     var navigateEventDetails: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
 
-    
+
     // variables
     var page: Int
     var events: [EventModel]

@@ -30,7 +30,8 @@ class EventOnMapViewModel: EventViewModel {
 
 
     // inputs:
-    func onClickOpen() {
+    func onClickOpenEventDetails() {
+        self.navigateBack?()
         self.navigateEventDetails?(id: self.event.id)
     }
     

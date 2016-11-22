@@ -46,11 +46,13 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.extMakeNavBarHidden()
         self.extMakeStatusBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
+        self.extMakeNavBarVisible()
         self.extMakeStatusBarDefault()
     }
 

@@ -53,8 +53,8 @@ class HappMainTabBarController: UITabBarController {
 
         let tabExplore = UINavigationController()
         let tabMap = UINavigationController()
-        let tabFeed = HappNavigationController()
-        let tabFavourite = HappNavigationController()
+        let tabFeed = UINavigationController()
+        let tabFavourite = UINavigationController()
         // let tabChat = HappNavigationController()
 
         tabExplore.tabBarItem = UITabBarItem(title: "Explore",
@@ -386,6 +386,7 @@ class NavigationCoordinator {
         print(".nav.showEventDetails [forID=\(forID)]")
         let viewModel = EventViewModel(forID: forID)
         viewModel.navigateBack = self.goBack
+        viewModel.navigateEventDetailsMap = self.showEventDetailsMap
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel

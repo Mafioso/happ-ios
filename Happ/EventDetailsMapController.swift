@@ -30,7 +30,7 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
 
     // actions
     @IBAction func clickedOpenEventDetails(sender: UIButton) {
-        self.viewModel.onClickOpen()
+        self.viewModel.onClickOpenEventDetails()
     }
     @IBAction func clickedRouteButton(sender: UIButton) {
     }
@@ -45,32 +45,40 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         super.viewDidLoad()
 
         self.initMap()
+        self.initNavItems()
 
+        self.updateViews()
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.extMakeNavBarWhite()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.extMakeNavBarHidden()
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        [buttonRoute, buttonLocate, viewButtonRouteBackground, viewButtonLocateBackground].forEach { $0.extMakeCircle() }
+
+        self.onDidMapLayoutSubviews() //MapViewControllerProtocol
+    }
+
+
+    func zoomToUserCity() {
         let userCity = ProfileService.getUserCity()
         CityService.fetchCityLocation(userCity.id)
             .then { data -> Void in
                 let location = data as! CLLocation
                 self.updateMap(location.coordinate, zoom: 15)
         }
-        
-        self.updateViews()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        buttonRoute.extMakeCircle()
-        buttonLocate.extMakeCircle()
-        viewButtonRouteBackground.extMakeCircle()
-        viewButtonLocateBackground.extMakeCircle()
-
-        self.onDidMapLayoutSubviews()
-    }
-
-    
     func updateViews() {
         let event = self.viewModel.event
-        self.displayMarker(.EventPoint(event: event))
-
+    
         if let imageURL = event.images.first {
             imageEventCover.hnk_setImageFromURL(imageURL!)
         }
@@ -79,6 +87,9 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         labelEventDate.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
         labelEventLocation.text = event.address
         labelDistance.text = "? km"
+
+        self.displayMarker(.EventPoint(event: event))
+        self.updateMap(self.markers.last!.position, zoom: 12)
     }
 
 
@@ -88,6 +99,14 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         return self.viewMap
     }
 
+
+    private func initNavItems() {
+        self.navigationItem.title = "Event location"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close"), style: .Plain, target: self, action: #selector(handleClickCloseNavItem))
+    }
+    func handleClickCloseNavItem() {
+        self.viewModel.navigateBack?()
+    }
 }
 
 

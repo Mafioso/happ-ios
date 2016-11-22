@@ -15,6 +15,7 @@ class EventViewModel {
     var event: EventModel!
 
     var navigateBack: NavigationFunc
+    var navigateEventDetailsMap: NavigationFuncWithID
 
 
     init() {
@@ -65,8 +66,11 @@ class EventViewModel {
     func onClickDisplayMoreActions() {
         self.displayMoreActionList?()
     }
-    
-    
+    func onClickOpenMap() {
+        self.navigateEventDetailsMap?(id: self.event.id)
+    }
+
+
 }
 
 

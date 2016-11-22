@@ -198,9 +198,12 @@ class EventsMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hidesBottomBarWhenPushed = true
+
         self.initMap()
         self.initLocationManager()
         self.displayUserCity()
+
         self.initNavBarItems()
     }
     override func viewDidLayoutSubviews() {
