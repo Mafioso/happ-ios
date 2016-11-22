@@ -91,7 +91,10 @@ enum HappDateFormats: String {
         return self.getFormatter().stringFromDate(date)
     }
 
-    func toDate(value: String) -> NSDate? {
+    func toDate(var value: String) -> NSDate? {
+        if self == HappDateFormats.ISOFormat {
+            value = value.componentsSeparatedByString(".").first!
+        }
         return self.getFormatter().dateFromString(value)
     }
 }

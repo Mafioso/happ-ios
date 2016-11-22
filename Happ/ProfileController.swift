@@ -20,12 +20,13 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
 
     // outlets
-    @IBOutlet weak var constraintBottom: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var buttonSave: UIButton!
     @IBOutlet weak var imageProfileImage: UIImageView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPhone: UITextField!
-    @IBOutlet weak var textFieldBirthday: UITextField!
+    @IBOutlet weak var buttonSelectBirthday: UIButton!
     @IBOutlet weak var segmentedFieldGender: UISegmentedControl!
     @IBOutlet weak var textFieldPasswordOld: UITextField!
     @IBOutlet weak var textFieldPasswordNew: UITextField!
@@ -40,6 +41,9 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBAction func clickedSaveButton(sender: UIButton) {
         self.validatedSave()
     }
+    @IBAction func clickedSelectBithday(sender: UIButton) {
+        
+    }
 
 
     override func viewDidLoad() {
@@ -52,37 +56,48 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        self.prefilFieldValues()
+        
+        self.viewModelDidUpdate()
 
         self.initObservers()
         self.extMakeStatusBarWhite()
-        self.extMakeNavBarTransparrent(UIColor.whiteColor())
+        self.extMakeNavBarTransparrent()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.deinitObservers()
+        self.extDestroyObservers()
         self.extMakeStatusBarDefault()
+        self.extMakeNavBarVisible()
+    }
+
+
+
+    func viewModelDidUpdate() {
+        let profile = self.viewModel.userProfile
+        textFieldFullName.text = profile.fullname
+        textFieldEmail.text = profile.email
+        textFieldPhone.text = profile.phone
+        if let date = profile.date_of_birth {
+            buttonSelectBirthday.titleLabel?.text = HappDateFormats.ISOFormat.toString(date)
+        }
+        textFieldPasswordNew.text = ""
+        textFieldPasswordOld.text = ""
+        textFieldPasswordConfirm.text = ""
     }
 
     private func bindToViewModel() {
         self.viewModel.didUpdate = { [weak self] _ in
-            self?.prefilFieldValues()
+            self?.viewModelDidUpdate()
         }
-    }
-
-
-    private func prefilFieldValues() {
-        let profile = self.viewModel.userProfile
-        textFieldFullName.text = profile.fullname
-        textFieldEmail.text = profile.email
     }
 
     private func validatedSave() {
         let values: [String: AnyObject] = [
             "fullname": textFieldFullName.text!,
             "email": textFieldEmail.text!,
+            "phone": textFieldPhone.text!,
+            "gender": segmentedFieldGender.selectedSegmentIndex,
             "old_password": textFieldPasswordOld.text!,
             "new_password": textFieldPasswordNew.text!,
             "confirm_password": textFieldPasswordConfirm.text!,
@@ -91,6 +106,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         self.viewModel.onSave(values)
             .then { _ in
                 self.extDisplayAlertView("Saved Successfully", title: "Done!")
+                
             }
             .error { err in
                 if let profileError = err as? ProfileErrorTypes {
@@ -100,7 +116,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
                     case .BadPassword:
                         self.extDisplayAlertView("Check your passwords and repeat", title: "Warning")
                     case .BadValues:
-                        self.extDisplayAlertView(err)
+                        self.extDisplayAlertView("Check your input data")
                     }
 
                 } else {
@@ -122,44 +138,57 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 
     private func initNavigationBarItems() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back-shadow"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back-orange"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()
     }
-    
-    
+
+
+
     private func initObservers() {
         // keyboard
         NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: #selector(SignInController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+            .addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter()
-            .addObserver(self, selector: #selector(SignInController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+            .addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         // tap
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    private func deinitObservers() {
-        // remove observer
-        NSNotificationCenter.defaultCenter()
-            .removeObserver(self)
+        self.extHideKeyboardWhenTappedAround()
     }
 
     func keyboardWillShow(notification: NSNotification) {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardHeight = keyboardFrame.size.height
 
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.constraintBottom.constant = keyboardFrame.size.height
-        })
+        // 1. Adjust the bottom content inset of your scroll view by the keyboard height.
+        let newInset = UIEdgeInsetsMake(0, 0, keyboardHeight, 0)
+        scrollView.contentInset = newInset
+        scrollView.scrollIndicatorInsets = newInset
+
+        // 2. If active text field is hidden by keyboard, scroll it so it's visible
+        var visibleWindow: CGRect = self.view.frame;
+        visibleWindow.size.height -= keyboardHeight;
+        if activeField != nil {
+            var activeFieldFrame = activeField!.frame
+            activeFieldFrame.size.height -= 20 // to display under statusbar
+            if !CGRectContainsPoint(visibleWindow, activeFieldFrame.origin) {
+                self.scrollView.scrollRectToVisible(activeFieldFrame, animated: true)
+            }
+        }
     }
     func keyboardWillHide(notification: NSNotification) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.constraintBottom.constant = 0
-        })
+        let resetInset = UIEdgeInsetsZero
+        scrollView.contentInset = resetInset
+        scrollView.scrollIndicatorInsets = resetInset
     }
-    func dismissKeyboard() {
-        view.endEditing(true)
+
+    var activeField: UITextField?
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeField = textField
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeField = nil
     }
 }
 

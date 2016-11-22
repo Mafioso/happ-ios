@@ -161,7 +161,7 @@ extension UIViewController {
         if let reqError = error as? RequestError {
             self.extDisplayAlertView(reqError.description)
         } else {
-            self.extDisplayAlertView(error)
+            print("error:", error)
         }
     }
 
@@ -214,9 +214,13 @@ extension UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.extDismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    
     func extDismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func extDestroyObservers() {
+        NSNotificationCenter.defaultCenter()
+            .removeObserver(self)
     }
 }
 

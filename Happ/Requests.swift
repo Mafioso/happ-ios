@@ -87,7 +87,7 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
 
 }
 
-func Post(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
+func PostRAW(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         let headers = getRequestHeaders(isAuthenticated)
@@ -107,11 +107,12 @@ func Post(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated: Bo
         Alamofire
             .request(request)
             .validate()
-            .validate(statusCode: [204])
             .response { (request, response, data, error) in
                 if error == nil {
-                    resolve(NSNull())
+                    resolve( (data != nil) ? data! : NSNull() )
                 } else {
+                    print("PostRAW.error ", error?.code, error?.localizedDescription)
+
                     if let reqErrorType = RequestError(rawValue: error!.code) {
                         reject(reqErrorType)
                     } else {

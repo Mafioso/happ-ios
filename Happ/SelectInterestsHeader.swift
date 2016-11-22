@@ -69,9 +69,9 @@ class SelectInterestsHeader: UICollectionReusableView {
     private func initNavItems() {
         switch self.viewModel.scope {
         case .MenuChangeInterests:
-            self.buttonNavItem.setImage(UIImage(named: "nav-menu-gray"), forState: .Normal)
+            self.buttonNavItem.setImage(UIImage(named: "nav-menu"), forState: .Normal)
         case .EventManage:
-            self.buttonNavItem.setImage(UIImage(named: "nav-back-gray"), forState: .Normal)
+            self.buttonNavItem.setImage(UIImage(named: "nav-back"), forState: .Normal)
         default:
             break
         }

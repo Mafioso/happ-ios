@@ -33,8 +33,8 @@ class PrototypeEventManageViewController: UIViewController {
 
 
     private func initNavBarItems() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close"), style: .Plain, target: self, action: #selector(handleBackNavItem))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-presentation"), style: .Plain, target: self, action: #selector(handlePresentationButton))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-gray"), style: .Plain, target: self, action: #selector(handleBackNavItem))
     }
 
     func handleBackNavItem() {

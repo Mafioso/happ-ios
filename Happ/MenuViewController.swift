@@ -57,12 +57,12 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
         let tappableGesture = UITapGestureRecognizer(target: self, action: #selector(onClickChangeCity))
         self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
-
-        self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.viewModelDidUpdate()
+        
         let highlightedIndexPath = NSIndexPath(forRow: self.viewModelMenu.highlight.rawValue, inSection: 0)
         self.tableMenuActions.selectRowAtIndexPath(highlightedIndexPath, animated: true, scrollPosition: .None)
     }

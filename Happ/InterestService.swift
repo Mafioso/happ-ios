@@ -44,7 +44,7 @@ class InterestService {
 
     static func setUserInterests(interestIDs: [String]) -> Promise<AnyObject> {
         let url = endpoint + "set/"
-        return Post(url, parametersAnyObject: interestIDs as AnyObject)
+        return PostRAW(url, parametersAnyObject: interestIDs)
                 .then { data in
                     return ProfileService.fetchUserProfile()
                         .then { userProfileData in

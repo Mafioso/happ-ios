@@ -53,7 +53,7 @@ class AuthenticationService {
             "old_password": oldPassword,
             "new_password": newPassword
         ]
-        return Post("auth/password/change/", parametersAnyObject: params as AnyObject)
+        return PostRAW("auth/password/change/", parametersAnyObject: params)
     }
 
 

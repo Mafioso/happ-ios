@@ -86,7 +86,7 @@ class CityService {
 
     class func setUserCity(cityID: String) -> Promise<AnyObject> {
         let url = endpoint + cityID + "/set/"
-        return Post(url, parametersAnyObject: nil)
+        return PostRAW(url, parametersAnyObject: nil)
                 .then { data in
                     return ProfileService.fetchUserProfile()
                         .then { userProfileData in

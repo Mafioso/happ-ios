@@ -40,7 +40,7 @@ class UserModel: Object, Mappable {
     dynamic var email = ""
     dynamic var phone = ""
     dynamic var date_of_birth: NSDate?
-    dynamic var gender = 0
+    dynamic var gender = 0 // 0 - male / 1 - female
     dynamic var ogranization = false
     dynamic var is_active = false
     dynamic var last_login: NSDate?

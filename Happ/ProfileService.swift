@@ -69,14 +69,21 @@ class ProfileService {
 
     class func setCurrency(currencyID: String) -> Promise<AnyObject> {
         let url = endpointCurrencies + currencyID + "/set/"
-        return Post(url, parametersAnyObject: nil)
+        return PostRAW(url, parametersAnyObject: nil)
     }
     class func setLanguage(language: String) -> Promise<AnyObject> {
         let url = endpointUser + "set/language/"
         return Post(url, parameters: ["language": language])
     }
-    class func updateUserProfile(valuesDict: [String: AnyObject]) -> Promise<AnyObject> {
+    class func updateUserProfile(valuesDict: [String: AnyObject]) -> Promise<Void> {
         return Post(endpointUser + "edit/", parameters: valuesDict)
+            .then { result -> Void in
+                let realm = try! Realm()
+                try! realm.write {
+                    let item = Mapper<UserModel>().map(result)
+                    realm.add(item!, update: true)
+                }
+            }
     }
 
 

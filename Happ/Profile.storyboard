@@ -257,7 +257,7 @@
         <!--Profile Controller-->
         <scene sceneID="dgO-R4-Edd">
             <objects>
-                <viewController storyboardIdentifier="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5af-Zl-vK0" customClass="ProfileController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5af-Zl-vK0" customClass="ProfileController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="biT-1G-Isn"/>
                         <viewControllerLayoutGuide type="bottom" id="J1E-tK-KRK"/>
@@ -266,8 +266,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmo-a9-PDv">
-                                <frame key="frameInset" width="375" height="800"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmo-a9-PDv">
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2lT-fK-i00" userLabel="Content View">
                                         <subviews>
@@ -276,8 +275,8 @@
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="Ih8-Cu-ax8"/>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcX-47-5VO">
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="25" id="U2N-eW-BTh"/>
-                                                            <constraint firstAttribute="height" constant="21" id="Zse-zo-xCk"/>
+                                                            <constraint firstAttribute="width" constant="44" id="U2N-eW-BTh"/>
+                                                            <constraint firstAttribute="height" constant="44" id="Zse-zo-xCk"/>
                                                         </constraints>
                                                         <state key="normal" image="icon-camera"/>
                                                         <connections>
@@ -369,22 +368,27 @@
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SxM-YB-hsG">
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="select date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brq-Bb-Pbg">
-                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="nRw-be-Xji"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEn-Kd-A64">
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="26" id="08h-bZ-iaR"/>
+                                                                                    <constraint firstAttribute="height" constant="36" id="7Sp-ax-vhP"/>
                                                                                 </constraints>
-                                                                                <nil key="textColor"/>
-                                                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                                                                                <textInputTraits key="textInputTraits"/>
-                                                                            </textField>
+                                                                                <state key="normal" title="select date">
+                                                                                    <color key="titleColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="clickedSelectBithday:" destination="5af-Zl-vK0" eventType="touchUpInside" id="aUr-EK-c5t"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="42" id="141-wb-29K"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="brq-Bb-Pbg" secondAttribute="bottom" id="WZD-iS-Ydx"/>
-                                                                            <constraint firstItem="brq-Bb-Pbg" firstAttribute="leading" secondItem="SxM-YB-hsG" secondAttribute="leading" id="cNZ-ps-G6X"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="brq-Bb-Pbg" secondAttribute="trailing" id="mbB-ZU-8aD"/>
+                                                                            <constraint firstItem="kEn-Kd-A64" firstAttribute="leading" secondItem="SxM-YB-hsG" secondAttribute="leading" id="Jfq-6Q-ELv"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="kEn-Kd-A64" secondAttribute="bottom" constant="-5" id="QNL-yg-Aep"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="nRw-be-Xji" secondAttribute="trailing" id="UBJ-hb-gW7"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="kEn-Kd-A64" secondAttribute="trailing" id="gb6-Bc-opl"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="nRw-be-Xji" secondAttribute="bottom" constant="5" id="jx5-dc-tpy"/>
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAg-e3-fC7">
@@ -510,7 +514,7 @@
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSl-kg-Ey2">
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="****" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ORQ-So-SHn">
+                                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="***" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ORQ-So-SHn">
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="26" id="y8b-vU-cGU"/>
@@ -662,7 +666,7 @@
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9c-g6-kBB">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="EEh-eb-v8y"/>
+                                    <constraint firstAttribute="height" constant="51" id="EEh-eb-v8y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
                                 <state key="normal" title="SAVE">
@@ -676,10 +680,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lmo-a9-PDv" firstAttribute="top" secondItem="bYu-jZ-TZ5" secondAttribute="top" id="3w0-lc-zw0"/>
+                            <constraint firstItem="J1E-tK-KRK" firstAttribute="top" secondItem="lmo-a9-PDv" secondAttribute="bottom" constant="51" id="9kS-AN-fZa"/>
                             <constraint firstItem="2lT-fK-i00" firstAttribute="width" secondItem="bYu-jZ-TZ5" secondAttribute="width" id="IgJ-Ai-IyD"/>
                             <constraint firstAttribute="trailing" secondItem="lmo-a9-PDv" secondAttribute="trailing" id="nJ1-vc-VQI"/>
                             <constraint firstItem="J1E-tK-KRK" firstAttribute="top" secondItem="u9c-g6-kBB" secondAttribute="bottom" id="ngN-z4-MNB"/>
-                            <constraint firstItem="u9c-g6-kBB" firstAttribute="top" secondItem="lmo-a9-PDv" secondAttribute="bottom" id="pmQ-af-Fo1"/>
                             <constraint firstItem="u9c-g6-kBB" firstAttribute="leading" secondItem="bYu-jZ-TZ5" secondAttribute="leading" id="q0M-VI-TnF"/>
                             <constraint firstItem="lmo-a9-PDv" firstAttribute="leading" secondItem="bYu-jZ-TZ5" secondAttribute="leading" id="r3H-eW-24k"/>
                             <constraint firstAttribute="trailing" secondItem="u9c-g6-kBB" secondAttribute="trailing" id="sN9-hM-kGk"/>
@@ -688,10 +692,11 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
-                        <outlet property="constraintBottom" destination="ngN-z4-MNB" id="7ie-ey-GM8"/>
+                        <outlet property="buttonSave" destination="u9c-g6-kBB" id="LEa-BX-JEc"/>
+                        <outlet property="buttonSelectBirthday" destination="kEn-Kd-A64" id="SF2-j9-C0L"/>
                         <outlet property="imageProfileImage" destination="Ih8-Cu-ax8" id="U75-bb-maV"/>
+                        <outlet property="scrollView" destination="lmo-a9-PDv" id="tC7-v9-rwJ"/>
                         <outlet property="segmentedFieldGender" destination="qnm-9z-epC" id="uev-Dy-WjD"/>
-                        <outlet property="textFieldBirthday" destination="brq-Bb-Pbg" id="ejW-oq-6Q7"/>
                         <outlet property="textFieldEmail" destination="4GJ-4S-xcl" id="x0I-iS-Xth"/>
                         <outlet property="textFieldFullName" destination="OeG-i7-A8J" id="WBa-IJ-mJh"/>
                         <outlet property="textFieldPasswordConfirm" destination="4Gy-TF-sZ2" id="cRj-vd-r49"/>
@@ -920,8 +925,9 @@
     </scenes>
     <resources>
         <image name="bg-feed" width="375" height="180"/>
-        <image name="icon-camera" width="50" height="40"/>
+        <image name="icon-camera" width="25" height="20"/>
         <image name="icon-cities-orange" width="18" height="19"/>
+        <image name="icon-disclosure" width="8" height="13"/>
         <image name="icon-faq-orange" width="20" height="20"/>
         <image name="icon-info-orange" width="20" height="20"/>
         <image name="icon-message-orange" width="20" height="16"/>

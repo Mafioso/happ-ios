@@ -39,13 +39,10 @@ class ProfileViewModel {
                     return ProfileService.updateUserProfile(values)
                 }
                 .then { _ -> Promise<Void> in
-                    return ProfileService.fetchUserProfile()
-                }
-                .then { _ -> Promise<Void> in
-                    //self.setProfile()
                     return self.updatePassword(values)
                 }
-                .then { _ in
+                .then { self.setProfile() }
+                .then { _ -> Void in
                     resolve()
                 }
                 .error { err in
