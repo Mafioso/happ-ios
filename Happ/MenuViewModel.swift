@@ -61,7 +61,8 @@ class MenuViewModel {
         case .SelectInterests:
             self.navigateSelectInterests?()
         case .EventPlanner:
-            self.navigateEventPlanner?()
+            //TODO self.navigateEventPlanner?()
+            break
         case .Settings:
             self.navigateSettings?()
         case .Logout:

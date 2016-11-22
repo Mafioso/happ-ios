@@ -6,14 +6,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="2279.ttf">
+            <string>WienLight</string>
+        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
-        </array>
-        <array key="WienLight_Normal.ttf">
-            <string>WienLight</string>
         </array>
     </customFonts>
     <objects>
@@ -28,7 +28,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4P-8l-Kev">
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="boZ-24-qZD">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="boZ-24-qZD">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="8r7-IQ-pEU"/>
                                 </constraints>
