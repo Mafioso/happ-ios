@@ -74,7 +74,10 @@ class SelectCityViewModelPrototype {
     init() {
         print(".selectCityVM.init")
 
-        self.willLoad()
+        self.fetchCities()
+            .then { _ -> Void in
+                print(".selectCityVM.fetchCities.done", self.cities.count)
+            }
     }
 
 
@@ -91,8 +94,11 @@ class SelectCityViewModelPrototype {
     }
     func onChangeSearch(search: String?) {
         self.search = search
+        // local search
         self.cities = self.getCities()
         self.didUpdate?()
+        // server search
+        self.fetchCitiesByName()
     }
     func onLoadNextPage() {
         if self.citiesPage > 1 && CityService.isLastPage {
@@ -103,18 +109,19 @@ class SelectCityViewModelPrototype {
     }
 
 
-    private func willLoad() {
-        self.fetchCities().then { _ -> Void in
-            print(".selectCityVM.fetchCities.done", self.cities.count)
-            self.didUpdate?()
-        }
-    }
     private func fetchCities() -> Promise<Void> {
         return CityService.fetchCities(self.citiesPage)
             .then { _ -> Void in
                 self.cities = self.getCities()
                 self.didUpdate?()
         }
+    }
+    private func fetchCitiesByName() {
+        CityService.fetchCitiesByName(self.search!)
+            .then { _ -> Void in
+                self.cities = self.getCities()
+                self.didUpdate?()
+            }
     }
     private func getCities() -> [CityModel] {
         var cities = CityService.getCities()

@@ -112,15 +112,12 @@ extension UITableViewCell {
         self.backgroundColor = UIColor.happOrangeHighlightColor()
 
         let imageHapp = UIImage(named: "icon-happ-orange")
-        let imageViewHapp = UIImageView(image: imageHapp)
-        imageViewHapp.frame = CGRect(x: 16, y: 13, width: 24, height: 24)
-        imageViewHapp.tag = 924
-        self.addSubview(imageViewHapp)
+        self.imageView?.image = imageHapp
     }
     func extUnsetHighlighted() {
         self.textLabel?.textColor = UIColor.happBlackHalfTextColor()
         self.backgroundColor = UIColor.clearColor()
-        self.viewWithTag(924)?.removeFromSuperview()
+        self.imageView?.image = nil
     }
 }
 

@@ -51,6 +51,20 @@ class CityService {
                 }
         }
     }
+    class func fetchCitiesByName(name: String) -> Promise<Void> {
+        return GetPaginated(endpoint, parameters: ["search": name], paramsEncoding: .URL)
+            .then { (data, isLastPage) -> Void in
+                let results = data as! [AnyObject]
+                
+                let realm = try! Realm()
+                try! realm.write {
+                    results.forEach() { city in
+                        let inst = Mapper<CityModel>().map(city)
+                        realm.add(inst!, update: true)
+                    }
+                }
+        }
+    }
     class func fetchCity(id: String) -> Promise<Void> {
         return Get(endpoint + id + "/", parameters: nil)
             .then { result -> Void in

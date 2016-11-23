@@ -129,11 +129,11 @@ func PostRAW(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated:
 
 
 
-func Get(endpoint: String, parameters: [String: AnyObject]?) -> Promise<AnyObject> {
+func Get(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         Alamofire
-            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
+            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: paramsEncoding)
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -181,11 +181,11 @@ func GetCustom(url: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
 }
 
 
-func GetPaginated(endpoint: String, parameters: [String: AnyObject]?) -> Promise<(AnyObject, Bool)> {
+func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON) -> Promise<(AnyObject, Bool)> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         Alamofire
-            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
+            .request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: paramsEncoding)
             .validate()
             .responseJSON { response in
                 switch response.result {
