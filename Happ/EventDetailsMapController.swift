@@ -73,7 +73,7 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         CityService.fetchCityLocation(userCity.id)
             .then { data -> Void in
                 let location = data as! CLLocation
-                self.updateMap(location.coordinate, zoom: 15)
+                self.updateMap(location.coordinate, zoom: 10)
         }
     }
     func updateViews() {
@@ -89,7 +89,7 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         labelDistance.text = "? km"
 
         self.displayMarker(.EventPoint(event: event))
-        self.updateMap(self.markers.last!.position, zoom: 12)
+        self.updateMap(self.markers.last!.position, zoom: 14)
     }
 
 

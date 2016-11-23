@@ -98,7 +98,7 @@ protocol MapViewControllerProtocol: GMSMapViewDelegate {
     var markers: [GMSMarker] { get set }
     func getMapView() -> GMSMapView
     // actions:
-    func updateMap(coordinate: CLLocationCoordinate2D, zoom: Int)
+    func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float)
     func displayMarker(mapMarker: MapMarkerType)
     // inputs:
     func onDidMapLayoutSubviews()
@@ -116,9 +116,10 @@ extension MapViewControllerProtocol where Self: UIViewController {
         self.markers = []
     }
 
-    func updateMap(coordinate: CLLocationCoordinate2D, zoom: Int) {
+    func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float) {
         let updCamera = GMSCameraUpdate.setTarget(coordinate)
-        self.getMapView().moveCamera(updCamera)
+        self.getMapView().animateWithCameraUpdate(updCamera)
+        self.getMapView().animateToZoom(zoom)
     }
 
     func displayMarker(mapMarker: MapMarkerType) {
