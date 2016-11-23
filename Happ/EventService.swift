@@ -22,7 +22,23 @@ class EventService {
     static var isLastPageOfExplore: Bool = false
 
 
-    class func setLike(eventID: String, value: Bool) -> Promise<Void> {
+    class func setLike(eventID: String, value: Bool) {
+        let event = self.getByID(eventID)!
+        let realm = try! Realm()
+        try! realm.write {
+            event.is_upvoted = value
+        }
+    }
+
+    class func setFavourite(eventID: String, value: Bool) {
+        let event = self.getByID(eventID)!
+        let realm = try! Realm()
+        try! realm.write {
+            event.is_in_favourites = value
+        }
+    }
+
+    class func updateLike(eventID: String, value: Bool) -> Promise<Void> {
         var url = endpoint + eventID
         url += (value == true) ? "/upvote/" : "/downvote/"
         return Post(url, parameters: nil)
@@ -33,7 +49,7 @@ class EventService {
                 .then { print(".EventService.setLike.afterFetch!") }
     }
 
-    class func setFavourite(eventID: String, value: Bool) -> Promise<Void> {
+    class func updateFavourite(eventID: String, value: Bool) -> Promise<Void> {
         var url = endpoint + eventID
         url += (value == true) ? "/fav/" : "/unfav/"
         return Post(url, parameters: nil)

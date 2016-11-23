@@ -47,8 +47,10 @@ class EventDetailsController: UIViewController {
         self.viewModel.navigateBack?()
     }
     @IBAction func clickedWantToGoButton(sender: UIButton) {
+        self.viewModel.onFavourite()
     }
     @IBAction func clickedUpvote(sender: UIButton) {
+        self.viewModel.onLike()
     }
     @IBAction func clickedLocationButton(sender: UIButton) {
         self.viewModel.onClickOpenMap()
@@ -69,12 +71,16 @@ class EventDetailsController: UIViewController {
 
         self.tableViewInfo.dataSource = self
         self.tableViewInfo.delegate = self
-        
-        self.viewModelDidUpdate()
+
+        [buttonUpvote, buttonWantToGo].forEach { btn in
+            btn.imageEdgeInsets.right = 12
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.viewModelDidUpdate()
+        
         self.extMakeStatusBarWhite()
         self.extMakeNavBarHidden()
     }
@@ -117,15 +123,11 @@ class EventDetailsController: UIViewController {
         labelLocation.text = event.address
         labelPriceMinimum.text = event.getPrice(.MinPrice)
 
-        buttonUpvote.titleLabel?.text = String(event.votes_num)
+        buttonUpvote.setTitle(String(event.votes_num), forState: .Normal)
         buttonUpvote.selected = event.is_upvoted
-        if event.is_in_favourites {
-            buttonWantToGo.selected = true
-            buttonWantToGo.backgroundColor = color
-        } else {
-            buttonWantToGo.selected = false
-            buttonWantToGo.backgroundColor = UIColor.happOrangeColor()
-        }
+
+        buttonWantToGo.selected = event.is_in_favourites
+        buttonWantToGo.backgroundColor = event.is_in_favourites ? color : UIColor.happOrangeColor()
     }
 
     private func bindToViewModel() {
