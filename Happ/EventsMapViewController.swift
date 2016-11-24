@@ -141,19 +141,18 @@ extension MapViewControllerProtocol where Self: UIViewController {
             // create view
             let eventOnMapView = NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
             eventOnMapView.labelTitle.text = event.title
+            if let colorValue = event.color {
+                let color = UIColor(hexString: colorValue)
+                eventOnMapView.viewRounded.backgroundColor = color
+                eventOnMapView.viewTriangle.backgroundColor = color
+            }
             if  let imageURL = event.images.first {
                 eventOnMapView.imageCover.hnk_setImageFromURL(imageURL!)
             }
             let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
 
-            /*
-            // set constraints
-            NSLayoutConstraint(item: eventOnMapView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 39).active = true
-            */
- 
             // add to map
             marker.position = eventLocation.coordinate
-            marker.tracksViewChanges = true
             marker.iconView = eventOnMapView
             marker.map = self.getMapView()
         }

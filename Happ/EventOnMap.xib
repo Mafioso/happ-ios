@@ -18,6 +18,12 @@
             <rect key="frame" x="0.0" y="0.0" width="268" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-ph-IP9" customClass="TriangeCorner" customModule="Happ" customModuleProvider="target">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="S6G-F8-2Ar"/>
+                        <constraint firstAttribute="width" constant="26" id="ul3-AB-5k4"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbL-IU-ymV" userLabel="Rounded View">
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g74-l5-4Xd">
@@ -34,20 +40,23 @@
                     <color key="backgroundColor" red="0.96470588239999999" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="g74-l5-4Xd" firstAttribute="leading" secondItem="mbL-IU-ymV" secondAttribute="leading" id="8J5-8m-c6J"/>
+                        <constraint firstAttribute="height" constant="39" id="B8j-0k-v5b"/>
                         <constraint firstItem="yEF-PJ-E3H" firstAttribute="leading" secondItem="g74-l5-4Xd" secondAttribute="trailing" constant="8.5" id="Qfc-Lc-2wb"/>
                         <constraint firstAttribute="bottom" secondItem="g74-l5-4Xd" secondAttribute="bottom" id="UMe-G9-Qml"/>
                         <constraint firstAttribute="trailing" secondItem="yEF-PJ-E3H" secondAttribute="trailing" constant="8" id="aGS-rj-zPx"/>
                         <constraint firstItem="g74-l5-4Xd" firstAttribute="top" secondItem="mbL-IU-ymV" secondAttribute="top" id="cM6-kw-XX9"/>
+                        <constraint firstItem="yEF-PJ-E3H" firstAttribute="top" secondItem="mbL-IU-ymV" secondAttribute="top" constant="13" id="jla-Ud-Zcp"/>
                         <constraint firstItem="yEF-PJ-E3H" firstAttribute="centerY" secondItem="mbL-IU-ymV" secondAttribute="centerY" id="up6-Tr-2we"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="mbL-IU-ymV" secondAttribute="trailing" id="DN1-5R-2a1"/>
-                <constraint firstItem="mbL-IU-ymV" firstAttribute="top" secondItem="YTj-UJ-Ygd" secondAttribute="top" id="MXi-dj-NeK"/>
-                <constraint firstAttribute="bottom" secondItem="mbL-IU-ymV" secondAttribute="bottom" id="grA-ne-Pf2"/>
-                <constraint firstItem="mbL-IU-ymV" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" constant="6.5" id="pRd-kS-kRI"/>
+                <constraint firstItem="4hF-ph-IP9" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" id="L6f-kE-0Pr"/>
+                <constraint firstItem="mbL-IU-ymV" firstAttribute="top" secondItem="YTj-UJ-Ygd" secondAttribute="top" id="Wug-1J-GGK"/>
+                <constraint firstItem="mbL-IU-ymV" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" constant="11" id="ixB-Kv-FTT"/>
+                <constraint firstItem="4hF-ph-IP9" firstAttribute="bottom" secondItem="mbL-IU-ymV" secondAttribute="bottom" id="lZr-oR-ryY"/>
+                <constraint firstAttribute="trailing" secondItem="mbL-IU-ymV" secondAttribute="trailing" priority="250" id="qtM-h3-f0T"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -55,6 +64,7 @@
                 <outlet property="imageCover" destination="g74-l5-4Xd" id="sdK-J0-345"/>
                 <outlet property="labelTitle" destination="yEF-PJ-E3H" id="hWC-ae-zWs"/>
                 <outlet property="viewRounded" destination="mbL-IU-ymV" id="7ut-Vp-cWE"/>
+                <outlet property="viewTriangle" destination="4hF-ph-IP9" id="5t3-rR-YI9"/>
             </connections>
             <point key="canvasLocation" x="-168" y="-328"/>
         </view>

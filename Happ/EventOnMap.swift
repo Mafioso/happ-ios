@@ -9,6 +9,27 @@
 import UIKit
 
 
+
+class TriangeCorner: UIView {
+    override func drawRect(rect: CGRect) {
+        let path = UIBezierPath()
+        path.lineWidth = 1
+        path.moveToPoint(CGPoint(
+            x:bounds.width/2,
+            y:0))
+        path.addLineToPoint(CGPoint(
+            x:0,
+            y:bounds.height))
+        path.addLineToPoint(CGPoint(
+            x:bounds.width,
+            y:bounds.height))
+        UIColor(hexString: "F6A623").setFill()
+        path.fill()
+    }
+
+}
+
+
 class EventOnMap: UIView {
     
     static let nibName = "EventOnMap"
@@ -16,13 +37,13 @@ class EventOnMap: UIView {
     var view: UIView!
     
     @IBOutlet weak var viewRounded: UIView!
+    @IBOutlet weak var viewTriangle: TriangeCorner!
     @IBOutlet weak var imageCover: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
-    
     }
 }
 
