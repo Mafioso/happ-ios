@@ -54,7 +54,7 @@ extension MapViewControllerProtocol where Self: UIViewController {
             marker.position = location.coordinate
             marker.icon = UIImage(named: "icon-mylocation")
             marker.map = self.getMapView()
-            
+
         case .EventPoint(let event):
             let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
             marker.position = eventLocation.coordinate
@@ -74,11 +74,12 @@ extension MapViewControllerProtocol where Self: UIViewController {
                 eventOnMapView.imageCover.hnk_setImageFromURL(imageURL!)
             }
             let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
-            
+
             // add to map
             marker.groundAnchor = CGPoint(x: 0, y: 1)
             marker.position = eventLocation.coordinate
             marker.iconView = eventOnMapView
+            marker.userData = event.id
             marker.map = self.getMapView()
         }
         self.markers.append(marker)

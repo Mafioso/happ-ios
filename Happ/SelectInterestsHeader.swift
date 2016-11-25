@@ -38,21 +38,22 @@ class SelectInterestsHeader: UICollectionReusableView {
     func viewModelDidUpdate() {
         // init
         if self.viewModel.isAllowsMultipleSelection() {
-            self.viewForMultipleSelection.hidden = false
-            self.viewForSingleSelection.hidden = true
-            self.labelForName.text = self.viewModel.getTitle()
+            viewForMultipleSelection.hidden = false
+            viewForSingleSelection.hidden = true
+            labelForName.text = self.viewModel.getTitle()
+            buttonSelectAll.selected = self.viewModel.isSelectedAll
         } else {
-            self.viewForMultipleSelection.hidden = true
-            self.viewForSingleSelection.hidden = false
+            viewForMultipleSelection.hidden = true
+            viewForSingleSelection.hidden = false
         }
         self.initNavItems()
         
 
         // update
         if self.viewModel.scope == .MenuChangeInterests {
-            self.buttonNavItem.hidden = !self.viewModel.isHeaderVisible
+            buttonNavItem.hidden = !self.viewModel.isHeaderVisible
         } else {
-            self.buttonNavItem.hidden = true
+            buttonNavItem.hidden = true
         }
     }
 
@@ -69,9 +70,9 @@ class SelectInterestsHeader: UICollectionReusableView {
     private func initNavItems() {
         switch self.viewModel.scope {
         case .MenuChangeInterests:
-            self.buttonNavItem.setImage(UIImage(named: "nav-menu"), forState: .Normal)
+            self.buttonNavItem.setImage(UIImage(named: "nav-menu-gray"), forState: .Normal)
         case .EventManage:
-            self.buttonNavItem.setImage(UIImage(named: "nav-back"), forState: .Normal)
+            self.buttonNavItem.setImage(UIImage(named: "nav-back-gray"), forState: .Normal)
         default:
             break
         }

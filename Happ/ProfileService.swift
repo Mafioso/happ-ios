@@ -119,7 +119,6 @@ class ProfileService {
     class func checkCityExists() -> Promise<Void> {
         let profile = self.getUserProfile()
         let settings = profile.settings!
-        
         return Promise { resolve, reject in
             if settings.city_id == nil {
                 reject(ProfileErrors.CityNotSelected)
@@ -130,7 +129,6 @@ class ProfileService {
     }
     class func checkInterestsExist() -> Promise<Void> {
         let profile = self.getUserProfile()
-
         return Promise { resolve, reject in
             if profile.interests.isEmpty {
                 reject(ProfileErrors.InterestsNotSelected)

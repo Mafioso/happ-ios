@@ -133,7 +133,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="dop-pX-pDi"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

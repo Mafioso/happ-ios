@@ -67,6 +67,7 @@ class EventsListViewModel {
     var state: EventsListState
 
     var navigateEventDetails: NavigationFuncWithID
+    var navigateEventDetailsMap: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
     var displaySlideFeedFilters: NavigationFunc
     var hideSlideFeedFilters: NavigationFunc
@@ -158,14 +159,14 @@ class EventsListViewModel {
         EventService.fetchFeed(self.state.page)
             .then { _ -> Void in
                 self.state.events = self.getEvents()
-                self.didUpdate!()
+                self.didUpdate?()
         }
     }
     private func fetchFavouriteEvents() {
         EventService.fetchFavourite(self.state.page)
             .then { _ -> Void in
                 self.state.events = self.getEvents()
-                self.didUpdate!()
+                self.didUpdate?()
         }
     }
 

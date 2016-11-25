@@ -13,14 +13,13 @@ import PromiseKit
 class SetupCityAndInterestsViewModel {
 
     var citySelected: CityModel?
-    var interestsSelected: [InterestModel] = []
 
     var navigateSelectCity: NavigationFunc
     var navigateBack: NavigationFunc
     var navigateSelectInterests: NavigationFunc
     var navigateFeed: NavigationFunc
 
-    
+
     init() {
     }
 
@@ -32,30 +31,25 @@ class SetupCityAndInterestsViewModel {
     func onClickSelectCity() {
         self.navigateSelectCity?()
     }
-
-
     func onSelectCity(city: CityModel) {
         self.citySelected = city
         self.navigateBack?()
         self.didUpdate?()
     }
-    func onSelectInterests(interests: [InterestModel]) {
-        self.interestsSelected = interests
-        self.didUpdate?()
-    }
-
     func onSaveCityPage() {
         CityService.setUserCity(self.citySelected!.id)
             .then { _ in
                 self.navigateSelectInterests?()
         }
     }
-    func onSaveInterestsPage() {
-        let interestIDs = self.interestsSelected.map{ $0.id }
+    func onSaveInterestsPage(selectedInterests: [InterestModel]) {
+        let interestIDs = selectedInterests.map{ $0.id }
         InterestService.setUserInterests(interestIDs)
-            .then { _ in
-                self.navigateFeed?()
-        }
+            .then { _ in self.navigateFeed?() }
+    }
+    func onSaveInterestsPage() {
+        InterestService.setUserAllInterests()
+            .then { _ in self.navigateFeed?() }
     }
 }
 
@@ -68,7 +62,9 @@ extension SetupCityAndInterestsViewModel: SelectInterestsVMProtocol {
         return self.citySelected!.name
     }
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
-        self.onSelectInterests(selectedInterests)
+        self.onSaveInterestsPage(selectedInterests)
+    }
+    func selectInterestsOnSaveAll() {
         self.onSaveInterestsPage()
     }
 }

@@ -111,7 +111,6 @@ func PostRAW(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated:
         }
         headers.forEach({ request.setValue($0.1, forHTTPHeaderField: $0.0) })
 
-
         Alamofire
             .request(request)
             .validate()

@@ -45,5 +45,6 @@ extension EventManageViewModel: SelectInterestsVMProtocol {
         // self.event.interests = selectedInterests
         self.navigateBack?()
     }
+    func selectInterestsOnSaveAll() {} // optional
 }
 

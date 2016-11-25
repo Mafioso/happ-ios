@@ -16,7 +16,7 @@ class SelectInterestsController: UIViewController {
             self.bindToViewModel()
         }
     }
-    
+
 
     // outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -191,7 +191,7 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
             return CGSize(width: collectionView.frame.width, height: 44)
         }
     }
-    
+
     // init event on scroll
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.viewModel.onScroll(Int(scrollView.contentOffset.y))
@@ -205,13 +205,16 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
     // init pagination and react to longPressed
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let cell = cell as! InterestCollectionViewCell
-        
+
         //when some interest long pressed
         //unfocus all cells except longPressedInterest
-        if  let focusedInterest = self.viewModel.longPressedInterest,
-            let focusedInterestIndex = self.viewModel.interests.indexOf(focusedInterest)
-            where indexPath.row == focusedInterestIndex {
-            cell.viewUnfocus.hidden = false
+        if let focusedInterest = self.viewModel.longPressedInterest {
+            if  let focusedInterestIndex = self.viewModel.interests.indexOf(focusedInterest)
+                where indexPath.row == focusedInterestIndex {
+                cell.viewUnfocus.hidden = true
+            } else {
+                cell.viewUnfocus.hidden = false
+            }
         } else {
             cell.viewUnfocus.hidden = true
         }
@@ -244,28 +247,18 @@ extension SelectInterestsController: UICollectionViewDataSource, UICollectionVie
         case .NonSelected:
             cell.viewSelectionInfo.hidden = true
 
-            cell.viewSelectedOne.hidden = true
-            cell.viewSelectedSome.hidden = true
-            cell.viewSelectedAll.hidden = true
-
-        case .SelectedOne:
-            cell.viewSelectionInfo.hidden = false
-
-            cell.viewSelectedOne.hidden = false
             cell.viewSelectedSome.hidden = true
             cell.viewSelectedAll.hidden = true
 
         case .SelectedAll:
             cell.viewSelectionInfo.hidden = false
 
-            cell.viewSelectedOne.hidden = true
             cell.viewSelectedSome.hidden = true
             cell.viewSelectedAll.hidden = false
 
         case .SelectedSome(let numberOfSelected, let count):
             cell.viewSelectionInfo.hidden = false
 
-            cell.viewSelectedOne.hidden = true
             cell.viewSelectedSome.hidden = false
             cell.viewSelectedAll.hidden = true
 

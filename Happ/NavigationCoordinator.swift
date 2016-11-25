@@ -379,7 +379,15 @@ class NavigationCoordinator {
         self.updateSlidebar() // to remove feedFilter
     }
     func showMap() {
+        let viewModel = EventsListViewModel(scope: .Feed)
+        viewModel.navigateEventDetails = self.showEventDetails
+        viewModel.navigateEventDetailsMap = self.showEventDetailsMap
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
+        viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
+
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsMap") as! EventsMapViewController
+        viewController.viewModel = viewModel
 
         let tabIndex = 1
         self.tabBarController.selectedIndex = tabIndex

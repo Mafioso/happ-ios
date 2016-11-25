@@ -41,7 +41,6 @@ class InterestService {
                 }
         }
     }
-
     static func setUserInterests(interestIDs: [String]) -> Promise<AnyObject> {
         let url = endpoint + "set/"
         return PostRAW(url, parametersAnyObject: interestIDs)
@@ -52,6 +51,12 @@ class InterestService {
                     }
                 }
     }
+    static func setUserAllInterests() -> Promise<Void> {
+        let url = endpoint + "set/?all=1"
+        return PostRAW(url, parametersAnyObject: nil)
+            .then { _ in ProfileService.fetchUserProfile() }
+    }
+
 
     static func getAllStored() -> Results<InterestModel> {
         let realm = try! Realm()

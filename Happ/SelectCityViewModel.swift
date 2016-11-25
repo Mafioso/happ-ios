@@ -55,9 +55,11 @@ class SelectCityOnMenuViewModel: SelectCityViewModelPrototype, SelectInterestsVM
     func selectInterestsOnSave(selectedInterests: [InterestModel]) {
         let interestIDs = selectedInterests.map { $0.id }
         InterestService.setUserInterests(interestIDs)
-            .then { _ in
-                self.navigateFeed?()
-        }
+            .then { _ in self.navigateFeed?() }
+    }
+    func selectInterestsOnSaveAll() {
+        InterestService.setUserAllInterests()
+            .then { _ in self.navigateFeed?() }
     }
 }
 

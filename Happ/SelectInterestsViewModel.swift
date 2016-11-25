@@ -12,9 +12,8 @@ import PromiseKit
 
 enum InterestSelectionTypes {
     case NonSelected
-    case SelectedOne
-    case SelectedAll
     case SelectedSome(numberOfSelected: Int, count: Int)
+    case SelectedAll
 }
 
 
@@ -22,7 +21,11 @@ protocol SelectInterestsVMProtocol {
     func selectInterestsIsAllowsMultipleSelection() -> Bool
     func selectInterestsGetTitle() -> String
     func selectInterestsOnSave(selectedInterests: [InterestModel]) -> Void
+    func selectInterestsOnSaveAll() -> Void
 }
+
+
+
 enum SelectInterestsScope {
     case EventManage
     case Setup
@@ -39,6 +42,7 @@ class SelectInterestsViewModel {
     var interestsPage: Int = 1
 
     var interests: [InterestModel] = []
+    var isSelectedAll: Bool = false
     var longPressedInterest: InterestModel?
     var selectedInterests: [InterestModel: [InterestModel]] = [:]
     /*
@@ -92,21 +96,19 @@ class SelectInterestsViewModel {
         }
     }
     func onSelectAll() {
+        self.isSelectedAll = !self.isSelectedAll
         self.selectedInterests = [:]
-        self.interests.forEach { interest in
-            self.selectedInterests.updateValue([], forKey: interest)
-        }
         self.didUpdate?()
     }
     func onSave() {
-        let selectedInterestsMap: [[InterestModel]] = self.selectedInterests
-            .map { (key, value) in
-                return (value.isEmpty) ? [key] : value
-            }
-        let selectedInterests: [InterestModel] = selectedInterestsMap.flatMap { $0 }
-
-        print("..onSave", selectedInterests)
-        self.parentViewModel.selectInterestsOnSave(selectedInterests)
+        if self.isSelectedAll {
+            self.parentViewModel.selectInterestsOnSaveAll()
+        } else {
+            let value = self.selectedInterests
+                            .map { (key, value) in return (value.isEmpty) ? [key] : value }
+                            .flatMap { $0 }
+            self.parentViewModel.selectInterestsOnSave(value)
+        }
     }
     func onScroll(offset: Int) {
         let isNowHeaderVisible = offset < 138
@@ -116,11 +118,15 @@ class SelectInterestsViewModel {
         }
     }
     func onSelectInterest(interest: InterestModel) {
-        let isSelected = self.selectedInterests.keys.contains(interest)
         if !self.isAllowsMultipleSelection() { // clear all previous values
             self.selectedInterests = [:]
         }
+        if self.isSelectedAll {
+            self.isSelectedAll = false
+            self.selectedInterests = [:]
+        }
 
+        let isSelected = self.selectedInterests.keys.contains(interest)
         if !isSelected {
             self.selectedInterests.updateValue([], forKey: interest)
         } else {
@@ -135,6 +141,10 @@ class SelectInterestsViewModel {
     func onSelectSubinterest(subinterest: InterestModel) {
         if let interest = InterestService.getParentOf(subinterest) {
             if !self.isAllowsMultipleSelection() { // clear all previous values
+                self.selectedInterests = [:]
+            }
+            if self.isSelectedAll {
+                self.isSelectedAll = false
                 self.selectedInterests = [:]
             }
 
@@ -153,17 +163,17 @@ class SelectInterestsViewModel {
         }
     }
     func onClosePopoverSelectSubinterests() {
-        print("..onClose")
         self.longPressedInterest = nil
         self.didUpdate?()
     }
 
 
     func getInterestSelectionTypeFor(interest: InterestModel) -> InterestSelectionTypes {
-        if let selectedSubinterests = self.selectedInterests[interest] {
-            if selectedSubinterests.isEmpty {
-                return .SelectedOne
-            } else if selectedSubinterests.count == interest.children.count {
+        if self.isSelectedAll {
+            return .SelectedAll
+        } else if let selectedSubinterests = self.selectedInterests[interest] {
+            if  selectedSubinterests.isEmpty
+                || selectedSubinterests.count == interest.children.count {
                 return .SelectedAll
             } else {
                 return .SelectedSome(

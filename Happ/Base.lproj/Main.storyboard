@@ -431,22 +431,6 @@
                                                                         <constraint firstAttribute="height" constant="20" id="cnD-oY-0e8"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U14-aF-fXy" userLabel="Selected One">
-                                                                    <subviews>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-Cl-6JM">
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="13.41" id="9Hi-SO-HGP"/>
-                                                                                <constraint firstAttribute="width" constant="17.5" id="YcX-Kh-t2Q"/>
-                                                                            </constraints>
-                                                                            <state key="normal" backgroundImage="icon-selected"/>
-                                                                        </button>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="QXZ-Cl-6JM" firstAttribute="centerX" secondItem="U14-aF-fXy" secondAttribute="centerX" id="KJZ-yG-3wR"/>
-                                                                        <constraint firstItem="QXZ-Cl-6JM" firstAttribute="centerY" secondItem="U14-aF-fXy" secondAttribute="centerY" id="Tgm-2z-cw3"/>
-                                                                        <constraint firstAttribute="height" constant="20" id="pdY-qX-qCL"/>
-                                                                    </constraints>
-                                                                </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9D9-0w-48a" userLabel="Selected Some">
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykh-no-VBs">
@@ -474,15 +458,12 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="9D9-0w-48a" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="5F2-bq-mQa"/>
-                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="Jc4-TM-UWR"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="centerX" secondItem="mOq-7K-1lv" secondAttribute="centerX" id="Q2a-aP-70A"/>
-                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="width" secondItem="mOq-7K-1lv" secondAttribute="width" id="WZz-Pg-m9G"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="XB0-FW-3lA"/>
                                                                 <constraint firstItem="9D9-0w-48a" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="bQA-cH-sXb"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Zoz-2U-Z1i" secondAttribute="trailing" id="fkw-uc-izs"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Zoz-2U-Z1i" secondAttribute="bottom" id="rad-g3-8mj"/>
                                                                 <constraint firstItem="eeo-4e-RY0" firstAttribute="width" secondItem="mOq-7K-1lv" secondAttribute="width" id="tPL-eZ-TmH"/>
-                                                                <constraint firstItem="U14-aF-fXy" firstAttribute="centerY" secondItem="mOq-7K-1lv" secondAttribute="centerY" id="wMV-P1-ZHw"/>
                                                                 <constraint firstItem="Zoz-2U-Z1i" firstAttribute="leading" secondItem="mOq-7K-1lv" secondAttribute="leading" id="ybf-bI-7m0"/>
                                                                 <constraint firstItem="Zoz-2U-Z1i" firstAttribute="top" secondItem="mOq-7K-1lv" secondAttribute="top" id="ztv-UB-ocm"/>
                                                             </constraints>
@@ -540,7 +521,6 @@
                                             <outlet property="labelSelectedSomeText" destination="ykh-no-VBs" id="wGT-zO-1ZC"/>
                                             <outlet property="viewFooter" destination="CHJ-ed-a3R" id="wY0-WC-WLt"/>
                                             <outlet property="viewSelectedAll" destination="eeo-4e-RY0" id="8lx-LQ-UPx"/>
-                                            <outlet property="viewSelectedOne" destination="U14-aF-fXy" id="RXi-Dj-pry"/>
                                             <outlet property="viewSelectedSome" destination="9D9-0w-48a" id="hVb-dl-bOd"/>
                                             <outlet property="viewSelectionInfo" destination="mOq-7K-1lv" id="nE4-Ki-40N"/>
                                             <outlet property="viewUnfocus" destination="0lM-Hc-5HO" id="nIQ-eI-JjS"/>
@@ -548,7 +528,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="5dc-ht-cTC" customClass="SelectInterestsHeader" customModule="Happ" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="138"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqd-ab-Ouq" userLabel="for Single">
@@ -577,10 +557,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H94-vl-h04" userLabel="Select All Interests">
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H94-vl-h04" userLabel="Select All Interests">
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                     <state key="normal" title="Select All Interests" image="icon-selected-all-orange">
                                                         <color key="titleColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="selected" title="Unselect All" image="icon-selected-all-gray">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="clickedSelectAll:" destination="5dc-ht-cTC" eventType="touchUpInside" id="aMU-kS-lrI"/>
@@ -700,7 +683,7 @@
                                 <inset key="separatorInset" minX="68" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="2n7-FB-h6t" imageView="oME-8O-tLT" style="IBUITableViewCellStyleDefault" id="2jb-Lx-hBO">
-                                        <rect key="frame" x="0.0" y="28" width="1000" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2jb-Lx-hBO" id="gjI-Xt-fwh">
                                             <frame key="frameInset" width="375" height="44"/>
@@ -930,6 +913,7 @@
         <image name="icon-geo-orange" width="14" height="20"/>
         <image name="icon-selected" width="18" height="14"/>
         <image name="icon-selected-all" width="24" height="14"/>
+        <image name="icon-selected-all-gray" width="24" height="14"/>
         <image name="icon-selected-all-orange" width="24" height="14"/>
         <image name="icon-selected-orange" width="18" height="14"/>
         <image name="nav-close-shadow" width="32" height="36"/>
