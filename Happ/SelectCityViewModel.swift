@@ -126,7 +126,7 @@ class SelectCityViewModelPrototype {
     private func getCities() -> [CityModel] {
         var cities = CityService.getCities()
         if self.search != nil {
-            cities = cities.filter("name CONTAINS %@", search!)
+            cities = cities.filter("name CONTAINS[c] %@", search!)
         }
         return Array(cities)
     }

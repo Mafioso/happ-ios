@@ -171,8 +171,9 @@ class NavigationCoordinator {
     }
 
     func start() {
-        AuthenticationService.checkCredentialAvailable()
-        .then { _ -> Promise<Void> in
+        firstly {
+            AuthenticationService.checkCredentialAvailable()
+        }.then { _ -> Promise<Void> in
             return ProfileService.fetchUserProfile()
         }.then { _ -> Promise<Void> in
             return ProfileService.checkCityExists()
@@ -189,13 +190,20 @@ class NavigationCoordinator {
             case AuthenticationErrors.NoCredentials:
                 self.startSignIn()
             case AuthenticationErrors.CredentialsExpired:
-                break
+                break // TODO
+            case RequestError.NotAuthorized:
+                AuthenticationService.logOut()
+                self.startSignIn()
             case ProfileErrors.CityNotSelected:
                 self.startSetupCityAndInterests()
             case ProfileErrors.InterestsNotSelected:
                 self.startSetupOnlyInterests()
             default:
-                break
+                if let reqErr = err as? RequestError {
+                    print(".nav.start.reqError", reqErr)
+                } else {
+                    print(".nav.start.error", err)
+                }
             }
         }
     }
@@ -208,7 +216,8 @@ class NavigationCoordinator {
                     switch err {
                     case ProfileErrors.LanguageWasChanged(let nowLanguage):
                         ProfileService.setLanguage(nowLanguage)
-                        resolve()
+                            .then { _ in resolve() }
+                            .error { err in reject(err) }
                     default:
                         break
                     }

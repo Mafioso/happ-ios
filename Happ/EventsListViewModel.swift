@@ -144,7 +144,7 @@ class EventsListViewModel {
         var events = events
         let filters = self.state.filters
         if filters.search != nil {
-            events = events.filter("title CONTAINS %@", filters.search!)
+            events = events.filter("title CONTAINS[c] %@", filters.search!)
         }
         if filters.onlyFree {
             events = events.filter("min_price == nil")

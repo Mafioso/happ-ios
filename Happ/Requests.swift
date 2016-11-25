@@ -20,6 +20,8 @@ let HostAPI = Host + "/api/v1/"
 enum RequestError: Int, ErrorType, CustomStringConvertible {
     case SignInIncorrect
     case NoInternet
+    case NotAuthorized = 401
+    case NotFound = 404
     case BadRequest = -6003
     case BadResponse = -1017
     case NoResponseIsTimedOut = -1001
@@ -27,6 +29,10 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
 
     var description: String {
         switch self {
+        case .NotAuthorized:
+            return "Non Authorized"
+        case .NotFound:
+            return "Please, requesting data doesn't exists"
         case .BadRequest:
             return "Please, check your input data"
         case .BadResponse:
@@ -71,7 +77,9 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: B
                 case .Success:
                     resolve(response.result.value!)
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: error.code) {
+                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                        reject(reqErrorType as ErrorType)
+                    } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
                     } else {
                         // print(".Post.error", endpoint, parameters, error, error.code)
@@ -113,7 +121,9 @@ func PostRAW(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated:
                 } else {
                     print("PostRAW.error ", error?.code, error?.localizedDescription)
 
-                    if let reqErrorType = RequestError(rawValue: error!.code) {
+                    if let reqErrorType = RequestError(rawValue: response!.statusCode) {
+                        reject(reqErrorType as ErrorType)
+                    } else if let reqErrorType = RequestError(rawValue: error!.code) {
                         reject(reqErrorType)
                     } else {
                         // print(".Post.error", endpoint, parameters, error, error.code)
@@ -141,12 +151,14 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: Par
                     resolve(response.result.value!)
 
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: error.code) {
+                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                        reject(reqErrorType as ErrorType)
+                    } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType as ErrorType)
                     } else {
-                        print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
                         reject(RequestError.UnknownError)
                     }
+                    print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -164,14 +176,16 @@ func GetCustom(url: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
                 switch response.result {
                 case .Success:
                     resolve(response.result.value!)
-                    
+
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: error.code) {
+                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                        reject(reqErrorType as ErrorType)
+                    } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType as ErrorType)
                     } else {
                         reject(RequestError.UnknownError)
                     }
-                    print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
+                    print(".GetCustom.error", url, parameters, error, error.code, error.localizedDescription)
                 }
                 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -196,10 +210,12 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEnco
                     resolve((results, isLastPage))
 
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: error.code) {
+                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                        reject(reqErrorType as ErrorType)
+                    } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
                     } else {
-                        print(".Get.error", endpoint, parameters, error, error.code)
+                        print(".GetPaginated.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
                     }
                 }

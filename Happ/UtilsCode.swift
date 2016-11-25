@@ -57,7 +57,8 @@ class DefaultParameters {
 
 
 func getSystemLanguage() -> String? {
-    return NSLocale.preferredLanguages()[0] as String?
+    let langAndRegion = NSLocale.preferredLanguages()[0] as String? // en-KZ
+    return langAndRegion?.componentsSeparatedByString("-").first
 }
 
 

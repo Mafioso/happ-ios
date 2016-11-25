@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 
 
-class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
+class EventDetailsMapController: UIViewController, MapLocationViewControllerProtocol {
 
     var viewModel: EventOnMapViewModel!
 
@@ -38,20 +38,22 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
     }
 
     // variables
-    var markers: [GMSMarker] = []
+    var markers: [GMSMarker] = [] // MapViewControllerProtocol
+    var locationState: MapLocationState! //MapLocationViewControllerProtocol
+
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.initMap()
+        self.initLocation()
         self.initNavItems()
-
-        self.updateViews()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        self.updateViews()
         self.extMakeNavBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
@@ -88,7 +90,11 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
         labelEventLocation.text = event.address
         labelDistance.text = "? km"
 
+        self.destroyMarkers()
         self.displayMarker(.EventPoint(event: event))
+        if let myLocation = self.locationState.myLocation {
+            self.displayMarker(.MyLocation(location: myLocation))
+        }
         self.updateMap(self.markers.last!.position, zoom: 14)
     }
 
@@ -97,6 +103,13 @@ class EventDetailsMapController: UIViewController, MapViewControllerProtocol {
     // implement MapViewControllerProtocol
     func getMapView() -> GMSMapView {
         return self.viewMap
+    }
+    // implement MapLocationViewControllerProtocol
+    func getLocateButton() -> UIButton {
+        return self.buttonLocate
+    }
+    func mapView(mapView: GMSMapView, willMove gesture: Bool) {
+        self.onWillCameraMove(gesture)
     }
 
 

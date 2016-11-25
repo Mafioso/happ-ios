@@ -26,11 +26,18 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbL-IU-ymV" userLabel="Rounded View">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g74-l5-4Xd">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3h-W3-UrX">
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g74-l5-4Xd"/>
+                            </subviews>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="g74-l5-4Xd" secondAttribute="height" multiplier="1:1" id="9LB-WJ-hej"/>
+                                <constraint firstAttribute="trailing" secondItem="g74-l5-4Xd" secondAttribute="trailing" constant="2" id="0Az-2R-oa1"/>
+                                <constraint firstItem="g74-l5-4Xd" firstAttribute="leading" secondItem="g3h-W3-UrX" secondAttribute="leading" constant="2" id="BRa-o4-T0C"/>
+                                <constraint firstItem="g74-l5-4Xd" firstAttribute="top" secondItem="g3h-W3-UrX" secondAttribute="top" constant="2" id="HUy-b8-Jzi"/>
+                                <constraint firstAttribute="bottom" secondItem="g74-l5-4Xd" secondAttribute="bottom" constant="2" id="MWP-8w-YfW"/>
+                                <constraint firstAttribute="width" secondItem="g3h-W3-UrX" secondAttribute="height" multiplier="1:1" id="xiE-uL-hLN"/>
                             </constraints>
-                        </imageView>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAP.EVENT.TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEF-PJ-E3H">
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,12 +46,12 @@
                     </subviews>
                     <color key="backgroundColor" red="0.96470588239999999" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="g74-l5-4Xd" firstAttribute="leading" secondItem="mbL-IU-ymV" secondAttribute="leading" id="8J5-8m-c6J"/>
+                        <constraint firstItem="yEF-PJ-E3H" firstAttribute="leading" secondItem="g3h-W3-UrX" secondAttribute="trailing" constant="8.5" id="2XO-A9-nFl"/>
+                        <constraint firstItem="g3h-W3-UrX" firstAttribute="leading" secondItem="mbL-IU-ymV" secondAttribute="leading" id="9Tf-EO-ZGL"/>
+                        <constraint firstAttribute="trailing" secondItem="yEF-PJ-E3H" secondAttribute="trailing" constant="8" id="AMX-Ls-cJG"/>
                         <constraint firstAttribute="height" constant="39" id="B8j-0k-v5b"/>
-                        <constraint firstItem="yEF-PJ-E3H" firstAttribute="leading" secondItem="g74-l5-4Xd" secondAttribute="trailing" constant="8.5" id="Qfc-Lc-2wb"/>
-                        <constraint firstAttribute="bottom" secondItem="g74-l5-4Xd" secondAttribute="bottom" id="UMe-G9-Qml"/>
-                        <constraint firstAttribute="trailing" secondItem="yEF-PJ-E3H" secondAttribute="trailing" constant="8" id="aGS-rj-zPx"/>
-                        <constraint firstItem="g74-l5-4Xd" firstAttribute="top" secondItem="mbL-IU-ymV" secondAttribute="top" id="cM6-kw-XX9"/>
+                        <constraint firstAttribute="bottom" secondItem="g3h-W3-UrX" secondAttribute="bottom" id="ZLU-nq-KBZ"/>
+                        <constraint firstItem="g3h-W3-UrX" firstAttribute="top" secondItem="mbL-IU-ymV" secondAttribute="top" id="i0D-M8-Fjz"/>
                         <constraint firstItem="yEF-PJ-E3H" firstAttribute="top" secondItem="mbL-IU-ymV" secondAttribute="top" constant="13" id="jla-Ud-Zcp"/>
                         <constraint firstItem="yEF-PJ-E3H" firstAttribute="centerY" secondItem="mbL-IU-ymV" secondAttribute="centerY" id="up6-Tr-2we"/>
                     </constraints>
