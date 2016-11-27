@@ -57,6 +57,9 @@ class SignInController: UIViewController {
         }
     }
     
+    @IBAction func clickedPrivacyPolicy(sender: UIButton) {
+        self.viewModel.navigatePrivacyPolicy?()
+    }
 
     // constants
     let defaultFormToBottomConstraint = CGFloat(142)

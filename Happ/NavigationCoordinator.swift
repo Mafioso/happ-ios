@@ -242,7 +242,7 @@ class NavigationCoordinator {
         viewModel.navigateSetup = self.startSetupCityAndInterests
         viewModel.navigateAfterLogin = self.start
         // viewModel.navigateTerm
-        // viewModel.navigatePolicy
+        viewModel.navigatePrivacyPolicy = self.showWebView("http://happ.westeurope.cloudapp.azure.com/api/v1/terms-of-service/")
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! SignInController
         viewController.viewModel = viewModel
@@ -256,6 +256,14 @@ class NavigationCoordinator {
             print(".nav.showSignUp")
             let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
             viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func showWebView(link:String) -> NavigationFunc{
+        return {
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+            viewController.link = link
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
