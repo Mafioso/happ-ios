@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		520900E51DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */; };
 		520900E71DE704E800A4F8FD /* MapViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */; };
+		520AAFDB1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */; };
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
 		52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */; };
 		52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F011DE1E3C800CECE3D /* EventOnMap.swift */; };
@@ -105,6 +106,7 @@
 /* Begin PBXFileReference section */
 		520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapLocationViewControllerProtocol.swift; sourceTree = "<group>"; };
 		520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerProtocol.swift; sourceTree = "<group>"; };
+		520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LocationAlmatyMyHome.gpx; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOnMap.xib; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				525A8AAE1D7D4023002C6F46 /* Assets.xcassets */,
 				525A8AB01D7D4023002C6F46 /* LaunchScreen.storyboard */,
 				5210D1171D90F225000A7C47 /* Happ.entitlements */,
+				520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */,
 				525A8AB31D7D4023002C6F46 /* Info.plist */,
 				52839C061DDAE19700B6EBD8 /* Default.plist */,
 			);
@@ -524,6 +527,7 @@
 				52FDB3851DD5CA4100E6B821 /* EventManageTableCell.xib in Resources */,
 				B4E215E11DAF764C00144E78 /* SF-UI-Display-Thin.otf in Resources */,
 				B4E215DD1DAF764C00144E78 /* SF-UI-Display-Light.otf in Resources */,
+				520AAFDB1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx in Resources */,
 				B4E215E81DAF764C00144E78 /* SF-UI-Text-LightItalic.otf in Resources */,
 				B4E215E21DAF764C00144E78 /* SF-UI-Display-Ultralight.otf in Resources */,
 				525A8AB21D7D4023002C6F46 /* LaunchScreen.storyboard in Resources */,

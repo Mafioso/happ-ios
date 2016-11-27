@@ -24,10 +24,10 @@ struct MapDirection {
     let legSteps: [JSON]
     let overviewPolylinePoints: String
 
-    func getDistance() -> Int {
+    func getDistance() -> Double {
         return self.legSteps
-            .reduce(0, combine: { (var acc, step) in
-                acc += step["distance", "value"].intValue
+            .reduce(0.0, combine: { (var acc, step) in
+                acc += step["distance", "value"].doubleValue
                 return acc
             })
     }
@@ -41,6 +41,7 @@ enum MapMarkerType {
 }
 
 
+
 protocol MapViewControllerProtocol: class, GMSMapViewDelegate {
     func initMap()
     // variables:
@@ -49,7 +50,7 @@ protocol MapViewControllerProtocol: class, GMSMapViewDelegate {
     // actions:
     func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float)
     func displayMarker(mapMarker: MapMarkerType)
-    func destroyMarkers()
+    func clearMap()
     // inputs:
     func onDidMapLayoutSubviews()
 }
@@ -72,6 +73,7 @@ extension MapViewControllerProtocol where Self: UIViewController {
     func displayDirection(direction: MapDirection) {
         let path = GMSPath(fromEncodedPath: direction.overviewPolylinePoints)
         let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = UIColor.happOrangeColor()
         polyline.map = self.getMapView()
     }
     func displayMarker(mapMarker: MapMarkerType) {
@@ -136,8 +138,8 @@ extension MapViewControllerProtocol where Self: UIViewController {
         print("..map.displayMarker", self.markers.count)
     }
 
-    func destroyMarkers() {
-        self.markers.forEach { $0.map = nil }
+    func clearMap() {
+        self.getMapView().clear()
         self.markers = []
     }
 

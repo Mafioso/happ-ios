@@ -12,7 +12,11 @@ import GoogleMaps
 
 class EventDetailsMapController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
 
-    var viewModel: EventOnMapViewModel!
+    var viewModel: EventOnMapViewModel!  {
+        didSet {
+            self.bindToViewModel()
+        }
+    }
 
 
     // outlets
@@ -33,6 +37,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
         self.viewModel.onClickOpenEventDetails()
     }
     @IBAction func clickedRouteButton(sender: UIButton) {
+        self.handleClickRoute()
     }
     @IBAction func clickedLocateButton(sender: UIButton) {
         self.onClickLocate()
@@ -91,12 +96,23 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
         labelEventLocation.text = event.address
         labelDistance.text = "? km"
 
-        self.destroyMarkers()
-        self.displayMarker(.EventPoint(event: event))
-        if let myLocation = self.locationState.myLocation {
-            self.displayMarker(.MyLocation(location: myLocation))
+        self.clearMap()
+        if let location = self.viewModel.location {
+            self.displayMarker(.MyLocation(location: location))
         }
+        if let direction = self.viewModel.mapDirection {
+            self.displayDirection(direction)
+            labelDistance.text = Utils.formatDistance(direction.getDistance(), type: .Metric)
+        }
+        self.displayMarker(.EventPoint(event: event))
         self.updateMap(self.markers.last!.position, zoom: 14)
+    }
+
+
+    private func bindToViewModel() {
+        self.viewModel.didUpdate = { [weak self] _ in
+            self?.updateViews()
+        }
     }
 
 
@@ -114,22 +130,31 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     }
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
-            self.startLocationDetecting()
+            manager.startUpdatingLocation()
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
         if let location = locations.first {
-            self.stopLocationDetecting()
-            
             self.locationState = MapLocationState(locationManager: manager, location: location)
             self.updateMapLocationViews()
             self.displayMarker(.MyLocation(location: location))
-
             self.viewModel.onFoundLocation(location)
         }
     }
 
 
+    private func handleClickRoute() {
+        // 1. clear map / markerks & polyline
+        // 2. clear current location
+        // 3. init location -> will init polyline direction
+        // 4. update views
+        self.viewModel.mapDirection = nil
+        self.clearMap()
+        self.initLocation()
+        self.updateViews()
+    }
 
     private func initNavItems() {
         self.navigationItem.title = "Event location"

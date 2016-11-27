@@ -177,7 +177,8 @@ func GetCustom(url: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
                     resolve(response.result.value!)
 
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                    if  let statusCode = response.response?.statusCode,
+                        let reqErrorType = RequestError(rawValue: statusCode) {
                         reject(reqErrorType as ErrorType)
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType as ErrorType)

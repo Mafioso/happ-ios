@@ -74,12 +74,13 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
         self.extMakeNavBarWhite()
     }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
         self.extMakeNavBarVisible()
-        self.destroyMarkers()
+        self.clearMap()
     }
+
 
 
     // implementations MapLocationViewControllerProtocol
@@ -89,9 +90,6 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     func getLocateButton() -> UIButton {
         return self.buttonLocate
     }
-    func mapView(mapView: GMSMapView, willMove gesture: Bool) {
-        self.onWillCameraMove(gesture)
-    }
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
         if let eventID = marker.userData as? String {
             self.viewModel.navigateEventDetailsMap?(id: eventID)
@@ -99,15 +97,18 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         }
         return false
     }
+    func mapView(mapView: GMSMapView, willMove gesture: Bool) {
+        self.onWillCameraMove(gesture)
+    }
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
-            self.startLocationDetecting()
+            manager.startUpdatingLocation()
         }
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
+        manager.delegate = nil
         if let location = locations.first {
-            self.stopLocationDetecting()
-            
             self.locationState = MapLocationState(locationManager: manager, location: location)
             self.updateMapLocationViews()
             self.displayMarker(.MyLocation(location: location))
@@ -145,7 +146,7 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickFilterNavItem))
     }
     func handleClickMenuNavItem() {
-       // self.viewModel.displaySlideMenu?() TODO uncomment
+        self.viewModel.displaySlideMenu?()
     }
     func handleClickFilterNavItem() {
     }
