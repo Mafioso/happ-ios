@@ -31,8 +31,12 @@ class TriangeCorner: UIView {
 
 
 class EventOnMap: UIView {
-    
+
     static let nibName = "EventOnMap"
+    static func initView() -> EventOnMap {
+        return NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
+    }
+
 
     var view: UIView!
     

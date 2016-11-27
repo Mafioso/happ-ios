@@ -75,7 +75,6 @@ class HappMainTabBarController: UITabBarController {
         */
 
         self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite]//, tabChat]
-        self.hidesBottomBarWhenPushed = true
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -130,7 +129,6 @@ class HappManagerTabBarController: UITabBarController {
          */
 
         self.viewControllers = [tabAnalytics, tabProFunctions, tabMyEvents, tabAddEvent]//, tabChat]
-        self.hidesBottomBarWhenPushed = true
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -419,6 +417,7 @@ class NavigationCoordinator {
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetailsMap") as! EventDetailsMapController
         viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(viewController, animated: true)
     }
 

@@ -64,12 +64,12 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
 
 
 
-func Post(endpoint: String, parameters: [String: AnyObject]?, isAuthenticated: Bool = true) -> Promise<AnyObject> {
+func Post(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
 
         Alamofire
-            .request(.POST, url, headers: getRequestHeaders(isAuthenticated), parameters: parameters, encoding: .JSON)
+            .request(.POST, url, headers: getRequestHeaders(isAuthenticated), parameters: parameters, encoding: paramsEncoding)
             .validate()
             .responseJSON { response in
 

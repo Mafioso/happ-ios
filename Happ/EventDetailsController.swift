@@ -67,8 +67,6 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.hidesBottomBarWhenPushed = true
-
         self.tableViewInfo.dataSource = self
         self.tableViewInfo.delegate = self
 

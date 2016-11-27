@@ -56,7 +56,7 @@ extension MapLocationViewControllerProtocol where Self: MapViewControllerProtoco
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
         self.locationState = MapLocationState(locationManager: manager)
-        
+
         // if already has authorization
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             self.startLocationDetecting()

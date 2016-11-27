@@ -9,14 +9,37 @@
 import Foundation
 import UIKit
 import GoogleMaps
+import SwiftyJSON
 
 
+struct MapPlace {
+    let name: String
+    let photoRef: String
+    let address: String
+    let location: CLLocation
+}
+
+struct MapDirection {
+    // NOTE: Route without waypoints contains only one leg in `legs` array
+    let legSteps: [JSON]
+    let overviewPolylinePoints: String
+
+    func getDistance() -> Int {
+        return self.legSteps
+            .reduce(0, combine: { (var acc, step) in
+                acc += step["distance", "value"].intValue
+                return acc
+            })
+    }
+}
 
 enum MapMarkerType {
     case MyLocation(location: CLLocation)
     case EventPoint(event: EventModel)
     case Event(event: EventModel)
+    case TempEventPlace(event: EventModel, place: MapPlace)
 }
+
 
 protocol MapViewControllerProtocol: class, GMSMapViewDelegate {
     func initMap()
@@ -45,7 +68,12 @@ extension MapViewControllerProtocol where Self: UIViewController {
         let updCamera = GMSCameraUpdate.setTarget(coordinate, zoom: zoom)
         self.getMapView().animateWithCameraUpdate(updCamera)
     }
-    
+
+    func displayDirection(direction: MapDirection) {
+        let path = GMSPath(fromEncodedPath: direction.overviewPolylinePoints)
+        let polyline = GMSPolyline(path: path)
+        polyline.map = self.getMapView()
+    }
     func displayMarker(mapMarker: MapMarkerType) {
         var marker = GMSMarker()
         
@@ -63,7 +91,7 @@ extension MapViewControllerProtocol where Self: UIViewController {
             
         case .Event(let event):
             // create view
-            let eventOnMapView = NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
+            let eventOnMapView = EventOnMap.initView()
             eventOnMapView.labelTitle.text = event.title
             if let colorValue = event.color {
                 let color = UIColor(hexString: colorValue)
@@ -81,6 +109,28 @@ extension MapViewControllerProtocol where Self: UIViewController {
             marker.iconView = eventOnMapView
             marker.userData = event.id
             marker.map = self.getMapView()
+
+        case .TempEventPlace(let event, let place):
+            let eventOnMapView = EventOnMap.initView()
+            eventOnMapView.labelTitle.text = "\(event.title) | \(place.name)"
+            if let colorValue = event.color {
+                let color = UIColor(hexString: colorValue)
+                eventOnMapView.viewRounded.backgroundColor = color
+                eventOnMapView.viewTriangle.backgroundColor = color
+            }
+            if  let imageURL = event.images.first {
+                let url = MapService.getPlacePhotoURL(place.photoRef, width: 40)
+                print("..Map.TempEventPlace.image", url)
+                eventOnMapView.imageCover.hnk_setImageFromURL(url)
+            }
+
+            // add to map
+            marker.groundAnchor = CGPoint(x: 0, y: 1)
+            marker.position = place.location.coordinate
+            marker.iconView = eventOnMapView
+            marker.userData = event.id
+            marker.map = self.getMapView()
+
         }
         self.markers.append(marker)
         print("..map.displayMarker", self.markers.count)
@@ -90,7 +140,7 @@ extension MapViewControllerProtocol where Self: UIViewController {
         self.markers.forEach { $0.map = nil }
         self.markers = []
     }
-    
+
     func onDidMapLayoutSubviews() {
         print("..map.onDidMapLayoutSubviews", self.markers.count)
         self.markers.forEach { marker in

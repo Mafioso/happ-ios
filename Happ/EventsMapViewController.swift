@@ -10,6 +10,19 @@ import UIKit
 import GoogleMaps
 
 
+enum TempEventPlaces: String {
+    case Almaty
+    case Astana
+    
+    func getPlaces() -> [String] {
+        switch self {
+        case .Almaty:
+            return ["Dostyk Plaza", "Mega Almaty", "ЦУМ", "Sova coffee", "KBTU", "Kyrmangazy 54"]
+        case .Astana:
+            return ["Khan Shatyr", "MEGA", "EXPO", "Nazarbayev University", "Maronno Rosso"]
+        }
+    }
+}
 
 
 class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
@@ -34,8 +47,6 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.hidesBottomBarWhenPushed = true
 
         self.initMap()
         self.initLocation()
@@ -106,8 +117,17 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
 
     private func displayEventMarkers() {
-        self.displayMarker(.Event(event: EventService.getFeed().first! ))
-        //EventService.getFeed().forEach { self.displayMarker(.Event(event: $0 )) }
+        let events = self.viewModel.getEvents()
+        let userCity = ProfileService.getUserCity()
+        if let places = TempEventPlaces(rawValue: userCity.name)?.getPlaces() {
+            zip(events, places)
+                .forEach { event, placeName in
+                    MapService.fetchPlaces(placeName)
+                        .then { results -> Void in
+                            self.displayMarker(.TempEventPlace(event: event, place: results.first!))
+                        }
+                }
+        }
     }
     private func displayUserCity() {
         let userCity = ProfileService.getUserCity()

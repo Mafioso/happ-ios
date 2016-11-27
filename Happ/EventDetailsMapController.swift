@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 
 
-class EventDetailsMapController: UIViewController, MapLocationViewControllerProtocol {
+class EventDetailsMapController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
 
     var viewModel: EventOnMapViewModel!
 
@@ -35,6 +35,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     @IBAction func clickedRouteButton(sender: UIButton) {
     }
     @IBAction func clickedLocateButton(sender: UIButton) {
+        self.onClickLocate()
     }
 
     // variables
@@ -111,6 +112,23 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     func mapView(mapView: GMSMapView, willMove gesture: Bool) {
         self.onWillCameraMove(gesture)
     }
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .AuthorizedWhenInUse {
+            self.startLocationDetecting()
+        }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.stopLocationDetecting()
+            
+            self.locationState = MapLocationState(locationManager: manager, location: location)
+            self.updateMapLocationViews()
+            self.displayMarker(.MyLocation(location: location))
+
+            self.viewModel.onFoundLocation(location)
+        }
+    }
+
 
 
     private func initNavItems() {

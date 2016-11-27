@@ -9,6 +9,7 @@ target 'Happ' do
   pod 'PromiseKit', '~> 3.4'
   pod 'RealmSwift'
   pod 'Alamofire', '~> 3.4'
+  pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 1.3'
   pod 'ObjectMapper+Realm'
   pod 'HanekeSwift' # fetch&cache images by urls

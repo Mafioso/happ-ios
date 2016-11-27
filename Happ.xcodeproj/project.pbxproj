@@ -23,6 +23,7 @@
 		5239C37F1D92434700F66E31 /* EventTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5239C37D1D92434700F66E31 /* EventTableCell.xib */; };
 		5239C3831D925D5D00F66E31 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3811D925D5D00F66E31 /* Authentication.storyboard */; };
 		5239C3851D925E8100F66E31 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3841D925E8100F66E31 /* Event.storyboard */; };
+		523EFED81DE994600075259D /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EFED71DE994600075259D /* MapService.swift */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
 		525A8AAA1D7D4023002C6F46 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* SignInController.swift */; };
@@ -119,6 +120,7 @@
 		5239C37D1D92434700F66E31 /* EventTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableCell.xib; sourceTree = "<group>"; };
 		5239C3821D925D5D00F66E31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		5239C3841D925E8100F66E31 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
+		523EFED71DE994600075259D /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				52B012431D9AE19F0061F083 /* ProfileService.swift */,
 				52C2EC671DC8B03500156652 /* InterestService.swift */,
 				52B37CA31DDF24D200CBDA1B /* CityService.swift */,
+				523EFED71DE994600075259D /* MapService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */,
 				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
+				523EFED81DE994600075259D /* MapService.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				520900E51DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift in Sources */,
 				52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */,

@@ -27,7 +27,7 @@ class AuthenticationService {
             "password": password
         ]
 
-        return Post("auth/login/", parameters: parameters, isAuthenticated: false)
+        return Post("auth/login/", parameters: parameters, paramsEncoding: .JSON, isAuthenticated: false)
             .then { (data: AnyObject) -> Void in
                 self.storeCredential(data as! [String : AnyObject])
             }
@@ -42,7 +42,7 @@ class AuthenticationService {
             parameters.merge(["email": email!])
         }
 
-        return Post("auth/register/", parameters: parameters, isAuthenticated: false)
+        return Post("auth/register/", parameters: parameters, paramsEncoding: .JSON, isAuthenticated: false)
             .then { (data: AnyObject) -> Void in
                 self.storeCredential(data as! [String : AnyObject])
             }
