@@ -37,10 +37,11 @@ protocol MapLocationViewControllerProtocol: class, MapViewControllerProtocol, CL
 
     func initLocation()
     // functions
-    func startLocationDetecting()
-    func stopLocationDetecting()
     func updateMapLocationViews()
     // variables:
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    func mapView(mapView: GMSMapView, willMove gesture: Bool)
     func getLocateButton() -> UIButton
     // inputs:
     func onWillCameraMove(gesture: Bool)
@@ -55,24 +56,11 @@ extension MapLocationViewControllerProtocol where Self: MapViewControllerProtoco
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.requestWhenInUseAuthorization()
-        self.locationState = MapLocationState(locationManager: manager)
-
         // if already has authorization
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-            self.startLocationDetecting()
-        }
-    }
-    func startLocationDetecting() {
-        dispatch_async(dispatch_get_main_queue()) {
-            let manager = self.locationState.locationManager
             manager.startUpdatingLocation()
         }
-    }
-    func stopLocationDetecting() {
-        dispatch_async(dispatch_get_main_queue()) {
-            let manager = self.locationState.locationManager
-            manager.stopUpdatingLocation()
-        }
+        self.locationState = MapLocationState(locationManager: manager)
     }
     func updateMapLocationViews() {
         let state = self.locationState
@@ -92,12 +80,16 @@ extension MapLocationViewControllerProtocol where Self: MapViewControllerProtoco
         }
     }
     func onClickLocate() {
-        let state = self.locationState
-        state.isButtonSelected = true
-        self.updateMapLocationViews()
+        if self.locationState.myLocation != nil {
+            let state = self.locationState
+            state.isButtonSelected = true
+            self.updateMapLocationViews()
+        }
     }
 
-    // handlers
-    // NOTE:
+    // NOTE: some functions are not be able to implement in this extension:
+    // - func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    // - func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    // - func mapView(mapView: GMSMapView, willMove gesture: Bool)
 
 }

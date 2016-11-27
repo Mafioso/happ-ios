@@ -71,6 +71,34 @@ extension Dictionary {
 }
 
 
+enum DistanceTypes {
+    case Metric
+    case Mile
+}
+
+
+struct Utils {
+    static func formatDistance(value: Double, type: DistanceTypes) -> String {
+        switch type {
+        case .Metric:
+            switch value {
+            case 0..<1000:
+                return "\(value) m"
+            default:
+                return Double(value / 1000).format(".1") + " km"
+            }
+        case .Mile:
+            return "\(value) mi"
+        }
+    }
+}
+
+extension Double {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
 func formatStatValue(value: Int) -> String {
     return String(value)
 }

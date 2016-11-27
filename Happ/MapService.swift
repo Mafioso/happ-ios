@@ -45,20 +45,27 @@ class MapService {
     class func fetchDirection(from: CLLocation, to: CLLocation) -> Promise<MapDirection> {
         let url = "https://maps.googleapis.com/maps/api/directions/json"
         let params: [String: AnyObject] = [
-            "key": DefaultParameters.getValue(.GoogleMapApiKey) as! String,
             "origin": "\(from.coordinate.latitude),\(from.coordinate.longitude)",
             "destination": "\(to.coordinate.latitude),\(to.coordinate.longitude)",
             "mode": "driving",
             "alternatives": false,
             "units": "metric"
         ]
-        return GetCustom(url, parameters: params, paramsEncoding: .URL)
+        return GetCustom(url, parameters: params, paramsEncoding: .URL, headers: nil)
             .then { result -> MapDirection in
                 let json = JSON(result as! NSDictionary)
-                return MapDirection(
-                    legSteps: json["routes", 0, "legs", 0, "steps"].arrayValue,
-                    overviewPolylinePoints: json["routes", 0, "overview_polyline", "points"].stringValue
-                )
+                let status = json["status"].stringValue
+                switch status {
+                    case "OK":
+                        return MapDirection(
+                            legSteps: json["routes", 0, "legs", 0, "steps"].array!,
+                            overviewPolylinePoints: json["routes", 0, "overview_polyline", "points"].string!)
+                    case "ZERO_RESULTS":
+                        return MapDirection(legSteps: [], overviewPolylinePoints: "")
+                    default:
+                        fatalError()
+                     break
+                }
         }
     }
 
