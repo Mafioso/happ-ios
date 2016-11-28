@@ -197,6 +197,40 @@ enum EventModelPriceTypes {
     }
 }
 
+
+
+class ImageModel: Object, Mappable {
+    dynamic var id = ""
+    dynamic var path: String?
+
+
+    func getURL() -> NSURL? {
+        if let url = self.path {
+            return NSURL(string: Host+url)
+        }
+        return nil
+    }
+
+
+    // Object
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    override static func ignoredProperties() -> [String] {
+        return []
+    }
+
+    // Mappable
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+        id      <- map["id"]
+        path    <- map["path"]
+    }
+}
+
+
 enum EventModelStatusTypes: Int {
     case Active = 0
     case Inactive = 1
@@ -204,7 +238,6 @@ enum EventModelStatusTypes: Int {
     case Rejected = 3
     case Finished = 4
 }
-
 
 class EventModel: Object, Mappable {
     dynamic var id = ""
@@ -238,15 +271,7 @@ class EventModel: Object, Mappable {
     dynamic var email: String?
     dynamic var web_site: String?
     dynamic var votes_num = 0
-    // images
-    dynamic var stored_images: String = "" // NOTE: array of urls are stored as single string by concating
-    var images: [NSURL?] {
-        get {
-            let urls = ArrayStringTransformer.transformToJSON(self.stored_images)!
-            return urls.map({ NSURL(string:$0) })
-        }
-    }
-    // end: images
+    var images = List<ImageModel>()
     // city
     dynamic var id_of_city = ""
     var city: CityModel? {
@@ -269,7 +294,7 @@ class EventModel: Object, Mappable {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["images", "city"]
+        return ["city"]
     }
 
 
@@ -302,7 +327,7 @@ class EventModel: Object, Mappable {
         email               <- map["email"]
         web_site            <- map["web_site"]
         votes_num           <- map["votes_num"]
-        stored_images       <- (map["images"], ArrayStringTransformer)
+        images              <- (map["images"], ArrayTransform<ImageModel>())
         id_of_city          <- map["id_of_city"]
         is_close_on_start   <- map["close_on_start"]
         registration_link   <- map["registration_link"]

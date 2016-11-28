@@ -11,9 +11,10 @@ import Alamofire
 import PromiseKit
 
 
-let Host = "http://happ.westeurope.cloudapp.azure.com"
-let HostLocal = "http://127.0.0.1:8000"
-let HostPC = "http://192.168.43.179:8000"
+private let HostServer = "http://happ.westeurope.cloudapp.azure.com"
+private let HostLocal = "http://127.0.0.1:8000"
+private let HostPC = "http://192.168.43.179:8000"
+let Host = HostServer
 let HostAPI = Host + "/api/v1/"
 
 

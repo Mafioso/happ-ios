@@ -83,7 +83,7 @@ class EventService {
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
-                self.isLastPageOfFeed = isLastPage
+                self.isLastPageOfFavourites = isLastPage
 
                 if overwrite {
                     self.deleteEventsLocal()

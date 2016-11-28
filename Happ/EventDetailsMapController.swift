@@ -87,8 +87,8 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     func updateViews() {
         let event = self.viewModel.event
     
-        if let imageURL = event.images.first {
-            imageEventCover.hnk_setImageFromURL(imageURL!)
+        if let imageURL = event.images.first?.getURL() {
+            imageEventCover.hnk_setImageFromURL(imageURL)
         }
         labelEventTitle.text = event.title
         labelEventPrice.text = event.getPrice(.Range)

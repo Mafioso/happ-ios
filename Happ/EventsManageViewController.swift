@@ -84,8 +84,8 @@ class EventsManageViewController: UITableViewController {
         cell.labelUpvoteCount.text = String(event.votes_num)
         cell.imageUpvoteIcon.image = event.getUpvoteIcon()
         cell.imageFavIcon.image = event.getFavIcon()
-        if let url = event.images.first {
-            cell.imageCover.hnk_setImageFromURL(url!)
+        if let url = event.images.first?.getURL() {
+            cell.imageCover.hnk_setImageFromURL(url)
         }
         if let color = event.color {
             cell.viewDetailsContainer.backgroundColor = UIColor(hexString: color)

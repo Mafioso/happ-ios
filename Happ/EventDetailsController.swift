@@ -22,6 +22,7 @@ class EventDetailsController: UIViewController {
     // outlets
     @IBOutlet weak var imageBackground: UIImageView!
     @IBOutlet weak var pageControllImages: UIPageControl!
+    @IBOutlet weak var viewImagesPlaceholder: UIView!
 
     @IBOutlet weak var viewContainerTitle: UIView!
     @IBOutlet weak var labelTitle: UILabel!
@@ -102,14 +103,22 @@ class EventDetailsController: UIViewController {
         }
 
         let event = self.viewModel.event
-        let color = event.color != nil ? UIColor(hexString: event.color!) : view.backgroundColor
-        
+        let color = (event.color != nil) ? UIColor(hexString: event.color!) : UIColor.happBlackQuarterTextColor()
+
         // TODO: change to images slider
-        if let image = event.images[0] {
-            imageBackground.hnk_setImageFromURL(image)
-        }
         pageControllImages.currentPage = 0
         pageControllImages.numberOfPages = 1
+
+        viewImagesPlaceholder.hidden = false
+        if let imageURL = event.images.first?.getURL() {
+            imageBackground.hnk_setImageFromURL(
+                imageURL,
+                success: { img in
+                    self.imageBackground.image = img
+                    self.viewImagesPlaceholder.hidden = true
+            })
+            imageBackground.layer.masksToBounds = true
+        }
 
         [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { $0.backgroundColor = color }
         [labelPriceMinimum, labelLocation, labelDateRange].forEach { $0.textColor = color }

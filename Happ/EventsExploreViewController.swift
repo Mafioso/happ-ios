@@ -73,8 +73,8 @@ class EventsExploreViewController: UICollectionViewController {
         let event = self.viewModel.events[indexPath.row]
         
         cell.labelTitle.text = event.title
-        if let imageURL = event.images.first {
-            cell.image.hnk_setImageFromURL(imageURL!)
+        if let imageURL = event.images.first?.getURL() {
+            cell.image.hnk_setImageFromURL(imageURL)
         }
         if let color = event.color {
             cell.viewTitleContainer.backgroundColor = UIColor(hexString: color)

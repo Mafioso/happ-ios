@@ -22,6 +22,7 @@ class EventTableCell: UITableViewCell {
 
     // outlets
     @IBOutlet weak var imageCover: UIImageView!
+    @IBOutlet weak var viewImagePlaceholder: UIView!
     @IBOutlet weak var viewDetailsContainer: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelCategory: UILabel!
@@ -63,7 +64,6 @@ class EventTableCell: UITableViewCell {
 
         labelTitle.text = event.title
         labelCategory.text = event.interests.first?.title
-        // TODO viewDetailsContainer.backgroundColor =
         labelPlace.text = event.address
         labelPrice.text = event.getPrice(.MinPrice)
         labelUpvotesCount.text = formatStatValue(event.votes_num)
@@ -76,8 +76,16 @@ class EventTableCell: UITableViewCell {
         if let color = event.color {
             viewDetailsContainer.backgroundColor = UIColor(hexString: color)
         }
-        if let imageURL = event.images[0] {
-            imageCover.hnk_setImageFromURL(imageURL)
+
+        viewImagePlaceholder.hidden = false
+        if let imageURL = event.images.first?.getURL() {
+            imageCover.hnk_setImageFromURL(
+                imageURL,
+                success: { img in
+                    self.imageCover.image = img
+                    self.viewImagePlaceholder.hidden = true
+            })
+            imageCover.layer.masksToBounds = true
         }
     }
 

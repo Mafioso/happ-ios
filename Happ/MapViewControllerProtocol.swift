@@ -100,8 +100,8 @@ extension MapViewControllerProtocol where Self: UIViewController {
                 eventOnMapView.viewRounded.backgroundColor = color
                 eventOnMapView.viewTriangle.backgroundColor = color
             }
-            if  let imageURL = event.images.first {
-                eventOnMapView.imageCover.hnk_setImageFromURL(imageURL!)
+            if  let imageURL = event.images.first?.getURL() {
+                eventOnMapView.imageCover.hnk_setImageFromURL(imageURL)
             }
             let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
 
