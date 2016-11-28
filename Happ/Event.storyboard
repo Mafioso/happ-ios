@@ -2305,7 +2305,7 @@ OF COOKING</string>
         <!--Events List Empty View Controller-->
         <scene sceneID="Fen-Ox-1rY">
             <objects>
-                <viewController storyboardIdentifier="EventsListEmpty" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dlI-NP-VRU" customClass="EventsListEmptyViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsListEmpty" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dlI-NP-VRU" customClass="EventsListEmptyViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fFL-jZ-TsM"/>
                         <viewControllerLayoutGuide type="bottom" id="WeS-dq-cV1"/>
@@ -2314,30 +2314,101 @@ OF COOKING</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzH-Pz-qwp">
-                                <rect key="frame" x="20" y="468" width="335" height="30"/>
-                                <state key="normal" title="Find Awesome Events"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTHING HERE 😣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sil-4A-Goj">
-                                <rect key="frame" x="112" y="323" width="150" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82A-AX-DS8" userLabel="Background">
+                                <rect key="frame" x="16" y="80" width="343" height="571"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="border-dotted" translatesAutoresizingMaskIntoConstraints="NO" id="EuX-Ug-3Dx">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="571"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EuX-Ug-3Dx" firstAttribute="leading" secondItem="82A-AX-DS8" secondAttribute="leading" id="EDu-U9-ZXy"/>
+                                    <constraint firstAttribute="bottom" secondItem="EuX-Ug-3Dx" secondAttribute="bottom" id="KGl-sx-go9"/>
+                                    <constraint firstItem="EuX-Ug-3Dx" firstAttribute="top" secondItem="82A-AX-DS8" secondAttribute="top" id="RVE-ln-4Bl"/>
+                                    <constraint firstAttribute="trailing" secondItem="EuX-Ug-3Dx" secondAttribute="trailing" id="b8L-i1-gm6"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rv5-hR-x45" userLabel="Content">
+                                <rect key="frame" x="16" y="80" width="343" height="571"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-air-baloon" translatesAutoresizingMaskIntoConstraints="NO" id="M1X-Eb-chI">
+                                        <rect key="frame" x="52" y="112" width="240" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="M1X-Eb-chI" secondAttribute="height" multiplier="4:3" id="NQ2-dF-xBZ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eo2-4r-3LZ">
+                                        <rect key="frame" x="51" y="324" width="240" height="50.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It is Empty Here!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uIL-B1-Cbp">
+                                                <rect key="frame" x="50" y="0.0" width="140.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="You don’t have any favourited event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="po8-d2-ceQ">
+                                                <rect key="frame" x="1.5" y="33.5" width="236" height="17"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="po8-d2-ceQ" firstAttribute="top" secondItem="uIL-B1-Cbp" secondAttribute="bottom" constant="12" id="1kg-OH-hWn"/>
+                                            <constraint firstItem="po8-d2-ceQ" firstAttribute="centerX" secondItem="eo2-4r-3LZ" secondAttribute="centerX" id="8WC-Kz-pOw"/>
+                                            <constraint firstAttribute="bottom" secondItem="po8-d2-ceQ" secondAttribute="bottom" id="9P5-02-005"/>
+                                            <constraint firstItem="uIL-B1-Cbp" firstAttribute="centerX" secondItem="eo2-4r-3LZ" secondAttribute="centerX" id="CmI-E8-7Ie"/>
+                                            <constraint firstItem="uIL-B1-Cbp" firstAttribute="top" secondItem="eo2-4r-3LZ" secondAttribute="top" id="jpA-P9-3Y0"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4Q-9h-y2p">
+                                        <rect key="frame" x="54.5" y="444.5" width="234" height="41"/>
+                                        <color key="backgroundColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="234" id="6x4-JZ-Z9X"/>
+                                            <constraint firstAttribute="height" constant="41" id="kap-Ob-lky"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                        <state key="normal" title="Find Awesome Events" image="icon-star"/>
+                                        <connections>
+                                            <action selector="clickedActionButton:" destination="dlI-NP-VRU" eventType="touchUpInside" id="caz-XO-L1k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eo2-4r-3LZ" firstAttribute="top" secondItem="M1X-Eb-chI" secondAttribute="bottom" constant="32" id="Ati-Fd-CEq"/>
+                                    <constraint firstItem="M1X-Eb-chI" firstAttribute="leading" secondItem="Rv5-hR-x45" secondAttribute="leading" constant="51.5" id="C02-n2-B0m"/>
+                                    <constraint firstItem="x4Q-9h-y2p" firstAttribute="top" secondItem="eo2-4r-3LZ" secondAttribute="bottom" constant="70" id="Os3-7r-rQJ"/>
+                                    <constraint firstItem="x4Q-9h-y2p" firstAttribute="centerX" secondItem="Rv5-hR-x45" secondAttribute="centerX" id="P3k-qA-3zy"/>
+                                    <constraint firstAttribute="trailing" secondItem="eo2-4r-3LZ" secondAttribute="trailing" constant="52" id="eTC-Dv-ChN"/>
+                                    <constraint firstAttribute="trailing" secondItem="M1X-Eb-chI" secondAttribute="trailing" constant="51.5" id="nDO-E5-dzl"/>
+                                    <constraint firstItem="eo2-4r-3LZ" firstAttribute="leading" secondItem="Rv5-hR-x45" secondAttribute="leading" constant="51" id="pj3-SS-0Bd"/>
+                                    <constraint firstItem="M1X-Eb-chI" firstAttribute="top" relation="lessThanOrEqual" secondItem="Rv5-hR-x45" secondAttribute="top" constant="112" id="x5N-7r-3fh"/>
+                                    <constraint firstAttribute="bottom" secondItem="x4Q-9h-y2p" secondAttribute="bottom" constant="85.5" id="zRy-ba-m8w"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sil-4A-Goj" firstAttribute="centerX" secondItem="76a-cp-5Ic" secondAttribute="centerX" id="IhI-wj-YCZ"/>
-                            <constraint firstAttribute="trailing" secondItem="tzH-Pz-qwp" secondAttribute="trailing" constant="20" id="RLH-gn-QMn"/>
-                            <constraint firstItem="WeS-dq-cV1" firstAttribute="top" secondItem="tzH-Pz-qwp" secondAttribute="bottom" constant="169" id="U1U-eO-whh"/>
-                            <constraint firstItem="tzH-Pz-qwp" firstAttribute="leading" secondItem="76a-cp-5Ic" secondAttribute="leading" constant="20" id="ZXp-bZ-hDj"/>
-                            <constraint firstItem="Sil-4A-Goj" firstAttribute="centerY" secondItem="76a-cp-5Ic" secondAttribute="centerY" id="rZQ-XK-JeQ"/>
+                            <constraint firstItem="WeS-dq-cV1" firstAttribute="top" secondItem="82A-AX-DS8" secondAttribute="bottom" constant="16" id="2hm-0a-flS"/>
+                            <constraint firstItem="WeS-dq-cV1" firstAttribute="top" secondItem="Rv5-hR-x45" secondAttribute="bottom" constant="16" id="AeK-OU-xIm"/>
+                            <constraint firstItem="82A-AX-DS8" firstAttribute="top" secondItem="fFL-jZ-TsM" secondAttribute="bottom" constant="60" id="Mfb-ko-3lv"/>
+                            <constraint firstItem="82A-AX-DS8" firstAttribute="leading" secondItem="76a-cp-5Ic" secondAttribute="leading" constant="16" id="cK1-TV-mO0"/>
+                            <constraint firstAttribute="trailing" secondItem="82A-AX-DS8" secondAttribute="trailing" constant="16" id="gHp-Cr-Hvh"/>
+                            <constraint firstItem="Rv5-hR-x45" firstAttribute="top" secondItem="fFL-jZ-TsM" secondAttribute="bottom" constant="60" id="tqB-EZ-14z"/>
+                            <constraint firstItem="Rv5-hR-x45" firstAttribute="leading" secondItem="76a-cp-5Ic" secondAttribute="leading" constant="16" id="u7f-PE-OiT"/>
+                            <constraint firstAttribute="trailing" secondItem="Rv5-hR-x45" secondAttribute="trailing" constant="16" id="yc9-vq-EFS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonAction" destination="x4Q-9h-y2p" id="BpK-dg-HnR"/>
+                        <outlet property="image" destination="M1X-Eb-chI" id="9Vg-6Q-9uK"/>
+                        <outlet property="labelDescription" destination="po8-d2-ceQ" id="1ma-vo-Hci"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZx-lc-hvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3694" y="3003"/>
+            <point key="canvasLocation" x="3693.5999999999999" y="3002.2488755622189"/>
         </scene>
         <!--Events List View Controller-->
         <scene sceneID="oXj-oC-Dx6">
@@ -2394,6 +2465,7 @@ OF COOKING</string>
     <resources>
         <image name="bg-event-details" width="187" height="187"/>
         <image name="bg-feed" width="375" height="180"/>
+        <image name="border-dotted" width="343" height="522"/>
         <image name="call-tv" width="18" height="18"/>
         <image name="clock" width="20" height="22"/>
         <image name="icon-disclosure" width="8" height="13"/>
@@ -2410,6 +2482,7 @@ OF COOKING</string>
         <image name="icon-upvote-active" width="20" height="20"/>
         <image name="icon-web" width="20" height="20"/>
         <image name="image-placeholder" width="60" height="60"/>
+        <image name="img-air-baloon" width="240" height="180"/>
         <image name="map" width="16" height="21"/>
         <image name="message-bulb" width="20" height="20"/>
         <image name="nav-back-shadow" width="34" height="38"/>
