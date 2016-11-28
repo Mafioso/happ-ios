@@ -58,23 +58,18 @@ class EventService {
                 }
     }
 
-    class func fetchFeed(page: Int = 1) -> Promise<Void> {
+    class func fetchFeed(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let feedEndpoint = endpoint + "feed/" + "?page=\(page)"
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
-                let realm = try! Realm()
-
-                if page == 1 {
-                    // 1. delete exists
-                    try! realm.write {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
-                    }
+                self.isLastPageOfFeed = isLastPage
+                
+                if overwrite {
+                    self.deleteEventsLocal()
                 }
 
-                self.isLastPageOfFeed = isLastPage
-                // 2. add new
+                let realm = try! Realm()
                 try! realm.write {
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
@@ -83,23 +78,18 @@ class EventService {
                 }
             }
     }
-    class func fetchFavourite(page: Int = 1) -> Promise<Void> {
+    class func fetchFavourite(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let feedEndpoint = endpoint + "favourites/" + "?page=\(page)"
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
-                let realm = try! Realm()
-                
-                if page == 1 {
-                    // 1. delete exists
-                    try! realm.write {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
-                    }
+                self.isLastPageOfFeed = isLastPage
+
+                if overwrite {
+                    self.deleteEventsLocal()
                 }
 
-                self.isLastPageOfFeed = isLastPage
-                // 2. add new
+                let realm = try! Realm()
                 try! realm.write {
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
@@ -113,18 +103,9 @@ class EventService {
         return GetPaginated(paged, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
-                let realm = try! Realm()
-                
-                if page == 1 {
-                    // 1. delete exists
-                    try! realm.write {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
-                    }
-                }
-
                 self.isLastPageOfExplore = isLastPage
-                // 2. add new
+
+                let realm = try! Realm()
                 try! realm.write {
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
@@ -144,6 +125,14 @@ class EventService {
                 }
         }
 
+    }
+
+    class func deleteEventsLocal() {
+        let realm = try! Realm()
+        try! realm.write {
+            let exists = realm.objects(EventModel)
+            realm.delete(exists)
+        }
     }
 
     class func getFeed() -> Results<EventModel> {

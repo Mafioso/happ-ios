@@ -24,16 +24,19 @@ class EventsExploreViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(".explore.didLoad")
 
         self.initNavBarItems()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print(".explore.willAppear")
 
         self.extMakeNavBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        print(".explore.didDissapear")
 
         self.extMakeNavBarVisible()
     }

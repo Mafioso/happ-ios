@@ -76,7 +76,7 @@ class CityService {
         }
     }
     class func fetchCityLocation(id: String) -> Promise<AnyObject?> {
-        let city = self.getCity(id)
+        let city = self.getCity(id)!
         let url = "http://nominatim.openstreetmap.org/search"
         let params: [String: AnyObject] = [
             "city": city.name,
@@ -115,10 +115,10 @@ class CityService {
         let result = realm.objects(CityModel)
         return result
     }
-    class func getCity(id: String) -> CityModel {
+    class func getCity(id: String) -> CityModel? {
         let realm = try! Realm()
         let result = realm.objects(CityModel)
-        return result.filter("id == %@", id).first!
+        return result.filter("id == %@", id).first
     }
 
     

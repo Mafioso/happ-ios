@@ -118,7 +118,7 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
 
     private func displayEventMarkers() {
-        let events = self.viewModel.getEvents()
+        let events = self.viewModel.state.events
         let userCity = ProfileService.getUserCity()
         if let places = TempEventPlaces(rawValue: userCity.name)?.getPlaces() {
             zip(events, places)

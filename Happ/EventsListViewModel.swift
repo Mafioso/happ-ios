@@ -39,6 +39,40 @@ enum EventsListScope {
     case Feed
     case Favourite
     case MyEvents
+
+    func fetchEvents(byPage page: Int, overwrite: Bool) -> Promise<Void> {
+        switch self {
+        case .Feed:
+            if EventService.isLastPageOfFeed {
+                return Promise<Void>()
+            }
+            return EventService.fetchFeed(page, overwrite: overwrite)
+        case .Favourite:
+            if EventService.isLastPageOfFavourites {
+                return Promise<Void>()
+            }
+            return EventService.fetchFavourite(page, overwrite: overwrite)
+        default:
+            fatalError()
+        }
+    }
+    func getEvents() -> Results<EventModel> {
+        switch self {
+        case .Feed:
+            return EventService.getFeed()
+        case .Favourite:
+            return EventService.getFavourite()
+        default:
+            fatalError()
+        }
+    }
+}
+
+enum FetchingStates: Int {
+    case None = 0
+    case StartRequest = 1
+    case FinishRequest = 2
+    case NoInternet = 3
 }
 
 
@@ -53,9 +87,9 @@ struct EventsListFiltersState {
     var statusMap: [EventModelStatusTypes: Bool]?
 }
 
-
 struct EventsListState {
     var scope: EventsListScope
+    var fetchingState: FetchingStates
     var events: [EventModel]
     var page: Int
     var filters: EventsListFiltersState
@@ -71,15 +105,46 @@ class EventsListViewModel {
     var displaySlideMenu: NavigationFunc
     var displaySlideFeedFilters: NavigationFunc
     var hideSlideFeedFilters: NavigationFunc
+    var displayEmptyList: NavigationFunc
+    var hideEmptyList: NavigationFunc
 
 
     init(scope: EventsListScope) {
         let filtersState = EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, sortBy: .ByDate, onlyFree: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
-        self.state = EventsListState(scope: scope, events: [], page: 0, filters: filtersState)
-        
+        self.state = EventsListState(scope: scope, fetchingState: .None, events: [], page: 0, filters: filtersState)
 
-        self.getFromCache()
-        self.loadNextPage() // will load first page
+        self.initDataFetching()
+    }
+
+
+    func initDataFetching() {
+        // 1. start request
+        // 2. update fetchState -> display loading cells
+        // 3. finish request -> delete database -> add new
+        // 4. update fetchState -> display data | display EmptyPage if isEmpty
+        // !. error request -> catch error
+        // !. update fetchState -> display data | display EmptyPage if isEmpty
+
+        let scope = self.state.scope
+        let filters = self.state.filters
+
+        self.state.fetchingState = .StartRequest
+        self.didUpdate?()
+
+        self.state.scope
+            .fetchEvents(byPage: 1, overwrite: true)
+            .then { _ -> Void in
+                let events = self.filterEvents(scope.getEvents())
+                self.state = EventsListState(scope: scope, fetchingState: .FinishRequest, events: events, page: 1, filters: filters)
+                self.didUpdate?()
+            }
+            .error { err in
+                // catch NoInternet here
+                let events = self.filterEvents(scope.getEvents()) // old instances
+                self.state = EventsListState(scope: scope, fetchingState: .NoInternet, events: events, page: 0, filters: filters)
+                self.didUpdate?()
+                
+            }
     }
 
 
@@ -89,55 +154,24 @@ class EventsListViewModel {
 
     //MARK: - Inputs
     func loadNextPage() {
-        switch self.state.scope {
-        case .Feed:
-            if self.state.page != 0 && EventService.isLastPageOfFeed {
-                return
+        let nextPage = self.state.page + 1
+        self.state.scope
+            .fetchEvents(byPage: nextPage, overwrite: false)
+            .then { _ -> Void in
+                let events = self.filterEvents(self.state.scope.getEvents())
+                self.state.page = nextPage
+                self.state.events = events
+                self.didUpdate?()
             }
-            self.state.page += 1
-            self.fetchFeedEvents()
-        case .Favourite:
-            if self.state.page != 0 && EventService.isLastPageOfFavourites {
-                return
-            }
-            self.state.page += 1
-            self.fetchFavouriteEvents()
-        case .MyEvents:
-            break
-        }
     }
     func onClickEvent(event: EventModel) {
-        self.navigateEventDetails!(id: event.id)
+        self.navigateEventDetails?(id: event.id)
     }
     func onChangeFilters(newState: EventsListFiltersState) {
         self.state.filters = newState
-        self.state.events = self.getEvents()
+        self.state.events = self.filterEvents(self.state.scope.getEvents())
         self.hideSlideFeedFilters!() // return to FeedViewController
-        self.didUpdate!()
-    }
-
-
-    func getFromCache() {
-        self.state.events = self.getEvents()
         self.didUpdate?()
-    }
-    func getEvents() -> [EventModel] {
-        var events: Results<EventModel>!
-        switch self.state.scope {
-        case .Feed:
-            events = EventService.getFeed()
-        case .Favourite:
-            events = EventService.getFavourite()
-        case .MyEvents:
-            break
-        }
-        return self.filterEvents(events)
-    }
-    func getEventAt(indexPath: NSIndexPath) -> EventModel {
-        return self.state.events[indexPath.row]
-    }
-    func getEventsCount() -> Int {
-        return self.state.events.count
     }
 
 
@@ -152,22 +186,6 @@ class EventsListViewModel {
         }
         // TODO filters.statusMap
         return events.sort(filters.sortBy.isOrderedBeforeFunc)
-    }
-
-
-    private func fetchFeedEvents() {
-        EventService.fetchFeed(self.state.page)
-            .then { _ -> Void in
-                self.state.events = self.getEvents()
-                self.didUpdate?()
-        }
-    }
-    private func fetchFavouriteEvents() {
-        EventService.fetchFavourite(self.state.page)
-            .then { _ -> Void in
-                self.state.events = self.getEvents()
-                self.didUpdate?()
-        }
     }
 
 }

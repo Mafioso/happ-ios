@@ -14,6 +14,7 @@ import ObjectMapper
 
 enum ProfileErrors: ErrorType {
     case CityNotSelected
+    case CityNotLoaded
     case InterestsNotSelected
     case LanguageWasChanged(nowLanguage: String)
 }
@@ -100,14 +101,10 @@ class ProfileService {
     }
 
     class func getUserCity() -> CityModel {
-        let realm = try! Realm()
-        let result = realm.objects(CityModel)
-
         let user = self.getUserProfile()
         let settings = user.settings!
-        let city = result.filter("id == %@", settings.city_id!).first
 
-        return city!
+        return CityService.getCity(settings.city_id!)!
     }
 
     class func isUserProfileExists() -> Bool {
@@ -115,7 +112,22 @@ class ProfileService {
         let users = realm.objects(UserModel)
         return users.count > 0
     }
-    
+
+    class func checkCityLoaded() -> Promise<Void> {
+        let user = self.getUserProfile()
+        let settings = user.settings!
+
+        return Promise { resolve, reject in
+            if  let cityID = settings.city_id
+                where CityService.getCity(cityID) != nil {
+                resolve()
+
+            } else {
+                reject(ProfileErrors.CityNotLoaded)
+            }
+        }
+    }
+
     class func checkCityExists() -> Promise<Void> {
         let profile = self.getUserProfile()
         let settings = profile.settings!

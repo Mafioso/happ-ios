@@ -19,7 +19,7 @@ let HostAPI = Host + "/api/v1/"
 
 enum RequestError: Int, ErrorType, CustomStringConvertible {
     case SignInIncorrect
-    case NoInternet
+    case NoInternet = -1009
     case NotAuthorized = 401
     case NotFound = 404
     case BadRequest = -6003
@@ -77,10 +77,11 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
                 case .Success:
                     resolve(response.result.value!)
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                    if  let statusCode = response.response?.statusCode,
+                        let reqErrorType = RequestError(rawValue: statusCode){
                         reject(reqErrorType as ErrorType)
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
-                        reject(reqErrorType)
+                        reject(reqErrorType as ErrorType)
                     } else {
                         // print(".Post.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
@@ -120,10 +121,11 @@ func PostRAW(endpoint: String, parametersAnyObject: AnyObject?, isAuthenticated:
                 } else {
                     print("PostRAW.error ", error?.code, error?.localizedDescription)
 
-                    if let reqErrorType = RequestError(rawValue: response!.statusCode) {
+                    if  let statusCode = response?.statusCode,
+                        let reqErrorType = RequestError(rawValue: statusCode) {
                         reject(reqErrorType as ErrorType)
                     } else if let reqErrorType = RequestError(rawValue: error!.code) {
-                        reject(reqErrorType)
+                        reject(reqErrorType as ErrorType)
                     } else {
                         // print(".Post.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
@@ -150,7 +152,8 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: Par
                     resolve(response.result.value!)
 
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                    if  let statusCode = response.response?.statusCode,
+                        let reqErrorType = RequestError(rawValue: statusCode) {
                         reject(reqErrorType as ErrorType)
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType as ErrorType)
@@ -210,7 +213,8 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEnco
                     resolve((results, isLastPage))
 
                 case .Failure(let error):
-                    if let reqErrorType = RequestError(rawValue: response.response!.statusCode) {
+                    if  let statusCode = response.response?.statusCode,
+                        let reqErrorType = RequestError(rawValue: statusCode) {
                         reject(reqErrorType as ErrorType)
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)

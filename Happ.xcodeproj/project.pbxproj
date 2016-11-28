@@ -10,6 +10,9 @@
 		520900E51DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */; };
 		520900E71DE704E800A4F8FD /* MapViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */; };
 		520AAFDB1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */; };
+		520AAFDD1DEB00C00002DE9E /* EventsListEmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AAFDC1DEB00C00002DE9E /* EventsListEmptyViewController.swift */; };
+		520AAFE21DEC079E0002DE9E /* EventLoadingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AAFE01DEC079E0002DE9E /* EventLoadingTableCell.swift */; };
+		520AAFE31DEC079E0002DE9E /* EventLoadingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520AAFE11DEC079E0002DE9E /* EventLoadingTableCell.xib */; };
 		5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5212E69C1D9029DC00729CC8 /* EventService.swift */; };
 		52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */; };
 		52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F011DE1E3C800CECE3D /* EventOnMap.swift */; };
@@ -107,6 +110,9 @@
 		520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapLocationViewControllerProtocol.swift; sourceTree = "<group>"; };
 		520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerProtocol.swift; sourceTree = "<group>"; };
 		520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LocationAlmatyMyHome.gpx; sourceTree = "<group>"; };
+		520AAFDC1DEB00C00002DE9E /* EventsListEmptyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListEmptyViewController.swift; sourceTree = "<group>"; };
+		520AAFE01DEC079E0002DE9E /* EventLoadingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoadingTableCell.swift; sourceTree = "<group>"; };
+		520AAFE11DEC079E0002DE9E /* EventLoadingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventLoadingTableCell.xib; sourceTree = "<group>"; };
 		5210D1171D90F225000A7C47 /* Happ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Happ.entitlements; sourceTree = "<group>"; };
 		5212E69C1D9029DC00729CC8 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventOnMap.xib; sourceTree = "<group>"; };
@@ -320,6 +326,7 @@
 				52AF59AC1DCA781A002037FE /* SelectSubinterestsController.swift */,
 				522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */,
 				52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */,
+				520AAFDC1DEB00C00002DE9E /* EventsListEmptyViewController.swift */,
 				52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */,
 				52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */,
 				52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */,
@@ -342,6 +349,8 @@
 			children = (
 				5239C37C1D92434700F66E31 /* EventTableCell.swift */,
 				5239C37D1D92434700F66E31 /* EventTableCell.xib */,
+				520AAFE01DEC079E0002DE9E /* EventLoadingTableCell.swift */,
+				520AAFE11DEC079E0002DE9E /* EventLoadingTableCell.xib */,
 				52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */,
 				52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */,
 				52136F011DE1E3C800CECE3D /* EventOnMap.swift */,
@@ -513,6 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				520AAFE31DEC079E0002DE9E /* EventLoadingTableCell.xib in Resources */,
 				B4E215ED1DAF764C00144E78 /* SF-UI-Text-Semibold.otf in Resources */,
 				B4E215E91DAF764C00144E78 /* SF-UI-Text-Medium.otf in Resources */,
 				52839C071DDAE19700B6EBD8 /* Default.plist in Resources */,
@@ -610,6 +620,7 @@
 			files = (
 				52FDB3841DD5CA4100E6B821 /* EventManageTableCell.swift in Sources */,
 				B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */,
+				520AAFE21DEC079E0002DE9E /* EventLoadingTableCell.swift in Sources */,
 				52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */,
 				52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
@@ -664,6 +675,7 @@
 				52A3C2C91D8F212E00C31F3F /* AuthenticationService.swift in Sources */,
 				52FC8B091DD5DEC50032BBE4 /* EventsManageViewController.swift in Sources */,
 				52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */,
+				520AAFDD1DEB00C00002DE9E /* EventsListEmptyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

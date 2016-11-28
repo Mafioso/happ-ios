@@ -67,12 +67,11 @@ class EventsManageViewController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("...events", self.viewModel.getEventsCount())
-        return self.viewModel.getEventsCount()
+        return self.viewModel.state.events.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventManageTableCell
-        let event = self.viewModel.getEventAt(indexPath)
+        let event = self.viewModel.state.events[indexPath.row]
         var cellInflator: EventManageTableCellInflator
 
         // set cell data

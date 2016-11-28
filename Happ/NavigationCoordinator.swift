@@ -172,11 +172,35 @@ class NavigationCoordinator {
         firstly {
             AuthenticationService.checkCredentialAvailable()
         }.then { _ -> Promise<Void> in
-            return ProfileService.fetchUserProfile()
+            return Promise { resolve, reject in
+                ProfileService.fetchUserProfile()
+                    .then { resolve() }
+                    .error { err in
+                        switch err {
+                        case RequestError.NoInternet:
+                            resolve() // continue without internet
+                        default:
+                            reject(err)
+                        }
+                    }
+            }
         }.then { _ -> Promise<Void> in
             return ProfileService.checkCityExists()
         }.then { _ -> Promise<Void> in
-            return ProfileService.fetchUserCity()
+            return Promise { resolve, reject in
+                ProfileService.checkCityLoaded()
+                    .then { resolve() }
+                    .error { err in
+                        switch err {
+                        case ProfileErrors.CityNotLoaded:
+                            ProfileService.fetchUserCity()
+                                .then { resolve() }
+                                .error { err in reject(err) }
+                        default:
+                            reject(err)
+                        }
+                    }
+            }
         }.then { _ -> Promise<Void> in
             return ProfileService.checkInterestsExist()
         }.then { _ -> Promise<Void> in
@@ -187,11 +211,8 @@ class NavigationCoordinator {
             switch err {
             case AuthenticationErrors.NoCredentials:
                 self.startSignIn()
-            case AuthenticationErrors.CredentialsExpired:
-                break // TODO
-            case RequestError.NotAuthorized:
-                AuthenticationService.logOut()
-                self.startSignIn()
+            case AuthenticationErrors.CredentialsExpired, RequestError.NotAuthorized:
+                self.resetRedirectLogin()
             case ProfileErrors.CityNotSelected:
                 self.startSetupCityAndInterests()
             case ProfileErrors.InterestsNotSelected:
@@ -202,9 +223,15 @@ class NavigationCoordinator {
                 } else {
                     print(".nav.start.error", err)
                 }
+                self.resetRedirectLogin()
             }
         }
     }
+    func resetRedirectLogin() {
+        AuthenticationService.logOut()
+        self.startSignIn()
+    }
+
     func updateUserLanguageIfNeeded() -> Promise<Void> {
         return Promise { resolve, reject in
             ProfileService.checkLanguageChange()
@@ -339,6 +366,14 @@ class NavigationCoordinator {
         self.navigationController.viewControllers = [viewController]
     }
 
+    func showEmptyEventsList(parentViewModel: EventsListViewModel) -> NavigationFunc {
+        return {
+            let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsListEmpty") as! EventsListEmptyViewController
+            viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: false)
+        }
+    }
+
     func showEventsList(scope: EventsListScope) {
         let viewModel = EventsListViewModel(scope: scope)
         //TODO uncomment -> viewModel.navigateEventDetails = self.showEventDetails
@@ -346,6 +381,7 @@ class NavigationCoordinator {
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
         viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
+        viewModel.displayEmptyList = self.showEmptyEventsList(viewModel)
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
