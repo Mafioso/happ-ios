@@ -152,6 +152,7 @@ class NavigationCoordinator {
     private let mainStoryboard: UIStoryboard
     private let eventStoryboard: UIStoryboard
     private let profileStoryboard: UIStoryboard
+    private let organizerStoryboard: UIStoryboard
 
     private let window: UIWindow
     private var navigationController: UINavigationController!
@@ -166,6 +167,7 @@ class NavigationCoordinator {
         self.authStoryboard = UIStoryboard(name: "Authentication", bundle: nil)
         self.eventStoryboard = UIStoryboard(name: "Event", bundle: nil)
         self.profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        self.organizerStoryboard = UIStoryboard(name: "Organizer", bundle: nil)
     }
 
     func start() {
@@ -269,7 +271,7 @@ class NavigationCoordinator {
         viewModel.navigateSetup = self.startSetupCityAndInterests
         viewModel.navigateAfterLogin = self.start
         // viewModel.navigateTerm
-        // viewModel.navigatePolicy
+        viewModel.navigatePrivacyPolicy = self.showWebView("http://happ.westeurope.cloudapp.azure.com/api/v1/terms-of-service/")
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! SignInController
         viewController.viewModel = viewModel
@@ -283,6 +285,14 @@ class NavigationCoordinator {
             print(".nav.showSignUp")
             let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
             viewController.viewModel = parentViewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func showWebView(link:String) -> NavigationFunc{
+        return {
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+            viewController.link = link
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
@@ -358,7 +368,7 @@ class NavigationCoordinator {
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.navigateEventDetails = self.showEventDetails
 
-        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
+        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
         viewController.viewModel = viewModel
 
         self.tabBarController.selectedIndex = 2
@@ -629,7 +639,7 @@ class NavigationCoordinator {
         viewModel.navigateNext = self.showEventManageSecondPage(viewModel)
         viewModel.navigateSelectInterest = self.showSelectInterest(.EventManage, parentViewModel: viewModel)
 
-        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
+        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
 
@@ -640,7 +650,7 @@ class NavigationCoordinator {
 
     func showEventManageSecondPage(parentViewModel: EventManageViewModel) -> NavigationFunc {
         return {
-            let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("addEvent2") as! EventManageSecondPageViewController
+            let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent2") as! EventManageSecondPageViewController
             viewController.viewModel = parentViewModel
 
             self.navigationController.pushViewController(viewController, animated: true)

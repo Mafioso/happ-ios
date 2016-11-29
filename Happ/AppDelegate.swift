@@ -33,7 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
-
+//        let backimage = UIImage(named: "nav-back-gray")!
+//        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics:UIBarMetrics.Default)
+//        UIBarButtonItem.appearance().setBackButtonBackgroundImage(backimage.resizableImageWithCapInsets(UIEdgeInsetsMake(0, (backimage.size.width)-1, 0, 0)), forState: .Normal, barMetrics: .Default)
+        
         let apiKey = DefaultParameters.getValue(.GoogleMapApiKey) as! String
         GMSServices.provideAPIKey(apiKey)
         GMSPlacesClient.provideAPIKey(apiKey)
