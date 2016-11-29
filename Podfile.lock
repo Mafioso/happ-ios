@@ -37,6 +37,7 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - Shimmer (1.0.2)
   - SlideMenuControllerSwift (2.3.0)
   - SwiftyJSON (2.3.2)
 
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - ObjectMapper+Realm
   - PromiseKit (~> 3.4)
   - RealmSwift
+  - Shimmer
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.3`)
   - SwiftyJSON
 
@@ -81,9 +83,10 @@ SPEC CHECKSUMS:
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: fa46f282c55e8c169ef8e161e07ca837a99f7649
+PODFILE CHECKSUM: 8dbe071a239e7d8b99df80c008046ef1f0d70004
 
 COCOAPODS: 1.0.1

@@ -54,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Shimmer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SlideMenuControllerSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,17 +72,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E50B7178AA7F50E50CB95B232F1A601</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>190ACD3A51BC90B85EADB13E9CDD207B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>27317A7A663144D6FC8476382E6B43F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,17 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4929EEE5013F849F0BEAECA01D3AE371</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4C698C648EE4D43C6B8BE0BE1FE91737</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>59F88667793B149C16845A8B0A516143</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5F00C8EDFC6A87C18B8A45647EECBC83</key>
+		<key>512FE23795227F5BCDBB581894F2BF95</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,7 +112,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8CF9B27EBAD4DB8B04D4AADA8DD3C7CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98F12DA150984111065826171C4034FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C31A540DD6DB56404A28511F9FCEB0D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4DECFA048B810D399709CAAFC2A4624</key>
 		<dict>
 			<key>primary</key>
 			<true/>

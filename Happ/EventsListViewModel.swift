@@ -68,13 +68,6 @@ enum EventsListScope {
     }
 }
 
-enum FetchingStates: Int {
-    case None = 0
-    case StartRequest = 1
-    case FinishRequest = 2
-    case NoInternet = 3
-}
-
 
 struct EventsListFiltersState {
     var search: String?
@@ -89,7 +82,7 @@ struct EventsListFiltersState {
 
 struct EventsListState {
     var scope: EventsListScope
-    var fetchingState: FetchingStates
+    var fetchingState: RequestStates
     var events: [EventModel]
     var page: Int
     var filters: EventsListFiltersState
@@ -106,7 +99,9 @@ class EventsListViewModel {
     var displaySlideFeedFilters: NavigationFunc
     var hideSlideFeedFilters: NavigationFunc
     var displayEmptyList: NavigationFunc
-    var hideEmptyList: NavigationFunc
+    var navigateFeed: NavigationFunc
+    var navigateSelectInterests: NavigationFunc
+    var navigateCreateEvent: NavigationFunc
 
 
     init(scope: EventsListScope) {

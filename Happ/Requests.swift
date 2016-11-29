@@ -18,6 +18,14 @@ let Host = HostServer
 let HostAPI = Host + "/api/v1/"
 
 
+enum RequestStates: Int {
+    case None = 0
+    case StartRequest = 1
+    case FinishRequest = 2
+    case NoInternet = 3
+}
+
+
 enum RequestError: Int, ErrorType, CustomStringConvertible {
     case SignInIncorrect
     case NoInternet = -1009

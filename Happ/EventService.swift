@@ -98,12 +98,16 @@ class EventService {
                 }
         }
     }
-    class func fetchExplore(page: Int = 1) -> Promise<Void> {
-        let paged = endpoint + "favourites/" + "?page=\(page)"
-        return GetPaginated(paged, parameters: nil)
+    class func fetchExplore(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
+        let exploreEndpoint = endpoint + "feed/" + "?page=\(page)"
+        return GetPaginated(exploreEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]
                 self.isLastPageOfExplore = isLastPage
+
+                if overwrite {
+                    self.deleteEventsLocal()
+                }
 
                 let realm = try! Realm()
                 try! realm.write {

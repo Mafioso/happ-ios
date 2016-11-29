@@ -376,12 +376,22 @@ class NavigationCoordinator {
 
     func showEventsList(scope: EventsListScope) {
         let viewModel = EventsListViewModel(scope: scope)
-        //TODO uncomment -> viewModel.navigateEventDetails = self.showEventDetails
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
         viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
+
+        // for empty list page
         viewModel.displayEmptyList = self.showEmptyEventsList(viewModel)
+        viewModel.navigateFeed = self.startFeed
+        viewModel.navigateCreateEvent = self.startEventManage
+
+        let viewModelSelectCity = SelectCityOnMenuViewModel()
+        viewModelSelectCity.navigateFeed = self.startFeed
+
+        viewModel.navigateSelectInterests = self.showSelectInterest(.MenuChangeInterests, parentViewModel: viewModelSelectCity)
+        // END - for empty list page
+
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel

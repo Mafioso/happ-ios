@@ -24,6 +24,7 @@ class EventsListEmptyViewController: UIViewController {
     @IBOutlet weak var buttonAction: UIButton!
     
     @IBAction func clickedActionButton(sender: UIButton) {
+        self.handleClickAction()
     }
 
 
@@ -52,15 +53,25 @@ class EventsListEmptyViewController: UIViewController {
         labelDescription.text = self.getDescription()
     }
 
-    
+
+    private func getNavTitle() -> String {
+        switch self.viewModel.state.scope {
+        case .Favourite:
+            return "Favourite"
+        case .Feed:
+            return "Feed"
+        case .MyEvents:
+            return "My Events"
+        }
+    }
     private func getDescription() -> String {
         switch self.viewModel.state.scope {
         case .Favourite:
             return "You don’t have any favourited event"
         case .Feed:
             return "There are no events for selected interests"
-        default:
-            fatalError()
+        case .MyEvents:
+            return "You have not created any event yet"
         }
     }
     private func getActionTitle() -> String {
@@ -69,8 +80,8 @@ class EventsListEmptyViewController: UIViewController {
             return "Find Awesome Events"
         case .Feed:
             return "Add More Interests"
-        default:
-            fatalError()
+        case .MyEvents:
+            return "Add First Event"
         }
     }
     private func getActionIcon() -> UIImage {
@@ -79,23 +90,22 @@ class EventsListEmptyViewController: UIViewController {
             return UIImage(named: "icon-star")!
         case .Feed:
             return UIImage(named: "icon-search")!
-        default:
-            fatalError()
+        case .MyEvents:
+            return UIImage(named: "icon-add")!
         }
     }
     private func handleClickAction() {
         switch self.viewModel.state.scope {
         case .Favourite:
-            // self.viewModel.navigateFeed?()
-            break
+            self.viewModel.navigateFeed?()
         case .Feed:
-            // self.viewModel.navigateSelectInterests?()
-            break
+            self.viewModel.navigateSelectInterests?()
         default:
-            fatalError()
+            self.viewModel.navigateCreateEvent?()
         }
     }
-    
+
+
 
     private func bindToViewModel() {
         let superDidUpdate = self.viewModel.didUpdate
@@ -106,7 +116,7 @@ class EventsListEmptyViewController: UIViewController {
     }
 
     private func initNavBarItems() {
-        self.navigationItem.title = "Feed"
+        self.navigationItem.title = self.getNavTitle()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
     }
     func handleClickMenuNavItem() {

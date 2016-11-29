@@ -9,6 +9,7 @@
 import UIKit
 
 private let reuseIdentifier = "cell"
+private let reuseLoadingIdentifier = "cellLoading"
 
 
 
@@ -44,8 +45,6 @@ class EventsExploreViewController: UICollectionViewController {
 
     
     func viewModelDidUpdate() {
-        print(".VMdidUpdate", self.viewModel.events.count)
-
         self.collectionView!.reloadData()
     }
 
@@ -56,37 +55,69 @@ class EventsExploreViewController: UICollectionViewController {
     }
 
 
-    // size
+    // init size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         return CGSizeMake(min(124, screenSize.width*0.33), 164)
     }
-    // data source
+
+    // fill with data
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.events.count
+        let state = self.viewModel.state
+
+        if state.fetchingState == .StartRequest {
+            return 10
+            
+        } else {
+            return state.events.count
+        }
     }
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventExploreCollectionViewCell
-        let event = self.viewModel.events[indexPath.row]
-        
-        cell.labelTitle.text = event.title
-        if let imageURL = event.images.first?.getURL() {
-            cell.image.hnk_setImageFromURL(imageURL)
-        }
-        if let color = event.color {
-            cell.viewTitleContainer.backgroundColor = UIColor(hexString: color)
-        }
+        let state = self.viewModel.state
 
-        return cell
+        if state.fetchingState == .StartRequest {
+            let cellLoading = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLoadingIdentifier, forIndexPath: indexPath) as! EventExploreLoadingCollectionViewCell
+            return cellLoading
+
+        } else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventExploreCollectionViewCell
+            let event = state.events[indexPath.row]
+
+            cell.labelTitle.text = event.title
+            if let imageURL = event.images.first?.getURL() {
+                cell.image.hnk_setImageFromURL(imageURL)
+            }
+            if let color = event.color {
+                cell.viewTitleContainer.backgroundColor = UIColor(hexString: color)
+            }
+
+            return cell
+        }
     }
-    // events handle
+    
+    // init pagination
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+
+        if indexPath.row == self.viewModel.state.events.count - 3 {
+            self.viewModel.loadNextPage()
+        }
+    }
+
+    // init action handle
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let event = self.viewModel.events[indexPath.row]
-        self.viewModel.onClickEvent(event)
+        let state = self.viewModel.state
+
+        if state.fetchingState == .StartRequest {
+            // do nothing
+        } else {
+            let event = state.events[indexPath.row]
+            self.viewModel.onClickEvent(event)
+        }
     }
+
 
 
     private func initNavBarItems() {

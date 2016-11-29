@@ -17,9 +17,8 @@ target 'Happ' do
   pod 'SlideMenuControllerSwift', git: "https://github.com/dekatotoro/SlideMenuControllerSwift.git", branch: "swift2.3"
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Shimmer'
 
-
-  
 
 
   post_install do |installer|
