@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-
+/*
 enum TempEventPlaces: String {
     case Almaty
     case Astana
@@ -23,11 +23,16 @@ enum TempEventPlaces: String {
         }
     }
 }
+*/
 
 
 class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
 
-    var viewModel: EventsListViewModel!
+    var viewModel: EventsListViewModel!  {
+        didSet {
+            self.bindToViewModel()
+        }
+    }
 
 
     // outlets
@@ -64,13 +69,7 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.displayEventMarkers()
         self.displayUserCity()
-        /*
-        if let myLocation = self.locationState.myLocation {
-            self.displayMarker(.MyLocation(location: myLocation))
-        }
-        */
 
         self.extMakeNavBarWhite()
     }
@@ -78,9 +77,18 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         super.viewDidDisappear(animated)
         
         self.extMakeNavBarVisible()
-        self.clearMap()
     }
 
+    func viewModelDidUpdate() {
+
+        self.clearMap()
+        self.displayEventMarkers()
+        /*
+         if let myLocation = self.locationState.myLocation {
+         self.displayMarker(.MyLocation(location: myLocation))
+         }
+         */
+    }
 
 
     // implementations MapLocationViewControllerProtocol
@@ -119,14 +127,12 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
     private func displayEventMarkers() {
         let events = self.viewModel.state.events
-        let userCity = ProfileService.getUserCity()
-        if let places = TempEventPlaces(rawValue: userCity.name)?.getPlaces() {
-            zip(events, places)
-                .forEach { event, placeName in
-                    MapService.fetchPlaces(placeName)
-                        .then { results -> Void in
-                            self.displayMarker(.TempEventPlace(event: event, place: results.first!))
-                        }
+        events.forEach { event in
+            guard let address = event.address else { return }
+            MapService.fetchPlaces(address)
+                .then { results -> Void in
+                    guard let location = results.first else { return }
+                    self.displayMarker(.TempEventPlace(event: event, place: location))
                 }
         }
     }
@@ -139,6 +145,14 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         }
     }
 
+
+    private func bindToViewModel() {
+        let superDidUpdate = self.viewModel.didUpdate
+        self.viewModel.didUpdate = { [weak self] _ in
+            superDidUpdate?()
+            self?.viewModelDidUpdate()
+        }
+    }
 
     private func initNavBarItems() {
         self.navigationItem.title = "Events near you"
