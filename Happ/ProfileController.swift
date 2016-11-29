@@ -22,7 +22,9 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     // outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var buttonSave: UIButton!
+    
     @IBOutlet weak var imageProfileImage: UIImageView!
+    @IBOutlet weak var viewImagePlaceholder: UIView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPhone: UITextField!
@@ -81,6 +83,16 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         if let date = profile.date_of_birth {
             buttonSelectBirthday.titleLabel?.text = HappDateFormats.ISOFormat.toString(date)
         }
+
+        viewImagePlaceholder.hidden = false
+        if false { //TODO let imageURL = profile. {
+            let imageURL = NSURL()
+            imageProfileImage.hnk_setImageFromURL(imageURL, success: { img in
+                self.imageProfileImage.image = img
+                self.viewImagePlaceholder.hidden = true
+            })
+        }
+
         textFieldPasswordNew.text = ""
         textFieldPasswordOld.text = ""
         textFieldPasswordConfirm.text = ""
