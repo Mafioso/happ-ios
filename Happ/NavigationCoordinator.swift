@@ -11,19 +11,6 @@ import PromiseKit
 import SlideMenuControllerSwift
 
 
-/*
- auth:   SignIn     ->  SignUp      ->  profile.SelectCityInterest  ->  profile.SelectCity
-                                                                    ->  main.Feed
-                    ->  main.Feed
-
- main:  vared       ->  event.EventDetails
-                    ->  event.EventForm
-                    ->  event.EventsManage
-                    ->  profile.Profile
-
- profile: Profile   ->  profile.SelectCity
-*/
-
 
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
@@ -146,6 +133,12 @@ class HappManagerTabBarController: UITabBarController {
 
 
 
+
+
+
+
+
+
 class NavigationCoordinator {
 
     private let authStoryboard: UIStoryboard
@@ -171,14 +164,17 @@ class NavigationCoordinator {
     }
 
     func start() {
+
+        /*
         self.navigationController = UINavigationController()
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
         let display = self.showSelectUserInterests()
         display?()
         return;
+        */
 
-        
+
         firstly {
             AuthenticationService.checkCredentialAvailable()
         }.then { _ -> Promise<Void> in
@@ -399,15 +395,7 @@ class NavigationCoordinator {
         viewModel.displayEmptyList = self.showEmptyEventsList(viewModel)
         viewModel.navigateFeed = self.startFeed
         viewModel.navigateCreateEvent = self.startEventManage
-
-        /*
-        let viewModelSelectCity = SelectCityOnMenuViewModel()
-        viewModelSelectCity.navigateFeed = self.startFeed
-
-        viewModel.navigateSelectInterests = self.showSelectUserInterests(viewModelSelectCity, loadInMenu: true)
-        */
-        // END - for empty list page
-
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(true)
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
         viewController.viewModel = viewModel
@@ -552,7 +540,9 @@ class NavigationCoordinator {
         return {
             print(".setup.showSelectCityOnSetup")
 
-            let viewModel = SelectCityOnSetupViewModel()
+            var viewModel = SelectCityOnSetupViewModel()
+            viewModel.navigateBack = self.goBack
+
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
             viewController.viewModel = viewModel
             viewController.delegate = delegateVC
@@ -682,7 +672,6 @@ class NavigationCoordinator {
 
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModelMenu = viewModel
-        //menuViewController.viewModelSelectCity = viewModelChangeCity
 
         return menuViewController
     }

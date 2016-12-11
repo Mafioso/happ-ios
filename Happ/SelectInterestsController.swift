@@ -23,21 +23,8 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
 
     var collectionView: UICollectionView!
     var buttonNavItemSecond: UIButton!
+    var buttonSave: UIButton!
 
-    /*
-    // outlets
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var buttonNavItemSecond: UIButton!
-    @IBOutlet weak var buttonSave: UIButton!
-
-    // actions
-    @IBAction func clickedSave(sender: UIButton) {
-        self.viewModel.onSave()
-    }
-    @IBAction func clickedNavItemSecond(sender: UIButton) {
-        // overwrite
-    }
-    */
  
     let headerIdentifier = "header"
     let cellIdentifier = "cell"
@@ -81,6 +68,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         self.collectionView.registerNib(cellNib, forCellWithReuseIdentifier: self.cellIdentifier)
 
 
+        self.initSaveButton()
         self.initNavItems()
         self.initLongPressGesture()
     }
@@ -120,6 +108,19 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     }
 
 
+    private func initSaveButton() {
+        self.buttonSave = {
+            let btn = UIButton()
+            let windowSize = UIScreen.mainScreen().bounds
+            btn.setTitle(NSLocalizedString("SAVE", comment: "Select Interests save button"), forState: .Normal)
+            btn.setTitleColor(UIColor.happOrangeColor(), forState: .Normal)
+            btn.backgroundColor = UIColor.whiteColor()
+            btn.frame = CGRectMake(0, windowSize.height-52, windowSize.width, 52)
+            return btn
+        }()
+        self.buttonSave.addTarget(self, action: #selector(self.handleClickSave), forControlEvents: .TouchUpInside)
+        self.view.addSubview(self.buttonSave)
+    }
     private func initNavItems() {
         let navItem = self.viewModel.navItem
         self.buttonNavItemSecond = {
@@ -166,6 +167,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         }
     }
     private func getHeightConstraint() -> NSLayoutConstraint? {
+        print("...", self.collectionView.constraints.count   )
         return self.collectionView.constraints.filter { $0.identifier == "height" }.first
     }
     private func createHeightConstraint() {
@@ -177,6 +179,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         self.collectionView.addConstraint(heightConstraint)
         self.collectionView.updateConstraints()
     }
+
     private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
         return self.viewModel.state.items[indexPath.row] as! InterestModel
     }
@@ -205,7 +208,10 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             print("couldn't find index path")
         }
     }
-    
+    func handleClickSave() {
+        self.viewModel.onSave()
+    }
+
     private func initLongPressGesture() {
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.onLongPressCell))
         lpgr.minimumPressDuration = 0.3

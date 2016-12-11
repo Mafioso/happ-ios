@@ -41,6 +41,7 @@
 		527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */; };
 		527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */; };
 		527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */; };
+		528159BC1DFD6BCF002DA272 /* SetupUserCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528159BB1DFD6BCF002DA272 /* SetupUserCity.swift */; };
 		52839C071DDAE19700B6EBD8 /* Default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52839C061DDAE19700B6EBD8 /* Default.plist */; };
 		52839C091DDAE9D200B6EBD8 /* EventsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */; };
 		52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52899B191D90099A005AD79E /* RealmModels.swift */; };
@@ -147,6 +148,7 @@
 		527B43B81D9E584B00C6EAF2 /* SelectCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCurrencyViewController.swift; sourceTree = "<group>"; };
 		527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		528159BB1DFD6BCF002DA272 /* SetupUserCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupUserCity.swift; sourceTree = "<group>"; };
 		52839C061DDAE19700B6EBD8 /* Default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Default.plist; sourceTree = "<group>"; };
 		52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsMapViewController.swift; sourceTree = "<group>"; };
 		52899B191D90099A005AD79E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 			children = (
 				525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */,
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
+				528159BB1DFD6BCF002DA272 /* SetupUserCity.swift */,
 				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModels.swift */,
 				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
@@ -666,6 +669,7 @@
 				527B43BB1D9E599600C6EAF2 /* SettingsViewModel.swift in Sources */,
 				52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */,
 				52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */,
+				528159BC1DFD6BCF002DA272 /* SetupUserCity.swift in Sources */,
 				523EFED81DE994600075259D /* MapService.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				520900E51DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift in Sources */,

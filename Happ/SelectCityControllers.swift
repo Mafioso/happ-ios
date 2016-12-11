@@ -10,19 +10,11 @@ import Foundation
 import UIKit
 
 
-class SelectCityOnMenuController {
+class SelectCityOnMenuController: SelectCityController<SelectCityOnMenuViewModel> {
 }
 
-/*
-class SelectCityOnSetupController {
-    
-    var viewModel: SelectCityOnSetupViewModel! {
-        didSet {
-            
-        }
-    }
-    
-    
+
+class SelectCityOnSetupController: SelectCityController<SelectCityOnSetupViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,17 +32,15 @@ class SelectCityOnSetupController {
     }
 
     
-    
     private func initNavBarItems() {
         self.navigationItem.title = "Select Your City"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-orange"), style: .Plain, target: self, action: #selector(handleClickNavItemClose))
     }
     func handleClickNavItemClose() {
-        let vm = self.viewModel as! SetupUserCityViewModel
-        vm.navigateBack?()
+        self.viewModel.navigateBack?()
     }
 }
-*/
+
 
 
 
@@ -63,9 +53,9 @@ protocol SelectCityDataSource {
 }
 
 
-class SelectCityOnSetupController: UITableViewController, UISearchResultsUpdating {
+class SelectCityController<T: SelectCityViewModelProtocol>: UITableViewController, UISearchResultsUpdating {
 
-    var viewModel: SelectCityOnSetupViewModel! {
+    var viewModel: T!  {
         didSet {
             self.updateView()
         }
@@ -98,7 +88,7 @@ class SelectCityOnSetupController: UITableViewController, UISearchResultsUpdatin
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if let city = self.dataSource?.getSelectedCity() {
             self.viewModel.state.selectedID = city.id
         }
