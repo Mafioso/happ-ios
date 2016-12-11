@@ -48,13 +48,15 @@ class EventOnMapViewModel: EventViewModel {
 
 
     private func fetchDirection() {
-        if self.location != nil {
-            let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
-            MapService.fetchDirection(self.location!, to: eventLocation)
-                .then { direction -> Void in
-                    self.mapDirection = direction
-                    self.didUpdate?()
-            }
+        guard let myLocation = self.location else { return }
+        EventService.updateGeoPointIfNotExists(self.event)
+            .then { event -> Void in
+                let eventLocation = CLLocation(geopoint: event.geopoint!)
+                MapService.fetchDirection(myLocation, to: eventLocation)
+                    .then { direction -> Void in
+                        self.mapDirection = direction
+                        self.didUpdate?()
+                }
         }
     }
 }

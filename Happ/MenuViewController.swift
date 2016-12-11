@@ -17,11 +17,6 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             self.bindToViewModel()
         }
     }
-    var viewModelSelectCity: SelectCityOnMenuViewModel! {
-        didSet {
-            self.bindToSelectCityViewModel()
-        }
-    }
 
 
     // outlets
@@ -77,9 +72,10 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             self.tableMenuActions.delegate = self
         }
         if segue.identifier == segueEmbeddedSelectCity {
-            let dest = segue.destinationViewController as! SelectCityOnMenuController
-            self.tableViewControllerSelectCity = dest
-            self.tableViewControllerSelectCity.viewModel = self.viewModelSelectCity
+            // TODO
+            // let dest = segue.destinationViewController as! SelectCityOnMenuController
+            // self.tableViewControllerSelectCity = dest
+            // self.tableViewControllerSelectCity.viewModel = self.viewModelSelectCity
         }
     }
 
@@ -98,14 +94,14 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     private func bindToViewModel() {
         self.viewModelMenu.didUpdate = { [weak self] _ in
             self?.viewModelDidUpdate()
-            self?.viewModelSelectCity.didUpdate?()
+            //self?.viewModelSelectCity.didUpdate?()
         }
-    }
+    }/*
     func bindToSelectCityViewModel() {
-        self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
+        self.viewModelSelectCity.didChangeCity = { [weak self] in
             self?.viewModelMenu.onChangeCity()
         }
-    }
+    }*/
 
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -124,7 +120,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         switch self.viewModelMenu.state {
         case .Normal:
             UIView.transitionFromView(viewSelectCity, toView: viewMenu, duration: 0.5, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            labelChangeCity.text = self.viewModelSelectCity.selectedCity?.name
+            //TODO labelChangeCity.text = self.viewModelSelectCity.selectCityState.selected!.name
 
             UIView.animateWithDuration(0.25, animations: {
                 self.iconChangeCity.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))

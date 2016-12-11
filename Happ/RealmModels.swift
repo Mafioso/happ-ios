@@ -31,7 +31,6 @@ class SettingsDictModel: Object, Mappable {
 
 class UserModel: Object, Mappable {
     dynamic var id = ""
-    var interests = List<InterestModel>()
     dynamic var settings: SettingsDictModel?
     dynamic var date_created: NSDate?
     dynamic var date_edited: NSDate?
@@ -53,7 +52,6 @@ class UserModel: Object, Mappable {
     func mapping(map: Map) {
         id              <- map["id"]
         settings        <- map["settings"]
-        interests       <- (map["interests"], ArrayTransform<InterestModel>())
         date_created    <- (map["date_created"], HappDateTransformer)
         date_edited     <- (map["date_edited"], HappDateTransformer)
         username        <- map["username"]
@@ -136,7 +134,7 @@ class InterestModel: Object, Mappable {
     dynamic var parent_id: String?
     var children = List<InterestModel>()
     dynamic var title = ""
-    dynamic var color = "FF0000"
+    dynamic var color: String?
 
 
     required convenience init?(_ map: Map) {
@@ -198,6 +196,25 @@ enum EventModelPriceTypes {
 }
 
 
+class GeoPointModel: Object, Mappable {
+    dynamic var lat = 0.0
+    dynamic var long = 0.0
+
+
+    func isZero() -> Bool {
+        return self.lat.isZero && self.long.isZero
+    }
+    
+    
+    // Mappable
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+        lat     <- map["0"]
+        long    <- map["1"]
+    }
+}
 
 class ImageModel: Object, Mappable {
     dynamic var id = ""
@@ -215,9 +232,6 @@ class ImageModel: Object, Mappable {
     // Object
     override static func primaryKey() -> String? {
         return "id"
-    }
-    override static func ignoredProperties() -> [String] {
-        return []
     }
 
     // Mappable
@@ -259,7 +273,7 @@ class EventModel: Object, Mappable {
     var min_price = RealmOptional<Int>()
     var max_price = RealmOptional<Int>()
     dynamic var address: String?
-    dynamic var geopoint: NSData?
+    dynamic var geopoint: GeoPointModel?
     // phone
     dynamic var stored_phone_numbers: String = ""
     var phones: [String] {

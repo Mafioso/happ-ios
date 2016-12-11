@@ -104,8 +104,19 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
             self.displayDirection(direction)
             labelDistance.text = Utils.formatDistance(direction.getDistance(), type: .Metric)
         }
-        self.displayMarker(.EventPoint(event: event))
-        self.updateMap(self.markers.last!.position, zoom: 14)
+        EventService.updateGeoPointIfNotExists(event)
+            .then { updEvent -> Void in
+                self.displayMarker(.EventPoint(event: updEvent))
+                self.updateMap(self.markers.last!.position, zoom: 14)
+            }
+            .error { err in
+                switch err {
+                case EventLocationError.AddressNotFound:
+                    self.extDisplayAlertView("Event location doesn't found on map", title: "Oops")
+                default:
+                    break
+                }
+            }
     }
 
 

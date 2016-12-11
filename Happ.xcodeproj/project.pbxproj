@@ -18,8 +18,6 @@
 		52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F011DE1E3C800CECE3D /* EventOnMap.swift */; };
 		52136F041DE2BA1B00CECE3D /* EventDetailsMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */; };
 		52136F061DE2BC7600CECE3D /* EventOnMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */; };
-		522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */; };
-		522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */; };
 		522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522CD5601DD1E7320080BEBE /* SetupCityController.swift */; };
 		522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */; };
 		523110AB1DED63DD00BFA917 /* EventExploreLoadingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523110AA1DED63DD00BFA917 /* EventExploreLoadingCollectionViewCell.swift */; };
@@ -31,6 +29,7 @@
 		5239C3851D925E8100F66E31 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3841D925E8100F66E31 /* Event.storyboard */; };
 		523EFED81DE994600075259D /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EFED71DE994600075259D /* MapService.swift */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
+		525344421DF5AE6F0086436B /* PaginatedDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
 		525A8AAA1D7D4023002C6F46 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA91D7D4023002C6F46 /* SignInController.swift */; };
 		525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 525A8AAB1D7D4023002C6F46 /* Main.storyboard */; };
@@ -46,9 +45,8 @@
 		52839C091DDAE9D200B6EBD8 /* EventsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */; };
 		52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52899B191D90099A005AD79E /* RealmModels.swift */; };
 		529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529046B91D9BB40B00BFB06A /* SettingsController.swift */; };
-		52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */; };
-		52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */; };
-		52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */; };
+		52941C2E1DB1E08B00A1CB57 /* SelectCityControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */; };
+		52941C301DB1E70F00A1CB57 /* SelectCityViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52941C2F1DB1E70F00A1CB57 /* SelectCityViewModels.swift */; };
 		52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */; };
 		52A3C2C91D8F212E00C31F3F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */; };
 		52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */; };
@@ -60,17 +58,19 @@
 		52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */; };
 		52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA31DDF24D200CBDA1B /* CityService.swift */; };
 		52C2EC681DC8B03500156652 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC671DC8B03500156652 /* InterestService.swift */; };
-		52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */; };
 		52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D190961D9FF4B300608B02 /* ProfileController.swift */; };
 		52D5E6C31DDC87530085665A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52D5E6C51DDC87530085665A /* InfoPlist.strings */; };
 		52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */; };
 		52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */; };
 		52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
+		52E0E44F1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0E44D1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift */; };
+		52E0E4501DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0E44E1DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib */; };
+		52E0E4531DFC0E560073FAFF /* SelectInterestCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E0E4511DFC0E560073FAFF /* SelectInterestCollectionCell.swift */; };
+		52E0E4541DFC0E560073FAFF /* SelectInterestCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0E4521DFC0E560073FAFF /* SelectInterestCollectionCell.xib */; };
 		52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */; };
 		52ED3E5C1DB686EC00B7E5B8 /* EventManageViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */; };
 		52F65F8F1DC75475005E751E /* SelectInterestsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F8E1DC75475005E751E /* SelectInterestsController.swift */; };
-		52F65F911DC75E10005E751E /* InterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */; };
 		52F65F931DC764AC005E751E /* SelectInterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */; };
 		52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */; };
 		52FC8B091DD5DEC50032BBE4 /* EventsManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */; };
@@ -122,8 +122,6 @@
 		52136F011DE1E3C800CECE3D /* EventOnMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOnMap.swift; sourceTree = "<group>"; };
 		52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsMapController.swift; sourceTree = "<group>"; };
 		52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventOnMapViewModel.swift; sourceTree = "<group>"; };
-		522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityAndInterestsViewModel.swift; sourceTree = "<group>"; };
-		522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnSetupController.swift; sourceTree = "<group>"; };
 		522CD5601DD1E7320080BEBE /* SetupCityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCityController.swift; sourceTree = "<group>"; };
 		522EC75E1DA3AC7100D02116 /* FeedFiltersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFiltersController.swift; sourceTree = "<group>"; };
 		523110AA1DED63DD00BFA917 /* EventExploreLoadingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventExploreLoadingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -135,6 +133,7 @@
 		5239C3841D925E8100F66E31 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		523EFED71DE994600075259D /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedDataProtocol.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		525A8AA91D7D4023002C6F46 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
@@ -152,9 +151,8 @@
 		52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsMapViewController.swift; sourceTree = "<group>"; };
 		52899B191D90099A005AD79E /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		529046B91D9BB40B00BFB06A /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityOnMenuController.swift; sourceTree = "<group>"; };
-		52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityPrototype.swift; sourceTree = "<group>"; };
-		52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewModel.swift; sourceTree = "<group>"; };
+		52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityControllers.swift; sourceTree = "<group>"; };
+		52941C2F1DB1E70F00A1CB57 /* SelectCityViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityViewModels.swift; sourceTree = "<group>"; };
 		52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectNotificationsViewController.swift; sourceTree = "<group>"; };
 		52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		52B37CA31DDF24D200CBDA1B /* CityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
 		52C2EC671DC8B03500156652 /* InterestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
-		52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsHeader.swift; sourceTree = "<group>"; };
 		52D190961D9FF4B300608B02 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		52D5E6C41DDC87530085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		52D5E6C61DDC87540085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -176,10 +173,13 @@
 		52D769CE1DACBF8000A6AEF7 /* EventsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsListViewController.swift; sourceTree = "<group>"; };
 		52DD590D1D807E5D007E19E9 /* UtilsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsUI.swift; sourceTree = "<group>"; };
 		52DD590F1D812105007E19E9 /* UtilsCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilsCode.swift; sourceTree = "<group>"; };
+		52E0E44D1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMultipleInterestsHeader.swift; sourceTree = "<group>"; };
+		52E0E44E1DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectMultipleInterestsHeader.xib; sourceTree = "<group>"; };
+		52E0E4511DFC0E560073FAFF /* SelectInterestCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestCollectionCell.swift; sourceTree = "<group>"; };
+		52E0E4521DFC0E560073FAFF /* SelectInterestCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectInterestCollectionCell.xib; sourceTree = "<group>"; };
 		52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewModel.swift; sourceTree = "<group>"; };
 		52ED3E5B1DB686EC00B7E5B8 /* EventManageViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageViewControllers.swift; sourceTree = "<group>"; };
 		52F65F8E1DC75475005E751E /* SelectInterestsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsController.swift; sourceTree = "<group>"; };
-		52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestCollectionViewCell.swift; sourceTree = "<group>"; };
 		52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectInterestsViewModel.swift; sourceTree = "<group>"; };
 		52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageViewModel.swift; sourceTree = "<group>"; };
 		52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageViewController.swift; sourceTree = "<group>"; };
@@ -323,9 +323,7 @@
 		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				52941C2D1DB1E08B00A1CB57 /* SelectCityPrototype.swift */,
-				52941C2B1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift */,
-				522CD55E1DD1E6440080BEBE /* SelectCityOnSetupController.swift */,
+				52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */,
 				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				525A8AA91D7D4023002C6F46 /* SignInController.swift */,
 				52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */,
@@ -363,10 +361,12 @@
 				52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */,
 				52136F011DE1E3C800CECE3D /* EventOnMap.swift */,
 				52136EFF1DE1E35A00CECE3D /* EventOnMap.xib */,
-				52F65F901DC75E10005E751E /* InterestCollectionViewCell.swift */,
-				52C2EC691DC8CA3B00156652 /* SelectInterestsHeader.swift */,
 				52722F941DD4F1E300F31811 /* EventExploreCollectionViewCell.swift */,
 				523110AA1DED63DD00BFA917 /* EventExploreLoadingCollectionViewCell.swift */,
+				52E0E4511DFC0E560073FAFF /* SelectInterestCollectionCell.swift */,
+				52E0E4521DFC0E560073FAFF /* SelectInterestCollectionCell.xib */,
+				52E0E44D1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift */,
+				52E0E44E1DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -384,19 +384,19 @@
 		52A3C2C51D8F20BF00C31F3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */,
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
-				522CD55C1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift */,
-				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModel.swift */,
+				52941C2F1DB1E70F00A1CB57 /* SelectCityViewModels.swift */,
 				52F65F921DC764AC005E751E /* SelectInterestsViewModel.swift */,
 				52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */,
 				52722F921DD4E80D00F31811 /* EventsExploreViewModel.swift */,
 				52FC8B061DD5DCE20032BBE4 /* EventsManageViewModel.swift */,
+				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
 				52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
-				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -557,12 +557,14 @@
 				52B0123E1D9AD5970061F083 /* Profile.storyboard in Resources */,
 				B4E215EE1DAF764C00144E78 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				B4E215E71DAF764C00144E78 /* SF-UI-Text-Light.otf in Resources */,
+				52E0E4541DFC0E560073FAFF /* SelectInterestCollectionCell.xib in Resources */,
 				52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */,
 				525A8AAF1D7D4023002C6F46 /* Assets.xcassets in Resources */,
 				B4E215DB1DAF764C00144E78 /* SF-UI-Display-Bold.otf in Resources */,
 				B4E215DC1DAF764C00144E78 /* SF-UI-Display-Heavy.otf in Resources */,
 				525A8AAD1D7D4023002C6F46 /* Main.storyboard in Resources */,
 				B4E215E61DAF764C00144E78 /* SF-UI-Text-HeavyItalic.otf in Resources */,
+				52E0E4501DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib in Resources */,
 				52D5E6C31DDC87530085665A /* InfoPlist.strings in Resources */,
 				5239C3851D925E8100F66E31 /* Event.storyboard in Resources */,
 				B4E215EA1DAF764C00144E78 /* SF-UI-Text-MediumItalic.otf in Resources */,
@@ -633,6 +635,7 @@
 				520AAFE21DEC079E0002DE9E /* EventLoadingTableCell.swift in Sources */,
 				52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */,
 				52FC8B071DD5DCE20032BBE4 /* EventsManageViewModel.swift in Sources */,
+				52E0E4531DFC0E560073FAFF /* SelectInterestCollectionCell.swift in Sources */,
 				5212E69D1D9029DC00729CC8 /* EventService.swift in Sources */,
 				B4E7B70A1D9B8E6E004B8B78 /* MenuViewModel.swift in Sources */,
 				5239C37E1D92434700F66E31 /* EventTableCell.swift in Sources */,
@@ -645,8 +648,8 @@
 				52959CD31DC3D93D00282038 /* SelectNotificationsViewController.swift in Sources */,
 				529046BA1D9BB40B00BFB06A /* SettingsController.swift in Sources */,
 				B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */,
-				522CD55F1DD1E6440080BEBE /* SelectCityOnSetupController.swift in Sources */,
 				52AF59AD1DCA781A002037FE /* SelectSubinterestsController.swift in Sources */,
+				52E0E44F1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift in Sources */,
 				525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */,
 				AA0CB5B81DEAC2CF00ABC686 /* WebViewController.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
@@ -655,9 +658,8 @@
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
 				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
-				52F65F911DC75E10005E751E /* InterestCollectionViewCell.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,
-				52941C301DB1E70F00A1CB57 /* SelectCityViewModel.swift in Sources */,
+				52941C301DB1E70F00A1CB57 /* SelectCityViewModels.swift in Sources */,
 				52722F911DD4E49E00F31811 /* EventsExploreViewController.swift in Sources */,
 				52136F041DE2BA1B00CECE3D /* EventDetailsMapController.swift in Sources */,
 				52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */,
@@ -667,19 +669,17 @@
 				523EFED81DE994600075259D /* MapService.swift in Sources */,
 				52DD590E1D807E5D007E19E9 /* UtilsUI.swift in Sources */,
 				520900E51DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift in Sources */,
-				52C2EC6A1DC8CA3B00156652 /* SelectInterestsHeader.swift in Sources */,
+				525344421DF5AE6F0086436B /* PaginatedDataProtocol.swift in Sources */,
 				52ED3E5A1DB6852700B7E5B8 /* EventManageViewModel.swift in Sources */,
 				B4D931341D93A86B00E23C77 /* UIView+Gradient.swift in Sources */,
 				52722F951DD4F1E300F31811 /* EventExploreCollectionViewCell.swift in Sources */,
 				52136F021DE1E3C800CECE3D /* EventOnMap.swift in Sources */,
 				52136F061DE2BC7600CECE3D /* EventOnMapViewModel.swift in Sources */,
 				525025461D801E2A0074E6B5 /* Requests.swift in Sources */,
-				52941C2E1DB1E08B00A1CB57 /* SelectCityPrototype.swift in Sources */,
+				52941C2E1DB1E08B00A1CB57 /* SelectCityControllers.swift in Sources */,
 				52899B1A1D90099A005AD79E /* RealmModels.swift in Sources */,
 				523110AB1DED63DD00BFA917 /* EventExploreLoadingCollectionViewCell.swift in Sources */,
 				52A3C2D11D8F8FA000C31F3F /* AuthenticationViewModel.swift in Sources */,
-				52941C2C1DB1DFCB00A1CB57 /* SelectCityOnMenuController.swift in Sources */,
-				522CD55D1DD1D7D50080BEBE /* SetupCityAndInterestsViewModel.swift in Sources */,
 				52722F931DD4E80D00F31811 /* EventsExploreViewModel.swift in Sources */,
 				527B43BD1D9EF0E800C6EAF2 /* ProfileViewModel.swift in Sources */,
 				52D769CF1DACBF8000A6AEF7 /* EventsListViewController.swift in Sources */,

@@ -77,9 +77,7 @@ class MenuViewModel {
         self.state = .Normal
         self.didUpdate?()
 
-        if self.getUser().interests.isEmpty {
-            self.navigateSelectInterests?()
-        }
+        self.navigateSelectInterests?()
     }
 
 

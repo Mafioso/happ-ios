@@ -139,16 +139,6 @@ class ProfileService {
             }
         }
     }
-    class func checkInterestsExist() -> Promise<Void> {
-        let profile = self.getUserProfile()
-        return Promise { resolve, reject in
-            if profile.interests.isEmpty {
-                reject(ProfileErrors.InterestsNotSelected)
-            } else {
-                resolve()
-            }
-        }
-    }
     class func checkLanguageChange() -> Promise<Void> {
         let profile = self.getUserProfile()
         let settings = profile.settings!

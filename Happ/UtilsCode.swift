@@ -9,6 +9,7 @@
 import Foundation
 import ObjectMapper
 import RealmSwift
+import GoogleMaps
 
 
 struct ScreenSize
@@ -67,6 +68,21 @@ extension Dictionary {
         for key in dict2.keys {
             self[key] = dict2[key]
         }
+    }
+}
+
+
+
+
+extension CLLocation {
+    convenience init(geopoint: GeoPointModel) {
+        self.init(latitude: geopoint.lat, longitude: geopoint.long)
+    }
+    func asGeoPoint() -> GeoPointModel {
+        let inst = GeoPointModel()
+        inst.lat = Double(self.coordinate.latitude)
+        inst.long = Double(self.coordinate.longitude)
+        return inst
     }
 }
 

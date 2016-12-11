@@ -50,7 +50,7 @@ class EventManageFirstPageViewController: PrototypeEventManageViewController {
 
     // actions
     @IBAction func clickedSelectInterestButton(sender: UIButton) {
-        self.viewModel.navigateSelectInterest?()
+        self.viewModel.onClickSelectInterest()
     }
     @IBAction func clickedNextButton(sender: UIButton) {
         self.viewModel.navigateNext?()

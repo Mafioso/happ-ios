@@ -21,7 +21,7 @@ class CityService {
     static var isLastPage: Bool = false
 
 
-    class func fetchCities(page: Int = 1) -> Promise<Void> {
+    class func fetchCities(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let pagedURL = endpoint + "?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
             .then { (data, isLastPage) -> Void in
@@ -30,20 +30,10 @@ class CityService {
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    /*
-                    if page == 1 {
-                        // 1.   delete exists
-                        var query = realm.objects(CityModel)
-                        //      except User's City
-                        let userProfile = ProfileService.getUserProfile()
-                        if let userCityID = userProfile.settings?.city_id {
-                            query = query.filter("id != %@", userCityID)
-                        }
-                        realm.delete(query)
+                    if overwrite {
+                        let exists = realm.objects(CityModel)
+                        realm.delete(exists)
                     }
-                    */
-
-                    // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<CityModel>().map(city)
                         realm.add(inst!, update: true)
@@ -109,6 +99,17 @@ class CityService {
                 }
     }
 
+
+    class func deleteCitiesLocal(exceptIDs: [String]?) {
+        let realm = try! Realm()
+        try! realm.write {
+            var exists = realm.objects(EventModel)
+            if let ids = exceptIDs {
+                exists = exists.filter("NOT id IN %@", ids)
+            }
+            realm.delete(exists)
+        }
+    }
 
     class func getCities() -> Results<CityModel> {
         let realm = try! Realm()

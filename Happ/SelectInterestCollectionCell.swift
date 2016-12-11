@@ -1,16 +1,15 @@
 //
-//  InterestCollectionCell.swift
+//  SelectInterestCollectionCell.swift
 //  Happ
 //
-//  Created by MacBook Pro on 10/31/16.
+//  Created by MacBook Pro on 12/10/16.
 //  Copyright © 2016 Sattar Stamkulov. All rights reserved.
 //
 
 import UIKit
 
+class SelectInterestCollectionCell: UICollectionViewCell {
 
-class InterestCollectionViewCell: UICollectionViewCell {
-    
     // outlets
     @IBOutlet weak var viewFooter: UIView!
     @IBOutlet weak var labelName: UILabel!
@@ -21,11 +20,12 @@ class InterestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var viewUnfocus: UIView!
     @IBOutlet weak var labelSelectedSomeText: UILabel!
 
+    static let nibName = "SelectInterestCollectionCell"
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
-        
     }
-    
+
 }

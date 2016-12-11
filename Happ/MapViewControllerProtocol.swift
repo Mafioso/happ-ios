@@ -37,7 +37,6 @@ enum MapMarkerType {
     case MyLocation(location: CLLocation)
     case EventPoint(event: EventModel)
     case Event(event: EventModel)
-    case TempEventPlace(event: EventModel, place: MapPlace)
 }
 
 
@@ -86,11 +85,11 @@ extension MapViewControllerProtocol where Self: UIViewController {
             marker.map = self.getMapView()
 
         case .EventPoint(let event):
-            let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
-            marker.position = eventLocation.coordinate
+            let location = CLLocation(geopoint: event.geopoint!)
+            marker.position = location.coordinate
             marker.icon = UIImage(named: "icon-position")
             marker.map = self.getMapView()
-            
+
         case .Event(let event):
             // create view
             let eventOnMapView = EventOnMap.initView()
@@ -103,32 +102,11 @@ extension MapViewControllerProtocol where Self: UIViewController {
             if  let imageURL = event.images.first?.getURL() {
                 eventOnMapView.imageCover.hnk_setImageFromURL(imageURL)
             }
-            let eventLocation = CLLocation(latitude: 43.233018, longitude: 76.955978)
+            let location = CLLocation(geopoint: event.geopoint!)
 
             // add to map
             marker.groundAnchor = CGPoint(x: 0, y: 1)
-            marker.position = eventLocation.coordinate
-            marker.iconView = eventOnMapView
-            marker.userData = event.id
-            marker.map = self.getMapView()
-
-        case .TempEventPlace(let event, let place):
-            let eventOnMapView = EventOnMap.initView()
-            eventOnMapView.labelTitle.text = "\(event.title) | \(place.name)"
-            if let colorValue = event.color {
-                let color = UIColor(hexString: colorValue)
-                eventOnMapView.viewRounded.backgroundColor = color
-                eventOnMapView.viewTriangle.backgroundColor = color
-            }
-            if  let imageURL = event.images.first {
-                let url = MapService.getPlacePhotoURL(place.photoRef, width: 40)
-                print("..Map.TempEventPlace.image", url)
-                eventOnMapView.imageCover.hnk_setImageFromURL(url)
-            }
-
-            // add to map
-            marker.groundAnchor = CGPoint(x: 0, y: 1)
-            marker.position = place.location.coordinate
+            marker.position = location.coordinate
             marker.iconView = eventOnMapView
             marker.userData = event.id
             marker.map = self.getMapView()

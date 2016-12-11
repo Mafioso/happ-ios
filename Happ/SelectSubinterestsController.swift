@@ -8,13 +8,28 @@
 
 import UIKit
 
-class SelectSubinterestsController: UIViewController {
 
-    var viewModel: SelectInterestsViewModel!  {
-        didSet {
-            self.bindToViewModel()
-        }
-    }
+
+
+protocol SelectSubinterestsDataSource {
+    func selectSubinterestsItems() -> [InterestModel]
+    func selectSubinterestsIsSelected(subinterest: InterestModel) -> Bool
+}
+protocol SelectSubinterestsDelegate {
+    func selectSubinterestsDidClose()
+    func selectSubinterestsDidSelect(subinterest: InterestModel)
+}
+
+
+
+
+
+
+
+class SelectSubinterestsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    var delegate: SelectSubinterestsDelegate?
+    var dataSource: SelectSubinterestsDataSource?
 
 
     // outlets
@@ -23,7 +38,7 @@ class SelectSubinterestsController: UIViewController {
 
     // actions
     @IBAction func clickedClose(sender: UIButton) {
-        self.viewModel.onClosePopoverSelectSubinterests()
+        self.delegate?.selectSubinterestsDidClose()
         self.extBackOnPopover()
     }
 
@@ -36,41 +51,16 @@ class SelectSubinterestsController: UIViewController {
     }
 
 
-    func viewModelDidUpdate() {
+    func updateView() {
         self.tableView.reloadData()
     }
-    
-    private func bindToViewModel() {
-        let superDidUpdate: (() -> ())? = self.viewModel.didUpdate
-        self.viewModel.didUpdate = { [weak self] _ in
-            superDidUpdate?()
-
-            if self?.presentingViewController != nil {
-                self?.viewModelDidUpdate()
-            }
-        }
-    }
-    private func getSubinterestBy(indexPath: NSIndexPath) -> InterestModel {
-        return self.getSubinterests()[indexPath.row]
-    }
-    private func getSubinterests() -> [InterestModel] {
-        if let interest = self.viewModel.longPressedInterest {
-            let subinterests = InterestService.getSubinterestsOf(interest)
-            return subinterests
-        } else {
-            return []
-        }
-    }
-
-}
 
 
-extension SelectSubinterestsController: UITableViewDataSource, UITableViewDelegate {
-    
+
     // init select event
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let subinterest = self.getSubinterestBy(indexPath)
-        self.viewModel.onSelectSubinterest(subinterest)
+        self.delegate?.selectSubinterestsDidSelect(subinterest)
     }
 
     // fill with data
@@ -85,7 +75,9 @@ extension SelectSubinterestsController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         cell.textLabel!.text = subinterest.title.uppercaseString
-        if self.viewModel.isSubinterestSelected(subinterest) {
+        if  let isSelected = self.dataSource?.selectSubinterestsIsSelected(subinterest)
+            where isSelected == true {
+
             cell.imageView?.hidden = false
             cell.textLabel?.textColor = UIColor.happOrangeColor()
         } else {
@@ -93,6 +85,16 @@ extension SelectSubinterestsController: UITableViewDataSource, UITableViewDelega
             cell.textLabel?.textColor = UIColor.happBlackHalfTextColor()
         }
         return cell
+    }
+    
+
+
+    private func getSubinterestBy(indexPath: NSIndexPath) -> InterestModel {
+        return self.getSubinterests()[indexPath.row]
+    }
+    private func getSubinterests() -> [InterestModel] {
+        guard let items = self.dataSource?.selectSubinterestsItems() else { return [] }
+        return items
     }
 }
 

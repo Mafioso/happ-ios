@@ -12,9 +12,10 @@ import PromiseKit
 
 
 private let HostServer = "http://happ.westeurope.cloudapp.azure.com"
+private let HostServerReserve = "http://happ.skills.kz"
 private let HostLocal = "http://127.0.0.1:8000"
 private let HostPC = "http://192.168.43.179:8000"
-let Host = HostServer
+let Host = HostServerReserve
 let HostAPI = Host + "/api/v1/"
 
 
@@ -41,7 +42,7 @@ enum RequestError: Int, ErrorType, CustomStringConvertible {
         case .NotAuthorized:
             return "Non Authorized"
         case .NotFound:
-            return "Please, requesting data doesn't exists"
+            return "Requesting data doesn't exists"
         case .BadRequest:
             return "Please, check your input data"
         case .BadResponse:
@@ -228,11 +229,11 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEnco
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType)
                     } else {
-                        print(".GetPaginated.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
                     }
+                    print(".GetPaginated.error", endpoint, parameters, error, error.code)
                 }
-                
+
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true

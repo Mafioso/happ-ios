@@ -171,6 +171,14 @@ class NavigationCoordinator {
     }
 
     func start() {
+        self.navigationController = UINavigationController()
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+        let display = self.showSelectUserInterests()
+        display?()
+        return;
+
+        
         firstly {
             AuthenticationService.checkCredentialAvailable()
         }.then { _ -> Promise<Void> in
@@ -204,8 +212,6 @@ class NavigationCoordinator {
                     }
             }
         }.then { _ -> Promise<Void> in
-            return ProfileService.checkInterestsExist()
-        }.then { _ -> Promise<Void> in
             return self.updateUserLanguageIfNeeded()
         }.then { _ in
             self.startFeed()
@@ -217,8 +223,6 @@ class NavigationCoordinator {
                 self.resetRedirectLogin()
             case ProfileErrors.CityNotSelected:
                 self.startSetupCityAndInterests()
-            case ProfileErrors.InterestsNotSelected:
-                self.startSetupOnlyInterests()
             default:
                 if let reqErr = err as? RequestError {
                     print(".nav.start.reqError", reqErr)
@@ -396,10 +400,12 @@ class NavigationCoordinator {
         viewModel.navigateFeed = self.startFeed
         viewModel.navigateCreateEvent = self.startEventManage
 
+        /*
         let viewModelSelectCity = SelectCityOnMenuViewModel()
         viewModelSelectCity.navigateFeed = self.startFeed
 
-        viewModel.navigateSelectInterests = self.showSelectInterest(.MenuChangeInterests, parentViewModel: viewModelSelectCity)
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(viewModelSelectCity, loadInMenu: true)
+        */
         // END - for empty list page
 
 
@@ -478,30 +484,20 @@ class NavigationCoordinator {
     }
 
 
-    func showSelectInterest(scope: SelectInterestsScope, parentViewModel: SelectInterestsVMProtocol)  -> NavigationFunc {
+    func showSelectUserInterests(loadInMenu: Bool = false)  -> NavigationFunc {
         return {
             // init VM
-            let viewModel = SelectInterestsViewModel(scope: scope, parentViewModel: parentViewModel)
-            switch scope {
-            case .MenuChangeInterests:
-                viewModel.displaySlideMenu = self.displaySlideMenu
-            case .NextToMenuChangeCity, .EventManage:
-                viewModel.navigateBack = self.goBack
-            case .Setup:
-                break // do nothing
-            }
+            let navItem: NavItemType = loadInMenu ? .Menu : .Back
+            var viewModel = SelectUserInterestsViewModel(navItem: navItem)
 
             // init V
-            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectInterests") as! SelectInterestsController
+            let viewController = SelectInterestController<SelectUserInterestsViewModel>()
+            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewController)
             viewController.viewModel = viewModel
 
-            // add V into VM func
-            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewModel, target: viewController)
 
-
-            // add V to Navigation
-            switch scope {
-            case .MenuChangeInterests:
+            // add to Navigation
+            if loadInMenu {
                 self.tabBarController = nil
                 self.navigationController = UINavigationController(rootViewController: viewController)
                 // init sidebar
@@ -512,24 +508,23 @@ class NavigationCoordinator {
                 self.window.rootViewController = sidebar
                 self.window.makeKeyAndVisible()
 
-            case .Setup, .EventManage:
+            } else {
                 self.navigationController.pushViewController(viewController, animated: true)
-            default: // TODO
-                break
+
             }
         }
     }
-    func showPopupSelectSubinterests(parentViewModel: SelectInterestsViewModel, target: UIViewController) -> NavigationFunc {
+    func showPopupSelectSubinterests<T: SelectInterestViewModelProtocol>(target: SelectInterestController<T>) -> NavigationFunc {
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController
-            viewController.viewModel = parentViewModel
+            viewController.delegate = target
+            viewController.dataSource = target
 
             viewController.modalPresentationStyle = .OverCurrentContext
             let windowsBounds = UIScreen.mainScreen().bounds
             viewController.preferredContentSize = CGSizeMake(windowsBounds.width, windowsBounds.height - 164)
             let popoverViewController = viewController.popoverPresentationController
             popoverViewController?.permittedArrowDirections = .Any
-            //popoverViewController?.delegate = target
             popoverViewController?.sourceView = target.view
             popoverViewController?.sourceRect = CGRectMake(100, 100, 0, 0)
             target.presentViewController(viewController, animated: true, completion: nil)
@@ -539,44 +534,30 @@ class NavigationCoordinator {
     func startSetupCityAndInterests() {
         print(".start.SetupCityAndInterests")
 
-        let viewModel = SetupCityAndInterestsViewModel()
-
-        let selectCityViewModel = SelectCityOnSetupViewModel()
-        selectCityViewModel.navigateBack = self.goBack
-
+         let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SetupCity") as! SetupCityController
+        
+        var viewModel = SetupUserCityViewModel()
         viewModel.navigateBack = self.goBack
-        viewModel.navigateSelectCity = self.showSetupSelectCity(selectCityViewModel)
-        viewModel.navigateSelectInterests = self.showSelectInterest(.Setup, parentViewModel: viewModel)
-        viewModel.navigateFeed = self.startFeed
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(false)
+        viewModel.navigateSelectCity = self.showSelectCityOnSetup(viewController, viewController)
 
-        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SetupCity") as! SetupCityController
         viewController.viewModel = viewModel
-        viewController.viewModelSelectCity = selectCityViewModel
 
         self.navigationController = UINavigationController(rootViewController: viewController)
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
-    func startSetupOnlyInterests() { // same as `startSetupCityAndInterests`, but without SelectCity
-        print(".start.startSetupOnlyInterests")
 
-        let viewModel = SetupCityAndInterestsViewModel()
-        viewModel.navigateFeed = self.startFeed
-        viewModel.citySelected = ProfileService.getUserCity()
-
-        self.navigationController = UINavigationController()
-        self.window.rootViewController = self.navigationController
-        self.window.makeKeyAndVisible()
-
-        let runRootController = self.showSelectInterest(.Setup, parentViewModel: viewModel)!
-        runRootController()
-    }
-    func showSetupSelectCity(viewModel: SelectCityOnSetupViewModel) -> NavigationFunc {
+    func showSelectCityOnSetup(delegateVC: SelectCityDelegate, _ dataSourceVC: SelectCityDataSource) -> NavigationFunc {
         return {
-            print(".setup.showSetupSelectCity")
+            print(".setup.showSelectCityOnSetup")
 
+            let viewModel = SelectCityOnSetupViewModel()
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
             viewController.viewModel = viewModel
+            viewController.delegate = delegateVC
+            viewController.dataSource = dataSourceVC
+
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
@@ -637,7 +618,7 @@ class NavigationCoordinator {
         let viewModel = EventManageViewModel()
         viewModel.navigateBack = self.startMyEvents
         viewModel.navigateNext = self.showEventManageSecondPage(viewModel)
-        viewModel.navigateSelectInterest = self.showSelectInterest(.EventManage, parentViewModel: viewModel)
+        //viewModel.navigateSelectInterest = self.showSelectInterest
 
         let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
         viewController.viewModel = viewModel
@@ -688,14 +669,11 @@ class NavigationCoordinator {
 
     private func initMenuController(highlight: MenuActions) -> MenuViewController {
         let viewModel = MenuViewModel(highlight: highlight)
-        
-        let viewModelSelectCity = SelectCityOnMenuViewModel()
-        viewModelSelectCity.navigateFeed = self.startFeed
 
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
         viewModel.navigateSelectInterests = self.hideSlideMenu(
-            self.showSelectInterest(.MenuChangeInterests, parentViewModel: viewModelSelectCity)
+            self.showSelectUserInterests(true)
         )
         viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)
         viewModel.navigateSettings = self.hideSlideMenu(self.startSettings)
@@ -704,7 +682,7 @@ class NavigationCoordinator {
 
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModelMenu = viewModel
-        menuViewController.viewModelSelectCity = viewModelSelectCity
+        //menuViewController.viewModelSelectCity = viewModelChangeCity
 
         return menuViewController
     }

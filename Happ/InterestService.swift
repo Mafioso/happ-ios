@@ -19,7 +19,7 @@ class InterestService {
     static var isLastPage: Bool = false
 
 
-    static func fetchFromServer(page: Int = 1) -> Promise<Void> {
+    static func fetchAll(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let pagedURL = endpoint + "?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
             .then { (data, isLastPage) -> Void in
@@ -28,14 +28,34 @@ class InterestService {
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
-                    /* 1. delete exists
-                    let exists = realm.objects(InterestModel)
-                    realm.delete(exists)
-                    */
+                    if overwrite {
+                        let all = realm.objects(InterestModel)
+                        realm.delete(all)
+                    }
 
-                    // 2. add new
                     results.forEach() { city in
                         let inst = Mapper<InterestModel>().map(city)
+                        realm.add(inst!, update: true)
+                    }
+                }
+        }
+    }
+    static func fetchUserInterests(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
+        let pagedURL = endpoint + "my/?page=\(page)"
+        return GetPaginated(pagedURL, parameters: nil)
+            .then { (data, isLastPage) -> Void in
+                self.isLastPage = isLastPage
+                let results = data as! [AnyObject]
+
+                let realm = try! Realm()
+                try! realm.write {
+                    if overwrite {
+                        let all = realm.objects(InterestModel)
+                        realm.delete(all)
+                    }
+
+                    results.forEach() { data in
+                        let inst = Mapper<InterestModel>().map(data)
                         realm.add(inst!, update: true)
                     }
                 }

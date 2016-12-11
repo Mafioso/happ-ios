@@ -11,16 +11,11 @@ import UIKit
 import GoogleMaps
 
 
-class SetupCityController: UIViewController {
+class SetupCityController: UIViewController, SelectCityDelegate, SelectCityDataSource {
 
-    var viewModel: SetupCityAndInterestsViewModel!  {
+    var viewModel: SetupUserCityViewModel!  {
         didSet {
-            self.bindToViewModel()
-        }
-    }
-    var viewModelSelectCity: SelectCityOnSetupViewModel! {
-        didSet {
-            self.bindToSelectCityViewModel()
+            self.updateView()
         }
     }
 
@@ -33,7 +28,7 @@ class SetupCityController: UIViewController {
 
     // actions
     @IBAction func clickedSave(sender: UIButton) {
-        self.viewModel.onSaveCityPage()
+        self.viewModel.onClickSave()
     }
     @IBAction func clickedSelectCity(sender: UIButton) {
         self.viewModel.onClickSelectCity()
@@ -48,7 +43,6 @@ class SetupCityController: UIViewController {
         super.viewDidLoad()
 
         self.initMap()
-        self.viewModelDidUpdate()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,11 +58,11 @@ class SetupCityController: UIViewController {
     }
 
 
-    func viewModelDidUpdate() {
-        print(".VMdidUpdate")
+    func updateView() {
+        if !self.isViewLoaded() { return }
 
         self.imageGeoIndicator.hidden = true // TODO
-        if let city = self.viewModel.citySelected {
+        if let city = self.viewModel.selectedCity {
             self.labelSelectedCityName.text = city.name
             self.buttonSave.enabled = true
         } else {
@@ -76,6 +70,14 @@ class SetupCityController: UIViewController {
             self.buttonSave.enabled = false
         }
         self.updateMap()
+    }
+
+    // SelectCityDelegate & SelectCityDataSource
+    func didSelectCity(city: CityModel) {
+        self.viewModel.onSelectCity(city)
+    }
+    func getSelectedCity() -> CityModel? {
+        return self.viewModel.selectedCity
     }
 
 
@@ -88,7 +90,7 @@ class SetupCityController: UIViewController {
         self.viewMap.settings.rotateGestures = false
     }
     private func updateMap() {
-        if let city = self.viewModel.citySelected {
+        if let city = self.viewModel.selectedCity {
             CityService.fetchCityLocation(city.id)
                 .then { data -> Void in
                     let location = data as! CLLocation
@@ -98,17 +100,6 @@ class SetupCityController: UIViewController {
         }
     }
 
-
-    private func bindToViewModel() {
-        self.viewModel.didUpdate = { [weak self] _ in
-            self?.viewModelDidUpdate()
-        }
-    }
-    private func bindToSelectCityViewModel() {
-        self.viewModelSelectCity.didSelectCity = { [weak self] (city: CityModel) in
-            self?.viewModel.onSelectCity(city)
-        }
-    }
 }
 
 

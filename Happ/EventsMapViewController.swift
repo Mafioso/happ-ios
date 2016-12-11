@@ -9,22 +9,6 @@
 import UIKit
 import GoogleMaps
 
-/*
-enum TempEventPlaces: String {
-    case Almaty
-    case Astana
-    
-    func getPlaces() -> [String] {
-        switch self {
-        case .Almaty:
-            return ["Dostyk Plaza", "Mega Almaty", "ЦУМ", "Sova coffee", "KBTU", "Kyrmangazy 54"]
-        case .Astana:
-            return ["Khan Shatyr", "MEGA", "EXPO", "Nazarbayev University", "Maronno Rosso"]
-        }
-    }
-}
-*/
-
 
 class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
 
@@ -124,15 +108,12 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     }
 
 
-
     private func displayEventMarkers() {
         let events = self.viewModel.state.events
         events.forEach { event in
-            guard let address = event.address else { return }
-            MapService.fetchPlaces(address)
-                .then { results -> Void in
-                    guard let location = results.first else { return }
-                    self.displayMarker(.TempEventPlace(event: event, place: location))
+            EventService.updateGeoPointIfNotExists(event)
+                .then { event -> Void in
+                    self.displayMarker(.Event(event: event))
                 }
         }
     }

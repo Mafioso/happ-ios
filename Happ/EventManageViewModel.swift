@@ -15,36 +15,41 @@ class EventManageViewModel {
     var navigateBack: NavigationFunc
     var navigateNext: NavigationFunc
     var navigateSubmit: NavigationFunc
-    var navigateSelectInterest: NavigationFunc
+    //var navigateSelectInterest: ((SelectInterestProtocol, loadInMenu: Bool) -> NavigationFunc)?
 
     var event: EventModel
     var isEditing: Bool
+
+    //MARK: - Events
+    var didUpdate: (() -> Void)?
+
+    //MARK: - Inputs
+    func onSelectInterest(interest: InterestModel) {
+        self.event.interests.append(interest)
+        self.didUpdate?()
+    }
+    func onClickSelectInterest() {
+        let title = self.event.title
+        //let selectInterestViewModel = SelectEventInterestViewModel(title: title, navItemIcon: "nav-back-gray", navigateNavItem: self.navigateBack)
+        //let navigateTo = self.navigateSelectInterest?(selectInterestViewModel, loadInMenu: false)
+        //navigateTo!()
+    }
 
 
     init() {
         self.event = EventModel()
         self.isEditing = false
+
     }
-    init(event: EventModel) {
+    convenience init(event: EventModel) {
+        self.init()
         self.event = event
         self.isEditing = true
     }
 
+    
+    
+
 }
 
-
-extension EventManageViewModel: SelectInterestsVMProtocol {
-    func selectInterestsIsAllowsMultipleSelection() -> Bool {
-        return false
-    }
-    func selectInterestsGetTitle() -> String {
-        return self.event.title
-    }
-    func selectInterestsOnSave(selectedInterests: [InterestModel]) {
-        // TODO
-        // self.event.interests = selectedInterests
-        self.navigateBack?()
-    }
-    func selectInterestsOnSaveAll() {} // optional
-}
 

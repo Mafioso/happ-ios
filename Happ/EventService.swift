@@ -13,6 +13,12 @@ import ObjectMapper
 import ObjectMapper_Realm
 
 
+enum EventLocationError: ErrorType {
+    case NoAddress
+    case AddressNotFound
+}
+
+
 class EventService {
 
     static let endpoint = "events/"
@@ -130,12 +136,44 @@ class EventService {
         }
 
     }
-
+    
     class func deleteEventsLocal() {
         let realm = try! Realm()
         try! realm.write {
             let exists = realm.objects(EventModel)
             realm.delete(exists)
+        }
+    }
+
+    class func updateGeoPoint(event: EventModel, geopoint: GeoPointModel) {
+        let realm = try! Realm()
+        try! realm.write {
+            event.geopoint = geopoint
+        }
+    }
+
+    class func updateGeoPointIfNotExists(event: EventModel) -> Promise<EventModel> {
+        return Promise { resolve, reject in
+            if  let geopoint = event.geopoint
+                where !geopoint.isZero() {
+                    resolve(event)
+
+            } else {
+                guard   let address = event.address
+                        else { reject(EventLocationError.NoAddress); return }
+                MapService.fetchPlaces(address)
+                    .then { results -> Void in
+                        guard   let location = results.first
+                                else { reject(EventLocationError.AddressNotFound); return }
+                        self.updateGeoPoint(event, geopoint: location.location.asGeoPoint())
+                        let updEvent = self.getByID(event.id)!
+                        resolve(updEvent)
+
+                    }
+                    .error { err in
+                        reject(err)
+                    }
+            }
         }
     }
 
