@@ -454,7 +454,7 @@
                             <constraint firstItem="3c4-eR-TFB" firstAttribute="top" secondItem="fpB-7M-Tyq" secondAttribute="bottom" id="Gkw-Cr-5tg"/>
                             <constraint firstItem="IjI-Gg-Urx" firstAttribute="leading" secondItem="KeJ-ZD-HwT" secondAttribute="leading" id="NIP-Zu-c7p"/>
                             <constraint firstAttribute="trailing" secondItem="fpB-7M-Tyq" secondAttribute="trailing" id="lYi-Ad-18E"/>
-                            <constraint firstItem="IjI-Gg-Urx" firstAttribute="top" secondItem="9hI-fG-8ua" secondAttribute="bottom" constant="165" id="wfH-aJ-Aoi"/>
+                            <constraint firstItem="IjI-Gg-Urx" firstAttribute="top" secondItem="9hI-fG-8ua" secondAttribute="bottom" priority="250" constant="165" id="wfH-aJ-Aoi"/>
                             <constraint firstItem="fpB-7M-Tyq" firstAttribute="top" secondItem="IjI-Gg-Urx" secondAttribute="bottom" id="zeR-iy-oJm"/>
                         </constraints>
                     </view>

@@ -14,6 +14,7 @@ import UIKit
 protocol SelectSubinterestsDataSource {
     func selectSubinterestsItems() -> [InterestModel]
     func selectSubinterestsIsSelected(subinterest: InterestModel) -> Bool
+    func selectSubinterestsCellHeight() -> CGFloat
 }
 protocol SelectSubinterestsDelegate {
     func selectSubinterestsDidClose()
@@ -48,6 +49,22 @@ class SelectSubinterestsController: UIViewController, UITableViewDataSource, UIT
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        if  self.tableView.constraints.filter({ $0.identifier == "height" }).first == nil,
+            let cellHeight = self.dataSource?.selectSubinterestsCellHeight() {
+
+            let screenSize = UIScreen.mainScreen().bounds
+            let buttonSize = CGFloat(52)
+            let height = screenSize.height - cellHeight - buttonSize
+
+            let heightConstraint = NSLayoutConstraint(item: self.tableView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: height)
+            heightConstraint.identifier = "height"
+            heightConstraint.active = true
+            self.tableView.updateConstraints()
+        }
     }
 
 

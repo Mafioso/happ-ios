@@ -37,21 +37,40 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let layout: UICollectionViewFlowLayout = {
-            let t = UICollectionViewFlowLayout()
-            t.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
-            t.minimumLineSpacing = 1.5
-            t.minimumInteritemSpacing = 1.5
-            t.itemSize = self.getCellSize()
-            return t
+        
+        self.collectionView = {
+            let layout: UICollectionViewFlowLayout = {
+                let t = UICollectionViewFlowLayout()
+                t.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 52, right: 0)
+                t.minimumLineSpacing = 1.5
+                t.minimumInteritemSpacing = 1.5
+                t.itemSize = self.getCellSize()
+                return t
+            }()
+
+            let c = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+            c.backgroundColor = UIColor.whiteColor()
+            c.alwaysBounceVertical = true
+
+            self.view.addSubview(c)
+
+            c.dataSource = self
+            c.delegate = self
+
+            c.translatesAutoresizingMaskIntoConstraints = false
+            // top
+            NSLayoutConstraint(item: c, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 0).active = true
+            // left
+            NSLayoutConstraint(item: c, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1.0, constant: 0).active = true
+            // right
+            NSLayoutConstraint(item: c, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .Trailing, multiplier: 1.0, constant: 0).active = true
+            // bottom
+            let bottom = NSLayoutConstraint(item: c, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0)
+            bottom.priority = 250
+            bottom.active = true
+
+            return c
         }()
-        self.collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        self.collectionView.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(self.collectionView)
-
-
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
 
 
         // add header
@@ -141,7 +160,6 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         // 2. present ViewController as Popover
 
         if self.getHeightConstraint() == nil {
-            // minimize collectionView to able scroll to the bottom
             self.createHeightConstraint()
         }
 
@@ -165,23 +183,28 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             self.view.updateConstraintsIfNeeded()
             self.view.layoutIfNeeded()
         }
+ 
     }
     private func getHeightConstraint() -> NSLayoutConstraint? {
-        print("...", self.collectionView.constraints.count   )
         return self.collectionView.constraints.filter { $0.identifier == "height" }.first
     }
     private func createHeightConstraint() {
-        let cellHeigh = self.getCellSize().height
-        let statusBarHeight = CGFloat(20)
-        let heightConstraint = NSLayoutConstraint(item: self.collectionView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: cellHeigh + statusBarHeight + 1)
+        let height = self.getCollectionViewHeightAlternative()
+        let heightConstraint = NSLayoutConstraint(item: self.collectionView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: height)
         heightConstraint.identifier = "height"
         heightConstraint.active = true
-        self.collectionView.addConstraint(heightConstraint)
         self.collectionView.updateConstraints()
     }
 
+
     private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
         return self.viewModel.state.items[indexPath.row] as! InterestModel
+    }
+    private func getCollectionViewHeightAlternative() -> CGFloat {
+        let cellHeigh = self.getCellSize().height
+        let statusBarHeight = CGFloat(20)
+        let height = cellHeigh + statusBarHeight
+        return height
     }
     private func getCellSize() -> CGSize {
         if DeviceType.IS_IPHONE_4_OR_LESS || DeviceType.IS_IPHONE_5 {
@@ -262,6 +285,9 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     func selectSubinterestsIsSelected(subinterest: InterestModel) -> Bool {
         return self.viewModel.isSubinterestSelected(subinterest)
     }
+    func selectSubinterestsCellHeight() -> CGFloat {
+        return self.getCollectionViewHeightAlternative()
+    }
     // MARK: - implement SelectSubinterestsDelegate
     func selectSubinterestsDidClose() {
         self.viewModel.onCloseSubinterests()
@@ -325,12 +351,12 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             cell.viewUnfocus.hidden = true
         }
 
-        if indexPath.row > self.viewModel.state.items.count - 3
-            && self.viewModel.willLoadNextDataPage() {
-                print(".[v].beforeLoadNext", indexPath.row, self.viewModel.state.items.count, self.viewModel.state.page, self.viewModel.state.isFetching)
-                self.viewModel.onLoadNextDataPage() { state in
-                    self.viewModel.state = state
-                }
+        if  indexPath.row > self.viewModel.state.items.count - 3 &&
+            self.viewModel.willLoadNextDataPage() {
+
+            self.viewModel.onLoadNextDataPage() { state in
+                self.viewModel.state = state
+            }
         }
     }
 
@@ -375,8 +401,6 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             cell.labelSelectedSomeText.text = "\(numberOfSelected)/\(count)"
         }
 
-        print("..cell ", indexPath.row, name)
-        
         return cell
     }
 

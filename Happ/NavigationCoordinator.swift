@@ -165,16 +165,6 @@ class NavigationCoordinator {
 
     func start() {
 
-        /*
-        self.navigationController = UINavigationController()
-        self.window.rootViewController = self.navigationController
-        self.window.makeKeyAndVisible()
-        let display = self.showSelectUserInterests()
-        display?()
-        return;
-        */
-
-
         firstly {
             AuthenticationService.checkCredentialAvailable()
         }.then { _ -> Promise<Void> in
