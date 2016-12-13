@@ -10,11 +10,13 @@ import Foundation
 import UIKit
 
 
-class SelectCityOnMenuController: SelectCityController<SelectCityOnMenuViewModel> {
-}
 
+class SelectCityOnSetupController: SelectCityControllerPrototype<SelectCityOnSetupViewModel> {
 
-class SelectCityOnSetupController: SelectCityController<SelectCityOnSetupViewModel> {
+    init() {
+        super.init()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +33,7 @@ class SelectCityOnSetupController: SelectCityController<SelectCityOnSetupViewMod
         self.extMakeNavBarVisible()
     }
 
-    
+
     private func initNavBarItems() {
         self.navigationItem.title = "Select Your City"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-orange"), style: .Plain, target: self, action: #selector(handleClickNavItemClose))
@@ -40,6 +42,20 @@ class SelectCityOnSetupController: SelectCityController<SelectCityOnSetupViewMod
         self.viewModel.navigateBack?()
     }
 }
+
+
+class SelectCityOnMenuController: SelectCityControllerPrototype<SelectCityOnMenuViewModel> {
+
+    init() {
+        super.init()
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -53,7 +69,7 @@ protocol SelectCityDataSource {
 }
 
 
-class SelectCityController<T: SelectCityViewModelProtocol>: UITableViewController, UISearchResultsUpdating {
+class SelectCityControllerPrototype<T: SelectCityViewModelProtocol>: UITableViewController, UISearchResultsUpdating {
 
     var viewModel: T!  {
         didSet {
@@ -65,6 +81,11 @@ class SelectCityController<T: SelectCityViewModelProtocol>: UITableViewControlle
 
     var searchController: UISearchController!
     let identifierCell = "cell"
+
+
+    init(nibName: String = "SelectCityViewController") {
+        super.init(nibName: nibName, bundle: nil)
+    }
 
 
     override func viewDidLoad() {
@@ -85,6 +106,8 @@ class SelectCityController<T: SelectCityViewModelProtocol>: UITableViewControlle
         self.tableView.tableHeaderView = self.searchController.searchBar
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
+
+        self.tableView.registerNib(UINib(nibName: "SelectCityCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

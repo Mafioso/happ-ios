@@ -59,6 +59,9 @@
 		52B37CA21DDDE10A00CBDA1B /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */; };
 		52B37CA41DDF24D200CBDA1B /* CityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B37CA31DDF24D200CBDA1B /* CityService.swift */; };
 		52C2EC681DC8B03500156652 /* InterestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2EC671DC8B03500156652 /* InterestService.swift */; };
+		52CD94231DFFF1E7003D0B46 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD94211DFFF1E6003D0B46 /* SelectCityViewController.xib */; };
+		52CD94261DFFF5C2003D0B46 /* SelectCityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD94241DFFF5C2003D0B46 /* SelectCityCell.swift */; };
+		52CD94271DFFF5C2003D0B46 /* SelectCityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */; };
 		52D190971D9FF4B300608B02 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D190961D9FF4B300608B02 /* ProfileController.swift */; };
 		52D5E6C31DDC87530085665A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52D5E6C51DDC87530085665A /* InfoPlist.strings */; };
 		52D769CD1DACBF6C00A6AEF7 /* EventsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D769CC1DACBF6C00A6AEF7 /* EventsListViewModel.swift */; };
@@ -166,6 +169,9 @@
 		52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		52B37CA31DDF24D200CBDA1B /* CityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityService.swift; sourceTree = "<group>"; };
 		52C2EC671DC8B03500156652 /* InterestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestService.swift; sourceTree = "<group>"; };
+		52CD94211DFFF1E6003D0B46 /* SelectCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityViewController.xib; sourceTree = "<group>"; };
+		52CD94241DFFF5C2003D0B46 /* SelectCityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityCell.swift; sourceTree = "<group>"; };
+		52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCityCell.xib; sourceTree = "<group>"; };
 		52D190961D9FF4B300608B02 /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		52D5E6C41DDC87530085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		52D5E6C61DDC87540085665A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
@@ -369,6 +375,9 @@
 				52E0E4521DFC0E560073FAFF /* SelectInterestCollectionCell.xib */,
 				52E0E44D1DFC08D60073FAFF /* SelectMultipleInterestsHeader.swift */,
 				52E0E44E1DFC08D60073FAFF /* SelectMultipleInterestsHeader.xib */,
+				52CD94241DFFF5C2003D0B46 /* SelectCityCell.swift */,
+				52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */,
+				52CD94211DFFF1E6003D0B46 /* SelectCityViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -547,6 +556,7 @@
 				B4E215E01DAF764C00144E78 /* SF-UI-Display-Semibold.otf in Resources */,
 				B476D76A1DAF75CF00598CB8 /* 2279.ttf in Resources */,
 				52FDB3851DD5CA4100E6B821 /* EventManageTableCell.xib in Resources */,
+				52CD94231DFFF1E7003D0B46 /* SelectCityViewController.xib in Resources */,
 				B4E215E11DAF764C00144E78 /* SF-UI-Display-Thin.otf in Resources */,
 				B4E215DD1DAF764C00144E78 /* SF-UI-Display-Light.otf in Resources */,
 				520AAFDB1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx in Resources */,
@@ -559,6 +569,7 @@
 				B4E215DE1DAF764C00144E78 /* SF-UI-Display-Medium.otf in Resources */,
 				52B0123E1D9AD5970061F083 /* Profile.storyboard in Resources */,
 				B4E215EE1DAF764C00144E78 /* SF-UI-Text-SemiboldItalic.otf in Resources */,
+				52CD94271DFFF5C2003D0B46 /* SelectCityCell.xib in Resources */,
 				B4E215E71DAF764C00144E78 /* SF-UI-Text-Light.otf in Resources */,
 				52E0E4541DFC0E560073FAFF /* SelectInterestCollectionCell.xib in Resources */,
 				52136F001DE1E35A00CECE3D /* EventOnMap.xib in Resources */,
@@ -657,6 +668,7 @@
 				AA0CB5B81DEAC2CF00ABC686 /* WebViewController.swift in Sources */,
 				B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */,
 				527B43B91D9E584B00C6EAF2 /* SelectCurrencyViewController.swift in Sources */,
+				52CD94261DFFF5C2003D0B46 /* SelectCityCell.swift in Sources */,
 				522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */,
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,

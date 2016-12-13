@@ -164,7 +164,6 @@ class NavigationCoordinator {
     }
 
     func start() {
-
         firstly {
             AuthenticationService.checkCredentialAvailable()
         }.then { _ -> Promise<Void> in
@@ -464,15 +463,22 @@ class NavigationCoordinator {
 
     func showSelectUserInterests(loadInMenu: Bool = false)  -> NavigationFunc {
         return {
-            // init VM
-            let navItem: NavItemType = loadInMenu ? .Menu : .Back
-            var viewModel = SelectUserInterestsViewModel(navItem: navItem)
-
             // init V
             let viewController = SelectInterestController<SelectUserInterestsViewModel>()
-            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewController)
-            viewController.viewModel = viewModel
 
+            // init VM
+            var viewModel: SelectUserInterestsViewModel!
+            if loadInMenu {
+                viewModel = SelectUserInterestsViewModel(navItem: .Menu)
+                viewModel.navigateNavItem = self.displaySlideMenu
+            } else {
+                viewModel = SelectUserInterestsViewModel(navItem: .Back)
+                viewModel.navigateNavItem = self.goBack
+            }
+            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewController)
+
+            // connect VM with V
+            viewController.viewModel = viewModel
 
             // add to Navigation
             if loadInMenu {
@@ -513,7 +519,7 @@ class NavigationCoordinator {
         print(".start.SetupCityAndInterests")
 
          let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SetupCity") as! SetupCityController
-        
+
         var viewModel = SetupUserCityViewModel()
         viewModel.navigateBack = self.goBack
         viewModel.navigateSelectInterests = self.showSelectUserInterests(false)
@@ -533,7 +539,8 @@ class NavigationCoordinator {
             var viewModel = SelectCityOnSetupViewModel()
             viewModel.navigateBack = self.goBack
 
-            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
+            let viewController = SelectCityOnSetupController()
+            // let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
             viewController.viewModel = viewModel
             viewController.delegate = delegateVC
             viewController.dataSource = dataSourceVC

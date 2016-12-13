@@ -178,6 +178,7 @@ struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
 
     var navPopoverSelectSubinterests: NavigationFunc
     var navigateNavItem: NavigationFunc
+    var navigateAfterSave: NavigationFunc
 
 
     init(navItem: NavItemType) {
@@ -185,6 +186,18 @@ struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
         self.title = cityName
         self.navItem = navItem
         self.state = SelectUserInterestsState(items: [], page: 0, isFetching: false, selected: [:], opened: nil, isSelectedAll: false, userInterests: [])
+    }
+
+    func onSave() {
+        var promise: Promise<Void>
+        if self.state.isSelectedAll {
+            promise = InterestService.setUserAllInterests()
+        } else {
+            let interestIDs = self.getSelectedInterests().map { $0.id }
+            promise = InterestService.setUserInterests(interestIDs)
+                .then { _ -> Void in }
+        }
+        promise.then { self.navigateAfterSave?() }
     }
 }
 
@@ -275,6 +288,9 @@ protocol SelectMultipleInterestsViewModelProtocol: SelectInterestViewModelProtoc
 
 protocol SelectUserInterestsViewModelProtocol: SelectMultipleInterestsViewModelProtocol {
     associatedtype StateType: SelectUserInterestsStateProtocol
+
+    var navigateAfterSave: NavigationFunc { get set }
+
     func fetchAllUserInterests(page: Int) -> Promise<Void>
     func getAllUserInterests() -> [InterestModel]
     func updateSelectedInterests(originState: Self.StateType) -> Self.StateType
@@ -361,17 +377,9 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
         updState.selected = updSelected
         return updState
     }
-
-
-    func onSave() {
-        if self.state.isSelectedAll {
-            InterestService.setUserAllInterests()
-        } else {
-            let interestIDs = self.getSelectedInterests().map { $0.id }
-            InterestService.setUserInterests(interestIDs).then { _ -> Void in }
-        }
-    }
 }
+
+
 
 extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataViewModelProtocol {
 
