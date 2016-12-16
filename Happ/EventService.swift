@@ -64,8 +64,18 @@ class EventService {
                 }
     }
 
-    class func fetchFeed(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
-        let feedEndpoint = endpoint + "feed/" + "?page=\(page)"
+    class func fetchFeed(page: Int = 1, overwrite: Bool = false, onlyFree: Bool = false, popular: Bool = false, startDate: NSDate? = nil, endDate: NSDate? = nil, startTime: NSDate? = nil) -> Promise<Void> {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let timeformatter = NSDateFormatter()
+        timeformatter.dateFormat = "HHss"
+        let feedEndpoint = endpoint + "feed/" + "?page=\(page)" +
+            (onlyFree ? "&max_price=0" : "") +
+            (popular ? "&order=popular" : "") +
+            (startDate != nil ? "&start_date=\(formatter.stringFromDate(startDate!))" : "") +
+            (endDate != nil ? "&end_date=\(formatter.stringFromDate(endDate!))" : "") +
+            (startTime != nil ? "&start_time=\(timeformatter.stringFromDate(startTime!))" : "")
+        print(feedEndpoint)
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage) -> Void in
                 let results = data as! [AnyObject]

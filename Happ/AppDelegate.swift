@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import SlideMenuControllerSwift
-
+import WTLCalendarView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,14 +25,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.window?.rootViewController != nil { // for Debuging single storyboard's vc
             return true
         }
-
+        
+        SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.8
         if DeviceType.IS_IPHONE_5 || DeviceType.IS_IPHONE_4_OR_LESS {
-           SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
+            SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
+            SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.86
         }
+        
+        CalendarViewTheme.instance.bgColorForMonthContainer = UIColor.clearColor()
+        CalendarViewTheme.instance.bgColorForDaysOfWeekContainer = UIColor.clearColor()
+        CalendarViewTheme.instance.bgColorForCurrentMonth = UIColor.clearColor()
+        CalendarViewTheme.instance.bgColorForOtherMonth = UIColor.clearColor()
+        CalendarViewTheme.instance.textColorForTitle = UIColor(hexString: "DEDEDE")
+        CalendarViewTheme.instance.textColorForNormalDay = UIColor(hexString: "DEDEDE")
+        CalendarViewTheme.instance.textColorForDisabledDay = UIColor(hexString: "9A9A9A")
+        CalendarViewTheme.instance.textColorForSelectedDay = UIColor.whiteColor()
+        CalendarViewTheme.instance.textColorForDayOfWeek = UIColor(hexString: "DEDEDE")
+        CalendarViewTheme.instance.colorForSelectedDate = UIColor(hexString: "FD692E")
+        CalendarViewTheme.instance.colorForDatesRange = UIColor(hexString: "AA512A")
+        CalendarViewTheme.instance.colorForDivider = UIColor.clearColor()
         
         application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-        UILabel.appearance().substituteFontName = "SF-UI-Text-Regular"
 //        let backimage = UIImage(named: "nav-back-gray")!
 //        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics:UIBarMetrics.Default)
 //        UIBarButtonItem.appearance().setBackButtonBackgroundImage(backimage.resizableImageWithCapInsets(UIEdgeInsetsMake(0, (backimage.size.width)-1, 0, 0)), forState: .Normal, barMetrics: .Default)

@@ -18,6 +18,7 @@ target 'Happ' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Shimmer'
+  pod 'WTLCalendarView', git: "https://github.com/lenyapugachev/CalendarView.git"
 
 
 
