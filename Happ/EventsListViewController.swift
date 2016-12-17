@@ -40,23 +40,17 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(".list.\(self.viewModel.state.scope).didLoad")
-        
-        
+
         self.initTableView()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print(".list.\(self.viewModel.state.scope).willAppear")
-        
-        //self.viewModelDidUpdate()
 
         self.extMakeNavBarHidden()
         self.extMakeStatusBarWhite()
     }
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        print(".list.\(self.viewModel.state.scope).didDisappear")
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
 
         self.extMakeNavBarVisible()
         self.extMakeStatusBarDefault()

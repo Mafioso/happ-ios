@@ -79,7 +79,7 @@ class EventDetailsController: UIViewController {
         super.viewWillAppear(animated)
 
         self.viewModelDidUpdate()
-        
+
         self.extMakeStatusBarWhite()
         self.extMakeNavBarHidden()
     }

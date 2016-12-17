@@ -60,13 +60,15 @@ class FeedFiltersController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        
+
         tableDateRange.dataSource = self
         tableDateRange.delegate = self
         
         calendarView.delegate = self
         
         searchBar.delegate = self
+
+        self.extHideKeyboardWhenTappedAround()
     }
     
     private func closeDateTime() {

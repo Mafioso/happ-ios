@@ -26,6 +26,8 @@ class HappNavigationController: UINavigationController {
 }
 
 
+
+
 class HappMainTabBarController: UITabBarController {
 
     var navigateExploreTab: NavigationFunc
@@ -80,6 +82,7 @@ class HappMainTabBarController: UITabBarController {
         }
     }
 }
+
 
 
 class HappManagerTabBarController: UITabBarController {
@@ -445,8 +448,6 @@ class NavigationCoordinator {
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
-
-        self.updateSlidebar() // to remove feedFilter
     }
     func showEventDetailsMap(forID: String) {
         print(".nav.showEventDetailsMap [forID=\(forID)]")
@@ -631,7 +632,11 @@ class NavigationCoordinator {
         }
     }
     private func displaySlideFeedFilters() {
-        if let slideMenu = self.window.rootViewController as? SlideMenuController {
+        if  let slideMenu = self.window.rootViewController as? SlideMenuController,
+            let currentVC = self.navigationController.visibleViewController,
+            let rootVC = self.navigationController.viewControllers.first
+            where currentVC == rootVC
+        {
             slideMenu.openRight()
         }
     }

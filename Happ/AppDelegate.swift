@@ -25,13 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if self.window?.rootViewController != nil { // for Debuging single storyboard's vc
             return true
         }
-        
+
+        SlideMenuOptions.rightPanFromBezel = false
         SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.8
         if DeviceType.IS_IPHONE_5 || DeviceType.IS_IPHONE_4_OR_LESS {
             SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
             SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.86
         }
-        
+
+
         CalendarViewTheme.instance.bgColorForMonthContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForDaysOfWeekContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForCurrentMonth = UIColor.clearColor()
