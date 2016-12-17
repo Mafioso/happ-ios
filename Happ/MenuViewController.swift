@@ -10,7 +10,7 @@ import UIKit
 import Haneke
 
 
-class MenuViewController: UIViewController, UITableViewDelegate {
+class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDelegate, SelectCityDataSource {
 
     var viewModelMenu: MenuViewModel! {
         didSet {
@@ -28,6 +28,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tappableViewChangeCity: UIView!
     @IBOutlet weak var viewMenu: UIView!
     @IBOutlet weak var viewSelectCity: UIView!
+    @IBOutlet weak var containerViewSelectCity: UIView!
 
 
     // action
@@ -40,7 +41,6 @@ class MenuViewController: UIViewController, UITableViewDelegate {
 
     // constants
     let segueEmbeddedTableMenu = "embeddedTableMenu"
-    let segueEmbeddedSelectCity = "embeddedTableSelectCity"
 
     // variables
     var tableMenuActions: UITableView!
@@ -50,8 +50,8 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tappableGesture = UITapGestureRecognizer(target: self, action: #selector(onClickChangeCity))
-        self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
+        self.initEmbeddedTableSelectCity()
+        self.initTapGestureHandler()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -71,12 +71,6 @@ class MenuViewController: UIViewController, UITableViewDelegate {
             self.tableMenuActions = dest.tableView
             self.tableMenuActions.delegate = self
         }
-        if segue.identifier == segueEmbeddedSelectCity {
-            // TODO
-            // let dest = segue.destinationViewController as! SelectCityOnMenuController
-            // self.tableViewControllerSelectCity = dest
-            // self.tableViewControllerSelectCity.viewModel = self.viewModelSelectCity
-        }
     }
 
 
@@ -91,18 +85,34 @@ class MenuViewController: UIViewController, UITableViewDelegate {
     }
 
 
+    private func initEmbeddedTableSelectCity() {
+        self.addChildViewController(tableViewControllerSelectCity)
+        let containerSize = self.containerViewSelectCity.frame.size
+        tableViewControllerSelectCity.view.frame = CGRectMake(0, 0, containerSize.width, containerSize.height);
+        self.containerViewSelectCity.addSubview(tableViewControllerSelectCity.view)
+        tableViewControllerSelectCity.didMoveToParentViewController(self)
+    }
+    private func initTapGestureHandler() {
+        let tappableGesture = UITapGestureRecognizer(target: self, action: #selector(onClickChangeCity))
+        self.tappableViewChangeCity.addGestureRecognizer(tappableGesture)
+    }
+    
     private func bindToViewModel() {
         self.viewModelMenu.didUpdate = { [weak self] _ in
             self?.viewModelDidUpdate()
             //self?.viewModelSelectCity.didUpdate?()
         }
-    }/*
-    func bindToSelectCityViewModel() {
-        self.viewModelSelectCity.didChangeCity = { [weak self] in
-            self?.viewModelMenu.onChangeCity()
-        }
-    }*/
+    }
 
+    // implement Delegate & DataSource
+    func didSelectCity(city: CityModel) {
+        self.viewModelMenu.onChangeCity(city)
+    }
+    func getSelectedCity() -> CityModel? {
+        return self.viewModelMenu.city
+    }
+
+    
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -120,7 +130,7 @@ class MenuViewController: UIViewController, UITableViewDelegate {
         switch self.viewModelMenu.state {
         case .Normal:
             UIView.transitionFromView(viewSelectCity, toView: viewMenu, duration: 0.5, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            //TODO labelChangeCity.text = self.viewModelSelectCity.selectCityState.selected!.name
+            labelChangeCity.text = self.viewModelMenu.city.name
 
             UIView.animateWithDuration(0.25, animations: {
                 self.iconChangeCity.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))

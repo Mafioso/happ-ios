@@ -147,45 +147,6 @@
             </objects>
             <point key="canvasLocation" x="494" y="1581"/>
         </scene>
-        <!--Select City On Menu Controller-->
-        <scene sceneID="Rxu-48-mre">
-            <objects>
-                <tableViewController id="Ghv-vH-Whx" customClass="SelectCityOnMenuController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" canCancelContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="28" id="BpY-rk-MzS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="292"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" textLabel="8Tb-Tu-spx" style="IBUITableViewCellStyleDefault" id="vgR-OF-ZrA">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vgR-OF-ZrA" id="1Ex-8B-oGt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Tb-Tu-spx">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="18"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Ghv-vH-Whx" id="H0I-yg-wWo"/>
-                            <outlet property="delegate" destination="Ghv-vH-Whx" id="sLl-Al-TIN"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nju-S6-Isu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1166" y="1599"/>
-        </scene>
         <!--Menu View Controller-->
         <scene sceneID="U8c-sI-Mys">
             <objects>
@@ -285,9 +246,6 @@
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzy-BN-SRE">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="292"/>
-                                                <connections>
-                                                    <segue destination="Ghv-vH-Whx" kind="embed" identifier="embeddedTableSelectCity" id="xBE-rC-gD7"/>
-                                                </connections>
                                             </containerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -362,6 +320,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerViewSelectCity" destination="uzy-BN-SRE" id="stN-09-6CX"/>
                         <outlet property="iconChangeCity" destination="0Go-0e-e3o" id="uIG-ba-hVM"/>
                         <outlet property="imageUserPhoto" destination="pYe-Sv-Fxn" id="CEc-fW-APq"/>
                         <outlet property="labelChangeCity" destination="Uw9-1z-mgP" id="6bA-gG-Ggl"/>

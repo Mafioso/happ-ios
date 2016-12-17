@@ -12,72 +12,6 @@ import RealmSwift
 
 /*
 
-class SetupUserInterestsViewModel: SelectUserInterestsViewModel {
-
-    var navigateFeed: NavigationFunc
-
-    func onSave() {
-        var promise: Promise<Void>
-        if self.selectMutlipleInterestState.isSelectedAll {
-            promise = InterestService.setUserAllInterests()
-        } else {
-            let interestIDs = self.getSelectedInterests().map { $0.id }
-            promise = InterestService.setUserInterests(interestIDs).then { _ -> Void in }
-        }
-        promise.then { _ -> Void in
-            self.navigateFeed?()
-        }
-    }
-
-    override init(navItemIcon: String, navigateNavItem: NavigationFunc) {
-        super.init(navItemIcon: navItemIcon, navigateNavItem: navigateNavItem)
-    }
-}
-
-
-
-class SelectUserInterestsViewModel: SelectUserInterestsProtocol {
- 
-    var navPopoverSelectSubinterests: NavigationFunc
-
-
-    var dataState: PaginatedDataState {
-        didSet {
-            if dataState.isFetching { return }
-            self.didUpdate?()
-        }
-    }
-    var selectInterestState: SelectInterestState {
-        didSet {
-            self.didUpdate?()
-        }
-    }
-    var selectMutlipleInterestState: SelectMultipleInterestsState {
-        didSet {
-            self.didUpdate?()
-        }
-    }
-    var headerState: SelectInterestHeaderState {
-        didSet {
-            self.didUpdate?()
-        }
-    }
-    var userInterests: [InterestModel] = []
-
-
-    var didUpdate: UpdateHandlerFunc
-
-
-    init(navItemIcon: String, navigateNavItem: NavigationFunc) {
-        self.dataState = PaginatedDataState(page: 0, items: [], isFetching: false)
-        self.selectMutlipleInterestState = SelectMultipleInterestsState(isSelectedAll: false)
-        self.selectInterestState = SelectInterestState(selected: [:], opened: nil)
-        self.headerState = SelectInterestHeaderState(navItemIcon: navItemIcon, navigateNavItem: navigateNavItem, isHeaderVisible: true, isAllowsMultipleSelection: true)
-    }
-    
-}
-
-
 class SelectEventInterestViewModel: SelectInterestProtocol {
     
     var navPopoverSelectSubinterests: NavigationFunc
@@ -210,7 +144,7 @@ struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
 enum NavItemType {
     case Back
     case Menu
-    
+
     func getIcon() -> UIImage {
         switch self {
         case .Back:
@@ -300,7 +234,7 @@ protocol SelectUserInterestsViewModelProtocol: SelectMultipleInterestsViewModelP
 
 
 //  MARK: VIEW MODELs extension
-extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataViewModelProtocol, Self: SelectUserInterestsViewModelProtocol {
+extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInterestsViewModelProtocol {
 
     // 1. clean interests in DB
     // 2. fetch ALL PAGES of User Interests 
@@ -310,6 +244,7 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
 
     mutating func onLoadFirstDataPage(completion: ((Self.StateType) -> Void)) {
         if self.state.page == 0 {
+            InterestService.deleteAllStored()
             self.fetchAllUserInterests()
                 .then { _ -> Void in
                     let userInterests = self.getAllUserInterests()
@@ -322,7 +257,7 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
         self.state.isFetching = true
 
         let nextPage = self.state.page + 1
-        self.fetchData(nextPage, overwrite: nextPage == 1)
+        self.fetchData(nextPage, overwrite: false)
             .then { _ -> Void in
                 var updState = self.state
                 updState.page = nextPage
@@ -330,11 +265,15 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
                 updState.isFetching = false
                 // update with user's saved interests
                 updState = self.updateSelectedInterests(updState)
+                if nextPage == 1 && InterestService.countAll == InterestService.countUserInterests {
+                    updState.isSelectedAll = true
+                }
                 completion(updState)
         }
     }
     func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
-        return InterestService.fetchAll(page, overwrite: false) // prevent from overwrite
+        // prevent from overwrite
+        return InterestService.fetchAll(page, overwrite: false)
     }
     func fetchAllUserInterests(page: Int = 1) -> Promise<Void> {
         return Promise { resolve, reject in
@@ -361,10 +300,8 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
         let interests = originState.userInterests
 
         let newParents = interests
-            .filter { $0.parent_id != nil }
-            .map { InterestService.getParentOf($0) }
-            .filter { $0 != nil && updSelected[$0!] == nil }
-            .map { $0! }
+            .filter { $0.parent_id == nil }
+            .filter { updSelected[$0] == nil }
 
         newParents.forEach { parent in
             let newSubinterests = InterestService
@@ -381,16 +318,18 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
 
 
 
-extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataViewModelProtocol {
+extension SelectMultipleInterestsViewModelProtocol {
 
     mutating func onSelectAll() {
         self.state.isSelectedAll = !self.state.isSelectedAll
+        self.state.selected = [:]
     }
 
 
     mutating func willSelect() {
         if self.state.isSelectedAll {
             self.state.isSelectedAll = false
+            self.state.selected = [:]
         }
     }
     func getSelectionType(interest: InterestModel) -> SelectInterestSelectionTypes {
@@ -436,7 +375,7 @@ extension SelectMultipleInterestsViewModelProtocol where Self: PaginatedDataView
 
 
 
-extension SelectInterestViewModelProtocol where Self: PaginatedDataViewModelProtocol {
+extension SelectInterestViewModelProtocol {
     func isLastPage() -> Bool {
         return InterestService.isLastPage
     }

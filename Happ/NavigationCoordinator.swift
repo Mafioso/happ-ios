@@ -540,7 +540,6 @@ class NavigationCoordinator {
             viewModel.navigateBack = self.goBack
 
             let viewController = SelectCityOnSetupController()
-            // let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectCityOnSetup") as! SelectCityOnSetupController
             viewController.viewModel = viewModel
             viewController.delegate = delegateVC
             viewController.dataSource = dataSourceVC
@@ -667,8 +666,15 @@ class NavigationCoordinator {
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
         viewModel.navigateBack = self.hideSlideMenu
 
+
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModelMenu = viewModel
+
+        let selectCityViewController = SelectCityOnMenuController()
+        selectCityViewController.viewModel = SelectCityOnMenuViewModel()
+        selectCityViewController.delegate = menuViewController
+        selectCityViewController.dataSource = menuViewController
+        menuViewController.tableViewControllerSelectCity = selectCityViewController
 
         return menuViewController
     }

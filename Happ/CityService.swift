@@ -24,7 +24,7 @@ class CityService {
     class func fetchCities(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let pagedURL = endpoint + "?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 self.isLastPage = isLastPage
 
                 let results = data as! [AnyObject]
@@ -43,7 +43,7 @@ class CityService {
     }
     class func fetchCitiesByName(name: String) -> Promise<Void> {
         return GetPaginated(endpoint, parameters: ["search": name], paramsEncoding: .URL)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 
                 let realm = try! Realm()
@@ -100,10 +100,10 @@ class CityService {
     }
 
 
-    class func deleteCitiesLocal(exceptIDs: [String]?) {
+    class func deleteAllStored(exceptIDs: [String]?) {
         let realm = try! Realm()
         try! realm.write {
-            var exists = realm.objects(EventModel)
+            var exists = realm.objects(CityModel)
             if let ids = exceptIDs {
                 exists = exists.filter("NOT id IN %@", ids)
             }

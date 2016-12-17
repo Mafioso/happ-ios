@@ -50,7 +50,7 @@ class ProfileService {
 
     class func fetchCurrencies() -> Promise<Void> {
         return GetPaginated(endpointCurrencies, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {

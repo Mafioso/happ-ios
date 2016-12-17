@@ -67,7 +67,7 @@ class EventService {
     class func fetchFeed(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let feedEndpoint = endpoint + "feed/" + "?page=\(page)"
         return GetPaginated(feedEndpoint, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 self.isLastPageOfFeed = isLastPage
                 
@@ -87,7 +87,7 @@ class EventService {
     class func fetchFavourite(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let feedEndpoint = endpoint + "favourites/" + "?page=\(page)"
         return GetPaginated(feedEndpoint, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 self.isLastPageOfFavourites = isLastPage
 
@@ -107,7 +107,7 @@ class EventService {
     class func fetchExplore(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let exploreEndpoint = endpoint + "feed/" + "?page=\(page)"
         return GetPaginated(exploreEndpoint, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 self.isLastPageOfExplore = isLastPage
 

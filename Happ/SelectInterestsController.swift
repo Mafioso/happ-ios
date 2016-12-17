@@ -110,7 +110,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
 
 
     func updateView(oldViewModel: T?) {
-        print(".[V].update", self.viewModel.state.items.count, self.viewModel.state.isFetching)
+        print(".[V].update", self.viewModel.state.items.count)
 
         if self.isViewLoaded() && self.viewModel.state.isFetching == false {
             self.collectionView.reloadData()

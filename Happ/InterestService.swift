@@ -17,13 +17,16 @@ class InterestService {
     static let endpoint = "interests/"
 
     static var isLastPage: Bool = false
+    static var countAll: Int = 0
+    static var countUserInterests: Int = 0
 
 
     static func fetchAll(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let pagedURL = endpoint + "?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 self.isLastPage = isLastPage
+                self.countAll = count
 
                 let results = data as! [AnyObject]
                 let realm = try! Realm()
@@ -43,10 +46,11 @@ class InterestService {
     static func fetchUserInterests(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let pagedURL = endpoint + "my/?page=\(page)"
         return GetPaginated(pagedURL, parameters: nil)
-            .then { (data, isLastPage) -> Void in
+            .then { (data, isLastPage, count) -> Void in
                 self.isLastPage = isLastPage
-                let results = data as! [AnyObject]
+                self.countUserInterests = count
 
+                let results = data as! [AnyObject]
                 let realm = try! Realm()
                 try! realm.write {
                     if overwrite {
@@ -82,6 +86,13 @@ class InterestService {
         let realm = try! Realm()
         let result = realm.objects(InterestModel)//.sort(sort.isOrderedBeforeFunc)
         return result
+    }
+    static func deleteAllStored() {
+        let realm = try! Realm()
+        try! realm.write {
+            let exists = realm.objects(InterestModel)
+            realm.delete(exists)
+        }
     }
 
     static func getParentOf(interest: InterestModel) -> InterestModel? {

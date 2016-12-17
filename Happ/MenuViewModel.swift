@@ -36,6 +36,7 @@ class MenuViewModel {
 
     var highlight: MenuActions
     var state: MenuViewModelStateTypes = .Normal
+    var city: CityModel
 
     var navigateBack: NavigationFunc
     var navigateProfile: NavigationFunc
@@ -47,6 +48,7 @@ class MenuViewModel {
 
     init(highlight: MenuActions) {
         self.highlight = highlight
+        self.city = ProfileService.getUserCity()
     }
 
 
@@ -73,8 +75,9 @@ class MenuViewModel {
         self.state = self.state.opposite()
         self.didUpdate?()
     }
-    func onChangeCity() {
+    func onChangeCity(city: CityModel) {
         self.state = .Normal
+        self.city = city
         self.didUpdate?()
 
         self.navigateSelectInterests?()

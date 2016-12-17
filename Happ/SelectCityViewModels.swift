@@ -47,18 +47,14 @@ struct SelectCityOnMenuState: SelectCityStateProtocol {
     var search: String?
 }
 struct SelectCityOnMenuViewModel: SelectCityViewModelProtocol {
-    var state: SelectCityOnSetupState {
-        didSet {
-            print(".[VM].update", state)
-        }
-    }
+    var state: SelectCityOnSetupState
 
     mutating func onLoadFirstDataPage(completion: ((SelectCityOnSetupState) -> Void)) {
         if self.state.page == 0 {
             // 1. delete previous cities except current
             let userCity = ProfileService.getUserCity()
             let exceptIDs = [userCity.id]
-            CityService.deleteCitiesLocal(exceptIDs)
+            CityService.deleteAllStored(exceptIDs)
             // 2. start fetching
             self.onLoadNextDataPage(completion)
         }

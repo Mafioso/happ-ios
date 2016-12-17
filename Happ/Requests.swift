@@ -208,7 +208,7 @@ func GetCustom(url: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
 }
 
 
-func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON) -> Promise<(AnyObject, Bool)> {
+func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON) -> Promise<(AnyObject, Bool, Int)> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
         Alamofire
@@ -220,7 +220,8 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEnco
                     let paginatedResponse = response.result.value as! NSDictionary
                     let results = paginatedResponse["results"] as! [AnyObject]
                     let isLastPage = paginatedResponse["next"] is NSNull
-                    resolve((results, isLastPage))
+                    let count = paginatedResponse["count"] as! Int
+                    resolve((results, isLastPage, count))
 
                 case .Failure(let error):
                     if  let statusCode = response.response?.statusCode,
