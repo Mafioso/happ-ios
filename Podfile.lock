@@ -40,6 +40,7 @@ PODS:
   - Shimmer (1.0.2)
   - SlideMenuControllerSwift (2.3.0)
   - SwiftyJSON (2.3.2)
+  - WTLCalendarView (0.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
@@ -54,6 +55,7 @@ DEPENDENCIES:
   - Shimmer
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.3`)
   - SwiftyJSON
+  - WTLCalendarView (from `https://github.com/lenyapugachev/CalendarView.git`)
 
 EXTERNAL SOURCES:
   KeychainSwift:
@@ -62,6 +64,8 @@ EXTERNAL SOURCES:
   SlideMenuControllerSwift:
     :branch: swift2.3
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
+  WTLCalendarView:
+    :git: https://github.com/lenyapugachev/CalendarView.git
 
 CHECKOUT OPTIONS:
   KeychainSwift:
@@ -70,6 +74,9 @@ CHECKOUT OPTIONS:
   SlideMenuControllerSwift:
     :commit: cd6d807f5ee69091e9d1301779a05f6e9a2e5173
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
+  WTLCalendarView:
+    :commit: 918ffb08841bc7a36ef2e4a6dcf03c064664f22b
+    :git: https://github.com/lenyapugachev/CalendarView.git
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
@@ -86,7 +93,8 @@ SPEC CHECKSUMS:
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  WTLCalendarView: c7ee2e7f916cd069b131f75fcdc3cf3f7418f4ff
 
-PODFILE CHECKSUM: 8dbe071a239e7d8b99df80c008046ef1f0d70004
+PODFILE CHECKSUM: 405691a83948b2d350b2a474c08ade3538286be1
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.0.0.rc.2

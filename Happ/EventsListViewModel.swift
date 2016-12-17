@@ -40,13 +40,17 @@ enum EventsListScope {
     case Favourite
     case MyEvents
 
-    func fetchEvents(byPage page: Int, overwrite: Bool) -> Promise<Void> {
+    func fetchEvents(byPage page: Int, overwrite: Bool, filters: EventsListFiltersState? = nil) -> Promise<Void> {
         switch self {
         case .Feed:
             if EventService.isLastPageOfFeed {
                 return Promise<Void>()
             }
-            return EventService.fetchFeed(page, overwrite: overwrite)
+            if filters == nil {
+                return EventService.fetchFeed(page, overwrite: overwrite)
+            }else{
+                return EventService.fetchFeed(page, overwrite: overwrite, onlyFree: filters!.onlyFree, popular: filters?.sortBy == .ByPopular, startDate: filters!.dateFrom, endDate: filters!.dateTo, startTime: filters!.time)
+            }
         case .Favourite:
             if EventService.isLastPageOfFavourites {
                 return Promise<Void>()
@@ -73,9 +77,11 @@ struct EventsListFiltersState {
     var search: String?
     var dateFrom: NSDate?
     var dateTo: NSDate?
+    var time: NSDate?
     // for scope: .Feed, .Favourite
     var sortBy: EventsListSortType
     var onlyFree: Bool
+    var convertCurrency: Bool
     // for scope: .MyEvents
     var statusMap: [EventModelStatusTypes: Bool]?
 }
@@ -105,7 +111,7 @@ class EventsListViewModel {
 
 
     init(scope: EventsListScope) {
-        let filtersState = EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, sortBy: .ByDate, onlyFree: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
+        let filtersState = EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, time: nil, sortBy: .ByDate, onlyFree: false, convertCurrency: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
         self.state = EventsListState(scope: scope, fetchingState: .None, events: [], page: 0, filters: filtersState)
 
         self.initDataFetching()
@@ -125,17 +131,19 @@ class EventsListViewModel {
 
         self.state.fetchingState = .StartRequest
         self.didUpdate?()
+        
+        self.state.page = 1
 
         self.state.scope
-            .fetchEvents(byPage: 1, overwrite: true)
+            .fetchEvents(byPage: 1, overwrite: true, filters: filters)
             .then { _ -> Void in
-                let events = self.filterEvents(scope.getEvents())
+                let events = scope.getEvents().filter { _ in return true }
                 self.state = EventsListState(scope: scope, fetchingState: .FinishRequest, events: events, page: 1, filters: filters)
                 self.didUpdate?()
             }
             .error { err in
                 // catch NoInternet here
-                let events = self.filterEvents(scope.getEvents()) // old instances
+                let events = scope.getEvents().filter { _ in return true }
                 self.state = EventsListState(scope: scope, fetchingState: .NoInternet, events: events, page: 0, filters: filters)
                 self.didUpdate?()
                 
@@ -151,36 +159,22 @@ class EventsListViewModel {
     func loadNextPage() {
         let nextPage = self.state.page + 1
         self.state.scope
-            .fetchEvents(byPage: nextPage, overwrite: false)
+            .fetchEvents(byPage: nextPage, overwrite: false, filters: self.state.filters)
             .then { _ -> Void in
-                let events = self.filterEvents(self.state.scope.getEvents())
+                let events = self.state.scope.getEvents()
                 self.state.page = nextPage
-                self.state.events = events
+                self.state.events = events.filter { _ in return true }
                 self.didUpdate?()
             }
     }
+    
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails?(id: event.id)
     }
+    
     func onChangeFilters(newState: EventsListFiltersState) {
         self.state.filters = newState
-        self.state.events = self.filterEvents(self.state.scope.getEvents())
-        self.hideSlideFeedFilters!() // return to FeedViewController
-        self.didUpdate?()
-    }
-
-
-    private func filterEvents(events: Results<EventModel>) -> [EventModel] {
-        var events = events
-        let filters = self.state.filters
-        if filters.search != nil {
-            events = events.filter("title CONTAINS[c] %@", filters.search!)
-        }
-        if filters.onlyFree {
-            events = events.filter("min_price == nil")
-        }
-        // TODO filters.statusMap
-        return events.sort(filters.sortBy.isOrderedBeforeFunc)
+        self.initDataFetching()
     }
 
 }

@@ -1,0 +1,25 @@
+{
+  "name": "WTLCalendarView",
+  "version": "0.2.0",
+  "summary": "Date range picker with customizeable components.",
+  "homepage": "https://github.com/lenyapugachev/CalendarView",
+  "license": "MIT",
+  "authors": {
+    "Lenya Pugachev": "lenyapugachev@me.com"
+  },
+  "source": {
+    "git": "https://github.com/lenyapugachev/CalendarView.git",
+    "tag": "0.2.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*.swift",
+  "resource_bundles": {
+    "WTCalendarView": [
+      "Pod/Assets/*.png",
+      "Pod/Classes/**/*.xib"
+    ]
+  }
+}
