@@ -12,6 +12,7 @@ import RealmSwift
 import GoogleMaps
 
 
+
 struct ScreenSize
 {
     static let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width

@@ -327,6 +327,8 @@ class NavigationCoordinator {
                 mainViewController: self.tabBarController,
                 leftMenuViewController: menuController,
                 rightMenuViewController: rightController!)
+            slidebar.delegate = rightController as? SlideMenuControllerDelegate
+
         } else {
             slidebar = SlideMenuController(
                 mainViewController: self.tabBarController,

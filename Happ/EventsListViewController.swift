@@ -83,12 +83,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
         super.viewDidLoad()
 
         self.initTableView()
-
-        if self.viewModel.willLoadNextDataPage() {
-            self.viewModel.onLoadFirstDataPage() { state in
-                self.viewModel.state = state
-            }
-        }
+        self.initDataLoading()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -104,6 +99,14 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     }
 
 
+    func initDataLoading() {
+        if self.viewModel.willLoadNextDataPage() {
+            self.viewModel.onLoadFirstDataPage() { state in
+                self.viewModel.state = state
+            }
+        }
+    }
+    
     func updateView() {
         if !self.isViewLoaded() {
             return
@@ -142,8 +145,10 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // delegate FeedFiltersDelegate
     func didChangeFilters(filters: EventsListFiltersState) {
-        self.viewModel.onChangeFilters(filters)
+        self.viewModel.onChangeFilters(filters) // it clear state
+        self.initDataLoading() // fetch items into state
     }
+
 
     // delegate EventsEmptyListDelegate & EventsEmptyListDataSource
     func eventsEmptyList(clickNavItemLeft sender: UIButton) {

@@ -8,7 +8,7 @@
 
 import UIKit
 import WTLCalendarView
-
+import SlideMenuControllerSwift
 
 
 protocol FeedFiltersDelegate {
@@ -16,7 +16,7 @@ protocol FeedFiltersDelegate {
 }
 
 
-class FeedFiltersController: UIViewController {
+@objc class FeedFiltersController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableDateRange: UITableView!
@@ -30,7 +30,7 @@ class FeedFiltersController: UIViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var timeOK: UIButton!
     @IBOutlet weak var top: NSLayoutConstraint!
-    
+
     let cellDateDisplayID = "cellDisplayDate"
 
     var delegate: FeedFiltersDelegate?
@@ -38,13 +38,15 @@ class FeedFiltersController: UIViewController {
     var finishDate: NSDate?
     var time: NSDate?
 
+    var isKeyboardOpen: Bool = false
+
     @IBAction func clickedTimeOK(sender: AnyObject) {
         time = timePicker.date
         tableDateRange.reloadData()
         reapplyFilters()
         closeDateTime()
     }
-    
+
     @IBAction func clickedResetFilters(sender: AnyObject) {
         beginDate = nil
         finishDate = nil
@@ -54,11 +56,11 @@ class FeedFiltersController: UIViewController {
         timePicker.date = NSDate(timeIntervalSince1970: 60 * 60 * 20)
         tableDateRange.reloadData()
         searchBar.text = ""
-        
+
         radios.forEach {
             $0.setOn(false, animated: true)
         }
-        
+
         reapplyFilters()
         closeDateTime()
     }
@@ -75,9 +77,19 @@ class FeedFiltersController: UIViewController {
         
         searchBar.delegate = self
 
-        self.extHideKeyboardWhenTappedAround()
+        let tapGesture = self.extHideKeyboardWhenTappedAround()
+        tapGesture.delegate = self
+        
+        
+        self.initObservers()
     }
-    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.deinitObservers()
+    }
+
+
     private func closeDateTime() {
         top.constant = 30
         UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseIn, animations: {
@@ -134,6 +146,44 @@ class FeedFiltersController: UIViewController {
 }
 
 
+extension FeedFiltersController: SlideMenuControllerDelegate, UIGestureRecognizerDelegate {
+    
+    // hide keyboard when SlideMenu closes
+    func rightWillClose() {
+        self.extDismissKeyboard()
+    }
+
+    // fix keyboard closing on tap for tableview.didSelectCell
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return self.isKeyboardOpen
+    }
+
+    
+
+    func initObservers() {
+        // keyboard
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(self.keyboardWillShow), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(self.keyboardWillHide), name:UIKeyboardWillHideNotification, object: nil);
+    }
+    
+    func keyboardWillShow() {
+        self.isKeyboardOpen = true
+    }
+    
+    func keyboardWillHide() {
+        self.isKeyboardOpen = false
+    }
+    
+    func deinitObservers() {
+        // remove observer
+        NSNotificationCenter.defaultCenter()
+            .removeObserver(self)
+    }
+}
+
+
 extension FeedFiltersController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -151,7 +201,7 @@ extension FeedFiltersController: UITableViewDataSource, UITableViewDelegate {
         cell.labelSecond.text = ""
         cell.spacerFirst.hidden = true
         cell.spacerSecond.hidden = true
-        
+
         switch indexPath.row {
             case 0:
                 cell.labelTitle.text = "Select date"
