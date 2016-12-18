@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Happ/SelectCityControllers.swift"
-            timestampString = "503314156.760708"
+            timestampString = "503741916.855835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245">
+            startingLineNumber = "244"
+            endingLineNumber = "244">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -46,6 +46,22 @@
             startingLineNumber = "382"
             endingLineNumber = "382"
             landmarkName = "collectionView(collectionView:cellForItemAtIndexPath:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Happ/NavigationCoordinator.swift"
+            timestampString = "503755489.125002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
+            landmarkName = "showFeed()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

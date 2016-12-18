@@ -14,8 +14,7 @@ class EventTableCell: UITableViewCell {
 
     var viewModel: EventViewModel! {
         didSet {
-            // self.bindToViewModel()
-            self.viewModelDidUpdate()
+            self.updateView()
         }
     }
 
@@ -50,16 +49,7 @@ class EventTableCell: UITableViewCell {
     static let estimatedHeight = CGFloat(integerLiteral: 420)
 
 
-/*
-    private func bindToViewModel() {
-        let superViewModel = self.viewModel.didUpdate
-        self.viewModel.didUpdate = { [weak self] _ in
-            superViewModel?()
-            self?.viewModelDidUpdate()
-        }
-    }
-*/
-    func viewModelDidUpdate() {
+    func updateView() {
         let event = self.viewModel.event
 
         labelTitle.text = event.title
@@ -73,21 +63,23 @@ class EventTableCell: UITableViewCell {
         buttonUpvote.selected = event.is_upvoted
         buttonFavourite.selected = event.is_in_favourites
 
-        if let color = event.color {
-            viewDetailsContainer.backgroundColor = UIColor(hexString: color)
-        }
-
         viewImagePlaceholder.hidden = false
-        if let imageURL = event.images.first?.getURL() {
-            imageCover.hnk_setImageFromURL(
-                imageURL,
-                success: { img in
-                    self.imageCover.image = img
-                    self.viewImagePlaceholder.hidden = true
-            })
-            imageCover.layer.masksToBounds = true
-        }
-    }
 
+        if let image = event.images.first {
+            if let url = image.getURL() {
+                imageCover.hnk_setImageFromURL(
+                    url,
+                    success: { img in
+                        self.imageCover.image = img
+                        self.viewImagePlaceholder.hidden = true
+                })
+                imageCover.layer.masksToBounds = true
+            }
+            if let color = image.color {
+               viewDetailsContainer.backgroundColor = UIColor(hexString: color)
+            }
+        }
+
+    }
 
 }

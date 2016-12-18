@@ -84,11 +84,14 @@ class EventsExploreViewController: UICollectionViewController {
             let event = state.events[indexPath.row]
 
             cell.labelTitle.text = event.title
-            if let imageURL = event.images.first?.getURL() {
-                cell.image.hnk_setImageFromURL(imageURL)
-            }
-            if let color = event.color {
-                cell.viewTitleContainer.backgroundColor = UIColor(hexString: color)
+
+            if let image = event.images.first {
+                if let url = image.getURL() {
+                    cell.image.hnk_setImageFromURL(url)
+                }
+                if  let colorCode = image.color {
+                    cell.viewTitleContainer.backgroundColor = UIColor(hexString: colorCode)
+                }
             }
 
             return cell

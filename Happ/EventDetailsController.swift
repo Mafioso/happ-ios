@@ -103,21 +103,25 @@ class EventDetailsController: UIViewController {
         }
 
         let event = self.viewModel.event
-        let color = (event.color != nil) ? UIColor(hexString: event.color!) : UIColor.happBlackQuarterTextColor()
+        var color = UIColor.happBlackQuarterTextColor()
 
         // TODO: change to images slider
         pageControllImages.currentPage = 0
-        pageControllImages.numberOfPages = 1
+        pageControllImages.numberOfPages = event.images.count
 
         viewImagesPlaceholder.hidden = false
-        if let imageURL = event.images.first?.getURL() {
+        if let image = event.images.first {
             imageBackground.hnk_setImageFromURL(
-                imageURL,
+                image.getURL()!,
                 success: { img in
                     self.imageBackground.image = img
                     self.viewImagesPlaceholder.hidden = true
             })
             imageBackground.layer.masksToBounds = true
+
+            if let colorCode = image.color {
+                color = UIColor(hexString: colorCode)
+            }
         }
 
         [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { $0.backgroundColor = color }

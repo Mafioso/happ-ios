@@ -64,7 +64,7 @@ struct EventManageTableCellInflator {
 
 class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
 
-    var viewModel: EventsManageViewModel!
+    //var viewModel: EventsManageViewModel!
     
     // outlets
     @IBOutlet weak var scrollView: UIScrollView!

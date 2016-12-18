@@ -10,20 +10,55 @@ import UIKit
 import Foundation
 
 
-private let reuseIdentifier = "Cell"
-private let reuseIdentifierLoading = "CellLoading"
+enum ReuseIdentifier: String {
+    case Cell = "Cell"
+    case Loading = "CellLoading"
+    case Header = "SectionHeader"
+}
 private let segueEmbeddedTableID = "embeddedTable"
 
 
 
-class EventsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+class FeedViewController: EventsListViewControllerPrototype<FeedViewModel> {
+    init() {
+        super.init()
+    }
+}
 
 
-    var viewModel: EventsListViewModel! {
+class FavouriteViewController: EventsListViewControllerPrototype<FavouritesViewModel> {
+    init() {
+        super.init()
+    }
+}
+
+
+
+
+
+
+protocol EventsListDelegate {
+    func willDisplayItemsEventsList()
+}
+
+
+protocol EventsListSyncWithEmptyList: EventsEmptyListDelegate, EventsEmptyListDataSource  {
+    var delegateEmptyList: EventsListDelegate? { get set }
+}
+
+
+
+class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>: UIViewController, UITableViewDataSource, UITableViewDelegate,
+    FeedFiltersDelegate, EventsListSyncWithEmptyList {
+
+    var viewModel: T! {
         didSet {
-            self.bindToViewModel()
+            self.updateView()
         }
     }
+
+    var delegateEmptyList: EventsListDelegate?
 
 
     // outlets
@@ -34,7 +69,13 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         self.viewModel.displaySlideMenu?()
     }
     @IBAction func clickedFiltersNavItem(sender: UIButton) {
-        self.viewModel.displaySlideFeedFilters?()
+        self.viewModel.displaySlideFilters?()
+    }
+
+
+
+    init(nibName: String = "EventsListViewController") {
+        super.init(nibName: nibName, bundle: nil)
     }
 
 
@@ -42,6 +83,12 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
 
         self.initTableView()
+
+        if self.viewModel.willLoadNextDataPage() {
+            self.viewModel.onLoadFirstDataPage() { state in
+                self.viewModel.state = state
+            }
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -57,21 +104,18 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     }
 
 
-    private func bindToViewModel() {
-        let superDidUpdate = self.viewModel.didUpdate
-        self.viewModel.didUpdate = { [weak self] _ in
-            superDidUpdate?()
-            self?.viewModelDidUpdate()
+    func updateView() {
+        if !self.isViewLoaded() {
+            return
         }
-    }
 
-    func viewModelDidUpdate() {
-        let state = self.viewModel.state
-        if  state.fetchingState == .FinishRequest &&
-            state.events.isEmpty  {
-            self.viewModel.displayEmptyList?()
-        } else {
+        if  self.viewModel.isLoadingFirstDataPage() ||
+            !self.viewModel.state.items.isEmpty
+        {
+            self.delegateEmptyList?.willDisplayItemsEventsList()
             self.tableView.reloadData() // display loading cells or events
+        } else {
+            self.viewModel.displayEmptyList?()
         }
     }
 
@@ -79,46 +123,94 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
     private func initTableView() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        self.tableView.registerNib(
+            UINib(nibName: EventTableCell.nibName, bundle: nil),
+            forCellReuseIdentifier: ReuseIdentifier.Cell.rawValue)
+        self.tableView.registerNib(
+            UINib(nibName: EventLoadingTableCell.nibName, bundle: nil),
+            forCellReuseIdentifier: ReuseIdentifier.Loading.rawValue)
+        self.tableView.registerNib(
+            UINib(nibName: EventsListSectionHeader.nibName, bundle: nil),
+            forCellReuseIdentifier: ReuseIdentifier.Header.rawValue)
 
-        self.tableView.registerNib(UINib(nibName: EventTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-        self.tableView.registerNib(UINib(nibName: EventLoadingTableCell.nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifierLoading)
         self.tableView.estimatedRowHeight = EventTableCell.estimatedHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+
+
+    // delegate FeedFiltersDelegate
+    func didChangeFilters(filters: EventsListFiltersState) {
+        self.viewModel.onChangeFilters(filters)
+    }
+
+    // delegate EventsEmptyListDelegate & EventsEmptyListDataSource
+    func eventsEmptyList(clickNavItemLeft sender: UIButton) {
+        self.viewModel.onClickNavItemLeftEmptyList()
+    }
+    func eventsEmptyList(clickNavItemRight sender: UIButton) {
+        self.viewModel.onClickNavItemRightEmptyList()
+    }
+    func eventsEmptyList(clickAction sender: UIButton) {
+        self.viewModel.onClickActionEmptyList()
+    }
+    func getScope() -> EventsEmptyListScope {
+        return self.viewModel.getScopeEmptyList()
+    }
+
+
+
+    // header
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.viewModel.isLoadingFirstDataPage() {
+            return nil
+        }
+
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Header.rawValue) as! EventsListSectionHeader
+        cell.title.text = self.viewModel.state.getSectionTitle(section)
+        return cell
+    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(56)
+    }
+
+
     // fill with data
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if self.viewModel.isLoadingFirstDataPage() {
+            return 1
+        } else {
+            return self.viewModel.state.getSectionsCount()
+        }
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let state = self.viewModel.state
-        if state.fetchingState == .StartRequest {
+        if self.viewModel.isLoadingFirstDataPage() {
             return 3
 
         } else {
-            return state.events.count
+            return self.viewModel.state.getSectionEventsCount(section)
         }
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let state = self.viewModel.state
 
-        if state.fetchingState == .StartRequest {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifierLoading, forIndexPath: indexPath) as! EventLoadingTableCell
+        if self.viewModel.isLoadingFirstDataPage() {
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Loading.rawValue, forIndexPath: indexPath) as! EventLoadingTableCell
             return cell
 
         } else {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventTableCell
-            
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Cell.rawValue, forIndexPath: indexPath) as! EventTableCell
+
             // configure cell
-            let event = state.events[indexPath.row]
+            let event = self.viewModel.state.getSectionEvent(indexPath)
             cell.viewModel = {
                 let vm = EventViewModel(event: event)
                 vm.didUpdate = { [weak self] _ in
-                    self?.viewModelDidUpdate()
+                    self?.updateView()
                 }
                 vm.displayMoreActionList = { [weak self] _ in
                     let actionList = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-                    
+
                     if let interestName = event.interests.first?.title {
                         let actionUnsubscribe = UIAlertAction(title: "Unsubscribe from \"\(interestName)\"", style: .Default, handler: {_ in
                             vm.onUnsubscribeFromInterest()
@@ -140,26 +232,26 @@ class EventsListViewController: UIViewController, UITableViewDataSource, UITable
 
     // select event
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let state = self.viewModel.state
-        if state.fetchingState == .StartRequest {
+        if self.viewModel.isLoadingFirstDataPage() {
             return // do nothing
         }
 
-        let event = state.events[indexPath.row]
+        let event = self.viewModel.state.getSectionEvent(indexPath)
         print(".didSelect", indexPath.row, event.title)
         self.viewModel.onClickEvent(event)
     }
-    
+
     // pagination
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.row == self.viewModel.state.events.count - 3 {
-            self.viewModel.loadNextPage()
+        if indexPath.row == self.viewModel.state.items.count - 3 {
+            self.viewModel.onLoadNextDataPage { asyncState in
+                self.viewModel.state = asyncState
+            }
         }
     }
     
 }
-
 
 
 

@@ -10,13 +10,15 @@ import UIKit
 
 
 
-class EventsManageViewController: UITableViewController {
+class EventsManageViewController: UITableViewController, EventsListSyncWithEmptyList {
 
     var viewModel: EventsManageViewModel! {
         didSet {
-            self.bindToViewModel()
+            self.updateView()
         }
     }
+
+    var delegateEmptyList: EventsListDelegate?
 
 
     override func viewDidLoad() {
@@ -42,13 +44,14 @@ class EventsManageViewController: UITableViewController {
         self.tableView.rowHeight = CGFloat(125)
     }
 
-    func viewModelDidUpdate() {
-        self.tableView.reloadData()
-    }
-
-    private func bindToViewModel() {
-        self.viewModel.didUpdate = { [weak self] _ in
-            self?.viewModelDidUpdate()
+    func updateView() {
+        if  self.viewModel.isLoadingFirstDataPage() ||
+            !self.viewModel.state.items.isEmpty
+        {
+            self.delegateEmptyList?.willDisplayItemsEventsList()
+            self.tableView.reloadData()
+        } else {
+            self.viewModel.displayEmptyList?()
         }
     }
 
@@ -61,17 +64,32 @@ class EventsManageViewController: UITableViewController {
     }
 
 
+    // delegate EventsEmptyListDelegate & EventsEmptyListDataSource
+    func eventsEmptyList(clickNavItemLeft sender: UIButton) {
+        self.viewModel.onClickNavItemLeftEmptyList()
+    }
+    func eventsEmptyList(clickNavItemRight sender: UIButton) {
+        self.viewModel.onClickNavItemRightEmptyList()
+    }
+    func eventsEmptyList(clickAction sender: UIButton) {
+        self.viewModel.onClickActionEmptyList()
+    }
+    func getScope() -> EventsEmptyListScope {
+        return self.viewModel.getScopeEmptyList()
+    }
+
 
     // data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.state.events.count
+        return self.viewModel.state.items.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventManageTableCell
-        let event = self.viewModel.state.events[indexPath.row]
+
+        let event = self.viewModel.state.items[indexPath.row] as! EventModel
         var cellInflator: EventManageTableCellInflator
 
         // set cell data
@@ -84,11 +102,13 @@ class EventsManageViewController: UITableViewController {
         cell.labelUpvoteCount.text = String(event.votes_num)
         cell.imageUpvoteIcon.image = event.getUpvoteIcon()
         cell.imageFavIcon.image = event.getFavIcon()
-        if let url = event.images.first?.getURL() {
-            cell.imageCover.hnk_setImageFromURL(url)
-        }
-        if let color = event.color {
-            cell.viewDetailsContainer.backgroundColor = UIColor(hexString: color)
+        if let image = event.images.first {
+            if let url = image.getURL() {
+                cell.imageCover.hnk_setImageFromURL(url)
+            }
+            if let color = image.color {
+                cell.viewDetailsContainer.backgroundColor = UIColor(hexString: color)
+            }
         }
 
         // set cell styles

@@ -122,7 +122,6 @@ class SelectCityControllerPrototype<T: SelectCityViewModelProtocol>: UITableView
 
 
     func updateView() {
-        print(".[V].update", self.viewModel.state)
         self.tableView.reloadData()
         //TODO self.scrollToSelectedCity()
     }
@@ -176,7 +175,9 @@ class SelectCityControllerPrototype<T: SelectCityViewModelProtocol>: UITableView
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchText = searchController.searchBar.text
         print(".updateSearch", searchText)
-        self.viewModel.onChangeSearch(searchText)
+        self.viewModel.onChangeSearch(searchText, completion: { state in
+            self.viewModel.state = state
+        })
     }
 
     private func getCity(indexPath: NSIndexPath) -> CityModel {

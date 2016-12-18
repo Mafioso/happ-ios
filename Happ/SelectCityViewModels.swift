@@ -86,11 +86,11 @@ protocol SelectCityStateProtocol: PaginatedDataStateProtocol {
 
 // MARK: - ViewModel Protocol
 protocol SelectCityViewModelProtocol: PaginatedDataViewModelProtocol {
-    associatedtype SelectCityStateType: SelectCityStateProtocol
-    var state: SelectCityStateType { get set }
-    
+    associatedtype StateType: SelectCityStateProtocol
+    var state: StateType { get set }
+
     mutating func onSelectCity(city: CityModel)
-    mutating func onChangeSearch(search: String?)
+    mutating func onChangeSearch(search: String?, completion: ((StateType) -> Void))
     func fetchCitiesByName() -> Promise<Void>
     func selectedCity() -> CityModel?
 }
@@ -102,7 +102,7 @@ extension SelectCityViewModelProtocol {
     mutating func onSelectCity(city: CityModel) {
         self.state.selectedID = city.id
     }
-    mutating func onChangeSearch(search: String?) {
+    mutating func onChangeSearch(search: String?, completion: ((Self.StateType) -> Void)) {
         let searchValue = (search == "") ? nil : search
 
         var updState = self.state
@@ -116,8 +116,9 @@ extension SelectCityViewModelProtocol {
             // fetch from server by `search`
             self.fetchCitiesByName()
                 .then { _ -> Void in
-                    let serverItems = self.getData()
-                    self.state.items = serverItems
+                    var updState = self.state
+                    updState.items = self.getData()
+                    completion(updState)
             }
         }
 

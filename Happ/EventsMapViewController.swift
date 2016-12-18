@@ -10,11 +10,12 @@ import UIKit
 import GoogleMaps
 
 
-class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
+class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate, FeedFiltersDelegate {
 
-    var viewModel: EventsListViewModel!  {
+
+    var viewModel: EventsMapViewModel!  {
         didSet {
-            self.bindToViewModel()
+            self.updateView()
         }
     }
 
@@ -54,16 +55,15 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         super.viewWillAppear(animated)
 
         self.displayUserCity()
-
         self.extMakeNavBarWhite()
     }
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
         self.extMakeNavBarVisible()
     }
 
-    func viewModelDidUpdate() {
+    func updateView() {
 
         self.clearMap()
         self.displayEventMarkers()
@@ -72,6 +72,12 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
          self.displayMarker(.MyLocation(location: myLocation))
          }
          */
+    }
+    
+    
+    // implement FeedFiltersDelegate
+    func didChangeFilters(filters: EventsListFiltersState) {
+        self.viewModel.onChangeFilters(filters)
     }
 
 
@@ -109,13 +115,15 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
 
     private func displayEventMarkers() {
-        let events = self.viewModel.state.events
-        events.forEach { event in
-            EventService.updateGeoPointIfNotExists(event)
-                .then { event -> Void in
-                    self.displayMarker(.Event(event: event))
-                }
-        }
+        let events = self.viewModel.state.items
+        events
+            .map { $0 as! EventModel }
+            .forEach { event in
+                EventService.updateGeoPointIfNotExists(event)
+                    .then { event -> Void in
+                        self.displayMarker(.Event(event: event))
+                    }
+            }
     }
     private func displayUserCity() {
         let userCity = ProfileService.getUserCity()
@@ -126,14 +134,6 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         }
     }
 
-
-    private func bindToViewModel() {
-        let superDidUpdate = self.viewModel.didUpdate
-        self.viewModel.didUpdate = { [weak self] _ in
-            superDidUpdate?()
-            self?.viewModelDidUpdate()
-        }
-    }
 
     private func initNavBarItems() {
         self.navigationItem.title = "Events near you"

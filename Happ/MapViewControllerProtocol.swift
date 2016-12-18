@@ -94,8 +94,8 @@ extension MapViewControllerProtocol where Self: UIViewController {
             // create view
             let eventOnMapView = EventOnMap.initView()
             eventOnMapView.labelTitle.text = event.title
-            if let colorValue = event.color {
-                let color = UIColor(hexString: colorValue)
+            if let colorCode = event.images.first?.color {
+                let color = UIColor(hexString: colorCode)
                 eventOnMapView.viewRounded.backgroundColor = color
                 eventOnMapView.viewTriangle.backgroundColor = color
             }

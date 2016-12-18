@@ -9,6 +9,13 @@
 import UIKit
 import WTLCalendarView
 
+
+
+protocol FeedFiltersDelegate {
+    func didChangeFilters(filters: EventsListFiltersState)
+}
+
+
 class FeedFiltersController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
@@ -25,8 +32,8 @@ class FeedFiltersController: UIViewController {
     @IBOutlet weak var top: NSLayoutConstraint!
     
     let cellDateDisplayID = "cellDisplayDate"
-    
-    var viewModel: EventsListViewModel!
+
+    var delegate: FeedFiltersDelegate?
     var beginDate: NSDate?
     var finishDate: NSDate?
     var time: NSDate?
@@ -42,7 +49,7 @@ class FeedFiltersController: UIViewController {
         beginDate = nil
         finishDate = nil
         time = nil
-        
+
         calendarView.setBeginDate(nil, finishDate: nil)
         timePicker.date = NSDate(timeIntervalSince1970: 60 * 60 * 20)
         tableDateRange.reloadData()
@@ -122,9 +129,8 @@ class FeedFiltersController: UIViewController {
         let sortBy: EventsListSortType = radioIsPopular.on ? .ByPopular : .ByDate
 
         let filters = EventsListFiltersState(search: search, dateFrom: beginDate, dateTo: finishDate, time: time, sortBy: sortBy, onlyFree: radioIsFree.on, convertCurrency: radioIsConvert.on, statusMap: nil)
-        self.viewModel.onChangeFilters(filters)
+        self.delegate?.didChangeFilters(filters)
     }
-    
 }
 
 

@@ -350,17 +350,56 @@ class NavigationCoordinator {
 
 
     func showFeed() {
-        self.showEventsList(.Feed)
+        var viewModel = FeedViewModel()
+        viewModel.navigateEventDetails = self.showEventDetails
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(false)
+
+        let viewController = FeedViewController()
+        viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
+        viewController.viewModel = viewModel
+
+        let tabIndex = 2
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
+
+        // slidebar filter
+        let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        filtersViewController.delegate = viewController
+        // update slidebar
+        self.updateSlidebar(filtersViewController)
     }
     func showFavourite() {
-        self.showEventsList(.Favourite)
+        var viewModel = FavouritesViewModel()
+        viewModel.navigateEventDetails = self.showEventDetails
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        viewModel.navigateFeed = self.showFeed
+
+        let viewController = FavouriteViewController()
+        viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
+        viewController.viewModel = viewModel
+
+        let tabIndex = 3
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
+
+        // slidebar filter
+        let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        filtersViewController.delegate = viewController
+        // update slidebar
+        self.updateSlidebar(filtersViewController)
     }
     func showMyEvents() {
-        let viewModel = EventsManageViewModel()
+        var viewModel = EventsManageViewModel()
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.navigateEventDetails = self.showEventDetails
 
-        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
+         let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
+        viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
         viewController.viewModel = viewModel
 
         self.tabBarController.selectedIndex = 2
@@ -368,28 +407,33 @@ class NavigationCoordinator {
         self.navigationController.viewControllers = [viewController]
     }
 
-    func showEmptyEventsList(parentViewModel: EventsListViewModel) -> NavigationFunc {
+    func showEmptyEventsList(var parentViewController: EventsListSyncWithEmptyList) -> NavigationFunc {
         return {
             let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsListEmpty") as! EventsListEmptyViewController
-            viewController.viewModel = parentViewModel
+            viewController.delegate = parentViewController
+            viewController.dataSource = parentViewController
+
+            parentViewController.delegateEmptyList = viewController
+            
             self.navigationController.pushViewController(viewController, animated: false)
         }
     }
-
-    func showEventsList(scope: EventsListScope) {
-        let viewModel = EventsListViewModel(scope: scope)
+    /*
+    func showEventsList<T: EventsListViewModelProtocol>(var viewModel: T) {
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
-        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
-        viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        // viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
 
-        // for empty list page
+
+        /*/ for empty list page
         viewModel.displayEmptyList = self.showEmptyEventsList(viewModel)
         viewModel.navigateFeed = self.startFeed
         viewModel.navigateCreateEvent = self.startEventManage
         viewModel.navigateSelectInterests = self.showSelectUserInterests(true)
-
-        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsList") as! EventsListViewController
+        */
+ 
+        let viewController = EventsListViewController()
         viewController.viewModel = viewModel
 
         let tabIndex = (scope == .Feed) ? 2 : 3
@@ -403,6 +447,7 @@ class NavigationCoordinator {
         // update slidebar
         self.updateSlidebar(filtersViewController)
     }
+    */
     func showExplore() {
         let viewModel = EventsExploreViewModel()
         viewModel.navigateEventDetails = self.showEventDetails
@@ -419,12 +464,11 @@ class NavigationCoordinator {
         self.updateSlidebar() // to remove feedFilter
     }
     func showMap() {
-        let viewModel = EventsListViewModel(scope: .Feed)
-        viewModel.navigateEventDetails = self.showEventDetails
+        var viewModel = EventsMapViewModel()
         viewModel.navigateEventDetailsMap = self.showEventDetailsMap
         viewModel.displaySlideMenu = self.displaySlideMenu
-        viewModel.displaySlideFeedFilters = self.displaySlideFeedFilters
-        viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        // viewModel.hideSlideFeedFilters = self.hideSlideFeedFilters
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsMap") as! EventsMapViewController
         viewController.viewModel = viewModel
@@ -434,8 +478,11 @@ class NavigationCoordinator {
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
 
-        // TODO add own Filter
-        self.updateSlidebar() // to remove feedFilter
+        // slidebar filter
+        let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        filtersViewController.delegate = viewController
+        // update slidebar
+        self.updateSlidebar(filtersViewController)
     }
 
 

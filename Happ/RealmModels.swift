@@ -219,6 +219,7 @@ class GeoPointModel: Object, Mappable {
 class ImageModel: Object, Mappable {
     dynamic var id = ""
     dynamic var path: String?
+    dynamic var color: String?
 
 
     func getURL() -> NSURL? {
@@ -241,6 +242,7 @@ class ImageModel: Object, Mappable {
     func mapping(map: Map) {
         id      <- map["id"]
         path    <- map["path"]
+        color   <- map["color"]
     }
 }
 
@@ -297,8 +299,8 @@ class EventModel: Object, Mappable {
     // city end
     dynamic var is_close_on_start = false
     dynamic var registration_link: String?
-    dynamic var age_restriction = 0
-    dynamic var color: String?
+    dynamic var max_age = 200
+    dynamic var min_age = 0
 
 
 
@@ -345,8 +347,8 @@ class EventModel: Object, Mappable {
         id_of_city          <- map["id_of_city"]
         is_close_on_start   <- map["close_on_start"]
         registration_link   <- map["registration_link"]
-        age_restriction     <- map["age_restriction"]
-        color               <- map["color"]
+        min_age             <- map["min_age"]
+        max_age             <- map["max_age"]
     }
 
 
