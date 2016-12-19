@@ -38,6 +38,8 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.initDataLoading()
+
         self.initMap()
         self.initLocation()
 
@@ -63,7 +65,17 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.extMakeNavBarVisible()
     }
 
+    
+    func initDataLoading() {
+        if self.viewModel.willLoadNextDataPage() {
+            self.viewModel.onLoadFirstDataPage() { state in
+                self.viewModel.state = state
+            }
+        }
+    }
+    
     func updateView() {
+        guard self.isViewLoaded() else { return }
 
         self.clearMap()
         self.displayEventMarkers()
@@ -77,7 +89,8 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     
     // implement FeedFiltersDelegate
     func didChangeFilters(filters: EventsListFiltersState) {
-        self.viewModel.onChangeFilters(filters)
+        self.viewModel.onChangeFilters(filters) // it clear state
+        self.initDataLoading() // fetch items into state
     }
 
 

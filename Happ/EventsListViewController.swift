@@ -63,7 +63,8 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // outlets
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var statusBarBackground: UIView!
+
     // actions
     @IBAction func clickedMenuNavItem(sender: UIButton) {
         self.viewModel.displaySlideMenu?()
@@ -108,15 +109,20 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     }
     
     func updateView() {
-        if !self.isViewLoaded() {
-            return
-        }
+        guard self.isViewLoaded() else { return }
 
         if  self.viewModel.isLoadingFirstDataPage() ||
             !self.viewModel.state.items.isEmpty
         {
-            self.delegateEmptyList?.willDisplayItemsEventsList()
-            self.tableView.reloadData() // display loading cells or events
+            self.delegateEmptyList?.willDisplayItemsEventsList() // close placeholder
+            self.tableView.reloadData() // display loading cells or event cells
+
+            if self.viewModel.isLoadingFirstDataPage() {
+                self.statusBarBackground.backgroundColor = UIColor.clearColor()
+            } else {
+                self.statusBarBackground.backgroundColor = UIColor.happOrangeColor()
+            }
+            
         } else {
             self.viewModel.displayEmptyList?()
         }
@@ -168,9 +174,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // header
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if self.viewModel.isLoadingFirstDataPage() {
-            return nil
-        }
+        guard !self.viewModel.isLoadingFirstDataPage() else { return nil }
 
         let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Header.rawValue) as! EventsListSectionHeader
         cell.title.text = self.viewModel.state.getSectionTitle(section)

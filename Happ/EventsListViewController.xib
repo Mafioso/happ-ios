@@ -10,8 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsListViewController" customModule="Happ" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsListViewControllerPrototype" customModule="Happ" customModuleProvider="target">
             <connections>
+                <outlet property="statusBarBackground" destination="JQe-uV-VyH" id="0AG-wk-qoS"/>
                 <outlet property="tableView" destination="KwE-sA-2cP" id="gJ0-17-kJi"/>
                 <outlet property="view" destination="uRF-p4-iv2" id="anU-QW-W4R"/>
             </connections>
