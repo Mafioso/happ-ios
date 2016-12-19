@@ -31,7 +31,9 @@ class SettingsDictModel: Object, Mappable {
 
 class UserModel: Object, Mappable {
     dynamic var id = ""
+    dynamic var fn = ""
     dynamic var settings: SettingsDictModel?
+    dynamic var avatar: ImageModel?
     dynamic var date_created: NSDate?
     dynamic var date_edited: NSDate?
     dynamic var username = ""
@@ -43,6 +45,7 @@ class UserModel: Object, Mappable {
     dynamic var ogranization = false
     dynamic var is_active = false
     dynamic var last_login: NSDate?
+    dynamic var role = 0
 
 
     required convenience init?(_ map: Map) {
@@ -51,7 +54,9 @@ class UserModel: Object, Mappable {
 
     func mapping(map: Map) {
         id              <- map["id"]
+        fn              <- map["fn"]
         settings        <- map["settings"]
+        avatar          <- map["avatar"]
         date_created    <- (map["date_created"], HappDateTransformer)
         date_edited     <- (map["date_edited"], HappDateTransformer)
         username        <- map["username"]
@@ -62,7 +67,8 @@ class UserModel: Object, Mappable {
         gender          <- map["gender"]
         ogranization    <- map["ogranization"]
         is_active       <- map["is_active"]
-        last_login   <- (map["last_login"], HappDateTransformer)
+        last_login      <- (map["last_login"], HappDateTransformer)
+        role            <- map["role"]
     }
 
     override static func primaryKey() -> String? {

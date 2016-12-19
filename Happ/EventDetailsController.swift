@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MessageUI
 
 
 class EventDetailsController: UIViewController {
@@ -212,46 +211,30 @@ extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension EventDetailsController: MFMailComposeViewControllerDelegate {
+
+/* TODO
+ let event = self.viewModel.event
+ let user = ProfileService.getUserProfile()
+ let subject = "I have question by \(event.title)"
+ let body = "Hi, my name is \(user.fullname)."
+ */
+
+
+
+
+extension EventDetailsController: EmailSenderProtocol {
 
     // EMAIL TO
     func sendEmail() {
-        let emails = self.getReceipientsAddresses()
-        if emails.isEmpty {
-            return
-        }
-
         let event = self.viewModel.event
         let user = ProfileService.getUserProfile()
+
+        let receipants = self.getReceipientsAddresses()
         let subject = "I have question by \(event.title)"
         let body = "Hi, my name is \(user.fullname)."
-
-
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(self.getReceipientsAddresses())
-            mail.setSubject(subject)
-            mail.setMessageBody("<p>\(body).</p> <br/>", isHTML: true)
-
-            self.presentViewController(mail, animated: true, completion: nil)
-
-        } else {
-            let params = [
-                "subject": subject,
-                "body": body
-            ]
-
-            let query = params.map { NSURLQueryItem(name: $0.0, value: $0.1) }
-            let mailTo = NSURLComponents(string: "mailto:\(emails.first!)")!
-            mailTo.queryItems = query
-            let mailToURL = mailTo.URL!
-
-            UIApplication.sharedApplication().openURL(mailToURL)
-        }
-    }
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        let email = EmailSenderCompose.Simple(subject: subject, body: body, receipants: receipants)
+        self.sendEmail(email)
     }
     private func getReceipientsAddresses() -> [String] {
         if let email = self.viewModel.event.email {

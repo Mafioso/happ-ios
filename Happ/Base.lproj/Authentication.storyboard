@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -289,9 +289,9 @@
                                         <exclude reference="JwK-QV-qH7"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="dgj-mv-56D"/>
                                         <exclude reference="HPy-S6-Kcp"/>
                                         <exclude reference="LlH-Z4-dK1"/>
+                                        <exclude reference="dgj-mv-56D"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -300,9 +300,9 @@
                                         <include reference="JwK-QV-qH7"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="dgj-mv-56D"/>
                                         <include reference="HPy-S6-Kcp"/>
                                         <include reference="LlH-Z4-dK1"/>
+                                        <include reference="dgj-mv-56D"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -318,6 +318,9 @@
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedPrivacyPolicy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3kM-sE-kf3"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beb-of-gd3" userLabel="Line for Privacy">
                                                 <rect key="frame" x="0.0" y="16" width="98" height="1"/>
@@ -338,6 +341,9 @@
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedTermsPolicy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cY4-3P-2If"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQY-Z5-LiC" userLabel="Line for Terms">
                                                 <rect key="frame" x="126.5" y="16" width="98" height="1"/>
@@ -418,12 +424,12 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="gth-3f-pN9"/>
+                                <exclude reference="II8-5U-9ka"/>
+                                <exclude reference="mnV-4E-Lsn"/>
                                 <exclude reference="RmY-YY-d63"/>
                                 <exclude reference="YLi-n4-Pob"/>
                                 <exclude reference="Iuv-Ba-f2H"/>
                                 <exclude reference="Xfc-0Z-5kx"/>
-                                <exclude reference="II8-5U-9ka"/>
-                                <exclude reference="mnV-4E-Lsn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -434,12 +440,12 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="gth-3f-pN9"/>
+                                <include reference="II8-5U-9ka"/>
+                                <include reference="mnV-4E-Lsn"/>
                                 <include reference="RmY-YY-d63"/>
                                 <include reference="YLi-n4-Pob"/>
                                 <include reference="Iuv-Ba-f2H"/>
                                 <include reference="Xfc-0Z-5kx"/>
-                                <include reference="II8-5U-9ka"/>
-                                <include reference="mnV-4E-Lsn"/>
                             </mask>
                         </variation>
                     </view>
@@ -825,11 +831,11 @@
                                         <exclude reference="F8a-4f-jNR"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="6TD-PC-K8L"/>
-                                        <exclude reference="QSj-DO-edo"/>
-                                        <exclude reference="gBd-MI-YDP"/>
                                         <exclude reference="U9M-0r-3iL"/>
                                         <exclude reference="nu1-LJ-Ace"/>
+                                        <exclude reference="QSj-DO-edo"/>
+                                        <exclude reference="gBd-MI-YDP"/>
+                                        <exclude reference="6TD-PC-K8L"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -839,11 +845,11 @@
                                         <include reference="F8a-4f-jNR"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="6TD-PC-K8L"/>
-                                        <include reference="QSj-DO-edo"/>
-                                        <include reference="gBd-MI-YDP"/>
                                         <include reference="U9M-0r-3iL"/>
                                         <include reference="nu1-LJ-Ace"/>
+                                        <include reference="QSj-DO-edo"/>
+                                        <include reference="gBd-MI-YDP"/>
+                                        <include reference="6TD-PC-K8L"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -953,6 +959,9 @@
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedTermsPolicy:" destination="yE1-eK-aIX" eventType="touchUpInside" id="2Dw-N6-T2F"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dC0-uS-nIe" userLabel="Line for Terms">
                                                 <rect key="frame" x="126.5" y="16" width="98" height="1"/>
@@ -1044,12 +1053,12 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="PYz-Eh-Ohk"/>
+                                <exclude reference="Foz-bq-NVQ"/>
+                                <exclude reference="YEZ-hY-IIO"/>
                                 <exclude reference="55N-8O-q9H"/>
                                 <exclude reference="Zzi-m6-6BZ"/>
                                 <exclude reference="Obv-Lf-8me"/>
                                 <exclude reference="xZx-Vd-MQ6"/>
-                                <exclude reference="Foz-bq-NVQ"/>
-                                <exclude reference="YEZ-hY-IIO"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -1060,12 +1069,12 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="PYz-Eh-Ohk"/>
+                                <include reference="Foz-bq-NVQ"/>
+                                <include reference="YEZ-hY-IIO"/>
                                 <include reference="55N-8O-q9H"/>
                                 <include reference="Zzi-m6-6BZ"/>
                                 <include reference="Obv-Lf-8me"/>
                                 <include reference="xZx-Vd-MQ6"/>
-                                <include reference="Foz-bq-NVQ"/>
-                                <include reference="YEZ-hY-IIO"/>
                             </mask>
                         </variation>
                     </view>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsController: UIViewController, UITableViewDelegate {
+class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProtocol {
 
     var viewModel: SettingsViewModel!
 
@@ -53,18 +53,24 @@ class SettingsController: UIViewController, UITableViewDelegate {
         case 3:
             self.viewModel.navigateSelectCurrency?()
         case 4:
-            self.viewModel.navigateContact?()
+            self.sendEmailToHapp()
         case 5:
             self.viewModel.navigateHelp?()
         case 6:
             self.viewModel.navigateTerms?()
         case 7:
-            self.viewModel.navigatePolicy?()
+            self.viewModel.navigatePrivacy?()
         default:
             break
         }
     }
 
+    
+    private func sendEmailToHapp() {
+        let happAddress = DefaultParameters.getValue(.HappEmailAddress) as! String
+        let email = EmailSenderCompose.Simple(subject: "Hello Happ!", body: "", receipants: [happAddress])
+        self.sendEmail(email)
+    }
 
     private func initNavigationBarItems() {
         self.navigationItem.title = "Settings"

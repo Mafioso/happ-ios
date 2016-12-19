@@ -10,6 +10,59 @@ import Foundation
 import ObjectMapper
 import RealmSwift
 import GoogleMaps
+import MessageUI
+
+
+
+
+enum EmailSenderCompose {
+    case Simple(subject: String, body: String, receipants: [String])
+}
+
+protocol EmailSenderProtocol: MFMailComposeViewControllerDelegate {
+    func sendEmail(composed: EmailSenderCompose)
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult)
+}
+extension EmailSenderProtocol where Self: UIViewController {
+    func sendEmail(email: EmailSenderCompose) {
+        var receipants: [String]
+        var subject: String
+        var body: String
+        
+        switch email {
+        case .Simple(let _subject, let _body, let _receipants):
+            receipants = _receipants
+            subject = _subject
+            body = _body
+        }
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(receipants)
+            mail.setSubject(subject)
+            mail.setMessageBody("<p>\(body).</p> <br/>", isHTML: true)
+            
+            self.presentViewController(mail, animated: true, completion: nil)
+            
+        } else {
+            let params = [
+                "subject": subject,
+                "body": body
+            ]
+            
+            let query = params.map { NSURLQueryItem(name: $0.0, value: $0.1) }
+            let mailTo = NSURLComponents(string: "mailto:\(receipants.first!)")!
+            mailTo.queryItems = query
+            let mailToURL = mailTo.URL!
+            
+            UIApplication.sharedApplication().openURL(mailToURL)
+        }
+    }
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
 
 
 
@@ -32,6 +85,7 @@ struct DeviceType
 
 enum DefaultParametersKeyTypes: String {
     case GoogleMapApiKey = "api_key_google_map"
+    case HappEmailAddress = "happ_email"
 }
 
 class DefaultParameters {

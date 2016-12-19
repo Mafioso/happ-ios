@@ -67,7 +67,7 @@ class EventsListEmptyViewController: UIViewController, EventsListDelegate {
 
     // delegate EventsList
     func willDisplayItemsEventsList() {
-        if (self.isViewLoaded() && self.view.window != nil) {
+        if self.navigationController?.viewControllers.indexOf(self) != nil {
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
@@ -117,10 +117,14 @@ class EventsListEmptyViewController: UIViewController, EventsListDelegate {
 
     private func initNavBarItems() {
         self.navigationItem.title = self.getNavTitle()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem(withSender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickNavItemMenu(withSender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickNavItemFilter(withSender:)))
     }
-    func handleClickMenuNavItem(withSender sender: UIButton) {
+    func handleClickNavItemMenu(withSender sender: UIButton) {
         self.delegate.eventsEmptyList(clickNavItemLeft: sender)
+    }
+    func handleClickNavItemFilter(withSender sender: UIButton) {
+        self.delegate.eventsEmptyList(clickNavItemRight: sender)
     }
 }
 

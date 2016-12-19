@@ -17,7 +17,8 @@ class AuthenticationViewModel {
     var navigateSetup: NavigationFunc
     var navigateBack: NavigationFunc
     var navigateAfterLogin: NavigationFunc
-    var navigatePrivacyPolicy: NavigationFunc
+    var navigatePrivacyPolicyPage: NavigationFunc
+    var navigateTermsPolicyPage: NavigationFunc
 
 
     init() {

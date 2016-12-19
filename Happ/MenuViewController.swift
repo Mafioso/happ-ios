@@ -75,10 +75,13 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
 
 
     func viewModelDidUpdate() {
-        // let imageURL = NSURL(user...)
-        // imageUserPhoto.hnk_setImageFromURL(imageURL)
-        imageUserPhoto.image = UIImage(named: "bg-feed")
-        labelUserFullname.text = self.viewModelMenu.getUser().fullname
+        let user = self.viewModelMenu.getUser()
+        labelUserFullname.text = user.fullname
+        if  let image = user.avatar,
+            let url = image.getURL()
+        {
+            imageUserPhoto.hnk_setImageFromURL(url)
+        }
 
         self.updateScopeViews()
         self.tableMenuActions.reloadData()

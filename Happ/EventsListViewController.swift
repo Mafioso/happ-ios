@@ -122,7 +122,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
             } else {
                 self.statusBarBackground.backgroundColor = UIColor.happOrangeColor()
             }
-            
+
         } else {
             self.viewModel.displayEmptyList?()
         }
@@ -153,6 +153,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     func didChangeFilters(filters: EventsListFiltersState) {
         self.viewModel.onChangeFilters(filters) // it clear state
         self.initDataLoading() // fetch items into state
+        self.delegateEmptyList?.willDisplayItemsEventsList()
     }
 
 

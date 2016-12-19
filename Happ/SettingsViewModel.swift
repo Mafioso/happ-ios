@@ -46,7 +46,7 @@ class SettingsViewModel {
     var navigateContact: NavigationFunc
     var navigateHelp: NavigationFunc
     var navigateTerms: NavigationFunc
-    var navigatePolicy: NavigationFunc
+    var navigatePrivacy: NavigationFunc
 
     var navigateBack: NavigationFunc
     var displaySlideMenu: NavigationFunc

@@ -61,6 +61,14 @@ class SignUpController: UIViewController {
     @IBAction func clickedBackNavItem(sender: UIButton) {
         self.viewModel.navigateBack?()
     }
+    @IBAction func clickedPrivacyPolicy(sender: UIButton) {
+        self.viewModel.navigatePrivacyPolicyPage?()
+    }
+    @IBAction func clickedTermsPolicy(sender: UIButton) {
+        self.viewModel.navigateTermsPolicyPage?()
+    }
+
+
     
     // constants
     let defaultFormToBottomConstraint = CGFloat(142)

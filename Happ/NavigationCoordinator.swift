@@ -262,8 +262,8 @@ class NavigationCoordinator {
         viewModel.navigateBack = self.goBack
         viewModel.navigateSetup = self.startSetupCityAndInterests
         viewModel.navigateAfterLogin = self.start
-        // viewModel.navigateTerm
-        viewModel.navigatePrivacyPolicy = self.showWebView("http://happ.westeurope.cloudapp.azure.com/api/v1/terms-of-service/")
+        viewModel.navigateTermsPolicyPage = self.showWebView(.Terms)
+        viewModel.navigatePrivacyPolicyPage = self.showWebView(.Privacy)
 
         let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignInPage") as! SignInController
         viewController.viewModel = viewModel
@@ -280,11 +280,11 @@ class NavigationCoordinator {
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
-    
-    func showWebView(link:String) -> NavigationFunc{
+
+    func showWebView(webPage: HappWebPages) -> NavigationFunc{
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
-            viewController.link = link
+            viewController.link = webPage.getURL()
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
@@ -421,12 +421,17 @@ class NavigationCoordinator {
 
     func showEmptyEventsList(var parentViewController: EventsListSyncWithEmptyList) -> NavigationFunc {
         return {
+            let existsAt: Int? = self.navigationController.viewControllers.indexOf { view in
+                return view.isKindOfClass(EventsListEmptyViewController)
+            }
+            guard existsAt == nil else { return }
+
             let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsListEmpty") as! EventsListEmptyViewController
             viewController.delegate = parentViewController
             viewController.dataSource = parentViewController
 
             parentViewController.delegateEmptyList = viewController
-            
+
             self.navigationController.pushViewController(viewController, animated: false)
         }
     }
@@ -587,6 +592,8 @@ class NavigationCoordinator {
         viewModel.navigateProfile = self.showProfile
         viewModel.navigateSelectCurrency = self.showSelectCurrency(viewModel)
         viewModel.navigateSelectNotifications = self.showSelectNotifications(viewModel)
+        viewModel.navigateTerms = self.showWebView(.Terms)
+        viewModel.navigatePrivacy = self.showWebView(.Privacy)
  
         let viewController = self.profileStoryboard.instantiateViewControllerWithIdentifier("Settings") as! SettingsController
         viewController.viewModel = viewModel
@@ -663,11 +670,7 @@ class NavigationCoordinator {
         }
     }
     private func displaySlideFeedFilters() {
-        if  let slideMenu = self.window.rootViewController as? SlideMenuController,
-            let currentVC = self.navigationController.visibleViewController,
-            let rootVC = self.navigationController.viewControllers.first
-            where currentVC == rootVC
-        {
+        if  let slideMenu = self.window.rootViewController as? SlideMenuController {
             slideMenu.openRight()
         }
     }
