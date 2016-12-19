@@ -221,7 +221,7 @@ protocol SelectMultipleInterestsViewModelProtocol: SelectInterestViewModelProtoc
 
     var title: String { get set }
 
-    mutating func setSelectedInterests(interests: [InterestModel])
+    mutating func makeSelectedInterests(interests: [InterestModel]) -> [InterestModel: [InterestModel]]
     mutating func onSelectAll()
 
     func getAllInterestsCount() -> Int
@@ -232,9 +232,8 @@ protocol SelectUserInterestsViewModelProtocol: SelectMultipleInterestsViewModelP
 
     var navigateAfterSave: NavigationFunc { get set }
 
-    func fetchAllUserInterests(page: Int) -> Promise<Void>
+    func fetchAllUserInterests(page: Int, overwrite: Bool) -> Promise<Void>
     func getAllUserInterests() -> [InterestModel]
-    func updateSelectedInterests(originState: Self.StateType) -> Self.StateType
 }
 
 
@@ -250,11 +249,10 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
     // 5. update `selected` with user interests
 
     mutating func onInitLoadingData(completion: ((Self.StateType) -> Void)) {
-        self.state.isFetching = true
-
-        InterestService.deleteAllStored()
         var userInterests: [InterestModel] = []
-        self.fetchAllUserInterests()
+
+        self.state.isFetching = true
+        self.fetchAllUserInterests(1, overwrite: true)
             .then { _ -> Void in
                 userInterests = self.getAllUserInterests()
             }
@@ -266,19 +264,19 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
                 updState.items = self.getData()
                 updState.isFetching = false
                 updState.userInterests = userInterests
-                updState = self.updateSelectedInterests(updState) // .selected
+                updState.selected = self.makeSelectedInterests(userInterests)
                 updState.isSelectedAll = (self.getAllInterestsCount() == InterestService.countUserInterests)
                 completion(updState)
             }
     }
-    func fetchAllUserInterests(page: Int = 1) -> Promise<Void> {
+    func fetchAllUserInterests(page: Int, overwrite: Bool) -> Promise<Void> {
         return Promise { resolve, reject in
-            InterestService.fetchUserInterests(page, overwrite: page == 1)
+            InterestService.fetchUserInterests(page, overwrite: overwrite)
                 .then { _ -> Void in
                     if InterestService.isLastPage {
                         resolve()
                     } else {
-                        self.fetchAllUserInterests(page + 1)
+                        self.fetchAllUserInterests(page + 1, overwrite: false)
                             .then { resolve() }
                     }
                 }
@@ -289,26 +287,6 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
     }
     func getAllUserInterests() -> [InterestModel] {
         return Array(InterestService.getAllStored())
-    }
-    func updateSelectedInterests(originState: Self.StateType) -> Self.StateType {
-        // add only subinterest which not be added when parent didn't exists
-        var updSelected = originState.selected
-        let interests = originState.userInterests
-
-        let newParents = interests
-            .filter { $0.parent_id == nil }
-            .filter { updSelected[$0] == nil }
-
-        newParents.forEach { parent in
-            let newSubinterests = InterestService
-                .getSubinterestsOf(parent)
-                .filter { interests.indexOf($0) != nil }
-            updSelected.updateValue(newSubinterests, forKey: parent)
-        }
-
-        var updState = originState
-        updState.selected = updSelected
-        return updState
     }
 }
 
@@ -348,24 +326,24 @@ extension SelectMultipleInterestsViewModelProtocol {
         }
     }
 
-    mutating func setSelectedInterests(interests: [InterestModel]) {
-        var updSelected: [InterestModel: [InterestModel]] = [:]
+    mutating func makeSelectedInterests(interests: [InterestModel]) -> [InterestModel: [InterestModel]] {
+        var result: [InterestModel: [InterestModel]] = [:]
 
         interests.forEach { item in
             if item.parent_id == nil {
-                updSelected.updateValue([], forKey: item)
+                result.updateValue([], forKey: item)
 
             } else if let parent = InterestService.getParentOf(item) {
-                if var prevValue = updSelected[parent] {
+                if var prevValue = result[parent] {
                     prevValue.append(item)
-                    updSelected.updateValue(prevValue, forKey: parent)
+                    result.updateValue(prevValue, forKey: parent)
                 } else {
-                    updSelected.updateValue([item], forKey: parent)
+                    result.updateValue([item], forKey: parent)
                 }
             }
         }
 
-        self.state.selected = updSelected
+        return result
     }
     func getAllInterestsCount() -> Int {
         return InterestService.getAllStored().count
