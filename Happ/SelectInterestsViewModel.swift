@@ -87,10 +87,9 @@ struct SelectInterestViewModel: SelectInterestViewModelProtocol {
 
 
 struct SelectUserInterestsState: SelectUserInterestsStateProtocol {
-    var items: [Object]
-    var page: Int
+    var items: [InterestModel]
     var isFetching: Bool
-    
+
     var selected: [InterestModel : [InterestModel]]
     var opened: InterestModel?
     var isSelectedAll: Bool
@@ -98,7 +97,7 @@ struct SelectUserInterestsState: SelectUserInterestsStateProtocol {
     var userInterests: [InterestModel]
     
     static func getInitialState() -> SelectUserInterestsState {
-        return SelectUserInterestsState(items: [], page: 0, isFetching: false, selected: [:], opened: nil, isSelectedAll: false, userInterests: [])
+        return SelectUserInterestsState(items: [], isFetching: false, selected: [:], opened: nil, isSelectedAll: false, userInterests: [])
     }
 }
 
@@ -170,7 +169,9 @@ enum SelectInterestSelectionTypes {
 
 
 // MARK: STATEs
-protocol SelectInterestStateProtocol: PaginatedDataStateProtocol {
+protocol SelectInterestStateProtocol {
+    var items: [InterestModel] { get set }
+    var isFetching: Bool { get set }
     var selected: [InterestModel: [InterestModel]] { get set }
     var opened: InterestModel? { get set }
 }
@@ -186,7 +187,7 @@ protocol SelectUserInterestsStateProtocol: SelectMultipleInterestsStateProtocol 
 
 
 // MARK: VIEW MODELs
-protocol SelectInterestViewModelProtocol: PaginatedDataViewModelProtocol {
+protocol SelectInterestViewModelProtocol {
     associatedtype StateType: SelectInterestStateProtocol
     var state: StateType { get set }
 
@@ -198,10 +199,15 @@ protocol SelectInterestViewModelProtocol: PaginatedDataViewModelProtocol {
     mutating func onSelectSubinterest(subinterest: InterestModel)
     mutating func onOpenSubinterests(for interest: InterestModel)
     mutating func onCloseSubinterests()
+    mutating func onInitLoadingData(completion: ((Self.StateType) -> Void))
     func getSelectionType(interest: InterestModel) -> SelectInterestSelectionTypes
     func getSelectedInterests() -> [InterestModel]
     func isInterestSelected(interest: InterestModel) -> Bool
     func isSubinterestSelected(subinterest: InterestModel) -> Bool
+
+    func fetchData(overwrite flagValue: Bool) -> Promise<Void>
+    func fetchDataFromAllPages(page: Int, overwrite: Bool) -> Promise<Void>
+    func getData() -> [InterestModel]
 
     var isHeaderVisible: Bool { get set }
     var navItem: NavItemType { get set }
@@ -217,6 +223,8 @@ protocol SelectMultipleInterestsViewModelProtocol: SelectInterestViewModelProtoc
 
     mutating func setSelectedInterests(interests: [InterestModel])
     mutating func onSelectAll()
+
+    func getAllInterestsCount() -> Int
 }
 
 protocol SelectUserInterestsViewModelProtocol: SelectMultipleInterestsViewModelProtocol {
@@ -238,41 +246,30 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
     // 1. clean interests in DB
     // 2. fetch ALL PAGES of User Interests 
     // 3. get from DB and store in `userInterests`
-    // 4. start fetching Interests by PAGES
+    // 4. fetch ALL PAGES of Interests
     // 5. update `selected` with user interests
 
-    mutating func onLoadFirstDataPage(completion: ((Self.StateType) -> Void)) {
-        if self.state.page == 0 {
-            InterestService.deleteAllStored()
-            self.fetchAllUserInterests()
-                .then { _ -> Void in
-                    let userInterests = self.getAllUserInterests()
-                    self.state.userInterests = userInterests
-                    self.onLoadNextDataPage(completion)
-                }
-        }
-    }
-    mutating func onLoadNextDataPage(completion: ((Self.StateType) -> Void)) {
+    mutating func onInitLoadingData(completion: ((Self.StateType) -> Void)) {
         self.state.isFetching = true
 
-        let nextPage = self.state.page + 1
-        self.fetchData(nextPage, overwrite: false)
+        InterestService.deleteAllStored()
+        var userInterests: [InterestModel] = []
+        self.fetchAllUserInterests()
+            .then { _ -> Void in
+                userInterests = self.getAllUserInterests()
+            }
+            .then {
+                return self.fetchData(overwrite: false)
+            }
             .then { _ -> Void in
                 var updState = self.state
-                updState.page = nextPage
                 updState.items = self.getData()
                 updState.isFetching = false
-                // update with user's saved interests
-                updState = self.updateSelectedInterests(updState)
-                if nextPage == 1 && InterestService.countAll == InterestService.countUserInterests {
-                    updState.isSelectedAll = true
-                }
+                updState.userInterests = userInterests
+                updState = self.updateSelectedInterests(updState) // .selected
+                updState.isSelectedAll = (self.getAllInterestsCount() == InterestService.countUserInterests)
                 completion(updState)
-        }
-    }
-    func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
-        // prevent from overwrite
-        return InterestService.fetchAll(page, overwrite: false)
+            }
     }
     func fetchAllUserInterests(page: Int = 1) -> Promise<Void> {
         return Promise { resolve, reject in
@@ -357,7 +354,7 @@ extension SelectMultipleInterestsViewModelProtocol {
         interests.forEach { item in
             if item.parent_id == nil {
                 updSelected.updateValue([], forKey: item)
-                
+
             } else if let parent = InterestService.getParentOf(item) {
                 if var prevValue = updSelected[parent] {
                     prevValue.append(item)
@@ -370,19 +367,45 @@ extension SelectMultipleInterestsViewModelProtocol {
 
         self.state.selected = updSelected
     }
+    func getAllInterestsCount() -> Int {
+        return InterestService.getAllStored().count
+    }
 }
 
 
 
 extension SelectInterestViewModelProtocol {
-    func isLastPage() -> Bool {
-        return InterestService.isLastPage
+    mutating func onInitLoadingData(completion: ((Self.StateType) -> Void)) {
+        self.state.isFetching = true
+        self.fetchData(overwrite: false)
+            .then { _ -> Void in
+                var updState = self.state
+                updState.items = self.getData()
+                updState.isFetching = false
+                completion(updState)
+            }
     }
-    func getData() -> [Object] {
+    func getData() -> [InterestModel] {
         return Array(InterestService.getAllStored().filter("parent_id == nil"))
     }
-    func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
-        return InterestService.fetchAll(page, overwrite: overwrite)
+    func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
+        return fetchDataFromAllPages(1, overwrite: flagValue)
+    }
+    func fetchDataFromAllPages(page: Int, overwrite: Bool) -> Promise<Void> {
+        return Promise { resolve, reject in
+            InterestService.fetchAll(page, overwrite: overwrite)
+                .then { _ -> Void in
+                    if InterestService.isLastPage {
+                        resolve()
+                    } else {
+                        self.fetchDataFromAllPages(page + 1, overwrite: false)
+                            .then { resolve() }
+                    }
+                }
+                .error { err in
+                    reject(err)
+            }
+        }
     }
 
 

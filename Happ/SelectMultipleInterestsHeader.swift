@@ -23,6 +23,10 @@ protocol SelectInterestHeaderDataSource {
     func headerIsSelectedAll() -> Bool
 }
 
+protocol SelectInterestSyncWithHeader:
+    SelectInterestHeaderDelegate, SelectInterestHeaderDataSource {}
+
+
 
 
 protocol SelectInterestHeaderProtocol {
@@ -34,23 +38,24 @@ protocol SelectInterestHeaderProtocol {
     var buttonNavItem: UIButton! { get set }
 
     func updateView()
-    func initNavItem()
+    func updateNavItem()
 }
 extension SelectInterestHeaderProtocol {
     func updateView() {
-        labelForName.text = self.dataSource?.headerTitle()
-        
         guard let dataSource = self.dataSource else { return }
+
+        labelForName.text = dataSource.headerTitle()
         buttonNavItem.hidden = !dataSource.headerIsVisible()
 
-        self.initNavItem()
+        self.updateNavItem()
     }
 
-    func initNavItem() {
+    func updateNavItem() {
         let icon = self.dataSource?.headerNavItem().getIcon()
         self.buttonNavItem.setImage(icon, forState: .Normal)
     }
 }
+
 
 
 protocol SelectMultipleInterestsHeaderProtocol: SelectInterestHeaderProtocol {
@@ -58,13 +63,13 @@ protocol SelectMultipleInterestsHeaderProtocol: SelectInterestHeaderProtocol {
 }
 extension SelectMultipleInterestsHeaderProtocol {
     func updateView() {
-        labelForName.text = self.dataSource?.headerTitle()
-
         guard let dataSource = self.dataSource else { return }
+
+        labelForName.text = dataSource.headerTitle()
         buttonSelectAll.selected = dataSource.headerIsSelectedAll()
         buttonNavItem.hidden = !dataSource.headerIsVisible()
 
-        self.initNavItem()
+        self.updateNavItem()
     }
 }
 

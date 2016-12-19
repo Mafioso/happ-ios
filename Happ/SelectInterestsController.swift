@@ -11,8 +11,8 @@ import UIKit
 
 
 class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,
-    SelectInterestHeaderDataSource, SelectInterestHeaderDelegate,
-    SelectSubinterestsDataSource, SelectSubinterestsDelegate {
+    SelectInterestSyncWithHeader,
+    SelectSubinterestsDelegate, SelectSubinterestsDataSource {
 
 
     var viewModel: T! {
@@ -37,7 +37,51 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.initCollectionView()
+        self.initSaveButton()
+        self.initNavItems()
+        self.initLongPressGesture()
+
+        self.viewModel.onInitLoadingData { state in
+            self.viewModel.state = state
+        }
+
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.extMakeNavBarHidden()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.extMakeNavBarVisible()
+    }
+
+
+    func updateView(oldViewModel: T?) {
+        guard self.isViewLoaded() else { return }
+        print(".[V].update", self.viewModel.state.items.count)
+
+        self.collectionView.reloadData()
+        self.updateNavItems()
+        self.updateHeader()
+
+        if oldViewModel?.state.opened != self.viewModel.state.opened {
+            self.displayPopoverSelectSubinterestsIfNeeded()
+        }
+    }
+
+    func updateHeader() {
+        NSNotificationCenter.defaultCenter()
+            .postNotificationName(notificationKeySelectInterestHeaderShouldUpdate, object: nil)
+    }
+    func updateNavItems() {
+        self.buttonNavItemSecond.hidden = self.viewModel.isHeaderVisible
+    }
+    
+    
+    private func initCollectionView() {
         self.collectionView = {
             let layout: UICollectionViewFlowLayout = {
                 let t = UICollectionViewFlowLayout()
@@ -47,15 +91,12 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
                 t.itemSize = self.getCellSize()
                 return t
             }()
-
+            
             let c = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
             c.backgroundColor = UIColor.whiteColor()
             c.alwaysBounceVertical = true
-
+            
             self.view.addSubview(c)
-
-            c.dataSource = self
-            c.delegate = self
 
             c.translatesAutoresizingMaskIntoConstraints = false
             // top
@@ -68,68 +109,27 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             let bottom = NSLayoutConstraint(item: c, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: 0)
             bottom.priority = 250
             bottom.active = true
-
+            
             return c
         }()
 
-
+ 
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        
         // add header
         if self.viewModel is SelectUserInterestsViewModel {
             let headerNib = UINib(nibName: SelectMultipleInterestsHeader.nibName, bundle: nil)
             self.collectionView.registerNib(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: self.headerIdentifier)
-
+            
         } else {
             // TODO add header for single selection
         }
-
+        
         // add cell
         let cellNib = UINib(nibName: SelectInterestCollectionCell.nibName, bundle: nil)
         self.collectionView.registerNib(cellNib, forCellWithReuseIdentifier: self.cellIdentifier)
-
-
-        self.initSaveButton()
-        self.initNavItems()
-        self.initLongPressGesture()
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if self.viewModel.willLoadNextDataPage() {
-            self.viewModel.onLoadFirstDataPage() { state in
-                self.viewModel.state = state
-            }
-        }
-
-        self.extMakeNavBarHidden()
-    }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        self.extMakeNavBarVisible()
-    }
-
-
-    func updateView(oldViewModel: T?) {
-        print(".[V].update", self.viewModel.state.items.count)
-
-        if self.isViewLoaded() && self.viewModel.state.isFetching == false {
-            self.collectionView.reloadData()
-            self.updateNavItems()
-
-            if oldViewModel?.state.opened != self.viewModel.state.opened {
-                self.displayPopoverSelectSubinterestsIfNeeded()
-            }
-        }
-
-        if  let wasHeaderVisible = oldViewModel?.isHeaderVisible
-            where wasHeaderVisible == self.viewModel.isHeaderVisible {
-
-            self.updateNavItems()
-            NSNotificationCenter.defaultCenter()
-                .postNotificationName(notificationKeySelectInterestHeaderShouldUpdate, object: nil)
-        }
-    }
-
 
     private func initSaveButton() {
         self.buttonSave = {
@@ -155,9 +155,8 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         }()
         self.view.addSubview(self.buttonNavItemSecond)
     }
-    private func updateNavItems() {
-       self.buttonNavItemSecond.hidden = self.viewModel.isHeaderVisible
-    }
+    
+
     private func displayPopoverSelectSubinterestsIfNeeded() {
         // to display popup over selected cell, we do:
         // 1. Minimize CollectionView by adding Height Constraint
@@ -202,7 +201,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
 
 
     private func getInterestBy(indexPath: NSIndexPath) -> InterestModel {
-        return self.viewModel.state.items[indexPath.row] as! InterestModel
+        return self.viewModel.state.items[indexPath.row]
     }
     private func getCollectionViewHeightAlternative() -> CGFloat {
         let cellHeigh = self.getCellSize().height
@@ -222,7 +221,6 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
 
 
 
-
     func onLongPressCell(gesture : UILongPressGestureRecognizer!) {
         if gesture.state != .Ended {
             return
@@ -239,6 +237,8 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         self.viewModel.onSave()
     }
 
+    
+    
     private func initLongPressGesture() {
         let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(self.onLongPressCell))
         lpgr.minimumPressDuration = 0.3
@@ -327,7 +327,6 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         }
     }
 
-
     // init event on scroll
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         self.viewModel.onScroll(Int(scrollView.contentOffset.y))
@@ -338,7 +337,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         self.viewModel.onSelectInterest(self.getInterestBy(indexPath))
     }
 
-    // init pagination and react to longPressed
+    // react to longPressed
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let cell = cell as! SelectInterestCollectionCell
 
@@ -353,14 +352,6 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             }
         } else {
             cell.viewUnfocus.hidden = true
-        }
-
-        if  indexPath.row > self.viewModel.state.items.count - 3 &&
-            self.viewModel.willLoadNextDataPage() {
-
-            self.viewModel.onLoadNextDataPage() { state in
-                self.viewModel.state = state
-            }
         }
     }
 
