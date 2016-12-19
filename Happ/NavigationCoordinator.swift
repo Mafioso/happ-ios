@@ -356,7 +356,7 @@ class NavigationCoordinator {
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.displaySlideFilters = self.displaySlideFeedFilters
-        viewModel.navigateSelectInterests = self.showSelectUserInterests(false)
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(true, navigateAfterSave: self.startFeed)
 
         let viewController = FeedViewController()
         viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
@@ -492,13 +492,13 @@ class NavigationCoordinator {
     }
 
 
-    func showSelectUserInterests(loadInMenu: Bool = false)  -> NavigationFunc {
+    func showSelectUserInterests(loadInMenu: Bool, navigateAfterSave: NavigationFunc)  -> NavigationFunc {
         return {
             // init V
             let viewController = SelectInterestController<SelectUserInterestsViewModel>()
 
             // init VM
-            var viewModel: SelectUserInterestsViewModel!
+            var viewModel: SelectUserInterestsViewModel
             if loadInMenu {
                 viewModel = SelectUserInterestsViewModel(navItem: .Menu)
                 viewModel.navigateNavItem = self.displaySlideMenu
@@ -507,6 +507,7 @@ class NavigationCoordinator {
                 viewModel.navigateNavItem = self.goBack
             }
             viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewController)
+            viewModel.navigateAfterSave = navigateAfterSave
 
             // connect VM with V
             viewController.viewModel = viewModel
@@ -553,7 +554,7 @@ class NavigationCoordinator {
 
         var viewModel = SetupUserCityViewModel()
         viewModel.navigateBack = self.goBack
-        viewModel.navigateSelectInterests = self.showSelectUserInterests(false)
+        viewModel.navigateSelectInterests = self.showSelectUserInterests(false, navigateAfterSave: self.startFeed)
         viewModel.navigateSelectCity = self.showSelectCityOnSetup(viewController, viewController)
 
         viewController.viewModel = viewModel
@@ -694,7 +695,7 @@ class NavigationCoordinator {
         viewModel.navigateProfile = self.hideSlideMenu(self.showProfile)
         viewModel.navigateFeed = self.hideSlideMenu(self.startFeed)
         viewModel.navigateSelectInterests = self.hideSlideMenu(
-            self.showSelectUserInterests(true)
+            self.showSelectUserInterests(true, navigateAfterSave: self.startFeed)
         )
         viewModel.navigateEventPlanner = self.hideSlideMenu(self.startMyEvents)
         viewModel.navigateSettings = self.hideSlideMenu(self.startSettings)

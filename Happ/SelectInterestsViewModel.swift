@@ -59,16 +59,12 @@ class SelectEventInterestViewModel: SelectInterestProtocol {
 }
 
 
-*/
-
-
-
 
 struct SelectInterestState: SelectInterestStateProtocol {
     var items: [Object]
     var page: Int
     var isFetching: Bool
-
+    
     var selected: [InterestModel : [InterestModel]]
     var opened: InterestModel?
 }
@@ -78,15 +74,15 @@ struct SelectInterestViewModel: SelectInterestViewModelProtocol {
     var state: SelectInterestState
     var isHeaderVisible: Bool = true
     var navItem: NavItemType
-
+    
     var navPopoverSelectSubinterests: NavigationFunc
     var navigateNavItem: NavigationFunc
-
+    
     func onSave() {
         
     }
 }
-
+*/
 
 
 
@@ -100,6 +96,10 @@ struct SelectUserInterestsState: SelectUserInterestsStateProtocol {
     var isSelectedAll: Bool
 
     var userInterests: [InterestModel]
+    
+    static func getInitialState() -> SelectUserInterestsState {
+        return SelectUserInterestsState(items: [], page: 0, isFetching: false, selected: [:], opened: nil, isSelectedAll: false, userInterests: [])
+    }
 }
 
 struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
@@ -119,7 +119,7 @@ struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
         let cityName = ProfileService.getUserCity().name
         self.title = cityName
         self.navItem = navItem
-        self.state = SelectUserInterestsState(items: [], page: 0, isFetching: false, selected: [:], opened: nil, isSelectedAll: false, userInterests: [])
+        self.state = SelectUserInterestsState.getInitialState()
     }
 
     func onSave() {
@@ -134,7 +134,6 @@ struct SelectUserInterestsViewModel: SelectUserInterestsViewModelProtocol {
         promise.then { self.navigateAfterSave?() }
     }
 }
-
 
 
 

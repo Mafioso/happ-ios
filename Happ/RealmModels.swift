@@ -134,7 +134,7 @@ class InterestModel: Object, Mappable {
     dynamic var parent_id: String?
     var children = List<InterestModel>()
     dynamic var title = ""
-    dynamic var color: String?
+    dynamic var image: ImageModel?
 
 
     required convenience init?(_ map: Map) {
@@ -146,7 +146,7 @@ class InterestModel: Object, Mappable {
         parent_id   <- map["parent"]
         children    <- (map["children"], ArrayTransform<InterestModel>())
         title       <- map["title"]
-        color       <- map["color"]
+        image       <- map["image"]
     }
 
     override static func primaryKey() -> String? {

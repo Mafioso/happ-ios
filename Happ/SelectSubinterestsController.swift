@@ -18,7 +18,7 @@ protocol SelectSubinterestsDataSource {
 }
 protocol SelectSubinterestsDelegate {
     func selectSubinterestsDidClose()
-    func selectSubinterestsDidSelect(subinterest: InterestModel)
+    func selectSubinterests(didSelect subinterest: InterestModel)
 }
 
 
@@ -77,7 +77,8 @@ class SelectSubinterestsController: UIViewController, UITableViewDataSource, UIT
     // init select event
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let subinterest = self.getSubinterestBy(indexPath)
-        self.delegate?.selectSubinterestsDidSelect(subinterest)
+        self.delegate?.selectSubinterests(didSelect: subinterest)
+        self.updateView()
     }
 
     // fill with data

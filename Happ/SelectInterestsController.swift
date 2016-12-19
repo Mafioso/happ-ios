@@ -115,14 +115,18 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         if self.isViewLoaded() && self.viewModel.state.isFetching == false {
             self.collectionView.reloadData()
             self.updateNavItems()
-            self.displayPopoverSelectSubinterestsIfNeeded()
+
+            if oldViewModel?.state.opened != self.viewModel.state.opened {
+                self.displayPopoverSelectSubinterestsIfNeeded()
+            }
         }
 
         if  let wasHeaderVisible = oldViewModel?.isHeaderVisible
             where wasHeaderVisible == self.viewModel.isHeaderVisible {
 
             self.updateNavItems()
-            NSNotificationCenter.defaultCenter().postNotificationName(notificationKeySelectInterestHeaderShouldUpdate, object: nil)
+            NSNotificationCenter.defaultCenter()
+                .postNotificationName(notificationKeySelectInterestHeaderShouldUpdate, object: nil)
         }
     }
 
@@ -292,10 +296,10 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     func selectSubinterestsDidClose() {
         self.viewModel.onCloseSubinterests()
     }
-    func selectSubinterestsDidSelect(subinterest: InterestModel) {
+    func selectSubinterests(didSelect subinterest: InterestModel) {
         self.viewModel.onSelectSubinterest(subinterest)
     }
-    
+
 
     
     
@@ -374,10 +378,15 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         let interest = self.getInterestBy(indexPath)
         let name = interest.title.uppercaseString
         cell.labelName.text = name
-        if let color = interest.color {
-            cell.viewFooter.backgroundColor = UIColor(hexString: color)
+        if let image = interest.image {
+            if let url = image.getURL() {
+                cell.imagePhoto.hnk_setImageFromURL(url)
+                cell.imagePhoto.layer.masksToBounds = true
+            }
+            if let colorCode = image.color {
+                cell.viewFooter.backgroundColor = UIColor(hexString: colorCode)
+            }
         }
-        //TODO cell.imagePhoto.hnk_setImageFromURL()
 
         switch self.viewModel.getSelectionType(interest) {
         case .NonSelected:
