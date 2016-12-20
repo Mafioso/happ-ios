@@ -16,22 +16,13 @@ class InterestService {
 
     static let endpoint = "interests/"
 
-    static var isLastPage: Bool = false
-    static var countAll: Int = 0
-    static var countUserInterests: Int = 0
-
-
-    static func fetchAll(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
-        let pagedURL = endpoint + "?page=\(page)"
-        return GetPaginated(pagedURL, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                self.isLastPage = isLastPage
-                self.countAll = count
-
-                let results = data as! [AnyObject]
+    static func fetch(overwrite overwriteValue: Bool = false) -> Promise<Void> {
+        return Get(endpoint, parameters: nil)
+            .then { data -> Void in
+                let results = (data as? NSDictionary)?.objectForKey("results") as! NSArray
                 let realm = try! Realm()
                 try! realm.write {
-                    if overwrite {
+                    if overwriteValue {
                         let all = realm.objects(InterestModel)
                         realm.delete(all)
                     }
@@ -43,17 +34,13 @@ class InterestService {
                 }
         }
     }
-    static func fetchUserInterests(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
-        let pagedURL = endpoint + "my/?page=\(page)"
-        return GetPaginated(pagedURL, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                self.isLastPage = isLastPage
-                self.countUserInterests = count
-
-                let results = data as! [AnyObject]
+    static func fetchUserInterests(overwrite overwriteValue: Bool = false) -> Promise<Void> {
+        return Get(endpoint + "my/", parameters: nil)
+            .then { data -> Void in
+                let results = (data as? NSDictionary)?.objectForKey("results") as! NSArray
                 let realm = try! Realm()
                 try! realm.write {
-                    if overwrite {
+                    if overwriteValue {
                         let all = realm.objects(InterestModel)
                         realm.delete(all)
                     }
@@ -82,12 +69,12 @@ class InterestService {
     }
 
 
-    static func getAllStored() -> Results<InterestModel> {
+    static func getStored() -> Results<InterestModel> {
         let realm = try! Realm()
         let result = realm.objects(InterestModel)//.sort(sort.isOrderedBeforeFunc)
         return result
     }
-    static func deleteAllStored() {
+    static func deleteStored() {
         let realm = try! Realm()
         try! realm.write {
             let exists = realm.objects(InterestModel)

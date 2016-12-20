@@ -241,21 +241,3 @@ func GetPaginated(endpoint: String, parameters: [String: AnyObject]?, paramsEnco
     }
 }
 
-
-/*
-private func createRequest(url: String, parameters: [String: AnyObject]?, customHeaders: [String: String]?) -> Request {
-    // create Request
-    var  request: Request!
-    if parameters == nil {
-        let nsURL = NSURL(string: url)
-        let headers = customHeaders == nil ? getRequestHeaders() : customHeaders // getRequestHeaders()
-        let nsRequest = NSMutableURLRequest(URL: nsURL!)
-        nsRequest.HTTPMethod = "GET"
-        headers.forEach({ nsRequest.setValue($0.1, forHTTPHeaderField: $0.0) })
-        request = Alamofire.request(nsRequest)
-    } else {
-        request = Alamofire.request(.GET, url, headers: getRequestHeaders(), parameters: parameters, encoding: .JSON)
-    }
-    return request
-}
-*/

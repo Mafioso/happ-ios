@@ -10,79 +10,7 @@ import Foundation
 import PromiseKit
 import RealmSwift
 
-/*
 
-class SelectEventInterestViewModel: SelectInterestProtocol {
-    
-    var navPopoverSelectSubinterests: NavigationFunc
-
-    
-    var headerState: SelectInterestHeaderState {
-        didSet {
-            self.didUpdate?()
-        }
-    }
-    var dataState: PaginatedDataState {
-        didSet {
-            if dataState.isFetching { return }
-            self.didUpdate?()
-        }
-    }
-    var selectInterestState: SelectInterestState {
-        didSet {
-            self.didUpdate?()
-        }
-    }
-    var title: String
-
-
-    var didUpdate: UpdateHandlerFunc
-    var didSelectInterest: ((interest: InterestModel) -> ())?
-    
-    
-    init(title: String, navItemIcon: String, navigateNavItem: NavigationFunc) {
-        self.dataState = PaginatedDataState(page: 0, items: [], isFetching: false)
-        self.selectInterestState = SelectInterestState(selected: [:], opened: nil)
-        self.headerState = SelectInterestHeaderState(navItemIcon: navItemIcon, navigateNavItem: navigateNavItem, isHeaderVisible: true, isAllowsMultipleSelection: false)
-
-        self.title = title
-    }
-
-    func onSave() {
-        if let selected = self.getSelectedInterests().first {
-            self.didSelectInterest?(interest: selected)
-        }
-    }
-    func getTitle() -> String {
-        return self.title
-    }
-}
-
-
-
-struct SelectInterestState: SelectInterestStateProtocol {
-    var items: [Object]
-    var page: Int
-    var isFetching: Bool
-    
-    var selected: [InterestModel : [InterestModel]]
-    var opened: InterestModel?
-}
-
-struct SelectInterestViewModel: SelectInterestViewModelProtocol {
-    
-    var state: SelectInterestState
-    var isHeaderVisible: Bool = true
-    var navItem: NavItemType
-    
-    var navPopoverSelectSubinterests: NavigationFunc
-    var navigateNavItem: NavigationFunc
-    
-    func onSave() {
-        
-    }
-}
-*/
 
 
 
@@ -206,7 +134,6 @@ protocol SelectInterestViewModelProtocol {
     func isSubinterestSelected(subinterest: InterestModel) -> Bool
 
     func fetchData(overwrite flagValue: Bool) -> Promise<Void>
-    func fetchDataFromAllPages(page: Int, overwrite: Bool) -> Promise<Void>
     func getData() -> [InterestModel]
 
     var isHeaderVisible: Bool { get set }
@@ -223,17 +150,12 @@ protocol SelectMultipleInterestsViewModelProtocol: SelectInterestViewModelProtoc
 
     mutating func makeSelectedInterests(interests: [InterestModel]) -> [InterestModel: [InterestModel]]
     mutating func onSelectAll()
-
-    func getAllInterestsCount() -> Int
 }
 
 protocol SelectUserInterestsViewModelProtocol: SelectMultipleInterestsViewModelProtocol {
     associatedtype StateType: SelectUserInterestsStateProtocol
 
     var navigateAfterSave: NavigationFunc { get set }
-
-    func fetchAllUserInterests(page: Int, overwrite: Bool) -> Promise<Void>
-    func getAllUserInterests() -> [InterestModel]
 }
 
 
@@ -252,41 +174,24 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
         var userInterests: [InterestModel] = []
 
         self.state.isFetching = true
-        self.fetchAllUserInterests(1, overwrite: true)
+        InterestService.fetchUserInterests(overwrite: true)
             .then { _ -> Void in
-                userInterests = self.getAllUserInterests()
+                userInterests = self.getData()
             }
             .then {
                 return self.fetchData(overwrite: false)
             }
             .then { _ -> Void in
+                let parentInterests = self.getData()
+                let allInterestsCount = InterestService.getStored().count
                 var updState = self.state
-                updState.items = self.getData()
+                updState.items = parentInterests
                 updState.isFetching = false
                 updState.userInterests = userInterests
                 updState.selected = self.makeSelectedInterests(userInterests)
-                updState.isSelectedAll = (self.getAllInterestsCount() == InterestService.countUserInterests)
+                updState.isSelectedAll = (allInterestsCount == userInterests.count)
                 completion(updState)
             }
-    }
-    func fetchAllUserInterests(page: Int, overwrite: Bool) -> Promise<Void> {
-        return Promise { resolve, reject in
-            InterestService.fetchUserInterests(page, overwrite: overwrite)
-                .then { _ -> Void in
-                    if InterestService.isLastPage {
-                        resolve()
-                    } else {
-                        self.fetchAllUserInterests(page + 1, overwrite: false)
-                            .then { resolve() }
-                    }
-                }
-                .error { err in
-                    reject(err)
-                }
-        }
-    }
-    func getAllUserInterests() -> [InterestModel] {
-        return Array(InterestService.getAllStored())
     }
 }
 
@@ -345,9 +250,6 @@ extension SelectMultipleInterestsViewModelProtocol {
 
         return result
     }
-    func getAllInterestsCount() -> Int {
-        return InterestService.getAllStored().count
-    }
 }
 
 
@@ -364,28 +266,11 @@ extension SelectInterestViewModelProtocol {
             }
     }
     func getData() -> [InterestModel] {
-        return Array(InterestService.getAllStored().filter("parent_id == nil"))
+        return Array(InterestService.getStored().filter("parent_id == nil"))
     }
     func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
-        return fetchDataFromAllPages(1, overwrite: flagValue)
+        return InterestService.fetch(overwrite: flagValue)
     }
-    func fetchDataFromAllPages(page: Int, overwrite: Bool) -> Promise<Void> {
-        return Promise { resolve, reject in
-            InterestService.fetchAll(page, overwrite: overwrite)
-                .then { _ -> Void in
-                    if InterestService.isLastPage {
-                        resolve()
-                    } else {
-                        self.fetchDataFromAllPages(page + 1, overwrite: false)
-                            .then { resolve() }
-                    }
-                }
-                .error { err in
-                    reject(err)
-            }
-        }
-    }
-
 
     mutating func onScroll(offset: Int) {
         let isNowHeaderVisible = offset < 138

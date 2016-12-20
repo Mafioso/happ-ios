@@ -121,7 +121,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         if self.viewModel is SelectUserInterestsViewModel {
             let headerNib = UINib(nibName: SelectMultipleInterestsHeader.nibName, bundle: nil)
             self.collectionView.registerNib(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: self.headerIdentifier)
-            
+
         } else {
             // TODO add header for single selection
         }
