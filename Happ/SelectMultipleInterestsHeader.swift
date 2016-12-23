@@ -43,16 +43,17 @@ protocol SelectInterestHeaderProtocol {
 extension SelectInterestHeaderProtocol {
     func updateView() {
         guard let dataSource = self.dataSource else { return }
-
         labelForName.text = dataSource.headerTitle()
         buttonNavItem.hidden = !dataSource.headerIsVisible()
-
         self.updateNavItem()
     }
 
     func updateNavItem() {
-        let icon = self.dataSource?.headerNavItem().getIcon()
+        guard let dataSource = self.dataSource else { return }
+        let icon = dataSource.headerNavItem().getIcon()
+        let isSelectedAll = dataSource.headerIsSelectedAll()
         self.buttonNavItem.setImage(icon, forState: .Normal)
+        self.buttonNavItem.selected = isSelectedAll
     }
 }
 

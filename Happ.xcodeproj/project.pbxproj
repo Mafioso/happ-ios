@@ -28,7 +28,7 @@
 		5239C3831D925D5D00F66E31 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3811D925D5D00F66E31 /* Authentication.storyboard */; };
 		5239C3851D925E8100F66E31 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3841D925E8100F66E31 /* Event.storyboard */; };
 		523EFED81DE994600075259D /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EFED71DE994600075259D /* MapService.swift */; };
-		5241B6E01E07D0B600018908 /* WebPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241B6DF1E07D0B600018908 /* WebPageService.swift */; };
+		5241B6E01E07D0B600018908 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241B6DF1E07D0B600018908 /* Services.swift */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525344421DF5AE6F0086436B /* PaginatedDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */; };
 		525A8AA81D7D4023002C6F46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525A8AA71D7D4023002C6F46 /* AppDelegate.swift */; };
@@ -142,7 +142,7 @@
 		5239C3821D925D5D00F66E31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		5239C3841D925E8100F66E31 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		523EFED71DE994600075259D /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
-		5241B6DF1E07D0B600018908 /* WebPageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPageService.swift; sourceTree = "<group>"; };
+		5241B6DF1E07D0B600018908 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedDataProtocol.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,13 +443,13 @@
 		52A3C2C71D8F20EB00C31F3F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5241B6DF1E07D0B600018908 /* Services.swift */,
 				52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */,
 				5212E69C1D9029DC00729CC8 /* EventService.swift */,
 				52B012431D9AE19F0061F083 /* ProfileService.swift */,
 				52C2EC671DC8B03500156652 /* InterestService.swift */,
 				52B37CA31DDF24D200CBDA1B /* CityService.swift */,
 				523EFED71DE994600075259D /* MapService.swift */,
-				5241B6DF1E07D0B600018908 /* WebPageService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -751,7 +751,7 @@
 				52CD94261DFFF5C2003D0B46 /* SelectCityCell.swift in Sources */,
 				522CD5611DD1E7320080BEBE /* SetupCityController.swift in Sources */,
 				52A3C2CF1D8F8B4000C31F3F /* NavigationCoordinator.swift in Sources */,
-				5241B6E01E07D0B600018908 /* WebPageService.swift in Sources */,
+				5241B6E01E07D0B600018908 /* Services.swift in Sources */,
 				52B012441D9AE19F0061F083 /* ProfileService.swift in Sources */,
 				522EC75F1DA3AC7100D02116 /* FeedFiltersController.swift in Sources */,
 				52DD59101D812105007E19E9 /* UtilsCode.swift in Sources */,

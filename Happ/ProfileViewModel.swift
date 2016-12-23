@@ -19,6 +19,9 @@ enum ProfileErrorTypes: ErrorType {
 class ProfileViewModel {
 
     var userProfile: UserModel!
+    var avatar: UIImage?
+    var avatarModel: ImageModel?
+    var isUploadingAvatar: Bool = false
 
     var navigateBack: NavigationFunc
     var navigateChangePassword: NavigationFunc
@@ -33,6 +36,24 @@ class ProfileViewModel {
 
 
     //MARK: - Inputs
+    func onPickImage(image: UIImage) {
+        self.isUploadingAvatar = true
+        self.avatar = image
+        self.didUpdate?()
+
+        UploadImage(image)
+            .then { imageData -> Void in
+                self.avatarModel = imageData
+                self.isUploadingAvatar = false
+                self.didUpdate?()
+            }
+            .error { err in
+                self.avatarModel = nil
+                self.avatar = nil
+                self.isUploadingAvatar = false
+                self.didUpdate?()
+            }
+    }
     func onSave(values: [String: AnyObject]) -> Promise<Void> {
         return Promise { resolve, reject in
                 firstly {

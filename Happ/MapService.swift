@@ -18,6 +18,31 @@ import GoogleMaps
 
 class MapService {
 
+    class func fetchByArea(location: CLLocation, radius: Int, overwrite: Bool = false) -> Promise<Void> {
+        let endpoint = "events/map/"
+        let params: [String: AnyObject] = [
+            "center": [location.coordinate.longitude, location.coordinate.latitude],
+            "radius": radius
+        ]
+        return Post(endpoint, parameters: params)
+            .then { result -> Void in
+                let json = JSON(result as! NSDictionary)
+                let results = json["results"].arrayObject!
+                let realm = try! Realm()
+                try! realm.write {
+                    if overwrite {
+                        let all = realm.objects(EventModel)
+                        realm.delete(all)
+                    }
+
+                    results.forEach() { event in
+                        let inst = Mapper<EventModel>().map(event)
+                        realm.add(inst!, update: true)
+                    }
+                }
+            }
+    }
+
     class func fetchPlaces(search: String) -> Promise<[MapPlace]> {
         let endpoint = "places/"
         let params: [String: AnyObject] = [

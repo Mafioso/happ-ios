@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import RealmSwift
 import ObjectMapper
+import SwiftyJSON
 
 
 class InterestService {
@@ -19,7 +20,8 @@ class InterestService {
     static func fetch(overwrite overwriteValue: Bool = false) -> Promise<Void> {
         return Get(endpoint, parameters: nil)
             .then { data -> Void in
-                let results = (data as? NSDictionary)?.objectForKey("results") as! NSArray
+                let json = JSON(data)
+                let results = json["results"].arrayObject!
                 let realm = try! Realm()
                 try! realm.write {
                     if overwriteValue {

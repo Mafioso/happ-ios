@@ -24,6 +24,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var buttonSave: UIButton!
     
     @IBOutlet weak var imageProfileImage: UIImageView!
+    @IBOutlet weak var activityIndicatorImageUploading: UIActivityIndicatorView!
     @IBOutlet weak var viewImagePlaceholder: UIView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
@@ -46,12 +47,17 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBAction func clickedSelectBithday(sender: UIButton) {
         
     }
+    
+    
+    let imagePicker = UIImagePickerController()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
+        self.activityIndicatorImageUploading.hidesWhenStopped = true
+        self.imagePicker.delegate = self
 
         self.initNavigationBarItems()
         self.extHideKeyboardWhenTappedAround()
@@ -83,19 +89,34 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         if let date = profile.date_of_birth {
             buttonSelectBirthday.titleLabel?.text = HappDateFormats.ISOFormat.toString(date)
         }
-
-        viewImagePlaceholder.hidden = false
-        if false { //TODO let imageURL = profile. {
-            let imageURL = NSURL()
-            imageProfileImage.hnk_setImageFromURL(imageURL, success: { img in
-                self.imageProfileImage.image = img
-                self.viewImagePlaceholder.hidden = true
-            })
-        }
-
         textFieldPasswordNew.text = ""
         textFieldPasswordOld.text = ""
         textFieldPasswordConfirm.text = ""
+        
+
+        viewImagePlaceholder.hidden = false
+        if let image = self.viewModel.avatar {
+            imageProfileImage.image = image
+            imageProfileImage.layer.masksToBounds = true
+            viewImagePlaceholder.hidden = true
+
+            if self.viewModel.isUploadingAvatar {
+                activityIndicatorImageUploading.startAnimating()
+                self.buttonSave.enabled = false
+            } else {
+                activityIndicatorImageUploading.stopAnimating()
+                self.buttonSave.enabled = true
+            }
+
+        } else if   let image = profile.avatar,
+                    let imageURL = image.getURL()
+        {
+            imageProfileImage.hnk_setImageFromURL(imageURL, success: { img in
+                self.imageProfileImage.image = img
+                self.imageProfileImage.layer.masksToBounds = true
+                self.viewImagePlaceholder.hidden = true
+            })
+        }
     }
 
     private func bindToViewModel() {
@@ -105,7 +126,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 
     private func validatedSave() {
-        let values: [String: AnyObject] = [
+        var values: [String: AnyObject] = [
             "fullname": textFieldFullName.text!,
             "email": textFieldEmail.text!,
             "phone": textFieldPhone.text!,
@@ -114,6 +135,9 @@ class ProfileController: UIViewController, UITextFieldDelegate {
             "new_password": textFieldPasswordNew.text!,
             "confirm_password": textFieldPasswordConfirm.text!,
         ]
+        if let newImageData = self.viewModel.avatarModel {
+            values.updateValue(newImageData.id, forKey: "avatar_id")
+        }
 
         self.viewModel.onSave(values)
             .then { _ in
@@ -140,8 +164,12 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
     private func displayChangePhotoActions() {
         let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
-        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default, handler: nil)
-        let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default, handler: nil)
+        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+            self.pickImageFromCamera()
+        }
+        let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default) { (action) in
+            self.pickImageFromLibrary()
+        }
         let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         actionList.addAction(actionTakePhoto)
         actionList.addAction(actionOpenGalery)
@@ -204,5 +232,30 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     }
 }
 
+
+
+extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func pickImageFromCamera() {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .Camera
+        self.presentViewController(self.imagePicker, animated: true, completion: nil)
+    }
+    private func pickImageFromLibrary() {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .PhotoLibrary
+        self.presentViewController(self.imagePicker, animated: true, completion: nil)
+    }
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.viewModel.onPickImage(pickedImage)
+        }
+
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
 
 

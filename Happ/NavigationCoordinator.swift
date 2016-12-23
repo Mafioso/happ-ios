@@ -592,6 +592,7 @@ class NavigationCoordinator {
         viewModel.navigateProfile = self.showProfile
         viewModel.navigateSelectCurrency = self.showSelectCurrency(viewModel)
         viewModel.navigateSelectNotifications = self.showSelectNotifications(viewModel)
+        viewModel.navigateHelp = self.showWebView(.FAQ)
         viewModel.navigateTerms = self.showWebView(.Terms)
         viewModel.navigatePrivacy = self.showWebView(.Privacy)
  

@@ -280,9 +280,26 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFt-tW-WMc">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="Ih8-Cu-ax8">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-9b-sVk" userLabel="Image">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                                    </imageView>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-feed" translatesAutoresizingMaskIntoConstraints="NO" id="Ih8-Cu-ax8">
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                            </imageView>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-6Q-GSU">
+                                                                <rect key="frame" x="169" y="169" width="37" height="37"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstItem="Ih8-Cu-ax8" firstAttribute="leading" secondItem="7zr-9b-sVk" secondAttribute="leading" id="3qa-gj-HoP"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Ih8-Cu-ax8" secondAttribute="bottom" id="DC2-ko-bcL"/>
+                                                            <constraint firstItem="wIZ-6Q-GSU" firstAttribute="centerY" secondItem="7zr-9b-sVk" secondAttribute="centerY" id="LDq-B7-LuC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Ih8-Cu-ax8" secondAttribute="trailing" id="R35-oS-zjE"/>
+                                                            <constraint firstItem="wIZ-6Q-GSU" firstAttribute="centerX" secondItem="7zr-9b-sVk" secondAttribute="centerX" id="bzg-Kj-NKI"/>
+                                                            <constraint firstItem="Ih8-Cu-ax8" firstAttribute="top" secondItem="7zr-9b-sVk" secondAttribute="top" id="h2n-rq-vPh"/>
+                                                        </constraints>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-es-nBK" userLabel="Image Placeholder">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                                         <subviews>
@@ -326,16 +343,16 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="Ih8-Cu-ax8" secondAttribute="trailing" id="4dS-BF-uxw"/>
                                                     <constraint firstAttribute="trailing" secondItem="mcX-47-5VO" secondAttribute="trailing" constant="16" id="5Ib-ae-8Ee"/>
-                                                    <constraint firstItem="Ih8-Cu-ax8" firstAttribute="top" secondItem="TFt-tW-WMc" secondAttribute="top" id="C0Y-Qd-Imu"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Ih8-Cu-ax8" secondAttribute="bottom" id="It1-qY-3js"/>
+                                                    <constraint firstItem="7zr-9b-sVk" firstAttribute="top" secondItem="TFt-tW-WMc" secondAttribute="top" id="Ebu-q7-Q4i"/>
                                                     <constraint firstAttribute="width" secondItem="TFt-tW-WMc" secondAttribute="height" multiplier="1:1" id="M9I-8Z-XaJ"/>
+                                                    <constraint firstItem="7zr-9b-sVk" firstAttribute="leading" secondItem="TFt-tW-WMc" secondAttribute="leading" id="Soz-b5-htP"/>
                                                     <constraint firstAttribute="bottom" secondItem="gUu-es-nBK" secondAttribute="bottom" id="T9N-SA-LO9"/>
                                                     <constraint firstItem="gUu-es-nBK" firstAttribute="top" secondItem="TFt-tW-WMc" secondAttribute="top" id="Tc7-mm-MVg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7zr-9b-sVk" secondAttribute="bottom" id="X2Y-ox-8UN"/>
                                                     <constraint firstAttribute="trailing" secondItem="gUu-es-nBK" secondAttribute="trailing" id="XQH-wl-jma"/>
-                                                    <constraint firstItem="Ih8-Cu-ax8" firstAttribute="leading" secondItem="TFt-tW-WMc" secondAttribute="leading" id="Xh2-yj-R1B"/>
                                                     <constraint firstItem="gUu-es-nBK" firstAttribute="leading" secondItem="TFt-tW-WMc" secondAttribute="leading" id="rfo-g3-FkO"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7zr-9b-sVk" secondAttribute="trailing" id="vvM-t0-Elc"/>
                                                     <constraint firstAttribute="bottom" secondItem="mcX-47-5VO" secondAttribute="bottom" constant="16" id="xvi-uu-WI2"/>
                                                 </constraints>
                                             </view>
@@ -774,6 +791,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="activityIndicatorImageUploading" destination="wIZ-6Q-GSU" id="abd-BJ-vXc"/>
                         <outlet property="buttonSave" destination="u9c-g6-kBB" id="LEa-BX-JEc"/>
                         <outlet property="buttonSelectBirthday" destination="kEn-Kd-A64" id="SF2-j9-C0L"/>
                         <outlet property="imageProfileImage" destination="Ih8-Cu-ax8" id="U75-bb-maV"/>
@@ -814,7 +832,7 @@
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch on notifications to be always  informed about interesting events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd1-OW-oyf">
-                                <rect key="frame" x="51.5" y="241" width="274" height="38.5"/>
+                                <rect key="frame" x="50.5" y="241" width="274" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
