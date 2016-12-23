@@ -13,7 +13,45 @@ import RealmSwift
 
 
 
+// MARK: - SelectEventInterest
+struct SelectEventInterestState: SelectInterestStateProtocol {
+    var items: [InterestModel]
+    var isFetching: Bool
+    var selected: [InterestModel : [InterestModel]]
+    var opened: InterestModel?
 
+    static func getInitialState() -> SelectEventInterestState {
+        return SelectEventInterestState(items: [], isFetching: false, selected: [:], opened: nil)
+    }
+}
+struct SelectEventInterestViewModel: SelectInterestViewModelProtocol {
+    var state: SelectEventInterestState
+
+    var isHeaderVisible: Bool = true
+    var navItem: NavItemType = .Back
+
+    var navPopoverSelectSubinterests: NavigationFunc
+    var navigateNavItem: NavigationFunc
+    var navigateAfterSave: NavigationFunc
+
+
+    init() {
+        self.state = SelectEventInterestState.getInitialState()
+    }
+
+    func onSave() {
+        // do nothing
+    }
+    
+    func getSelectedInterest() -> InterestModel? {
+        return self.getSelectedInterests().first
+    }
+    
+}
+
+
+
+// MARK: - SelectUserInterests
 struct SelectUserInterestsState: SelectUserInterestsStateProtocol {
     var items: [InterestModel]
     var isFetching: Bool

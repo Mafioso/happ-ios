@@ -497,10 +497,24 @@ class NavigationCoordinator {
     }
 
 
+    func showSelectEventInterest(parentViewController: SelectEventInterestDelegate) -> NavigationFunc {
+        return {
+            let viewController = SelectEventInterestController()
+            viewController.delegate = parentViewController
+            
+            var viewModel = SelectEventInterestViewModel()
+            viewModel.navigateNavItem = self.goBack
+            viewModel.navPopoverSelectSubinterests = self.showPopupSelectSubinterests(viewController)
+            viewModel.navigateAfterSave = self.goBack
+
+            viewController.viewModel = viewModel
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
     func showSelectUserInterests(loadInMenu: Bool, navigateAfterSave: NavigationFunc)  -> NavigationFunc {
         return {
             // init V
-            let viewController = SelectInterestController<SelectUserInterestsViewModel>()
+            let viewController = SelectUserInterestsController()
 
             // init VM
             var viewModel: SelectUserInterestsViewModel
@@ -587,6 +601,7 @@ class NavigationCoordinator {
 
     func startSettings() {
         print(".start.Settings")
+
         let viewModel = SettingsViewModel()
         viewModel.displaySlideMenu = self.displaySlideMenu
         viewModel.navigateProfile = self.showProfile

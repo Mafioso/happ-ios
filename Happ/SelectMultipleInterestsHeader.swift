@@ -9,57 +9,9 @@
 import UIKit
 
 
-let notificationKeySelectInterestHeaderShouldUpdate = "hackteam.happ.selectInterestHeaderShouldUpdate"
-
-
-protocol SelectInterestHeaderDelegate {
-    func onHeaderClickNavItem()
-    func onHeaderClickSelectAll()
-}
-protocol SelectInterestHeaderDataSource {
-    func headerTitle() -> String?
-    func headerNavItem() -> NavItemType
-    func headerIsVisible() -> Bool
-    func headerIsSelectedAll() -> Bool
-}
-
-protocol SelectInterestSyncWithHeader:
-    SelectInterestHeaderDelegate, SelectInterestHeaderDataSource {}
-
-
-
-
-protocol SelectInterestHeaderProtocol {
-    static var nibName: String { get }
-    var delegate: SelectInterestHeaderDelegate? { get set }
-    var dataSource: SelectInterestHeaderDataSource? { get set }
-    
-    var labelForName: UILabel! { get set }
-    var buttonNavItem: UIButton! { get set }
-
-    func updateView()
-    func updateNavItem()
-}
-extension SelectInterestHeaderProtocol {
-    func updateView() {
-        guard let dataSource = self.dataSource else { return }
-        labelForName.text = dataSource.headerTitle()
-        buttonNavItem.hidden = !dataSource.headerIsVisible()
-        self.updateNavItem()
-    }
-
-    func updateNavItem() {
-        guard let dataSource = self.dataSource else { return }
-        let icon = dataSource.headerNavItem().getIcon()
-        let isSelectedAll = dataSource.headerIsSelectedAll()
-        self.buttonNavItem.setImage(icon, forState: .Normal)
-        self.buttonNavItem.selected = isSelectedAll
-    }
-}
-
-
 
 protocol SelectMultipleInterestsHeaderProtocol: SelectInterestHeaderProtocol {
+    var labelForName: UILabel! { get set }
     var buttonSelectAll: UIButton! { get set }
 }
 extension SelectMultipleInterestsHeaderProtocol {

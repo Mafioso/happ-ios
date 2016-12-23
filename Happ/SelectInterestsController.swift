@@ -9,7 +9,53 @@
 import UIKit
 
 
+// MARK: - SelectEventInterest
+protocol SelectEventInterestDelegate {
+    func selectEventInterest(onSave interest: InterestModel)
+}
 
+
+class SelectEventInterestController: SelectInterestController<SelectEventInterestViewModel> {
+
+    var delegate: SelectEventInterestDelegate?
+
+    override init() {
+        super.init()
+    }
+
+
+    override func handleClickSave() {
+        if let interest = self.viewModel.getSelectedInterest() {
+            self.delegate?.selectEventInterest(onSave: interest)
+            self.viewModel.navigateAfterSave?()
+        }
+    }
+}
+
+
+
+// MARK: - SelectUserInterests
+class SelectUserInterestsController: SelectInterestController<SelectUserInterestsViewModel> {
+    
+    override init() {
+        super.init()
+    }
+
+
+    override func initHeader() {
+        let headerNib = UINib(nibName: SelectMultipleInterestsHeader.nibName, bundle: nil)
+        self.collectionView.registerNib(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: self.headerIdentifier)
+    }
+    override func getHeaderSize() -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 118)
+    }
+}
+
+
+
+
+
+// MARK: - Prototype
 class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewController, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,
     SelectInterestSyncWithHeader,
     SelectSubinterestsDelegate, SelectSubinterestsDataSource {
@@ -116,21 +162,19 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
  
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        
-        // add header
-        if self.viewModel is SelectUserInterestsViewModel {
-            let headerNib = UINib(nibName: SelectMultipleInterestsHeader.nibName, bundle: nil)
-            self.collectionView.registerNib(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: self.headerIdentifier)
 
-        } else {
-            // TODO add header for single selection
-        }
-        
+        // add header
+        self.initHeader()
+
         // add cell
         let cellNib = UINib(nibName: SelectInterestCollectionCell.nibName, bundle: nil)
         self.collectionView.registerNib(cellNib, forCellWithReuseIdentifier: self.cellIdentifier)
     }
-
+    
+    private func initHeader() {
+        let headerNib = UINib(nibName: SelectInterestHeader.nibName, bundle: nil)
+        self.collectionView.registerNib(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: self.headerIdentifier)
+    }
     private func initSaveButton() {
         self.buttonSave = {
             let btn = UIButton()
@@ -218,7 +262,9 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
             return CGSizeMake(137, 182)
         }
     }
-
+    private func getHeaderSize() -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 60)
+    }
 
 
     func onLongPressCell(gesture : UILongPressGestureRecognizer!) {
@@ -263,8 +309,8 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         return self.viewModel.isHeaderVisible
     }
     func headerIsSelectedAll() -> Bool {
-        if let multiViewModel = self.viewModel as? SelectUserInterestsViewModel {
-            return multiViewModel.state.isSelectedAll
+        if let multipleSelectedState = self.viewModel.state as? SelectMultipleInterestsStateProtocol {
+            return multipleSelectedState.isSelectedAll
         } else {
             return false
         }
@@ -319,12 +365,8 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         return headerView as! UICollectionReusableView
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        if self.viewModel.state is SelectMultipleInterestsStateProtocol {
-            return CGSize(width: collectionView.frame.width, height: 118)
-        } else {
-            return CGSize(width: collectionView.frame.width, height: 44)
-        }
+
+        return self.getHeaderSize()
     }
 
     // init event on scroll
