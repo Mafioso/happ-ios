@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,20 +18,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="YTj-UJ-Ygd" customClass="EventOnMap" customModule="Happ" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="268" height="64"/>
+            <rect key="frame" x="0.0" y="0.0" width="268" height="39"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-ph-IP9" customClass="TriangeCorner" customModule="Happ" customModuleProvider="target">
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hF-ph-IP9">
+                    <rect key="frame" x="0.0" y="14" width="26" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="S6G-F8-2Ar"/>
                         <constraint firstAttribute="width" constant="26" id="ul3-AB-5k4"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbL-IU-ymV" userLabel="Rounded View">
+                    <rect key="frame" x="12" y="0.0" width="157" height="39"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3h-W3-UrX">
+                            <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g74-l5-4Xd"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g74-l5-4Xd">
+                                    <rect key="frame" x="2" y="2" width="35" height="35"/>
+                                </imageView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="g74-l5-4Xd" secondAttribute="trailing" constant="2" id="0Az-2R-oa1"/>
@@ -39,6 +47,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAP.EVENT.TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEF-PJ-E3H">
+                            <rect key="frame" x="47.5" y="13" width="101.5" height="13"/>
                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -61,7 +70,7 @@
             <constraints>
                 <constraint firstItem="4hF-ph-IP9" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" id="L6f-kE-0Pr"/>
                 <constraint firstItem="mbL-IU-ymV" firstAttribute="top" secondItem="YTj-UJ-Ygd" secondAttribute="top" id="Wug-1J-GGK"/>
-                <constraint firstItem="mbL-IU-ymV" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" constant="11" id="ixB-Kv-FTT"/>
+                <constraint firstItem="mbL-IU-ymV" firstAttribute="leading" secondItem="YTj-UJ-Ygd" secondAttribute="leading" constant="12" id="ixB-Kv-FTT"/>
                 <constraint firstItem="4hF-ph-IP9" firstAttribute="bottom" secondItem="mbL-IU-ymV" secondAttribute="bottom" id="lZr-oR-ryY"/>
                 <constraint firstAttribute="trailing" secondItem="mbL-IU-ymV" secondAttribute="trailing" priority="250" id="qtM-h3-f0T"/>
             </constraints>
@@ -73,7 +82,7 @@
                 <outlet property="viewRounded" destination="mbL-IU-ymV" id="7ut-Vp-cWE"/>
                 <outlet property="viewTriangle" destination="4hF-ph-IP9" id="5t3-rR-YI9"/>
             </connections>
-            <point key="canvasLocation" x="-168" y="-328"/>
+            <point key="canvasLocation" x="-168" y="-340.5"/>
         </view>
     </objects>
 </document>

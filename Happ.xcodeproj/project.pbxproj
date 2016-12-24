@@ -350,6 +350,8 @@
 		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */,
+				520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */,
 				52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */,
 				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
 				525A8AA91D7D4023002C6F46 /* SignInController.swift */,
@@ -370,8 +372,6 @@
 				52959CD21DC3D93D00282038 /* SelectNotificationsViewController.swift */,
 				B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */,
 				52D190961D9FF4B300608B02 /* ProfileController.swift */,
-				520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */,
-				520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */,
 				AA0CB5B71DEAC2CF00ABC686 /* WebViewController.swift */,
 			);
 			name = Controllers;

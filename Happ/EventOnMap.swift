@@ -11,6 +11,9 @@ import UIKit
 
 
 class TriangeCorner: UIView {
+    
+    var colorToFill: UIColor!
+
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath()
         path.lineWidth = 1
@@ -23,7 +26,7 @@ class TriangeCorner: UIView {
         path.addLineToPoint(CGPoint(
             x:bounds.width,
             y:bounds.height))
-        UIColor(hexString: "F6A623").setFill()
+        self.colorToFill.setFill()
         path.fill()
     }
 
@@ -33,10 +36,19 @@ class TriangeCorner: UIView {
 class EventOnMap: UIView {
 
     static let nibName = "EventOnMap"
-    static func initView() -> EventOnMap {
-        return NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
-    }
 
+    static func initView(color: UIColor) -> EventOnMap {
+
+        let inst = NSBundle.mainBundle().loadNibNamed(EventOnMap.nibName, owner: EventOnMap(), options: nil)!.first as! EventOnMap
+
+        let triangleFrame = CGRectMake(0, 14, 32, 32)
+        let triangle = TriangeCorner(frame: triangleFrame)
+        triangle.colorToFill = color
+        triangle.backgroundColor = UIColor.clearColor()
+        inst.insertSubview(triangle, atIndex: 0)
+
+        return inst
+    }
 
     var view: UIView!
     
@@ -46,9 +58,7 @@ class EventOnMap: UIView {
     @IBOutlet weak var labelTitle: UILabel!
 
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+
 }
 
 

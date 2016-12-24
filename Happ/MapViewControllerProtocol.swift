@@ -91,15 +91,18 @@ extension MapViewControllerProtocol where Self: UIViewController {
             marker.map = self.getMapView()
 
         case .Event(let event):
-            // create view
-            let eventOnMapView = EventOnMap.initView()
-            eventOnMapView.labelTitle.text = event.title
-            if let colorCode = event.images.first?.color {
-                let color = UIColor(hexString: colorCode)
-                eventOnMapView.viewRounded.backgroundColor = color
-                eventOnMapView.viewTriangle.backgroundColor = color
+            var color: UIColor = UIColor.happBlackQuarterTextColor()
+            if  let image = event.images.first,
+                let colorCode = image.color {
+                color = UIColor(hexString: colorCode)
             }
-            if  let imageURL = event.images.first?.getURL() {
+
+            // create view
+            let eventOnMapView = EventOnMap.initView(color)
+            eventOnMapView.labelTitle.text = event.title
+            eventOnMapView.viewRounded.backgroundColor = color
+            if  let image = event.images.first,
+                let imageURL = image.getURL() {
                 eventOnMapView.imageCover.hnk_setImageFromURL(imageURL)
             }
             let location = CLLocation(geopoint: event.geopoint!)
