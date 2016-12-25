@@ -84,7 +84,7 @@ class EventsExploreViewModel {
 
 
     private func getEvents() -> [EventModel] {
-        return Array(EventService.getExplore())
+        return Array(EventService.getStored())
     }
 }
 

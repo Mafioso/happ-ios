@@ -8,9 +8,23 @@
 
 import UIKit
 import GoogleMaps
+import PromiseKit
 
 
-class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate, FeedFiltersDelegate {
+class ClusterMarker: NSObject, GMUClusterItem {
+    var position: CLLocationCoordinate2D
+    var event: EventModel
+
+    init(event: EventModel) {
+        self.event = event
+        self.position = CLLocation(geopoint: self.event.geopoint!).coordinate
+    }
+}
+
+class ClusterRenderer: GMUDefaultClusterRenderer {}
+
+
+class EventsMapViewController: UIViewController, MapLocationViewControllerProtocol, GMUClusterManagerDelegate, GMUClusterRendererDelegate, GMSMapViewDelegate, FeedFiltersDelegate {
 
 
     var viewModel: EventsMapViewModel!  {
@@ -32,17 +46,18 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
     // variables
     var markers: [GMSMarker] = []
+    var clusterMarkerks: [ClusterMarker] = []
     var locationState: MapLocationState!
+    var clusterManager: GMUClusterManager!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initDataLoading()
-
         self.initMap()
+        self.initMapCluster()
         self.initLocation()
-
+        
         self.initNavBarItems()
     }
     override func viewDidLayoutSubviews() {
@@ -65,15 +80,56 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.extMakeNavBarVisible()
     }
 
-    
-    func initDataLoading() {
-        if self.viewModel.willLoadNextDataPage() {
-            self.viewModel.onLoadFirstDataPage() { state in
-                self.viewModel.state = state
-            }
+    func renderer(renderer: GMUClusterRenderer, didRenderMarker marker: GMSMarker) {
+        if let view = marker.iconView as? EventOnMap {
+            view.viewRounded.extMakeCircle()
+            view.imageCover.extMakeCircle()
         }
     }
-    
+
+    func renderer(renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
+        if let clusterMarker = marker.userData as? ClusterMarker {
+            let event = clusterMarker.event
+            var color: UIColor = UIColor.happBlackQuarterTextColor()
+            if  let image = event.images.first,
+                let colorCode = image.color {
+                color = UIColor(hexString: colorCode)
+            }
+
+            // create view
+            let eventOnMapView = EventOnMap.initView(color)
+            eventOnMapView.labelTitle.text = event.title
+            eventOnMapView.viewRounded.backgroundColor = color
+            if  let image = event.images.first,
+                let imageURL = image.getURL() {
+                eventOnMapView.imageCover.hnk_setImageFromURL(imageURL)
+            }
+
+            marker.groundAnchor = CGPoint(x: 0, y: 1)
+            marker.iconView = eventOnMapView
+        }
+    }
+
+    func initMapCluster() {
+        let iconGenerator = GMUDefaultClusterIconGenerator()
+        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+        let renderer = ClusterRenderer(mapView: self.getMapView(), clusterIconGenerator: iconGenerator)
+        renderer.delegate = self
+        self.clusterManager = GMUClusterManager(map: self.getMapView(), algorithm: algorithm,renderer: renderer)
+        self.clusterManager.setDelegate(self, mapDelegate: self)
+    }
+
+    func handleChangeMapView() {
+        guard !self.viewModel.state.isFetching else { return }
+
+        let center = self.getMapCenter()
+        let radius = self.getMapRadius()
+        print(".mapView.change", center.coordinate, radius)
+        self.viewModel.onChangeMapPosition(center, radius: radius) { AsyncState in
+            self.viewModel.state = AsyncState
+        }
+    }
+
     func updateView() {
         guard self.isViewLoaded() else { return }
 
@@ -90,7 +146,19 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     // implement FeedFiltersDelegate
     func didChangeFilters(filters: EventsListFiltersState) {
         self.viewModel.onChangeFilters(filters) // it clear state
-        self.initDataLoading() // fetch items into state
+        // TODO self.initDataLoading() // fetch items into state
+    }
+
+
+    func getMapCenter() -> CLLocation {
+        let cameraCoord = self.getMapView().camera.target
+        return CLLocation(latitude: cameraCoord.latitude, longitude: cameraCoord.longitude)
+    }
+    func getMapRadius() -> Int {
+        let cameraLocation = self.getMapCenter()
+        let mapRegion = self.getMapView().projection.visibleRegion()
+        let bottomLeft = CLLocation(latitude: mapRegion.nearLeft.latitude, longitude: mapRegion.nearLeft.longitude)
+        return Int(cameraLocation.distanceFromLocation(bottomLeft))
     }
 
 
@@ -102,14 +170,21 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         return self.buttonLocate
     }
     func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
-        if let eventID = marker.userData as? String {
+        if let clusterMarker = marker.userData as? ClusterMarker {
+            self.viewModel.navigateEventDetailsMap?(id: clusterMarker.event.id)
+            return true
+
+        } else if let eventID = marker.userData as? String {
             self.viewModel.navigateEventDetailsMap?(id: eventID)
             return true
+
+        } else {
+            return false
         }
-        return false
     }
     func mapView(mapView: GMSMapView, willMove gesture: Bool) {
         self.onWillCameraMove(gesture)
+        self.handleChangeMapView()
     }
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
@@ -129,14 +204,48 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
     private func displayEventMarkers() {
         let events = self.viewModel.state.items
-        events
-            .map { $0 as! EventModel }
-            .forEach { event in
-                EventService.updateGeoPointIfNotExists(event)
+        print(".displayEvents.count: ", events.count)
+
+        var tmpClusterMarkers: [ClusterMarker] = []
+        let eventPromises: [Promise<Void>] = events.map { event in
+            return Promise { resolve, reject in
+                EventService
+                    .updateGeoPointIfNotExists(event)
                     .then { event -> Void in
-                        self.displayMarker(.Event(event: event))
+                        //self.displayMarker(.Event(event: event))
+                        let cm = ClusterMarker(event: event)
+                        tmpClusterMarkers.append(cm)
+                        resolve()
+                    }
+                    .error { err in
+                        switch err {
+                        case EventLocationError.NoAddress:
+                            print(".displayEvent.error", err, event.title)
+                            resolve()
+                        case EventLocationError.AddressNotFound:
+                            print(".displayEvent.error", err, event.title)
+                            resolve()
+                        default:
+                            reject(err)
+                            break;
+                        }
                     }
             }
+        }
+
+        when(eventPromises)
+        .then { _ -> Void in
+            self.clusterManager.clearItems()
+            self.clusterManager.addItems(tmpClusterMarkers)
+            self.clusterMarkerks = tmpClusterMarkers
+        }
+        .then { _ -> Void in
+            self.clusterManager.cluster()
+        }
+        .error { err in
+            print(".displayEvents.when.error", err)
+        }
+
     }
     private func displayUserCity() {
         let userCity = ProfileService.getUserCity()

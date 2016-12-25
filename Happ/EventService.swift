@@ -11,6 +11,8 @@ import PromiseKit
 import RealmSwift
 import ObjectMapper
 import ObjectMapper_Realm
+import GoogleMapsCore
+import SwiftyJSON
 
 
 enum EventLocationError: ErrorType {
@@ -80,13 +82,13 @@ class EventService {
             .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]
                 self.isLastPageOfFeed = isLastPage
-                
-                if overwrite {
-                    self.deleteEventsLocal()
-                }
 
                 let realm = try! Realm()
                 try! realm.write {
+                    if overwrite {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
                         realm.add(inst!, update: true) // `update: true` - not required
@@ -101,12 +103,12 @@ class EventService {
                 let results = data as! [AnyObject]
                 self.isLastPageOfFavourites = isLastPage
 
-                if overwrite {
-                    self.deleteEventsLocal()
-                }
-
                 let realm = try! Realm()
                 try! realm.write {
+                    if overwrite {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
                         realm.add(inst!, update: true) // `update: true` - not required
@@ -121,12 +123,35 @@ class EventService {
                 let results = data as! [AnyObject]
                 self.isLastPageOfExplore = isLastPage
 
-                if overwrite {
-                    self.deleteEventsLocal()
+                let realm = try! Realm()
+                try! realm.write {
+                    if overwrite {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
+                    results.forEach() { event in
+                        let inst = Mapper<EventModel>().map(event)
+                        realm.add(inst!, update: true) // `update: true` - not required
+                    }
                 }
+        }
+    }
+    class func fetchMap(center: CLLocation, radius: Int, overwrite: Bool = false) -> Promise<Void> {
+        let mapEndpoint = endpoint + "map/"
+        let params: [String: AnyObject] = [
+            "center": [center.coordinate.longitude, center.coordinate.latitude],
+            "radius": radius
+        ]
+        return Post(mapEndpoint, parameters: params)
+            .then { result -> Void in
+                guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
 
                 let realm = try! Realm()
                 try! realm.write {
+                    if overwrite {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
                         realm.add(inst!, update: true) // `update: true` - not required
@@ -146,14 +171,7 @@ class EventService {
         }
 
     }
-    
-    class func deleteEventsLocal() {
-        let realm = try! Realm()
-        try! realm.write {
-            let exists = realm.objects(EventModel)
-            realm.delete(exists)
-        }
-    }
+
 
     class func updateGeoPoint(event: EventModel, geopoint: GeoPointModel) {
         let realm = try! Realm()
@@ -187,7 +205,7 @@ class EventService {
         }
     }
 
-    class func getFeed() -> Results<EventModel> {
+    class func getStored() -> Results<EventModel> {
         let realm = try! Realm()
         let events = realm.objects(EventModel)
         return events
@@ -197,11 +215,6 @@ class EventService {
         let events = realm
                         .objects(EventModel)
                         .filter("is_in_favourites == true")
-        return events
-    }
-    class func getExplore() -> Results<EventModel> {
-        let realm = try! Realm()
-        let events = realm.objects(EventModel) //TODO get only Explore
         return events
     }
 

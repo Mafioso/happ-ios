@@ -6,8 +6,9 @@
 //  Copyright © 2016 Sattar Stamkulov. All rights reserved.
 //
 
-import Foundation
 import PromiseKit
+import RealmSwift
+import UIKit
 
 
 enum ProfileErrorTypes: ErrorType {

@@ -217,10 +217,11 @@ class GeoPointModel: Object, Mappable {
         self.init()
     }
     func mapping(map: Map) {
-        lat     <- map["0"]
-        long    <- map["1"]
+        lat     <- map["lat"]
+        long    <- map["lng"]
     }
 }
+
 
 class ImageModel: Object, Mappable {
     dynamic var id = ""

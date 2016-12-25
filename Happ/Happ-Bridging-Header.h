@@ -2,8 +2,9 @@
 //  Happ-Bridging-Header.h
 //  Happ
 //
-//  Created by Aleksei Pugachev on 12/14/16.
+//  Created by MacBook Pro on 12/24/16.
 //  Copyright © 2016 Sattar Stamkulov. All rights reserved.
 //
 
 #import "UIAppearance+Swift.h"
+#import "GMUMarkerClustering.h"

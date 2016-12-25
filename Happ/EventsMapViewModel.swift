@@ -9,24 +9,26 @@
 import UIKit
 import PromiseKit
 import RealmSwift
+import GoogleMapsCore
 
 
-
-struct EventsMapState: PaginatedDataStateProtocol {
-    var items: [Object]
-    var page: Int
+struct EventsMapState: DataStateProtocol {
+    var items: [EventModel]
     var isFetching: Bool
-    
+
     var filters: EventsListFiltersState
 
+    var center: CLLocation?
+    var radius: Int?
+
     static func getInitialState() -> EventsMapState {
-        return EventsMapState(items: [], page: 0, isFetching: false, filters: EventsListFiltersState.getInitialState())
+        return EventsMapState(items: [], isFetching: false, filters: EventsListFiltersState.getInitialState(), center: nil, radius: nil)
     }
 }
 
-struct EventsMapViewModel: PaginatedDataViewModelProtocol {
+struct EventsMapViewModel: DataViewModelProtocol {
     var state: EventsMapState
-    
+
     var navigateEventDetailsMap: NavigationFuncWithID
     var displaySlideMenu: NavigationFunc
     var displaySlideFilters: NavigationFunc
@@ -42,14 +44,20 @@ struct EventsMapViewModel: PaginatedDataViewModelProtocol {
         self.state.filters = newFiltersState
     }
 
-    func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
-        return EventService.fetchFeed(page, overwrite: overwrite)
+    mutating func onChangeMapPosition(center: CLLocation, radius: Int, completion: (EventsMapState -> Void)) {
+        self.state.center = center
+        self.state.radius = radius
+
+        self.onInitLoadingData(completion)
     }
-    func getData() -> [Object] {
-        return Array(EventService.getFeed())
+    
+    func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
+        return EventService.fetchMap(self.state.center!, radius: self.state.radius!, overwrite: flagValue)
     }
-    func isLastPage() -> Bool {
-        return EventService.isLastPageOfFeed
+    func getData() -> [EventModel] {
+        return Array(EventService.getStored())
     }
 }
+
+
 

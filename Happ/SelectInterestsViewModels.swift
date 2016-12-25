@@ -165,12 +165,12 @@ protocol SelectInterestViewModelProtocol {
     mutating func onSelectSubinterest(subinterest: InterestModel)
     mutating func onOpenSubinterests(for interest: InterestModel)
     mutating func onCloseSubinterests()
-    mutating func onInitLoadingData(completion: ((Self.StateType) -> Void))
     func getSelectionType(interest: InterestModel) -> SelectInterestSelectionTypes
     func getSelectedInterests() -> [InterestModel]
     func isInterestSelected(interest: InterestModel) -> Bool
     func isSubinterestSelected(subinterest: InterestModel) -> Bool
 
+    mutating func onInitLoadingData(completion: ((Self.StateType) -> Void))
     func fetchData(overwrite flagValue: Bool) -> Promise<Void>
     func getData() -> [InterestModel]
 

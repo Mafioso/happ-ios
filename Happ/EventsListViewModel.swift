@@ -26,14 +26,14 @@ struct EventsManageViewModel: EventsListSectionedViewModelProtocol {
         self.state = EventsListSectionedState.getInitialState()
     }
     
-    
+
     func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
         let filters = self.state.filters
         return EventService.fetchFeed(page, overwrite: overwrite,
                                       onlyFree: filters.onlyFree, popular: filters.sortBy == .ByPopular, startDate: filters.dateFrom, endDate: filters.dateTo, startTime: filters.time)
     }
     func getData() -> [Object] {
-        return Array(EventService.getFeed())
+        return Array(EventService.getStored())
     }
     func isLastPage() -> Bool {
         return EventService.isLastPageOfFeed
@@ -133,7 +133,7 @@ struct FeedViewModel: EventsListSectionedViewModelProtocol {
                                       onlyFree: filters.onlyFree, popular: filters.sortBy == .ByPopular, startDate: filters.dateFrom, endDate: filters.dateTo, startTime: filters.time)
     }
     func getData() -> [Object] {
-        return Array(EventService.getFeed())
+        return Array(EventService.getStored())
     }
     func isLastPage() -> Bool {
         return EventService.isLastPageOfFeed

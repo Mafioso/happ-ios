@@ -49,6 +49,7 @@ protocol MapViewControllerProtocol: class, GMSMapViewDelegate {
     // actions:
     func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float)
     func displayMarker(mapMarker: MapMarkerType)
+    func displayDirection(direction: MapDirection)
     func clearMap()
     // inputs:
     func onDidMapLayoutSubviews()
@@ -77,7 +78,7 @@ extension MapViewControllerProtocol where Self: UIViewController {
     }
     func displayMarker(mapMarker: MapMarkerType) {
         var marker = GMSMarker()
-        
+
         switch mapMarker {
         case .MyLocation(let location):
             marker.position = location.coordinate

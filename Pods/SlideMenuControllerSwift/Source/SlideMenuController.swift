@@ -908,7 +908,7 @@ public class SlideMenuController: UIViewController, UIGestureRecognizerDelegate 
             viewController.didMoveToParentViewController(self)
         }
     }
-
+    
     
     private func removeViewController(viewController: UIViewController?) {
         if let _viewController = viewController {
