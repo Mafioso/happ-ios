@@ -178,7 +178,7 @@ protocol SelectInterestViewModelProtocol {
     var navItem: NavItemType { get set }
     var navigateNavItem: NavigationFunc { get set }
     var navPopoverSelectSubinterests: NavigationFunc { get set }
-    
+
 }
 
 protocol SelectMultipleInterestsViewModelProtocol: SelectInterestViewModelProtocol {
@@ -221,13 +221,19 @@ extension SelectMultipleInterestsViewModelProtocol where Self: SelectUserInteres
             }
             .then { _ -> Void in
                 let parentInterests = self.getData()
-                let allInterestsCount = InterestService.getStored().count
                 var updState = self.state
                 updState.items = parentInterests
                 updState.isFetching = false
                 updState.userInterests = userInterests
                 updState.selected = self.makeSelectedInterests(userInterests)
-                updState.isSelectedAll = (allInterestsCount == userInterests.count)
+
+                let allSelectedInterestsCount = updState.selected
+                    .filter({ interest, subinterests in
+                        return subinterests.isEmpty || subinterests.count == interest.children.count
+                    })
+                    .count
+
+                updState.isSelectedAll = (allSelectedInterestsCount == parentInterests.count)
                 completion(updState)
             }
     }
@@ -288,6 +294,24 @@ extension SelectMultipleInterestsViewModelProtocol {
 
         return result
     }
+
+    func isSubinterestSelected(subinterest: InterestModel) -> Bool {
+        if self.state.isSelectedAll {
+            return true
+        }
+        if  let interest = InterestService.getParentOf(subinterest),
+            let subinterests = self.state.selected[interest]
+            where subinterests.isEmpty {
+            return true
+        }
+
+        if  let interest = InterestService.getParentOf(subinterest)
+            where self.state.selected[interest]?.indexOf(subinterest) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 
@@ -344,7 +368,14 @@ extension SelectInterestViewModelProtocol {
             } else {
                 selectedSubinterests.append(subinterest)
             }
-            updSelected.updateValue(selectedSubinterests, forKey: interest)
+
+            if selectedSubinterests.isEmpty {
+                updSelected.removeValueForKey(interest)
+            } else if selectedSubinterests.count == interest.children.count {
+                updSelected.updateValue([], forKey: interest)
+            } else {
+                updSelected.updateValue(selectedSubinterests, forKey: interest)
+            }
 
         } else {
             updSelected[interest] = [subinterest]
@@ -381,8 +412,9 @@ extension SelectInterestViewModelProtocol {
     }
 
     func isSubinterestSelected(subinterest: InterestModel) -> Bool {
-        if let interest = InterestService.getParentOf(subinterest) {
-            return self.state.selected[interest]?.indexOf(subinterest) != nil
+        if  let interest = InterestService.getParentOf(subinterest)
+            where self.state.selected[interest]?.indexOf(subinterest) != nil {
+            return true
         } else {
             return false
         }
