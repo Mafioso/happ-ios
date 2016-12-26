@@ -253,6 +253,41 @@ class ImageModel: Object, Mappable {
     }
 }
 
+class EventDateModel: Object, Mappable {
+    dynamic var raw_date = ""
+    dynamic var raw_start_time = ""
+    dynamic var raw_end_time = ""
+
+    var start_time: NSDate {
+        get {
+            let t = "\(raw_date) \(raw_start_time)"
+            return HappDateFormats.DateTime.toDate(t)!
+        }
+    }
+    var end_time: NSDate {
+        get {
+            let t = "\(raw_date) \(raw_end_time)"
+            return HappDateFormats.DateTime.toDate(t)!
+        }
+    }
+
+
+
+    override static func ignoredProperties() -> [String] {
+        return ["start_time", "end_time"]
+    }
+    
+    // Mappable
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+        raw_date        <- map["date"]
+        raw_start_time  <- map["start_time"]
+        raw_end_time    <- map["end_time"]
+    }
+}
+
 
 enum EventModelStatusTypes: Int {
     case Active = 0
@@ -268,8 +303,7 @@ class EventModel: Object, Mappable {
     var interests = List<InterestModel>()
     dynamic var currency: CurrencyModel?
     dynamic var author: AuthorModel?
-    dynamic var start_datetime: NSDate?
-    dynamic var end_datetime: NSDate?
+    var datetimes = List<EventDateModel>()
     dynamic var is_upvoted = false
     dynamic var is_in_favourites = false
     dynamic var date_created: NSDate?
@@ -332,8 +366,7 @@ class EventModel: Object, Mappable {
         interests           <- (map["interests"], ArrayTransform<InterestModel>())
         currency            <- map["currency"]
         author              <- map["author"]
-        start_datetime      <- (map["start_datetime"], HappDateTransformer)
-        end_datetime        <- (map["end_datetime"], HappDateTransformer)
+        datetimes           <- (map["datetimes"], ArrayTransform<EventDateModel>())
         is_upvoted          <- map["is_upvoted"]
         is_in_favourites    <- map["is_in_favourites"]
         date_created        <- (map["date_created"], HappDateTransformer)

@@ -51,20 +51,20 @@ class EventTableCell: UITableViewCell {
 
     func updateView() {
         let event = self.viewModel.event
+        let start_time = event.datetimes.first!.start_time
+        let end_time = event.datetimes.first!.end_time
 
         labelTitle.text = event.title
         labelCategory.text = event.interests.first?.title
         labelPlace.text = event.address
         labelPrice.text = event.getPrice(.MinPrice)
         labelUpvotesCount.text = formatStatValue(event.votes_num)
-        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(event.start_datetime!)) — \(HappDateFormats.OnlyTime.toString(event.end_datetime!))"
-
+        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(start_time)) — \(HappDateFormats.OnlyTime.toString(end_time))"
         buttonUpvote.titleLabel!.text = String(event.votes_num)
         buttonUpvote.selected = event.is_upvoted
         buttonFavourite.selected = event.is_in_favourites
 
         viewImagePlaceholder.hidden = false
-
         if let image = event.images.first {
             if let url = image.getURL() {
                 imageCover.hnk_setImageFromURL(

@@ -97,11 +97,8 @@ class EventDetailsController: UIViewController {
 
 
     func viewModelDidUpdate() {
-        if viewModel.event == nil {
-            return
-        }
-
-        let event = self.viewModel.event
+        guard let event = self.viewModel.event else { return }
+        var start_time = event.datetimes.first!.start_time
         var color = UIColor.happBlackQuarterTextColor()
 
         // TODO: change to images slider
@@ -129,7 +126,7 @@ class EventDetailsController: UIViewController {
         labelTitle.text = event.title
         labelDescription.text = event.description_text
         // TODO
-        labelDateRange.text = HappDateFormats.EventOnFeed.toString(event.start_datetime!)
+        labelDateRange.text = HappDateFormats.EventOnFeed.toString(start_time)
         labelLocation.text = event.address
         labelPriceMinimum.text = event.getPrice(.MinPrice)
 

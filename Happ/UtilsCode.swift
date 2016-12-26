@@ -177,6 +177,7 @@ func formatStatValue(value: Int) -> String {
 
 enum HappDateFormats: String {
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    case DateTime = "yyyy-MM-dd HH:mm:ss"
     case EventOnFeed = "MMMM d"
     case OnlyTime = "HH:mm"
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,10 +46,10 @@
                                                 <blurEffect style="light"/>
                                             </visualEffectView>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obt-pS-RdA" userLabel="Selected All">
-                                                <rect key="frame" x="0.0" y="65.5" width="151" height="20"/>
+                                                <rect key="frame" x="0.0" y="66" width="151" height="20"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtS-rg-8fT">
-                                                        <rect key="frame" x="64.5" y="4" width="23" height="13"/>
+                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtS-rg-8fT">
+                                                        <rect key="frame" x="64" y="4" width="23" height="13"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="13.42" id="CuS-i7-mUf"/>
                                                             <constraint firstAttribute="width" constant="23.25" id="aaO-2M-JTC"/>
@@ -64,16 +64,16 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0g1-ff-VEA" userLabel="Selected Some">
-                                                <rect key="frame" x="51" y="65.5" width="49.5" height="20"/>
+                                                <rect key="frame" x="51" y="66" width="50" height="20"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-tp-b1t">
-                                                        <rect key="frame" x="0.0" y="0.5" width="25.5" height="19"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="26" height="20"/>
                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZU-CP-sdZ">
-                                                        <rect key="frame" x="32.5" y="4" width="17" height="13"/>
+                                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZU-CP-sdZ">
+                                                        <rect key="frame" x="33" y="4" width="17" height="13"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="13.41" id="9Mf-ei-riG"/>
                                                             <constraint firstAttribute="width" constant="17.5" id="A2W-jC-dRS"/>
@@ -120,8 +120,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMe-ob-u4J" userLabel="Footer">
                                 <rect key="frame" x="0.0" y="151" width="151" height="36"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ART d f" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohE-6p-eX4">
-                                        <rect key="frame" x="4" y="4" width="143" height="50.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ART d f" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohE-6p-eX4">
+                                        <rect key="frame" x="4" y="10" width="143" height="17"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -129,13 +129,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.8980392157" green="0.36470588240000001" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ohE-6p-eX4" firstAttribute="top" secondItem="UMe-ob-u4J" secondAttribute="top" constant="4" id="6Tf-19-wwJ"/>
                                     <constraint firstItem="ohE-6p-eX4" firstAttribute="leading" secondItem="UMe-ob-u4J" secondAttribute="leading" constant="4" id="Aeo-Af-kvq"/>
-                                    <constraint firstAttribute="bottom" secondItem="ohE-6p-eX4" secondAttribute="bottom" priority="749" constant="4" id="nmi-Dh-PZq"/>
+                                    <constraint firstItem="ohE-6p-eX4" firstAttribute="centerY" secondItem="UMe-ob-u4J" secondAttribute="centerY" id="PnI-0j-NJI"/>
                                     <constraint firstAttribute="trailing" secondItem="ohE-6p-eX4" secondAttribute="trailing" constant="4" id="oQS-yh-Irl"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXa-sv-C2v" userLabel="Unfocus View">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cXa-sv-C2v" userLabel="Unfocus View">
                                 <rect key="frame" x="0.0" y="0.0" width="151" height="187"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>

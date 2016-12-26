@@ -20,6 +20,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
 
 
     // outlets
+    @IBOutlet weak var viewImagePlaceholder: UIView!
     @IBOutlet weak var imageUserPhoto: UIImageView!
     @IBOutlet weak var labelUserFullname: UILabel!
     @IBOutlet weak var labelChangeCity: UILabel!
@@ -62,6 +63,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
         self.tableMenuActions.selectRowAtIndexPath(highlightedIndexPath, animated: true, scrollPosition: .None)
     }
     override func viewDidLayoutSubviews() {
+        self.viewImagePlaceholder.extRoundCorners(.AllCorners, radius: 5)
         let footerHeight = CGFloat(37)
         self.tableMenuActions.contentSize.height = self.tableMenuActions.contentSize.height + footerHeight
     }
@@ -77,10 +79,15 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
     func viewModelDidUpdate() {
         let user = self.viewModelMenu.getUser()
         labelUserFullname.text = user.fullname
+        self.viewImagePlaceholder.hidden = false
         if  let image = user.avatar,
             let url = image.getURL()
         {
-            imageUserPhoto.hnk_setImageFromURL(url)
+            self.imageUserPhoto.hnk_setImageFromURL(url, success: { img in
+                self.imageUserPhoto.image = img
+                self.imageUserPhoto.layer.masksToBounds = true
+                self.viewImagePlaceholder.hidden = true
+            })
         }
 
         self.updateScopeViews()

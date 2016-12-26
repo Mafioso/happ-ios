@@ -161,25 +161,6 @@ struct FeedViewModel: EventsListSectionedViewModelProtocol {
 enum EventsListSortType {
     case ByDate
     case ByPopular
-    
-    func isOrderedBeforeFunc(event1: EventModel, event2: EventModel) -> Bool {
-        let date1 = event1.start_datetime!
-        let date2 = event2.start_datetime!
-        let diff = NSCalendar.currentCalendar().components([.Day, .Hour], fromDate: date1, toDate: date2, options: [])
-        let isSameDay = diff.day == 0
-        let isLater = date1.laterDate(date2).isEqualToDate(date1)
-        
-        if isSameDay {
-            switch self {
-            case .ByDate:
-                return isLater
-            case .ByPopular:
-                return event1.votes_num > event2.votes_num
-            }
-        } else {
-            return isLater
-        }
-    }
 }
 
 // MARK: - States
@@ -252,7 +233,7 @@ struct EventsListSectionedState: EventsListSectionedStateProtocol {
         var result: [NSDate: [EventModel]] = [:]
 
         result = items.reduce(result, combine: { (var acc, event) in
-            let eventDate = event.start_datetime!
+            let eventDate = event.datetimes.first!.start_time
             let existKey = acc.keys
                 .filter { date in
                     let order = NSCalendar.currentCalendar().compareDate(date, toDate: eventDate, toUnitGranularity: .Day)
