@@ -197,7 +197,6 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.viewModel.isLoadingFirstDataPage() {
             return 3
-
         } else {
             return self.viewModel.state.getSectionEventsCount(section)
         }
@@ -242,9 +241,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // select event
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if self.viewModel.isLoadingFirstDataPage() {
-            return // do nothing
-        }
+        guard !self.viewModel.isLoadingFirstDataPage() else { return }
 
         let event = self.viewModel.state.getSectionEvent(indexPath)
         print(".didSelect", indexPath.row, event.title)
@@ -254,8 +251,9 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     // pagination
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
-        if  indexPath.section > self.viewModel.state.getSectionsCount() - 1 &&
-            self.viewModel.willLoadNextDataPage() == true {
+        if  indexPath.section == self.viewModel.state.getSectionsCount() - 1 &&
+            self.viewModel.willLoadNextDataPage() == true
+        {
             self.viewModel.onLoadNextDataPage { asyncState in
                 self.viewModel.state = asyncState
             }

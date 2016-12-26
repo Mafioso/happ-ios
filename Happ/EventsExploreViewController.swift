@@ -26,11 +26,11 @@ class EventsExploreViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initNavBarItems()
-
         self.viewModel.onInitLoadingData() { asyncState in
             self.viewModel.state = asyncState
         }
+        
+        self.initNavBarItems()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,6 +46,7 @@ class EventsExploreViewController: UICollectionViewController {
 
 
     func updateView() {
+        //print(".updateView", self.viewModel.state.isFetching, self.viewModel.state.items.count)
         self.collectionView!.reloadData()
     }
 
@@ -53,6 +54,7 @@ class EventsExploreViewController: UICollectionViewController {
     // init size
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
+        //print(".cellSize", indexPath.row)
         return CGSizeMake(min(124, screenSize.width*0.33), 164)
     }
 
@@ -61,15 +63,18 @@ class EventsExploreViewController: UICollectionViewController {
         return 1
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         if self.viewModel.isInitLoadingData() {
             return 10
         } else {
+            //print(".numberOfItems", self.viewModel.state.items.count)
             return self.viewModel.state.items.count
         }
 
     }
+
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+        //print(".cell", indexPath.row)
 
         if self.viewModel.isInitLoadingData() {
             let cellLoading = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLoadingIdentifier, forIndexPath: indexPath) as! EventExploreLoadingCollectionViewCell
@@ -93,19 +98,19 @@ class EventsExploreViewController: UICollectionViewController {
         }
     }
 
+    /*
     // init pagination
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
 
         if  indexPath.row == self.viewModel.state.items.count - 1 &&
             self.viewModel.state.isFetching == false
         {
-            print(".willDisplayCell.paginating", self.viewModel.state.items.count)
-
             self.viewModel.onInitLoadingNextData() { asyncState in
                 self.viewModel.state = asyncState
             }
         }
     }
+    */
 
     // init action handle
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

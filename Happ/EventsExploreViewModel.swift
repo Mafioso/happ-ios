@@ -36,27 +36,28 @@ struct EventsExploreViewModel: DataViewModelProtocol {
     }
 
     mutating func onInitLoadingNextData(completion: ((EventsExploreState) -> Void)) {
-        self.loadData(completion)
+        completion(self.state)
+        self.state.isFetching = true
+        self.fetchData(overwrite: false)
+            .then { _ -> Void in
+                let newItems = self.getData()
+                var updState = self.state
+                updState.items = newItems
+                updState.isFetching = false
+                completion(updState)
+            }
+            .error { err in
+                let cachedItems = self.getData()
+                var updState = self.state
+                updState.items = cachedItems
+                updState.isFetching = false
+                completion(updState)
+        }
     }
+
+
 
     mutating func onInitLoadingData(completion: ((EventsExploreState) -> Void)) {
-        self.loadData(completion)
-    }
-    func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
-        return EventService.fetchExplore(overwrite: flagValue)
-    }
-    func getData() -> [EventModel] {
-        return EventService.getExplore()
-    }
-
-    
-    //MARK: - Inputs
-    func onClickEvent(event: EventModel) {
-        self.navigateEventDetails?(id: event.id)
-    }
-
-    
-    private mutating func loadData(completion: ((EventsExploreState) -> Void)) {
         self.state.isFetching = true
         self.fetchData(overwrite: true)
             .then { _ -> Void in
@@ -73,6 +74,19 @@ struct EventsExploreViewModel: DataViewModelProtocol {
                 updState.isFetching = false
                 completion(updState)
         }
+    }
+    func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
+        return EventService.fetchExplore(overwrite: flagValue)
+    }
+    func getData() -> [EventModel] {
+        print("..VM.getData", EventService.getExplore().count)
+        return EventService.getExplore()
+    }
+
+    
+    //MARK: - Inputs
+    func onClickEvent(event: EventModel) {
+        self.navigateEventDetails?(id: event.id)
     }
 
 }
