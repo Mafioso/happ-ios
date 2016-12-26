@@ -148,8 +148,10 @@ class SelectCityControllerPrototype<T: SelectCityViewModelProtocol>: UITableView
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let city = self.getCity(indexPath)
 
-        self.viewModel.onSelectCity(city)
-        self.delegate?.didSelectCity(city)
+        self.viewModel.onSelectCity(city) { asyncState in
+            self.viewModel.state = asyncState
+            self.delegate?.didSelectCity(city)
+        }
     }
     // higlight and pagination
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

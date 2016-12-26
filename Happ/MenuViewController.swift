@@ -10,7 +10,7 @@ import UIKit
 import Haneke
 
 
-class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDelegate, SelectCityDataSource {
+class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDelegate {
 
     var viewModelMenu: MenuViewModel! {
         didSet {
@@ -114,15 +114,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
         }
     }
 
-    // implement Delegate & DataSource
+    // implement SelectCityDelegate
     func didSelectCity(city: CityModel) {
         self.viewModelMenu.onChangeCity(city)
     }
-    func getSelectedCity() -> CityModel? {
-        return self.viewModelMenu.city
-    }
 
-    
+
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 

@@ -728,7 +728,6 @@ class NavigationCoordinator {
         let selectCityViewController = SelectCityOnMenuController()
         selectCityViewController.viewModel = SelectCityOnMenuViewModel()
         selectCityViewController.delegate = menuViewController
-        selectCityViewController.dataSource = menuViewController
         menuViewController.tableViewControllerSelectCity = selectCityViewController
 
         return menuViewController

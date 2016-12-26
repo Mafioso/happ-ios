@@ -22,14 +22,17 @@ struct SelectCityOnSetupState: SelectCityStateProtocol {
 }
 
 struct SelectCityOnSetupViewModel: SelectCityViewModelProtocol {
-    var state: SelectCityOnSetupState {
-        didSet {
-            print(".[VM].update", state)
-        }
-    }
+    var state: SelectCityOnSetupState
 
     var navigateBack: NavigationFunc
     
+    
+    mutating func onSelectCity(city: CityModel, completion: ((SelectCityOnSetupState) -> Void)) {
+        var updState = self.state
+        updState.selectedID = city.id
+        completion(updState)
+    }
+
     init() {
         self.state = SelectCityOnSetupState(items: [], page: 0, isFetching: false, selectedID: nil, search: nil)
     }
@@ -47,9 +50,9 @@ struct SelectCityOnMenuState: SelectCityStateProtocol {
     var search: String?
 }
 struct SelectCityOnMenuViewModel: SelectCityViewModelProtocol {
-    var state: SelectCityOnSetupState
+    var state: SelectCityOnMenuState
 
-    mutating func onLoadFirstDataPage(completion: ((SelectCityOnSetupState) -> Void)) {
+    mutating func onLoadFirstDataPage(completion: ((SelectCityOnMenuState) -> Void)) {
         if self.state.page == 0 {
             // 1. delete previous cities except current
             let userCity = ProfileService.getUserCity()
@@ -64,10 +67,19 @@ struct SelectCityOnMenuViewModel: SelectCityViewModelProtocol {
         return CityService.fetchCities(page, overwrite: false)
     }
 
-    
+    mutating func onSelectCity(city: CityModel, completion: ((SelectCityOnMenuState) -> Void)) {
+        CityService
+            .setUserCity(city.id)
+            .then { _ -> Void in
+                var updState = self.state
+                updState.selectedID = city.id
+                completion(updState)
+            }
+    }
+
     init() {
         let userCity = ProfileService.getUserCity()
-        self.state = SelectCityOnSetupState(items: [], page: 0, isFetching: false, selectedID: userCity.id, search: nil)
+        self.state = SelectCityOnMenuState(items: [], page: 0, isFetching: false, selectedID: userCity.id, search: nil)
     }
 }
 
@@ -89,7 +101,7 @@ protocol SelectCityViewModelProtocol: PaginatedDataViewModelProtocol {
     associatedtype StateType: SelectCityStateProtocol
     var state: StateType { get set }
 
-    mutating func onSelectCity(city: CityModel)
+    mutating func onSelectCity(city: CityModel, completion: ((StateType) -> Void))
     mutating func onChangeSearch(search: String?, completion: ((StateType) -> Void))
     func fetchCitiesByName() -> Promise<Void>
     func selectedCity() -> CityModel?
@@ -99,9 +111,6 @@ protocol SelectCityViewModelProtocol: PaginatedDataViewModelProtocol {
 
 // MARK: - ViewModel extension
 extension SelectCityViewModelProtocol {
-    mutating func onSelectCity(city: CityModel) {
-        self.state.selectedID = city.id
-    }
     mutating func onChangeSearch(search: String?, completion: ((Self.StateType) -> Void)) {
         let searchValue = (search == "") ? nil : search
 
