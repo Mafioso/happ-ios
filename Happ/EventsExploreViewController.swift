@@ -18,7 +18,7 @@ class EventsExploreViewController: UICollectionViewController {
     
     var viewModel: EventsExploreViewModel! {
         didSet {
-            self.bindToViewModel()
+            self.updateView()
         }
     }
 
@@ -27,6 +27,10 @@ class EventsExploreViewController: UICollectionViewController {
         super.viewDidLoad()
 
         self.initNavBarItems()
+
+        self.viewModel.onInitLoadingData() { asyncState in
+            self.viewModel.state = asyncState
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,15 +44,9 @@ class EventsExploreViewController: UICollectionViewController {
     }
 
 
-    
-    func viewModelDidUpdate() {
-        self.collectionView!.reloadData()
-    }
 
-    private func bindToViewModel() {
-        self.viewModel.didUpdate = { [weak self] _ in
-            self?.viewModelDidUpdate()
-        }
+    func updateView() {
+        self.collectionView!.reloadData()
     }
 
 
@@ -63,28 +61,25 @@ class EventsExploreViewController: UICollectionViewController {
         return 1
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let state = self.viewModel.state
 
-        if state.fetchingState == .StartRequest {
+        if self.viewModel.isInitLoadingData() {
             return 10
-            
         } else {
-            return state.events.count
+            return self.viewModel.state.items.count
         }
+
     }
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let state = self.viewModel.state
 
-        if state.fetchingState == .StartRequest {
+        if self.viewModel.isInitLoadingData() {
             let cellLoading = collectionView.dequeueReusableCellWithReuseIdentifier(reuseLoadingIdentifier, forIndexPath: indexPath) as! EventExploreLoadingCollectionViewCell
             return cellLoading
 
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventExploreCollectionViewCell
-            let event = state.events[indexPath.row]
+            let event = self.viewModel.state.items[indexPath.row]
 
             cell.labelTitle.text = event.title
-
             if let image = event.images.first {
                 if let url = image.getURL() {
                     cell.image.hnk_setImageFromURL(url)
@@ -97,12 +92,18 @@ class EventsExploreViewController: UICollectionViewController {
             return cell
         }
     }
-    
+
     // init pagination
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.row == self.viewModel.state.events.count - 3 {
-            self.viewModel.loadNextPage()
+        if  indexPath.row == self.viewModel.state.items.count - 1 &&
+            self.viewModel.state.isFetching == false
+        {
+            print(".willDisplayCell.paginating", self.viewModel.state.items.count)
+
+            self.viewModel.onInitLoadingNextData() { asyncState in
+                self.viewModel.state = asyncState
+            }
         }
     }
 
@@ -110,10 +111,10 @@ class EventsExploreViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let state = self.viewModel.state
 
-        if state.fetchingState == .StartRequest {
+        if self.viewModel.isInitLoadingData() {
             // do nothing
         } else {
-            let event = state.events[indexPath.row]
+            let event = state.items[indexPath.row]
             self.viewModel.onClickEvent(event)
         }
     }

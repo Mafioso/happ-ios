@@ -25,18 +25,23 @@ protocol DataViewModelProtocol {
     mutating func onInitLoadingData(completion: ((Self.StateType) -> Void))
     func fetchData(overwrite flagValue: Bool) -> Promise<Void>
     func getData() -> [StateType.ItemType]
+
+    func isInitLoadingData() -> Bool
 }
 
 extension DataViewModelProtocol {
     mutating func onInitLoadingData(completion: ((Self.StateType) -> Void)) {
         self.state.isFetching = true
-        self.fetchData(overwrite: false)
+        self.fetchData(overwrite: true)
             .then { _ -> Void in
                 var updState = self.state
                 updState.items = self.getData()
                 updState.isFetching = false
                 completion(updState)
         }
+    }
+    func isInitLoadingData() -> Bool {
+        return self.state.isFetching && self.state.items.isEmpty
     }
 }
 

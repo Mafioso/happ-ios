@@ -25,6 +25,7 @@ protocol PaginatedDataViewModelProtocol {
     mutating func onLoadFirstDataPage(completion: ((Self.StateType) -> Void))
     mutating func onLoadNextDataPage(completion: ((Self.StateType) -> Void))
     func willLoadNextDataPage() -> Bool
+    func isLoadingFirstDataPage() -> Bool
     // should implement:
     func isLastPage() -> Bool
     func fetchData(page: Int, overwrite: Bool) -> Promise<Void>
@@ -57,6 +58,9 @@ extension PaginatedDataViewModelProtocol {
         } else {
             return true
         }
+    }
+    func isLoadingFirstDataPage() -> Bool {
+        return self.state.isFetching && self.state.page == 0
     }
 }
 

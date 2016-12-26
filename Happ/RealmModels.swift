@@ -264,6 +264,7 @@ enum EventModelStatusTypes: Int {
 
 class EventModel: Object, Mappable {
     dynamic var id = ""
+    dynamic var timestamp: NSDate = NSDate()
     var interests = List<InterestModel>()
     dynamic var currency: CurrencyModel?
     dynamic var author: AuthorModel?

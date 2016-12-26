@@ -626,7 +626,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Sattar Stamkulov";
 				TargetAttributes = {
 					525A8AA31D7D4023002C6F46 = {

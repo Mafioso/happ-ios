@@ -27,7 +27,6 @@ class EventService {
 
     static var isLastPageOfFeed: Bool = false
     static var isLastPageOfFavourites: Bool = false
-    static var isLastPageOfExplore: Bool = false
 
 
     class func setLike(eventID: String, value: Bool) {
@@ -116,16 +115,15 @@ class EventService {
                 }
         }
     }
-    class func fetchExplore(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
-        let exploreEndpoint = endpoint + "feed/" + "?page=\(page)"
-        return GetPaginated(exploreEndpoint, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                let results = data as! [AnyObject]
-                self.isLastPageOfExplore = isLastPage
+    class func fetchExplore(overwrite overwriteValue: Bool = false) -> Promise<Void> {
+        let exploreEndpoint = endpoint + "explore/"
+        return Get(exploreEndpoint, parameters: nil)
+            .then { result -> Void in
+                guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
 
                 let realm = try! Realm()
                 try! realm.write {
-                    if overwrite {
+                    if overwriteValue {
                         let exists = realm.objects(EventModel)
                         realm.delete(exists)
                     }
@@ -215,6 +213,15 @@ class EventService {
         let events = realm
                         .objects(EventModel)
                         .filter("is_in_favourites == true")
+        return events
+    }
+    class func getExplore() -> [EventModel] {
+        let realm = try! Realm()
+        let events = realm
+            .objects(EventModel)
+            .sort({ eventA, eventB in
+                return eventA.timestamp.compare(eventB.timestamp) == .OrderedAscending
+            })
         return events
     }
 

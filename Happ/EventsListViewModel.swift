@@ -326,7 +326,6 @@ protocol EventsListViewModelProtocol: PaginatedDataViewModelProtocol {
 
     func onClickEvent(event: EventModel)
     mutating func onChangeFilters(newState: EventsListFiltersState)
-    func isLoadingFirstDataPage() -> Bool
 }
 
 protocol EventsListSectionedViewModelProtocol:
@@ -354,6 +353,7 @@ extension EventsListViewModelProtocol {
             .error { err in
                 var updState = self.state
                 updState.items = self.getData()
+                updState.isFetching = false
                 completion(updState)
             }
     }
@@ -365,9 +365,6 @@ extension EventsListViewModelProtocol {
     mutating func onChangeFilters(newFiltersState: EventsListFiltersState) {
         self.state = StateType.getInitialState()
         self.state.filters = newFiltersState
-    }
-    func isLoadingFirstDataPage() -> Bool {
-        return self.state.isFetching && self.state.page == 0
     }
 }
 

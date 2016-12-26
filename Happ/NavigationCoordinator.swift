@@ -437,7 +437,7 @@ class NavigationCoordinator {
     }
 
     func showExplore() {
-        let viewModel = EventsExploreViewModel()
+        var viewModel = EventsExploreViewModel()
         viewModel.navigateEventDetails = self.showEventDetails
         viewModel.displaySlideMenu = self.displaySlideMenu
 

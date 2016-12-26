@@ -254,11 +254,13 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     // pagination
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.row == self.viewModel.state.items.count - 3 {
+        if  indexPath.section > self.viewModel.state.getSectionsCount() - 1 &&
+            self.viewModel.willLoadNextDataPage() == true {
             self.viewModel.onLoadNextDataPage { asyncState in
                 self.viewModel.state = asyncState
             }
         }
+
     }
     
 }
