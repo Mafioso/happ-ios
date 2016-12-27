@@ -98,7 +98,7 @@ class EventsManageViewController: UITableViewController, EventsListSyncWithEmpty
             cell.labelInterest.text = interest.title
         }
         cell.labelAddress.text = event.address
-        cell.labelPrice.text = event.getPrice(.Range)
+        cell.labelPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
         cell.labelUpvoteCount.text = String(event.votes_num)
         cell.imageUpvoteIcon.image = event.getUpvoteIcon()
         cell.imageFavIcon.image = event.getFavIcon()

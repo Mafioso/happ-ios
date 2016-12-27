@@ -51,15 +51,13 @@ class EventTableCell: UITableViewCell {
 
     func updateView() {
         let event = self.viewModel.event
-        let start_time = event.datetimes.first!.start_time
-        let end_time = event.datetimes.first!.end_time
 
         labelTitle.text = event.title
         labelCategory.text = event.interests.first?.title
         labelPlace.text = event.address
-        labelPrice.text = event.getPrice(.MinPrice)
+        labelPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
         labelUpvotesCount.text = formatStatValue(event.votes_num)
-        labelDateTime.text = "\(HappDateFormats.OnlyTime.toString(start_time)) — \(HappDateFormats.OnlyTime.toString(end_time))"
+        labelDateTime.text = HappEventDateFormats.EventTimeRange(datetime: event.datetimes.first!).toString()
         buttonUpvote.titleLabel!.text = String(event.votes_num)
         buttonUpvote.selected = event.is_upvoted
         buttonFavourite.selected = event.is_in_favourites

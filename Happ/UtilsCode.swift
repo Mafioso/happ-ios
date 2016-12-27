@@ -162,6 +162,9 @@ struct Utils {
             return "\(value) mi"
         }
     }
+    static func isNilOrZero(value: Int?) -> Bool {
+        return (value == nil || value! == 0)
+    }
 }
 
 extension Double {
@@ -174,6 +177,65 @@ func formatStatValue(value: Int) -> String {
     return String(value)
 }
 
+
+enum HappEventPriceFormats {
+    case EventMinPrice(event: EventModel)
+    case EventPriceRange(event: EventModel)
+    
+    func toString() -> String {
+        switch self {
+        case .EventMinPrice(let event):
+            guard let currency = event.currency else { return "ERROR" }
+            if  let value = event.min_price
+                where value > 0
+            {
+                return "from" + " \(value) \(currency.code)"
+            } else {
+                return "FREE"
+            }
+
+        case .EventPriceRange(let event):
+            guard let currency = event.currency else { return "ERROR" }
+            let minValue = event.min_price
+            let maxValue = event.max_price
+
+            if minValue == nil || (minValue == 0 && Utils.isNilOrZero(maxValue)) {
+                return "FREE"
+            } else if minValue! > 0 && (maxValue == nil || maxValue! == minValue!) {
+                return "\(minValue!)\n\(currency.name)"
+            } else {
+                return "\(minValue!) – \(maxValue!)\n\(currency.name)"
+            }
+        }
+    }
+}
+
+enum HappEventDateFormats {
+    case EventDate(datetime: EventDateModel)
+    case EventTimeRange(datetime: EventDateModel)
+    case EventDetails(first_datetime: EventDateModel, last_datetime: EventDateModel)
+
+    func toString() -> String {
+        switch self {
+        case .EventDate(let datetime):
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "MMMM d"
+            return formatter.stringFromDate(datetime.start_time)
+
+        case .EventDetails(let first_datetime, let last_datetime):
+            let dayFormatter = NSDateFormatter()
+            dayFormatter.dateFormat = "MMM d"
+            let timeFormatter = NSDateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            return "\(dayFormatter.stringFromDate(first_datetime.start_time)) – \(dayFormatter.stringFromDate(last_datetime.end_time)) \n\(timeFormatter.stringFromDate(first_datetime.start_time)) – \(timeFormatter.stringFromDate(last_datetime.end_time))"
+
+        case .EventTimeRange(let datetime):
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "HH:mm"
+            return "\(formatter.stringFromDate(datetime.start_time)) – \(formatter.stringFromDate(datetime.end_time))"
+        }
+    }
+}
 
 enum HappDateFormats: String {
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"

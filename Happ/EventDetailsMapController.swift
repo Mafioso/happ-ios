@@ -86,14 +86,13 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     }
     func updateViews() {
         let event = self.viewModel.event
-        let start_time = event.datetimes.first!.start_time
-    
+
         if let imageURL = event.images.first?.getURL() {
             imageEventCover.hnk_setImageFromURL(imageURL)
         }
         labelEventTitle.text = event.title
-        labelEventPrice.text = event.getPrice(.Range)
-        labelEventDate.text = HappDateFormats.EventOnFeed.toString(start_time)
+        labelEventPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
+        labelEventDate.text = HappEventDateFormats.EventDate(datetime: event.datetimes.first!).toString()
         labelEventLocation.text = event.address
         labelDistance.text = "? km"
 

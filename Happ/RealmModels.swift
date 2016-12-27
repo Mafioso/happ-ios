@@ -99,14 +99,16 @@ class AuthorModel: Object, Mappable {
 class CurrencyModel: Object, Mappable {
     dynamic var id = ""
     dynamic var name = ""
+    dynamic var code = ""
 
     required convenience init?(_ map: Map) {
         self.init()
     }
 
     func mapping(map: Map) {
-        id              <- map["id"]
-        name            <- map["name"]
+        id      <- map["id"]
+        name    <- map["name"]
+        code    <- map["code"]
     }
 
     override static func primaryKey() -> String? {
@@ -157,47 +159,6 @@ class InterestModel: Object, Mappable {
 
     override static func primaryKey() -> String? {
         return "id"
-    }
-}
-
-
-enum EventModelPriceTypes {
-    case Range
-    case MinPrice
-    case MaxPrice
-
-    func format(event: EventModel) -> String {
-        let currency = event.currency == nil ? CurrencyModel(value: ["0", "KZT"]) : event.currency!
-        let minValue = event.min_price.value
-        let maxValue = event.max_price.value
-
-        switch self {
-        case .Range:
-            var ans: String
-            if minValue == nil {
-                ans = "FREE"
-            } else {
-                ans = format(minValue!)
-            }
-            if maxValue != nil {
-                ans += " — "
-                ans = format(maxValue!)
-            }
-            return ans
-        case .MinPrice:
-            if minValue == nil {
-                return "FREE"
-            } else {
-                return format(minValue!) + " " + currency.name
-            }
-        case .MaxPrice:
-            return format(maxValue!) + " " + currency.name
-        }
-    }
-
-    func format(value: Int) -> String {
-        // TODO add real formatting
-        return String(value)
     }
 }
 
@@ -314,8 +275,26 @@ class EventModel: Object, Mappable {
     dynamic var language = ""
     dynamic var type = 0
     dynamic var status = 0
-    var min_price = RealmOptional<Int>()
-    var max_price = RealmOptional<Int>()
+    // NOTE: RealmOptional can't be mapped directly to variable
+    let min_price_raw = RealmOptional<Int>()
+    let max_price_raw = RealmOptional<Int>()
+    var min_price: Int? {
+        get {
+            return min_price_raw.value
+        }
+        set(value) {
+            min_price_raw.value = value
+        }
+    }
+    var max_price: Int? {
+        get {
+            return max_price_raw.value
+        }
+        set(value) {
+            max_price_raw.value = value
+        }
+    }
+
     dynamic var address: String?
     dynamic var geopoint: GeoPointModel?
     // phone
@@ -352,7 +331,7 @@ class EventModel: Object, Mappable {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["city"]
+        return ["city", "min_price", "max_price"]
     }
 
 
@@ -394,9 +373,6 @@ class EventModel: Object, Mappable {
 
 
     // functions
-    func getPrice(format: EventModelPriceTypes) -> String {
-        return format.format(self)
-    }
     func getStatus() -> EventModelStatusTypes {
         return EventModelStatusTypes(rawValue: self.status)!
     }
