@@ -19,8 +19,8 @@ target 'Happ' do
   pod 'GooglePlaces'
   pod 'Shimmer'
   pod 'WTLCalendarView', git: "https://github.com/lenyapugachev/CalendarView.git"
-
-
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

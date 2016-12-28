@@ -29,6 +29,7 @@
 		5239C3831D925D5D00F66E31 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3811D925D5D00F66E31 /* Authentication.storyboard */; };
 		5239C3851D925E8100F66E31 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5239C3841D925E8100F66E31 /* Event.storyboard */; };
 		523EFED81DE994600075259D /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523EFED71DE994600075259D /* MapService.swift */; };
+		5241100E1E130A8700BB1392 /* FacebookAuthProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241100D1E130A8700BB1392 /* FacebookAuthProtocol.swift */; };
 		5241B6E01E07D0B600018908 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5241B6DF1E07D0B600018908 /* Services.swift */; };
 		525025461D801E2A0074E6B5 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		525344421DF5AE6F0086436B /* PaginatedDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */; };
@@ -97,7 +98,6 @@
 		52FC8B091DD5DEC50032BBE4 /* EventsManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */; };
 		52FDB3841DD5CA4100E6B821 /* EventManageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */; };
 		52FDB3851DD5CA4100E6B821 /* EventManageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */; };
-		5A585830169428E0C9DDE037 /* Pods_Happ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71CC065163E981DB528BA77 /* Pods_Happ.framework */; };
 		97ED9A6F1E0176DD0037D37B /* UIAppearance+Swift.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED9A6E1E0176DD0037D37B /* UIAppearance+Swift.m */; };
 		97ED9A721E01C09F0037D37B /* FeedFilterDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ED9A711E01C09F0037D37B /* FeedFilterDateCell.swift */; };
 		AA0CB5B81DEAC2CF00ABC686 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0CB5B71DEAC2CF00ABC686 /* WebViewController.swift */; };
@@ -130,9 +130,12 @@
 		B4E7B70C1D9B9384004B8B78 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */; };
 		B4FBF1DC1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */; };
 		B4FE0CB11D9297B40081310F /* EventDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FE0CB01D9297B40081310F /* EventDetailsController.swift */; };
+		D9949AD894418CDE6B368DA4 /* Pods_Happ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26C6FB713091B8A028B2BF1F /* Pods_Happ.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26C6FB713091B8A028B2BF1F /* Pods_Happ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Happ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F092D8789B52004926042C3 /* Pods-Happ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.debug.xcconfig"; sourceTree = "<group>"; };
 		520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapLocationViewControllerProtocol.swift; sourceTree = "<group>"; };
 		520900E61DE704E800A4F8FD /* MapViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewControllerProtocol.swift; sourceTree = "<group>"; };
 		520AAFDA1DEADB5A0002DE9E /* LocationAlmatyMyHome.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LocationAlmatyMyHome.gpx; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		5239C3821D925D5D00F66E31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Authentication.storyboard; sourceTree = "<group>"; };
 		5239C3841D925E8100F66E31 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		523EFED71DE994600075259D /* MapService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		5241100D1E130A8700BB1392 /* FacebookAuthProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAuthProtocol.swift; sourceTree = "<group>"; };
 		5241B6DF1E07D0B600018908 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		524FBA6D1E0ED09900B3A5A9 /* Happ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Happ-Bridging-Header.h"; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 		52FC8B081DD5DEC50032BBE4 /* EventsManageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageViewController.swift; sourceTree = "<group>"; };
 		52FDB3821DD5CA4100E6B821 /* EventManageTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManageTableCell.swift; sourceTree = "<group>"; };
 		52FDB3831DD5CA4100E6B821 /* EventManageTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventManageTableCell.xib; sourceTree = "<group>"; };
+		6DA35D1BFEC1D089DB050BDF /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
 		97ED9A6B1E0176C60037D37B /* UIAppearance+Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		97ED9A6E1E0176DD0037D37B /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
 		97ED9A711E01C09F0037D37B /* FeedFilterDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedFilterDateCell.swift; sourceTree = "<group>"; };
@@ -285,9 +290,6 @@
 		B4E7B70B1D9B9384004B8B78 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B4FBF1DB1D7FBDB400C0E08B /* UILabel+SubstituteFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+SubstituteFont.swift"; sourceTree = "<group>"; };
 		B4FE0CB01D9297B40081310F /* EventDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsController.swift; sourceTree = "<group>"; };
-		D8289159483D1D358A629E58 /* Pods-Happ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.release.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.release.xcconfig"; sourceTree = "<group>"; };
-		DE8AA9A846D4704CB1684C6E /* Pods-Happ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Happ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Happ/Pods-Happ.debug.xcconfig"; sourceTree = "<group>"; };
-		F71CC065163E981DB528BA77 /* Pods_Happ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Happ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,13 +297,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A585830169428E0C9DDE037 /* Pods_Happ.framework in Frameworks */,
+				D9949AD894418CDE6B368DA4 /* Pods_Happ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4281D4910057B4C4260A7160 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26C6FB713091B8A028B2BF1F /* Pods_Happ.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5239C3801D925D2600F66E31 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,8 +340,8 @@
 				525A8AA61D7D4023002C6F46 /* Happ */,
 				B4FBF1A71D7ED87900C0E08B /* Resources */,
 				525A8AA51D7D4023002C6F46 /* Products */,
-				6C0EC2B6E712F278DD8A1002 /* Pods */,
-				6A35B8D8EEE9E0697C388096 /* Frameworks */,
+				8662848AB07B0B6A757757EC /* Pods */,
+				4281D4910057B4C4260A7160 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -381,6 +391,7 @@
 				520900E41DE704A300A4F8FD /* MapLocationViewControllerProtocol.swift */,
 				52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */,
 				522CD5601DD1E7320080BEBE /* SetupCityController.swift */,
+				5241100D1E130A8700BB1392 /* FacebookAuthProtocol.swift */,
 				525A8AA91D7D4023002C6F46 /* SignInController.swift */,
 				52B37CA11DDDE10A00CBDA1B /* SignUpController.swift */,
 				52F65F8E1DC75475005E751E /* SelectInterestsController.swift */,
@@ -527,19 +538,11 @@
 			name = "Google-Maps-iOS-Utils";
 			sourceTree = "<group>";
 		};
-		6A35B8D8EEE9E0697C388096 /* Frameworks */ = {
+		8662848AB07B0B6A757757EC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F71CC065163E981DB528BA77 /* Pods_Happ.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6C0EC2B6E712F278DD8A1002 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DE8AA9A846D4704CB1684C6E /* Pods-Happ.debug.xcconfig */,
-				D8289159483D1D358A629E58 /* Pods-Happ.release.xcconfig */,
+				2F092D8789B52004926042C3 /* Pods-Happ.debug.xcconfig */,
+				6DA35D1BFEC1D089DB050BDF /* Pods-Happ.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -603,12 +606,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 525A8AB61D7D4023002C6F46 /* Build configuration list for PBXNativeTarget "Happ" */;
 			buildPhases = (
-				95DA52B4C9E12B86AA6A6661 /* [CP] Check Pods Manifest.lock */,
+				3A44E7A2A7034914E09F60AE /* [CP] Check Pods Manifest.lock */,
 				525A8AA01D7D4023002C6F46 /* Sources */,
 				525A8AA11D7D4023002C6F46 /* Frameworks */,
 				525A8AA21D7D4023002C6F46 /* Resources */,
-				DC08E0FF7DA30CD2AEE095DA /* [CP] Embed Pods Frameworks */,
-				3572386918ECC6DF0B6FB113 /* [CP] Copy Pods Resources */,
+				2CEB303B6A53CF39A546DBBC /* [CP] Embed Pods Frameworks */,
+				62EF50B5D83F27BBBB63E091 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -716,37 +719,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3572386918ECC6DF0B6FB113 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95DA52B4C9E12B86AA6A6661 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DC08E0FF7DA30CD2AEE095DA /* [CP] Embed Pods Frameworks */ = {
+		2CEB303B6A53CF39A546DBBC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -759,6 +732,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A44E7A2A7034914E09F60AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		62EF50B5D83F27BBBB63E091 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -843,6 +846,7 @@
 				52FC8B091DD5DEC50032BBE4 /* EventsManageViewController.swift in Sources */,
 				5217D0411E0F9B6200041026 /* DataProtocol.swift in Sources */,
 				52A3C2CD1D8F330D00C31F3F /* EventViewModel.swift in Sources */,
+				5241100E1E130A8700BB1392 /* FacebookAuthProtocol.swift in Sources */,
 				520AAFDD1DEB00C00002DE9E /* EventsListEmptyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -980,7 +984,7 @@
 		};
 		525A8AB71D7D4023002C6F46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE8AA9A846D4704CB1684C6E /* Pods-Happ.debug.xcconfig */;
+			baseConfigurationReference = 2F092D8789B52004926042C3 /* Pods-Happ.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1010,7 +1014,7 @@
 		};
 		525A8AB81D7D4023002C6F46 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8289159483D1D358A629E58 /* Pods-Happ.release.xcconfig */;
+			baseConfigurationReference = 6DA35D1BFEC1D089DB050BDF /* Pods-Happ.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

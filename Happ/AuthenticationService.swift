@@ -9,6 +9,8 @@
 import Foundation
 import PromiseKit
 import KeychainSwift
+import FacebookCore
+import FacebookLogin
 
 
 let keyJWT = "auth0-jwt"
@@ -17,9 +19,41 @@ let keyJWT = "auth0-jwt"
 enum AuthenticationErrors: ErrorType {
     case NoCredentials
     case CredentialsExpired
+    case FacebookUserNotRegistered
+    case FacebookNoCredentials
 }
 
 class AuthenticationService {
+
+    class func facebookLogin(fbUserID: String) -> Promise<Void> {
+        let params = [
+            "facebook_id": fbUserID
+        ]
+        return Promise { resolve, reject in
+            Post("auth/login/facebook/", parameters: params, paramsEncoding: .JSON, isAuthenticated: false)
+            .then { (data: AnyObject) -> Void in
+                self.storeCredential(data as! [String : AnyObject])
+            }
+            .then { _ in resolve() }
+            .error { err in
+                switch err {
+                case RequestError.BadRequest:
+                    reject(AuthenticationErrors.FacebookUserNotRegistered)
+                default:
+                    reject(err)
+                }
+            }
+        }
+    }
+
+    class func facebookRegister(fbUserID: String, info: [String: AnyObject]) -> Promise<Void> {
+        var params = info
+        params.updateValue(fbUserID, forKey: "facebook_id")
+        return Post("auth/register/facebook/", parameters: params, paramsEncoding: .JSON, isAuthenticated: false)
+            .then { (data: AnyObject) -> Void in
+                self.storeCredential(data as! [String : AnyObject])
+            }
+    }
 
     class func signIn(username: String, password: String) -> Promise<Void> {
         let parameters = [
@@ -70,15 +104,31 @@ class AuthenticationService {
         }
     }
 
+    class func checkFacebookCredentialAvailable() -> Promise<Void> {
+        return Promise { fulfill, reject in
+            if AccessToken.current != nil {
+                fulfill()
+            } else {
+                reject(AuthenticationErrors.FacebookNoCredentials)
+            }
+        }
+    }
+
     class func logOut() {
         self.deleteCredential()
+        self.facebookLogOut()
     }
-    
+
+    class func facebookLogOut() {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+    }
+
     class func getCredential() -> String? {
         let jwt = KeychainSwift().get(keyJWT)
         return jwt
     }
-    
+
     private class func storeCredential(data: [String: AnyObject]) {
         let jwt = data["token"] as! String
         KeychainSwift().set(jwt, forKey: keyJWT)

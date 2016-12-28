@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -541,19 +541,9 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwV-Xc-X5b" userLabel="Right">
                                                 <rect key="frame" x="40" y="0.0" width="271" height="40"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKk-Ng-cVm">
-                                                        <rect key="frame" x="48.5" y="9.5" width="174.5" height="21"/>
-                                                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
                                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="0.80334051719999999" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="EBI-0S-y84"/>
-                                                    <constraint firstItem="RKk-Ng-cVm" firstAttribute="centerY" secondItem="rwV-Xc-X5b" secondAttribute="centerY" id="XCj-6M-x8L"/>
-                                                    <constraint firstItem="RKk-Ng-cVm" firstAttribute="centerX" secondItem="rwV-Xc-X5b" secondAttribute="centerX" id="iZa-Je-RqO"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="for-md-2y5" userLabel="Left">
@@ -575,44 +565,30 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-mO-Gf5">
-                                                <rect key="frame" x="0.0" y="-4" width="311" height="44"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="hbG-2F-z08"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="hbG-2F-z08"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="hbG-2F-z08"/>
-                                                    </mask>
-                                                </variation>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fs2-36-Pk5">
+                                                <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                                <state key="normal" title=" Login with Facebook"/>
+                                                <connections>
+                                                    <action selector="clickedFacebookAuthButton:" destination="yE1-eK-aIX" eventType="touchUpInside" id="uab-Mq-GJO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="OHd-mO-Gf5" secondAttribute="trailing" id="1UJ-6t-ivt"/>
                                             <constraint firstAttribute="height" constant="40" id="5yO-1X-upO"/>
                                             <constraint firstAttribute="trailing" secondItem="rwV-Xc-X5b" secondAttribute="trailing" id="7IP-99-ev8"/>
-                                            <constraint firstAttribute="bottom" secondItem="OHd-mO-Gf5" secondAttribute="bottom" id="DDb-r5-DW6"/>
+                                            <constraint firstAttribute="trailing" secondItem="fs2-36-Pk5" secondAttribute="trailing" id="DrV-Hj-i2d"/>
                                             <constraint firstItem="for-md-2y5" firstAttribute="leading" secondItem="nGg-Zp-gw4" secondAttribute="leading" id="a25-pX-r9n"/>
+                                            <constraint firstAttribute="bottom" secondItem="fs2-36-Pk5" secondAttribute="bottom" id="icy-Kw-1AK"/>
                                             <constraint firstAttribute="bottom" secondItem="for-md-2y5" secondAttribute="bottom" id="mpR-UN-0RD"/>
+                                            <constraint firstItem="fs2-36-Pk5" firstAttribute="top" secondItem="nGg-Zp-gw4" secondAttribute="top" id="oe5-3M-Zgu"/>
                                             <constraint firstItem="rwV-Xc-X5b" firstAttribute="leading" secondItem="for-md-2y5" secondAttribute="trailing" id="phk-jw-VEj"/>
-                                            <constraint firstItem="OHd-mO-Gf5" firstAttribute="leading" secondItem="nGg-Zp-gw4" secondAttribute="leading" id="xYt-HZ-3t0"/>
+                                            <constraint firstItem="fs2-36-Pk5" firstAttribute="leading" secondItem="nGg-Zp-gw4" secondAttribute="leading" id="wZG-Kt-jCK"/>
                                             <constraint firstAttribute="bottom" secondItem="rwV-Xc-X5b" secondAttribute="bottom" id="y88-wR-NgY"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="for-md-2y5"/>
-                                                <exclude reference="OHd-mO-Gf5"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="a25-pX-r9n"/>
@@ -621,7 +597,6 @@
                                         <variation key="widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="for-md-2y5"/>
-                                                <include reference="OHd-mO-Gf5"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="a25-pX-r9n"/>
@@ -648,7 +623,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="d01-Sf-f8N" secondAttribute="bottom" id="1Ur-Az-puW"/>
                                     <constraint firstItem="d01-Sf-f8N" firstAttribute="centerX" secondItem="0BL-zO-qbH" secondAttribute="centerX" id="1xF-FW-5Ga"/>
@@ -1084,9 +1058,9 @@
                         <outlet property="appLogoImageView" destination="iWg-em-GrW" id="Hkf-iQ-vQf"/>
                         <outlet property="appNameHeightConstraint" destination="xd1-N6-L6L" id="tf8-JF-IlD"/>
                         <outlet property="appNameImageView" destination="KEf-1i-UcS" id="bJs-XC-ZYe"/>
+                        <outlet property="buttonFacebookAuth" destination="fs2-36-Pk5" id="I8a-gu-I6j"/>
                         <outlet property="constraintFormToBottomLayout" destination="XWD-cG-7aF" id="iCw-zb-XuX"/>
                         <outlet property="constraintLogoToForm" destination="8ZG-CT-Lor" id="7eH-yd-kZ7"/>
-                        <outlet property="enterWithFbButton" destination="OHd-mO-Gf5" id="LPs-vO-I2m"/>
                         <outlet property="loginButton" destination="1J4-Rx-lRV" id="LwG-40-dku"/>
                         <outlet property="textFieldPassword" destination="7Lc-S0-8gx" id="p2u-jd-AY3"/>
                         <outlet property="textFieldUsername" destination="v59-X3-jNt" id="DTv-WU-tgc"/>
@@ -1101,7 +1075,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RcL-5e-D7Q" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3230" y="510"/>
+            <point key="canvasLocation" x="-3231.1999999999998" y="509.59520239880067"/>
         </scene>
     </scenes>
     <resources>

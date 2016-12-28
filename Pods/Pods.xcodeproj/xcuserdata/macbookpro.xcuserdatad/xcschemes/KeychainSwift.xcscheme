@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C698C648EE4D43C6B8BE0BE1FE91737"
+               BlueprintIdentifier = "38ACA430605AFB4229712A18BDDF5086"
                BuildableName = "KeychainSwift.framework"
                BlueprintName = "KeychainSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C698C648EE4D43C6B8BE0BE1FE91737"
+            BlueprintIdentifier = "38ACA430605AFB4229712A18BDDF5086"
             BuildableName = "KeychainSwift.framework"
             BlueprintName = "KeychainSwift"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4C698C648EE4D43C6B8BE0BE1FE91737"
-            BuildableName = "KeychainSwift.framework"
-            BlueprintName = "KeychainSwift"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

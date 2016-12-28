@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EB87EFDBA0ECE7BD6BA6522A132F047A"
+               BlueprintIdentifier = "6914E7AAE51380E6F928673C82FF7F44"
                BuildableName = "Shimmer.framework"
                BlueprintName = "Shimmer"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EB87EFDBA0ECE7BD6BA6522A132F047A"
+            BlueprintIdentifier = "6914E7AAE51380E6F928673C82FF7F44"
             BuildableName = "Shimmer.framework"
             BlueprintName = "Shimmer"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EB87EFDBA0ECE7BD6BA6522A132F047A"
-            BuildableName = "Shimmer.framework"
-            BlueprintName = "Shimmer"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

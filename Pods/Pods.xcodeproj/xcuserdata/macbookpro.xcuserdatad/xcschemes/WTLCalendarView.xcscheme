@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "001FA2FA67A224F9AEB42A2D9C273DC3"
+               BlueprintIdentifier = "C80A6F78BBCB5488735FC7A6F4BF2683"
                BuildableName = "WTLCalendarView.framework"
                BlueprintName = "WTLCalendarView"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "001FA2FA67A224F9AEB42A2D9C273DC3"
+            BlueprintIdentifier = "C80A6F78BBCB5488735FC7A6F4BF2683"
             BuildableName = "WTLCalendarView.framework"
             BlueprintName = "WTLCalendarView"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "001FA2FA67A224F9AEB42A2D9C273DC3"
-            BuildableName = "WTLCalendarView.framework"
-            BlueprintName = "WTLCalendarView"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

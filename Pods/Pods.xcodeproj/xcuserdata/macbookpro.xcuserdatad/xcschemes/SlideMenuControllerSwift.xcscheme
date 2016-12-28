@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9AFCD5F365FC3D97DD8BE2B12AA94175"
+               BlueprintIdentifier = "4082A9166AEA53AEC4DFA7F48C3BAA6E"
                BuildableName = "SlideMenuControllerSwift.framework"
                BlueprintName = "SlideMenuControllerSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9AFCD5F365FC3D97DD8BE2B12AA94175"
+            BlueprintIdentifier = "4082A9166AEA53AEC4DFA7F48C3BAA6E"
             BuildableName = "SlideMenuControllerSwift.framework"
             BlueprintName = "SlideMenuControllerSwift"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9AFCD5F365FC3D97DD8BE2B12AA94175"
-            BuildableName = "SlideMenuControllerSwift.framework"
-            BlueprintName = "SlideMenuControllerSwift"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

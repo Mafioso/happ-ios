@@ -11,6 +11,9 @@ import GoogleMaps
 import GooglePlaces
 import SlideMenuControllerSwift
 import WTLCalendarView
+import FacebookCore
+import FacebookLogin
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -49,13 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         application.setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-//        let backimage = UIImage(named: "nav-back-gray")!
-//        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics:UIBarMetrics.Default)
-//        UIBarButtonItem.appearance().setBackButtonBackgroundImage(backimage.resizableImageWithCapInsets(UIEdgeInsetsMake(0, (backimage.size.width)-1, 0, 0)), forState: .Normal, barMetrics: .Default)
-        
+
         let apiKey = DefaultParameters.getValue(.GoogleMapApiKey) as! String
         GMSServices.provideAPIKey(apiKey)
         GMSPlacesClient.provideAPIKey(apiKey)
+
+        // delegate FacebookCore
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = UINavigationController()
@@ -81,10 +84,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppEventsLogger.activate(application)
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        return ApplicationDelegate.shared.application(application,
+                                                      openURL: url,
+                                                      sourceApplication: sourceApplication,
+                                                      annotation: annotation)
     }
 
 

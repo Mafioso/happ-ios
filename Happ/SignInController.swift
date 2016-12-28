@@ -8,9 +8,12 @@
 
 import UIKit
 import PromiseKit
+import FacebookCore
+import FacebookLogin
 
 
-class SignInController: UIViewController {
+
+class SignInController: UIViewController, FacebookAuthProtocol {
 
     var viewModel: AuthenticationViewModel!
 
@@ -27,7 +30,7 @@ class SignInController: UIViewController {
     @IBOutlet weak var appLogoImageView: UIImageView!
     
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var enterWithFbButton: UIButton!
+    @IBOutlet weak var buttonFacebookAuth: UIButton!
     @IBOutlet weak var viewEnterWithFBRight: UIView!
 
     @IBOutlet weak var viewLoginByFacebookContainer: UIView!
@@ -39,6 +42,20 @@ class SignInController: UIViewController {
 
 
     // actions
+    @IBAction func clickedFacebookAuthButton(sender: UIButton) {
+        firstly {
+            self.buttonFacebookAuth.enabled = false
+            self.fbLogout()
+            return Promise<Void>()
+        }
+        .then {
+            return self.fbLogin()
+        }
+        .then { result -> Void in
+            self.buttonFacebookAuth.enabled = true
+            self.fbLoginManagerDidComplete(result)
+        }
+    }
     @IBAction func clickedSignUpButton(sender: UIButton) {
         self.viewModel.navigateSignUp?()
     }
@@ -56,7 +73,7 @@ class SignInController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func clickedPrivacyPolicy(sender: UIButton) {
         self.viewModel.navigatePrivacyPolicyPage?()
     }
@@ -111,7 +128,34 @@ class SignInController: UIViewController {
         self.extMakeStatusBarDefault()
         self.deinitObservers()
     }
-    
+
+
+    func fbLoginManagerDidComplete(result: LoginResult) {
+        switch result {
+        case .Success(_, _, let accessToken):
+            self.viewModel
+                .onLoggedInFacebook(accessToken.userId!)
+                .error { err in
+                    switch err {
+                    case AuthenticationErrors.FacebookUserNotRegistered:
+                        self.fbFetchProfileData()
+                            .then { data in
+                                self.viewModel.onRegisterByFacebookData(data)
+                        }
+                        
+                    default:
+                        print(".fb.error", err)
+                        self.extDisplayAlertView(err)
+                    }
+                }
+
+        case .Failed(let error):
+            self.extDisplayAlertView(error)
+
+        default:
+            break
+        }
+    }
     
     
     private func initObservers() {
