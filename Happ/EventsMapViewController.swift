@@ -53,7 +53,11 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // 1. initMap with userCity.geopoint
+        // 2. fetch current location -> display marker myLocation
+        // 3. get Center & Radius -> fetch events -> display cluster marker of events
+        
         self.initMap()
         self.initMapCluster()
         self.initLocation()
@@ -135,13 +139,11 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
         self.clearMap()
         self.displayEventMarkers()
-        /*
-         if let myLocation = self.locationState.myLocation {
-         self.displayMarker(.MyLocation(location: myLocation))
-         }
-         */
+        if let myLocation = self.locationState.myLocation {
+            self.displayMarker(.MyLocation(location: myLocation))
+        }
     }
-    
+
     
     // implement FeedFiltersDelegate
     func didChangeFilters(filters: EventsListFiltersState) {
