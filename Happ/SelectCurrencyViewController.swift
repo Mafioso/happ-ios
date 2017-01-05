@@ -57,11 +57,23 @@ class SelectCurrencyViewController: UITableViewController {
         let currency = self.viewModel.currencies[selectedIndexPath.row]
         self.viewModel.onSelectCurrency(currency)
     }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
+        if  let currency_id = self.viewModel.state.currencyID,
+            let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first,
+            let selectedRow = self.viewModel.currencies.indexOf(currency)
+            where selectedRow == indexPath.row {
+
+            cell.extSetHighlighted()
+        } else {
+            cell.extUnsetHighlighted()
+        }
+    }
 
 
     private func updateTableWithSelected() {
-        if let currency = self.viewModel.state.currency {
+        if  let currency_id = self.viewModel.state.currencyID,
+            let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first {
             // select row
             let atRow = self.viewModel.currencies.indexOf(currency)
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)

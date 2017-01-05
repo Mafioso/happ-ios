@@ -18,12 +18,12 @@ enum SettingsNotificationTypes {
 
 
 class SettingsState {
-    
-    var currency: CurrencyModel?
+
+    var currencyID: String?
     var notificationsMap: [SettingsNotificationTypes: Bool]
 
     init() { // TODO set from UserSettings
-        self.currency = nil
+        self.currencyID = nil
         self.notificationsMap = [
             SettingsNotificationTypes.NewInterests: false,
             SettingsNotificationTypes.EventUpdates: false,
@@ -57,6 +57,8 @@ class SettingsViewModel {
 
         self.userSettings = self.getUserSettings()
         self.currencies = self.getCurrencies()
+
+        self.state.currencyID = self.userSettings.currency_id
     }
 
     //MARK: - Events
@@ -66,7 +68,7 @@ class SettingsViewModel {
 
     //MARK: - Inputs
     func onSelectCurrency(currency: CurrencyModel) {
-        self.state.currency = currency
+        self.state.currencyID = currency.id
         self.didCurrencyUpdate?()
     }
     func onSelectNotification(notification: SettingsNotificationTypes) {
@@ -75,8 +77,8 @@ class SettingsViewModel {
         self.didNotificationsUpdate?()
     }
     func onSaveCurrency() {
-        let currency = self.state.currency!
-        ProfileService.setCurrency(currency.id)
+        guard let _id = self.state.currencyID else { return }
+        ProfileService.setCurrency(_id)
             .then {_ -> Void in
                 self.userSettings = self.getUserSettings()
                 self.navigateBack?()

@@ -10,6 +10,7 @@ import Foundation
 import PromiseKit
 import RealmSwift
 import ObjectMapper
+import SwiftyJSON
 
 
 enum ProfileErrors: ErrorType {
@@ -49,9 +50,9 @@ class ProfileService {
     }
 
     class func fetchCurrencies() -> Promise<Void> {
-        return GetPaginated(endpointCurrencies, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                let results = data as! [AnyObject]
+        return Get(endpointCurrencies, parameters: nil)
+            .then { data -> Void in
+                let results = JSON(data).dictionaryValue["results"]!.arrayObject!
                 let realm = try! Realm()
                 try! realm.write {
                     // 1. delete exists
