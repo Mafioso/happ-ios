@@ -41,9 +41,8 @@ class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProt
 
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(".settings.selectedRow", indexPath.section, indexPath.row)
-
-        switch indexPath.row {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        switch cell.tag {
         case 0:
             self.viewModel.navigateProfile?()
         case 1:
