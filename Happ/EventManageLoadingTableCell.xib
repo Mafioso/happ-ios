@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="461" id="KGk-i7-Jjw" customClass="EventManageLoadingTableCell" customModule="Happ" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFH-7u-8h1" userLabel="Container View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="785-B2-hyU" userLabel="Top">
+                                <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="66h-8O-gnY">
+                                        <rect key="frame" x="32" y="33" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="axf-Rf-qVE"/>
+                                            <constraint firstAttribute="height" constant="60" id="plQ-Nm-eEU"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="66h-8O-gnY" firstAttribute="centerY" secondItem="785-B2-hyU" secondAttribute="centerY" id="AIh-KF-BPh"/>
+                                    <constraint firstItem="66h-8O-gnY" firstAttribute="centerX" secondItem="785-B2-hyU" secondAttribute="centerX" id="Ihs-Qi-f7l"/>
+                                    <constraint firstAttribute="width" constant="125" id="Y4Q-qO-f7s"/>
+                                    <constraint firstAttribute="height" constant="125" id="eu3-79-G7k"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Far-TT-EMf" userLabel="Bottom">
+                                <rect key="frame" x="125" y="0.0" width="250" height="125"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijq-gU-xdY" userLabel="Shimmer Title" customClass="FBShimmeringView">
+                                        <rect key="frame" x="12" y="12" width="226" height="20"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2w-l4-V0f">
+                                                <rect key="frame" x="0.0" y="0.0" width="226" height="20"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="226" id="1Ux-zC-Jm2"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="c2w-l4-V0f" firstAttribute="top" secondItem="Ijq-gU-xdY" secondAttribute="top" id="2dv-5j-fqH"/>
+                                            <constraint firstItem="c2w-l4-V0f" firstAttribute="leading" secondItem="Ijq-gU-xdY" secondAttribute="leading" id="7hX-0T-DET"/>
+                                            <constraint firstAttribute="trailing" secondItem="c2w-l4-V0f" secondAttribute="trailing" id="H6h-vf-7jJ"/>
+                                            <constraint firstAttribute="height" constant="20" id="O40-J4-Gy0"/>
+                                            <constraint firstAttribute="bottom" secondItem="c2w-l4-V0f" secondAttribute="bottom" id="iG6-E2-vtR"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7D2-u8-jjK" userLabel="Shimmer BL2" customClass="FBShimmeringView">
+                                        <rect key="frame" x="12" y="37" width="135" height="12"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAE-bY-Zog">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="12"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="4mK-6V-PiC"/>
+                                            <constraint firstItem="hAE-bY-Zog" firstAttribute="leading" secondItem="7D2-u8-jjK" secondAttribute="leading" id="7YL-OO-Uch"/>
+                                            <constraint firstItem="hAE-bY-Zog" firstAttribute="top" secondItem="7D2-u8-jjK" secondAttribute="top" id="SIY-5y-4hX"/>
+                                            <constraint firstAttribute="bottom" secondItem="hAE-bY-Zog" secondAttribute="bottom" id="SVC-np-BuR"/>
+                                            <constraint firstAttribute="width" constant="135" id="ddr-q5-92m"/>
+                                            <constraint firstAttribute="trailing" secondItem="hAE-bY-Zog" secondAttribute="trailing" id="mlK-3D-r8x"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9o-e3-FBR" userLabel="Shimmer BL1" customClass="FBShimmeringView">
+                                        <rect key="frame" x="12" y="86" width="135" height="12"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4nr-Gv-pGP">
+                                                <rect key="frame" x="0.0" y="0.0" width="135" height="12"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="4nr-Gv-pGP" secondAttribute="trailing" id="4QI-yZ-qZ1"/>
+                                            <constraint firstAttribute="width" constant="135" id="8NI-4j-epx"/>
+                                            <constraint firstItem="4nr-Gv-pGP" firstAttribute="leading" secondItem="o9o-e3-FBR" secondAttribute="leading" id="Bzu-2l-POo"/>
+                                            <constraint firstItem="4nr-Gv-pGP" firstAttribute="top" secondItem="o9o-e3-FBR" secondAttribute="top" id="K6a-W9-60H"/>
+                                            <constraint firstAttribute="height" constant="12" id="eV3-aI-oqI"/>
+                                            <constraint firstAttribute="bottom" secondItem="4nr-Gv-pGP" secondAttribute="bottom" id="kpA-63-RCe"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bn2-d3-7nl" userLabel="Shimmer BR1" customClass="FBShimmeringView">
+                                        <rect key="frame" x="12" y="103" width="96" height="10"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K56-d3-Yox">
+                                                <rect key="frame" x="0.0" y="0.0" width="96" height="10"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="K56-d3-Yox" firstAttribute="leading" secondItem="Bn2-d3-7nl" secondAttribute="leading" id="2kD-p6-ea8"/>
+                                            <constraint firstAttribute="height" constant="10" id="3to-bF-fFg"/>
+                                            <constraint firstAttribute="bottom" secondItem="K56-d3-Yox" secondAttribute="bottom" id="6ZI-2s-Oyw"/>
+                                            <constraint firstItem="K56-d3-Yox" firstAttribute="top" secondItem="Bn2-d3-7nl" secondAttribute="top" id="kDH-YO-Hhm"/>
+                                            <constraint firstAttribute="trailing" secondItem="K56-d3-Yox" secondAttribute="trailing" id="p9Q-Uu-prc"/>
+                                            <constraint firstAttribute="width" constant="96" id="zkk-Tz-bqC"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7D2-u8-jjK" firstAttribute="leading" secondItem="Far-TT-EMf" secondAttribute="leading" constant="12" id="9nz-O0-rtL"/>
+                                    <constraint firstItem="o9o-e3-FBR" firstAttribute="leading" secondItem="Far-TT-EMf" secondAttribute="leading" constant="12" id="FAn-6M-nxz"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ijq-gU-xdY" secondAttribute="trailing" constant="12" id="J0Q-PB-Af0"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bn2-d3-7nl" secondAttribute="bottom" constant="12" id="SdD-sB-7hT"/>
+                                    <constraint firstItem="Bn2-d3-7nl" firstAttribute="leading" secondItem="Far-TT-EMf" secondAttribute="leading" constant="12" id="VCt-Ua-Aiu"/>
+                                    <constraint firstItem="Ijq-gU-xdY" firstAttribute="top" secondItem="Far-TT-EMf" secondAttribute="top" constant="12" id="oOt-Es-62S"/>
+                                    <constraint firstItem="Bn2-d3-7nl" firstAttribute="top" secondItem="o9o-e3-FBR" secondAttribute="bottom" constant="5" id="t4g-2j-8jj"/>
+                                    <constraint firstItem="Ijq-gU-xdY" firstAttribute="leading" secondItem="Far-TT-EMf" secondAttribute="leading" constant="12" id="tpB-eL-R48"/>
+                                    <constraint firstItem="7D2-u8-jjK" firstAttribute="top" secondItem="Ijq-gU-xdY" secondAttribute="bottom" constant="5" id="vHP-hX-5Ja"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Far-TT-EMf" secondAttribute="trailing" id="3yF-j6-lbV"/>
+                            <constraint firstItem="785-B2-hyU" firstAttribute="top" secondItem="lFH-7u-8h1" secondAttribute="top" id="Bme-Eo-ROU"/>
+                            <constraint firstItem="785-B2-hyU" firstAttribute="leading" secondItem="lFH-7u-8h1" secondAttribute="leading" id="Efm-hP-yMg"/>
+                            <constraint firstAttribute="bottom" secondItem="Far-TT-EMf" secondAttribute="bottom" id="JHw-hy-Mod"/>
+                            <constraint firstItem="Far-TT-EMf" firstAttribute="top" secondItem="lFH-7u-8h1" secondAttribute="top" id="KuO-LP-Hbq"/>
+                            <constraint firstItem="Far-TT-EMf" firstAttribute="leading" secondItem="lFH-7u-8h1" secondAttribute="leading" constant="125" id="klW-Ql-6Vf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="lFH-7u-8h1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Ve-A8-MbP"/>
+                    <constraint firstItem="lFH-7u-8h1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bnr-C0-2hq"/>
+                    <constraint firstAttribute="trailing" secondItem="lFH-7u-8h1" secondAttribute="trailing" id="h5p-3u-FEu"/>
+                    <constraint firstAttribute="bottom" secondItem="lFH-7u-8h1" secondAttribute="bottom" id="iXY-Ag-6gr"/>
+                    <constraint firstItem="lFH-7u-8h1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vEV-oK-cq9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="viewContentBottomLeftOne" destination="4nr-Gv-pGP" id="Gst-rn-UaE"/>
+                <outlet property="viewContentBottomRight" destination="K56-d3-Yox" id="rK7-Li-IHb"/>
+                <outlet property="viewContentTitle" destination="c2w-l4-V0f" id="c0C-cn-Dg4"/>
+                <outlet property="viewShimmerBottomLeftOne" destination="o9o-e3-FBR" id="AGc-lx-DHh"/>
+                <outlet property="viewShimmerBottomLeftTwo" destination="7D2-u8-jjK" id="MMw-v3-49K"/>
+                <outlet property="viewShimmerBottomRight" destination="Bn2-d3-7nl" id="Nfz-44-tmj"/>
+                <outlet property="viewShimmerTitle" destination="Ijq-gU-xdY" id="jKW-VN-piP"/>
+            </connections>
+            <point key="canvasLocation" x="40.5" y="-134.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="image-placeholder" width="60" height="60"/>
+    </resources>
+</document>

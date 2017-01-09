@@ -251,11 +251,39 @@ class EventDateModel: Object, Mappable {
 
 
 enum EventModelStatusTypes: Int {
-    case Active = 0
-    case Inactive = 1
-    case OnReview = 2
-    case Rejected = 3
+    case OnReview = 0
+    case Active = 1
+    case Rejected = 2
+    case Inactive = 3
     case Finished = 4
+}
+
+class RealmString: Object, Mappable {
+    dynamic var stringValue = ""
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        stringValue <- map["stringValue"]
+    }
+}
+
+class RejectionReason: Object, Mappable {
+    dynamic var text: String?
+    dynamic var author: AuthorModel?
+    dynamic var date: NSDate?
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+    
+    func mapping(map: Map) {
+        text <- map["text"]
+        author <- map["author"]
+        date <- (map["date_edited"], HappDateTransformer)
+    }
 }
 
 class EventModel: Object, Mappable {
@@ -265,6 +293,7 @@ class EventModel: Object, Mappable {
     dynamic var currency: CurrencyModel?
     dynamic var author: AuthorModel?
     var datetimes = List<EventDateModel>()
+    dynamic var is_active = false
     dynamic var is_upvoted = false
     dynamic var is_in_favourites = false
     dynamic var date_created: NSDate?
@@ -295,35 +324,43 @@ class EventModel: Object, Mappable {
         }
     }
 
+    dynamic var place_name: String?
     dynamic var address: String?
     dynamic var geopoint: GeoPointModel?
-    // phone
-    dynamic var stored_phone_numbers: String = ""
+    var _phones = List<RealmString>()
     var phones: [String] {
         get {
-            return ArrayStringTransformer.transformToJSON(self.stored_phone_numbers)!
+            return _phones.map { $0.stringValue }
+        }
+        set {
+            _phones.removeAll()
+            _phones.appendContentsOf(newValue.map({ RealmString(value: [$0]) }))
         }
     }
-    // end: phone
     dynamic var email: String?
     dynamic var web_site: String?
     dynamic var votes_num = 0
+    dynamic var views_count = 0
     var images = List<ImageModel>()
     // city
-    dynamic var id_of_city = ""
+    dynamic var _cityCountry = ""
+    dynamic var _cityName = ""
+    dynamic var _cityId = ""
     var city: CityModel? {
         get {
-            // TODO: return by key in `self.id_of_city`
-            return CityModel(value: ["1capital", "Kazakhstan", "Astana"])
+            return CityModel(value: [_cityId, _cityCountry, _cityName])
         }
     }
     // city end
     dynamic var is_close_on_start = false
     dynamic var registration_link: String?
+    dynamic var tickets_link: String?
     dynamic var max_age = 200
     dynamic var min_age = 0
-
-
+    
+    dynamic var _rejectionText = ""
+    dynamic var _rejectionAuthor = ""
+    dynamic var _rejectionDate: NSDate?
 
     // Object
     override static func primaryKey() -> String? {
@@ -331,7 +368,7 @@ class EventModel: Object, Mappable {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["city", "min_price", "max_price"]
+        return ["city", "min_price", "max_price", "phones"]
     }
 
 
@@ -347,6 +384,7 @@ class EventModel: Object, Mappable {
         author              <- map["author"]
         datetimes           <- (map["datetimes"], ArrayTransform<EventDateModel>())
         is_upvoted          <- map["is_upvoted"]
+        is_active           <- map["is_active"]
         is_in_favourites    <- map["is_in_favourites"]
         date_created        <- (map["date_created"], HappDateTransformer)
         date_edited         <- (map["date_edited"], HappDateTransformer)
@@ -357,24 +395,43 @@ class EventModel: Object, Mappable {
         status              <- map["status"]
         min_price           <- map["min_price"]
         max_price           <- map["max_price"]
+        place_name          <- map["place_name"]
         address             <- map["address"]
         geopoint            <- map["geopoint"]
-        stored_phone_numbers <- map["stored_phone_numbers"]
+        phones              <- map["phones"]
         email               <- map["email"]
         web_site            <- map["web_site"]
         votes_num           <- map["votes_num"]
+        views_count         <- map["views_count"]
         images              <- (map["images"], ArrayTransform<ImageModel>())
-        id_of_city          <- map["id_of_city"]
+        _cityCountry        <- map["city.country_name"]
+        _cityName           <- map["city.name"]
+        _cityId             <- map["city.id"]
         is_close_on_start   <- map["close_on_start"]
         registration_link   <- map["registration_link"]
+        tickets_link        <- map["tickets_link"]
         min_age             <- map["min_age"]
         max_age             <- map["max_age"]
+        _rejectionText      <- map["rejection_reason.text"]
+        _rejectionAuthor    <- map["rejection_reason.author.fn"]
+        _rejectionDate      <- (map["rejection_reason.date_edited"], HappDateTransformer)
     }
 
 
     // functions
-    func getStatus() -> EventModelStatusTypes {
-        return EventModelStatusTypes(rawValue: self.status)!
+    func getStatus(activated: Bool? = nil) -> EventModelStatusTypes {
+        var status = self.status
+        if activated != nil {
+            if !activated! { status = 3 }
+        }else{
+            if !self.is_active { status = 3 }
+        }
+        if let lastDate = self.datetimes.last?.raw_date {
+            if NSDate() > HappDateFormats.ISOFormatBegin.toDate(lastDate) {
+                status = 4
+            }
+        }
+        return EventModelStatusTypes(rawValue: status)!
     }
     func getUpvoteIcon() -> UIImage {
         if self.is_upvoted {

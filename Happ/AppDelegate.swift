@@ -13,7 +13,7 @@ import SlideMenuControllerSwift
 import WTLCalendarView
 import FacebookCore
 import FacebookLogin
-
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,8 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
             SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.86
         }
-
-
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
         CalendarViewTheme.instance.bgColorForMonthContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForDaysOfWeekContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForCurrentMonth = UIColor.clearColor()
@@ -64,6 +65,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = UINavigationController()
         self.navigationCoordinator = NavigationCoordinator(window: self.window!)
         self.navigationCoordinator.start()
+        
+        return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        
+        if let urlItems = url.queryItems {
+            if let token = urlItems["key"] {
+                if navigationCoordinator.emailConfirmModel != nil {
+                    navigationCoordinator.emailConfirmModel!.onConfirm(token)
+                }else{
+                    AuthenticationService.confirm(token)
+                        .then { _ -> Void in
+                            self.window?.rootViewController?.extDisplayAlertView("You have confirmed your email, now you can create your events")
+                            ProfileService.fetchUserProfile()
+                    }
+                }
+            }
+        }
         
         return true
     }

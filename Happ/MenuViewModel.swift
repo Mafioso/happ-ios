@@ -45,6 +45,7 @@ class MenuViewModel {
     var navigateEventPlanner: NavigationFunc
     var navigateSettings: NavigationFunc
     var navigateLogout: NavigationFunc
+    var navigateConfirm: NavigationFunc
 
     init(highlight: MenuActions) {
         self.highlight = highlight
@@ -63,7 +64,11 @@ class MenuViewModel {
         case .SelectInterests:
             self.navigateSelectInterests?()
         case .EventPlanner:
-            //TODO self.navigateEventPlanner?()
+            if self.getUser().role == 0 {
+                self.navigateConfirm?()
+            }else{
+                self.navigateEventPlanner?()
+            }
             break
         case .Settings:
             self.navigateSettings?()

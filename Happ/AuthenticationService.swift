@@ -24,6 +24,24 @@ enum AuthenticationErrors: ErrorType {
 }
 
 class AuthenticationService {
+    
+    class func requestConfirm(email: String) -> Promise<Void> {
+        let parameters = [
+            "email": email
+        ]
+        
+        return Post("auth/email/confirm/request/", parameters: parameters, paramsEncoding: .JSON)
+            .then { data -> Void in }
+    }
+    
+    class func confirm(token: String) -> Promise<Void> {
+        let parameters = [
+            "key": token
+        ]
+        
+        return Post("auth/email/confirm/", parameters: parameters, paramsEncoding: .JSON, isAuthenticated: true)
+            .then { data -> Void in }
+    }
 
     class func facebookLogin(fbUserID: String) -> Promise<Void> {
         let params = [
@@ -95,6 +113,7 @@ class AuthenticationService {
     class func checkCredentialAvailable() -> Promise<Void> {
         return Promise { fulfill, reject in
             if let credential = self.getCredential() {
+                //print(credential)
                 // TODO check here
                 // reject(AuthenticationErrors.CredentialsExpired)
                 fulfill()

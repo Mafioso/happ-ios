@@ -8,3 +8,6 @@
 
 #import "UIAppearance+Swift.h"
 #import "GMUMarkerClustering.h"
+#import "ContextMaker.h"
+
+@import UITextView_Placeholder;

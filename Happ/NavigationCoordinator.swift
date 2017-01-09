@@ -9,13 +9,12 @@
 import UIKit
 import PromiseKit
 import SlideMenuControllerSwift
-
+import RealmSwift
 
 
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
-
-
+typealias NavigationFuncWithObject = ((object: Object) -> Void)?
 
 class HappNavigationController: UINavigationController {
     override func viewDidLoad() {
@@ -154,6 +153,8 @@ class NavigationCoordinator {
     private var navigationController: UINavigationController!
     private var tabBarController: UITabBarController!
 
+    private var eventCreationScreen: Int!
+    internal var emailConfirmModel: AuthenticationViewModel?
 
     init(window: UIWindow) {
         self.window = window
@@ -246,6 +247,9 @@ class NavigationCoordinator {
 
     func goBack() {
         print(".nav.goBack")
+        
+        emailConfirmModel = nil
+        
         self.navigationController.popViewControllerAnimated(true)
     }
 
@@ -253,6 +257,22 @@ class NavigationCoordinator {
         print(".nav.LogOut")
         AuthenticationService.logOut()
         self.start()
+    }
+    
+    func showConfirm() {
+        let viewModel = AuthenticationViewModel()
+        viewModel.navigateBack = self.goBack
+        viewModel.navigateTermsPolicyPage = self.showWebView(.Terms)
+        viewModel.navigatePrivacyPolicyPage = self.showWebView(.Privacy)
+        viewModel.navigateAfterConfirm = { self.startMyEvents() }
+        
+        let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("ConfirmPage") as! ConfirmEmailViewController
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.viewModel = viewModel
+        
+        emailConfirmModel = viewModel
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
 
     func startSignIn() {
@@ -344,12 +364,12 @@ class NavigationCoordinator {
         self.updateSlidebar()
         self.showFeed()
     }
+    
     func startMyEvents() {
         self.initManagerTab()
         self.updateSlidebar()
         self.showMyEvents()
     }
-
 
     func showFeed() {
         var viewModel = FeedViewModel()
@@ -373,6 +393,7 @@ class NavigationCoordinator {
         // update slidebar
         self.updateSlidebar(filtersViewController)
     }
+    
     func showFavourite() {
         var viewModel = FavouritesViewModel()
         viewModel.navigateEventDetails = self.showEventDetails
@@ -395,13 +416,18 @@ class NavigationCoordinator {
         // update slidebar
         self.updateSlidebar(filtersViewController)
     }
+    
     func showMyEvents() {
         var viewModel = EventsManageViewModel()
         viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
         viewModel.navigateEventDetails = self.showEventDetails
+        viewModel.navigateUpdate = self.startMyEvents
         viewModel.navigateAddEvent = self.startEventManage
+        viewModel.navigateEventEdit = self.startEventManageWithEvent
+        viewModel.navigateEventDeniedDetails = self.showDeniedDetailsValue
 
-         let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("EventsManage") as! EventsManageViewController
+        let viewController = EventsManageViewController()
         viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
         viewController.viewModel = viewModel
 
@@ -410,13 +436,11 @@ class NavigationCoordinator {
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
 
-        /* TODO
         // slidebar filter
-        let filtersViewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("FeedFilters") as! FeedFiltersController
+        let filtersViewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("EventsManageFilters") as! EventsManageFiltersController
         filtersViewController.delegate = viewController
         // update slidebar
         self.updateSlidebar(filtersViewController)
-        */
     }
 
     func showEmptyEventsList(var parentViewController: EventsListSyncWithEmptyList) -> NavigationFunc {
@@ -653,29 +677,131 @@ class NavigationCoordinator {
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
     }
-
-
-    func startEventManage() {
-        let viewModel = EventManageViewModel()
-        viewModel.navigateBack = self.startMyEvents
-        viewModel.navigateNext = self.showEventManageSecondPage(viewModel)
-        //viewModel.navigateSelectInterest = self.showSelectInterest
-
-        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventManageFirstPageViewController
+    
+    
+    func showSelectPlace(parentViewController: SelectPlaceDelegate) -> NavigationFunc {
+        return {
+            let model = SelectPlaceViewModel()
+            model.navigateBack = self.goBack
+            
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("selectPlace") as! SelectPlaceViewController
+            viewController.viewModel = model
+            viewController.delegate = parentViewController
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func showSelectCurrencyValue(parentViewController: SelectCurrencyValueDelegate) -> NavigationFunc {
+        return {
+            let model = SelectCurrencyValueViewModel()
+            model.navigateBack = self.goBack
+            
+            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("selectCurrencyValue") as! SelectCurrencyValueViewController
+            viewController.viewModel = model
+            viewController.delegate = parentViewController
+            self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func showDeniedDetailsValue(event: Object?) {
+        let model = EventsManageDeniedDetailsViewModel(event: event as! EventModel)
+        model.navigateBack = self.goBack
+        model.navigateEditEvent = self.startEventManageWithEvent
+        
+        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("denied") as! EventsManageDeniedDetailsViewController
+        viewController.viewModel = model
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func startEventManageWithEvent(event: Object?) {
+        let viewModel = EventManageViewModel(event: event as! EventModel)
+        
+        eventCreationScreen = 1
+        
+        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventsManageCreateViewController
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
-
+        
+        viewModel.navigatePickInterest = self.showSelectEventInterest(viewController as! EventsManageCreateFirstPageViewController)
+        
+        viewModel.navigateSubmit = { self.startMyEvents() }
+        viewModel.navigateBack = self.eventCreationScreenTo("prev", model: viewModel)
+        viewModel.navigateNext = self.eventCreationScreenTo("next", model: viewModel)
+        
         self.navigationController = UINavigationController(rootViewController: viewController)
         self.window.rootViewController = self.navigationController
         self.window.makeKeyAndVisible()
     }
 
-    func showEventManageSecondPage(parentViewModel: EventManageViewModel) -> NavigationFunc {
-        return {
-            let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent2") as! EventManageSecondPageViewController
-            viewController.viewModel = parentViewModel
+    func startEventManage() {
+        let viewModel = EventManageViewModel()
+        
+        eventCreationScreen = 1
 
-            self.navigationController.pushViewController(viewController, animated: true)
+        let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent1") as! EventsManageCreateViewController
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        
+        viewModel.navigatePickInterest = self.showSelectEventInterest(viewController as! EventsManageCreateFirstPageViewController)
+        
+        viewModel.navigateSubmit = { self.startMyEvents() }
+        viewModel.navigateBack = self.eventCreationScreenTo("prev", model: viewModel)
+        viewModel.navigateNext = self.eventCreationScreenTo("next", model: viewModel)
+
+        self.navigationController = UINavigationController(rootViewController: viewController)
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
+    }
+    
+    func eventCreationScreenTo(direction: String, model: EventManageViewModel) -> NavigationFunc {
+        var nextScreen = -1
+        
+        if direction == "next" {
+            if eventCreationScreen < 3 {
+                nextScreen = eventCreationScreen + 1
+            }
+        } else {
+            if eventCreationScreen > 1 {
+                nextScreen = eventCreationScreen - 1
+            }
+        }
+        
+        if nextScreen < 0 {
+            if direction == "prev" {
+                return {
+                    self.startMyEvents()
+                }
+            }else{
+                return {}
+            }
+        }else{
+            return {
+                self.eventCreationScreen = nextScreen
+                if direction == "next" {
+                    let viewController = self.organizerStoryboard.instantiateViewControllerWithIdentifier("addEvent\(nextScreen)") as! EventsManageCreateViewController
+                    
+                    self.navigationController.pushViewController(viewController, animated: true)
+                    viewController.viewModel = model
+                    
+                    switch nextScreen {
+                        case 1:
+                            model.navigatePickInterest = self.showSelectEventInterest(viewController as! EventsManageCreateFirstPageViewController)
+                        break
+                        case 2:
+                            model.navigatePickCity = self.showSelectCityOnSetup(viewController as! EventsManageCreateSecondPageViewController, viewController as! EventsManageCreateSecondPageViewController)
+                            model.navigatePickPlace = self.showSelectPlace(viewController as! EventsManageCreateSecondPageViewController)
+                            model.navigatePickCurrency = self.showSelectCurrencyValue(viewController as! EventsManageCreateSecondPageViewController)
+                        break
+                        case 3: break
+                        default: break
+                    }
+                } else {
+                    self.navigationController.popViewControllerAnimated(true)
+                }
+                
+                model.navigateBack = self.eventCreationScreenTo("prev", model: model)
+                model.navigateNext = self.eventCreationScreenTo("next", model: model)
+            }
         }
     }
 
@@ -720,7 +846,7 @@ class NavigationCoordinator {
         viewModel.navigateSettings = self.hideSlideMenu(self.startSettings)
         viewModel.navigateLogout = self.hideSlideMenu(self.logOut)
         viewModel.navigateBack = self.hideSlideMenu
-
+        viewModel.navigateConfirm = self.hideSlideMenu(self.showConfirm)
 
         let menuViewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("Menu") as! MenuViewController
         menuViewController.viewModelMenu = viewModel

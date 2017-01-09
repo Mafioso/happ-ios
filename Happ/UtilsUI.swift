@@ -24,12 +24,33 @@ extension UIView {
         self.layer.borderWidth = 0.0
         self.clipsToBounds = true
     }
+    func addDashedBorder(color: UIColor, width: CGFloat = 2) {
+        let color = color.CGColor
+        
+        let shapeLayer = CAShapeLayer()
+        let frameSize = self.frame.size
+        let shapeRect = CGRect(x: 2, y: 2, width: frameSize.width-4, height: frameSize.height-4)
+        
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
+        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = width
+        shapeLayer.lineJoin = kCALineJoinRound
+        shapeLayer.lineDashPattern = [10,8]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 10).CGPath
+        
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
+        
+        self.layer.addSublayer(shapeLayer)
+    }
 }
 
 
 extension UIImage {
     func blackAndWhiteCopy() -> UIImage {
-        let context = CIContext(options: nil)
+        let context = ContextMaker.makeMeAContext()
         let ciImage = CoreImage.CIImage(image: self)!
 
         // Set image color to b/w
@@ -75,6 +96,9 @@ extension UIColor {
     }
     class func happBlackQuarterTextColor() -> UIColor {
         return UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.38)
+    }
+    class func happErrorColor() -> UIColor {
+        return UIColor(hexString: "C2827E")
     }
 }
 

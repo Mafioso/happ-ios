@@ -11,7 +11,7 @@ import ObjectMapper
 import RealmSwift
 import GoogleMaps
 import MessageUI
-
+import UIKit
 
 
 
@@ -126,8 +126,16 @@ extension Dictionary {
     }
 }
 
-
-
+extension NSURL {
+    var queryItems: [String: String]? {
+        return NSURLComponents(URL: self, resolvingAgainstBaseURL: false)?
+            .queryItems?
+            .reduce([:], combine: { (var params: [String: String], item) -> [String: String] in
+                params[item.name] = item.value
+                return params
+            })
+    }
+}
 
 extension CLLocation {
     convenience init(geopoint: GeoPointModel) {
@@ -138,6 +146,29 @@ extension CLLocation {
         inst.lat = Double(self.coordinate.latitude)
         inst.long = Double(self.coordinate.longitude)
         return inst
+    }
+}
+
+extension Double {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
+extension String {
+    static func randomNumericString(len:UInt32) -> String {
+        return "\(Int(arc4random_uniform(len)))"
+    }
+    func isValidEmail() -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluateWithObject(self)
+    }
+    func isValidURL() -> Bool {
+        if let _ = NSURL(string: self) {
+            return true
+        }
+        return false
     }
 }
 
@@ -167,12 +198,6 @@ struct Utils {
     }
 }
 
-extension Double {
-    func format(f: String) -> String {
-        return String(format: "%\(f)f", self)
-    }
-}
-
 func formatStatValue(value: Int) -> String {
     return String(value)
 }
@@ -181,6 +206,7 @@ func formatStatValue(value: Int) -> String {
 enum HappEventPriceFormats {
     case EventMinPrice(event: EventModel)
     case EventPriceRange(event: EventModel)
+    case EventPriceRangeWithoutBreak(event: EventModel)
     
     func toString() -> String {
         switch self {
@@ -206,6 +232,19 @@ enum HappEventPriceFormats {
             } else {
                 return "\(minValue!) – \(maxValue!)\n\(currency.name)"
             }
+            
+        case .EventPriceRangeWithoutBreak(let event):
+            guard let currency = event.currency else { return "ERROR" }
+            let minValue = event.min_price
+            let maxValue = event.max_price
+            
+            if minValue == nil || (minValue == 0 && Utils.isNilOrZero(maxValue)) {
+                return "FREE"
+            } else if minValue! > 0 && (maxValue == nil || maxValue! == minValue!) {
+                return "\(minValue!) \(currency.name)"
+            } else {
+                return "\(minValue!) – \(maxValue!) \(currency.name)"
+            }
         }
     }
 }
@@ -214,21 +253,38 @@ enum HappEventDateFormats {
     case EventDate(datetime: EventDateModel)
     case EventTimeRange(datetime: EventDateModel)
     case EventDetails(first_datetime: EventDateModel, last_datetime: EventDateModel)
+    case EventManage(first_datetime: EventDateModel?, last_datetime: EventDateModel?)
 
     func toString() -> String {
         switch self {
+        
         case .EventDate(let datetime):
             let formatter = NSDateFormatter()
             formatter.dateFormat = "MMMM d"
             return formatter.stringFromDate(datetime.start_time)
-
+        
         case .EventDetails(let first_datetime, let last_datetime):
             let dayFormatter = NSDateFormatter()
             dayFormatter.dateFormat = "MMM d"
             let timeFormatter = NSDateFormatter()
             timeFormatter.dateFormat = "HH:mm"
             return "\(dayFormatter.stringFromDate(first_datetime.start_time)) – \(dayFormatter.stringFromDate(last_datetime.end_time)) \n\(timeFormatter.stringFromDate(first_datetime.start_time)) – \(timeFormatter.stringFromDate(last_datetime.end_time))"
-
+        
+        case .EventManage(let first_datetime, let last_datetime):
+            let dayFormatter = NSDateFormatter()
+            dayFormatter.dateFormat = "MMM d"
+            let timeFormatter = NSDateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            let yearFormatter = NSDateFormatter()
+            yearFormatter.dateFormat = "Y"
+            if first_datetime != nil {
+                if last_datetime == nil {
+                    return "\(dayFormatter.stringFromDate(first_datetime!.start_time)) \(yearFormatter.stringFromDate(first_datetime!.start_time)) \(timeFormatter.stringFromDate(first_datetime!.start_time)) – \(timeFormatter.stringFromDate(first_datetime!.end_time))"
+                }
+                return "\(dayFormatter.stringFromDate(first_datetime!.start_time)) – \(dayFormatter.stringFromDate(last_datetime!.end_time)) \(yearFormatter.stringFromDate(last_datetime!.end_time)) \(timeFormatter.stringFromDate(first_datetime!.start_time)) – \(timeFormatter.stringFromDate(last_datetime!.end_time))"
+            }
+            return "ERROR"
+            
         case .EventTimeRange(let datetime):
             let formatter = NSDateFormatter()
             formatter.dateFormat = "HH:mm"
@@ -238,9 +294,12 @@ enum HappEventDateFormats {
 }
 
 enum HappDateFormats: String {
+    case ISOFormatBegin = "yyyy-MM-dd"
+    case ISOFormatEnd = "HH:mm:ss"
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
     case DateTime = "yyyy-MM-dd HH:mm:ss"
     case EventOnFeed = "MMMM d"
+    case EventOnCreation = "MMMM d, yyyy"
     case OnlyTime = "HH:mm"
 
 
@@ -269,7 +328,15 @@ let HappDateTransformer = TransformOf<NSDate, String>(fromJSON: { (value: String
         return  (value == nil) ? nil : HappDateFormats.ISOFormat.toString(value!)
 })
 
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
+}
 
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == .OrderedAscending
+}
+
+extension NSDate: Comparable { }
 
 // gist source: https://gist.github.com/Jerrot/fe233a94c5427a4ec29b
 class ArrayTransform<T:RealmSwift.Object where T:Mappable> : TransformType {
@@ -283,8 +350,9 @@ class ArrayTransform<T:RealmSwift.Object where T:Mappable> : TransformType {
         if let tempArr = value as! Array<AnyObject>? {
             for entry in tempArr {
                 let mapper = Mapper<T>()
-                let model : T = mapper.map(entry)!
-                result.append(model)
+                if let model : T = mapper.map(entry) {
+                    result.append(model)
+                }
             }
         }
         return result
