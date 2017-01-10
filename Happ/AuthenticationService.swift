@@ -37,7 +37,7 @@ class AuthenticationService {
             .then { _ in resolve() }
             .error { err in
                 switch err {
-                case RequestError.BadRequest:
+                case RequestError.NotFound:
                     reject(AuthenticationErrors.FacebookUserNotRegistered)
                 default:
                     reject(err)
