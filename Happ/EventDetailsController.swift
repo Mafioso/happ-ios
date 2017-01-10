@@ -62,6 +62,9 @@ class EventDetailsController: UIViewController {
     }
     @IBAction func clickedExpandImages(sender: UIButton) {
     }
+    @IBAction func clickedShareButton(sender: UIButton) {
+        self.shareEvent()
+    }
 
 
     override func viewDidLoad() {
@@ -209,17 +212,6 @@ extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-
-/* TODO
- let event = self.viewModel.event
- let user = ProfileService.getUserProfile()
- let subject = "I have question by \(event.title)"
- let body = "Hi, my name is \(user.fullname)."
- */
-
-
-
-
 extension EventDetailsController: EmailSenderProtocol {
 
     // EMAIL TO
@@ -258,6 +250,28 @@ extension EventDetailsController: EmailSenderProtocol {
         }
     }
     
+
+    // SHARE
+    func shareEvent() {
+        let event = self.viewModel.event
+        let textToShare = event.title
+        guard let imageURL = event.images.first!.getURL() else { return }
+
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            let imageToShare = UIImage(data: NSData(contentsOfURL: imageURL)!)!
+
+            let objectsToShare: [AnyObject] = [imageToShare, textToShare]
+            var excludeTypes: [String] = [UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+            if #available(iOS 9.0, *) {
+                excludeTypes.append(UIActivityTypeOpenInIBooks)
+            }
+
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = excludeTypes
+            activityVC.popoverPresentationController?.sourceView = self.view
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        })
+    }
 }
 
 

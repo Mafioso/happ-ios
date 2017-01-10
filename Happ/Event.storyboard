@@ -112,9 +112,12 @@
                                                     <action selector="clickedBackNavItem:" destination="ONx-gR-b0p" eventType="touchUpInside" id="BKt-Bd-jOC"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFD-ro-V4F" userLabel="NavShare">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFD-ro-V4F" userLabel="NavShare">
                                                 <rect key="frame" x="324" y="36" width="35" height="43"/>
                                                 <state key="normal" backgroundImage="nav-share"/>
+                                                <connections>
+                                                    <action selector="clickedShareButton:" destination="ONx-gR-b0p" eventType="touchUpInside" id="a1R-bp-zkt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -970,7 +973,7 @@ OF COOKING</string>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellLoading" id="rbN-dO-2fN" customClass="EventExploreLoadingCollectionViewCell" customModule="Happ" customModuleProvider="target">
-                                <rect key="frame" x="126" y="0.0" width="124" height="164"/>
+                                <rect key="frame" x="125.5" y="0.0" width="124" height="164"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="124" height="164"/>
