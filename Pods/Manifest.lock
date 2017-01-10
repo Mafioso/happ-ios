@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.5.0)
+  - Alamofire (3.5.1)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -14,67 +14,71 @@ PODS:
     - FacebookCore
     - FBSDKCoreKit (~> 4.14)
     - FBSDKLoginKit (~> 4.14)
-  - FBSDKCoreKit (4.15.1):
+  - FBSDKCoreKit (4.18.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.15.1):
+  - FBSDKLoginKit (4.18.0):
     - FBSDKCoreKit
-  - GoogleMaps (2.0.1):
-    - GoogleMaps/Maps (= 2.0.1)
-  - GoogleMaps/Base (2.0.1)
-  - GoogleMaps/Maps (2.0.1):
-    - GoogleMaps/Base (= 2.0.1)
-  - GooglePlaces (2.0.1):
-    - GoogleMaps/Base (= 2.0.1)
+  - GoogleMaps (2.1.1):
+    - GoogleMaps/Maps (= 2.1.1)
+  - GoogleMaps/Base (2.1.1)
+  - GoogleMaps/Maps (2.1.1):
+    - GoogleMaps/Base
+  - GooglePlaces (2.1.1):
+    - GoogleMaps/Base (= 2.1.1)
   - HanekeSwift (0.10.1)
+  - IQKeyboardManagerSwift (4.0.5)
   - KeychainSwift (3.0.16)
-  - ObjectMapper (1.4.0)
+  - ObjectMapper (1.5.0)
   - ObjectMapper+Realm (0.1):
     - ObjectMapper
     - RealmSwift
-  - OMGHTTPURLRQ (3.2.0):
-    - OMGHTTPURLRQ/RQ (= 3.2.0)
-  - OMGHTTPURLRQ/FormURLEncode (3.2.0)
-  - OMGHTTPURLRQ/RQ (3.2.0):
+  - OMGHTTPURLRQ (3.2.2):
+    - OMGHTTPURLRQ/RQ (= 3.2.2)
+  - OMGHTTPURLRQ/FormURLEncode (3.2.2)
+  - OMGHTTPURLRQ/RQ (3.2.2):
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.2.0)
-  - PromiseKit (3.5.1):
-    - PromiseKit/Foundation (= 3.5.1)
-    - PromiseKit/QuartzCore (= 3.5.1)
-    - PromiseKit/UIKit (= 3.5.1)
-  - PromiseKit/CorePromise (3.5.1)
-  - PromiseKit/Foundation (3.5.1):
+  - OMGHTTPURLRQ/UserAgent (3.2.2)
+  - PromiseKit (3.5.3):
+    - PromiseKit/Foundation (= 3.5.3)
+    - PromiseKit/QuartzCore (= 3.5.3)
+    - PromiseKit/UIKit (= 3.5.3)
+  - PromiseKit/CorePromise (3.5.3)
+  - PromiseKit/Foundation (3.5.3):
     - OMGHTTPURLRQ (~> 3.2.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.5.1):
+  - PromiseKit/QuartzCore (3.5.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.5.1):
+  - PromiseKit/UIKit (3.5.3):
     - PromiseKit/CorePromise
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
+  - Realm (2.1.2):
+    - Realm/Headers (= 2.1.2)
+  - Realm/Headers (2.1.2)
+  - RealmSwift (2.1.2):
+    - Realm (= 2.1.2)
   - Shimmer (1.0.2)
   - SlideMenuControllerSwift (2.3.0)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (2.4.0)
+  - UITextView+Placeholder (1.2.0)
   - WTLCalendarView (0.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
-  - FacebookCore
-  - FacebookLogin
+  - FacebookCore (= 0.1.1)
+  - FacebookLogin (= 0.1.1)
   - GoogleMaps
   - GooglePlaces
   - HanekeSwift
+  - IQKeyboardManagerSwift (= 4.0.5)
   - KeychainSwift (from `https://github.com/marketplacer/keychain-swift.git`, branch `swift_2_3`)
   - ObjectMapper (~> 1.3)
-  - ObjectMapper+Realm
+  - ObjectMapper+Realm (= 0.1)
   - PromiseKit (~> 3.4)
   - RealmSwift
   - Shimmer
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.3`)
-  - SwiftyJSON
+  - SwiftyJSON (= 2.4.0)
+  - UITextView+Placeholder (~> 1.2)
   - WTLCalendarView (from `https://github.com/lenyapugachev/CalendarView.git`)
 
 EXTERNAL SOURCES:
@@ -99,27 +103,29 @@ CHECKOUT OPTIONS:
     :git: https://github.com/lenyapugachev/CalendarView.git
 
 SPEC CHECKSUMS:
-  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 14f27add6888c27470d42a100374e6361f4e0f79
   FacebookLogin: 748f4e621e874da3e0bf63bccf6fd1542c786a1b
-  FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
-  FBSDKLoginKit: 073f79b3b2e762fc6f54a283fe15f45372d59f5f
-  GoogleMaps: f09da64fc987c1aa29394567c3cab5a3df83c402
-  GooglePlaces: 72fab1d1651c6df0322f2aad245ffb15b80d3c56
+  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
+  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
+  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
+  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
-  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
+  ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
   ObjectMapper+Realm: dbcf666c2081d82dc527b054c574b9f3777df060
-  OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
-  PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  OMGHTTPURLRQ: edb14c7d28add69226b79d826f930805927a0ffa
+  PromiseKit: d3393df0dfd7ed208cec0267dce13c66d9c09d0a
+  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
+  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
+  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   WTLCalendarView: c7ee2e7f916cd069b131f75fcdc3cf3f7418f4ff
 
-PODFILE CHECKSUM: c3402e01db73a29d172cbd924f0fdba0ffb764a0
+PODFILE CHECKSUM: f96989ddbf2e51ed8a8b7334238da654e72219e5
 
 COCOAPODS: 1.1.1

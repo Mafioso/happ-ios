@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IQKeyboardManagerSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>KeychainSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -94,6 +99,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UITextView+Placeholder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>WTLCalendarView-WTCalendarView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,17 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0AA63FB34ED3193F465083A92FCF42C2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>13599D435BF27EAE2E9844821783ECB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>1BECF98F5D80315F4CA333AB7B4CB512</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>272F960BC4C00DE73F4357A19A71C610</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +147,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4082A9166AEA53AEC4DFA7F48C3BAA6E</key>
+		<key>40A16CB0CB5FD49FD533BBC4F0A0C888</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,7 +172,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6914E7AAE51380E6F928673C82FF7F44</key>
+		<key>5FE3DBDC5E05B470026F7F9703BEB282</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,6 +187,21 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>98FA2714C65E116F98EE67E5FEAB2C33</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B658324B6350120D38ED05110B26150</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ADD798F9F864CB6678E7E086A98B3242</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AE4759774042D8E013517E82C6F7A058</key>
 		<dict>
 			<key>primary</key>
@@ -182,27 +212,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C6BB13BEB980B5384AB81D1387EEA6F1</key>
+		<key>BAE3E6B5B7DF684026762E1662FD4F9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C80A6F78BBCB5488735FC7A6F4BF2683</key>
+		<key>BAE920667FB40EE5B2EDEA6836AC0068</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3F4F0FAA9C8AD2B622C7A91192A21F0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DACEE748E5B8592A303B84D58136BC28</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DC961C0BC528C0D6ABB7720BEBD5129E</key>
+		<key>C92713D019D1AFCC7C896D8CA6CC701E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

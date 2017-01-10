@@ -64,7 +64,66 @@ class EventService {
                     return self.fetchEvent(eventID)
                 }
     }
-
+    
+    class func fetchMyEvents(page: Int = 1, overwrite: Bool = false, startDate: NSDate? = nil, endDate: NSDate? = nil, active: Bool = true, inactive: Bool = true, onreview: Bool = true, rejected: Bool = true, finished: Bool = true) -> Promise<Void> {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let timeformatter = NSDateFormatter()
+        timeformatter.dateFormat = "HHss"
+        let feedEndpoint = endpoint + "organizer/" + "?page=\(page)" +
+            (startDate != nil ? "&start_date=\(formatter.stringFromDate(startDate!))" : "") +
+            (endDate != nil ? "&end_date=\(formatter.stringFromDate(endDate!))" : "") +
+            (active ? "" : "&active=false") +
+            (inactive ? "" : "&not_active=false") +
+            (onreview ? "" : "&moderation=false") +
+            (rejected ? "" : "&rejected=false") +
+            (finished ? "" : "&finished=false")
+        
+        return GetPaginated(feedEndpoint, parameters: nil)
+            .then { (data, isLastPage, count) -> Void in
+                let results = data as! [AnyObject]
+                self.isLastPageOfFeed = isLastPage
+                
+                let realm = try! Realm()
+                try! realm.write {
+                    if overwrite {
+                        let exists = realm.objects(EventModel)
+                        realm.delete(exists)
+                    }
+                    results.forEach() { event in
+                        let inst = Mapper<EventModel>().map(event)
+                        realm.add(inst!, update: true) // `update: true` - not required
+                    }
+                }
+        }
+    }
+    
+    class func createOrEditEvent(eventId: String?, valuesDict: [String: AnyObject]) -> Promise<Void> {
+        return Post(endpoint + "\(eventId != nil ? "\(eventId!)/" : "")", method: eventId != nil ? .PATCH : .POST, parameters: valuesDict)
+            .then { result -> Void in
+                let realm = try! Realm()
+                try! realm.write {
+                    let item = Mapper<EventModel>().map(result)
+                    realm.add(item!, update: true)
+                }
+        }
+    }
+    
+    class func removeEvent(id: String) -> Promise<Void> {
+        return Post(endpoint + id + "/", method: .DELETE, parameters: [:])
+            .then { result -> Void in }
+    }
+    
+    class func copyEvent(id: String) -> Promise<Void> {
+        return Post(endpoint + id + "/copy/", parameters: [:])
+            .then { result -> Void in }
+    }
+    
+    class func activateDeactivateEvent(activate: Bool, id: String) -> Promise<Void> {
+        return Post(endpoint + id + "/\(activate ? "" : "de")activate/", parameters: [:])
+            .then { result -> Void in }
+    }
+    
     class func fetchFeed(page: Int = 1, overwrite: Bool = false, onlyFree: Bool = false, popular: Bool = false, startDate: NSDate? = nil, endDate: NSDate? = nil, startTime: NSDate? = nil) -> Promise<Void> {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyyMMdd"
@@ -76,7 +135,7 @@ class EventService {
             (startDate != nil ? "&start_date=\(formatter.stringFromDate(startDate!))" : "") +
             (endDate != nil ? "&end_date=\(formatter.stringFromDate(endDate!))" : "") +
             (startTime != nil ? "&start_time=\(timeformatter.stringFromDate(startTime!))" : "")
-        print(feedEndpoint)
+        
         return GetPaginated(feedEndpoint, parameters: nil)
             .then { (data, isLastPage, count) -> Void in
                 let results = data as! [AnyObject]

@@ -11,11 +11,10 @@ import Alamofire
 import PromiseKit
 
 
-private let HostServer = "http://happ.westeurope.cloudapp.azure.com"
-private let HostServerReserve = "http://happ.skills.kz"
+private let HostServer = "http://happ.skills.kz"
 private let HostLocal = "http://127.0.0.1:8000"
 private let HostPC = "http://192.168.43.179:8000"
-let Host = HostServerReserve
+let Host = HostServer
 let HostAPI = Host + "/api/v1/"
 
 
@@ -74,15 +73,14 @@ func getRequestHeaders(isAuthenticated: Bool = true) -> [String: String] {
 
 
 
-func Post(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON, isAuthenticated: Bool = true) -> Promise<AnyObject> {
+func Post(endpoint: String, method: Alamofire.Method = .POST, parameters: [String: AnyObject]?, paramsEncoding: ParameterEncoding = .JSON, isAuthenticated: Bool = true) -> Promise<AnyObject> {
     return Promise { resolve, reject in
         let url = HostAPI + endpoint
 
         Alamofire
-            .request(.POST, url, headers: getRequestHeaders(isAuthenticated), parameters: parameters, encoding: paramsEncoding)
+            .request(method, url, headers: getRequestHeaders(isAuthenticated), parameters: parameters, encoding: paramsEncoding)
             .validate()
             .responseJSON { response in
-
                 switch response.result {
                 case .Success:
                     resolve(response.result.value!)
@@ -93,10 +91,13 @@ func Post(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: Pa
                     } else if let reqErrorType = RequestError(rawValue: error.code) {
                         reject(reqErrorType as ErrorType)
                     } else {
-                        // print(".Post.error", endpoint, parameters, error, error.code)
                         reject(RequestError.UnknownError)
                     }
-                    print(".Post.error", endpoint, parameters, error, error.code)
+                    print("\(method.rawValue).error", url, response.request?.allHTTPHeaderFields, parameters, error, error.code)
+                    if let data = response.data {
+                        let json = String(data: data, encoding: NSUTF8StringEncoding)
+                        print("Failure Response: \(json)")
+                    }
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -171,6 +172,10 @@ func Get(endpoint: String, parameters: [String: AnyObject]?, paramsEncoding: Par
                         reject(RequestError.UnknownError)
                     }
                     print(".Get.error", url, parameters, error, error.code, error.localizedDescription)
+                    if let data = response.data {
+                        let json = String(data: data, encoding: NSUTF8StringEncoding)
+                        print("Failure Response: \(json)")
+                    }
                 }
 
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false

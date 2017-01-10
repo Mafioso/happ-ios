@@ -10,8 +10,6 @@ import Foundation
 import RealmSwift
 import PromiseKit
 
-
-
 protocol DataStateProtocol {
     associatedtype ItemType: Object
     var items: [ItemType] { get set }

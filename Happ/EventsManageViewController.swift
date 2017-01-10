@@ -2,68 +2,117 @@
 //  EventsManageViewController.swift
 //  Happ
 //
-//  Created by MacBook Pro on 11/11/16.
+//  Created by Aleksei Pugachev on 12/22/16.
 //  Copyright © 2016 Sattar Stamkulov. All rights reserved.
 //
 
 import UIKit
 
+private let segueEmbeddedTableID = "embeddedTable"
+
+class EventsManageViewController: EventsManageViewControllerPrototype<EventsManageViewModel> {
+    init() {
+        super.init()
+    }
+}
+
+protocol EventsManageDelegate {
+    func willDisplayItemsEventsList()
+}
 
 
-class EventsManageViewController: UITableViewController, EventsListSyncWithEmptyList {
+protocol EventsManageSyncWithEmptyList: EventsEmptyListDelegate, EventsEmptyListDataSource  {
+    var delegateEmptyList: EventsManageDelegate? { get set }
+}
 
-    var viewModel: EventsManageViewModel! {
+
+
+class EventsManageViewControllerPrototype<T: EventsListSectionedViewModelProtocol>: UIViewController, UITableViewDataSource, UITableViewDelegate,
+FeedFiltersDelegate, EventsListSyncWithEmptyList {
+    
+    var viewModel: T! {
         didSet {
             self.updateView()
         }
     }
-
+    
     var delegateEmptyList: EventsListDelegate?
-
-
+    
+    
+    // outlets
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    
+    init(nibName: String = "EventsManageViewController") {
+        super.init(nibName: nibName, bundle: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.initTableView()
+        self.initDataLoading()
+        self.extMakeNavBarWhite()
         self.initNavBarItems()
     }
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    
+    private func initDataLoading() {
+        if self.viewModel.willLoadNextDataPage() {
+            self.viewModel.onLoadFirstDataPage() { state in
+                self.viewModel.state = state
+            }
+        }
+    }
+    
+    private func updateView() {
+        guard self.isViewLoaded() else { return }
         
-        self.extMakeNavBarWhite()
-    }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.extMakeNavBarVisible()
-    }
-
-
-    func initTableView() {
-        self.tableView.registerNib(UINib(nibName: EventManageTableCell.nibName, bundle: nil), forCellReuseIdentifier: "cell")
-        self.tableView.rowHeight = CGFloat(125)
-    }
-
-    func updateView() {
         if  self.viewModel.isLoadingFirstDataPage() ||
             !self.viewModel.state.items.isEmpty
         {
-            self.delegateEmptyList?.willDisplayItemsEventsList()
-            self.tableView.reloadData()
+            self.delegateEmptyList?.willDisplayItemsEventsList() // close placeholder
+            self.tableView.reloadData() // display loading cells or event cells
+            
         } else {
             self.viewModel.displayEmptyList?()
         }
     }
-
+    
+    private func initTableView() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.tableView.registerNib(
+            UINib(nibName: EventManageLoadingTableCell.nibName, bundle: nil),
+            forCellReuseIdentifier: ReuseIdentifier.Loading.rawValue)
+        self.tableView.registerNib(
+            UINib(nibName: EventManageTableCell.nibName, bundle: nil),
+            forCellReuseIdentifier: ReuseIdentifier.Cell.rawValue)
+    }
+    
     private func initNavBarItems() {
         self.navigationItem.title = "My Events"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickNavItemMenu(withSender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickNavItemFilter(withSender:)))
     }
-    func handleClickMenuNavItem() {
+    
+    func handleClickNavItemMenu(withSender sender: UIButton) {
         self.viewModel.displaySlideMenu?()
     }
-
-
+    
+    func handleClickNavItemFilter(withSender sender: UIButton) {
+        self.viewModel.displaySlideFilters?()
+    }
+    
+    // delegate FeedFiltersDelegate
+    func didChangeFilters(filters: EventsListFiltersState) {
+        self.viewModel.onChangeFilters(filters) // it clear state
+        self.initDataLoading() // fetch items into state
+        self.delegateEmptyList?.willDisplayItemsEventsList()
+    }
+    
     // delegate EventsEmptyListDelegate & EventsEmptyListDataSource
     func eventsEmptyList(clickNavItemLeft sender: UIButton) {
         self.viewModel.onClickNavItemLeftEmptyList()
@@ -77,76 +126,92 @@ class EventsManageViewController: UITableViewController, EventsListSyncWithEmpty
     func getScope() -> EventsEmptyListScope {
         return self.viewModel.getScopeEmptyList()
     }
-
-
-    // data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    
+    // fill with data
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if self.viewModel.isLoadingFirstDataPage() {
+            return 1
+        } else {
+            return self.viewModel.state.getSectionsCount()
+        }
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.state.items.count
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.viewModel.isLoadingFirstDataPage() {
+            return 10
+        } else {
+            return self.viewModel.state.getSectionEventsCount(section)
+        }
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! EventManageTableCell
-
-        let event = self.viewModel.state.items[indexPath.row] as! EventModel
-        var cellInflator: EventManageTableCellInflator
-
-        // set cell data
-        cell.labelTitle.text = event.title
-        if let interest = event.interests.first {
-            cell.labelInterest.text = interest.title
-        }
-        cell.labelAddress.text = event.address
-        cell.labelPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
-        cell.labelUpvoteCount.text = String(event.votes_num)
-        cell.imageUpvoteIcon.image = event.getUpvoteIcon()
-        cell.imageFavIcon.image = event.getFavIcon()
-        if let image = event.images.first {
-            if let url = image.getURL() {
-                cell.imageCover.hnk_setImageFromURL(url)
-            }
-            if let color = image.color {
-                cell.viewDetailsContainer.backgroundColor = UIColor(hexString: color)
-            }
-        }
-
-        // set cell styles
-        switch event.getStatus() {
-        case .Active:
-            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Active, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .None)
-        case .Inactive:
-            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Inactive, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .None)
-        case .OnReview:
-            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .OnReview, statistic: false, detailsDenied: false, detailsNormal: true, styleFilter: .None)
-        case .Finished:
-            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: nil, statistic: true, detailsDenied: false, detailsNormal: true, styleFilter: .BlackAndWhite)
-        case .Rejected:
-            cellInflator = EventManageTableCellInflator(status: true, statusImageIcon: .Rejected, statistic: false, detailsDenied: true, detailsNormal: false, styleFilter: .Red)
-        }
-        cellInflator.updateCell(cell)
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-
-        // set handlers
-        cell.onClick = {[weak self] _ in
-            self?.viewModel.onClickEvent(event)
+        if self.viewModel.isLoadingFirstDataPage() {
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Loading.rawValue, forIndexPath: indexPath) as! EventManageLoadingTableCell
+            
+            return cell
+        } else {
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Cell.rawValue, forIndexPath: indexPath) as! EventManageTableCell
+            
+            cell.event = self.viewModel.state.getSectionEvent(indexPath)
+            
+            cell.onCopy = {
+                cell.indicatorCopy.startAnimating()
+                self.viewModel.onCopyEvent(cell.event, onFinish: { copied in
+                    cell.indicatorCopy.stopAnimating()
+                    if !copied {
+                        self.extDisplayAlertView("Copying of event wasn't successful, try again please")
+                    }
+                })
+            }
+            cell.onShowDeniedDetails = {
+                self.viewModel.onDeniedDetailsEvent(cell.event)
+            }
+            cell.onClick = {
+                self.viewModel.onClickEvent(cell.event)
+            }
+            cell.onEdit = {
+                self.viewModel.onEditEvent(cell.event)
+            }
+            cell.onDelete = {
+                cell.indicatorDelete.startAnimating()
+                self.viewModel.onDeleteEvent(cell.event, onFinish: { deleted in
+                    cell.indicatorDelete.stopAnimating()
+                    if !deleted {
+                        self.extDisplayAlertView("Deletion of event wasn't successful, try again please")
+                    }
+                })
+            }
+            cell.onActivateDeactivate = {
+                cell.indicatorActivateDeactivate.startAnimating()
+                self.viewModel.onActivateEvent(cell.event, activated: cell.activated, onFinish: { activated in
+                    cell.indicatorActivateDeactivate.stopAnimating()
+                    if activated {
+                        cell.activated = !cell.activated
+                    }else{
+                        self.extDisplayAlertView("\(!cell.activated ? "A" : "Dea")ctivation of event wasn't successful, try again please")
+                    }
+                })
+            }
+            
+            return cell
         }
-        cell.onEdit = {[weak self] _ in
-            self?.viewModel.onEdit(event)
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return EventManageTableCell.estimatedHeight
+    }
+    
+    // pagination
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if  indexPath.section == self.viewModel.state.getSectionsCount() - 1 &&
+            self.viewModel.willLoadNextDataPage() == true
+        {
+            self.viewModel.onLoadNextDataPage { asyncState in
+                self.viewModel.state = asyncState
+            }
         }
-        cell.onShowHide = {[weak self] _ in
-            self?.viewModel.onShowHide(event)
-        }
-        cell.onDelete = {[weak self] _ in
-            self?.viewModel.onDelete(event)
-        }
-        cell.onShowDeniedDetails = {[weak self] _ in
-            self?.viewModel.onShowDeniedDetails(event)
-        }
-
-        return cell
     }
 }
-
-
-

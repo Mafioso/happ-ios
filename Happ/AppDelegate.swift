@@ -12,8 +12,7 @@ import GooglePlaces
 import SlideMenuControllerSwift
 import WTLCalendarView
 import FacebookCore
-import FacebookLogin
-
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,8 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SlideMenuOptions.leftViewWidth = UIScreen.mainScreen().bounds.width * 0.8
             SlideMenuOptions.rightViewWidth = UIScreen.mainScreen().bounds.width * 0.86
         }
-
-
+        
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        
         CalendarViewTheme.instance.bgColorForMonthContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForDaysOfWeekContainer = UIColor.clearColor()
         CalendarViewTheme.instance.bgColorForCurrentMonth = UIColor.clearColor()
@@ -58,12 +58,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(apiKey)
 
         // delegate FacebookCore
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        FacebookCore.ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = UINavigationController()
         self.navigationCoordinator = NavigationCoordinator(window: self.window!)
         self.navigationCoordinator.start()
+        
+        return true
+    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        
+        if #available(iOS 9.0, *) {
+            FacebookCore.ApplicationDelegate.shared.application(app, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String, annotation: options[UIApplicationOpenURLOptionsAnnotationKey] ?? [])
+        } else {
+            // Fallback on earlier versions
+        }
+
+        if let urlItems = url.queryItems {
+            if let token = urlItems["key"] {
+                if navigationCoordinator.emailConfirmModel != nil {
+                    navigationCoordinator.emailConfirmModel!.onConfirm(token)
+                }else{
+                    AuthenticationService.confirm(token)
+                        .then { _ -> Void in
+                            self.window?.rootViewController?.extDisplayAlertView("You have confirmed your email, now you can create your events")
+                            ProfileService.fetchUserProfile()
+                    }
+                }
+            }
+        }
         
         return true
     }
@@ -92,12 +117,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return ApplicationDelegate.shared.application(application,
-                                                      openURL: url,
+        return FacebookCore.ApplicationDelegate.shared.application(application,
+                                                      openURL: url as NSURL!,
                                                       sourceApplication: sourceApplication,
                                                       annotation: annotation)
     }
-
 
 }
 

@@ -7,64 +7,66 @@
 //
 
 import UIKit
-
-
-struct EventManageTableCellInflator {
-    enum StatusIconTypes: String {
-        case Active = "icon-status-active"
-        case Inactive = "icon-status-inactive"
-        case OnReview = "icon-status-onreview"
-        case Rejected = "icon-status-rejected"
-    }
-    enum StyleFilterTypes {
-        case None
-        case BlackAndWhite
-        case Red
-    }
-
-    var status: Bool
-    var statusImageIcon: StatusIconTypes?
-    var statistic: Bool
-    var detailsDenied: Bool
-    var detailsNormal: Bool
-    var styleFilter: StyleFilterTypes
-
-
-    func updateCell(cell: EventManageTableCell) {
-        cell.viewStatusContainer.hidden = !self.status
-        if let iconType = self.statusImageIcon {
-            cell.imageStatusIcon.hidden = false
-            cell.imageStatusIcon.image = UIImage(named: iconType.rawValue)
-        } else {
-            cell.imageStatusIcon.hidden = true
-        }
-        cell.viewStatisticContainer.hidden = !self.statistic
-        cell.viewDetailsDeniedContainer.hidden = !self.detailsDenied
-        cell.viewDetailsNormalContainer.hidden = !self.detailsNormal
-        switch self.styleFilter {
-        case .BlackAndWhite:
-            cell.viewDetailsContainer.backgroundColor = UIColor(hexString: "5C5C5C")
-            cell.viewStatusBackground.backgroundColor = UIColor(hexString: "2C2C2C")
-            let image = cell.imageCover.image
-            let blackImage = image?.blackAndWhiteCopy()
-            print("...", image, blackImage)
-            cell.imageCover.image = blackImage
-        case .Red:
-            cell.viewDetailsContainer.backgroundColor = UIColor(hexString: "C78080")
-            cell.viewStatusBackground.backgroundColor = UIColor(hexString: "9A1B1B")
-            let image = cell.imageCover.image
-            let blackImage = image?.blackAndWhiteCopy()
-            cell.imageCover.image = blackImage
-        case .None:
-            break
-        }
-    }
-}
-
+import Haneke
 
 class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
 
-    //var viewModel: EventsManageViewModel!
+    var event: EventModel! {
+        didSet {
+            self.updateView()
+        }
+    }
+    
+    var iconTypes: [EventModelStatusTypes:String] = [
+        .OnReview: "icon-status-onreview",
+        .Active: "icon-status-active",
+        .Rejected: "icon-status-rejected",
+        .Inactive: "icon-status-inactive"
+    ]
+    
+    func updateView() {
+        labelTitle.text = event.title
+        labelInterest.text = event.interests.first?.title
+        labelPrice.text = HappEventPriceFormats.EventPriceRangeWithoutBreak(event: event).toString()
+        labelAddress.text = event.address
+        labelUpvoteCount.text = "\(event.votes_num)"
+        labelFavCount.text = "\(event.views_count)"
+        labelDateTime.text = HappEventDateFormats.EventManage(first_datetime: event.datetimes.first, last_datetime: event.datetimes.last).toString()
+        
+        imageCover.image = nil
+        scrollView.backgroundColor = UIColor.happBlackHalfTextColor()
+        if let image = event.images.first {
+            if let url = image.getURL() {
+                imageCover.image = nil
+                imageCover.hnk_setImageFromURL(
+                    url,
+                    success: { img in
+                        self.imageCover.image = self.event.getStatus() == .Rejected || self.event.getStatus() == .Finished ? img.blackAndWhiteCopy() : img
+                })
+                imageCover.layer.masksToBounds = true
+            }
+            if let color = image.color {
+                scrollView.backgroundColor = UIColor(hexString: color)
+            }
+        }
+        
+        if let iconType = iconTypes[event.getStatus(activated)] {
+            imageStatusIcon.hidden = false
+            imageStatusIcon.image = UIImage(named: iconType)
+        } else {
+            imageStatusIcon.hidden = true
+        }
+        
+        switch event.getStatus(activated) {
+            case .Finished:
+                scrollView.backgroundColor = UIColor(hexString: "2C2C2C")
+            case .Rejected:
+                scrollView.backgroundColor = UIColor(hexString: "C33838")
+                viewDetailsNormalContainer.hidden = true
+                viewDetailsDeniedContainer.hidden = false
+            default: break
+        }
+    }
     
     // outlets
     @IBOutlet weak var scrollView: UIScrollView!
@@ -75,6 +77,7 @@ class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var viewStatusBackground: UIView!
     @IBOutlet weak var viewDetailsNormalContainer: UIView!
     @IBOutlet weak var viewDetailsDeniedContainer: UIView!
+    @IBOutlet weak var viewWidth: NSLayoutConstraint!
 
     @IBOutlet weak var imageCover: UIImageView!
     @IBOutlet weak var labelUpvoteCount: UILabel!
@@ -87,39 +90,66 @@ class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
     @IBOutlet weak var labelAddress: UILabel!
     @IBOutlet weak var labelDateTime: UILabel!
     @IBOutlet weak var labelPrice: UILabel!
-    @IBOutlet weak var buttonActionShowHide: UIButton!
-
+    @IBOutlet weak var buttonActionActivateDeactivate: UIButton!
+    @IBOutlet weak var indicatorActivateDeactivate: UIActivityIndicatorView!
+    @IBOutlet weak var indicatorDelete: UIActivityIndicatorView!
+    @IBOutlet weak var indicatorCopy: UIActivityIndicatorView!
 
     // actions
     @IBAction func clickedShowDeniedDetails(sender: UIButton) {
         self.onShowDeniedDetails?()
     }
+    
     @IBAction func clickedActionDelete(sender: UIButton) {
         self.onDelete?()
     }
-    @IBAction func clickedActionShowHide(sender: UIButton) {
-        self.onShowHide?()
+    
+    @IBAction func clickedActionActivateDeactivate(sender: UIButton) {
+        self.onActivateDeactivate?()
     }
+    
     @IBAction func clickedActionEdit(sender: UIButton) {
         self.onEdit?()
     }
-
+    
+    @IBAction func clickedActionCopy(sender: UIButton) {
+        self.onCopy?()
+    }
 
     // signals
     var onClick: (() -> Void)?
     var onShowDeniedDetails: (() -> Void)?
     var onDelete: (() -> Void)?
     var onEdit: (() -> Void)?
-    var onShowHide: (() -> Void)?
-
+    var onActivateDeactivate: (() -> Void)?
+    var onCopy: (() -> Void)?
 
     static let nibName = "EventManageTableCell"
+    static let estimatedHeight = CGFloat(integerLiteral: 123)
     let sizeOfActionView = 109
+    var activated = true {
+        didSet {
+            UIView.animateWithDuration(0.33, animations: {
+                if self.activated {
+                    self.buttonActionActivateDeactivate.setTitle("DEACTIVATE", forState: .Normal)
+                    self.buttonActionActivateDeactivate.backgroundColor = UIColor(hexString: "BFBFBF")
+                    self.indicatorActivateDeactivate.backgroundColor = UIColor(hexString: "BFBFBF")
+                }else{
+                    self.buttonActionActivateDeactivate.setTitle("ACTIVATE", forState: .Normal)
+                    self.buttonActionActivateDeactivate.backgroundColor = UIColor(hexString: "5F902C")
+                    self.indicatorActivateDeactivate.backgroundColor = UIColor(hexString: "5F902C")
+                }
+            })
+            dispatch_after(dispatch_time(dispatch_time_t(DISPATCH_TIME_NOW), Int64(NSEC_PER_SEC/3)), dispatch_get_main_queue()) {
+                self.indicatorActivateDeactivate.stopAnimating()
+                self.updateView()
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Initialization code
         scrollView.delegate = self
         scrollView.frame = self.bounds
         scrollView.contentSize = self.bounds.size
@@ -128,7 +158,8 @@ class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         
-        // init events
+        viewWidth.constant = ScreenSize.SCREEN_WIDTH
+        
         let clickEvent = UITapGestureRecognizer(target: self, action: #selector(self.handleClick))
         self.viewContentContainer.addGestureRecognizer(clickEvent)
     }
@@ -139,8 +170,6 @@ class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -158,6 +187,3 @@ class EventManageTableCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
 }
-
-
-

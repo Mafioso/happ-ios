@@ -16,11 +16,13 @@ struct EventsManageViewModel: EventsListSectionedViewModelProtocol {
     var state: EventsListSectionedState
 
     var navigateEventDetails: NavigationFuncWithID
+    var navigateEventEdit: NavigationFuncWithObject
+    var navigateEventDeniedDetails: NavigationFuncWithObject
+    var navigateUpdate: NavigationFunc
     var displaySlideMenu: NavigationFunc
     var displaySlideFilters: NavigationFunc
     var displayEmptyList: NavigationFunc
     var navigateAddEvent: NavigationFunc
-
 
     init() {
         self.state = EventsListSectionedState.getInitialState()
@@ -29,8 +31,7 @@ struct EventsManageViewModel: EventsListSectionedViewModelProtocol {
 
     func fetchData(page: Int, overwrite: Bool) -> Promise<Void> {
         let filters = self.state.filters
-        return EventService.fetchFeed(page, overwrite: overwrite,
-                                      onlyFree: filters.onlyFree, popular: filters.sortBy == .ByPopular, startDate: filters.dateFrom, endDate: filters.dateTo, startTime: filters.time)
+        return EventService.fetchMyEvents(page, overwrite: overwrite, startDate: filters.dateFrom, endDate: filters.dateTo, active: filters.statusMap![.Active]!, inactive: filters.statusMap![.Inactive]!, onreview: filters.statusMap![.OnReview]!, rejected: filters.statusMap![.Rejected]!, finished: filters.statusMap![.Finished]!)
     }
     func getData() -> [Object] {
         return Array(EventService.getStored())
@@ -38,21 +39,6 @@ struct EventsManageViewModel: EventsListSectionedViewModelProtocol {
     func isLastPage() -> Bool {
         return EventService.isLastPageOfFeed
     }
-    
-
-    func onDelete(event: EventModel) {
-        print(".EvntsManageVM.onDelete")
-    }
-    func onShowHide(event: EventModel) {
-        print(".EvntsManageVM.onShowHide")
-    }
-    func onEdit(event: EventModel) {
-        print(".EvntsManageVM.onEdit")
-    }
-    func onShowDeniedDetails(event: EventModel) {
-        print(".EvntsManageVM.onShowDeniedDetails")
-    }
-
 
     func onClickActionEmptyList() {
         self.navigateAddEvent?()
@@ -73,6 +59,9 @@ struct FavouritesViewModel: EventsListSectionedViewModelProtocol {
     var state: EventsListSectionedState
 
     var navigateEventDetails: NavigationFuncWithID
+    var navigateEventEdit: NavigationFuncWithObject
+    var navigateEventDeniedDetails: NavigationFuncWithObject
+    var navigateUpdate: NavigationFunc
     var displaySlideMenu: NavigationFunc
     var displaySlideFilters: NavigationFunc
     var displayEmptyList: NavigationFunc
@@ -116,6 +105,9 @@ struct FeedViewModel: EventsListSectionedViewModelProtocol {
     var state: EventsListSectionedState
 
     var navigateEventDetails: NavigationFuncWithID
+    var navigateEventEdit: NavigationFuncWithObject
+    var navigateEventDeniedDetails: NavigationFuncWithObject
+    var navigateUpdate: NavigationFunc
     var displaySlideMenu: NavigationFunc
     var displaySlideFilters: NavigationFunc
     var displayEmptyList: NavigationFunc
@@ -177,7 +169,7 @@ struct EventsListFiltersState {
     var statusMap: [EventModelStatusTypes: Bool]?
 
     static func getInitialState() -> EventsListFiltersState {
-        return EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, time: nil, sortBy: .ByDate, onlyFree: false, convertCurrency: false, statusMap: [.Active: false, .Inactive: false, .OnReview: false, .Finished: false])
+        return EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, time: nil, sortBy: .ByDate, onlyFree: false, convertCurrency: false, statusMap: [.Active: true, .Inactive: true, .OnReview: true, .Rejected: true, .Finished: true])
     }
 }
 
@@ -192,6 +184,7 @@ struct EventsListState: EventsListStateProtocol {
     static func getInitialState() -> EventsListState {
         return EventsListState(items: [], page: 0, isFetching: false, filters: EventsListFiltersState.getInitialState())
     }
+    mutating func deleteSectionEvent(event: EventModel) {}
 }
 struct EventsListSectionedState: EventsListSectionedStateProtocol {
     var items: [Object] {
@@ -222,7 +215,6 @@ struct EventsListSectionedState: EventsListSectionedStateProtocol {
         return self.sectionsValue[indexPath.section][indexPath.row]
     }
 
-
     static func getInitialState() -> EventsListSectionedState {
         return EventsListSectionedState(items: [], page: 0, isFetching: false, filters: EventsListFiltersState.getInitialState(), sections: [], sectionsValue: [])
     }
@@ -233,7 +225,7 @@ struct EventsListSectionedState: EventsListSectionedStateProtocol {
         var result: [NSDate: [EventModel]] = [:]
 
         result = items.reduce(result, combine: { (var acc, event) in
-            let eventDate = event.datetimes.first!.start_time
+            let eventDate = event.datetimes.first?.start_time ?? NSDate()
             let existKey = acc.keys
                 .filter { date in
                     let order = NSCalendar.currentCalendar().compareDate(date, toDate: eventDate, toUnitGranularity: .Day)
@@ -301,11 +293,19 @@ protocol EventsListViewModelProtocol: PaginatedDataViewModelProtocol {
     var state: StateType { get set }
     
     var navigateEventDetails: NavigationFuncWithID { get set }
+    var navigateEventEdit: NavigationFuncWithObject { get set }
+    var navigateEventDeniedDetails: NavigationFuncWithObject { get set }
+    var navigateUpdate: NavigationFunc { get set }
     var displaySlideMenu: NavigationFunc { get set }
     var displaySlideFilters: NavigationFunc { get set }
     var displayEmptyList: NavigationFunc { get set }
 
     func onClickEvent(event: EventModel)
+    func onEditEvent(event: EventModel)
+    func onDeniedDetailsEvent(event: EventModel)
+    func onCopyEvent(event: EventModel, onFinish: Bool -> Void)
+    func onDeleteEvent(event: EventModel, onFinish: Bool -> Void)
+    func onActivateEvent(event: EventModel, activated: Bool, onFinish: Bool -> Void)
     mutating func onChangeFilters(newState: EventsListFiltersState)
 }
 
@@ -338,16 +338,51 @@ extension EventsListViewModelProtocol {
                 completion(updState)
             }
     }
-
-
+    
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails?(id: event.id)
     }
+    
+    func onEditEvent(event: EventModel) {
+        self.navigateEventEdit?(object: event)
+    }
+    
+    func onDeniedDetailsEvent(event: EventModel) {
+        self.navigateEventDeniedDetails?(object: event)
+    }
+    
+    func onDeleteEvent(event: EventModel, onFinish: Bool -> Void) {
+        EventService.removeEvent(event.id)
+            .then { data -> Void in
+                self.navigateUpdate?()
+            }
+            .error { error in
+                onFinish(false)
+        }
+    }
+    
+    func onCopyEvent(event: EventModel, onFinish: Bool -> Void) {
+        EventService.copyEvent(event.id)
+            .then { data -> Void in
+                self.navigateUpdate?()
+            }
+            .error { error in
+                onFinish(false)
+        }
+    }
+    
+    func onActivateEvent(event: EventModel, activated: Bool = true, onFinish: Bool -> Void) {
+        EventService.activateDeactivateEvent(!activated, id: event.id)
+            .then { data -> Void in
+                onFinish(true)
+            }
+            .error { error in
+                onFinish(false)
+        }
+    }
+    
     mutating func onChangeFilters(newFiltersState: EventsListFiltersState) {
         self.state = StateType.getInitialState()
         self.state.filters = newFiltersState
     }
 }
-
-
-

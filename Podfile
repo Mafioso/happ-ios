@@ -9,9 +9,9 @@ target 'Happ' do
   pod 'PromiseKit', '~> 3.4'
   pod 'RealmSwift'
   pod 'Alamofire', '~> 3.4'
-  pod 'SwiftyJSON'
+  pod 'SwiftyJSON', '2.4.0'
   pod 'ObjectMapper', '~> 1.3'
-  pod 'ObjectMapper+Realm'
+  pod 'ObjectMapper+Realm', '0.1'
   pod 'HanekeSwift' # fetch&cache images by urls
   pod 'KeychainSwift', git: "https://github.com/marketplacer/keychain-swift.git", branch: "swift_2_3"
   pod 'SlideMenuControllerSwift', git: "https://github.com/dekatotoro/SlideMenuControllerSwift.git", branch: "swift2.3"
@@ -19,8 +19,10 @@ target 'Happ' do
   pod 'GooglePlaces'
   pod 'Shimmer'
   pod 'WTLCalendarView', git: "https://github.com/lenyapugachev/CalendarView.git"
-  pod 'FacebookCore'
-  pod 'FacebookLogin'
+  pod 'FacebookCore', '0.1.1'
+  pod 'FacebookLogin', '0.1.1'
+  pod 'IQKeyboardManagerSwift', '4.0.5'
+  pod 'UITextView+Placeholder', '~> 1.2'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

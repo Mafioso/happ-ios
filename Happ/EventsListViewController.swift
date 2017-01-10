@@ -9,16 +9,11 @@
 import UIKit
 import Foundation
 
-
 enum ReuseIdentifier: String {
     case Cell = "Cell"
     case Loading = "CellLoading"
     case Header = "SectionHeader"
 }
-private let segueEmbeddedTableID = "embeddedTable"
-
-
-
 
 class FeedViewController: EventsListViewControllerPrototype<FeedViewModel> {
     init() {
@@ -26,28 +21,19 @@ class FeedViewController: EventsListViewControllerPrototype<FeedViewModel> {
     }
 }
 
-
 class FavouriteViewController: EventsListViewControllerPrototype<FavouritesViewModel> {
     init() {
         super.init()
     }
 }
 
-
-
-
-
-
 protocol EventsListDelegate {
     func willDisplayItemsEventsList()
 }
 
-
 protocol EventsListSyncWithEmptyList: EventsEmptyListDelegate, EventsEmptyListDataSource  {
     var delegateEmptyList: EventsListDelegate? { get set }
 }
-
-
 
 class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>: UIViewController, UITableViewDataSource, UITableViewDelegate,
     FeedFiltersDelegate, EventsListSyncWithEmptyList {
@@ -59,6 +45,8 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
     }
 
     var delegateEmptyList: EventsListDelegate?
+    
+    private let segueEmbeddedTableID = "embeddedTable"
 
 
     // outlets
