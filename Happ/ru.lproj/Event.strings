@@ -1,0 +1,91 @@
+
+/* Class = "UILabel"; text = "ORGANIZER NAME"; ObjectID = "0Il-V7-S8q"; */
+"0Il-V7-S8q.text" = "ORGANIZER NAME";
+
+/* Class = "UILabel"; text = "EVENT_DETAILS_MAP.ADDRESS"; ObjectID = "0qo-Sm-sgL"; */
+"0qo-Sm-sgL.text" = "EVENT_DETAILS_MAP.ADDRESS";
+
+/* Class = "UILabel"; text = "EVENT_DETAILS_MAP.DATE_AND_TIME"; ObjectID = "2KA-xZ-Ucf"; */
+"2KA-xZ-Ucf.text" = "EVENT_DETAILS_MAP.DATE_AND_TIME";
+
+/* Class = "UILabel"; text = "Show popular first"; ObjectID = "50K-ZA-IEl"; */
+"50K-ZA-IEl.text" = "По популярности";
+
+/* Class = "UIButton"; normalTitle = "GO TO EVENT PAGE"; ObjectID = "6Jl-si-cKK"; */
+"6Jl-si-cKK.normalTitle" = "GO TO EVENT PAGE";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "6Mc-1Y-mIJ"; */
+"6Mc-1Y-mIJ.placeholder" = "Найти";
+
+/* Class = "UILabel"; text = "Event Organizer"; ObjectID = "BOE-NS-J8X"; */
+"BOE-NS-J8X.text" = "Мои события";
+
+/* Class = "UILabel"; text = "EVENT TITLE"; ObjectID = "GZK-U6-8Lv"; */
+"GZK-U6-8Lv.text" = "EVENT TITLE";
+
+/* Class = "UIButton"; normalTitle = "  Ask about event"; ObjectID = "Gq9-Al-0qS"; */
+"Gq9-Al-0qS.normalTitle" = "Узнать больше о событии";
+
+/* Class = "UILabel"; text = "EVENT_DETAILS_MAP.TITLE"; ObjectID = "HeC-E7-151"; */
+"HeC-E7-151.text" = "EVENT_DETAILS_MAP.TITLE";
+
+/* Class = "UILabel"; text = "DATE RANGE\nTIME RANGE"; ObjectID = "LTW-oM-Udx"; */
+"LTW-oM-Udx.text" = "DATE RANGE\nTIME RANGE";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "OnH-aT-bbw"; */
+"OnH-aT-bbw.text" = "Заголовок";
+
+/* Class = "UIButton"; normalTitle = "RESET FILTERS"; ObjectID = "RZo-Bm-VBQ"; */
+"RZo-Bm-VBQ.normalTitle" = "СБРОСИТЬ ФИЛЬТР";
+
+/* Class = "UILabel"; text = "EVENT
+MULTILINE
+DESCRIPTION"; ObjectID = "UPx-Xm-tKa"; */
+"UPx-Xm-tKa.text" = "EVENT
+MULTILINE
+DESCRIPTION";
+
+/* Class = "UILabel"; text = "EVENT_DETAILS_MAP.DISTANCE"; ObjectID = "Ydf-yM-m83"; */
+"Ydf-yM-m83.text" = "EVENT_DETAILS_MAP.DISTANCE";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "Zho-1E-hZh"; */
+"Zho-1E-hZh.normalTitle" = "0";
+
+/* Class = "UILabel"; text = "Select date"; ObjectID = "bPo-gS-hwW"; */
+"bPo-gS-hwW.text" = "Фильтр даты";
+
+/* Class = "UILabel"; text = "Customize Feed"; ObjectID = "elF-SS-3al"; */
+"elF-SS-3al.text" = "Фильтр";
+
+/* Class = "UILabel"; text = "EVENT_DETAILS_MAP.PRICE"; ObjectID = "jTT-Pf-XpM"; */
+"jTT-Pf-XpM.text" = "EVENT_DETAILS_MAP.PRICE";
+
+/* Class = "UILabel"; text = "ADDRESS"; ObjectID = "jVj-n0-shs"; */
+"jVj-n0-shs.text" = "ADDRESS";
+
+/* Class = "UILabel"; text = "You don’t have any favourited event"; ObjectID = "po8-d2-ceQ"; */
+"po8-d2-ceQ.text" = "У вас нет избранных интересов";
+
+/* Class = "UILabel"; text = "It is Empty Here!"; ObjectID = "uIL-B1-Cbp"; */
+"uIL-B1-Cbp.text" = "Здесь ничего нет!";
+
+/* Class = "UIButton"; normalTitle = "Find Awesome Events"; ObjectID = "x4Q-9h-y2p"; */
+"x4Q-9h-y2p.normalTitle" = "Найти";
+
+/* Class = "UILabel"; text = "EVENT TITLE"; ObjectID = "xox-2H-npc"; */
+"xox-2H-npc.text" = "EVENT TITLE";
+
+/* Class = "UILabel"; text = "Convert currency"; ObjectID = "yue-ql-8bg"; */
+"yue-ql-8bg.text" = "Сменить валюту";
+
+/* Class = "UILabel"; text = "FREE"; ObjectID = "z9K-6Z-ebi"; */
+"z9K-6Z-ebi.text" = "БЕСПЛАТНО";
+
+/* Class = "UIButton"; normalTitle = "I Want To Go!"; ObjectID = "zb8-8L-bhJ"; */
+"zb8-8L-bhJ.normalTitle" = "Я хочу сходить!";
+
+/* Class = "UIButton"; selectedTitle = "Already booked"; ObjectID = "zb8-8L-bhJ"; */
+"zb8-8L-bhJ.selectedTitle" = "Вы добавили событие";
+
+/* Class = "UILabel"; text = "Only Free Events"; ObjectID = "zfV-sb-KNv"; */
+"zfV-sb-KNv.text" = "Только бесплатные";

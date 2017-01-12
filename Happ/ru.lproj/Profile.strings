@@ -1,0 +1,117 @@
+
+/* Class = "UITextField"; placeholder = "enter phone"; ObjectID = "1nl-ls-Sdi"; */
+"1nl-ls-Sdi.placeholder" = "номер телефона";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "1pQ-Wx-rbV"; */
+"1pQ-Wx-rbV.text" = "Email";
+
+/* Class = "UILabel"; text = "EVENT UPDATES"; ObjectID = "2bt-Mu-h9g"; */
+"2bt-Mu-h9g.text" = "ОБНОВЛЕНИЯ СОБЫТИЙ";
+
+/* Class = "UITextField"; placeholder = "enter email"; ObjectID = "4GJ-4S-xcl"; */
+"4GJ-4S-xcl.placeholder" = "email";
+
+/* Class = "UITextField"; placeholder = "*****"; ObjectID = "4Gy-TF-sZ2"; */
+"4Gy-TF-sZ2.placeholder" = "*****";
+
+/* Class = "UILabel"; text = "CHAT"; ObjectID = "9Ta-BN-WDb"; */
+"9Ta-BN-WDb.text" = "СООБЩЕНИЯ";
+
+/* Class = "UILabel"; text = "CELL.TITLE"; ObjectID = "AzO-zg-d3n"; */
+"AzO-zg-d3n.text" = "CELL.TITLE";
+
+/* Class = "UILabel"; text = "Repeat Password"; ObjectID = "GMu-JB-ah0"; */
+"GMu-JB-ah0.text" = "Повторите пароль";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "HEu-8w-rmd"; */
+"HEu-8w-rmd.normalTitle" = "Сохранить";
+
+/* Class = "UILabel"; text = "FAQ/HELP"; ObjectID = "HOe-92-Ln6"; */
+"HOe-92-Ln6.text" = "FAQ/HELP";
+
+/* Class = "UILabel"; text = "CITIES MANAGER"; ObjectID = "IbV-nn-YEl"; */
+"IbV-nn-YEl.text" = "МОИ ГОРОДА";
+
+/* Class = "UILabel"; text = "PROFILE SETTINGS"; ObjectID = "IkY-0o-Cd9"; */
+"IkY-0o-Cd9.text" = "ПРОФИЛЬ";
+
+/* Class = "UILabel"; text = "Change Password"; ObjectID = "LHS-CY-4Yv"; */
+"LHS-CY-4Yv.text" = "Сменить пароль";
+
+/* Class = "UITextField"; placeholder = "***"; ObjectID = "ORQ-So-SHn"; */
+"ORQ-So-SHn.placeholder" = "***";
+
+/* Class = "UITextField"; placeholder = "enter name"; ObjectID = "OeG-i7-A8J"; */
+"OeG-i7-A8J.placeholder" = "имя";
+
+/* Class = "UITextField"; placeholder = "*****"; ObjectID = "Q9h-fX-Zsi"; */
+"Q9h-fX-Zsi.placeholder" = "*****";
+
+/* Class = "UILabel"; text = "Birth date"; ObjectID = "RIx-0f-Bfi"; */
+"RIx-0f-Bfi.text" = "Дата рождения";
+
+/* Class = "UILabel"; text = "NEW INTERESTS"; ObjectID = "T7h-aA-slw"; */
+"T7h-aA-slw.text" = "НОВЫЕ ИНТЕРЕСЫ";
+
+/* Class = "UILabel"; text = "TERMS OF SERVICE"; ObjectID = "UnL-zE-umj"; */
+"UnL-zE-umj.text" = "ПРАВИЛА ПОЛЬЗОВАНИЯ";
+
+/* Class = "UILabel"; text = "Switch on notifications to be always 
+informed about interesting events"; ObjectID = "Xd1-OW-oyf"; */
+"Xd1-OW-oyf.text" = "Уведомления";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "ZOJ-G5-xoY"; */
+"ZOJ-G5-xoY.text" = "Имя";
+
+/* Class = "UILabel"; text = "CONTACT HAPP"; ObjectID = "ZOX-EY-ete"; */
+"ZOX-EY-ete.text" = "СВЯЗАТЬСЯ С HAPP";
+
+/* Class = "UILabel"; text = "PUSH NOTIFICATIONS\n"; ObjectID = "aG7-1z-gYV"; */
+"aG7-1z-gYV.text" = "УВЕДОМЛЕНИЯ\n";
+
+/* Class = "UILabel"; text = "CHANGE CURRENCY"; ObjectID = "eS2-0V-6O8"; */
+"eS2-0V-6O8.text" = "СМЕНИТЬ ВАЛЮТУ";
+
+/* Class = "UILabel"; text = "HAPP v2.0
+© All Rights Reserved, 2017"; ObjectID = "hPj-9r-wEn"; */
+"hPj-9r-wEn.text" = "HAPP v2.0
+© Все права защищены, 2017";
+
+/* Class = "UILabel"; text = "New Password"; ObjectID = "hVu-1I-Jzp"; */
+"hVu-1I-Jzp.text" = "Новый пароль";
+
+/* Class = "UILabel"; text = "Current Password"; ObjectID = "jdw-4J-xSI"; */
+"jdw-4J-xSI.text" = "Старый пароль";
+
+/* Class = "UIButton"; normalTitle = "select date"; ObjectID = "kEn-Kd-A64"; */
+"kEn-Kd-A64.normalTitle" = "выбрать дату";
+
+/* Class = "UILabel"; text = "Tap Camera to Add a Photo"; ObjectID = "lwd-hW-zQi"; */
+"lwd-hW-zQi.text" = "Нажмите чтобы добавить фото";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "o5v-7C-ojs"; */
+"o5v-7C-ojs.text" = "Телефон";
+
+/* Class = "UILabel"; text = "Gender"; ObjectID = "pBT-ib-99H"; */
+"pBT-ib-99H.text" = "Пол";
+
+/* Class = "UISegmentedControl"; qnm-9z-epC.segmentTitles[0] = "Male"; ObjectID = "qnm-9z-epC"; */
+"qnm-9z-epC.segmentTitles[0]" = "Мужской";
+
+/* Class = "UISegmentedControl"; qnm-9z-epC.segmentTitles[1] = "Female"; ObjectID = "qnm-9z-epC"; */
+"qnm-9z-epC.segmentTitles[1]" = "Женский";
+
+/* Class = "UILabel"; text = "APP UPDATES"; ObjectID = "r7Z-ut-RWX"; */
+"r7Z-ut-RWX.text" = "ОБНОВЛЕНИЯ";
+
+/* Class = "UILabel"; text = "Personal Information"; ObjectID = "tSx-Eh-tTV"; */
+"tSx-Eh-tTV.text" = "Личная информация";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "u9c-g6-kBB"; */
+"u9c-g6-kBB.normalTitle" = "Сохранить";
+
+/* Class = "UILabel"; text = "PRIVACY POLICY"; ObjectID = "vbR-IU-Qex"; */
+"vbR-IU-Qex.text" = "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ";
+
+/* Class = "UILabel"; text = "Leave fields blank if you want to leave old password"; ObjectID = "xmw-N4-r2e"; */
+"xmw-N4-r2e.text" = "Оставьте поля пустыми если хотите использовать старый пароль";

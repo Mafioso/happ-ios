@@ -1,5 +1,3 @@
-/* Class = "UILabel"; text = "Create using Facebook"; ObjectID = "0V9-JY-AVb"; */
-"0V9-JY-AVb.text" = "Создать с помощью Facebook";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "1J4-Rx-lRV"; */
 "1J4-Rx-lRV.normalTitle" = "Войти";
@@ -8,47 +6,73 @@
 "7Lc-S0-8gx.placeholder" = "пароль";
 
 /* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "86a-KA-dyT"; */
-"86a-KA-dyT.text" = "© happapp.info 2016, Все права защищены";
+"86a-KA-dyT.text" = "© happapp.info 2017, Все права защищены";
 
 /* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "DVk-rZ-nZt"; */
-"DVk-rZ-nZt.text" = "© happapp.info 2016, Все права защищены";
+"DVk-rZ-nZt.text" = "© happapp.info 2017, Все права защищены";
 
 /* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "H5r-Q2-Gb7"; */
-"H5r-Q2-Gb7.normalTitle" = "Создать Профиль";
+"H5r-Q2-Gb7.normalTitle" = "Создать учетную запись";
+
+/* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "IRe-yC-dG9"; */
+"IRe-yC-dG9.normalTitle" = "Правила пользования";
+
+/* Class = "UILabel"; text = "•"; ObjectID = "Kjk-RP-n1T"; */
+"Kjk-RP-n1T.text" = "•";
 
 /* Class = "UITextField"; placeholder = "password"; ObjectID = "LOf-S3-3QF"; */
 "LOf-S3-3QF.placeholder" = "пароль";
 
+/* Class = "UILabel"; text = "Please confirm your email\nto become an Organizer"; ObjectID = "NNt-0F-KPj"; */
+"NNt-0F-KPj.text" = "Пожалуйста, подтвердите свой почтовый ящик";
+
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "PVx-Mc-SX7"; */
-"PVx-Mc-SX7.normalTitle" = "Условия использования";
+"PVx-Mc-SX7.normalTitle" = "Правила пользования";
 
 /* Class = "UITextField"; placeholder = "repeat password"; ObjectID = "QKE-ZV-Tp0"; */
-"QKE-ZV-Tp0.placeholder" = "повторите пароль";
+"QKE-ZV-Tp0.placeholder" = "Повторить пароль";
 
 /* Class = "UILabel"; text = "— OR —"; ObjectID = "QNb-DL-EKo"; */
-"QNb-DL-EKo.text" = "— ИЛИ —";
-
-/* Class = "UILabel"; text = "Login with Facebook"; ObjectID = "RKk-Ng-cVm"; */
-"RKk-Ng-cVm.text" = "Войти с Facebook";
+"QNb-DL-EKo.text" = "— или —";
 
 /* Class = "UILabel"; text = "If you have no account in Happ"; ObjectID = "XNn-bu-0CE"; */
-"XNn-bu-0CE.text" = "Если у вас нет профиля в Happ";
+"XNn-bu-0CE.text" = "Нет учетной записи?";
 
-/* Class = "UILabel"; text = "— OR —"; ObjectID = "ewN-CN-8i6"; */
-"ewN-CN-8i6.text" = "— ИЛИ —";
+/* Class = "UILabel"; text = "Detailed instructions will be sent to your email"; ObjectID = "bKj-q1-0Fc"; */
+"bKj-q1-0Fc.text" = "Инструкции высланы вам на email";
 
 /* Class = "UITextField"; placeholder = "username"; ObjectID = "fDq-qh-Ps0"; */
-"fDq-qh-Ps0.placeholder" = "никнэйм";
+"fDq-qh-Ps0.placeholder" = "Имя пользователя";
+
+/* Class = "UIButton"; normalTitle = "Confirm Email"; ObjectID = "fgs-i2-UCU"; */
+"fgs-i2-UCU.normalTitle" = "Подтвердить Email";
+
+/* Class = "UIButton"; normalTitle = " Login with Facebook"; ObjectID = "fs2-36-Pk5"; */
+"fs2-36-Pk5.normalTitle" = "    Войти с Facebook";
+
+/* Class = "UILabel"; text = "•"; ObjectID = "gRK-vv-Xqq"; */
+"gRK-vv-Xqq.text" = "•";
+
+/* Class = "UILabel"; text = "•"; ObjectID = "gjJ-rh-YbR"; */
+"gjJ-rh-YbR.text" = "•";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "jxt-IY-mOw"; */
-"jxt-IY-mOw.normalTitle" = "Политика конфеденциальности";
+"jxt-IY-mOw.normalTitle" = "Политика конфиденциальности";
+
+/* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "kMf-z4-tu5"; */
+"kMf-z4-tu5.text" = "© happapp.info 2017, Все права защищены";
+
+/* Class = "UITextField"; placeholder = "email"; ObjectID = "lbL-la-kE3"; */
+"lbL-la-kE3.placeholder" = "email";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "pdk-1C-LhQ"; */
-"pdk-1C-LhQ.normalTitle" = "Условия использования";
+"pdk-1C-LhQ.normalTitle" = "Правила пользования";
+
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "sh1-bk-xZp"; */
+"sh1-bk-xZp.normalTitle" = "Политика конфиденциальности";
 
 /* Class = "UITextField"; placeholder = "username"; ObjectID = "v59-X3-jNt"; */
-"v59-X3-jNt.placeholder" = "никнэйм";
+"v59-X3-jNt.placeholder" = "Имя пользователя";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "znt-xK-Cdw"; */
-"znt-xK-Cdw.normalTitle" = "Политика конфеденциальности";
-
+"znt-xK-Cdw.normalTitle" = "Политика конфиденциальности";

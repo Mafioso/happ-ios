@@ -2,13 +2,13 @@
 "EAA-hr-IBR.text" = "НАСТРОЙКИ";
 
 /* Class = "UILabel"; text = "FEED"; ObjectID = "FfI-9u-Xda"; */
-"FfI-9u-Xda.text" = "Лента";
+"FfI-9u-Xda.text" = "ЛЕНТА";
 
 /* Class = "UIButton"; normalTitle = "Select All Interests"; ObjectID = "H94-vl-h04"; */
 "H94-vl-h04.normalTitle" = "Выбрать все";
 
 /* Class = "UILabel"; text = "EVENTS MANAGER"; ObjectID = "Mbf-cj-ADz"; */
-"Mbf-cj-ADz.text" = "УПРАВЛЕНИЕ МЕРОПРИЯТИЯМИ";
+"Mbf-cj-ADz.text" = "ОРГАНИЗАТОР";
 
 /* Class = "UILabel"; text = "Select Interests for"; ObjectID = "Nm3-YA-3YG"; */
 "Nm3-YA-3YG.text" = "Выбрать Интересы для";

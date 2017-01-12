@@ -1,0 +1,195 @@
+
+/* Class = "UILabel"; text = "*"; ObjectID = "0Zt-AD-Tzf"; */
+"0Zt-AD-Tzf.text" = "*";
+
+/* Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "0a5-N8-AEp"; */
+"0a5-N8-AEp.placeholder" = "Нажмите чтобы выбрать";
+
+/* Class = "UILabel"; text = "Currency"; ObjectID = "12q-CW-Jbm"; */
+"12q-CW-Jbm.text" = "Валюта";
+
+/* Class = "UILabel"; text = "On review"; ObjectID = "1ri-Z5-TaN"; */
+"1ri-Z5-TaN.text" = "На рассмотрении";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "1vr-VY-LST"; */
+"1vr-VY-LST.text" = "*";
+
+/* Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "3X9-1x-tfz"; */
+"3X9-1x-tfz.placeholder" = "Нажмите чтобы выбрать";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "3c8-HY-TZp"; */
+"3c8-HY-TZp.text" = "*";
+
+/* Class = "UIButton"; normalTitle = "EDIT EVENT"; ObjectID = "4QP-KY-79g"; */
+"4QP-KY-79g.normalTitle" = "Изменить";
+
+/* Class = "UILabel"; text = "Please edit the following:"; ObjectID = "8Uk-zk-zR5"; */
+"8Uk-zk-zR5.text" = "Пожалуйста, измените следующие поля:";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "8sS-YM-4s4"; */
+"8sS-YM-4s4.text" = "*";
+
+/* Class = "UISearchBar"; placeholder = "Search"; ObjectID = "8y6-Oj-K0b"; */
+"8y6-Oj-K0b.placeholder" = "Найти";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "9mq-HI-xfq"; */
+"9mq-HI-xfq.text" = "*";
+
+/* Class = "UILabel"; text = "Registration"; ObjectID = "Cio-vC-Hmv"; */
+"Cio-vC-Hmv.text" = "Регистрация";
+
+/* Class = "UITextField"; placeholder = "Free"; ObjectID = "Cpy-zV-6ha"; */
+"Cpy-zV-6ha.placeholder" = "Бесплатно";
+
+/* Class = "UILabel"; text = "New visitors can enter event even if it already started"; ObjectID = "D8d-HX-NxM"; */
+"D8d-HX-NxM.text" = "Новые посетители могут прийти на событие в любое время во время проведения";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "ELU-zm-zgB"; */
+"ELU-zm-zgB.normalTitle" = "ДАЛЕЕ";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "HJ7-AH-naU"; */
+"HJ7-AH-naU.text" = "*";
+
+/* Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "HOa-fc-n66"; */
+"HOa-fc-n66.placeholder" = "Нажмите чтобы выбрать";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "Iif-IR-iq8"; */
+"Iif-IR-iq8.text" = "*";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "JiG-i2-bHj"; */
+"JiG-i2-bHj.text" = "Описание";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "JjK-f1-PQ8"; */
+"JjK-f1-PQ8.text" = "*";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "K7z-c5-y6T"; */
+"K7z-c5-y6T.text" = "*";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "LCH-M3-fb8"; */
+"LCH-M3-fb8.text" = "Email";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "LRT-7S-gNm"; */
+"LRT-7S-gNm.text" = "от";
+
+/* Class = "UILabel"; text = "Tap to add a photo"; ObjectID = "NDu-Xf-SCY"; */
+"NDu-Xf-SCY.text" = "Нажмите чтобы добавить фото";
+
+/* Class = "UILabel"; text = "TIckets link"; ObjectID = "NtH-0D-00e"; */
+"NtH-0D-00e.text" = "Ссылка на билет";
+
+/* Class = "UILabel"; text = "Place"; ObjectID = "OrR-Qc-aek"; */
+"OrR-Qc-aek.text" = "Место";
+
+/* Class = "UILabel"; text = "Select date"; ObjectID = "Otu-Zf-GLp"; */
+"Otu-Zf-GLp.text" = "Дата события";
+
+/* Class = "UILabel"; text = "Price"; ObjectID = "Q6q-PH-5o4"; */
+"Q6q-PH-5o4.text" = "Цена";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "QPp-wa-ueI"; */
+"QPp-wa-ueI.text" = "*";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "SHa-3M-5VQ"; */
+"SHa-3M-5VQ.text" = "*";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "Te8-Rh-tNP"; */
+"Te8-Rh-tNP.text" = "*";
+
+/* Class = "UIButton"; normalTitle = "RESET FILTERS"; ObjectID = "UQL-rK-99C"; */
+"UQL-rK-99C.normalTitle" = "ОЧИСТИТЬ ФИЛЬТР";
+
+/* Class = "UILabel"; text = "Continuing event"; ObjectID = "UTq-RL-TjZ"; */
+"UTq-RL-TjZ.text" = "Без фиксированного начала по времени";
+
+/* Class = "UILabel"; text = "to"; ObjectID = "Uar-h9-Y0i"; */
+"Uar-h9-Y0i.text" = "к";
+
+/* Class = "UILabel"; text = "City"; ObjectID = "XC9-gx-aag"; */
+"XC9-gx-aag.text" = "Город";
+
+/* Class = "UILabel"; text = "Customize Feed"; ObjectID = "XEY-Gl-I9j"; */
+"XEY-Gl-I9j.text" = "Фильтр";
+
+/* Class = "UILabel"; text = "Start"; ObjectID = "XHn-eH-AlQ"; */
+"XHn-eH-AlQ.text" = "Дата начала";
+
+/* Class = "UIButton"; normalTitle = "SUBMIT"; ObjectID = "aoG-P7-XEc"; */
+"aoG-P7-XEc.normalTitle" = "СОХРАНИТЬ";
+
+/* Class = "UILabel"; text = "Age limit"; ObjectID = "avD-HO-O2v"; */
+"avD-HO-O2v.text" = "Возрастное ограничение";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "azV-AA-xTs"; */
+"azV-AA-xTs.text" = "*";
+
+/* Class = "UILabel"; text = "Finished"; ObjectID = "bcr-1X-0Z4"; */
+"bcr-1X-0Z4.text" = "Завершенные";
+
+/* Class = "UILabel"; text = "Event duration"; ObjectID = "cCJ-Dj-XeN"; */
+"cCJ-Dj-XeN.text" = "Длительность события";
+
+/* Class = "UILabel"; text = "Show events by status"; ObjectID = "d3r-xY-xvp"; */
+"d3r-xY-xvp.text" = "Показывать события со статусом";
+
+/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "dPx-XQ-PzM"; */
+"dPx-XQ-PzM.normalTitle" = "ДАЛЕЕ";
+
+/* Class = "UITextField"; placeholder = "Add phone number"; ObjectID = "ewa-zA-ASW"; */
+"ewa-zA-ASW.placeholder" = "Номер телефона";
+
+/* Class = "UILabel"; text = "Website"; ObjectID = "ewg-4b-njp"; */
+"ewg-4b-njp.text" = "Веб-сайт";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "gCJ-ag-4Ce"; */
+"gCJ-ag-4Ce.text" = "*";
+
+/* Class = "UILabel"; text = "Active"; ObjectID = "h1b-eV-4xT"; */
+"h1b-eV-4xT.text" = "Активные";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "j5O-RM-BbF"; */
+"j5O-RM-BbF.text" = "*";
+
+/* Class = "UILabel"; text = "According to the policy and rules\nof “HAPP” the event you posted can not be published."; ObjectID = "k92-mL-z98"; */
+"k92-mL-z98.text" = "Ваше событие не может быть опубликовано в связи с нарушением правил Happ";
+
+/* Class = "UILabel"; text = "—"; ObjectID = "mqk-kn-1t7"; */
+"mqk-kn-1t7.text" = "—";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "nO1-Ux-cCG"; */
+"nO1-Ux-cCG.text" = "от";
+
+/* Class = "UILabel"; text = "Event date"; ObjectID = "nO7-Re-FFA"; */
+"nO7-Re-FFA.text" = "Дата события";
+
+/* Class = "UILabel"; text = "Interest"; ObjectID = "o7Y-aI-k9h"; */
+"o7Y-aI-k9h.text" = "Интерес";
+
+/* Class = "UILabel"; text = "*"; ObjectID = "oeS-R8-4hM"; */
+"oeS-R8-4hM.text" = "*";
+
+/* Class = "UILabel"; text = "Inactive"; ObjectID = "p8A-sX-uyY"; */
+"p8A-sX-uyY.text" = "Неактивные";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "pcl-C1-v1t"; */
+"pcl-C1-v1t.text" = "Номер телефона";
+
+/* Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "rKe-F4-CQQ"; */
+"rKe-F4-CQQ.placeholder" = "Нажмите чтобы выбрать";
+
+/* Class = "UILabel"; text = "First image will be used as event cover photo"; ObjectID = "sjz-D5-hIr"; */
+"sjz-D5-hIr.text" = "Первое изображение будет показано в ленте событий";
+
+/* Class = "UILabel"; text = "End"; ObjectID = "tp0-x3-A6C"; */
+"tp0-x3-A6C.text" = "Дата завершения";
+
+/* Class = "UILabel"; text = "to"; ObjectID = "vSv-Je-h3N"; */
+"vSv-Je-h3N.text" = "до";
+
+/* Class = "UILabel"; text = "Rejected"; ObjectID = "vT5-me-P9h"; */
+"vT5-me-P9h.text" = "Отклоненные";
+
+/* Class = "UILabel"; text = "Event Name"; ObjectID = "vTa-er-1rN"; */
+"vTa-er-1rN.text" = "Заголовок события";
+
+/* Class = "UITextField"; placeholder = "Free"; ObjectID = "zi7-6S-MPD"; */
+"zi7-6S-MPD.placeholder" = "Бесплатно";
