@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "Unfortunately your event was denied"; ObjectID = "5a7-gn-kIq"; */
+"5a7-gn-kIq.text" = "К сожалению, событие отклонено модератором";
+
+/* Class = "UILabel"; text = "Event.Interest"; ObjectID = "5ja-iX-nyd"; */
+"5ja-iX-nyd.text" = "Event.Interest";
+
+/* Class = "UILabel"; text = "Event.Title"; ObjectID = "ARl-By-jhN"; */
+"ARl-By-jhN.text" = "Event.Title";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "AWc-zH-9Pl"; */
+"AWc-zH-9Pl.normalTitle" = "УДАЛИТЬ";
+
+/* Class = "UILabel"; text = "Event.Address"; ObjectID = "JH5-EU-OCJ"; */
+"JH5-EU-OCJ.text" = "Event.Address";
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "Q87-bK-Swt"; */
+"Q87-bK-Swt.normalTitle" = "ИЗМЕНИТЬ";
+
+/* Class = "UIButton"; normalTitle = "SHOW DETAILS"; ObjectID = "SVw-q8-HJd"; */
+"SVw-q8-HJd.normalTitle" = "НАЖМИТЕ ДЛЯ ПРОСМОТРА";
+
+/* Class = "UILabel"; text = "Event.price"; ObjectID = "WXd-H8-ELk"; */
+"WXd-H8-ELk.text" = "Event.price";
+
+/* Class = "UIButton"; normalTitle = "DEACTIVATE"; ObjectID = "ZkQ-Ds-rQk"; */
+"ZkQ-Ds-rQk.normalTitle" = "ДЕАКТИВИРОВАТЬ";
+
+/* Class = "UILabel"; text = "666"; ObjectID = "a6z-gW-nOt"; */
+"a6z-gW-nOt.text" = "666";
+
+/* Class = "UILabel"; text = "Event.DateTime"; ObjectID = "aOc-Mg-00t"; */
+"aOc-Mg-00t.text" = "Event.DateTime";
+
+/* Class = "UIButton"; normalTitle = "COPY"; ObjectID = "ifV-zZ-RKW"; */
+"ifV-zZ-RKW.normalTitle" = "КОПИРОВАТЬ";
+
+/* Class = "UILabel"; text = "999"; ObjectID = "pah-fe-5Xc"; */
+"pah-fe-5Xc.text" = "999";

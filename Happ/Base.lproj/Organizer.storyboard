@@ -721,13 +721,13 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="83" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XC9-gx-aag">
-                                                                <rect key="frame" x="56" y="18" width="27" height="17"/>
+                                                                <rect key="frame" x="56.5" y="18" width="26.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="0.38" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeS-R8-4hM">
-                                                                <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -751,7 +751,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Te8-Rh-tNP">
-                                                                <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -919,7 +919,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCJ-ag-4Ce">
-                                                                <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -937,13 +937,13 @@
                                                         <rect key="frame" x="0.0" y="45" width="83" height="44"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12q-CW-Jbm">
-                                                                <rect key="frame" x="22" y="18" width="61" height="17"/>
+                                                                <rect key="frame" x="22.5" y="18" width="60.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" white="0.0" alpha="0.38" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHa-3M-5VQ">
-                                                                <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                 <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1121,13 +1121,13 @@
                                         <rect key="frame" x="0.0" y="205" width="375" height="128"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nO7-Re-FFA">
-                                                <rect key="frame" x="15" y="16" width="83" height="20"/>
+                                                <rect key="frame" x="15" y="16" width="82.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ek8-6Q-7vF" userLabel="2">
-                                                <rect key="frame" x="0.0" y="36" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="35" width="375" height="90"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpf-5t-KfB" userLabel="Left">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="90"/>
@@ -1142,7 +1142,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7z-c5-y6T">
-                                                                        <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                        <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                         <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -1160,13 +1160,13 @@
                                                                 <rect key="frame" x="0.0" y="45" width="83" height="44"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp0-x3-A6C">
-                                                                        <rect key="frame" x="57" y="18" width="26" height="17"/>
+                                                                        <rect key="frame" x="58" y="18" width="25" height="17"/>
                                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="0.38" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPp-wa-ueI">
-                                                                        <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                        <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                         <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -1288,13 +1288,13 @@
                                         <rect key="frame" x="0.0" y="348" width="375" height="83"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCJ-Dj-XeN">
-                                                <rect key="frame" x="15" y="16" width="113" height="20"/>
+                                                <rect key="frame" x="15" y="16" width="112.5" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVx-jY-qYW" userLabel="2">
-                                                <rect key="frame" x="0.0" y="36" width="375" height="45"/>
+                                                <rect key="frame" x="0.0" y="35" width="375" height="45"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APO-k3-qlH" userLabel="Left">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
@@ -1309,7 +1309,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vr-VY-LST">
-                                                                        <rect key="frame" x="83" y="13" width="8" height="17"/>
+                                                                        <rect key="frame" x="83" y="13" width="7.5" height="17"/>
                                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                                         <color key="textColor" red="0.60392156860000001" green="0.1058823529" blue="0.1058823529" alpha="0.5" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>

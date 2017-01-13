@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Select All Interests"; ObjectID = "7co-9p-rXH"; */
+"7co-9p-rXH.normalTitle" = "Выбрать все интересы";
+
+/* Class = "UIButton"; selectedTitle = "Unselect All"; ObjectID = "7co-9p-rXH"; */
+"7co-9p-rXH.selectedTitle" = "Отменить все";
+
+/* Class = "UILabel"; text = "Select Interests for"; ObjectID = "Jyr-Ry-xpZ"; */
+"Jyr-Ry-xpZ.text" = "Выбрать интересы для";
+
+/* Class = "UILabel"; text = "EVENT NAME"; ObjectID = "Kky-Gw-eQ7"; */
+"Kky-Gw-eQ7.text" = "EVENT NAME";
