@@ -10,6 +10,8 @@ import UIKit
 import GoogleMaps
 import PromiseKit
 
+let loc_events_near_you = NSLocalizedString("Events near you", comment: "Title of NavBar for EventsMapViewController")
+
 
 class ClusterMarker: NSObject, GMUClusterItem {
     var position: CLLocationCoordinate2D
@@ -260,7 +262,7 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
 
 
     private func initNavBarItems() {
-        self.navigationItem.title = "Events near you"
+        self.navigationItem.title = loc_events_near_you
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickFilterNavItem))
     }

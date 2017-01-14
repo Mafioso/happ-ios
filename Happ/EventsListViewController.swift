@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+
+let loc_event_action_unsubscribe = NSLocalizedString("Unsubscribe from", comment: "Title of actionsList action displayed on every event for unsubscribe from event's interest")
+
+
 enum ReuseIdentifier: String {
     case Cell = "Cell"
     case Loading = "CellLoading"
@@ -209,13 +213,13 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
                     let actionList = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
                     if let interestName = event.interests.first?.title {
-                        let actionUnsubscribe = UIAlertAction(title: "Unsubscribe from \"\(interestName)\"", style: .Default, handler: {_ in
+                        let actionUnsubscribe = UIAlertAction(title: loc_event_action_unsubscribe + "\"\(interestName)\"", style: .Default, handler: {_ in
                             vm.onUnsubscribeFromInterest()
                         })
                         actionList.addAction(actionUnsubscribe)
                     }
-                    
-                    let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+
+                    let actionCancel = UIAlertAction(title: loc_action_list_action_cancel, style: .Cancel, handler: nil)
                     actionList.addAction(actionCancel)
                     
                     self?.presentViewController(actionList, animated: true, completion: nil)

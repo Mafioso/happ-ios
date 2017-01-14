@@ -9,6 +9,8 @@
 import UIKit
 import GoogleMaps
 
+let loc_event_location = NSLocalizedString("Event location", comment: "Title of EventLocation NavBar")
+
 
 class EventDetailsMapController: UIViewController, MapLocationViewControllerProtocol, GMSMapViewDelegate {
 
@@ -86,7 +88,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     }
     func updateViews() {
         let event = self.viewModel.event
-
+        
         if let imageURL = event.images.first?.getURL() {
             imageEventCover.hnk_setImageFromURL(imageURL)
         }
@@ -94,7 +96,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
         labelEventPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
         labelEventDate.text = HappEventDateFormats.EventDate(datetime: event.datetimes.first!).toString()
         labelEventLocation.text = event.address
-        labelDistance.text = "? km"
+        labelDistance.text = "? " + loc_kilometer
 
         self.clearMap()
         if let location = self.viewModel.location {
@@ -168,7 +170,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     }
 
     private func initNavItems() {
-        self.navigationItem.title = "Event location"
+        self.navigationItem.title = loc_event_location
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close"), style: .Plain, target: self, action: #selector(handleClickCloseNavItem))
     }
     func handleClickCloseNavItem() {

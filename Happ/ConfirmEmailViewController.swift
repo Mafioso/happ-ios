@@ -9,6 +9,11 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+let loc_email_confirmation_warning_fill_email = NSLocalizedString("Fill your email, please", comment: "Message displayed in displayAlertView when email field is empty")
+let loc_email_confirmation_warning_sent = NSLocalizedString("Open link from email we have sent, with your device", comment: "Message displayed in displayAlertView when work is done and link have sent")
+let loc_email_confirmation_warning_check = NSLocalizedString("Check your inbox, we've sent you an email with confimation link", comment: "Message displayed in displayAlertView when work is done and link have sent")
+
+
 class ConfirmEmailViewController: UIViewController {
     
     var viewModel: AuthenticationViewModel! {
@@ -41,14 +46,14 @@ class ConfirmEmailViewController: UIViewController {
                 if textFieldEmail.text?.characters.count > 4 {
                     viewModel.onRequestConfirm(textFieldEmail.text!)
                 }else{
-                    self.extDisplayAlertView("Fill your email, please")
+                    self.extDisplayAlertView(loc_email_confirmation_warning_fill_email)
                 }
             break
             case .Requested:
                 if viewModel.confirmationToken != nil {
                     viewModel.onConfirm(viewModel.confirmationToken!)
                 }else{
-                    self.extDisplayAlertView("Open link from email we have sent, with your device")
+                    self.extDisplayAlertView(loc_email_confirmation_warning_sent)
                 }
             break
             case .Confirmed, .Loading: break
@@ -154,7 +159,7 @@ class ConfirmEmailViewController: UIViewController {
     private func displayFormRequested() {
         viewFieldContainerEmail.alpha = 0.25
         viewFieldContainerEmail.userInteractionEnabled = false
-        fieldHelperLabel.text = "Check your inbox, we've sent you an email with confimation link"
+        fieldHelperLabel.text = loc_email_confirmation_warning_check
     }
     
 }

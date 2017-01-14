@@ -8,6 +8,12 @@
 
 import UIKit
 
+let loc_my_events_warning_copy_failed = NSLocalizedString("Copying of event wasn't successful, try again please", comment: "Body of alert displayed after event copying was failed")
+let loc_my_events_warning_delete_failed = NSLocalizedString("Deletion of event wasn't successful, try again please", comment: "Body of alert displayed after event deleting was failed")
+let loc_my_events_warning_activation_failed = NSLocalizedString("Activation of event wasn't successful, try again please", comment: "Body of alert displayed after event activating was failed")
+let loc_my_events_warning_deactivation_failed = NSLocalizedString("Deactivation of event wasn't successful, try again please", comment: "Body of alert displayed after event deactivating was failed")
+
+
 private let segueEmbeddedTableID = "embeddedTable"
 
 class EventsManageViewController: EventsManageViewControllerPrototype<EventsManageViewModel> {
@@ -93,11 +99,11 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
     }
     
     private func initNavBarItems() {
-        self.navigationItem.title = "My Events"
+        self.navigationItem.title = loc_my_events
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickNavItemMenu(withSender:)))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickNavItemFilter(withSender:)))
     }
-    
+
     func handleClickNavItemMenu(withSender sender: UIButton) {
         self.viewModel.displaySlideMenu?()
     }
@@ -160,7 +166,7 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
                 self.viewModel.onCopyEvent(cell.event, onFinish: { copied in
                     cell.indicatorCopy.stopAnimating()
                     if !copied {
-                        self.extDisplayAlertView("Copying of event wasn't successful, try again please")
+                        self.extDisplayAlertView(loc_my_events_warning_copy_failed)
                     }
                 })
             }
@@ -178,7 +184,7 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
                 self.viewModel.onDeleteEvent(cell.event, onFinish: { deleted in
                     cell.indicatorDelete.stopAnimating()
                     if !deleted {
-                        self.extDisplayAlertView("Deletion of event wasn't successful, try again please")
+                        self.extDisplayAlertView(loc_my_events_warning_delete_failed)
                     }
                 })
             }
@@ -189,11 +195,11 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
                     if activated {
                         cell.activated = !cell.activated
                     }else{
-                        self.extDisplayAlertView("\(!cell.activated ? "A" : "Dea")ctivation of event wasn't successful, try again please")
+                        self.extDisplayAlertView(!cell.activated ? loc_my_events_warning_activation_failed: loc_my_events_warning_deactivation_failed)
                     }
                 })
             }
-            
+
             return cell
         }
         

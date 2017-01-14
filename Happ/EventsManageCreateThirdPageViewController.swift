@@ -8,6 +8,17 @@
 
 import UIKit
 
+let loc_my_events_submit = NSLocalizedString("Create Event: Submit", comment: "Label for field 'Create Event: Submit' used in Create Event Submit form")
+let loc_my_events_warning_modifying_failed = NSLocalizedString("Modifying of event is failed for some reason, please try again", comment: "Body of alert displayed after EventsManageCreate form failed on modifying")
+let loc_my_events_warning_creating_failed = NSLocalizedString("Creation of event is failed for some reason, please try again", comment: "Body of alert displayed after EventsManageCreate form failed on modifying")
+let loc_my_events_field_phone = NSLocalizedString("Phone", comment: "Label for field 'Phone' used in Create Event Submit form")
+let loc_my_events_field_email = NSLocalizedString("Email", comment: "Label for field 'Email' used in Create Event Submit form")
+let loc_my_events_field_website = NSLocalizedString("Website", comment: "Label for field 'Website' used in Create Event Submit form")
+let loc_my_events_field_tickets_link = NSLocalizedString("Tickets link", comment: "Label for field 'Tickets link' used in Create Event Submit form")
+let loc_my_events_field_registration_link = NSLocalizedString("Registration", comment: "Label for field 'Registration' for link used in Create Event Submit form")
+let loc_my_events_field_age_to = NSLocalizedString("Age to", comment: "Label for field 'Age to' used in Create Event Submit form")
+
+
 class EventsManageCreateThirdPageViewController: EventsManageCreateViewController {
     
     @IBOutlet weak var eventPhoneField: UITextField!
@@ -39,7 +50,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
         
         self.navigationItem.leftBarButtonItem?.image = UIImage(named: "nav-back-gray")
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "000000")
-        self.navigationItem.title = "Create Event: Submit"
+        self.navigationItem.title = loc_my_events_submit
         
         eventPhoneField.delegate = self
         
@@ -67,14 +78,14 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
     func creationFailed() {
         eventSubmitButton.enabled = true
         eventSubmitIndicator.stopAnimating()
-        extDisplayAlertView("\(viewModel.isEditing ? "Modifying" : "Creation") of event is failed for some reason, please try again")
+        extDisplayAlertView(viewModel.isEditing ? loc_my_events_warning_modifying_failed : loc_my_events_warning_creating_failed)
     }
-    
+
     override func validate() -> Bool {
         
         cleanFailures()
         var validated = true
-        let errorMessageBeginning = "Please fill right following fields: "
+        let errorMessageBeginning = loc_my_events_validate_field_empty
         var errorMessage = errorMessageBeginning
         
         var atLeastOnePhone = false
@@ -90,7 +101,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 $0.hidden = false
             }
             validated = false
-            errorMessage += "Phone"
+            errorMessage += loc_my_events_field_phone
         }
         
         var email: String? = nil
@@ -99,7 +110,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 let bool = self.eventEmailField.text!.isValidEmail()
                 if bool { email = self.eventEmailField.text! }
                 return bool
-            }, failureViews: eventEmailFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Email")
+            }, failureViews: eventEmailFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_email)
         }
         
         var website: String? = nil
@@ -108,7 +119,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 let bool = self.eventWebsiteField.text!.isValidURL()
                 if bool { website = self.eventWebsiteField.text! }
                 return bool
-            }, failureViews: eventWebsiteFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Website")
+            }, failureViews: eventWebsiteFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_website)
         }
         
         var tickets: String? = nil
@@ -117,7 +128,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 let bool = self.eventTicketsField.text!.isValidEmail()
                 if bool { tickets = self.eventTicketsField.text! }
                 return bool
-            }, failureViews: eventTicketsFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Tickets link")
+            }, failureViews: eventTicketsFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_tickets_link)
         }
         
         var registration: String? = nil
@@ -126,7 +137,7 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 let bool = self.eventRegistrationField.text!.isValidEmail()
                 if bool { registration = self.eventRegistrationField.text! }
                 return bool
-            }, failureViews: eventRegistrationFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Registration")
+            }, failureViews: eventRegistrationFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_registration_link)
         }
         
         let ageFrom = eventAgeFromField.text != nil ? Int(eventAgeFromField.text!) : 0
@@ -136,9 +147,10 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
                 $0.hidden = false
             }
             validated = false
-            errorMessage += errorMessage != errorMessageBeginning ? ", Age to" : "Age to"
+            errorMessage += errorMessage != errorMessageBeginning ? ", " : ""
+            errorMessage += loc_my_events_field_age_to
         }
-        
+
         if !validated {
             self.extDisplayAlertView(errorMessage)
         }else{

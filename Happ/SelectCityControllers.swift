@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 
+let loc_select_city = NSLocalizedString("Select Your City", comment: "Title of NavBar on SelectCityController")
+let loc_select_city_search_placeholder = NSLocalizedString("Find city...", comment: "Placeholder used in UISearchController on SelectCityController")
+
+
 
 class SelectCityOnSetupController: SelectCityControllerPrototype<SelectCityOnSetupViewModel> {
 
@@ -35,7 +39,7 @@ class SelectCityOnSetupController: SelectCityControllerPrototype<SelectCityOnSet
 
 
     private func initNavBarItems() {
-        self.navigationItem.title = "Select Your City"
+        self.navigationItem.title = loc_select_city
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-orange"), style: .Plain, target: self, action: #selector(handleClickNavItemClose))
     }
     func handleClickNavItemClose() {
@@ -97,7 +101,7 @@ class SelectCityControllerPrototype<T: SelectCityViewModelProtocol>: UITableView
             controller.searchResultsUpdater = self
             controller.searchBar.searchBarStyle = .Minimal
             controller.searchBar.sizeToFit()
-            controller.searchBar.placeholder = "Find city..."
+            controller.searchBar.placeholder = loc_select_city_search_placeholder
             controller.dimsBackgroundDuringPresentation = false
             self.definesPresentationContext = true
             return controller

@@ -9,6 +9,8 @@
 import UIKit
 import Haneke
 
+let loc_action_select_city = NSLocalizedString("Select city", comment: "Button title for select city on Menu")
+
 
 class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDelegate {
 
@@ -145,7 +147,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, SelectCityDeleg
 
         case .ChangeCity:
             UIView.transitionFromView(viewMenu, toView: viewSelectCity, duration: 0.5, options: UIViewAnimationOptions.ShowHideTransitionViews, completion: nil)
-            labelChangeCity.text = "select city"
+            labelChangeCity.text = loc_action_select_city
 
             UIView.animateWithDuration(0.25, animations: {
                 self.iconChangeCity.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))

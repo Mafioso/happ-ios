@@ -14,6 +14,14 @@ import SwiftyJSON
 import FBSDKCoreKit
 
 
+let loc_auth_facebook_warning_title_canceled = NSLocalizedString("Login Cancelled", comment: "Warning title displayed after Facebook's form when Login is canceled")
+let loc_auth_facebook_warning_body_canceled = NSLocalizedString("User cancelled login.", comment: "Warning body displayed after Facebook's form when Login is canceled")
+let loc_auth_facebook_warning_title_fail = NSLocalizedString("Login Fail", comment: "Warning title displayed after Facebook's form when Login fail occured")
+let loc_auth_facebook_warning_body_fail = NSLocalizedString("Login failed with error: ", comment: "Warning body displayed after Facebook's form when Login fail occured")
+let loc_auth_facebook_warning_title_success = NSLocalizedString("Login Success", comment: "Warning title displayed after Facebook's form on Success Login")
+let loc_auth_facebook_warning_body_success = NSLocalizedString("Login succeeded with granted permissions: ", comment: "Warning body displayed after Facebook's form on Success Login")
+
+
 protocol FacebookAuthProtocol: class {
     func fbLogin() -> Promise<LoginResult>
     func fbLoginManagerDidComplete(result: LoginResult)
@@ -47,11 +55,11 @@ extension FacebookAuthProtocol where Self: UIViewController {
         let alertController: UIAlertController
         switch result {
         case .Cancelled:
-            alertController = UIAlertController(title: "Login Cancelled", message: "User cancelled login.", preferredStyle: .Alert)
+            alertController = UIAlertController(title: loc_auth_facebook_warning_title_canceled, message: loc_auth_facebook_warning_body_canceled, preferredStyle: .Alert)
         case .Failed(let error):
-            alertController =  UIAlertController(title: "Login Fail", message: "Login failed with error \(error)", preferredStyle: .Alert)
+            alertController =  UIAlertController(title: loc_auth_facebook_warning_title_fail, message: loc_auth_facebook_warning_body_fail + "\(error)", preferredStyle: .Alert)
         case .Success(let grantedPermissions, _, _):
-            alertController = UIAlertController(title: "Login Success", message: "Login succeeded with granted permissions: \(grantedPermissions)", preferredStyle: .Alert)
+            alertController = UIAlertController(title: loc_auth_facebook_warning_title_success, message: loc_auth_facebook_warning_body_success + "\(grantedPermissions)", preferredStyle: .Alert)
         }
         self.presentViewController(alertController, animated: true, completion: nil)
     }

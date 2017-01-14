@@ -11,6 +11,9 @@ import UIKit
 import GoogleMaps
 
 
+let loc_select_city_placeholder = NSLocalizedString("NOT SELECTED", comment: "Placeholder used in SetupCityController")
+
+
 class SetupCityController: UIViewController, SelectCityDelegate, SelectCityDataSource {
 
     var viewModel: SetupUserCityViewModel!  {
@@ -36,7 +39,7 @@ class SetupCityController: UIViewController, SelectCityDelegate, SelectCityDataS
 
 
     // constants
-    let selectedCityNamePlaceholder = "NOT SELECTED"
+    let selectedCityNamePlaceholder = loc_select_city_placeholder
 
 
     override func viewDidLoad() {

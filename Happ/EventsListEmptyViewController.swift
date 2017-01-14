@@ -9,6 +9,16 @@
 
 import UIKit
 
+let loc_favourite = NSLocalizedString("Favourite", comment: "Title of NavBar for one of EventsListViewController")
+let loc_feed = NSLocalizedString("Feed", comment: "Title of NavBar for one of EventsListViewController")
+let loc_my_events = NSLocalizedString("My Events", comment: "Title of NavBar for one of EventsListViewController")
+let loc_empty_list_help_favourite = NSLocalizedString("You don’t have any favourited event", comment: "Help message displayed when there is no events in Favourites")
+let loc_empty_list_help_feed = NSLocalizedString("There are no events for selected interests", comment: "Help message displayed when there is no events in Feed")
+let loc_empty_list_help_my_events = NSLocalizedString("You have not created any event yet", comment: "Help message displayed when there is no events in My Events")
+let loc_empty_list_action_favourite = NSLocalizedString("Find Awesome Events", comment: "Title of button displayed when there is no events in Favourites")
+let loc_empty_list_action_feed = NSLocalizedString("Add More Interests", comment: "Title of button displayed when there is no events in Feed")
+let loc_empty_list_action_my_events = NSLocalizedString("Add First Event", comment: "Title of button displayed when there is no events in My Events")
+
 
 enum EventsEmptyListScope {
     case Feed
@@ -26,7 +36,6 @@ protocol EventsEmptyListDelegate {
 protocol EventsEmptyListDataSource {
     func getScope() -> EventsEmptyListScope
 }
-
 
 
 class EventsListEmptyViewController: UIViewController, EventsListDelegate {
@@ -76,31 +85,31 @@ class EventsListEmptyViewController: UIViewController, EventsListDelegate {
     private func getNavTitle() -> String {
         switch self.dataSource.getScope() {
         case .Favourite:
-            return "Favourite"
+            return loc_favourite
         case .Feed:
-            return "Feed"
+            return loc_feed
         case .MyEvents:
-            return "My Events"
+            return loc_my_events
         }
     }
     private func getDescription() -> String {
         switch self.dataSource.getScope() {
         case .Favourite:
-            return "You don’t have any favourited event"
+            return loc_empty_list_help_favourite
         case .Feed:
-            return "There are no events for selected interests"
+            return loc_empty_list_help_feed
         case .MyEvents:
-            return "You have not created any event yet"
+            return loc_empty_list_help_my_events
         }
     }
     private func getActionTitle() -> String {
         switch self.dataSource.getScope() {
         case .Favourite:
-            return "Find Awesome Events"
+            return loc_empty_list_action_favourite
         case .Feed:
-            return "Add More Interests"
+            return loc_empty_list_action_feed
         case .MyEvents:
-            return "Add First Event"
+            return loc_empty_list_action_my_events
         }
     }
     private func getActionIcon() -> UIImage {

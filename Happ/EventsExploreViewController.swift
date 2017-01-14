@@ -11,7 +11,7 @@ import UIKit
 private let reuseIdentifier = "cell"
 private let reuseLoadingIdentifier = "cellLoading"
 
-
+let loc_explore = NSLocalizedString("Explore", comment: "Title of NavBar for EventsExploreViewController")
 
 class EventsExploreViewController: UICollectionViewController {
 
@@ -127,7 +127,7 @@ class EventsExploreViewController: UICollectionViewController {
 
 
     private func initNavBarItems() {
-        self.navigationItem.title = "Explore"
+        self.navigationItem.title = loc_explore
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
     }
     func handleClickMenuNavItem() {

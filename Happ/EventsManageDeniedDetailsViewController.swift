@@ -9,6 +9,9 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+let loc_my_events_details = NSLocalizedString("Event details", comment: "Title of NavBar on EventsManageDeniedDetailsViewController")
+
+
 class EventsManageDeniedDetailsViewController: UIViewController {
     
     @IBOutlet weak var deniedInfo: UILabel!
@@ -50,9 +53,9 @@ class EventsManageDeniedDetailsViewController: UIViewController {
         
         IQKeyboardManager.sharedManager().enable = false
     }
-    
+
     private func initNavBarItems() {
-        self.navigationItem.title = "Event details"
+        self.navigationItem.title = loc_my_events_details
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleBackNavItem))
     }
     

@@ -14,6 +14,13 @@ import MessageUI
 import UIKit
 
 
+let loc_meter = NSLocalizedString("m", comment: "Distance metric 'm'")
+let loc_kilometer = NSLocalizedString("km", comment: "Distance 'km'")
+let loc_mile = NSLocalizedString("mi", comment: "Distance 'mi'")
+let loc_free = NSLocalizedString("FREE", comment: "Event min price it free")
+let loc_error = NSLocalizedString("ERROR", comment: "capitalized error")
+let loc_from = NSLocalizedString("from", comment: "Word 'from' used in Event min price")
+
 
 enum EmailSenderCompose {
     case Simple(subject: String, body: String, receipants: [String])
@@ -185,12 +192,12 @@ struct Utils {
         case .Metric:
             switch value {
             case 0..<1000:
-                return "\(value) m"
+                return "\(value) " + loc_meter
             default:
-                return Double(value / 1000).format(".1") + " km"
+                return Double(value / 1000).format(".1") + " " + loc_kilometer
             }
         case .Mile:
-            return "\(value) mi"
+            return "\(value) " + loc_mile
         }
     }
     static func isNilOrZero(value: Int?) -> Bool {
@@ -211,35 +218,35 @@ enum HappEventPriceFormats {
     func toString() -> String {
         switch self {
         case .EventMinPrice(let event):
-            guard let currency = event.currency else { return "ERROR" }
+            guard let currency = event.currency else { return loc_error }
             if  let value = event.min_price
                 where value > 0
             {
-                return "from" + " \(value) \(currency.code)"
+                return loc_from + " \(value) \(currency.code)"
             } else {
-                return "FREE"
+                return loc_free
             }
 
         case .EventPriceRange(let event):
-            guard let currency = event.currency else { return "ERROR" }
+            guard let currency = event.currency else { return loc_error }
             let minValue = event.min_price
             let maxValue = event.max_price
 
             if minValue == nil || (minValue == 0 && Utils.isNilOrZero(maxValue)) {
-                return "FREE"
+                return loc_free
             } else if minValue! > 0 && (maxValue == nil || maxValue! == minValue!) {
                 return "\(minValue!)\n\(currency.name)"
             } else {
                 return "\(minValue!) – \(maxValue!)\n\(currency.name)"
             }
-            
+
         case .EventPriceRangeWithoutBreak(let event):
-            guard let currency = event.currency else { return "ERROR" }
+            guard let currency = event.currency else { return loc_error }
             let minValue = event.min_price
             let maxValue = event.max_price
             
             if minValue == nil || (minValue == 0 && Utils.isNilOrZero(maxValue)) {
-                return "FREE"
+                return loc_free
             } else if minValue! > 0 && (maxValue == nil || maxValue! == minValue!) {
                 return "\(minValue!) \(currency.name)"
             } else {
@@ -257,12 +264,11 @@ enum HappEventDateFormats {
 
     func toString() -> String {
         switch self {
-        
         case .EventDate(let datetime):
             let formatter = NSDateFormatter()
             formatter.dateFormat = "MMMM d"
             return formatter.stringFromDate(datetime.start_time)
-        
+
         case .EventDetails(let first_datetime, let last_datetime):
             let dayFormatter = NSDateFormatter()
             dayFormatter.dateFormat = "MMM d"
@@ -283,8 +289,8 @@ enum HappEventDateFormats {
                 }
                 return "\(dayFormatter.stringFromDate(first_datetime!.start_time)) – \(dayFormatter.stringFromDate(last_datetime!.end_time)) \(yearFormatter.stringFromDate(last_datetime!.end_time)) \(timeFormatter.stringFromDate(first_datetime!.start_time)) – \(timeFormatter.stringFromDate(last_datetime!.end_time))"
             }
-            return "ERROR"
-            
+            return loc_error
+
         case .EventTimeRange(let datetime):
             let formatter = NSDateFormatter()
             formatter.dateFormat = "HH:mm"

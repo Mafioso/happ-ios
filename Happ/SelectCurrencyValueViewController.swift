@@ -8,6 +8,11 @@
 
 import UIKit
 
+let loc_search = NSLocalizedString("Search", comment: "Placeholder used in UISearchController")
+let loc_select_currency = NSLocalizedString("Select currency", comment: "Title of NavBar in SelectCurrency page")
+
+
+
 protocol SelectCurrencyValueDelegate {
     func didSelectCurrencyValue(currencyValue: CurrencyModel)
 }
@@ -57,7 +62,7 @@ class SelectCurrencyValueViewController: UITableViewController, UISearchResultsU
             controller.searchResultsUpdater = self
             controller.searchBar.searchBarStyle = .Minimal
             controller.searchBar.sizeToFit()
-            controller.searchBar.placeholder = "Search"
+            controller.searchBar.placeholder = loc_search
             controller.dimsBackgroundDuringPresentation = false
             self.definesPresentationContext = true
             return controller
@@ -67,9 +72,9 @@ class SelectCurrencyValueViewController: UITableViewController, UISearchResultsU
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
     }
-    
+
     private func initNavBarItems() {
-        self.navigationItem.title = "Select currency"
+        self.navigationItem.title = loc_select_currency
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-orange"), style: .Plain, target: self, action: #selector(handleClickNavItemClose))
     }
     

@@ -11,6 +11,10 @@ import WTLCalendarView
 import SlideMenuControllerSwift
 
 
+let loc_filter_select_date = NSLocalizedString("Select date", comment: "Label for datepicker in FeedFilters")
+let loc_filter_select_time = NSLocalizedString("Select time", comment: "Label for timepicker in FeedFilters")
+
+
 protocol FeedFiltersDelegate {
     func didChangeFilters(filters: EventsListFiltersState)
 }
@@ -204,7 +208,7 @@ extension FeedFiltersController: UITableViewDataSource, UITableViewDelegate {
 
         switch indexPath.row {
             case 0:
-                cell.labelTitle.text = "Select date"
+                cell.labelTitle.text = loc_filter_select_date
                 if beginDate != nil {
                     cell.spacerFirst.hidden = false
                     let formatter = NSDateFormatter()
@@ -217,7 +221,7 @@ extension FeedFiltersController: UITableViewDataSource, UITableViewDelegate {
                 }
             break
             case 1:
-                cell.labelTitle.text = "Select time"
+                cell.labelTitle.text = loc_filter_select_time
                 if time != nil {
                     cell.spacerFirst.hidden = false
                     let formatter = NSDateFormatter()

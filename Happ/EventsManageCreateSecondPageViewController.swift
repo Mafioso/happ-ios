@@ -8,6 +8,17 @@
 
 import UIKit
 
+
+let loc_my_events_create_info = NSLocalizedString("Create Event: Information", comment: "Title of NavBar on second page of Crete Event")
+let loc_my_events_field_place = NSLocalizedString("Place", comment: "Label for field 'Place' used in Create Event Info form")
+let loc_my_events_field_price_to = NSLocalizedString("Price to", comment: "Label for field 'Price to' used in Create Event Info form")
+let loc_my_events_field_currency = NSLocalizedString("Currency", comment: "Label for field 'Currency' used in Create Event Info form")
+let loc_my_events_field_date_start = NSLocalizedString("Date start", comment: "Label for field 'Date start' used in Create Event Info form")
+let loc_my_events_field_date_end = NSLocalizedString("Date end", comment: "Label for field 'Date end' used in Create Event Info form")
+let loc_my_events_field_time_from = NSLocalizedString("Time from", comment: "Label for field 'Time from' used in Create Event Info form")
+let loc_my_events_field_time_end = NSLocalizedString("Time end", comment: "Label for field 'Time end' used in Create Event Info form")
+
+
 class EventsManageCreateSecondPageViewController: EventsManageCreateViewController {
     
     @IBOutlet weak var eventCityField: UITextField!
@@ -63,7 +74,7 @@ class EventsManageCreateSecondPageViewController: EventsManageCreateViewControll
         
         navigationItem.leftBarButtonItem?.image = UIImage(named: "nav-back-gray")
         navigationItem.leftBarButtonItem?.tintColor = UIColor.blackColor()
-        navigationItem.title = "Create Event: Information"
+        navigationItem.title = loc_my_events_create_info
 
         prepareDatePickerForField(eventDateStartField, tag: 1)
         prepareDatePickerForField(eventDateEndField, tag: 2)
@@ -82,17 +93,17 @@ class EventsManageCreateSecondPageViewController: EventsManageCreateViewControll
         
         fillAll()
     }
-    
+
     override func validate() -> Bool {
         
         cleanFailures()
         var validated = true
-        let errorMessageBeginning = "Please fill right following fields: "
+        let errorMessageBeginning = loc_my_events_validate_field_empty
         var errorMessage = errorMessageBeginning
         
-        validateField(eventCityField, failureViews: eventCityFailureViews, disclosureView: eventCityDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "City")
-        validateField(eventPlaceField, failureViews: eventPlaceFailureViews, disclosureView: eventPlaceDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Place")
-        
+        validateField(eventCityField, failureViews: eventCityFailureViews, disclosureView: eventCityDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_city)
+        validateField(eventPlaceField, failureViews: eventPlaceFailureViews, disclosureView: eventPlaceDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_place)
+
         let priceFrom = eventPriceFromField.text != nil ? Int(eventPriceFromField.text!) : 0
         let priceTo = eventPriceToField.text != nil ? Int(eventPriceToField.text!) : 0
         if priceTo < priceFrom {
@@ -100,15 +111,16 @@ class EventsManageCreateSecondPageViewController: EventsManageCreateViewControll
                 $0.hidden = false
             }
             validated = false
-            errorMessage += errorMessage != errorMessageBeginning ? ", Price to" : "Price to"
+            errorMessage += errorMessage != errorMessageBeginning ? ", " : ""
+            errorMessage += loc_my_events_field_price_to
         }
-        
-        validateField(eventCurrencyField, failureViews: eventCurrencyFailureViews, disclosureView: eventCurrencyDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Currency")
-        validateField(eventDateStartField, failureViews: eventDateStartFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Date start")
-        validateField(eventDateEndField, failureViews: eventDateEndFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Date end")
-        validateField(eventTimeFromField, failureViews: eventTimeFromFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Time from")
-        validateField(eventTimeToField, failureViews: eventTimeToFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Time to")
-        
+
+        validateField(eventCurrencyField, failureViews: eventCurrencyFailureViews, disclosureView: eventCurrencyDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_currency)
+        validateField(eventDateStartField, failureViews: eventDateStartFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_date_start)
+        validateField(eventDateEndField, failureViews: eventDateEndFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_date_end)
+        validateField(eventTimeFromField, failureViews: eventTimeFromFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_time_from)
+        validateField(eventTimeToField, failureViews: eventTimeToFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_time_end)
+
         if !validated {
             self.extDisplayAlertView(errorMessage)
         }else{

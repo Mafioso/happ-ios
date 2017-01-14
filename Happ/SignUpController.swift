@@ -9,6 +9,12 @@
 import UIKit
 import PromiseKit
 
+let loc_auth_warning_body_password_mismatch = NSLocalizedString("Passwords don't match", comment: "Warning body displayed in SignUp when new passwords are non matched")
+let loc_auth_warning_title_password_mismatch = NSLocalizedString("Type again", comment: "Warning title displayed in SignUp when new passwords are non matched")
+let loc_auth_warning_body_empty_fields = NSLocalizedString("Fill all fields", comment: "Warning body displayed in SignUp when some fields are not filled")
+let loc_auth_warning_title_empty_fields = NSLocalizedString("One more ..", comment: "Warning title displayed in SignUp when some fields are not filled")
+
+
 
 class SignUpController: UIViewController {
     
@@ -42,7 +48,7 @@ class SignUpController: UIViewController {
             let repeatPassword = textFieldRepeatPassword.text {
             
             if password != repeatPassword {
-                self.extDisplayAlertView("Passwords don't match", title: "Type again")
+                self.extDisplayAlertView(loc_auth_warning_body_password_mismatch, title: loc_auth_warning_title_password_mismatch)
                 return
             }
             
@@ -55,7 +61,7 @@ class SignUpController: UIViewController {
                     self.extDisplayAlertView(e)
             }
         } else {
-            self.extDisplayAlertView("Fill all fields", title: "One more ..")
+            self.extDisplayAlertView(loc_auth_warning_body_empty_fields, title: loc_auth_warning_title_empty_fields)
         }
     }
     @IBAction func clickedBackNavItem(sender: UIButton) {

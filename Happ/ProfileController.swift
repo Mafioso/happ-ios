@@ -8,6 +8,16 @@
 
 import UIKit
 
+let loc_form_saved_body = NSLocalizedString("Saved Successfully", comment: "'Saved Successfully' used after profile form saved correctly")
+let loc_form_saved_title = NSLocalizedString("Done!", comment: "'Done!' used after profile form saved correctly")
+let loc_form_error_title = NSLocalizedString("Warning", comment: "Title of error message for Profile form")
+let loc_form_error_password_confirm = NSLocalizedString("Password does not match the confirm password", comment: "error message of Profile form when password does not match")
+let loc_form_error_password_mismatch = NSLocalizedString("Check your passwords and repeat", comment: " error message of Profile form when password mismatch")
+let loc_request_error_check_data = NSLocalizedString("Check your input data", comment: "error message of Profile form when input data error")
+let loc_change_photo_title = NSLocalizedString("Change Photo", comment: "Title of actionsList on Profile settings")
+let loc_image_upload_action_take = NSLocalizedString("Take Photo", comment: "Action name in actiosList for image upload")
+let loc_image_upload_action_choose = NSLocalizedString("Choose from Library", comment: "Action name in actiosList for image upload")
+let loc_action_list_action_cancel = NSLocalizedString("ActionListActionCancel", comment: "'Cancel' last action of an actionList")
 
 
 class ProfileController: UIViewController, UITextFieldDelegate {
@@ -141,18 +151,18 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
         self.viewModel.onSave(values)
             .then { _ in
-                self.extDisplayAlertView("Saved Successfully", title: "Done!")
+                self.extDisplayAlertView(loc_form_saved_body, title: loc_form_saved_title)
                 
             }
             .error { err in
                 if let profileError = err as? ProfileErrorTypes {
                     switch profileError {
                     case .BadConfirm:
-                        self.extDisplayAlertView("Password does not match the confirm password", title: "Warning")
+                        self.extDisplayAlertView(loc_form_error_password_confirm, title: loc_form_error_title)
                     case .BadPassword:
-                        self.extDisplayAlertView("Check your passwords and repeat", title: "Warning")
+                        self.extDisplayAlertView(loc_form_error_password_mismatch, title: loc_form_error_title)
                     case .BadValues:
-                        self.extDisplayAlertView("Check your input data")
+                        self.extDisplayAlertView(loc_request_error_check_data)
                     }
 
                 } else {
@@ -163,14 +173,14 @@ class ProfileController: UIViewController, UITextFieldDelegate {
 
 
     private func displayChangePhotoActions() {
-        let actionList = UIAlertController(title: nil, message: "Change Profile Photo", preferredStyle: .ActionSheet)
-        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+        let actionList = UIAlertController(title: nil, message: loc_change_photo_title, preferredStyle: .ActionSheet)
+        let actionTakePhoto = UIAlertAction(title: loc_image_upload_action_take, style: .Default) { (action) in
             self.pickImageFromCamera()
         }
-        let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default) { (action) in
+        let actionOpenGalery = UIAlertAction(title: loc_image_upload_action_choose, style: .Default) { (action) in
             self.pickImageFromLibrary()
         }
-        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionCancel = UIAlertAction(title: loc_action_list_action_cancel, style: .Cancel, handler: nil)
         actionList.addAction(actionTakePhoto)
         actionList.addAction(actionOpenGalery)
         actionList.addAction(actionCancel)

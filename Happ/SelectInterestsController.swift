@@ -8,6 +8,8 @@
 
 import UIKit
 
+let loc_save_capitalized = NSLocalizedString("SAVE", comment: "Title of button used systemwide")
+
 
 // MARK: - SelectEventInterest
 protocol SelectEventInterestDelegate {
@@ -179,7 +181,7 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
         self.buttonSave = {
             let btn = UIButton()
             let windowSize = UIScreen.mainScreen().bounds
-            btn.setTitle(NSLocalizedString("SAVE", comment: "Select Interests save button"), forState: .Normal)
+            btn.setTitle(loc_save_capitalized, forState: .Normal)
             btn.setTitleColor(UIColor.happOrangeColor(), forState: .Normal)
             btn.backgroundColor = UIColor.whiteColor()
             btn.frame = CGRectMake(0, windowSize.height-52, windowSize.width, 52)

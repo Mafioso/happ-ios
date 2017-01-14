@@ -8,6 +8,10 @@
 
 import UIKit
 
+let loc_select_place = NSLocalizedString("Select currency", comment: "Title of NavBar in SelectCurrency page")
+let loc_select_place_search_placeholder = NSLocalizedString("Start to type place or address", comment: "Placeholder used in UISearchController of SelectPlaceViewController")
+
+
 protocol SelectPlaceDelegate {
     func didSelectPlace(place: MapPlace)
 }
@@ -48,14 +52,14 @@ class SelectPlaceViewController: UITableViewController, UISearchResultsUpdating 
         
         self.extMakeNavBarVisible()
     }
-    
+
     private func prepareTableView() {
         self.searchController = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self
             controller.searchBar.searchBarStyle = .Minimal
             controller.searchBar.sizeToFit()
-            controller.searchBar.placeholder = "Start to type place or address"
+            controller.searchBar.placeholder = loc_select_place_search_placeholder
             controller.dimsBackgroundDuringPresentation = false
             self.definesPresentationContext = true
             return controller
@@ -65,9 +69,9 @@ class SelectPlaceViewController: UITableViewController, UISearchResultsUpdating 
         self.tableView.allowsSelection = true
         self.tableView.allowsMultipleSelection = false
     }
-    
+
     private func initNavBarItems() {
-        self.navigationItem.title = "Select place"
+        self.navigationItem.title = loc_select_place
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close-orange"), style: .Plain, target: self, action: #selector(handleClickNavItemClose))
     }
     

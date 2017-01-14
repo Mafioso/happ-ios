@@ -8,6 +8,9 @@
 
 import UIKit
 
+let loc_push_notifications = NSLocalizedString("Push notifications", comment: "Title of Select Notifications NavBar in Settings")
+
+
 class SelectNotificationsViewController: UIViewController, UITableViewDelegate {
 
     
@@ -98,7 +101,7 @@ class SelectNotificationsViewController: UIViewController, UITableViewDelegate {
 
 
     private func initNavigationBarItems() {
-        self.navigationItem.title = "Push notifications"
+        self.navigationItem.title = loc_push_notifications
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
     }
     func handleClickNavBarBack() {

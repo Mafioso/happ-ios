@@ -9,6 +9,8 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+let loc_my_events_create = NSLocalizedString("Create Event", comment: "Title of NavBar on EventsManageCreateViewController")
+
 
 // Prototype
 class EventsManageCreateViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -75,7 +77,7 @@ class EventsManageCreateViewController: UIViewController, UIGestureRecognizerDel
     }
 
     private func initNavBarItems() {
-        self.navigationItem.title = "Create Event"
+        self.navigationItem.title = loc_my_events_create
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-close"), style: .Plain, target: self, action: #selector(handleBackNavItem))
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon-presentation"), style: .Plain, target: self, action: #selector(handlePresentationButton))
     }

@@ -8,6 +8,14 @@
 
 import UIKit
 
+let loc_image_upload_failed = NSLocalizedString("Image can't be uploaded, try again", comment: "Body of alert displayed after upload raised error")
+let loc_my_events_validate_field_empty = NSLocalizedString("Please fill right following fields: ", comment: "Prefix of error body displayed when form of Create Event doesn't filled some fields")
+let loc_my_events_field_interest = NSLocalizedString("Interest", comment: "Label for field Interest used in Create Event form")
+let loc_my_events_field_city = NSLocalizedString("City", comment: "Label for field City used in Create Event form")
+let loc_my_events_field_description = NSLocalizedString("Description", comment: "Label for field Description used in Create Event form")
+let loc_my_events_add_image = NSLocalizedString("Add Photo", comment: "Label for ActionList to upload images")
+
+
 class EventsManageCreateFirstPageViewController: EventsManageCreateViewController {
     
     enum ReuseIdentifier: String {
@@ -54,20 +62,20 @@ class EventsManageCreateFirstPageViewController: EventsManageCreateViewControlle
             if !error {
                 self.collectionView.reloadData()
             }else{
-                self.extDisplayAlertView("Image can't be uploaded, try again")
+                self.extDisplayAlertView(loc_image_upload_failed)
             }
         }
     }
-    
+
     override func validate() -> Bool {
         cleanFailures()
         var validated = true
-        let errorMessageBeginning = "Please fill right following fields: "
+        let errorMessageBeginning = loc_my_events_validate_field_empty
         var errorMessage = errorMessageBeginning
-        
-        validateField(eventNameField, failureViews: eventNameFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "City")
-        validateField(eventInterestField, failureViews: eventInterestFailureViews, disclosureView: eventInterestDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Interest")
-        validateField(closure: { return self.eventDescriptionField.text?.characters.count > 10 }, failureViews: eventDescriptionFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: "Description")
+
+        validateField(eventNameField, failureViews: eventNameFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_city)
+        validateField(eventInterestField, failureViews: eventInterestFailureViews, disclosureView: eventInterestDisclosure, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_interest)
+        validateField(closure: { return self.eventDescriptionField.text?.characters.count > 10 }, failureViews: eventDescriptionFailureViews, disclosureView: nil, validated: &validated, errorMessage: &errorMessage, errorMessageBeginning: errorMessageBeginning, errorMessageField: loc_my_events_field_description)
         
         if !validated {
             self.extDisplayAlertView(errorMessage)
@@ -152,14 +160,14 @@ extension EventsManageCreateFirstPageViewController: UICollectionViewDelegate, U
 extension EventsManageCreateFirstPageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     private func displayChangePhotoActions() {
-        let actionList = UIAlertController(title: nil, message: "Add Photo", preferredStyle: .ActionSheet)
-        let actionTakePhoto = UIAlertAction(title: "Take Photo", style: .Default) { (action) in
+        let actionList = UIAlertController(title: nil, message: loc_my_events_add_image, preferredStyle: .ActionSheet)
+        let actionTakePhoto = UIAlertAction(title: loc_image_upload_action_take, style: .Default) { (action) in
             self.pickImageFromCamera()
         }
-        let actionOpenGalery = UIAlertAction(title: "Choose from Library", style: .Default) { (action) in
+        let actionOpenGalery = UIAlertAction(title: loc_image_upload_action_choose, style: .Default) { (action) in
             self.pickImageFromLibrary()
         }
-        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionCancel = UIAlertAction(title: loc_action_list_action_cancel, style: .Cancel, handler: nil)
         actionList.addAction(actionTakePhoto)
         actionList.addAction(actionOpenGalery)
         actionList.addAction(actionCancel)

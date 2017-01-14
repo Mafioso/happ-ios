@@ -8,6 +8,9 @@
 
 import UIKit
 
+let loc_settings = NSLocalizedString("Settings", comment: "Title of Settings NavBar")
+
+
 class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProtocol {
 
     var viewModel: SettingsViewModel!
@@ -72,7 +75,7 @@ class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProt
     }
 
     private func initNavigationBarItems() {
-        self.navigationItem.title = "Settings"
+        self.navigationItem.title = loc_settings
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickNavBarMenu))
     }
     func handleClickNavBarMenu() {

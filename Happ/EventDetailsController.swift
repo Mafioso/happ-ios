@@ -8,6 +8,8 @@
 
 import UIKit
 
+let loc_event_details_no_data = NSLocalizedString("NO DATA", comment: "When event doesn't have some info propertios like 'email', 'phone', 'site'")
+
 
 class EventDetailsController: UIViewController {
 
@@ -191,7 +193,8 @@ extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
             iconView.tag = 924
             cell.addSubview(iconView)
         }
-        cell.textLabel?.text = (text == nil || text!.isEmpty) ? "NO DATA" : text!.uppercaseString
+
+        cell.textLabel?.text = (text == nil || text!.isEmpty) ? loc_event_details_no_data : text!.uppercaseString
 
         return cell
     }

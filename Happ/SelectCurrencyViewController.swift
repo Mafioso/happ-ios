@@ -8,6 +8,10 @@
 
 import UIKit
 
+let loc_change_currency = NSLocalizedString("Change currency", comment: "Title of Select Currency NavBar in Settings")
+let loc_save = NSLocalizedString("Save", comment: "")
+
+
 class SelectCurrencyViewController: UITableViewController {
 
     var viewModel: SettingsViewModel!  {
@@ -86,9 +90,9 @@ class SelectCurrencyViewController: UITableViewController {
     }
 
     private func initNavigationBarItems() {
-        self.navigationItem.title = "Change Currency"
+        self.navigationItem.title = loc_change_currency
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: #selector(handleClickNavBarSave))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: loc_save, style: .Plain, target: self, action: #selector(handleClickNavBarSave))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()
