@@ -1,0 +1,1247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Happ/Base.lproj/Authentication.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="1J4-Rx-lRV.normalTitle">
+        <source>Login</source>
+        <note>Class = "UIButton"; normalTitle = "Login"; ObjectID = "1J4-Rx-lRV";</note>
+      </trans-unit>
+      <trans-unit id="7Lc-S0-8gx.placeholder">
+        <source>password</source>
+        <note>Class = "UITextField"; placeholder = "password"; ObjectID = "7Lc-S0-8gx";</note>
+      </trans-unit>
+      <trans-unit id="86a-KA-dyT.text">
+        <source>© happapp.info 2017, All Rights Reserved</source>
+        <note>Class = "UILabel"; text = "© happapp.info 2017, All Rights Reserved"; ObjectID = "86a-KA-dyT";</note>
+      </trans-unit>
+      <trans-unit id="DVk-rZ-nZt.text">
+        <source>© happapp.info 2017, All Rights Reserved</source>
+        <note>Class = "UILabel"; text = "© happapp.info 2017, All Rights Reserved"; ObjectID = "DVk-rZ-nZt";</note>
+      </trans-unit>
+      <trans-unit id="H5r-Q2-Gb7.normalTitle">
+        <source>Create Account</source>
+        <note>Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "H5r-Q2-Gb7";</note>
+      </trans-unit>
+      <trans-unit id="IRe-yC-dG9.normalTitle">
+        <source>Terms &amp; Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Terms &amp; Policy"; ObjectID = "IRe-yC-dG9";</note>
+      </trans-unit>
+      <trans-unit id="Kjk-RP-n1T.text">
+        <source>•</source>
+        <note>Class = "UILabel"; text = "•"; ObjectID = "Kjk-RP-n1T";</note>
+      </trans-unit>
+      <trans-unit id="LOf-S3-3QF.placeholder">
+        <source>password</source>
+        <note>Class = "UITextField"; placeholder = "password"; ObjectID = "LOf-S3-3QF";</note>
+      </trans-unit>
+      <trans-unit id="NNt-0F-KPj.text">
+        <source>Please confirm your email
+to become an Organizer</source>
+        <note>Class = "UILabel"; text = "Please confirm your email\nto become an Organizer"; ObjectID = "NNt-0F-KPj";</note>
+      </trans-unit>
+      <trans-unit id="PVx-Mc-SX7.normalTitle">
+        <source>Terms &amp; Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Terms &amp; Policy"; ObjectID = "PVx-Mc-SX7";</note>
+      </trans-unit>
+      <trans-unit id="QKE-ZV-Tp0.placeholder">
+        <source>repeat password</source>
+        <note>Class = "UITextField"; placeholder = "repeat password"; ObjectID = "QKE-ZV-Tp0";</note>
+      </trans-unit>
+      <trans-unit id="QNb-DL-EKo.text">
+        <source>— OR —</source>
+        <note>Class = "UILabel"; text = "— OR —"; ObjectID = "QNb-DL-EKo";</note>
+      </trans-unit>
+      <trans-unit id="XNn-bu-0CE.text">
+        <source>If you have no account in Happ</source>
+        <note>Class = "UILabel"; text = "If you have no account in Happ"; ObjectID = "XNn-bu-0CE";</note>
+      </trans-unit>
+      <trans-unit id="bKj-q1-0Fc.text">
+        <source>Detailed instructions will be sent to your email</source>
+        <note>Class = "UILabel"; text = "Detailed instructions will be sent to your email"; ObjectID = "bKj-q1-0Fc";</note>
+      </trans-unit>
+      <trans-unit id="fDq-qh-Ps0.placeholder">
+        <source>username</source>
+        <note>Class = "UITextField"; placeholder = "username"; ObjectID = "fDq-qh-Ps0";</note>
+      </trans-unit>
+      <trans-unit id="fgs-i2-UCU.normalTitle">
+        <source>Confirm Email</source>
+        <note>Class = "UIButton"; normalTitle = "Confirm Email"; ObjectID = "fgs-i2-UCU";</note>
+      </trans-unit>
+      <trans-unit id="fs2-36-Pk5.normalTitle">
+        <source> Login with Facebook</source>
+        <note>Class = "UIButton"; normalTitle = " Login with Facebook"; ObjectID = "fs2-36-Pk5";</note>
+      </trans-unit>
+      <trans-unit id="gRK-vv-Xqq.text">
+        <source>•</source>
+        <note>Class = "UILabel"; text = "•"; ObjectID = "gRK-vv-Xqq";</note>
+      </trans-unit>
+      <trans-unit id="gjJ-rh-YbR.text">
+        <source>•</source>
+        <note>Class = "UILabel"; text = "•"; ObjectID = "gjJ-rh-YbR";</note>
+      </trans-unit>
+      <trans-unit id="jxt-IY-mOw.normalTitle">
+        <source>Privacy Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "jxt-IY-mOw";</note>
+      </trans-unit>
+      <trans-unit id="kMf-z4-tu5.text">
+        <source>© happapp.info 2017, All Rights Reserved</source>
+        <note>Class = "UILabel"; text = "© happapp.info 2017, All Rights Reserved"; ObjectID = "kMf-z4-tu5";</note>
+      </trans-unit>
+      <trans-unit id="lbL-la-kE3.placeholder">
+        <source>email</source>
+        <note>Class = "UITextField"; placeholder = "email"; ObjectID = "lbL-la-kE3";</note>
+      </trans-unit>
+      <trans-unit id="pdk-1C-LhQ.normalTitle">
+        <source>Terms &amp; Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Terms &amp; Policy"; ObjectID = "pdk-1C-LhQ";</note>
+      </trans-unit>
+      <trans-unit id="sh1-bk-xZp.normalTitle">
+        <source>Privacy Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "sh1-bk-xZp";</note>
+      </trans-unit>
+      <trans-unit id="v59-X3-jNt.placeholder">
+        <source>username</source>
+        <note>Class = "UITextField"; placeholder = "username"; ObjectID = "v59-X3-jNt";</note>
+      </trans-unit>
+      <trans-unit id="znt-xK-Cdw.normalTitle">
+        <source>Privacy Policy</source>
+        <note>Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "znt-xK-Cdw";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/Event.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="0Il-V7-S8q.text">
+        <source>ORGANIZER NAME</source>
+        <note>Class = "UILabel"; text = "ORGANIZER NAME"; ObjectID = "0Il-V7-S8q";</note>
+      </trans-unit>
+      <trans-unit id="0qo-Sm-sgL.text">
+        <source>EVENT_DETAILS_MAP.ADDRESS</source>
+        <note>Class = "UILabel"; text = "EVENT_DETAILS_MAP.ADDRESS"; ObjectID = "0qo-Sm-sgL";</note>
+      </trans-unit>
+      <trans-unit id="2KA-xZ-Ucf.text">
+        <source>EVENT_DETAILS_MAP.DATE_AND_TIME</source>
+        <note>Class = "UILabel"; text = "EVENT_DETAILS_MAP.DATE_AND_TIME"; ObjectID = "2KA-xZ-Ucf";</note>
+      </trans-unit>
+      <trans-unit id="6Jl-si-cKK.normalTitle">
+        <source>GO TO EVENT PAGE</source>
+        <note>Class = "UIButton"; normalTitle = "GO TO EVENT PAGE"; ObjectID = "6Jl-si-cKK";</note>
+      </trans-unit>
+      <trans-unit id="6Mc-1Y-mIJ.placeholder">
+        <source>Search</source>
+        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "6Mc-1Y-mIJ";</note>
+      </trans-unit>
+      <trans-unit id="50K-ZA-IEl.text">
+        <source>Show popular first</source>
+        <note>Class = "UILabel"; text = "Show popular first"; ObjectID = "50K-ZA-IEl";</note>
+      </trans-unit>
+      <trans-unit id="BOE-NS-J8X.text">
+        <source>Event Organizer</source>
+        <note>Class = "UILabel"; text = "Event Organizer"; ObjectID = "BOE-NS-J8X";</note>
+      </trans-unit>
+      <trans-unit id="GZK-U6-8Lv.text">
+        <source>EVENT TITLE</source>
+        <note>Class = "UILabel"; text = "EVENT TITLE"; ObjectID = "GZK-U6-8Lv";</note>
+      </trans-unit>
+      <trans-unit id="Gq9-Al-0qS.normalTitle">
+        <source>  Ask about event</source>
+        <note>Class = "UIButton"; normalTitle = "  Ask about event"; ObjectID = "Gq9-Al-0qS";</note>
+      </trans-unit>
+      <trans-unit id="HeC-E7-151.text">
+        <source>EVENT_DETAILS_MAP.TITLE</source>
+        <note>Class = "UILabel"; text = "EVENT_DETAILS_MAP.TITLE"; ObjectID = "HeC-E7-151";</note>
+      </trans-unit>
+      <trans-unit id="LTW-oM-Udx.text">
+        <source>DATE RANGE
+TIME RANGE</source>
+        <note>Class = "UILabel"; text = "DATE RANGE\nTIME RANGE"; ObjectID = "LTW-oM-Udx";</note>
+      </trans-unit>
+      <trans-unit id="OnH-aT-bbw.text">
+        <source>Title</source>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "OnH-aT-bbw";</note>
+      </trans-unit>
+      <trans-unit id="RZo-Bm-VBQ.normalTitle">
+        <source>RESET FILTERS</source>
+        <note>Class = "UIButton"; normalTitle = "RESET FILTERS"; ObjectID = "RZo-Bm-VBQ";</note>
+      </trans-unit>
+      <trans-unit id="UPx-Xm-tKa.text">
+        <source>EVENT MULTILINE DESCRIPTION</source>
+        <note>Class = "UILabel"; text = "EVENT MULTILINE DESCRIPTION"; ObjectID = "UPx-Xm-tKa";</note>
+      </trans-unit>
+      <trans-unit id="Ydf-yM-m83.text">
+        <source>EVENT_DETAILS_MAP.DISTANCE</source>
+        <note>Class = "UILabel"; text = "EVENT_DETAILS_MAP.DISTANCE"; ObjectID = "Ydf-yM-m83";</note>
+      </trans-unit>
+      <trans-unit id="Zho-1E-hZh.normalTitle">
+        <source>0</source>
+        <note>Class = "UIButton"; normalTitle = "0"; ObjectID = "Zho-1E-hZh";</note>
+      </trans-unit>
+      <trans-unit id="bPo-gS-hwW.text">
+        <source>Select date</source>
+        <note>Class = "UILabel"; text = "Select date"; ObjectID = "bPo-gS-hwW";</note>
+      </trans-unit>
+      <trans-unit id="elF-SS-3al.text">
+        <source>Customize Feed</source>
+        <note>Class = "UILabel"; text = "Customize Feed"; ObjectID = "elF-SS-3al";</note>
+      </trans-unit>
+      <trans-unit id="jTT-Pf-XpM.text">
+        <source>EVENT_DETAILS_MAP.PRICE</source>
+        <note>Class = "UILabel"; text = "EVENT_DETAILS_MAP.PRICE"; ObjectID = "jTT-Pf-XpM";</note>
+      </trans-unit>
+      <trans-unit id="jVj-n0-shs.text">
+        <source>ADDRESS</source>
+        <note>Class = "UILabel"; text = "ADDRESS"; ObjectID = "jVj-n0-shs";</note>
+      </trans-unit>
+      <trans-unit id="po8-d2-ceQ.text">
+        <source>You don’t have any favourited event</source>
+        <note>Class = "UILabel"; text = "You don’t have any favourited event"; ObjectID = "po8-d2-ceQ";</note>
+      </trans-unit>
+      <trans-unit id="uIL-B1-Cbp.text">
+        <source>It is Empty Here!</source>
+        <note>Class = "UILabel"; text = "It is Empty Here!"; ObjectID = "uIL-B1-Cbp";</note>
+      </trans-unit>
+      <trans-unit id="x4Q-9h-y2p.normalTitle">
+        <source>Find Awesome Events</source>
+        <note>Class = "UIButton"; normalTitle = "Find Awesome Events"; ObjectID = "x4Q-9h-y2p";</note>
+      </trans-unit>
+      <trans-unit id="xox-2H-npc.text">
+        <source>EVENT TITLE</source>
+        <note>Class = "UILabel"; text = "EVENT TITLE"; ObjectID = "xox-2H-npc";</note>
+      </trans-unit>
+      <trans-unit id="yue-ql-8bg.text">
+        <source>Convert currency</source>
+        <note>Class = "UILabel"; text = "Convert currency"; ObjectID = "yue-ql-8bg";</note>
+      </trans-unit>
+      <trans-unit id="z9K-6Z-ebi.text">
+        <source>FREE</source>
+        <note>Class = "UILabel"; text = "FREE"; ObjectID = "z9K-6Z-ebi";</note>
+      </trans-unit>
+      <trans-unit id="zb8-8L-bhJ.normalTitle">
+        <source>I Want To Go!</source>
+        <note>Class = "UIButton"; normalTitle = "I Want To Go!"; ObjectID = "zb8-8L-bhJ";</note>
+      </trans-unit>
+      <trans-unit id="zb8-8L-bhJ.selectedTitle">
+        <source>Already booked</source>
+        <note>Class = "UIButton"; selectedTitle = "Already booked"; ObjectID = "zb8-8L-bhJ";</note>
+      </trans-unit>
+      <trans-unit id="zfV-sb-KNv.text">
+        <source>Only Free Events</source>
+        <note>Class = "UILabel"; text = "Only Free Events"; ObjectID = "zfV-sb-KNv";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/EventManageTableCell.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="5a7-gn-kIq.text">
+        <source>Unfortunately your event was denied</source>
+        <note>Class = "UILabel"; text = "Unfortunately your event was denied"; ObjectID = "5a7-gn-kIq";</note>
+      </trans-unit>
+      <trans-unit id="5ja-iX-nyd.text">
+        <source>Event.Interest</source>
+        <note>Class = "UILabel"; text = "Event.Interest"; ObjectID = "5ja-iX-nyd";</note>
+      </trans-unit>
+      <trans-unit id="ARl-By-jhN.text">
+        <source>Event.Title</source>
+        <note>Class = "UILabel"; text = "Event.Title"; ObjectID = "ARl-By-jhN";</note>
+      </trans-unit>
+      <trans-unit id="AWc-zH-9Pl.normalTitle">
+        <source>DELETE</source>
+        <note>Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "AWc-zH-9Pl";</note>
+      </trans-unit>
+      <trans-unit id="JH5-EU-OCJ.text">
+        <source>Event.Address</source>
+        <note>Class = "UILabel"; text = "Event.Address"; ObjectID = "JH5-EU-OCJ";</note>
+      </trans-unit>
+      <trans-unit id="Q87-bK-Swt.normalTitle">
+        <source>EDIT</source>
+        <note>Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "Q87-bK-Swt";</note>
+      </trans-unit>
+      <trans-unit id="SVw-q8-HJd.normalTitle">
+        <source>SHOW DETAILS</source>
+        <note>Class = "UIButton"; normalTitle = "SHOW DETAILS"; ObjectID = "SVw-q8-HJd";</note>
+      </trans-unit>
+      <trans-unit id="WXd-H8-ELk.text">
+        <source>Event.price</source>
+        <note>Class = "UILabel"; text = "Event.price"; ObjectID = "WXd-H8-ELk";</note>
+      </trans-unit>
+      <trans-unit id="ZkQ-Ds-rQk.normalTitle">
+        <source>DEACTIVATE</source>
+        <note>Class = "UIButton"; normalTitle = "DEACTIVATE"; ObjectID = "ZkQ-Ds-rQk";</note>
+      </trans-unit>
+      <trans-unit id="a6z-gW-nOt.text">
+        <source>666</source>
+        <note>Class = "UILabel"; text = "666"; ObjectID = "a6z-gW-nOt";</note>
+      </trans-unit>
+      <trans-unit id="aOc-Mg-00t.text">
+        <source>Event.DateTime</source>
+        <note>Class = "UILabel"; text = "Event.DateTime"; ObjectID = "aOc-Mg-00t";</note>
+      </trans-unit>
+      <trans-unit id="ifV-zZ-RKW.normalTitle">
+        <source>COPY</source>
+        <note>Class = "UIButton"; normalTitle = "COPY"; ObjectID = "ifV-zZ-RKW";</note>
+      </trans-unit>
+      <trans-unit id="pah-fe-5Xc.text">
+        <source>999</source>
+        <note>Class = "UILabel"; text = "999"; ObjectID = "pah-fe-5Xc";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/EventTableCell.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="3St-bq-Z3q.text">
+        <source>TIME_RANGE</source>
+        <note>Class = "UILabel"; text = "TIME_RANGE"; ObjectID = "3St-bq-Z3q";</note>
+      </trans-unit>
+      <trans-unit id="H2U-y5-h5B.text">
+        <source>2.5k</source>
+        <note>Class = "UILabel"; text = "2.5k"; ObjectID = "H2U-y5-h5B";</note>
+      </trans-unit>
+      <trans-unit id="MS1-jz-Kj9.text">
+        <source>MULTILINE_TITLE</source>
+        <note>Class = "UILabel"; text = "MULTILINE_TITLE"; ObjectID = "MS1-jz-Kj9";</note>
+      </trans-unit>
+      <trans-unit id="XIV-2O-98Z.text">
+        <source>INTEREST</source>
+        <note>Class = "UILabel"; text = "INTEREST"; ObjectID = "XIV-2O-98Z";</note>
+      </trans-unit>
+      <trans-unit id="ghn-3J-avY.text">
+        <source>ADDRESS</source>
+        <note>Class = "UILabel"; text = "ADDRESS"; ObjectID = "ghn-3J-avY";</note>
+      </trans-unit>
+      <trans-unit id="tEr-T3-668.text">
+        <source>PRICE_FROM</source>
+        <note>Class = "UILabel"; text = "PRICE_FROM"; ObjectID = "tEr-T3-668";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/LaunchScreen.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body/>
+  </file>
+  <file original="Happ/Base.lproj/Main.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="2n7-FB-h6t.text">
+        <source>Subinterest Title</source>
+        <note>Class = "UILabel"; text = "Subinterest Title"; ObjectID = "2n7-FB-h6t";</note>
+      </trans-unit>
+      <trans-unit id="5Gw-ov-CEj.text">
+        <source>HAPP V2.0 © All Rights Reserved, 2016</source>
+        <note>Class = "UILabel"; text = "HAPP V2.0 © All Rights Reserved, 2016"; ObjectID = "5Gw-ov-CEj";</note>
+      </trans-unit>
+      <trans-unit id="8gQ-QC-FxN.text">
+        <source>You can upload profile photo  in Settings &gt; Profile</source>
+        <note>Class = "UILabel"; text = "You can upload profile photo  in Settings &gt; Profile"; ObjectID = "8gQ-QC-FxN";</note>
+      </trans-unit>
+      <trans-unit id="39J-1p-L39.text">
+        <source>Full Name</source>
+        <note>Class = "UILabel"; text = "Full Name"; ObjectID = "39J-1p-L39";</note>
+      </trans-unit>
+      <trans-unit id="EAA-hr-IBR.text">
+        <source>SETTINGS</source>
+        <note>Class = "UILabel"; text = "SETTINGS"; ObjectID = "EAA-hr-IBR";</note>
+      </trans-unit>
+      <trans-unit id="FMy-Is-bat.text">
+        <source>Title</source>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "FMy-Is-bat";</note>
+      </trans-unit>
+      <trans-unit id="FfI-9u-Xda.text">
+        <source>FEED</source>
+        <note>Class = "UILabel"; text = "FEED"; ObjectID = "FfI-9u-Xda";</note>
+      </trans-unit>
+      <trans-unit id="KfH-CI-Kv9.text">
+        <source>Title</source>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "KfH-CI-Kv9";</note>
+      </trans-unit>
+      <trans-unit id="LfQ-jC-u4n.text">
+        <source>Subtitle</source>
+        <note>Class = "UILabel"; text = "Subtitle"; ObjectID = "LfQ-jC-u4n";</note>
+      </trans-unit>
+      <trans-unit id="Mbf-cj-ADz.text">
+        <source>EVENTS MANAGER</source>
+        <note>Class = "UILabel"; text = "EVENTS MANAGER"; ObjectID = "Mbf-cj-ADz";</note>
+      </trans-unit>
+      <trans-unit id="U6u-4D-6z5.text">
+        <source>LOGOUT</source>
+        <note>Class = "UILabel"; text = "LOGOUT"; ObjectID = "U6u-4D-6z5";</note>
+      </trans-unit>
+      <trans-unit id="Uw9-1z-mgP.text">
+        <source>CITY</source>
+        <note>Class = "UILabel"; text = "CITY"; ObjectID = "Uw9-1z-mgP";</note>
+      </trans-unit>
+      <trans-unit id="aTY-RE-yAK.text">
+        <source>INTERESTS</source>
+        <note>Class = "UILabel"; text = "INTERESTS"; ObjectID = "aTY-RE-yAK";</note>
+      </trans-unit>
+      <trans-unit id="cog-BP-ylE.text">
+        <source>click on city name to change it</source>
+        <note>Class = "UILabel"; text = "click on city name to change it"; ObjectID = "cog-BP-ylE";</note>
+      </trans-unit>
+      <trans-unit id="fcx-uA-hde.text">
+        <source>NOT SELECTED</source>
+        <note>Class = "UILabel"; text = "NOT SELECTED"; ObjectID = "fcx-uA-hde";</note>
+      </trans-unit>
+      <trans-unit id="fhx-Is-Bb4.text">
+        <source>Your City is</source>
+        <note>Class = "UILabel"; text = "Your City is"; ObjectID = "fhx-Is-Bb4";</note>
+      </trans-unit>
+      <trans-unit id="fpB-7M-Tyq.normalTitle">
+        <source>CLOSE</source>
+        <note>Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fpB-7M-Tyq";</note>
+      </trans-unit>
+      <trans-unit id="hV0-L1-ic1.normalTitle">
+        <source>SAVE</source>
+        <note>Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "hV0-L1-ic1";</note>
+      </trans-unit>
+      <trans-unit id="tQz-pw-NCc.text">
+        <source>Subtitle</source>
+        <note>Class = "UILabel"; text = "Subtitle"; ObjectID = "tQz-pw-NCc";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/Organizer.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="0Zt-AD-Tzf.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "0Zt-AD-Tzf";</note>
+      </trans-unit>
+      <trans-unit id="0a5-N8-AEp.placeholder">
+        <source>Tap to select</source>
+        <note>Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "0a5-N8-AEp";</note>
+      </trans-unit>
+      <trans-unit id="1ri-Z5-TaN.text">
+        <source>On review</source>
+        <note>Class = "UILabel"; text = "On review"; ObjectID = "1ri-Z5-TaN";</note>
+      </trans-unit>
+      <trans-unit id="1vr-VY-LST.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "1vr-VY-LST";</note>
+      </trans-unit>
+      <trans-unit id="3X9-1x-tfz.placeholder">
+        <source>Tap to select</source>
+        <note>Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "3X9-1x-tfz";</note>
+      </trans-unit>
+      <trans-unit id="3c8-HY-TZp.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "3c8-HY-TZp";</note>
+      </trans-unit>
+      <trans-unit id="4QP-KY-79g.normalTitle">
+        <source>EDIT EVENT</source>
+        <note>Class = "UIButton"; normalTitle = "EDIT EVENT"; ObjectID = "4QP-KY-79g";</note>
+      </trans-unit>
+      <trans-unit id="8Uk-zk-zR5.text">
+        <source>Please edit the following:</source>
+        <note>Class = "UILabel"; text = "Please edit the following:"; ObjectID = "8Uk-zk-zR5";</note>
+      </trans-unit>
+      <trans-unit id="8sS-YM-4s4.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "8sS-YM-4s4";</note>
+      </trans-unit>
+      <trans-unit id="8y6-Oj-K0b.placeholder">
+        <source>Search</source>
+        <note>Class = "UISearchBar"; placeholder = "Search"; ObjectID = "8y6-Oj-K0b";</note>
+      </trans-unit>
+      <trans-unit id="9mq-HI-xfq.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "9mq-HI-xfq";</note>
+      </trans-unit>
+      <trans-unit id="12q-CW-Jbm.text">
+        <source>Currency</source>
+        <note>Class = "UILabel"; text = "Currency"; ObjectID = "12q-CW-Jbm";</note>
+      </trans-unit>
+      <trans-unit id="Cio-vC-Hmv.text">
+        <source>Registration</source>
+        <note>Class = "UILabel"; text = "Registration"; ObjectID = "Cio-vC-Hmv";</note>
+      </trans-unit>
+      <trans-unit id="Cpy-zV-6ha.placeholder">
+        <source>Free</source>
+        <note>Class = "UITextField"; placeholder = "Free"; ObjectID = "Cpy-zV-6ha";</note>
+      </trans-unit>
+      <trans-unit id="D8d-HX-NxM.text">
+        <source>New visitors can enter event even if it already started</source>
+        <note>Class = "UILabel"; text = "New visitors can enter event even if it already started"; ObjectID = "D8d-HX-NxM";</note>
+      </trans-unit>
+      <trans-unit id="ELU-zm-zgB.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "ELU-zm-zgB";</note>
+      </trans-unit>
+      <trans-unit id="HJ7-AH-naU.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "HJ7-AH-naU";</note>
+      </trans-unit>
+      <trans-unit id="HOa-fc-n66.placeholder">
+        <source>Tap to select</source>
+        <note>Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "HOa-fc-n66";</note>
+      </trans-unit>
+      <trans-unit id="Iif-IR-iq8.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "Iif-IR-iq8";</note>
+      </trans-unit>
+      <trans-unit id="JiG-i2-bHj.text">
+        <source>Description</source>
+        <note>Class = "UILabel"; text = "Description"; ObjectID = "JiG-i2-bHj";</note>
+      </trans-unit>
+      <trans-unit id="JjK-f1-PQ8.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "JjK-f1-PQ8";</note>
+      </trans-unit>
+      <trans-unit id="K7z-c5-y6T.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "K7z-c5-y6T";</note>
+      </trans-unit>
+      <trans-unit id="LCH-M3-fb8.text">
+        <source>Email</source>
+        <note>Class = "UILabel"; text = "Email"; ObjectID = "LCH-M3-fb8";</note>
+      </trans-unit>
+      <trans-unit id="LRT-7S-gNm.text">
+        <source>From</source>
+        <note>Class = "UILabel"; text = "From"; ObjectID = "LRT-7S-gNm";</note>
+      </trans-unit>
+      <trans-unit id="NDu-Xf-SCY.text">
+        <source>Tap to add a photo</source>
+        <note>Class = "UILabel"; text = "Tap to add a photo"; ObjectID = "NDu-Xf-SCY";</note>
+      </trans-unit>
+      <trans-unit id="NtH-0D-00e.text">
+        <source>TIckets link</source>
+        <note>Class = "UILabel"; text = "TIckets link"; ObjectID = "NtH-0D-00e";</note>
+      </trans-unit>
+      <trans-unit id="OrR-Qc-aek.text">
+        <source>Place</source>
+        <note>Class = "UILabel"; text = "Place"; ObjectID = "OrR-Qc-aek";</note>
+      </trans-unit>
+      <trans-unit id="Otu-Zf-GLp.text">
+        <source>Select date</source>
+        <note>Class = "UILabel"; text = "Select date"; ObjectID = "Otu-Zf-GLp";</note>
+      </trans-unit>
+      <trans-unit id="Q6q-PH-5o4.text">
+        <source>Price</source>
+        <note>Class = "UILabel"; text = "Price"; ObjectID = "Q6q-PH-5o4";</note>
+      </trans-unit>
+      <trans-unit id="QPp-wa-ueI.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "QPp-wa-ueI";</note>
+      </trans-unit>
+      <trans-unit id="SHa-3M-5VQ.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "SHa-3M-5VQ";</note>
+      </trans-unit>
+      <trans-unit id="Te8-Rh-tNP.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "Te8-Rh-tNP";</note>
+      </trans-unit>
+      <trans-unit id="UQL-rK-99C.normalTitle">
+        <source>RESET FILTERS</source>
+        <note>Class = "UIButton"; normalTitle = "RESET FILTERS"; ObjectID = "UQL-rK-99C";</note>
+      </trans-unit>
+      <trans-unit id="UTq-RL-TjZ.text">
+        <source>Continuing event</source>
+        <note>Class = "UILabel"; text = "Continuing event"; ObjectID = "UTq-RL-TjZ";</note>
+      </trans-unit>
+      <trans-unit id="Uar-h9-Y0i.text">
+        <source>to</source>
+        <note>Class = "UILabel"; text = "to"; ObjectID = "Uar-h9-Y0i";</note>
+      </trans-unit>
+      <trans-unit id="XC9-gx-aag.text">
+        <source>City</source>
+        <note>Class = "UILabel"; text = "City"; ObjectID = "XC9-gx-aag";</note>
+      </trans-unit>
+      <trans-unit id="XEY-Gl-I9j.text">
+        <source>Customize Feed</source>
+        <note>Class = "UILabel"; text = "Customize Feed"; ObjectID = "XEY-Gl-I9j";</note>
+      </trans-unit>
+      <trans-unit id="XHn-eH-AlQ.text">
+        <source>Start</source>
+        <note>Class = "UILabel"; text = "Start"; ObjectID = "XHn-eH-AlQ";</note>
+      </trans-unit>
+      <trans-unit id="aoG-P7-XEc.normalTitle">
+        <source>SUBMIT</source>
+        <note>Class = "UIButton"; normalTitle = "SUBMIT"; ObjectID = "aoG-P7-XEc";</note>
+      </trans-unit>
+      <trans-unit id="avD-HO-O2v.text">
+        <source>Age limit</source>
+        <note>Class = "UILabel"; text = "Age limit"; ObjectID = "avD-HO-O2v";</note>
+      </trans-unit>
+      <trans-unit id="azV-AA-xTs.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "azV-AA-xTs";</note>
+      </trans-unit>
+      <trans-unit id="bcr-1X-0Z4.text">
+        <source>Finished</source>
+        <note>Class = "UILabel"; text = "Finished"; ObjectID = "bcr-1X-0Z4";</note>
+      </trans-unit>
+      <trans-unit id="cCJ-Dj-XeN.text">
+        <source>Event duration</source>
+        <note>Class = "UILabel"; text = "Event duration"; ObjectID = "cCJ-Dj-XeN";</note>
+      </trans-unit>
+      <trans-unit id="d3r-xY-xvp.text">
+        <source>Show events by status</source>
+        <note>Class = "UILabel"; text = "Show events by status"; ObjectID = "d3r-xY-xvp";</note>
+      </trans-unit>
+      <trans-unit id="dPx-XQ-PzM.normalTitle">
+        <source>NEXT</source>
+        <note>Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "dPx-XQ-PzM";</note>
+      </trans-unit>
+      <trans-unit id="ewa-zA-ASW.placeholder">
+        <source>Add phone number</source>
+        <note>Class = "UITextField"; placeholder = "Add phone number"; ObjectID = "ewa-zA-ASW";</note>
+      </trans-unit>
+      <trans-unit id="ewg-4b-njp.text">
+        <source>Website</source>
+        <note>Class = "UILabel"; text = "Website"; ObjectID = "ewg-4b-njp";</note>
+      </trans-unit>
+      <trans-unit id="gCJ-ag-4Ce.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "gCJ-ag-4Ce";</note>
+      </trans-unit>
+      <trans-unit id="h1b-eV-4xT.text">
+        <source>Active</source>
+        <note>Class = "UILabel"; text = "Active"; ObjectID = "h1b-eV-4xT";</note>
+      </trans-unit>
+      <trans-unit id="j5O-RM-BbF.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "j5O-RM-BbF";</note>
+      </trans-unit>
+      <trans-unit id="k92-mL-z98.text">
+        <source>According to the policy and rules
+of “HAPP” the event you posted can not be published.</source>
+        <note>Class = "UILabel"; text = "According to the policy and rules\nof “HAPP” the event you posted can not be published."; ObjectID = "k92-mL-z98";</note>
+      </trans-unit>
+      <trans-unit id="mqk-kn-1t7.text">
+        <source>—</source>
+        <note>Class = "UILabel"; text = "—"; ObjectID = "mqk-kn-1t7";</note>
+      </trans-unit>
+      <trans-unit id="nO1-Ux-cCG.text">
+        <source>From</source>
+        <note>Class = "UILabel"; text = "From"; ObjectID = "nO1-Ux-cCG";</note>
+      </trans-unit>
+      <trans-unit id="nO7-Re-FFA.text">
+        <source>Event date</source>
+        <note>Class = "UILabel"; text = "Event date"; ObjectID = "nO7-Re-FFA";</note>
+      </trans-unit>
+      <trans-unit id="o7Y-aI-k9h.text">
+        <source>Interest</source>
+        <note>Class = "UILabel"; text = "Interest"; ObjectID = "o7Y-aI-k9h";</note>
+      </trans-unit>
+      <trans-unit id="oeS-R8-4hM.text">
+        <source>*</source>
+        <note>Class = "UILabel"; text = "*"; ObjectID = "oeS-R8-4hM";</note>
+      </trans-unit>
+      <trans-unit id="p8A-sX-uyY.text">
+        <source>Inactive</source>
+        <note>Class = "UILabel"; text = "Inactive"; ObjectID = "p8A-sX-uyY";</note>
+      </trans-unit>
+      <trans-unit id="pcl-C1-v1t.text">
+        <source>Phone</source>
+        <note>Class = "UILabel"; text = "Phone"; ObjectID = "pcl-C1-v1t";</note>
+      </trans-unit>
+      <trans-unit id="rKe-F4-CQQ.placeholder">
+        <source>Tap to select</source>
+        <note>Class = "UITextField"; placeholder = "Tap to select"; ObjectID = "rKe-F4-CQQ";</note>
+      </trans-unit>
+      <trans-unit id="sjz-D5-hIr.text">
+        <source>First image will be used as event cover photo</source>
+        <note>Class = "UILabel"; text = "First image will be used as event cover photo"; ObjectID = "sjz-D5-hIr";</note>
+      </trans-unit>
+      <trans-unit id="tp0-x3-A6C.text">
+        <source>End</source>
+        <note>Class = "UILabel"; text = "End"; ObjectID = "tp0-x3-A6C";</note>
+      </trans-unit>
+      <trans-unit id="vSv-Je-h3N.text">
+        <source>to</source>
+        <note>Class = "UILabel"; text = "to"; ObjectID = "vSv-Je-h3N";</note>
+      </trans-unit>
+      <trans-unit id="vT5-me-P9h.text">
+        <source>Rejected</source>
+        <note>Class = "UILabel"; text = "Rejected"; ObjectID = "vT5-me-P9h";</note>
+      </trans-unit>
+      <trans-unit id="vTa-er-1rN.text">
+        <source>Event Name</source>
+        <note>Class = "UILabel"; text = "Event Name"; ObjectID = "vTa-er-1rN";</note>
+      </trans-unit>
+      <trans-unit id="zi7-6S-MPD.placeholder">
+        <source>Free</source>
+        <note>Class = "UITextField"; placeholder = "Free"; ObjectID = "zi7-6S-MPD";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/Profile.storyboard" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="1nl-ls-Sdi.placeholder">
+        <source>enter phone</source>
+        <note>Class = "UITextField"; placeholder = "enter phone"; ObjectID = "1nl-ls-Sdi";</note>
+      </trans-unit>
+      <trans-unit id="1pQ-Wx-rbV.text">
+        <source>Email</source>
+        <note>Class = "UILabel"; text = "Email"; ObjectID = "1pQ-Wx-rbV";</note>
+      </trans-unit>
+      <trans-unit id="2bt-Mu-h9g.text">
+        <source>EVENT UPDATES</source>
+        <note>Class = "UILabel"; text = "EVENT UPDATES"; ObjectID = "2bt-Mu-h9g";</note>
+      </trans-unit>
+      <trans-unit id="4GJ-4S-xcl.placeholder">
+        <source>enter email</source>
+        <note>Class = "UITextField"; placeholder = "enter email"; ObjectID = "4GJ-4S-xcl";</note>
+      </trans-unit>
+      <trans-unit id="4Gy-TF-sZ2.placeholder">
+        <source>*****</source>
+        <note>Class = "UITextField"; placeholder = "*****"; ObjectID = "4Gy-TF-sZ2";</note>
+      </trans-unit>
+      <trans-unit id="9Ta-BN-WDb.text">
+        <source>CHAT</source>
+        <note>Class = "UILabel"; text = "CHAT"; ObjectID = "9Ta-BN-WDb";</note>
+      </trans-unit>
+      <trans-unit id="AzO-zg-d3n.text">
+        <source>CELL.TITLE</source>
+        <note>Class = "UILabel"; text = "CELL.TITLE"; ObjectID = "AzO-zg-d3n";</note>
+      </trans-unit>
+      <trans-unit id="GMu-JB-ah0.text">
+        <source>Repeat Password</source>
+        <note>Class = "UILabel"; text = "Repeat Password"; ObjectID = "GMu-JB-ah0";</note>
+      </trans-unit>
+      <trans-unit id="HEu-8w-rmd.normalTitle">
+        <source>SAVE</source>
+        <note>Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "HEu-8w-rmd";</note>
+      </trans-unit>
+      <trans-unit id="HOe-92-Ln6.text">
+        <source>FAQ/HELP</source>
+        <note>Class = "UILabel"; text = "FAQ/HELP"; ObjectID = "HOe-92-Ln6";</note>
+      </trans-unit>
+      <trans-unit id="IbV-nn-YEl.text">
+        <source>CITIES MANAGER</source>
+        <note>Class = "UILabel"; text = "CITIES MANAGER"; ObjectID = "IbV-nn-YEl";</note>
+      </trans-unit>
+      <trans-unit id="IkY-0o-Cd9.text">
+        <source>PROFILE SETTINGS</source>
+        <note>Class = "UILabel"; text = "PROFILE SETTINGS"; ObjectID = "IkY-0o-Cd9";</note>
+      </trans-unit>
+      <trans-unit id="LHS-CY-4Yv.text">
+        <source>Change Password</source>
+        <note>Class = "UILabel"; text = "Change Password"; ObjectID = "LHS-CY-4Yv";</note>
+      </trans-unit>
+      <trans-unit id="ORQ-So-SHn.placeholder">
+        <source>***</source>
+        <note>Class = "UITextField"; placeholder = "***"; ObjectID = "ORQ-So-SHn";</note>
+      </trans-unit>
+      <trans-unit id="OeG-i7-A8J.placeholder">
+        <source>enter name</source>
+        <note>Class = "UITextField"; placeholder = "enter name"; ObjectID = "OeG-i7-A8J";</note>
+      </trans-unit>
+      <trans-unit id="Q9h-fX-Zsi.placeholder">
+        <source>*****</source>
+        <note>Class = "UITextField"; placeholder = "*****"; ObjectID = "Q9h-fX-Zsi";</note>
+      </trans-unit>
+      <trans-unit id="RIx-0f-Bfi.text">
+        <source>Birth date</source>
+        <note>Class = "UILabel"; text = "Birth date"; ObjectID = "RIx-0f-Bfi";</note>
+      </trans-unit>
+      <trans-unit id="T7h-aA-slw.text">
+        <source>NEW INTERESTS</source>
+        <note>Class = "UILabel"; text = "NEW INTERESTS"; ObjectID = "T7h-aA-slw";</note>
+      </trans-unit>
+      <trans-unit id="UnL-zE-umj.text">
+        <source>TERMS OF SERVICE</source>
+        <note>Class = "UILabel"; text = "TERMS OF SERVICE"; ObjectID = "UnL-zE-umj";</note>
+      </trans-unit>
+      <trans-unit id="Xd1-OW-oyf.text">
+        <source>Switch on notifications to be always  informed about interesting events</source>
+        <note>Class = "UILabel"; text = "Switch on notifications to be always  informed about interesting events"; ObjectID = "Xd1-OW-oyf";</note>
+      </trans-unit>
+      <trans-unit id="ZOJ-G5-xoY.text">
+        <source>Name</source>
+        <note>Class = "UILabel"; text = "Name"; ObjectID = "ZOJ-G5-xoY";</note>
+      </trans-unit>
+      <trans-unit id="ZOX-EY-ete.text">
+        <source>CONTACT HAPP</source>
+        <note>Class = "UILabel"; text = "CONTACT HAPP"; ObjectID = "ZOX-EY-ete";</note>
+      </trans-unit>
+      <trans-unit id="aG7-1z-gYV.text">
+        <source>PUSH NOTIFICATIONS
+</source>
+        <note>Class = "UILabel"; text = "PUSH NOTIFICATIONS\n"; ObjectID = "aG7-1z-gYV";</note>
+      </trans-unit>
+      <trans-unit id="eS2-0V-6O8.text">
+        <source>CHANGE CURRENCY</source>
+        <note>Class = "UILabel"; text = "CHANGE CURRENCY"; ObjectID = "eS2-0V-6O8";</note>
+      </trans-unit>
+      <trans-unit id="hPj-9r-wEn.text">
+        <source>HAPP v2.0 © All Rights Reserved, 2017</source>
+        <note>Class = "UILabel"; text = "HAPP v2.0 © All Rights Reserved, 2017"; ObjectID = "hPj-9r-wEn";</note>
+      </trans-unit>
+      <trans-unit id="hVu-1I-Jzp.text">
+        <source>New Password</source>
+        <note>Class = "UILabel"; text = "New Password"; ObjectID = "hVu-1I-Jzp";</note>
+      </trans-unit>
+      <trans-unit id="jdw-4J-xSI.text">
+        <source>Current Password</source>
+        <note>Class = "UILabel"; text = "Current Password"; ObjectID = "jdw-4J-xSI";</note>
+      </trans-unit>
+      <trans-unit id="kEn-Kd-A64.normalTitle">
+        <source>select date</source>
+        <note>Class = "UIButton"; normalTitle = "select date"; ObjectID = "kEn-Kd-A64";</note>
+      </trans-unit>
+      <trans-unit id="lwd-hW-zQi.text">
+        <source>Tap Camera to Add a Photo</source>
+        <note>Class = "UILabel"; text = "Tap Camera to Add a Photo"; ObjectID = "lwd-hW-zQi";</note>
+      </trans-unit>
+      <trans-unit id="o5v-7C-ojs.text">
+        <source>Phone</source>
+        <note>Class = "UILabel"; text = "Phone"; ObjectID = "o5v-7C-ojs";</note>
+      </trans-unit>
+      <trans-unit id="pBT-ib-99H.text">
+        <source>Gender</source>
+        <note>Class = "UILabel"; text = "Gender"; ObjectID = "pBT-ib-99H";</note>
+      </trans-unit>
+      <trans-unit id="qnm-9z-epC.segmentTitles[0]">
+        <source>Male</source>
+        <note>Class = "UISegmentedControl"; qnm-9z-epC.segmentTitles[0] = "Male"; ObjectID = "qnm-9z-epC";</note>
+      </trans-unit>
+      <trans-unit id="qnm-9z-epC.segmentTitles[1]">
+        <source>Female</source>
+        <note>Class = "UISegmentedControl"; qnm-9z-epC.segmentTitles[1] = "Female"; ObjectID = "qnm-9z-epC";</note>
+      </trans-unit>
+      <trans-unit id="r7Z-ut-RWX.text">
+        <source>APP UPDATES</source>
+        <note>Class = "UILabel"; text = "APP UPDATES"; ObjectID = "r7Z-ut-RWX";</note>
+      </trans-unit>
+      <trans-unit id="tSx-Eh-tTV.text">
+        <source>Personal Information</source>
+        <note>Class = "UILabel"; text = "Personal Information"; ObjectID = "tSx-Eh-tTV";</note>
+      </trans-unit>
+      <trans-unit id="u9c-g6-kBB.normalTitle">
+        <source>SAVE</source>
+        <note>Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "u9c-g6-kBB";</note>
+      </trans-unit>
+      <trans-unit id="vbR-IU-Qex.text">
+        <source>PRIVACY POLICY</source>
+        <note>Class = "UILabel"; text = "PRIVACY POLICY"; ObjectID = "vbR-IU-Qex";</note>
+      </trans-unit>
+      <trans-unit id="xmw-N4-r2e.text">
+        <source>Leave fields blank if you want to leave old password</source>
+        <note>Class = "UILabel"; text = "Leave fields blank if you want to leave old password"; ObjectID = "xmw-N4-r2e";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/SelectInterestHeader.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="Q8u-hf-JXN.text">
+        <source>Select Interest</source>
+        <note>Class = "UILabel"; text = "Select Interest"; ObjectID = "Q8u-hf-JXN";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Base.lproj/SelectMultipleInterestsHeader.xib" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="7co-9p-rXH.normalTitle">
+        <source>Select All Interests</source>
+        <note>Class = "UIButton"; normalTitle = "Select All Interests"; ObjectID = "7co-9p-rXH";</note>
+      </trans-unit>
+      <trans-unit id="7co-9p-rXH.selectedTitle">
+        <source>Unselect All</source>
+        <note>Class = "UIButton"; selectedTitle = "Unselect All"; ObjectID = "7co-9p-rXH";</note>
+      </trans-unit>
+      <trans-unit id="Jyr-Ry-xpZ.text">
+        <source>Select Interests for</source>
+        <note>Class = "UILabel"; text = "Select Interests for"; ObjectID = "Jyr-Ry-xpZ";</note>
+      </trans-unit>
+      <trans-unit id="Kky-Gw-eQ7.text">
+        <source>EVENT NAME</source>
+        <note>Class = "UILabel"; text = "EVENT NAME"; ObjectID = "Kky-Gw-eQ7";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Info.plist" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName">
+        <source>Happ</source>
+      </trans-unit>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+      </trans-unit>
+      <trans-unit id="CFBundleShortVersionString">
+        <source>2.0.0</source>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="Happ/Localizable.strings" source-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="ActionListActionCancel">
+        <source>ActionListActionCancel</source>
+        <note>'Cancel' last action of an actionList</note>
+      </trans-unit>
+      <trans-unit id="Activation of event wasn't successful, try again please">
+        <source>Activation of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event activating was failed</note>
+      </trans-unit>
+      <trans-unit id="Add First Event">
+        <source>Add First Event</source>
+        <note>Title of button displayed when there is no events in My Events</note>
+      </trans-unit>
+      <trans-unit id="Add More Interests">
+        <source>Add More Interests</source>
+        <note>Title of button displayed when there is no events in Feed</note>
+      </trans-unit>
+      <trans-unit id="Add Photo">
+        <source>Add Photo</source>
+        <note>Label for ActionList to upload images</note>
+      </trans-unit>
+      <trans-unit id="Age to">
+        <source>Age to</source>
+        <note>Label for field 'Age to' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="Change Photo">
+        <source>Change Photo</source>
+        <note>Title of actionsList on Profile settings</note>
+      </trans-unit>
+      <trans-unit id="Change currency">
+        <source>Change currency</source>
+        <note>Title of Select Currency NavBar in Settings</note>
+      </trans-unit>
+      <trans-unit id="Check your inbox, we've sent you an email with confimation link">
+        <source>Check your inbox, we've sent you an email with confimation link</source>
+        <note>Message displayed in displayAlertView when work is done and link have sent</note>
+      </trans-unit>
+      <trans-unit id="Check your input data">
+        <source>Check your input data</source>
+        <note>error message of Profile form when input data error</note>
+      </trans-unit>
+      <trans-unit id="Check your passwords and repeat">
+        <source>Check your passwords and repeat</source>
+        <note>error message of Profile form when password mismatch</note>
+      </trans-unit>
+      <trans-unit id="Choose from Library">
+        <source>Choose from Library</source>
+        <note>Action name in actiosList for image upload</note>
+      </trans-unit>
+      <trans-unit id="City">
+        <source>City</source>
+        <note>Label for field City used in Create Event form</note>
+      </trans-unit>
+      <trans-unit id="Copying of event wasn't successful, try again please">
+        <source>Copying of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event copying was failed</note>
+      </trans-unit>
+      <trans-unit id="Create Event">
+        <source>Create Event</source>
+        <note>Title of NavBar on EventsManageCreateViewController</note>
+      </trans-unit>
+      <trans-unit id="Create Event: Information">
+        <source>Create Event: Information</source>
+        <note>Title of NavBar on second page of Crete Event</note>
+      </trans-unit>
+      <trans-unit id="Create Event: Submit">
+        <source>Create Event: Submit</source>
+        <note>Label for field 'Create Event: Submit' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="Creation of event is failed for some reason, please try again">
+        <source>Creation of event is failed for some reason, please try again</source>
+        <note>Body of alert displayed after EventsManageCreate form failed on modifying</note>
+      </trans-unit>
+      <trans-unit id="Currency">
+        <source>Currency</source>
+        <note>Label for field 'Currency' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Date end">
+        <source>Date end</source>
+        <note>Label for field 'Date end' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Date start">
+        <source>Date start</source>
+        <note>Label for field 'Date start' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Deactivation of event wasn't successful, try again please">
+        <source>Deactivation of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event deactivating was failed</note>
+      </trans-unit>
+      <trans-unit id="Deletion of event wasn't successful, try again please">
+        <source>Deletion of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event deleting was failed</note>
+      </trans-unit>
+      <trans-unit id="Description">
+        <source>Description</source>
+        <note>Label for field Description used in Create Event form</note>
+      </trans-unit>
+      <trans-unit id="Done!">
+        <source>Done!</source>
+        <note>'Done!' used after profile form saved correctly</note>
+      </trans-unit>
+      <trans-unit id="ERROR">
+        <source>ERROR</source>
+        <note>capitalized error</note>
+      </trans-unit>
+      <trans-unit id="Email">
+        <source>Email</source>
+        <note>Label for field 'Email' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="Event details">
+        <source>Event details</source>
+        <note>Title of NavBar on EventsManageDeniedDetailsViewController</note>
+      </trans-unit>
+      <trans-unit id="Event location">
+        <source>Event location</source>
+        <note>Title of EventLocation NavBar</note>
+      </trans-unit>
+      <trans-unit id="Events near you">
+        <source>Events near you</source>
+        <note>Title of NavBar for EventsMapViewController</note>
+      </trans-unit>
+      <trans-unit id="Explore">
+        <source>Explore</source>
+        <note>Title of NavBar for EventsExploreViewController</note>
+      </trans-unit>
+      <trans-unit id="FREE">
+        <source>FREE</source>
+        <note>Event min price it free</note>
+      </trans-unit>
+      <trans-unit id="Favourite">
+        <source>Favourite</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+      </trans-unit>
+      <trans-unit id="Feed">
+        <source>Feed</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+      </trans-unit>
+      <trans-unit id="Fill all fields">
+        <source>Fill all fields</source>
+        <note>Warning body displayed in SignUp when some fields are not filled</note>
+      </trans-unit>
+      <trans-unit id="Fill your email, please">
+        <source>Fill your email, please</source>
+        <note>Message displayed in displayAlertView when email field is empty</note>
+      </trans-unit>
+      <trans-unit id="Find Awesome Events">
+        <source>Find Awesome Events</source>
+        <note>Title of button displayed when there is no events in Favourites</note>
+      </trans-unit>
+      <trans-unit id="Find city...">
+        <source>Find city...</source>
+        <note>Placeholder used in UISearchController on SelectCityController</note>
+      </trans-unit>
+      <trans-unit id="Image can't be uploaded, try again">
+        <source>Image can't be uploaded, try again</source>
+        <note>Body of alert displayed after upload raised error</note>
+      </trans-unit>
+      <trans-unit id="Interest">
+        <source>Interest</source>
+        <note>Label for field Interest used in Create Event form</note>
+      </trans-unit>
+      <trans-unit id="Login Cancelled">
+        <source>Login Cancelled</source>
+        <note>Warning title displayed after Facebook's form when Login is canceled</note>
+      </trans-unit>
+      <trans-unit id="Login Fail">
+        <source>Login Fail</source>
+        <note>Warning title displayed after Facebook's form when Login fail occured</note>
+      </trans-unit>
+      <trans-unit id="Login Success">
+        <source>Login Success</source>
+        <note>Warning title displayed after Facebook's form on Success Login</note>
+      </trans-unit>
+      <trans-unit id="Login failed with error: ">
+        <source>Login failed with error: </source>
+        <note>Warning body displayed after Facebook's form when Login fail occured</note>
+      </trans-unit>
+      <trans-unit id="Login succeeded with granted permissions: ">
+        <source>Login succeeded with granted permissions: </source>
+        <note>Warning body displayed after Facebook's form on Success Login</note>
+      </trans-unit>
+      <trans-unit id="Modifying of event is failed for some reason, please try again">
+        <source>Modifying of event is failed for some reason, please try again</source>
+        <note>Body of alert displayed after EventsManageCreate form failed on modifying</note>
+      </trans-unit>
+      <trans-unit id="My Events">
+        <source>My Events</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+      </trans-unit>
+      <trans-unit id="NO DATA">
+        <source>NO DATA</source>
+        <note>When event doesn't have some info propertios like 'email', 'phone', 'site'</note>
+      </trans-unit>
+      <trans-unit id="NOT SELECTED">
+        <source>NOT SELECTED</source>
+        <note>Placeholder used in SetupCityController</note>
+      </trans-unit>
+      <trans-unit id="One more ..">
+        <source>One more ..</source>
+        <note>Warning title displayed in SignUp when some fields are not filled</note>
+      </trans-unit>
+      <trans-unit id="Open link from email we have sent, with your device">
+        <source>Open link from email we have sent, with your device</source>
+        <note>Message displayed in displayAlertView when work is done and link have sent</note>
+      </trans-unit>
+      <trans-unit id="Password does not match the confirm password">
+        <source>Password does not match the confirm password</source>
+        <note>error message of Profile form when password does not match</note>
+      </trans-unit>
+      <trans-unit id="Passwords don't match">
+        <source>Passwords don't match</source>
+        <note>Warning body displayed in SignUp when new passwords are non matched</note>
+      </trans-unit>
+      <trans-unit id="Phone">
+        <source>Phone</source>
+        <note>Label for field 'Phone' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="Place">
+        <source>Place</source>
+        <note>Label for field 'Place' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Please fill right following fields: ">
+        <source>Please fill right following fields: </source>
+        <note>Prefix of error body displayed when form of Create Event doesn't filled some fields</note>
+      </trans-unit>
+      <trans-unit id="Price to">
+        <source>Price to</source>
+        <note>Label for field 'Price to' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Push notifications">
+        <source>Push notifications</source>
+        <note>Title of Select Notifications NavBar in Settings</note>
+      </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>Label for field 'Registration' for link used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="SAVE">
+        <source>SAVE</source>
+        <note>Title of button used systemwide</note>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Saved Successfully">
+        <source>Saved Successfully</source>
+        <note>'Saved Successfully' used after profile form saved correctly</note>
+      </trans-unit>
+      <trans-unit id="Search">
+        <source>Search</source>
+        <note>Placeholder used in UISearchController</note>
+      </trans-unit>
+      <trans-unit id="Select Your City">
+        <source>Select Your City</source>
+        <note>Title of NavBar on SelectCityController</note>
+      </trans-unit>
+      <trans-unit id="Select city">
+        <source>Select city</source>
+        <note>Button title for select city on Menu</note>
+      </trans-unit>
+      <trans-unit id="Select currency">
+        <source>Select currency</source>
+        <note>Title of NavBar in SelectCurrency page</note>
+      </trans-unit>
+      <trans-unit id="Select date">
+        <source>Select date</source>
+        <note>Label for datepicker in FeedFilters</note>
+      </trans-unit>
+      <trans-unit id="Select time">
+        <source>Select time</source>
+        <note>Label for timepicker in FeedFilters</note>
+      </trans-unit>
+      <trans-unit id="Settings">
+        <source>Settings</source>
+        <note>Title of Settings NavBar</note>
+      </trans-unit>
+      <trans-unit id="Start to type place or address">
+        <source>Start to type place or address</source>
+        <note>Placeholder used in UISearchController of SelectPlaceViewController</note>
+      </trans-unit>
+      <trans-unit id="Take Photo">
+        <source>Take Photo</source>
+        <note>Action name in actiosList for image upload</note>
+      </trans-unit>
+      <trans-unit id="There are no events for selected interests">
+        <source>There are no events for selected interests</source>
+        <note>Help message displayed when there is no events in Feed</note>
+      </trans-unit>
+      <trans-unit id="Tickets link">
+        <source>Tickets link</source>
+        <note>Label for field 'Tickets link' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="Time end">
+        <source>Time end</source>
+        <note>Label for field 'Time end' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Time from">
+        <source>Time from</source>
+        <note>Label for field 'Time from' used in Create Event Info form</note>
+      </trans-unit>
+      <trans-unit id="Type again">
+        <source>Type again</source>
+        <note>Warning title displayed in SignUp when new passwords are non matched</note>
+      </trans-unit>
+      <trans-unit id="Unsubscribe from">
+        <source>Unsubscribe from</source>
+        <note>Title of actionsList action displayed on every event for unsubscribe from event's interest</note>
+      </trans-unit>
+      <trans-unit id="User cancelled login.">
+        <source>User cancelled login.</source>
+        <note>Warning body displayed after Facebook's form when Login is canceled</note>
+      </trans-unit>
+      <trans-unit id="Warning">
+        <source>Warning</source>
+        <note>Title of error message for Profile form</note>
+      </trans-unit>
+      <trans-unit id="Website">
+        <source>Website</source>
+        <note>Label for field 'Website' used in Create Event Submit form</note>
+      </trans-unit>
+      <trans-unit id="You don’t have any favourited event">
+        <source>You don’t have any favourited event</source>
+        <note>Help message displayed when there is no events in Favourites</note>
+      </trans-unit>
+      <trans-unit id="You have not created any event yet">
+        <source>You have not created any event yet</source>
+        <note>Help message displayed when there is no events in My Events</note>
+      </trans-unit>
+      <trans-unit id="from">
+        <source>from</source>
+        <note>Word 'from' used in Event min price</note>
+      </trans-unit>
+      <trans-unit id="km">
+        <source>km</source>
+        <note>Distance 'km'</note>
+      </trans-unit>
+      <trans-unit id="m">
+        <source>m</source>
+        <note>Distance metric 'm'</note>
+      </trans-unit>
+      <trans-unit id="mi">
+        <source>mi</source>
+        <note>Distance 'mi'</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

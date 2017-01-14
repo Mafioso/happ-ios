@@ -1,0 +1,258 @@
+/* 'Cancel' last action of an actionList */
+"ActionListActionCancel" = "Отменить";
+
+/* Body of alert displayed after event activating was failed */
+"Activation of event wasn't successful, try again please" = "Активация события не удалось, попробуйте еще раз пожалуйста";
+
+/* Title of button displayed when there is no events in My Events */
+"Add First Event" = "Добавить первое событие";
+
+/* Title of button displayed when there is no events in Feed */
+"Add More Interests" = "Выбрать больше интересов";
+
+/* Label for ActionList to upload images */
+"Add Photo" = "Добавьте изображение для этого события";
+
+/* Label for field 'Age to' used in Create Event Submit form */
+"Age to" = "Возраст до";
+
+/* Title of actionsList on Profile settings */
+"Change Photo" = "Сменить Изображение";
+
+/* Title of Select Currency NavBar in Settings */
+"Change currency" = "Сменить валюту";
+
+/* Message displayed in displayAlertView when work is done and link have sent */
+"Check your inbox, we've sent you an email with confimation link" = "Проверьте свой почтовый ящик, мы отправили вам письмо с ссылкой для подтверждения";
+
+/* error message of Profile form when input data error */
+"Check your input data" = "Проверьте данные в полях";
+
+/* error message of Profile form when password mismatch */
+"Check your passwords and repeat" = "Пароль не совпадает";
+
+/* Action name in actiosList for image upload */
+"Choose from Library" = "Выбрать из библиотеки";
+
+/* Label for field City used in Create Event form */
+"City" = "Город";
+
+/* Body of alert displayed after event copying was failed */
+"Copying of event wasn't successful, try again please" = "Копирование события не было успешным, пожалуйста, попробуйте еще раз";
+
+/* Title of NavBar on EventsManageCreateViewController */
+"Create Event" = "Создать событие";
+
+/* Title of NavBar on second page of Crete Event */
+"Create Event: Information" = "Создать событие";
+
+/* Label for field 'Create Event: Submit' used in Create Event Submit form */
+"Create Event: Submit" = "Создать событие: Готово";
+
+/* Body of alert displayed after EventsManageCreate form failed on modifying */
+"Creation of event is failed for some reason, please try again" = "Создание события не удалось по каким-либо причинам, пожалуйста, попробуйте еще раз";
+
+/* Label for field 'Currency' used in Create Event Info form */
+"Currency" = "Валюта";
+
+/* Label for field 'Date end' used in Create Event Info form */
+"Date end" = "Дата окончания";
+
+/* Label for field 'Date start' used in Create Event Info form */
+"Date start" = "Дата начала";
+
+/* Body of alert displayed after event deactivating was failed */
+"Deactivation of event wasn't successful, try again please" = "Деактивация мероприятия не вышла, пожалуйста, попробуйте еще раз";
+
+/* Body of alert displayed after event deleting was failed */
+"Deletion of event wasn't successful, try again please" = "Удалить мероприятие не получилось, пожалуйста, попробуйте еще раз";
+
+/* Label for field Description used in Create Event form */
+"Description" = "Описание";
+
+/* 'Done!' used after profile form saved correctly */
+"Done!" = "Успешно!";
+
+/* capitalized error */
+"ERROR" = "ОШИБКА";
+
+/* Label for field 'Email' used in Create Event Submit form */
+"Email" = "Email";
+
+/* Title of NavBar on EventsManageDeniedDetailsViewController */
+"Event details" = "Подробности события";
+
+/* Title of EventLocation NavBar */
+"Event location" = "Местоположение";
+
+/* Title of NavBar for EventsMapViewController */
+"Events near you" = "События рядом с вами";
+
+/* Title of NavBar for EventsExploreViewController */
+"Explore" = "Интересное";
+
+/* Event min price it free */
+"FREE" = "БЕСПЛАТНО";
+
+/* Title of NavBar for one of EventsListViewController */
+"Favourite" = "Избранное";
+
+/* Title of NavBar for one of EventsListViewController */
+"Feed" = "Лента";
+
+/* Warning body displayed in SignUp when some fields are not filled */
+"Fill all fields" = "Некоторые поля не заполнены";
+
+/* Message displayed in displayAlertView when email field is empty */
+"Fill your email, please" = "Поле c email не заполнено";
+
+/* Title of button displayed when there is no events in Favourites */
+"Find Awesome Events" = "Найти";
+
+/* Placeholder used in UISearchController on SelectCityController */
+"Find city..." = "Найти город ..";
+
+/* Body of alert displayed after upload raised error */
+"Image can't be uploaded, try again" = "Изображение не может быть загружено, попробуйте еще раз";
+
+/* Label for field Interest used in Create Event form */
+"Interest" = "Интерес";
+
+/* Warning title displayed after Facebook's form when Login is canceled */
+"Login Cancelled" = "Вход был отменен";
+
+/* Warning title displayed after Facebook's form when Login fail occured */
+"Login Fail" = "Произошла ошибка при входе";
+
+/* Warning title displayed after Facebook's form on Success Login */
+"Login Success" = "Вход выполнен";
+
+/* Warning body displayed after Facebook's form when Login fail occured */
+"Login failed with error: " = "Произошла ошибка по причине: ";
+
+/* Warning body displayed after Facebook's form on Success Login */
+"Login succeeded with granted permissions: " = "Вход был выполнен, полученны данные: ";
+
+/* Body of alert displayed after EventsManageCreate form failed on modifying */
+"Modifying of event is failed for some reason, please try again" = "Изменить мероприятие не получилось, пожалуйста, попробуйте еще раз";
+
+/* Title of NavBar for one of EventsListViewController */
+"My Events" = "Мои события";
+
+/* When event doesn't have some info propertios like 'email', 'phone', 'site' */
+"NO DATA" = "НЕТ ДАННЫХ";
+
+/* Placeholder used in SetupCityController */
+"NOT SELECTED" = "НЕ ВЫБРАН";
+
+/* Warning title displayed in SignUp when some fields are not filled */
+"One more .." = "Упс ..";
+
+/* Message displayed in displayAlertView when work is done and link have sent */
+"Open link from email we have sent, with your device" = "С вашего устройства откройте ссылку которую мы выслали вам на электронную почту";
+
+/* error message of Profile form when password does not match */
+"Password does not match the confirm password" = "Новые пароли не совпадают!";
+
+/* Warning body displayed in SignUp when new passwords are non matched */
+"Passwords don't match" = "Пароли не совпадают";
+
+/* Label for field 'Phone' used in Create Event Submit form */
+"Phone" = "Телефон";
+
+/* Label for field 'Place' used in Create Event Info form */
+"Place" = "Место";
+
+/* Prefix of error body displayed when form of Create Event doesn't filled some fields */
+"Please fill right following fields: " = "Пожалуйста, измените следующие поля: ";
+
+/* Label for field 'Price to' used in Create Event Info form */
+"Price to" = "Макс. цена";
+
+/* Title of Select Notifications NavBar in Settings */
+"Push notifications" = "Уведомления";
+
+/* Label for field 'Registration' for link used in Create Event Submit form */
+"Registration" = "Ссылка на регистрацию";
+
+/* Title of button used systemwide */
+"SAVE" = "СОХРАНИТЬ";
+
+/* No comment provided by engineer. */
+"Save" = "Сохранить";
+
+/* 'Saved Successfully' used after profile form saved correctly */
+"Saved Successfully" = "Сохранено";
+
+/* Placeholder used in UISearchController */
+"Search" = "Найти";
+
+/* Title of NavBar on SelectCityController */
+"Select Your City" = "Выберить свой город";
+
+/* Button title for select city on Menu */
+"Select city" = "Выбрать город";
+
+/* Title of NavBar in SelectCurrency page */
+"Select currency" = "Выбрать валюту";
+
+/* Label for datepicker in FeedFilters */
+"Select date" = "Фильтр по дате";
+
+/* Label for timepicker in FeedFilters */
+"Select time" = "Фильтр по времени";
+
+/* Title of Settings NavBar */
+"Settings" = "Настройки";
+
+/* Placeholder used in UISearchController of SelectPlaceViewController */
+"Start to type place or address" = "Начните вводить место или адрес";
+
+/* Action name in actiosList for image upload */
+"Take Photo" = "Открыть камеру";
+
+/* Help message displayed when there is no events in Feed */
+"There are no events for selected interests" = "Нет событий для выбранных интересов";
+
+/* Label for field 'Tickets link' used in Create Event Submit form */
+"Tickets link" = "Ссылка на билет";
+
+/* Label for field 'Time end' used in Create Event Info form */
+"Time end" = "Время до";
+
+/* Label for field 'Time from' used in Create Event Info form */
+"Time from" = "Время с";
+
+/* Warning title displayed in SignUp when new passwords are non matched */
+"Type again" = "Введите снова";
+
+/* Title of actionsList action displayed on every event for unsubscribe from event's interest */
+"Unsubscribe from" = "Отписаться от";
+
+/* Warning body displayed after Facebook's form when Login is canceled */
+"User cancelled login." = "Пользователь отменил логин.";
+
+/* Title of error message for Profile form */
+"Warning" = "Предупреждение";
+
+/* Label for field 'Website' used in Create Event Submit form */
+"Website" = "Сайт";
+
+/* Help message displayed when there is no events in Favourites */
+"You don’t have any favourited event" = "Нет событий для выбранных интересов";
+
+/* Help message displayed when there is no events in My Events */
+"You have not created any event yet" = "Вы ещё не создали ни одного события";
+
+/* Word 'from' used in Event min price */
+"from" = "от";
+
+/* Distance 'km' */
+"km" = "км";
+
+/* Distance metric 'm' */
+"m" = "м";
+
+/* Distance 'mi' */
+"mi" = "миль";
+

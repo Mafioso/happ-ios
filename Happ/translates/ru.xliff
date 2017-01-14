@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="Happ/Localizable.strings" source-language="en" target-language="ru" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="8.2.1" build-num="8C1002"/>
+    </header>
+    <body>
+      <trans-unit id="ActionListActionCancel">
+        <source>ActionListActionCancel</source>
+        <note>'Cancel' last action of an actionList</note>
+        <target>Отменить</target>
+      </trans-unit>
+      <trans-unit id="Activation of event wasn't successful, try again please">
+        <source>Activation of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event activating was failed</note>
+        <target>Активация события не удалось, попробуйте еще раз пожалуйста</target>
+      </trans-unit>
+      <trans-unit id="Add First Event">
+        <source>Add First Event</source>
+        <note>Title of button displayed when there is no events in My Events</note>
+        <target>Добавить первое событие</target>
+      </trans-unit>
+      <trans-unit id="Add More Interests">
+        <source>Add More Interests</source>
+        <note>Title of button displayed when there is no events in Feed</note>
+        <target>Выбрать больше интересов</target>
+      </trans-unit>
+      <trans-unit id="Add Photo">
+        <source>Add Photo</source>
+        <note>Label for ActionList to upload images</note>
+        <target>Добавьте изображение для этого события</target>
+      </trans-unit>
+      <trans-unit id="Age to">
+        <source>Age to</source>
+        <note>Label for field 'Age to' used in Create Event Submit form</note>
+        <target>Возраст до</target>
+      </trans-unit>
+      <trans-unit id="Change Photo">
+        <source>Change Photo</source>
+        <note>Title of actionsList on Profile settings</note>
+        <target>Сменить Изображение</target>
+      </trans-unit>
+      <trans-unit id="Change currency">
+        <source>Change currency</source>
+        <note>Title of Select Currency NavBar in Settings</note>
+        <target>Сменить валюту</target>
+      </trans-unit>
+      <trans-unit id="Check your inbox, we've sent you an email with confimation link">
+        <source>Check your inbox, we've sent you an email with confimation link</source>
+        <note>Message displayed in displayAlertView when work is done and link have sent</note>
+        <target>Проверьте свой почтовый ящик, мы отправили вам письмо с ссылкой для подтверждения</target>
+      </trans-unit>
+      <trans-unit id="Check your input data">
+        <source>Check your input data</source>
+        <note>error message of Profile form when input data error</note>
+        <target>Проверьте данные в полях</target>
+      </trans-unit>
+      <trans-unit id="Check your passwords and repeat">
+        <source>Check your passwords and repeat</source>
+        <note>error message of Profile form when password mismatch</note>
+        <target>Пароль не совпадает</target>
+      </trans-unit>
+      <trans-unit id="Choose from Library">
+        <source>Choose from Library</source>
+        <note>Action name in actiosList for image upload</note>
+        <target>Выбрать из библиотеки</target>
+      </trans-unit>
+      <trans-unit id="City">
+        <source>City</source>
+        <note>Label for field City used in Create Event form</note>
+        <target>Город</target>
+      </trans-unit>
+      <trans-unit id="Copying of event wasn't successful, try again please">
+        <source>Copying of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event copying was failed</note>
+        <target>Копирование события не было успешным, пожалуйста, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="Create Event">
+        <source>Create Event</source>
+        <note>Title of NavBar on EventsManageCreateViewController</note>
+        <target>Создать событие</target>
+      </trans-unit>
+      <trans-unit id="Create Event: Information">
+        <source>Create Event: Information</source>
+        <note>Title of NavBar on second page of Crete Event</note>
+        <target>Создать событие</target>
+      </trans-unit>
+      <trans-unit id="Create Event: Submit">
+        <source>Create Event: Submit</source>
+        <note>Label for field 'Create Event: Submit' used in Create Event Submit form</note>
+        <target>Создать событие: Готово</target>
+      </trans-unit>
+      <trans-unit id="Creation of event is failed for some reason, please try again">
+        <source>Creation of event is failed for some reason, please try again</source>
+        <note>Body of alert displayed after EventsManageCreate form failed on modifying</note>
+        <target>Создание события не удалось по каким-либо причинам, пожалуйста, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="Currency">
+        <source>Currency</source>
+        <note>Label for field 'Currency' used in Create Event Info form</note>
+        <target>Валюта</target>
+      </trans-unit>
+      <trans-unit id="Date end">
+        <source>Date end</source>
+        <note>Label for field 'Date end' used in Create Event Info form</note>
+        <target>Дата окончания</target>
+      </trans-unit>
+      <trans-unit id="Date start">
+        <source>Date start</source>
+        <note>Label for field 'Date start' used in Create Event Info form</note>
+        <target>Дата начала</target>
+      </trans-unit>
+      <trans-unit id="Deactivation of event wasn't successful, try again please">
+        <source>Deactivation of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event deactivating was failed</note>
+        <target>Деактивация мероприятия не вышла, пожалуйста, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="Deletion of event wasn't successful, try again please">
+        <source>Deletion of event wasn't successful, try again please</source>
+        <note>Body of alert displayed after event deleting was failed</note>
+        <target>Удалить мероприятие не получилось, пожалуйста, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="Description">
+        <source>Description</source>
+        <note>Label for field Description used in Create Event form</note>
+        <target>Описание</target>
+      </trans-unit>
+      <trans-unit id="Done!">
+        <source>Done!</source>
+        <note>'Done!' used after profile form saved correctly</note>
+        <target>Успешно!</target>
+      </trans-unit>
+      <trans-unit id="ERROR">
+        <source>ERROR</source>
+        <note>capitalized error</note>
+        <target>ОШИБКА</target>
+      </trans-unit>
+      <trans-unit id="Email">
+        <source>Email</source>
+        <note>Label for field 'Email' used in Create Event Submit form</note>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="Event details">
+        <source>Event details</source>
+        <note>Title of NavBar on EventsManageDeniedDetailsViewController</note>
+        <target>Подробности события</target>
+      </trans-unit>
+      <trans-unit id="Event location">
+        <source>Event location</source>
+        <note>Title of EventLocation NavBar</note>
+        <target>Местоположение</target>
+      </trans-unit>
+      <trans-unit id="Events near you">
+        <source>Events near you</source>
+        <note>Title of NavBar for EventsMapViewController</note>
+        <target>События рядом с вами</target>
+      </trans-unit>
+      <trans-unit id="Explore">
+        <source>Explore</source>
+        <note>Title of NavBar for EventsExploreViewController</note>
+        <target>Интересное</target>
+      </trans-unit>
+      <trans-unit id="FREE">
+        <source>FREE</source>
+        <note>Event min price it free</note>
+        <target>БЕСПЛАТНО</target>
+      </trans-unit>
+      <trans-unit id="Favourite">
+        <source>Favourite</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+        <target>Избранное</target>
+      </trans-unit>
+      <trans-unit id="Feed">
+        <source>Feed</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+        <target>Лента</target>
+      </trans-unit>
+      <trans-unit id="Fill all fields">
+        <source>Fill all fields</source>
+        <note>Warning body displayed in SignUp when some fields are not filled</note>
+        <target>Некоторые поля не заполнены</target>
+      </trans-unit>
+      <trans-unit id="Fill your email, please">
+        <source>Fill your email, please</source>
+        <note>Message displayed in displayAlertView when email field is empty</note>
+        <target>Поле c email не заполнено</target>
+      </trans-unit>
+      <trans-unit id="Find Awesome Events">
+        <source>Find Awesome Events</source>
+        <note>Title of button displayed when there is no events in Favourites</note>
+        <target>Найти</target>
+      </trans-unit>
+      <trans-unit id="Find city...">
+        <source>Find city...</source>
+        <note>Placeholder used in UISearchController on SelectCityController</note>
+        <target>Найти город ..</target>
+      </trans-unit>
+      <trans-unit id="Image can't be uploaded, try again">
+        <source>Image can't be uploaded, try again</source>
+        <note>Body of alert displayed after upload raised error</note>
+        <target>Изображение не может быть загружено, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="Interest">
+        <source>Interest</source>
+        <note>Label for field Interest used in Create Event form</note>
+        <target>Интерес</target>
+      </trans-unit>
+      <trans-unit id="Login Cancelled">
+        <source>Login Cancelled</source>
+        <note>Warning title displayed after Facebook's form when Login is canceled</note>
+        <target>Вход был отменен</target>
+      </trans-unit>
+      <trans-unit id="Login Fail">
+        <source>Login Fail</source>
+        <note>Warning title displayed after Facebook's form when Login fail occured</note>
+        <target>Произошла ошибка при входе</target>
+      </trans-unit>
+      <trans-unit id="Login Success">
+        <source>Login Success</source>
+        <note>Warning title displayed after Facebook's form on Success Login</note>
+        <target>Вход выполнен</target>
+      </trans-unit>
+      <trans-unit id="Login failed with error: ">
+        <source>Login failed with error: </source>
+        <note>Warning body displayed after Facebook's form when Login fail occured</note>
+        <target>Произошла ошибка по причине: </target>
+      </trans-unit>
+      <trans-unit id="Login succeeded with granted permissions: ">
+        <source>Login succeeded with granted permissions: </source>
+        <note>Warning body displayed after Facebook's form on Success Login</note>
+        <target>Вход был выполнен, полученны данные: </target>
+      </trans-unit>
+      <trans-unit id="Modifying of event is failed for some reason, please try again">
+        <source>Modifying of event is failed for some reason, please try again</source>
+        <note>Body of alert displayed after EventsManageCreate form failed on modifying</note>
+        <target>Изменить мероприятие не получилось, пожалуйста, попробуйте еще раз</target>
+      </trans-unit>
+      <trans-unit id="My Events">
+        <source>My Events</source>
+        <note>Title of NavBar for one of EventsListViewController</note>
+        <target>Мои события</target>
+      </trans-unit>
+      <trans-unit id="NO DATA">
+        <source>NO DATA</source>
+        <note>When event doesn't have some info propertios like 'email', 'phone', 'site'</note>
+        <target>НЕТ ДАННЫХ</target>
+      </trans-unit>
+      <trans-unit id="NOT SELECTED">
+        <source>NOT SELECTED</source>
+        <note>Placeholder used in SetupCityController</note>
+        <target>НЕ ВЫБРАН</target>
+      </trans-unit>
+      <trans-unit id="One more ..">
+        <source>One more ..</source>
+        <note>Warning title displayed in SignUp when some fields are not filled</note>
+        <target>Упс ..</target>
+      </trans-unit>
+      <trans-unit id="Open link from email we have sent, with your device">
+        <source>Open link from email we have sent, with your device</source>
+        <note>Message displayed in displayAlertView when work is done and link have sent</note>
+        <target>С вашего устройства откройте ссылку которую мы выслали вам на электронную почту</target>
+      </trans-unit>
+      <trans-unit id="Password does not match the confirm password">
+        <source>Password does not match the confirm password</source>
+        <note>error message of Profile form when password does not match</note>
+        <target>Новые пароли не совпадают!</target>
+      </trans-unit>
+      <trans-unit id="Passwords don't match">
+        <source>Passwords don't match</source>
+        <note>Warning body displayed in SignUp when new passwords are non matched</note>
+        <target>Пароли не совпадают</target>
+      </trans-unit>
+      <trans-unit id="Phone">
+        <source>Phone</source>
+        <note>Label for field 'Phone' used in Create Event Submit form</note>
+        <target>Телефон</target>
+      </trans-unit>
+      <trans-unit id="Place">
+        <source>Place</source>
+        <note>Label for field 'Place' used in Create Event Info form</note>
+        <target>Место</target>
+      </trans-unit>
+      <trans-unit id="Please fill right following fields: ">
+        <source>Please fill right following fields: </source>
+        <note>Prefix of error body displayed when form of Create Event doesn't filled some fields</note>
+        <target>Пожалуйста, измените следующие поля: </target>
+      </trans-unit>
+      <trans-unit id="Price to">
+        <source>Price to</source>
+        <note>Label for field 'Price to' used in Create Event Info form</note>
+        <target>Макс. цена</target>
+      </trans-unit>
+      <trans-unit id="Push notifications">
+        <source>Push notifications</source>
+        <note>Title of Select Notifications NavBar in Settings</note>
+        <target>Уведомления</target>
+      </trans-unit>
+      <trans-unit id="Registration">
+        <source>Registration</source>
+        <note>Label for field 'Registration' for link used in Create Event Submit form</note>
+        <target>Ссылка на регистрацию</target>
+      </trans-unit>
+      <trans-unit id="SAVE">
+        <source>SAVE</source>
+        <note>Title of button used systemwide</note>
+        <target>СОХРАНИТЬ</target>
+      </trans-unit>
+      <trans-unit id="Save">
+        <source>Save</source>
+        <note>No comment provided by engineer.</note>
+        <target>Сохранить</target>
+      </trans-unit>
+      <trans-unit id="Saved Successfully">
+        <source>Saved Successfully</source>
+        <note>'Saved Successfully' used after profile form saved correctly</note>
+        <target>Сохранено</target>
+      </trans-unit>
+      <trans-unit id="Search">
+        <source>Search</source>
+        <note>Placeholder used in UISearchController</note>
+        <target>Найти</target>
+      </trans-unit>
+      <trans-unit id="Select Your City">
+        <source>Select Your City</source>
+        <note>Title of NavBar on SelectCityController</note>
+        <target>Выберить свой город</target>
+      </trans-unit>
+      <trans-unit id="Select city">
+        <source>Select city</source>
+        <note>Button title for select city on Menu</note>
+        <target>Выбрать город</target>
+      </trans-unit>
+      <trans-unit id="Select currency">
+        <source>Select currency</source>
+        <note>Title of NavBar in SelectCurrency page</note>
+        <target>Выбрать валюту</target>
+      </trans-unit>
+      <trans-unit id="Select date">
+        <source>Select date</source>
+        <note>Label for datepicker in FeedFilters</note>
+        <target>Фильтр по дате</target>
+      </trans-unit>
+      <trans-unit id="Select time">
+        <source>Select time</source>
+        <note>Label for timepicker in FeedFilters</note>
+        <target>Фильтр по времени</target>
+      </trans-unit>
+      <trans-unit id="Settings">
+        <source>Settings</source>
+        <note>Title of Settings NavBar</note>
+        <target>Настройки</target>
+      </trans-unit>
+      <trans-unit id="Start to type place or address">
+        <source>Start to type place or address</source>
+        <note>Placeholder used in UISearchController of SelectPlaceViewController</note>
+        <target>Начните вводить место или адрес</target>
+      </trans-unit>
+      <trans-unit id="Take Photo">
+        <source>Take Photo</source>
+        <note>Action name in actiosList for image upload</note>
+        <target>Открыть камеру</target>
+      </trans-unit>
+      <trans-unit id="There are no events for selected interests">
+        <source>There are no events for selected interests</source>
+        <note>Help message displayed when there is no events in Feed</note>
+        <target>Нет событий для выбранных интересов</target>
+      </trans-unit>
+      <trans-unit id="Tickets link">
+        <source>Tickets link</source>
+        <note>Label for field 'Tickets link' used in Create Event Submit form</note>
+        <target>Ссылка на билет</target>
+      </trans-unit>
+      <trans-unit id="Time end">
+        <source>Time end</source>
+        <note>Label for field 'Time end' used in Create Event Info form</note>
+        <target>Время до</target>
+      </trans-unit>
+      <trans-unit id="Time from">
+        <source>Time from</source>
+        <note>Label for field 'Time from' used in Create Event Info form</note>
+        <target>Время с</target>
+      </trans-unit>
+      <trans-unit id="Type again">
+        <source>Type again</source>
+        <note>Warning title displayed in SignUp when new passwords are non matched</note>
+        <target>Введите снова</target>
+      </trans-unit>
+      <trans-unit id="Unsubscribe from">
+        <source>Unsubscribe from</source>
+        <note>Title of actionsList action displayed on every event for unsubscribe from event's interest</note>
+        <target>Отписаться от</target>
+      </trans-unit>
+      <trans-unit id="User cancelled login.">
+        <source>User cancelled login.</source>
+        <note>Warning body displayed after Facebook's form when Login is canceled</note>
+        <target>Пользователь отменил логин.</target>
+      </trans-unit>
+      <trans-unit id="Warning">
+        <source>Warning</source>
+        <note>Title of error message for Profile form</note>
+        <target>Предупреждение</target>
+      </trans-unit>
+      <trans-unit id="Website">
+        <source>Website</source>
+        <note>Label for field 'Website' used in Create Event Submit form</note>
+        <target>Сайт</target>
+      </trans-unit>
+      <trans-unit id="You don’t have any favourited event">
+        <source>You don’t have any favourited event</source>
+        <note>Help message displayed when there is no events in Favourites</note>
+        <target>Нет событий для выбранных интересов</target>
+      </trans-unit>
+      <trans-unit id="You have not created any event yet">
+        <source>You have not created any event yet</source>
+        <note>Help message displayed when there is no events in My Events</note>
+        <target>Вы ещё не создали ни одного события</target>
+      </trans-unit>
+      <trans-unit id="from">
+        <source>from</source>
+        <note>Word 'from' used in Event min price</note>
+        <target>от</target>
+      </trans-unit>
+      <trans-unit id="km">
+        <source>km</source>
+        <note>Distance 'km'</note>
+        <target>км</target>
+      </trans-unit>
+      <trans-unit id="m">
+        <source>m</source>
+        <note>Distance metric 'm'</note>
+        <target>м</target>
+      </trans-unit>
+      <trans-unit id="mi">
+        <source>mi</source>
+        <note>Distance 'mi'</note>
+        <target>миль</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
