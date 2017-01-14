@@ -223,12 +223,16 @@
                                         </variation>
                                     </view>
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwK-QV-qH7" userLabel="Button View">
-                                        <rect key="frame" x="62" y="142" width="187" height="44"/>
+                                        <rect key="frame" x="35.5" y="142" width="240" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5r-Q2-Gb7">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="44"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="H5r-Q2-Gb7">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="h5h-a2-w0C"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <state key="normal" title="Create Account">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -244,7 +248,6 @@
                                             <constraint firstItem="H5r-Q2-Gb7" firstAttribute="top" secondItem="JwK-QV-qH7" secondAttribute="top" id="bYx-1P-ZWs"/>
                                             <constraint firstAttribute="trailing" secondItem="H5r-Q2-Gb7" secondAttribute="trailing" id="mPN-Ue-RgU"/>
                                             <constraint firstAttribute="bottom" secondItem="H5r-Q2-Gb7" secondAttribute="bottom" id="p5b-rp-ohK"/>
-                                            <constraint firstAttribute="width" constant="187" id="q8l-P7-1p5"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
@@ -310,10 +313,10 @@
                                 <rect key="frame" x="32" y="619" width="311" height="42"/>
                                 <subviews>
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqm-0c-WkU" userLabel="Info links">
-                                        <rect key="frame" x="43" y="0.0" width="225" height="17"/>
+                                        <rect key="frame" x="8" y="0.0" width="295" height="17"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znt-xK-Cdw">
-                                                <rect key="frame" x="0.0" y="-6" width="98" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znt-xK-Cdw">
+                                                <rect key="frame" x="0.0" y="-6" width="133" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -323,20 +326,20 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beb-of-gd3" userLabel="Line for Privacy">
-                                                <rect key="frame" x="0.0" y="16" width="98" height="1"/>
+                                                <rect key="frame" x="0.0" y="16" width="133" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="i8w-gr-FHS"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kjk-RP-n1T">
-                                                <rect key="frame" x="108" y="-2" width="9" height="21"/>
+                                                <rect key="frame" x="143" y="-2" width="9" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdk-1C-LhQ">
-                                                <rect key="frame" x="127" y="-6" width="98" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdk-1C-LhQ">
+                                                <rect key="frame" x="162" y="-6" width="133" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -346,7 +349,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQY-Z5-LiC" userLabel="Line for Terms">
-                                                <rect key="frame" x="127" y="16" width="98" height="1"/>
+                                                <rect key="frame" x="162" y="16" width="133" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="kRW-sK-VQ5"/>
@@ -383,6 +386,8 @@
                                 <constraints>
                                     <constraint firstItem="86a-KA-dyT" firstAttribute="centerX" secondItem="sxR-Zi-AZh" secondAttribute="centerX" id="0jN-mE-L9Y"/>
                                     <constraint firstAttribute="bottom" secondItem="86a-KA-dyT" secondAttribute="bottom" constant="6" id="4XD-SR-khc"/>
+                                    <constraint firstItem="Aqm-0c-WkU" firstAttribute="leading" secondItem="sxR-Zi-AZh" secondAttribute="leading" constant="8" id="LM9-Bm-o8m"/>
+                                    <constraint firstAttribute="trailing" secondItem="Aqm-0c-WkU" secondAttribute="trailing" constant="8" id="Ojb-wy-azM"/>
                                     <constraint firstItem="Aqm-0c-WkU" firstAttribute="top" secondItem="sxR-Zi-AZh" secondAttribute="top" id="d1n-uB-dof"/>
                                     <constraint firstItem="Aqm-0c-WkU" firstAttribute="centerX" secondItem="sxR-Zi-AZh" secondAttribute="centerX" id="fxJ-VL-O0O"/>
                                     <constraint firstItem="86a-KA-dyT" firstAttribute="top" secondItem="Aqm-0c-WkU" secondAttribute="bottom" constant="5" id="g8Q-UA-iQD"/>
@@ -744,6 +749,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="126" height="44"/>
                                                 <color key="backgroundColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="SFUIDisplay-Regular" family="SF UI Display" pointSize="16"/>
+                                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -828,10 +834,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5Q-Pc-Z9F" userLabel="Footer View">
-                                <rect key="frame" x="32" y="542" width="311" height="119"/>
+                                <rect key="frame" x="32" y="544" width="311" height="117"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SR7-Vy-cai" userLabel="SignUp Link View">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="53"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you have no account in Happ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNn-bu-0CE">
                                                 <rect key="frame" x="46.5" y="3" width="218.5" height="19"/>
@@ -839,24 +845,18 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s1y-Be-wga">
-                                                <rect key="frame" x="78" y="22" width="156" height="31"/>
-                                                <state key="normal">
-                                                    <attributedString key="attributedTitle">
-                                                        <fragment content="click here to SIGN UP">
-                                                            <attributes>
-                                                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <font key="NSFont" metaFont="system" size="16"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1y-Be-wga">
+                                                <rect key="frame" x="85" y="22" width="142" height="29"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
+                                                <state key="normal" title="click here to SIGN UP">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="clickedSignUpButton:" destination="yE1-eK-aIX" eventType="touchUpInside" id="cJe-8Z-9Sm"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oe7-oy-gg4">
-                                                <rect key="frame" x="78" y="45" width="156" height="1"/>
+                                                <rect key="frame" x="85" y="43" width="142" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="jQa-dz-9D0"/>
@@ -902,10 +902,10 @@
                                         </variation>
                                     </view>
                                     <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pap-O1-quV" userLabel="Info links">
-                                        <rect key="frame" x="43" y="77" width="225" height="17"/>
+                                        <rect key="frame" x="8" y="75" width="295" height="17"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxt-IY-mOw">
-                                                <rect key="frame" x="0.0" y="-6" width="98" height="29"/>
+                                                <rect key="frame" x="0.0" y="-6" width="132.5" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -915,20 +915,23 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1n-to-NVL" userLabel="Line for Privacy">
-                                                <rect key="frame" x="0.0" y="16" width="98" height="1"/>
+                                                <rect key="frame" x="0.0" y="16" width="132.5" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ris-Yz-WYW"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjJ-rh-YbR">
-                                                <rect key="frame" x="108" y="-2" width="9" height="21"/>
+                                                <rect key="frame" x="142.5" y="-2" width="10" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="10" id="lZT-J8-UwA"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVx-Mc-SX7">
-                                                <rect key="frame" x="127" y="-6" width="98" height="29"/>
+                                                <rect key="frame" x="162.5" y="-6" width="132.5" height="29"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -938,7 +941,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dC0-uS-nIe" userLabel="Line for Terms">
-                                                <rect key="frame" x="127" y="16" width="98" height="1"/>
+                                                <rect key="frame" x="162.5" y="16" width="132.5" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="aQd-w6-BOi"/>
@@ -965,7 +968,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© happapp.info 2017, All Rights Reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVk-rZ-nZt">
-                                        <rect key="frame" x="39.5" y="99" width="233.5" height="14"/>
+                                        <rect key="frame" x="39.5" y="97" width="233.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -976,9 +979,11 @@
                                     <constraint firstItem="Pap-O1-quV" firstAttribute="top" secondItem="SR7-Vy-cai" secondAttribute="bottom" constant="24" id="9l3-Lj-Al6"/>
                                     <constraint firstAttribute="trailing" secondItem="SR7-Vy-cai" secondAttribute="trailing" id="LA3-pJ-5Db"/>
                                     <constraint firstItem="DVk-rZ-nZt" firstAttribute="top" secondItem="Pap-O1-quV" secondAttribute="bottom" constant="5" id="We8-yw-Opk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pap-O1-quV" secondAttribute="trailing" constant="8" id="eu7-Bc-mfz"/>
                                     <constraint firstItem="DVk-rZ-nZt" firstAttribute="centerX" secondItem="L5Q-Pc-Z9F" secondAttribute="centerX" id="fIW-N5-4pt"/>
                                     <constraint firstItem="SR7-Vy-cai" firstAttribute="top" secondItem="L5Q-Pc-Z9F" secondAttribute="top" id="fzT-d3-4vC"/>
                                     <constraint firstItem="Pap-O1-quV" firstAttribute="centerX" secondItem="L5Q-Pc-Z9F" secondAttribute="centerX" id="goG-cO-atv"/>
+                                    <constraint firstItem="Pap-O1-quV" firstAttribute="leading" secondItem="L5Q-Pc-Z9F" secondAttribute="leading" constant="8" id="oJV-hp-Xc6"/>
                                     <constraint firstAttribute="bottom" secondItem="DVk-rZ-nZt" secondAttribute="bottom" constant="6" id="wJ4-Dg-Qi6"/>
                                     <constraint firstItem="SR7-Vy-cai" firstAttribute="leading" secondItem="L5Q-Pc-Z9F" secondAttribute="leading" id="wta-9W-O6Z"/>
                                 </constraints>
@@ -1279,6 +1284,7 @@ to become an Organizer</string>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66f-uj-cAY">
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="44"/>
+                                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <state key="normal" image="ok">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>

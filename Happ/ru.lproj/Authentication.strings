@@ -1,4 +1,7 @@
 
+/* Class = "UIButton"; normalTitle = "click here to SIGN UP"; ObjectID = "s1y-Be-wga"; */
+"s1y-Be-wga.normalTitle" = "Зарегистрироваться сейчас";
+
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "1J4-Rx-lRV"; */
 "1J4-Rx-lRV.normalTitle" = "Войти";
 
@@ -76,3 +79,5 @@
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "znt-xK-Cdw"; */
 "znt-xK-Cdw.normalTitle" = "Политика конфиденциальности";
+
+"s1y-Be-wga.normalTitle" = "Зарегистрироваться сейчас";

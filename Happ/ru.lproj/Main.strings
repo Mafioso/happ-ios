@@ -1,3 +1,29 @@
+
+/* Class = "UILabel"; text = "Subinterest Title"; ObjectID = "2n7-FB-h6t"; */
+"2n7-FB-h6t.text" = "Subinterest Title";
+
+/* Class = "UILabel"; text = "Full Name"; ObjectID = "39J-1p-L39"; */
+"39J-1p-L39.text" = "PROFILE.NAME";
+
+/* Class = "UILabel"; text = "HAPP V2.0
+© All Rights Reserved, 2016"; ObjectID = "5Gw-ov-CEj"; */
+"5Gw-ov-CEj.text" = "HAPP V2.0
+© Все права защищены, 2017";
+
+/* Class = "UILabel"; text = "You can upload profile photo
+ in Settings > Profile"; ObjectID = "8gQ-QC-FxN"; */
+"8gQ-QC-FxN.text" = "Вы можете загрузить фотографию
+ в Настройки > Профиль";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "KfH-CI-Kv9"; */
+"KfH-CI-Kv9.text" = "TITLE";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "LfQ-jC-u4n"; */
+"LfQ-jC-u4n.text" = "SUBTITLE";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "tQz-pw-NCc"; */
+"tQz-pw-NCc.text" = "SUBTITLE";
+
 /* Class = "UILabel"; text = "SETTINGS"; ObjectID = "EAA-hr-IBR"; */
 "EAA-hr-IBR.text" = "НАСТРОЙКИ";
 
@@ -37,9 +63,7 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "hV0-L1-ic1"; */
 "hV0-L1-ic1.normalTitle" = "СОХРАНИТЬ";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "ig2-wv-KEy"; */
-"ig2-wv-KEy.normalTitle" = "СОХРАНИТЬ";
-
 /* Class = "UILabel"; text = "Select Interest"; ObjectID = "lMf-lK-kDh"; */
 "lMf-lK-kDh.text" = "Выбрать Интересы";
+
 

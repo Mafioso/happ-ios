@@ -256,3 +256,12 @@
 /* Distance 'mi' */
 "mi" = "миль";
 
+/* Title of tab bar for EventsMap */
+"Map" = "Карта";
+
+/* Title of tab bar */
+"Analytics" = "Аналитика";
+
+/* Title of tab bar */
+"Pro-Functions" = "Про-функционал";
+

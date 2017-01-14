@@ -19,7 +19,7 @@ let loc_auth_warning_title_empty_fields = NSLocalizedString("One more ..", comme
 class SignUpController: UIViewController {
     
     var viewModel: AuthenticationViewModel!
-    
+
     
     // outlets
     @IBOutlet weak var constraintFormToBottomLayout: NSLayoutConstraint!

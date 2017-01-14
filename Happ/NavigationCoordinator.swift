@@ -25,6 +25,10 @@ class HappNavigationController: UINavigationController {
 }
 
 
+let loc_map = NSLocalizedString("Map", comment: "Title of tab bar for EventsMap")
+let loc_analytics = NSLocalizedString("Analytics", comment: "Title of tab bar")
+let loc_pro_functions = NSLocalizedString("Pro-Functions", comment: "Title of tab bar")
+// "Add Event"
 
 
 class HappMainTabBarController: UITabBarController {
@@ -45,16 +49,16 @@ class HappMainTabBarController: UITabBarController {
         let tabFavourite = UINavigationController()
         // let tabChat = HappNavigationController()
 
-        tabExplore.tabBarItem = UITabBarItem(title: "Explore",
+        tabExplore.tabBarItem = UITabBarItem(title: loc_explore,
                                           image: UIImage(named: "tab-explore"),
                                           selectedImage: nil)
-        tabMap.tabBarItem = UITabBarItem(title: "Map",
+        tabMap.tabBarItem = UITabBarItem(title: loc_map,
                                       image: UIImage(named: "tab-map"),
                                       selectedImage: nil)
-        tabFeed.tabBarItem = UITabBarItem(title: "Feed",
+        tabFeed.tabBarItem = UITabBarItem(title: loc_feed,
                                        image: UIImage(named: "tab-feed"),
                                        selectedImage: nil)
-        tabFavourite.tabBarItem = UITabBarItem(title: "Favourite",
+        tabFavourite.tabBarItem = UITabBarItem(title: loc_favourite,
                                             image: UIImage(named: "tab-favourite"),
                                             selectedImage: nil)
         /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
@@ -100,16 +104,16 @@ class HappManagerTabBarController: UITabBarController {
         let tabAddEvent = HappNavigationController()
         // let tabChat = HappNavigationController()
 
-        tabAnalytics.tabBarItem = UITabBarItem(title: "Analytics",
+        tabAnalytics.tabBarItem = UITabBarItem(title: loc_analytics,
                                              image: UIImage(named: "tab-analytics"),
                                              selectedImage: nil)
-        tabProFunctions.tabBarItem = UITabBarItem(title: "Pro-Functions",
+        tabProFunctions.tabBarItem = UITabBarItem(title: loc_pro_functions,
                                          image: UIImage(named: "tab-profunctions"),
                                          selectedImage: nil)
-        tabMyEvents.tabBarItem = UITabBarItem(title: "My Events",
+        tabMyEvents.tabBarItem = UITabBarItem(title: loc_my_events,
                                           image: UIImage(named: "tab-feed"),
                                           selectedImage: nil)
-        tabAddEvent.tabBarItem = UITabBarItem(title: "Add Event",
+        tabAddEvent.tabBarItem = UITabBarItem(title: loc_my_events_create,
                                                image: UIImage(named: "tab-favourite"),
                                                selectedImage: nil)
         /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
