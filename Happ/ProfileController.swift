@@ -36,6 +36,7 @@ class ProfileController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var imageProfileImage: UIImageView!
     @IBOutlet weak var activityIndicatorImageUploading: UIActivityIndicatorView!
     @IBOutlet weak var viewImagePlaceholder: UIView!
+    @IBOutlet weak var viewImagePlaceholderBackground: UIImageView!
     @IBOutlet weak var textFieldFullName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPhone: UITextField!
@@ -88,6 +89,9 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         self.extMakeStatusBarDefault()
         self.extMakeNavBarVisible()
     }
+    override func viewDidLayoutSubviews() {
+        self.viewImagePlaceholderBackground.extRoundCorners(.AllCorners, radius: 10)
+    }
 
 
 
@@ -99,10 +103,11 @@ class ProfileController: UIViewController, UITextFieldDelegate {
         if let date = profile.date_of_birth {
             buttonSelectBirthday.titleLabel?.text = HappDateFormats.ISOFormat.toString(date)
         }
+        segmentedFieldGender.selectedSegmentIndex = profile.gender
         textFieldPasswordNew.text = ""
         textFieldPasswordOld.text = ""
         textFieldPasswordConfirm.text = ""
-        
+
 
         viewImagePlaceholder.hidden = false
         if let image = self.viewModel.avatar {

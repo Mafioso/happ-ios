@@ -38,50 +38,57 @@ class HappMainTabBarController: UITabBarController {
     var navigateFeedTab: NavigationFunc
     var navigateFavouriteTab: NavigationFunc
 
+    enum Tabs: Int {
+        case Feed = 0
+        case Favourite = 1
+        case Explore = 2
+        case Map = 3
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tabBar.tintColor = UIColor.happOrangeColor()
 
-        let tabExplore = UINavigationController()
-        let tabMap = UINavigationController()
         let tabFeed = UINavigationController()
         let tabFavourite = UINavigationController()
+        let tabExplore = UINavigationController()
+        let tabMap = UINavigationController()
         // let tabChat = HappNavigationController()
 
+        tabFeed.tabBarItem = UITabBarItem(title: loc_feed,
+                                          image: UIImage(named: "tab-feed"),
+                                          selectedImage: nil)
+        tabFavourite.tabBarItem = UITabBarItem(title: loc_favourite,
+                                               image: UIImage(named: "tab-favourite"),
+                                               selectedImage: nil)
         tabExplore.tabBarItem = UITabBarItem(title: loc_explore,
                                           image: UIImage(named: "tab-explore"),
                                           selectedImage: nil)
         tabMap.tabBarItem = UITabBarItem(title: loc_map,
                                       image: UIImage(named: "tab-map"),
                                       selectedImage: nil)
-        tabFeed.tabBarItem = UITabBarItem(title: loc_feed,
-                                       image: UIImage(named: "tab-feed"),
-                                       selectedImage: nil)
-        tabFavourite.tabBarItem = UITabBarItem(title: loc_favourite,
-                                            image: UIImage(named: "tab-favourite"),
-                                            selectedImage: nil)
+
         /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
                                        image: UIImage(named: "tab-chat"),
                                        selectedImage: nil)
         */
 
-        self.viewControllers = [tabExplore, tabMap, tabFeed, tabFavourite]//, tabChat]
+        self.viewControllers = [tabFeed, tabFavourite, tabExplore, tabMap]//, tabChat]
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         let selectedAt = tabBar.items!.indexOf(item)!
-        switch selectedAt {
-        case 0:
-            self.navigateExploreTab?()
-        case 1:
-            self.navigateMapTab?()
-        case 2:
+        let tab = Tabs(rawValue: selectedAt)!
+        switch tab {
+        case .Feed:
             self.navigateFeedTab?()
-        case 3:
+        case .Favourite:
             self.navigateFavouriteTab?()
-        default:
-            break
+        case .Explore:
+            self.navigateExploreTab?()
+        case .Map:
+            self.navigateMapTab?()
         }
     }
 }
@@ -386,7 +393,7 @@ class NavigationCoordinator {
         viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
         viewController.viewModel = viewModel
 
-        let tabIndex = 2
+        let tabIndex = HappMainTabBarController.Tabs.Feed.rawValue
         self.tabBarController.selectedIndex = tabIndex
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
@@ -409,7 +416,7 @@ class NavigationCoordinator {
         viewModel.displayEmptyList = self.showEmptyEventsList(viewController)
         viewController.viewModel = viewModel
 
-        let tabIndex = 3
+        let tabIndex = HappMainTabBarController.Tabs.Favourite.rawValue
         self.tabBarController.selectedIndex = tabIndex
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
@@ -472,7 +479,7 @@ class NavigationCoordinator {
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("Explore") as! EventsExploreViewController
         viewController.viewModel = viewModel
 
-        let tabIndex = 0
+        let tabIndex = HappMainTabBarController.Tabs.Explore.rawValue
         self.tabBarController.selectedIndex = tabIndex
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
@@ -489,7 +496,7 @@ class NavigationCoordinator {
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventsMap") as! EventsMapViewController
         viewController.viewModel = viewModel
 
-        let tabIndex = 1
+        let tabIndex = HappMainTabBarController.Tabs.Map.rawValue
         self.tabBarController.selectedIndex = tabIndex
         self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
         self.navigationController.viewControllers = [viewController]
