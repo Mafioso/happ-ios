@@ -204,28 +204,20 @@ TIME RANGE</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="105"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoT-gu-SqK">
-                                                                <rect key="frame" x="10" y="-8" width="80" height="80"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pr-UL-M9G">
-                                                                        <rect key="frame" x="8" y="8" width="64" height="64"/>
-                                                                        <color key="backgroundColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="64" id="b1L-Xv-2kL"/>
-                                                                            <constraint firstAttribute="width" constant="64" id="rwd-nI-Jt8"/>
-                                                                        </constraints>
-                                                                        <state key="normal" image="wallet"/>
-                                                                        <connections>
-                                                                            <action selector="clickedPriceButton:" destination="ONx-gR-b0p" eventType="touchUpInside" id="Zpl-c6-JTQ"/>
-                                                                        </connections>
-                                                                    </button>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="4pr-UL-M9G" firstAttribute="centerY" secondItem="qoT-gu-SqK" secondAttribute="centerY" id="46S-ZB-S5O"/>
-                                                                    <constraint firstAttribute="height" constant="80" id="eXm-Z3-eu1"/>
-                                                                    <constraint firstItem="4pr-UL-M9G" firstAttribute="centerX" secondItem="qoT-gu-SqK" secondAttribute="centerX" id="k42-rK-gpy"/>
-                                                                    <constraint firstAttribute="width" constant="80" id="qFZ-z5-ewU"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="18" y="0.0" width="64" height="64"/>
                                                             </view>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pr-UL-M9G">
+                                                                <rect key="frame" x="18" y="0.0" width="64" height="64"/>
+                                                                <color key="backgroundColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="64" id="b1L-Xv-2kL"/>
+                                                                    <constraint firstAttribute="width" constant="64" id="rwd-nI-Jt8"/>
+                                                                </constraints>
+                                                                <state key="normal" image="wallet"/>
+                                                                <connections>
+                                                                    <action selector="clickedPriceButton:" destination="ONx-gR-b0p" eventType="touchUpInside" id="Zpl-c6-JTQ"/>
+                                                                </connections>
+                                                            </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-6Z-ebi">
                                                                 <rect key="frame" x="0.0" y="76" width="100" height="29"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
@@ -234,13 +226,17 @@ TIME RANGE</string>
                                                             </label>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="z9K-6Z-ebi" firstAttribute="top" secondItem="qoT-gu-SqK" secondAttribute="bottom" constant="4" id="83U-bL-Ujm"/>
+                                                            <constraint firstItem="qoT-gu-SqK" firstAttribute="height" secondItem="4pr-UL-M9G" secondAttribute="height" id="5oO-E3-DAp"/>
+                                                            <constraint firstItem="qoT-gu-SqK" firstAttribute="width" secondItem="4pr-UL-M9G" secondAttribute="width" id="L8p-Eu-eWv"/>
                                                             <constraint firstAttribute="bottom" secondItem="z9K-6Z-ebi" secondAttribute="bottom" id="U8D-Hw-Fza"/>
                                                             <constraint firstItem="qoT-gu-SqK" firstAttribute="centerX" secondItem="XiV-ui-ram" secondAttribute="centerX" id="UWt-bB-Ypc"/>
+                                                            <constraint firstItem="z9K-6Z-ebi" firstAttribute="top" secondItem="4pr-UL-M9G" secondAttribute="bottom" constant="12" id="Xmf-vz-X4H"/>
                                                             <constraint firstItem="z9K-6Z-ebi" firstAttribute="leading" secondItem="XiV-ui-ram" secondAttribute="leading" id="Yd3-0U-1Tc"/>
+                                                            <constraint firstItem="qoT-gu-SqK" firstAttribute="top" secondItem="XiV-ui-ram" secondAttribute="top" id="Zvo-Re-qXf"/>
+                                                            <constraint firstItem="4pr-UL-M9G" firstAttribute="centerX" secondItem="XiV-ui-ram" secondAttribute="centerX" id="apI-AW-n1u"/>
                                                             <constraint firstAttribute="trailing" secondItem="z9K-6Z-ebi" secondAttribute="trailing" id="bC3-zu-91b"/>
+                                                            <constraint firstItem="4pr-UL-M9G" firstAttribute="top" secondItem="XiV-ui-ram" secondAttribute="top" id="oX6-56-yBJ"/>
                                                             <constraint firstAttribute="width" constant="100" id="sOP-WZ-txv"/>
-                                                            <constraint firstItem="qoT-gu-SqK" firstAttribute="top" secondItem="XiV-ui-ram" secondAttribute="top" constant="-8" id="sUK-gO-k31"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -257,6 +253,9 @@ TIME RANGE</string>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-BO-BMx" userLabel="Place">
                                                         <rect key="frame" x="19" y="0.0" width="100" height="105"/>
                                                         <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFv-Qg-kKP">
+                                                                <rect key="frame" x="18" y="0.0" width="64" height="64"/>
+                                                            </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Iz-Pg-39D">
                                                                 <rect key="frame" x="18" y="0.0" width="64" height="64"/>
                                                                 <color key="backgroundColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -281,9 +280,13 @@ TIME RANGE</string>
                                                             <constraint firstItem="jVj-n0-shs" firstAttribute="leading" secondItem="Mz6-BO-BMx" secondAttribute="leading" id="3bK-nZ-vEf"/>
                                                             <constraint firstItem="jVj-n0-shs" firstAttribute="top" secondItem="9Iz-Pg-39D" secondAttribute="bottom" constant="12" id="5Jk-Tf-SLR"/>
                                                             <constraint firstAttribute="width" constant="100" id="J2Q-1Y-fmz"/>
+                                                            <constraint firstItem="fFv-Qg-kKP" firstAttribute="height" secondItem="9Iz-Pg-39D" secondAttribute="height" id="JTD-ZZ-zwu"/>
                                                             <constraint firstAttribute="trailing" secondItem="jVj-n0-shs" secondAttribute="trailing" id="K6j-Bq-Pyu"/>
+                                                            <constraint firstItem="fFv-Qg-kKP" firstAttribute="centerX" secondItem="Mz6-BO-BMx" secondAttribute="centerX" id="d8i-iV-EFs"/>
                                                             <constraint firstAttribute="bottom" secondItem="jVj-n0-shs" secondAttribute="bottom" id="ftn-w9-bxz"/>
+                                                            <constraint firstItem="fFv-Qg-kKP" firstAttribute="width" secondItem="9Iz-Pg-39D" secondAttribute="width" id="jMB-wv-diO"/>
                                                             <constraint firstItem="9Iz-Pg-39D" firstAttribute="centerX" secondItem="Mz6-BO-BMx" secondAttribute="centerX" id="qN9-f0-ofU"/>
+                                                            <constraint firstItem="fFv-Qg-kKP" firstAttribute="top" secondItem="Mz6-BO-BMx" secondAttribute="top" id="qwb-9c-Z3a"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -512,6 +515,7 @@ TIME RANGE</string>
                         <outlet property="pageControllImages" destination="wre-SC-raT" id="dwd-i9-Elq"/>
                         <outlet property="tableViewInfo" destination="dVj-4g-XZE" id="vhv-YO-r14"/>
                         <outlet property="viewContainerTitle" destination="SKq-8h-syE" id="vR5-lN-R08"/>
+                        <outlet property="viewHighlightInfoLocation" destination="fFv-Qg-kKP" id="jQL-iN-uSJ"/>
                         <outlet property="viewHighlightInfoPrice" destination="qoT-gu-SqK" id="ggP-1c-2oJ"/>
                         <outlet property="viewImagesPlaceholder" destination="6Y8-jG-NeL" id="tCp-8m-Y35"/>
                     </connections>
@@ -812,7 +816,7 @@ TIME RANGE</string>
         <scene sceneID="r6Q-gs-EfQ">
             <objects>
                 <collectionViewController storyboardIdentifier="Explore" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V5t-Ey-1kH" customClass="EventsExploreViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WF8-24-nmu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WF8-24-nmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

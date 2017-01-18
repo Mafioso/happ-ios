@@ -39,6 +39,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var viewHighlightInfoPrice: UIView!
     @IBOutlet weak var buttonInfoPrice: UIButton!
     @IBOutlet weak var buttonInfoLocation: UIButton!
+    @IBOutlet weak var viewHighlightInfoLocation: UIView!
     @IBOutlet weak var buttonUpvote: UIButton!
     @IBOutlet weak var buttonWantToGo: UIButton!
 
@@ -58,7 +59,7 @@ class EventDetailsController: UIViewController {
         self.viewModel.onClickOpenMap()
     }
     @IBAction func clickedPriceButton(sender: UIButton) {
-        
+        self.openWebPage()
     }
     @IBAction func clickedDateRangeButton(sender: UIButton) {
     }
@@ -86,6 +87,8 @@ class EventDetailsController: UIViewController {
 
         self.extMakeStatusBarWhite()
         self.extMakeNavBarHidden()
+
+        self.animateInfo()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
@@ -94,7 +97,9 @@ class EventDetailsController: UIViewController {
         self.extMakeNavBarVisible()
     }
     override func viewDidLayoutSubviews() {
-        [buttonInfoDate, buttonInfoPrice, buttonInfoLocation, viewHighlightInfoPrice]
+        [buttonInfoDate, buttonInfoPrice, buttonInfoLocation]
+            .forEach { $0.extMakeCircle() }
+        [viewHighlightInfoPrice, viewHighlightInfoLocation]
             .forEach { $0.extMakeCircle() }
         [buttonUpvote, buttonWantToGo]
             .forEach { $0.extMakeCircle() }
@@ -125,6 +130,7 @@ class EventDetailsController: UIViewController {
         }
 
         [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { $0.backgroundColor = color }
+        [viewHighlightInfoLocation, viewHighlightInfoPrice].forEach { v in v.backgroundColor = color; v.alpha = 0.2; }
         [labelPriceMinimum, labelLocation, labelDateRange].forEach { $0.textColor = color }
 
         labelTitle.text = event.title
@@ -149,6 +155,18 @@ class EventDetailsController: UIViewController {
         }
     }
 
+    func animateInfo() {
+        var trans: [UIView] = []
+        trans.append(viewHighlightInfoLocation)
+        if self.viewModel.event.web_site != nil {
+            trans.append(self.viewHighlightInfoPrice)
+        }
+        UIView.animate(duration: 1, delay: 0, options: [UIViewAnimationOptions.Repeat, UIViewAnimationOptions.Autoreverse],
+                       animations: { [unowned self] in
+                        trans.forEach { $0.transform = CGAffineTransformMakeScale(1.2, 1.2) }
+            })
+        print("!animate!")
+    }
 
 }
 
