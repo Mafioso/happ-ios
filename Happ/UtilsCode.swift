@@ -304,7 +304,7 @@ enum HappDateFormats: String {
     case ISOFormatEnd = "HH:mm:ss"
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
     case DateTime = "yyyy-MM-dd HH:mm:ss"
-    case EventOnFeed = "MMMM d"
+    case EventOnFeed = "d MMMM"
     case EventOnCreation = "MMMM d, yyyy"
     case OnlyTime = "HH:mm"
 

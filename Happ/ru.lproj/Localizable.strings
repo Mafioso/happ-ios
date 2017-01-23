@@ -185,7 +185,7 @@
 "Saved Successfully" = "Сохранено";
 
 /* Placeholder used in UISearchController */
-"Search" = "Найти";
+"Search" = "По названию";
 
 /* Title of NavBar on SelectCityController */
 "Select Your City" = "Выберить свой город";
@@ -197,10 +197,10 @@
 "Select currency" = "Выбрать валюту";
 
 /* Label for datepicker in FeedFilters */
-"Select date" = "Фильтр по дате";
+"Select date" = "По дате";
 
 /* Label for timepicker in FeedFilters */
-"Select time" = "Фильтр по времени";
+"Select time" = "По времени";
 
 /* Title of Settings NavBar */
 "Settings" = "Настройки";
