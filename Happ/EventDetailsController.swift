@@ -177,56 +177,39 @@ extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.viewModel.event_info_types().count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        let event = self.viewModel.event
-        var text: String? = nil
-        var iconName: String?
-
-        switch indexPath.row {
-        case 0:
-            text = event.web_site
-            iconName = "icon-web"
-        case 1:
-            text = event.email
-            iconName = "icon-email"
-        case 2:
-            text = event.phones.first
-            iconName = "icon-phone"
-        default:
-            break
-        }
+        let info_type = self.viewModel.event_info_types()[indexPath.row]
+        let info_type_icon = info_type.icon()
 
         // clear
-        cell.viewWithTag(924)?.removeFromSuperview()
+        cell.viewWithTag(222)?.removeFromSuperview()
         cell.textLabel?.text = ""
 
         // add
-        if iconName != nil {
-            let icon = UIImage(named: iconName!)
-            let iconView = UIImageView(image: icon)
-            iconView.frame = CGRect(x: 36, y: 13, width: 20, height: 20)
-            iconView.tag = 924
-            cell.addSubview(iconView)
-        }
+        let icon = UIImage(named: info_type_icon)
+        let iconView = UIImageView(image: icon)
+        iconView.frame = CGRect(x: 36, y: 13, width: 20, height: 20)
+        iconView.tag = 222
+        cell.addSubview(iconView)
 
-        cell.textLabel?.text = (text == nil || text!.isEmpty) ? loc_event_details_no_data : text!.uppercaseString
+        cell.textLabel?.text = self.viewModel.event_info(info_type)!.lowercaseString
 
         return cell
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
-        case 0:
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let info_type = self.viewModel.event_info_types()[indexPath.row]
+        switch info_type {
+        case .Site:
             self.openWebPage()
-        case 1:
+        case .Email:
             self.sendEmail()
-        case 2:
+        case .Phone:
             self.dialPhone()
-        default:
-            break
         }
     }
 
@@ -248,7 +231,7 @@ extension EventDetailsController: EmailSenderProtocol {
         self.sendEmail(email)
     }
     private func getReceipientsAddresses() -> [String] {
-        if let email = self.viewModel.event.email {
+        if let email = self.viewModel.event_info(.Email) {
             return [email]
         } else {
             return []
@@ -257,20 +240,18 @@ extension EventDetailsController: EmailSenderProtocol {
 
     // CALL TO
     func dialPhone() {
-        if let number = self.viewModel.event.phones.first {
-            let tel = NSURL(string: "tel://\(number)")!
-            UIApplication.sharedApplication().openURL(tel)
-        }
+        let number = self.viewModel.event_info(.Phone)!
+        let parsed = Utils.matchesForRegexInText("[0-9]", text: number).joinWithSeparator("")
+        let tel = NSURL(string: "tel://\(parsed)")!
+        UIApplication.sharedApplication().openURL(tel)
     }
 
     // OPEN SITE
     func openWebPage() {
-        if let url = self.viewModel.event.web_site {
-            // TODO
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
-        }
+        let url = self.viewModel.event_info(.Site)!
+        self.viewModel.openWebPage!(url: url)
     }
-    
+
 
     // SHARE
     func shareEvent() {

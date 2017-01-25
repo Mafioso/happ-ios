@@ -6,7 +6,7 @@
 "1J4-Rx-lRV.normalTitle" = "Войти";
 
 /* Class = "UITextField"; placeholder = "password"; ObjectID = "7Lc-S0-8gx"; */
-"7Lc-S0-8gx.placeholder" = "пароль";
+"7Lc-S0-8gx.placeholder" = "Пароль";
 
 /* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "86a-KA-dyT"; */
 "86a-KA-dyT.text" = "© happapp.info 2017, Все права защищены";
@@ -18,7 +18,7 @@
 "H5r-Q2-Gb7.normalTitle" = "Создать учетную запись";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "IRe-yC-dG9"; */
-"IRe-yC-dG9.normalTitle" = "Правила пользования";
+"IRe-yC-dG9.normalTitle" = "Правила";
 
 /* Class = "UILabel"; text = "•"; ObjectID = "Kjk-RP-n1T"; */
 "Kjk-RP-n1T.text" = "•";
@@ -30,7 +30,7 @@
 "NNt-0F-KPj.text" = "Пожалуйста, подтвердите свой почтовый ящик";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "PVx-Mc-SX7"; */
-"PVx-Mc-SX7.normalTitle" = "Правила пользования";
+"PVx-Mc-SX7.normalTitle" = "Правила";
 
 /* Class = "UITextField"; placeholder = "repeat password"; ObjectID = "QKE-ZV-Tp0"; */
 "QKE-ZV-Tp0.placeholder" = "Повторить пароль";
@@ -60,7 +60,7 @@
 "gjJ-rh-YbR.text" = "•";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "jxt-IY-mOw"; */
-"jxt-IY-mOw.normalTitle" = "Политика конфиденциальности";
+"jxt-IY-mOw.normalTitle" = "Политика";
 
 /* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "kMf-z4-tu5"; */
 "kMf-z4-tu5.text" = "© happapp.info 2017, Все права защищены";
@@ -69,15 +69,15 @@
 "lbL-la-kE3.placeholder" = "email";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "pdk-1C-LhQ"; */
-"pdk-1C-LhQ.normalTitle" = "Правила пользования";
+"pdk-1C-LhQ.normalTitle" = "Правила";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "sh1-bk-xZp"; */
-"sh1-bk-xZp.normalTitle" = "Политика конфиденциальности";
+"sh1-bk-xZp.normalTitle" = "Политика";
 
 /* Class = "UITextField"; placeholder = "username"; ObjectID = "v59-X3-jNt"; */
 "v59-X3-jNt.placeholder" = "Имя пользователя";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "znt-xK-Cdw"; */
-"znt-xK-Cdw.normalTitle" = "Политика конфиденциальности";
+"znt-xK-Cdw.normalTitle" = "Политика";
 
 "s1y-Be-wga.normalTitle" = "Зарегистрироваться сейчас";

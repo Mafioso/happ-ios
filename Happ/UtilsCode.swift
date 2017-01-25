@@ -22,6 +22,7 @@ let loc_error = NSLocalizedString("ERROR", comment: "capitalized error")
 let loc_from = NSLocalizedString("from", comment: "Word 'from' used in Event min price")
 
 
+
 enum EmailSenderCompose {
     case Simple(subject: String, body: String, receipants: [String])
 }
@@ -202,6 +203,19 @@ struct Utils {
     }
     static func isNilOrZero(value: Int?) -> Bool {
         return (value == nil || value! == 0)
+    }
+    static func matchesForRegexInText(regex: String, text: String) -> [String] {
+        
+        do {
+            let regex = try NSRegularExpression(pattern: regex, options: [])
+            let nsString = text as NSString
+            let results = regex.matchesInString(text,
+                                                options: [], range: NSMakeRange(0, nsString.length))
+            return results.map { nsString.substringWithRange($0.range)}
+        } catch let error as NSError {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
     }
 }
 

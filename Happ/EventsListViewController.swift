@@ -213,7 +213,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
                     let actionList = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
                     if let interestName = event.interests.first?.title {
-                        let actionUnsubscribe = UIAlertAction(title: loc_event_action_unsubscribe + "\"\(interestName)\"", style: .Default, handler: {_ in
+                        let actionUnsubscribe = UIAlertAction(title: loc_event_action_unsubscribe + " " + interestName.uppercaseString, style: .Default, handler: {_ in
                             vm.onUnsubscribeFromInterest()
                         })
                         actionList.addAction(actionUnsubscribe)

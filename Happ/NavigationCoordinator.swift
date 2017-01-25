@@ -15,6 +15,8 @@ import RealmSwift
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
 typealias NavigationFuncWithObject = ((object: Object) -> Void)?
+typealias NavigationFuncWithURL = ((url: String) -> Void)?
+
 
 class HappNavigationController: UINavigationController {
     override func viewDidLoad() {
@@ -312,12 +314,17 @@ class NavigationCoordinator {
         }
     }
 
-    func showWebView(webPage: HappWebPages) -> NavigationFunc{
+    func showWebView(webPage: HappWebPages) -> NavigationFunc {
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
             viewController.link = webPage.getURL()
             self.navigationController.pushViewController(viewController, animated: true)
         }
+    }
+    func openWebPage(url: String) {
+        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+        viewController.link = url
+        self.navigationController.pushViewController(viewController, animated: true)
     }
 
 
@@ -514,6 +521,7 @@ class NavigationCoordinator {
         let viewModel = EventViewModel(forID: forID)
         viewModel.navigateBack = self.goBack
         viewModel.navigateEventDetailsMap = self.showEventDetailsMap
+        viewModel.openWebPage = self.openWebPage
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel

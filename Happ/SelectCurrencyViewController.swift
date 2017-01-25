@@ -52,7 +52,7 @@ class SelectCurrencyViewController: UITableViewController {
         let currency = self.viewModel.currencies[indexPath.row]
 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = currency.name
+        cell.textLabel!.text = currency.code.uppercaseString
 
         return cell
     }
