@@ -27,16 +27,12 @@ enum EmailSenderCompose {
     case Simple(subject: String, body: String, receipants: [String])
 }
 
-protocol EmailSenderProtocol: MFMailComposeViewControllerDelegate {
-    func sendEmail(composed: EmailSenderCompose)
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult)
-}
-extension EmailSenderProtocol where Self: UIViewController {
-    func sendEmail(email: EmailSenderCompose) {
+extension MFMailComposeViewControllerDelegate where Self: UIViewController {
+    func extMailComposeController(sendEmail email: EmailSenderCompose) {
         var receipants: [String]
         var subject: String
         var body: String
-        
+
         switch email {
         case .Simple(let _subject, let _body, let _receipants):
             receipants = _receipants
@@ -67,11 +63,7 @@ extension EmailSenderProtocol where Self: UIViewController {
             UIApplication.sharedApplication().openURL(mailToURL)
         }
     }
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
-    }
 }
-
 
 
 struct ScreenSize
@@ -216,6 +208,9 @@ struct Utils {
             print("invalid regex: \(error.localizedDescription)")
             return []
         }
+    }
+    static func parsePhoneNumber(raw: String) -> String {
+        return self.matchesForRegexInText("(\\+?+[0-9])", text: raw).joinWithSeparator("")
     }
 }
 
