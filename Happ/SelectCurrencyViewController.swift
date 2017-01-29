@@ -12,7 +12,7 @@ let loc_change_currency = NSLocalizedString("Change currency", comment: "Title o
 let loc_save = NSLocalizedString("Save", comment: "")
 
 
-class SelectCurrencyViewController: UITableViewController {
+class SelectCurrencyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var viewModel: SettingsViewModel!  {
         didSet {
@@ -20,18 +20,32 @@ class SelectCurrencyViewController: UITableViewController {
         }
     }
 
-    
+
+    @IBAction func clickedSaveButton(sender: UIButton) {
+        self.viewModel.onSaveCurrency()
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buttonSave: UIButton!
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initNavigationBarItems()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
+        self.automaticallyAdjustsScrollViewInsets = false
+
+        self.initNavBarItems()
         self.viewModelDidUpdate()
     }
 
 
 
     func viewModelDidUpdate() {
-        self.updateTableWithSelected()
+        self.tableView.reloadData()
     }
 
     private func bindToViewModel() {
@@ -45,10 +59,10 @@ class SelectCurrencyViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.currencies.count
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let currency = self.viewModel.currencies[indexPath.row]
 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
@@ -56,12 +70,12 @@ class SelectCurrencyViewController: UITableViewController {
 
         return cell
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
         let currency = self.viewModel.currencies[selectedIndexPath.row]
         self.viewModel.onSelectCurrency(currency)
     }
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
         if  let currency_id = self.viewModel.state.currencyID,
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first,
@@ -82,22 +96,18 @@ class SelectCurrencyViewController: UITableViewController {
             let atRow = self.viewModel.currencies.indexOf(currency)
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
             // enable Save button
-            self.navigationItem.rightBarButtonItem!.enabled = true
+            self.buttonSave.enabled = true
 
         } else {
-            self.navigationItem.rightBarButtonItem!.enabled = false
+            self.buttonSave.enabled = false
         }
     }
 
-    private func initNavigationBarItems() {
+    private func initNavBarItems() {
         self.navigationItem.title = loc_change_currency
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-back"), style: .Plain, target: self, action: #selector(handleClickNavBarBack))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: loc_save, style: .Plain, target: self, action: #selector(handleClickNavBarSave))
     }
     func handleClickNavBarBack() {
         self.viewModel.navigateBack?()
-    }
-    func handleClickNavBarSave() {
-        self.viewModel.onSaveCurrency()
     }
 }

@@ -711,7 +711,7 @@ class NavigationCoordinator {
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
-    
+
     func showSelectCurrencyValue(parentViewController: SelectCurrencyValueDelegate) -> NavigationFunc {
         return {
             let model = SelectCurrencyValueViewModel()

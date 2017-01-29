@@ -144,9 +144,10 @@ extension UIColor { // copyright https://gist.github.com/yannickl/16f0ed38f0698d
 
 extension UITableViewCell {
     func extSetHighlighted() {
-        self.textLabel?.backgroundColor = UIColor.clearColor()
         self.textLabel?.textColor = UIColor.happOrangeColor()
         self.backgroundColor = UIColor.happOrangeHighlightColor()
+        self.textLabel?.backgroundColor = UIColor.clearColor()
+        //NOTE: above ordering is matter
 
         let imageHapp = UIImage(named: "icon-happ-orange")
         self.imageView?.image = imageHapp
