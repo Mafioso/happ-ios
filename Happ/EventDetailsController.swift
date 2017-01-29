@@ -252,7 +252,7 @@ extension EventDetailsController: MFMailComposeViewControllerDelegate {
 
     // OPEN SITE
     func openWebPage() {
-        let url = self.viewModel.event_info(.Site)!
+        guard let url = self.viewModel.event_info(.Site) else { return }
         self.viewModel.openWebPage!(url: url)
     }
 
