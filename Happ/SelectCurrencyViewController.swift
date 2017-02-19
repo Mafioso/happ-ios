@@ -59,7 +59,13 @@ class SelectCurrencyViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
         let currency = self.viewModel.currencies[selectedIndexPath.row]
+        let cell = tableView.cellForRowAtIndexPath(selectedIndexPath)
+        cell!.extSetHighlighted()
         self.viewModel.onSelectCurrency(currency)
+    }
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell!.extUnsetHighlighted()
     }
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -67,11 +73,12 @@ class SelectCurrencyViewController: UITableViewController {
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first,
             let selectedRow = self.viewModel.currencies.indexOf(currency)
             where selectedRow == indexPath.row {
-
-            cell.extSetHighlighted()
-        } else {
-            cell.extUnsetHighlighted()
-        }
+                cell.extSetHighlighted()
+                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            } else {
+                tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                cell.extUnsetHighlighted()
+            }
     }
 
 
@@ -80,7 +87,9 @@ class SelectCurrencyViewController: UITableViewController {
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first {
             // select row
             let atRow = self.viewModel.currencies.indexOf(currency)
+            
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            
             // enable Save button
             self.navigationItem.rightBarButtonItem!.enabled = true
 

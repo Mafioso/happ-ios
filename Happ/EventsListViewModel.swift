@@ -206,9 +206,12 @@ struct EventsListSectionedState: EventsListSectionedStateProtocol {
         return HappDateFormats.EventOnFeed.toString(date).uppercaseString
     }
     func getSectionsCount() -> Int {
+        print("section count",self.sections.count)
         return self.sections.count
     }
+    
     func getSectionEventsCount(sectionIndex: Int) -> Int {
+        print("section event count",self.sections.count)
         return self.sectionsValue[sectionIndex].count
     }
     func getSectionEvent(indexPath: NSIndexPath) -> EventModel {

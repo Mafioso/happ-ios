@@ -85,7 +85,7 @@ DESCRIPTION";
 "zb8-8L-bhJ.normalTitle" = "Я хочу сходить!";
 
 /* Class = "UIButton"; selectedTitle = "Already booked"; ObjectID = "zb8-8L-bhJ"; */
-"zb8-8L-bhJ.selectedTitle" = "Вы добавили событие";
+"zb8-8L-bhJ.selectedTitle" = "Событие добавлено";
 
 /* Class = "UILabel"; text = "Only Free Events"; ObjectID = "zfV-sb-KNv"; */
 "zfV-sb-KNv.text" = "Только бесплатные";
