@@ -316,13 +316,15 @@ class NavigationCoordinator {
 
     func showWebView(webPage: HappWebPages) -> NavigationFunc {
         return {
-            let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+            let viewController = WebViewController()
+            viewController.hidesBottomBarWhenPushed = true
             viewController.link = webPage.getURL()
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
     func openWebPage(url: String) {
-        let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("WebView") as! WebViewController
+        let viewController = WebViewController()
+        viewController.hidesBottomBarWhenPushed = true
         viewController.link = url
         self.navigationController.pushViewController(viewController, animated: true)
     }
@@ -709,7 +711,7 @@ class NavigationCoordinator {
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
-    
+
     func showSelectCurrencyValue(parentViewController: SelectCurrencyValueDelegate) -> NavigationFunc {
         return {
             let model = SelectCurrencyValueViewModel()

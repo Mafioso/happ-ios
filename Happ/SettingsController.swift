@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import MessageUI
 
 let loc_settings = NSLocalizedString("Settings", comment: "Title of Settings NavBar")
 
 
-class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProtocol {
+class SettingsController: UIViewController, UITableViewDelegate, MFMailComposeViewControllerDelegate {
 
     var viewModel: SettingsViewModel!
 
@@ -71,7 +72,10 @@ class SettingsController: UIViewController, UITableViewDelegate, EmailSenderProt
     private func sendEmailToHapp() {
         let happAddress = DefaultParameters.getValue(.HappEmailAddress) as! String
         let email = EmailSenderCompose.Simple(subject: "Hello Happ!", body: "", receipants: [happAddress])
-        self.sendEmail(email)
+        self.extMailComposeController(sendEmail: email)
+    }
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 
     private func initNavigationBarItems() {

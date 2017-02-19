@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 let loc_event_details_no_data = NSLocalizedString("NO DATA", comment: "When event doesn't have some info propertios like 'email', 'phone', 'site'")
 
@@ -216,9 +217,12 @@ extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension EventDetailsController: EmailSenderProtocol {
+extension EventDetailsController: MFMailComposeViewControllerDelegate {
 
     // EMAIL TO
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     func sendEmail() {
         let event = self.viewModel.event
         let user = ProfileService.getUserProfile()
@@ -228,7 +232,7 @@ extension EventDetailsController: EmailSenderProtocol {
         let body = "Hi, my name is \(user.fullname)."
         
         let email = EmailSenderCompose.Simple(subject: subject, body: body, receipants: receipants)
-        self.sendEmail(email)
+        self.extMailComposeController(sendEmail: email)
     }
     private func getReceipientsAddresses() -> [String] {
         if let email = self.viewModel.event_info(.Email) {
@@ -241,14 +245,14 @@ extension EventDetailsController: EmailSenderProtocol {
     // CALL TO
     func dialPhone() {
         let number = self.viewModel.event_info(.Phone)!
-        let parsed = Utils.matchesForRegexInText("[0-9]", text: number).joinWithSeparator("")
+        let parsed = Utils.parsePhoneNumber(number)
         let tel = NSURL(string: "tel://\(parsed)")!
         UIApplication.sharedApplication().openURL(tel)
     }
 
     // OPEN SITE
     func openWebPage() {
-        let url = self.viewModel.event_info(.Site)!
+        guard let url = self.viewModel.event_info(.Site) else { return }
         self.viewModel.openWebPage!(url: url)
     }
 

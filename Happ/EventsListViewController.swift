@@ -19,6 +19,8 @@ enum ReuseIdentifier: String {
     case Header = "SectionHeader"
 }
 
+
+
 class FeedViewController: EventsListViewControllerPrototype<FeedViewModel> {
     init() {
         super.init()
@@ -30,6 +32,8 @@ class FavouriteViewController: EventsListViewControllerPrototype<FavouritesViewM
         super.init()
     }
 }
+
+
 
 protocol EventsListDelegate {
     func willDisplayItemsEventsList()
@@ -137,6 +141,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
         self.tableView.estimatedRowHeight = EventTableCell.estimatedHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.separatorStyle = .None
     }
 
 
