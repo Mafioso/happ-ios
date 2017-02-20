@@ -77,15 +77,12 @@ class SelectCurrencyViewController: UIViewController, UITableViewDataSource, UIT
         cell!.extSetHighlighted()
         self.viewModel.onSelectCurrency(currency)
     }
-<<<<<<< HEAD
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell!.extUnsetHighlighted()
     }
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-=======
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
->>>>>>> b75b3c6ff359e519f866be5d5a96791b9e7a2c5e
 
         if  let currency_id = self.viewModel.state.currencyID,
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first,
