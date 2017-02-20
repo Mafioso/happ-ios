@@ -73,19 +73,30 @@ class SelectCurrencyViewController: UIViewController, UITableViewDataSource, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
         let currency = self.viewModel.currencies[selectedIndexPath.row]
+        let cell = tableView.cellForRowAtIndexPath(selectedIndexPath)
+        cell!.extSetHighlighted()
         self.viewModel.onSelectCurrency(currency)
     }
+<<<<<<< HEAD
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell!.extUnsetHighlighted()
+    }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+=======
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+>>>>>>> b75b3c6ff359e519f866be5d5a96791b9e7a2c5e
 
         if  let currency_id = self.viewModel.state.currencyID,
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first,
             let selectedRow = self.viewModel.currencies.indexOf(currency)
             where selectedRow == indexPath.row {
-
-            cell.extSetHighlighted()
-        } else {
-            cell.extUnsetHighlighted()
-        }
+                cell.extSetHighlighted()
+                tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            } else {
+                tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                cell.extUnsetHighlighted()
+            }
     }
 
 
@@ -94,7 +105,9 @@ class SelectCurrencyViewController: UIViewController, UITableViewDataSource, UIT
             let currency = self.viewModel.currencies.filter({ $0.id == currency_id }).first {
             // select row
             let atRow = self.viewModel.currencies.indexOf(currency)
+            
             self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: atRow!, inSection: 0), animated: false, scrollPosition: UITableViewScrollPosition.Middle)
+            
             // enable Save button
             self.buttonSave.enabled = true
 

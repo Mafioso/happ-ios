@@ -13,8 +13,9 @@ import PromiseKit
 
 private let HostServer = "http://happ.skills.kz"
 private let HostLocal = "http://127.0.0.1:8000"
-private let HostPC = "http://192.168.43.179:8000"
-let Host = HostServer
+private let HostPC = "http://happ.westeurope.cloudapp.azure.com/"
+private let HostPC2 = "http://happ.dev:8888"
+let Host = HostPC
 let HostAPI = Host + "/api/v1/"
 
 

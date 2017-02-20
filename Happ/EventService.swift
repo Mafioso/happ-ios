@@ -150,6 +150,12 @@ class EventService {
                     }
                     results.forEach() { event in
                         let inst = Mapper<EventModel>().map(event)
+//                        inst!.datetimes.forEach(){ datetime in
+//                            let datetimes = List<EventDateModel>()
+//                            datetimes.append(datetime)
+//                            inst!.datetimes = datetimes
+//                            realm.add(inst!, update: true)
+//                        }
                         realm.add(inst!, update: true) // `update: true` - not required
                     }
                 }
