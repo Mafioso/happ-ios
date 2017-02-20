@@ -223,7 +223,7 @@ enum HappEventPriceFormats {
     case EventMinPrice(event: EventModel)
     case EventPriceRange(event: EventModel)
     case EventPriceRangeWithoutBreak(event: EventModel)
-    
+
     func toString() -> String {
         switch self {
         case .EventMinPrice(let event):
@@ -275,19 +275,19 @@ enum HappEventDateFormats {
         switch self {
         case .EventDate(let datetime):
             let formatter = NSDateFormatter()
-            formatter.dateFormat = "MMMM d"
+            formatter.dateFormat = "d MMMM"
             return formatter.stringFromDate(datetime.start_time)
 
         case .EventDetails(let first_datetime, let last_datetime):
             let dayFormatter = NSDateFormatter()
-            dayFormatter.dateFormat = "MMM d"
+            dayFormatter.dateFormat = "d MMM"
             let timeFormatter = NSDateFormatter()
             timeFormatter.dateFormat = "HH:mm"
             return "\(dayFormatter.stringFromDate(first_datetime.start_time)) – \(dayFormatter.stringFromDate(last_datetime.end_time)) \n\(timeFormatter.stringFromDate(first_datetime.start_time)) – \(timeFormatter.stringFromDate(last_datetime.end_time))"
-        
+
         case .EventManage(let first_datetime, let last_datetime):
             let dayFormatter = NSDateFormatter()
-            dayFormatter.dateFormat = "MMM d"
+            dayFormatter.dateFormat = "d MMM"
             let timeFormatter = NSDateFormatter()
             timeFormatter.dateFormat = "HH:mm"
             let yearFormatter = NSDateFormatter()
@@ -314,7 +314,7 @@ enum HappDateFormats: String {
     case ISOFormat = "yyyy-MM-dd'T'HH:mm:ss"
     case DateTime = "yyyy-MM-dd HH:mm:ss"
     case EventOnFeed = "d MMMM"
-    case EventOnCreation = "MMMM d, yyyy"
+    case EventOnCreation = "d MMMM, yyyy"
     case OnlyTime = "HH:mm"
 
 

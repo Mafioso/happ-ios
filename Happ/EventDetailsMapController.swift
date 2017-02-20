@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleMaps
+import PromiseKit
+
 
 let loc_event_location = NSLocalizedString("Event location", comment: "Title of EventLocation NavBar")
 
@@ -25,6 +27,8 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     @IBOutlet weak var viewButtonRouteBackground: UIView!
     @IBOutlet weak var viewButtonLocateBackground: UIView!
     @IBOutlet weak var viewMap: GMSMapView!
+    @IBOutlet weak var viewDistanceContainer: UIView!
+    @IBOutlet weak var viewLocationContainer: UIView!
     @IBOutlet weak var buttonRoute: UIButton!
     @IBOutlet weak var buttonLocate: UIButton!
     @IBOutlet weak var imageEventCover: UIImageView!
@@ -34,6 +38,7 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     @IBOutlet weak var labelDistance: UILabel!
     @IBOutlet weak var labelEventLocation: UILabel!
 
+    
     // actions
     @IBAction func clickedOpenEventDetails(sender: UIButton) {
         self.viewModel.onClickOpenEventDetails()
@@ -50,24 +55,23 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     var locationState: MapLocationState! //MapLocationViewControllerProtocol
 
 
+    let constConstraintID = "leadingSuperview"
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initMap()
-        self.initLocation()
         self.initNavItems()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.updateViews()
-        self.extMakeNavBarWhite()
+        self.updateEventInfo()
+        self.initMapView()
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.extMakeNavBarHidden()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -77,57 +81,91 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
         self.onDidMapLayoutSubviews() //MapViewControllerProtocol
     }
 
+    func initMapView() {
+        // initMap
+        // displayEventPoint (add point + zoom)
+        // initLocation -> (add point)
 
-    func zoomToUserCity() {
-        let userCity = ProfileService.getUserCity()
-        CityService.fetchCityLocation(userCity.id)
-            .then { data -> Void in
-                let location = data as! CLLocation
-                self.updateMap(location.coordinate, zoom: 10)
+        let event = self.viewModel.event
+        self.clearMap()
+        self.initMap()
+
+        self.displayMarker(.EventPoint(event: event))
+        self.updateMap(self.markers.last!.position, zoom: 14)
+        
+        firstly { _ -> Promise<CLLocation> in
+            self.getLocation()
+        }
+        .then { location -> Void in
+            self.locationState = MapLocationState(location: location)
+            self.viewModel.location = location
+            self.displayMarker(.MyLocation(location: location))
         }
     }
-    func updateViews() {
+
+    func updateMapView() {
+        // clear map
+        // add Event point
+        // add Direction
+        // add Location point + zoom
+
+        let event = self.viewModel.event
+        self.clearMap()
+        self.displayMarker(.EventPoint(event: event))
+        if let direction = self.viewModel.mapDirection {
+            labelDistance.text = Utils.formatDistance(direction.getDistance(), type: .Metric)
+            labelDistance.layoutIfNeeded()
+            let width = labelDistance.frame.width + CGFloat(15);
+            self.showEventInfoDistance(width)
+            self.displayDirection(direction)
+        }
+        if let location = self.viewModel.location {
+            self.displayMarker(.MyLocation(location: location))
+            self.updateMapLocationViews()
+        } else {
+            self.updateMap(self.markers.last!.position, zoom: 14)
+        }
+    }
+
+    func updateRouteOnMap() {
+        firstly { _ -> Promise<CLLocation> in
+            self.getLocation()
+        }
+        .then { myLocation -> Promise<MapDirection> in
+            self.locationState = MapLocationState(location: myLocation)
+            self.viewModel.location = myLocation
+            
+            let eventLocation = CLLocation(geopoint: self.viewModel.event.geopoint!)
+            return MapService.fetchDirection(myLocation, to: eventLocation)
+        }
+        .then { direction -> Void in
+            self.viewModel.mapDirection = direction
+        }
+        .then { _ -> Void in
+            self.updateMapView()
+        }
+    }
+
+    func updateEventInfo() {
         let event = self.viewModel.event
         
         if let imageURL = event.images.first?.getURL() {
             imageEventCover.hnk_setImageFromURL(imageURL)
+            imageEventCover.layer.masksToBounds = true
         }
         labelEventTitle.text = event.title
         labelEventPrice.text = HappEventPriceFormats.EventMinPrice(event: event).toString()
         labelEventDate.text = HappEventDateFormats.EventDate(datetime: event.datetimes.first!).toString()
         labelEventLocation.text = event.address
-        labelDistance.text = "? " + loc_kilometer
-
-        self.clearMap()
-        if let location = self.viewModel.location {
-            self.displayMarker(.MyLocation(location: location))
-        }
-        if let direction = self.viewModel.mapDirection {
-            self.displayDirection(direction)
-            labelDistance.text = Utils.formatDistance(direction.getDistance(), type: .Metric)
-        }
-        EventService.updateGeoPointIfNotExists(event)
-            .then { updEvent -> Void in
-                self.displayMarker(.EventPoint(event: updEvent))
-                self.updateMap(self.markers.last!.position, zoom: 14)
-            }
-            .error { err in
-                switch err {
-                case EventLocationError.AddressNotFound:
-                    self.extDisplayAlertView("Event location doesn't found on map", title: "Oops")
-                default:
-                    break
-                }
-            }
+        self.hideEventInfoDistance()
     }
 
 
     private func bindToViewModel() {
         self.viewModel.didUpdate = { [weak self] _ in
-            self?.updateViews()
+            self?.updateMapView()
         }
     }
-
 
 
     // implement MapViewControllerProtocol
@@ -141,32 +179,34 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
     func mapView(mapView: GMSMapView, willMove gesture: Bool) {
         self.onWillCameraMove(gesture)
     }
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-        }
+
+
+    private func hideEventInfoDistance() {
+        viewDistanceContainer.hidden = true
+        self.addConstraintToDistanceView(0)
     }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
-        manager.delegate = nil
-        if let location = locations.first {
-            self.locationState = MapLocationState(locationManager: manager, location: location)
-            self.updateMapLocationViews()
-            self.displayMarker(.MyLocation(location: location))
-            self.viewModel.onFoundLocation(location)
-        }
+    private func showEventInfoDistance(width: CGFloat) {
+        viewDistanceContainer.hidden = false
+        self.addConstraintToDistanceView(width)
+    }
+    private func removeConstraintFromDistanceView() {
+        viewLocationContainer.constraints
+            .filter { $0.identifier == constConstraintID }
+            .forEach { $0.active = false }
+    }
+    private func addConstraintToDistanceView(width: CGFloat) {
+        self.removeConstraintFromDistanceView()
+
+        let constraint = NSLayoutConstraint(item: labelEventLocation, attribute: .Leading, relatedBy: .Equal, toItem: viewLocationContainer, attribute: .Leading, multiplier: 1.0, constant: width)
+        constraint.identifier = constConstraintID
+        constraint.active = true
+        viewLocationContainer.addConstraint(constraint)
+        viewLocationContainer.layoutIfNeeded()
     }
 
 
     private func handleClickRoute() {
-        // 1. clear map / markerks & polyline
-        // 2. clear current location
-        // 3. init location -> will init polyline direction
-        // 4. update views
-        self.viewModel.mapDirection = nil
-        self.clearMap()
-        self.initLocation()
-        self.updateViews()
+        self.updateRouteOnMap()
     }
 
     private func initNavItems() {

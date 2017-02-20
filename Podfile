@@ -6,7 +6,8 @@ target 'Happ' do
   use_frameworks!
 
   # Pods for Happ
-  pod 'PromiseKit', '~> 3.4'
+  pod 'PromiseKit', '~> 3.5'
+  pod 'PromiseKit/CoreLocation'
   pod 'RealmSwift'
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON', '2.4.0'

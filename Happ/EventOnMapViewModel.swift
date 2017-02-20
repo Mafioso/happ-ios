@@ -18,11 +18,8 @@ class EventOnMapViewModel: EventViewModel {
     var mapDirection: MapDirection?
     var location: CLLocation?
 
-
     override init() {
         super.init()
-        
-        self.fetchDirection()
     }
 
     convenience init(event: EventModel) {
@@ -40,24 +37,6 @@ class EventOnMapViewModel: EventViewModel {
     func onClickOpenEventDetails() {
         //self.navigateBack?()
         self.navigateEventDetails?(id: self.event.id)
-    }
-    func onFoundLocation(location: CLLocation) {
-        self.location = location
-        self.fetchDirection()
-    }
-
-
-    private func fetchDirection() {
-        guard let myLocation = self.location else { return }
-        EventService.updateGeoPointIfNotExists(self.event)
-            .then { event -> Void in
-                let eventLocation = CLLocation(geopoint: event.geopoint!)
-                MapService.fetchDirection(myLocation, to: eventLocation)
-                    .then { direction -> Void in
-                        self.mapDirection = direction
-                        self.didUpdate?()
-                }
-        }
     }
 }
 

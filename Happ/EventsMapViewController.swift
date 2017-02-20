@@ -190,66 +190,17 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.onWillCameraMove(gesture)
         self.handleChangeMapView()
     }
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse {
-            manager.startUpdatingLocation()
-        }
-    }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
-        manager.delegate = nil
-        if let location = locations.first {
-            self.locationState = MapLocationState(locationManager: manager, location: location)
-            self.updateMapLocationViews()
-            self.displayMarker(.MyLocation(location: location))
-        }
-    }
-
 
     private func displayEventMarkers() {
         let events = self.viewModel.state.items
         print(".displayEvents.count: ", events.count)
 
-        var tmpClusterMarkers: [ClusterMarker] = []
-        let eventPromises: [Promise<Void>] = events.map { event in
-            return Promise { resolve, reject in
-                EventService
-                    .updateGeoPointIfNotExists(event)
-                    .then { event -> Void in
-                        //self.displayMarker(.Event(event: event))
-                        let cm = ClusterMarker(event: event)
-                        tmpClusterMarkers.append(cm)
-                        resolve()
-                    }
-                    .error { err in
-                        switch err {
-                        case EventLocationError.NoAddress:
-                            print(".displayEvent.error", err, event.title)
-                            resolve()
-                        case EventLocationError.AddressNotFound:
-                            print(".displayEvent.error", err, event.title)
-                            resolve()
-                        default:
-                            reject(err)
-                            break;
-                        }
-                    }
-            }
-        }
+        let tmpClusterMarkers = events.map { ClusterMarker(event: $0) }
 
-        when(eventPromises)
-        .then { _ -> Void in
-            self.clusterManager.clearItems()
-            self.clusterManager.addItems(tmpClusterMarkers)
-            self.clusterMarkerks = tmpClusterMarkers
-        }
-        .then { _ -> Void in
-            self.clusterManager.cluster()
-        }
-        .error { err in
-            print(".displayEvents.when.error", err)
-        }
-
+        self.clusterManager.clearItems()
+        self.clusterManager.addItems(tmpClusterMarkers)
+        self.clusterMarkerks = tmpClusterMarkers
+        self.clusterManager.cluster()
     }
     private func displayUserCity() {
         let userCity = ProfileService.getUserCity()
