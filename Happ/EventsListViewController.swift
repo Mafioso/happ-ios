@@ -247,8 +247,9 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // pagination
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if  indexPath.section == self.viewModel.state.getSectionsCount() - 1 &&
-            self.viewModel.willLoadNextDataPage() == true
+        if  indexPath.section >= self.viewModel.state.getSectionsCount() - 1 &&
+            self.viewModel.willLoadNextDataPage() == true &&
+            indexPath.row >= self.tableView(self.tableView, numberOfRowsInSection: indexPath.section) - 1
         {
             self.viewModel.onLoadNextDataPage { asyncState in
                 self.viewModel.state = asyncState
