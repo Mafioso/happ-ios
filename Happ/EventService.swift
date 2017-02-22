@@ -15,10 +15,16 @@ import GoogleMapsCore
 import SwiftyJSON
 
 
-enum EventLocationError: ErrorType {
-    case NoAddress
-    case AddressNotFound
-    case LocateNotAllowed
+enum EventPageTypes {
+    case Favourite
+    case Feed
+    case Explore
+    case Map
+    case MyEvents
+}
+
+enum EventErrors: ErrorType {
+    case MutexWriteDenied
 }
 
 
@@ -28,6 +34,7 @@ class EventService {
 
     static var isLastPageOfFeed: Bool = false
     static var isLastPageOfFavourites: Bool = false
+    static var mutexCurrentPageType: EventPageTypes!
 
 
     class func setLike(eventID: String, value: Bool) {
@@ -51,10 +58,8 @@ class EventService {
         url += (value == true) ? "/upvote/" : "/downvote/"
         return Post(url, parameters: nil)
                 .then { _ -> Promise<Void> in
-                    print(".EventService.setLike.beforeFetch")
                     return self.fetchEvent(eventID)
                 }
-                .then { print(".EventService.setLike.afterFetch!") }
     }
 
     class func updateFavourite(eventID: String, value: Bool) -> Promise<Void> {
@@ -79,22 +84,30 @@ class EventService {
             (onreview ? "" : "&moderation=false") +
             (rejected ? "" : "&rejected=false") +
             (finished ? "" : "&finished=false")
-        
-        return GetPaginated(feedEndpoint, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                let results = data as! [AnyObject]
-                self.isLastPageOfFeed = isLastPage
-                
-                let realm = try! Realm()
-                try! realm.write {
-                    if overwrite {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
+
+        self.mutexCurrentPageType = .MyEvents
+        return Promise { resolve, reject in
+            GetPaginated(feedEndpoint, parameters: nil)
+                .then { (data, isLastPage, count) -> Void in
+                    guard self.mutexCurrentPageType == .MyEvents else {
+                        reject(EventErrors.MutexWriteDenied)
+                        return
                     }
-                    results.forEach() { event in
-                        let inst = Mapper<EventModel>().map(event)
-                        realm.add(inst!, update: true) // `update: true` - not required
+                    let results = data as! [AnyObject]
+                    self.isLastPageOfFeed = isLastPage
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        if overwrite {
+                            let exists = realm.objects(EventModel)
+                            realm.delete(exists)
+                        }
+                        results.forEach() { event in
+                            let inst = Mapper<EventModel>().map(event)
+                            realm.add(inst!, update: true) // `update: true` - not required
+                        }
                     }
+                    resolve()
                 }
         }
     }
@@ -137,66 +150,94 @@ class EventService {
             (endDate != nil ? "&end_date=\(formatter.stringFromDate(endDate!))" : "") +
             (startTime != nil ? "&start_time=\(timeformatter.stringFromDate(startTime!))" : "")
         
-        return GetPaginated(feedEndpoint, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                let results = data as! [AnyObject]
-                self.isLastPageOfFeed = isLastPage
+        self.mutexCurrentPageType = .Feed
+        return Promise { resolve, reject in
+            GetPaginated(feedEndpoint, parameters: nil)
+                .then { (data, isLastPage, count) -> Void in
+                    guard self.mutexCurrentPageType == .Feed else {
+                        reject(EventErrors.MutexWriteDenied)
+                        return
+                    }
 
-                let realm = try! Realm()
-                try! realm.write {
-                    if overwrite {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
+                    let results = data as! [AnyObject]
+                    self.isLastPageOfFeed = isLastPage
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        if overwrite {
+                            let exists = realm.objects(EventModel)
+                            realm.delete(exists)
+                        }
+                        results.forEach() { event in
+                            let inst = Mapper<EventModel>().map(event)
+                            //                        inst!.datetimes.forEach(){ datetime in
+                            //                            let datetimes = List<EventDateModel>()
+                            //                            datetimes.append(datetime)
+                            //                            inst!.datetimes = datetimes
+                            //                            realm.add(inst!, update: true)
+                            //                        }
+                            realm.add(inst!, update: true) // `update: true` - not required
+                        }
                     }
-                    results.forEach() { event in
-                        let inst = Mapper<EventModel>().map(event)
-//                        inst!.datetimes.forEach(){ datetime in
-//                            let datetimes = List<EventDateModel>()
-//                            datetimes.append(datetime)
-//                            inst!.datetimes = datetimes
-//                            realm.add(inst!, update: true)
-//                        }
-                        realm.add(inst!, update: true) // `update: true` - not required
-                    }
-                }
+                    resolve()
             }
+        }
     }
     class func fetchFavourite(page: Int = 1, overwrite: Bool = false) -> Promise<Void> {
         let feedEndpoint = endpoint + "favourites/" + "?page=\(page)"
-        return GetPaginated(feedEndpoint, parameters: nil)
-            .then { (data, isLastPage, count) -> Void in
-                let results = data as! [AnyObject]
-                self.isLastPageOfFavourites = isLastPage
 
-                let realm = try! Realm()
-                try! realm.write {
-                    if overwrite {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
+        self.mutexCurrentPageType = .Favourite
+        return Promise { resolve, reject in
+            GetPaginated(feedEndpoint, parameters: nil)
+                .then { (data, isLastPage, count) -> Void in
+                    guard self.mutexCurrentPageType == .Favourite else {
+                        reject(EventErrors.MutexWriteDenied)
+                        return
                     }
-                    results.forEach() { event in
-                        let inst = Mapper<EventModel>().map(event)
-                        realm.add(inst!, update: true) // `update: true` - not required
+
+                    let results = data as! [AnyObject]
+                    self.isLastPageOfFavourites = isLastPage
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        if overwrite {
+                            let exists = realm.objects(EventModel)
+                            realm.delete(exists)
+                        }
+                        results.forEach() { event in
+                            let inst = Mapper<EventModel>().map(event)
+                            realm.add(inst!, update: true) // `update: true` - not required
+                        }
                     }
+                    resolve()
                 }
         }
     }
     class func fetchExplore(overwrite overwriteValue: Bool = false) -> Promise<Void> {
         let exploreEndpoint = endpoint + "explore/"
-        return Get(exploreEndpoint, parameters: nil)
-            .then { result -> Void in
-                guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
 
-                let realm = try! Realm()
-                try! realm.write {
-                    if overwriteValue {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
+        self.mutexCurrentPageType = .Explore
+        return Promise { resolve, reject in
+            Get(exploreEndpoint, parameters: nil)
+                .then { result -> Void in
+                    guard self.mutexCurrentPageType == .Explore else {
+                        reject(EventErrors.MutexWriteDenied)
+                        return
                     }
-                    results.forEach() { event in
-                        let inst = Mapper<EventModel>().map(event)
-                        realm.add(inst!, update: true) // `update: true` - not required
+                    guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        if overwriteValue {
+                            let exists = realm.objects(EventModel)
+                            realm.delete(exists)
+                        }
+                        results.forEach() { event in
+                            let inst = Mapper<EventModel>().map(event)
+                            realm.add(inst!, update: true) // `update: true` - not required
+                        }
                     }
+                    resolve()
                 }
         }
     }
@@ -206,21 +247,30 @@ class EventService {
             "center": [center.coordinate.longitude, center.coordinate.latitude],
             "radius": radius
         ]
-        return Post(mapEndpoint, parameters: params)
-            .then { result -> Void in
-                guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
 
-                let realm = try! Realm()
-                try! realm.write {
-                    if overwrite {
-                        let exists = realm.objects(EventModel)
-                        realm.delete(exists)
+        self.mutexCurrentPageType = .Map
+        return Promise { resolve, reject in
+            Post(mapEndpoint, parameters: params)
+                .then { result -> Void in
+                    guard self.mutexCurrentPageType == .Map else {
+                        reject(EventErrors.MutexWriteDenied)
+                        return
                     }
-                    results.forEach() { event in
-                        let inst = Mapper<EventModel>().map(event)
-                        realm.add(inst!, update: true) // `update: true` - not required
+                    guard let results = JSON(result).dictionaryValue["results"]?.arrayObject else { return }
+                    
+                    let realm = try! Realm()
+                    try! realm.write {
+                        if overwrite {
+                            let exists = realm.objects(EventModel)
+                            realm.delete(exists)
+                        }
+                        results.forEach() { event in
+                            let inst = Mapper<EventModel>().map(event)
+                            realm.add(inst!, update: true) // `update: true` - not required
+                        }
                     }
-                }
+                    resolve()
+            }
         }
     }
     class func fetchEvent(id: String) -> Promise<Void> {

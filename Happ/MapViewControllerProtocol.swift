@@ -50,6 +50,7 @@ protocol MapViewControllerProtocol: class, GMSMapViewDelegate {
     func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float)
     func displayMarker(mapMarker: MapMarkerType)
     func displayDirection(direction: MapDirection)
+    func zoomToUserCity()
     func clearMap()
     // inputs:
     func onDidMapLayoutSubviews()
@@ -68,6 +69,15 @@ extension MapViewControllerProtocol where Self: UIViewController {
     func updateMap(coordinate: CLLocationCoordinate2D, zoom: Float) {
         let updCamera = GMSCameraUpdate.setTarget(coordinate, zoom: zoom)
         self.getMapView().animateWithCameraUpdate(updCamera)
+    }
+
+    func zoomToUserCity() {
+        let userCity = ProfileService.getUserCity()
+        CityService.fetchCityLocation(userCity.id)
+            .then { data -> Void in
+                let location = data as! CLLocation
+                self.updateMap(location.coordinate, zoom: 13)
+        }
     }
 
     func displayDirection(direction: MapDirection) {

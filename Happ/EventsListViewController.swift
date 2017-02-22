@@ -103,7 +103,7 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
             }
         }
     }
-    
+
     func updateView() {
         guard self.isViewLoaded() else { return }
 
@@ -247,11 +247,9 @@ class EventsListViewControllerPrototype<T: EventsListSectionedViewModelProtocol>
 
     // pagination
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath)
         if  indexPath.section == self.viewModel.state.getSectionsCount() - 1 &&
             self.viewModel.willLoadNextDataPage() == true
         {
-            print("next page", indexPath.section)
             self.viewModel.onLoadNextDataPage { asyncState in
                 self.viewModel.state = asyncState
             }

@@ -206,12 +206,10 @@ struct EventsListSectionedState: EventsListSectionedStateProtocol {
         return HappDateFormats.EventOnFeed.toString(date).uppercaseString
     }
     func getSectionsCount() -> Int {
-        print("section count",self.sections.count)
         return self.sections.count
     }
     
     func getSectionEventsCount(sectionIndex: Int) -> Int {
-        print("section event count",self.sections.count)
         return self.sectionsValue[sectionIndex].count
     }
     func getSectionEvent(indexPath: NSIndexPath) -> EventModel {
@@ -324,7 +322,6 @@ protocol EventsListSectionedViewModelProtocol:
 extension EventsListViewModelProtocol {
     mutating func onLoadNextDataPage(completion: ((Self.StateType) -> Void)) {
         self.state.isFetching = true
-
         let nextPage = self.state.page + 1
         self.fetchData(nextPage, overwrite: nextPage == 1)
             .then { _ -> Void in
@@ -335,13 +332,19 @@ extension EventsListViewModelProtocol {
                 completion(updState)
             }
             .error { err in
-                var updState = self.state
-                updState.items = self.getData()
-                updState.isFetching = false
-                completion(updState)
+                switch err {
+                case EventErrors.MutexWriteDenied:
+                    //do nothing
+                    break
+                default:
+                    var updState = self.state
+                    updState.items = self.getData()
+                    updState.isFetching = false
+                    completion(updState)
+                }
             }
     }
-    
+
     func onClickEvent(event: EventModel) {
         self.navigateEventDetails?(id: event.id)
     }

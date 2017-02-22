@@ -26,7 +26,9 @@ class EventsExploreViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(".Explore.loading.init")
         self.viewModel.onInitLoadingData() { asyncState in
+            print(".Explore.loading.done", EventService.mutexCurrentPageType)
             self.viewModel.state = asyncState
         }
         
@@ -63,6 +65,9 @@ class EventsExploreViewController: UICollectionViewController {
         return 1
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        print(".Explore.rows.number isLoading", self.viewModel.isInitLoadingData())
+
         if self.viewModel.isInitLoadingData() {
             return 10
         } else {
@@ -83,6 +88,8 @@ class EventsExploreViewController: UICollectionViewController {
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EventExploreCollectionViewCell
             let event = self.viewModel.state.items[indexPath.row]
+
+            //print(".cellForItemAt.", event.id, event.invalidated, indexPath.row)
 
             cell.labelTitle.text = event.title
             if let image = event.images.first {

@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import PromiseKit
 
+
 let loc_events_near_you = NSLocalizedString("Events near you", comment: "Title of NavBar for EventsMapViewController")
 
 
@@ -51,19 +52,18 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     var clusterMarkerks: [ClusterMarker] = []
     var locationState: MapLocationState!
     var clusterManager: GMUClusterManager!
+    var progressView: UIProgressView!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. initMap with userCity.geopoint
-        // 2. fetch current location -> display marker myLocation
-        // 3. get Center & Radius -> fetch events -> display cluster marker of events
-        
+        //self.edgesForExtendedLayout = .None
+
         self.initMap()
         self.initMapCluster()
         self.initLocation()
-        
+
         self.initNavBarItems()
     }
     override func viewDidLayoutSubviews() {
@@ -77,7 +77,9 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.displayUserCity()
+        self.zoomToUserCity()
+        self.initProgressBar()
+        self.handleChangeMapView()
         self.extMakeNavBarWhite()
     }
     override func viewWillDisappear(animated: Bool) {
@@ -92,7 +94,6 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
             view.imageCover.extMakeCircle()
         }
     }
-
     func renderer(renderer: GMUClusterRenderer, willRenderMarker marker: GMSMarker) {
         if let clusterMarker = marker.userData as? ClusterMarker {
             let event = clusterMarker.event
@@ -115,6 +116,12 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
             marker.iconView = eventOnMapView
         }
     }
+    func clusterManager(clusterManager: GMUClusterManager, didTapCluster cluster: GMUCluster) {
+        let map = self.getMapView()
+        let newCamera = GMSCameraPosition.cameraWithTarget(cluster.position, zoom: map.camera.zoom + 1)
+        let update = GMSCameraUpdate.setCamera(newCamera)
+        map.moveCamera(update)
+    }
 
     func initMapCluster() {
         let iconGenerator = GMUDefaultClusterIconGenerator()
@@ -124,6 +131,20 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.clusterManager = GMUClusterManager(map: self.getMapView(), algorithm: algorithm,renderer: renderer)
         self.clusterManager.setDelegate(self, mapDelegate: self)
     }
+    func initLocation() {
+        firstly { _ -> Promise<CLLocation> in
+            self.locationState = MapLocationState()
+            return self.getLocation()
+        }
+        .then { myLocation -> Void in
+            self.locationState = MapLocationState(location: myLocation)
+            self.displayMarker(.MyLocation(location: myLocation))
+            self.updateMapLocationViews()
+        }
+        .error { err in
+            print(".initLocation.error", err)
+        }
+    }
 
     func handleChangeMapView() {
         guard !self.viewModel.state.isFetching else { return }
@@ -131,9 +152,42 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         let center = self.getMapCenter()
         let radius = self.getMapRadius()
         print(".mapView.change", center.coordinate, radius)
+        
+        self.startProgressBar()
         self.viewModel.onChangeMapPosition(center, radius: radius) { AsyncState in
             self.viewModel.state = AsyncState
+            self.finishProgressBar()
         }
+    }
+
+    func startProgressBar() {
+        self.progressView.hidden = false
+        self.progressView.progress = 0.0
+        let third: Double = 1/3
+        UIView.animateKeyframesWithDuration(5.0, delay: 0, options: .CalculationModeLinear,animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: third, animations: {
+                self.progressView.progress = 0.1
+            })
+            UIView.addKeyframeWithRelativeStartTime(third, relativeDuration: third, animations: {
+                self.progressView.progress = 0.3
+            })
+            UIView.addKeyframeWithRelativeStartTime(2*third, relativeDuration: third, animations: {
+                self.progressView.progress = 0.5
+            })
+            }, completion: nil)
+    }
+    func finishProgressBar() {
+        self.progressView.layer.removeAllAnimations()
+        UIView.animateWithDuration(1.0, animations: {
+            self.progressView.progress = 1.0
+        }, completion: { _ in
+            self.hideProgressBar()
+        })
+    }
+    func hideProgressBar() {
+        UIView.animateWithDuration(1.0, animations: {
+            self.progressView.hidden = true
+        }, completion: nil)
     }
 
     func updateView() {
@@ -149,8 +203,7 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
     
     // implement FeedFiltersDelegate
     func didChangeFilters(filters: EventsListFiltersState) {
-        self.viewModel.onChangeFilters(filters) // it clear state
-        // TODO self.initDataLoading() // fetch items into state
+        self.viewModel.onChangeFilters(filters) // it clears state
     }
 
 
@@ -164,7 +217,6 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         let bottomLeft = CLLocation(latitude: mapRegion.nearLeft.latitude, longitude: mapRegion.nearLeft.longitude)
         return Int(cameraLocation.distanceFromLocation(bottomLeft))
     }
-
 
     // implementations MapLocationViewControllerProtocol
     func getMapView() -> GMSMapView {
@@ -191,32 +243,35 @@ class EventsMapViewController: UIViewController, MapLocationViewControllerProtoc
         self.handleChangeMapView()
     }
 
+    
     private func displayEventMarkers() {
         let events = self.viewModel.state.items
         print(".displayEvents.count: ", events.count)
 
         let tmpClusterMarkers = events.map { ClusterMarker(event: $0) }
-
         self.clusterManager.clearItems()
         self.clusterManager.addItems(tmpClusterMarkers)
         self.clusterMarkerks = tmpClusterMarkers
         self.clusterManager.cluster()
     }
-    private func displayUserCity() {
-        let userCity = ProfileService.getUserCity()
-        CityService.fetchCityLocation(userCity.id)
-            .then { data -> Void in
-                let location = data as! CLLocation
-                self.updateMap(location.coordinate, zoom: 13)
-        }
-    }
-
 
     private func initNavBarItems() {
         self.navigationItem.title = loc_events_near_you
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-menu"), style: .Plain, target: self, action: #selector(handleClickMenuNavItem))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav-filter-gray"), style: .Plain, target: self, action: #selector(handleClickFilterNavItem))
     }
+    private func initProgressBar() {
+        self.progressView = {
+            let p = UIProgressView(progressViewStyle: .Default)
+            let width = UIScreen.mainScreen().bounds.width
+            p.frame = CGRectMake(0, 64, width, p.frame.height)
+            p.progressTintColor = UIColor.happOrangeColor()
+            self.view.addSubview(p)
+            return p
+        }()
+        print("..progress.init.", self.progressView.frame)
+    }
+    
     func handleClickMenuNavItem() {
         self.viewModel.displaySlideMenu?()
     }

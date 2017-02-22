@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
+
     func application(app: UIApplication, openURL url: NSURL, options: [String: AnyObject]) -> Bool {
         
         if #available(iOS 9.0, *) {

@@ -92,9 +92,10 @@ class EventDetailsMapController: UIViewController, MapLocationViewControllerProt
 
         self.displayMarker(.EventPoint(event: event))
         self.updateMap(self.markers.last!.position, zoom: 14)
-        
+
         firstly { _ -> Promise<CLLocation> in
-            self.getLocation()
+            self.locationState = MapLocationState()
+            return self.getLocation()
         }
         .then { location -> Void in
             self.locationState = MapLocationState(location: location)

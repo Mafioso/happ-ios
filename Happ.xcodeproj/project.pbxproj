@@ -500,6 +500,7 @@
 		52A3C2C51D8F20BF00C31F3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				977D26031E14023B0069EBF1 /* DataProtocol.swift */,
 				525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */,
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
 				528159BB1DFD6BCF002DA272 /* SetupUserCity.swift */,
@@ -532,7 +533,6 @@
 		52A3C2C71D8F20EB00C31F3F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				977D26031E14023B0069EBF1 /* DataProtocol.swift */,
 				5241B6DF1E07D0B600018908 /* Services.swift */,
 				52A3C2C81D8F212E00C31F3F /* AuthenticationService.swift */,
 				5212E69C1D9029DC00729CC8 /* EventService.swift */,

@@ -50,9 +50,22 @@ struct EventsMapViewModel: DataViewModelProtocol {
 
         self.onInitLoadingData(completion)
     }
-    
+
     func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
-        return EventService.fetchMap(self.state.center!, radius: self.state.radius!, overwrite: flagValue)
+        return Promise { resolve, reject in
+            EventService
+                .fetchMap(self.state.center!, radius: self.state.radius!, overwrite: flagValue)
+                .then { resolve() }
+                .error { err in
+                    switch err {
+                    case EventErrors.MutexWriteDenied:
+                        //do nothing
+                        break
+                    default:
+                        reject(err)
+                    }
+                }
+        }
     }
     func getData() -> [EventModel] {
         return Array(EventService.getStored())

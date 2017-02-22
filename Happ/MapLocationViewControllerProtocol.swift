@@ -33,8 +33,6 @@ protocol MapLocationViewControllerProtocol: class, MapViewControllerProtocol, CL
     var locationState: MapLocationState! { get set }
 
     func getLocation() -> Promise<CLLocation>
-    func zoomToUserCity()
-    func initLocation()
     // functions
     func updateMapLocationViews()
     // variables:
@@ -48,18 +46,6 @@ protocol MapLocationViewControllerProtocol: class, MapViewControllerProtocol, CL
 
 extension MapLocationViewControllerProtocol where Self: MapViewControllerProtocol {
 
-    func initLocation() {
-        self.locationState = MapLocationState()
-        self.getLocation()
-            .then { myLocation -> Void in
-                self.locationState = MapLocationState(location: myLocation)
-                self.displayMarker(.MyLocation(location: myLocation))
-                self.updateMapLocationViews()
-            }
-            .error { err in
-                print(".initLocation.error", err)
-            }
-    }
     func getLocation() -> Promise<CLLocation> {
         return CLLocationManager.promise()
     }
@@ -71,15 +57,6 @@ extension MapLocationViewControllerProtocol where Self: MapViewControllerProtoco
         }
         self.getLocateButton().selected = state.isButtonSelected
     }
-    func zoomToUserCity() {
-        let userCity = ProfileService.getUserCity()
-        CityService.fetchCityLocation(userCity.id)
-            .then { data -> Void in
-                let location = data as! CLLocation
-                self.updateMap(location.coordinate, zoom: 10)
-        }
-    }
-
     
     // inputs
     func onWillCameraMove(gesture: Bool) {

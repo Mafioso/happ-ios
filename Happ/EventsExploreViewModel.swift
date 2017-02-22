@@ -54,9 +54,6 @@ struct EventsExploreViewModel: DataViewModelProtocol {
                 completion(updState)
         }
     }
-
-
-
     mutating func onInitLoadingData(completion: ((EventsExploreState) -> Void)) {
         self.state.isFetching = true
         self.fetchData(overwrite: true)
@@ -76,10 +73,22 @@ struct EventsExploreViewModel: DataViewModelProtocol {
         }
     }
     func fetchData(overwrite flagValue: Bool) -> Promise<Void> {
-        return EventService.fetchExplore(overwrite: flagValue)
+        return Promise { resolve, reject in
+            EventService
+                .fetchExplore(overwrite: flagValue)
+                .then { resolve() }
+                .error { err in
+                    switch err {
+                    case EventErrors.MutexWriteDenied:
+                        //do nothing
+                        break
+                    default:
+                        reject(err)
+                    }
+                }
+        }
     }
     func getData() -> [EventModel] {
-        print("..VM.getData", EventService.getExplore().count)
         return EventService.getExplore()
     }
 
