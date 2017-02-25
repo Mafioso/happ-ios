@@ -162,6 +162,21 @@ class InterestModel: Object, Mappable {
     }
 }
 
+class EventInterestModel: InterestModel {
+    dynamic var parent: InterestModel?
+    
+    required convenience init?(_ map: Map) {
+        self.init()
+    }
+
+    override func mapping(map: Map) {
+        id          <- map["id"]
+        parent      <- map["parent"]
+        children    <- (map["children"], ArrayTransform<InterestModel>())
+        title       <- map["title"]
+        image       <- map["image"]
+    }
+}
 
 class GeoPointModel: Object, Mappable {
     dynamic var lat = 0.0
@@ -289,7 +304,7 @@ class RejectionReason: Object, Mappable {
 class EventModel: Object, Mappable {
     dynamic var id = ""
     dynamic var timestamp: NSDate = NSDate()
-    var interests = List<InterestModel>()
+    var interests = List<EventInterestModel>()
     dynamic var currency: CurrencyModel?
     dynamic var author: AuthorModel?
     var datetimes = List<EventDateModel>()
@@ -379,7 +394,7 @@ class EventModel: Object, Mappable {
 
     func mapping(map: Map) {
         id                  <- map["id"]
-        interests           <- (map["interests"], ArrayTransform<InterestModel>())
+        interests           <- (map["interests"], ArrayTransform<EventInterestModel>())
         currency            <- map["currency"]
         author              <- map["author"]
         datetimes           <- (map["datetimes"], ArrayTransform<EventDateModel>())

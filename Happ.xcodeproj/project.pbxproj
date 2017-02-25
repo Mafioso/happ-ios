@@ -17,6 +17,7 @@
 		520096E41E28904C00B34B30 /* EventManageTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 520096E61E28904C00B34B30 /* EventManageTableCell.xib */; };
 		5200970B1E2A74E600B34B30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5200970D1E2A74E600B34B30 /* InfoPlist.strings */; };
 		520097151E2A74EB00B34B30 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 520097171E2A74EB00B34B30 /* Localizable.strings */; };
+		52564E981E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */; };
 		9737E4D61E236717005AF7B7 /* ContextMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D5E9A1E1EBC1E006282A9 /* ContextMaker.m */; };
 		9737E4D71E236733005AF7B7 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D260B1E1409040069EBF1 /* GMUClusterManager.m */; };
 		9737E4D81E236733005AF7B7 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D260F1E1409040069EBF1 /* GMUDefaultClusterIconGenerator.m */; };
@@ -194,6 +195,7 @@
 		5241B6DF1E07D0B600018908 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedDataProtocol.swift; sourceTree = "<group>"; };
+		52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInterestCollectionViewCell.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		525A8AA91D7D4023002C6F46 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				52CD94211DFFF1E6003D0B46 /* SelectCityViewController.xib */,
 				52CD94241DFFF5C2003D0B46 /* SelectCityCell.swift */,
 				52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */,
+				52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				97C184151E22C0F9002CE294 /* EventDetailsMapController.swift in Sources */,
 				97C184161E22C0F9002CE294 /* EventDetailsController.swift in Sources */,
 				97C184171E22C0F9002CE294 /* SettingsController.swift in Sources */,
+				52564E981E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift in Sources */,
 				97C184181E22C0F9002CE294 /* SelectCurrencyViewController.swift in Sources */,
 				97C184191E22C0F9002CE294 /* SelectNotificationsViewController.swift in Sources */,
 				97C1841A1E22C0F9002CE294 /* MenuViewController.swift in Sources */,

@@ -9,7 +9,12 @@
 import UIKit
 import MessageUI
 
-let loc_event_details_no_data = NSLocalizedString("NO DATA", comment: "When event doesn't have some info propertios like 'email', 'phone', 'site'")
+
+let loc_event_age_since = NSLocalizedString("Restricted to", comment: "on Event Details since some year")
+let loc_event_age_and_over = NSLocalizedString(" and over", comment: "final part on Event Details since some year")
+let loc_event_age_range = NSLocalizedString("For an audience of", comment: "on Event Details range of suitable ages")
+let loc_to = NSLocalizedString("to", comment: "to word")
+let loc_years = NSLocalizedString("years", comment: "years word")
 
 
 class EventDetailsController: UIViewController {
@@ -44,6 +49,12 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var buttonUpvote: UIButton!
     @IBOutlet weak var buttonWantToGo: UIButton!
 
+    @IBOutlet weak var viewInterests: UIView!
+    @IBOutlet weak var viewContainerInterests: UIView!
+    @IBOutlet weak var collectionViewInterests: UICollectionView!
+
+    @IBOutlet weak var labelAgeRange: UILabel!
+
     @IBOutlet weak var tableViewInfo: UITableView!
 
     // actions
@@ -74,12 +85,16 @@ class EventDetailsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.collectionViewInterests.dataSource = self
+        self.collectionViewInterests.delegate = self
+
         self.tableViewInfo.dataSource = self
         self.tableViewInfo.delegate = self
 
         [buttonUpvote, buttonWantToGo].forEach { btn in
             btn.imageEdgeInsets.right = 12
         }
+
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -104,6 +119,11 @@ class EventDetailsController: UIViewController {
             .forEach { $0.extMakeCircle() }
         [buttonUpvote, buttonWantToGo]
             .forEach { $0.extMakeCircle() }
+
+        var frame = viewInterests.frame
+        frame.size.height = collectionViewInterests.frame.size.height
+        viewInterests.frame = frame
+        viewInterests.layoutIfNeeded()
     }
 
 
@@ -148,6 +168,17 @@ class EventDetailsController: UIViewController {
 
         buttonWantToGo.selected = event.is_in_favourites
         buttonWantToGo.backgroundColor = event.is_in_favourites ? color : UIColor.happOrangeColor()
+
+        viewContainerInterests.backgroundColor = color
+        
+        if  let defaultMaxAge = DefaultParameters.getValue(.MaxAge) as? Int where
+            event.max_age == defaultMaxAge
+        {
+            labelAgeRange.text = loc_event_age_since + " \(event.min_age)" + loc_event_age_and_over
+        } else {
+            labelAgeRange.text = loc_event_age_range + " \(event.min_age) " + loc_to + " \(event.max_age) " + loc_years
+        }
+        labelAgeRange.textColor = color
     }
 
     private func bindToViewModel() {
@@ -166,11 +197,50 @@ class EventDetailsController: UIViewController {
                        animations: { [unowned self] in
                         trans.forEach { $0.transform = CGAffineTransformMakeScale(1.2, 1.2) }
             })
-        print("!animate!")
     }
 
 }
 
+
+extension EventDetailsController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let event = self.viewModel.event
+        return event.interests.count + 3
+    }
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! EventInterestCollectionViewCell
+        let event = self.viewModel.event
+        let interest = event.interests[ 0]//indexPath.row]
+
+        cell.title.text = interest.title
+        if let image = interest.parent?.image {
+            if let url = image.getURL() {
+                cell.image.hnk_setImageFromURL(url)
+            }
+            if let color = image.color {
+                cell.viewContainer.backgroundColor = UIColor(hexString: color)
+            }
+        }
+        cell.image.extMakeCircle()
+        cell.viewContainer.extMakeCircle()
+
+        switch indexPath.row {
+        case 1:
+            cell.title.text = interest.title + "ASD"
+        case 2:
+            cell.title.text = interest.title + "ASDASD"
+        default:
+            break
+        }
+        
+        return cell
+    }
+}
 
 extension EventDetailsController: UITableViewDataSource, UITableViewDelegate {
 

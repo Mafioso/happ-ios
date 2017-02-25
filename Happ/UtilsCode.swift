@@ -86,6 +86,7 @@ struct DeviceType
 enum DefaultParametersKeyTypes: String {
     case GoogleMapApiKey = "api_key_google_map"
     case HappEmailAddress = "happ_email"
+    case MaxAge = "default_max_age"
 }
 
 class DefaultParameters {
@@ -197,7 +198,7 @@ struct Utils {
         return (value == nil || value! == 0)
     }
     static func matchesForRegexInText(regex: String, text: String) -> [String] {
-        
+
         do {
             let regex = try NSRegularExpression(pattern: regex, options: [])
             let nsString = text as NSString
@@ -211,6 +212,13 @@ struct Utils {
     }
     static func parsePhoneNumber(raw: String) -> String {
         return self.matchesForRegexInText("(\\+?+[0-9])", text: raw).joinWithSeparator("")
+    }
+    static func evaluateStringWidth(textToEvaluate: String) -> CGFloat{
+        let font = UIFont(name: "HelveticaNeue-Light", size: 16)!
+        let attributes = NSDictionary(object: font, forKey:NSFontAttributeName)
+        let sizeOfText = textToEvaluate.sizeWithAttributes((attributes as! [String : AnyObject]))
+
+        return sizeOfText.width
     }
 }
 

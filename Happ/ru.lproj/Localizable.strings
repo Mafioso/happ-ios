@@ -265,3 +265,17 @@
 /* Title of tab bar */
 "Pro-Functions" = "Про-функционал";
 
+/* On Event Details since some year */
+"Restricted to" = "Для аудитории";
+
+/* Final part on Event Details since some year */
+" and over" = "+";
+
+/* On Event Details range of suitable ages */
+"For an audience of" = "Для аудитории от";
+
+/* To */
+"to" = "до";
+
+/* Years */
+"years" = "годы";

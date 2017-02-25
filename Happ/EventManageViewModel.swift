@@ -26,7 +26,7 @@ class EventManageViewModel {
     var uploadingPhotos: [String:UIImage?] = [:]
     var uploadedPhotoModels: [String:ImageModel] = [:]
     var name: String?
-    var interests: [InterestModel] = []
+    var interests: [EventInterestModel] = []
     var description: String?
     
     var city: CityModel?
@@ -85,9 +85,9 @@ class EventManageViewModel {
                 self.didUpdatePhotos?(true)
         }
     }
-    
+
     func onSelectInterests(interests: [InterestModel]) {
-        self.interests = interests
+        self.interests = interests as! [EventInterestModel]
     }
     
     func onSelectName(name: String?, andDescription description: String?) {
