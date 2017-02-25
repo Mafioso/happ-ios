@@ -144,7 +144,7 @@ protocol FeedFiltersDelegate {
         let search: String? = searchBar.text
         let sortBy: EventsListSortType = radioIsPopular.on ? .ByPopular : .ByDate
 
-        let filters = EventsListFiltersState(search: search, dateFrom: beginDate, dateTo: finishDate, time: time, sortBy: sortBy, onlyFree: radioIsFree.on, convertCurrency: radioIsConvert.on, statusMap: nil)
+        let filters = EventsListFiltersState(search: search, dateFrom: beginDate, dateTo: finishDate, time: time, sortBy: sortBy, onlyFree: radioIsFree.on, statusMap: nil)
         self.delegate?.didChangeFilters(filters)
     }
 }

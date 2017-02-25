@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -315,8 +315,8 @@
                                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqm-0c-WkU" userLabel="Info links">
                                         <rect key="frame" x="8" y="0.0" width="295" height="17"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znt-xK-Cdw">
-                                                <rect key="frame" x="0.0" y="-6" width="133" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="znt-xK-Cdw">
+                                                <rect key="frame" x="-29" y="-22" width="162" height="45"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,7 +326,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beb-of-gd3" userLabel="Line for Privacy">
-                                                <rect key="frame" x="0.0" y="16" width="133" height="1"/>
+                                                <rect key="frame" x="-29" y="16" width="162" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="i8w-gr-FHS"/>
@@ -338,8 +338,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdk-1C-LhQ">
-                                                <rect key="frame" x="162" y="-6" width="133" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pdk-1C-LhQ">
+                                                <rect key="frame" x="162" y="-22" width="162" height="45"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -349,7 +349,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kQY-Z5-LiC" userLabel="Line for Terms">
-                                                <rect key="frame" x="162" y="16" width="133" height="1"/>
+                                                <rect key="frame" x="162" y="16" width="162" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="kRW-sK-VQ5"/>
@@ -358,20 +358,20 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="beb-of-gd3" firstAttribute="leading" secondItem="Aqm-0c-WkU" secondAttribute="leading" id="2Ah-LY-i0Z"/>
+                                            <constraint firstItem="beb-of-gd3" firstAttribute="leading" secondItem="Aqm-0c-WkU" secondAttribute="leading" constant="-29" id="2Ah-LY-i0Z"/>
                                             <constraint firstItem="Kjk-RP-n1T" firstAttribute="centerX" secondItem="Aqm-0c-WkU" secondAttribute="centerX" id="4N8-OR-5b0"/>
-                                            <constraint firstItem="pdk-1C-LhQ" firstAttribute="centerY" secondItem="Aqm-0c-WkU" secondAttribute="centerY" id="FMb-df-27a"/>
+                                            <constraint firstItem="pdk-1C-LhQ" firstAttribute="centerY" secondItem="Aqm-0c-WkU" secondAttribute="centerY" constant="-8" id="FMb-df-27a"/>
                                             <constraint firstItem="beb-of-gd3" firstAttribute="width" secondItem="znt-xK-Cdw" secondAttribute="width" id="QCc-dd-DHy"/>
-                                            <constraint firstItem="znt-xK-Cdw" firstAttribute="centerY" secondItem="Aqm-0c-WkU" secondAttribute="centerY" id="WQm-1k-eah"/>
+                                            <constraint firstItem="znt-xK-Cdw" firstAttribute="centerY" secondItem="Aqm-0c-WkU" secondAttribute="centerY" constant="-8" id="WQm-1k-eah"/>
                                             <constraint firstAttribute="height" constant="17" id="ex7-GI-nPF"/>
                                             <constraint firstItem="pdk-1C-LhQ" firstAttribute="leading" secondItem="Kjk-RP-n1T" secondAttribute="trailing" constant="10" id="gyQ-nd-uEs"/>
-                                            <constraint firstItem="znt-xK-Cdw" firstAttribute="leading" secondItem="Aqm-0c-WkU" secondAttribute="leading" id="iio-1M-ye4"/>
-                                            <constraint firstAttribute="trailing" secondItem="kQY-Z5-LiC" secondAttribute="trailing" id="kCy-H0-A7r"/>
+                                            <constraint firstItem="znt-xK-Cdw" firstAttribute="leading" secondItem="Aqm-0c-WkU" secondAttribute="leading" constant="-29" id="iio-1M-ye4"/>
+                                            <constraint firstAttribute="trailing" secondItem="kQY-Z5-LiC" secondAttribute="trailing" constant="-29" id="kCy-H0-A7r"/>
                                             <constraint firstAttribute="bottom" secondItem="beb-of-gd3" secondAttribute="bottom" id="lH9-gf-4JY"/>
                                             <constraint firstItem="Kjk-RP-n1T" firstAttribute="centerY" secondItem="Aqm-0c-WkU" secondAttribute="centerY" id="n26-tg-aMR"/>
                                             <constraint firstAttribute="bottom" secondItem="kQY-Z5-LiC" secondAttribute="bottom" id="qii-US-hym"/>
                                             <constraint firstItem="Kjk-RP-n1T" firstAttribute="leading" secondItem="znt-xK-Cdw" secondAttribute="trailing" constant="10" id="rcI-ox-qtn"/>
-                                            <constraint firstAttribute="trailing" secondItem="pdk-1C-LhQ" secondAttribute="trailing" id="wtk-2E-8Uc"/>
+                                            <constraint firstAttribute="trailing" secondItem="pdk-1C-LhQ" secondAttribute="trailing" constant="-29" id="wtk-2E-8Uc"/>
                                             <constraint firstItem="kQY-Z5-LiC" firstAttribute="width" secondItem="pdk-1C-LhQ" secondAttribute="width" id="zuy-Ku-WNT"/>
                                         </constraints>
                                     </view>
@@ -476,7 +476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2452" y="510"/>
+            <point key="canvasLocation" x="-2452" y="509.59520239880067"/>
         </scene>
         <!--Sign In Controller-->
         <scene sceneID="eHo-Nu-icv">
@@ -904,8 +904,8 @@
                                     <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pap-O1-quV" userLabel="Info links">
                                         <rect key="frame" x="8" y="75" width="295" height="17"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxt-IY-mOw">
-                                                <rect key="frame" x="0.0" y="-6" width="132.5" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="jxt-IY-mOw">
+                                                <rect key="frame" x="-30" y="-22" width="162" height="45"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -915,7 +915,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1n-to-NVL" userLabel="Line for Privacy">
-                                                <rect key="frame" x="0.0" y="16" width="132.5" height="1"/>
+                                                <rect key="frame" x="-30" y="16" width="162" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ris-Yz-WYW"/>
@@ -930,8 +930,8 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVx-Mc-SX7">
-                                                <rect key="frame" x="162.5" y="-6" width="132.5" height="29"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PVx-Mc-SX7">
+                                                <rect key="frame" x="163" y="-22" width="162" height="45"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                 <state key="normal" title="Terms &amp; Policy">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -941,7 +941,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dC0-uS-nIe" userLabel="Line for Terms">
-                                                <rect key="frame" x="162.5" y="16" width="132.5" height="1"/>
+                                                <rect key="frame" x="163" y="16" width="162" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="aQd-w6-BOi"/>
@@ -954,17 +954,17 @@
                                             <constraint firstItem="PVx-Mc-SX7" firstAttribute="leading" secondItem="gjJ-rh-YbR" secondAttribute="trailing" constant="10" id="6yh-bd-kFW"/>
                                             <constraint firstItem="gjJ-rh-YbR" firstAttribute="centerY" secondItem="Pap-O1-quV" secondAttribute="centerY" id="7xe-wE-CX6"/>
                                             <constraint firstItem="gjJ-rh-YbR" firstAttribute="centerX" secondItem="Pap-O1-quV" secondAttribute="centerX" id="IXP-9E-6bw"/>
-                                            <constraint firstAttribute="trailing" secondItem="PVx-Mc-SX7" secondAttribute="trailing" id="Lgu-UP-h0b"/>
+                                            <constraint firstAttribute="trailing" secondItem="PVx-Mc-SX7" secondAttribute="trailing" constant="-30" id="Lgu-UP-h0b"/>
                                             <constraint firstAttribute="bottom" secondItem="dC0-uS-nIe" secondAttribute="bottom" id="N5C-fa-xPx"/>
-                                            <constraint firstItem="jxt-IY-mOw" firstAttribute="leading" secondItem="Pap-O1-quV" secondAttribute="leading" id="S2U-LY-Ydc"/>
+                                            <constraint firstItem="jxt-IY-mOw" firstAttribute="leading" secondItem="Pap-O1-quV" secondAttribute="leading" constant="-30" id="S2U-LY-Ydc"/>
                                             <constraint firstItem="gjJ-rh-YbR" firstAttribute="leading" secondItem="jxt-IY-mOw" secondAttribute="trailing" constant="10" id="SB2-53-Bst"/>
-                                            <constraint firstItem="q1n-to-NVL" firstAttribute="leading" secondItem="Pap-O1-quV" secondAttribute="leading" id="Tri-xI-BCw"/>
-                                            <constraint firstAttribute="trailing" secondItem="dC0-uS-nIe" secondAttribute="trailing" id="V3A-AS-Mpc"/>
+                                            <constraint firstItem="q1n-to-NVL" firstAttribute="leading" secondItem="Pap-O1-quV" secondAttribute="leading" constant="-30" id="Tri-xI-BCw"/>
+                                            <constraint firstAttribute="trailing" secondItem="dC0-uS-nIe" secondAttribute="trailing" constant="-30" id="V3A-AS-Mpc"/>
                                             <constraint firstAttribute="bottom" secondItem="q1n-to-NVL" secondAttribute="bottom" id="YnZ-dm-8UQ"/>
                                             <constraint firstItem="dC0-uS-nIe" firstAttribute="width" secondItem="PVx-Mc-SX7" secondAttribute="width" id="bfT-dB-k9n"/>
-                                            <constraint firstItem="jxt-IY-mOw" firstAttribute="centerY" secondItem="Pap-O1-quV" secondAttribute="centerY" id="pL8-gX-jzv"/>
+                                            <constraint firstItem="jxt-IY-mOw" firstAttribute="centerY" secondItem="Pap-O1-quV" secondAttribute="centerY" constant="-8" id="pL8-gX-jzv"/>
                                             <constraint firstAttribute="height" constant="17" id="w2D-QM-BM8"/>
-                                            <constraint firstItem="PVx-Mc-SX7" firstAttribute="centerY" secondItem="Pap-O1-quV" secondAttribute="centerY" id="zQJ-Ay-zlV"/>
+                                            <constraint firstItem="PVx-Mc-SX7" firstAttribute="centerY" secondItem="Pap-O1-quV" secondAttribute="centerY" constant="-8" id="zQJ-Ay-zlV"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© happapp.info 2017, All Rights Reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVk-rZ-nZt">
@@ -1365,67 +1365,11 @@ to become an Organizer</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zO9-vM-WeP" userLabel="Footer View">
                                 <rect key="frame" x="32" y="618" width="311" height="42"/>
                                 <subviews>
-                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbc-uN-3lc" userLabel="Info links">
+                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rbc-uN-3lc" userLabel="Info links">
                                         <rect key="frame" x="43" y="0.0" width="225" height="17"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sh1-bk-xZp">
-                                                <rect key="frame" x="0.0" y="-6" width="98" height="29"/>
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                                <state key="normal" title="Privacy Policy">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="clickedPrivacyPolicy:" destination="NVI-0f-PIx" eventType="touchUpInside" id="VWv-W4-YRa"/>
-                                                </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqb-ZT-51B" userLabel="Line for Privacy">
-                                                <rect key="frame" x="0.0" y="16" width="98" height="1"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="SEx-yL-eGm"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-vv-Xqq">
-                                                <rect key="frame" x="108" y="-2" width="9" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRe-yC-dG9">
-                                                <rect key="frame" x="127" y="-6" width="98" height="29"/>
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
-                                                <state key="normal" title="Terms &amp; Policy">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="clickedTermsPolicy:" destination="NVI-0f-PIx" eventType="touchUpInside" id="wvu-eJ-ILu"/>
-                                                </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6g1-jP-Ktp" userLabel="Line for Terms">
-                                                <rect key="frame" x="127" y="16" width="98" height="1"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="w2h-NH-82j"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="6g1-jP-Ktp" secondAttribute="trailing" id="6Ul-i7-foi"/>
-                                            <constraint firstItem="sh1-bk-xZp" firstAttribute="centerY" secondItem="rbc-uN-3lc" secondAttribute="centerY" id="6mJ-ne-ftk"/>
                                             <constraint firstAttribute="height" constant="17" id="GOs-Og-ciZ"/>
-                                            <constraint firstItem="gRK-vv-Xqq" firstAttribute="centerY" secondItem="rbc-uN-3lc" secondAttribute="centerY" id="Hrf-XC-KCF"/>
-                                            <constraint firstItem="iqb-ZT-51B" firstAttribute="leading" secondItem="rbc-uN-3lc" secondAttribute="leading" id="NKi-0h-cVn"/>
-                                            <constraint firstAttribute="bottom" secondItem="6g1-jP-Ktp" secondAttribute="bottom" id="Ob1-n2-gSF"/>
-                                            <constraint firstItem="iqb-ZT-51B" firstAttribute="width" secondItem="sh1-bk-xZp" secondAttribute="width" id="Rpb-fy-kFe"/>
-                                            <constraint firstAttribute="trailing" secondItem="IRe-yC-dG9" secondAttribute="trailing" id="fpm-NM-GI3"/>
-                                            <constraint firstItem="IRe-yC-dG9" firstAttribute="centerY" secondItem="rbc-uN-3lc" secondAttribute="centerY" id="gTT-Lk-rlG"/>
-                                            <constraint firstItem="gRK-vv-Xqq" firstAttribute="centerX" secondItem="rbc-uN-3lc" secondAttribute="centerX" id="gYr-1E-izd"/>
-                                            <constraint firstItem="IRe-yC-dG9" firstAttribute="leading" secondItem="gRK-vv-Xqq" secondAttribute="trailing" constant="10" id="hoF-aj-yB2"/>
-                                            <constraint firstItem="sh1-bk-xZp" firstAttribute="leading" secondItem="rbc-uN-3lc" secondAttribute="leading" id="n0d-6M-Pp0"/>
-                                            <constraint firstItem="gRK-vv-Xqq" firstAttribute="leading" secondItem="sh1-bk-xZp" secondAttribute="trailing" constant="10" id="qv3-hj-9Sw"/>
-                                            <constraint firstItem="6g1-jP-Ktp" firstAttribute="width" secondItem="IRe-yC-dG9" secondAttribute="width" id="ycq-dg-yem"/>
-                                            <constraint firstAttribute="bottom" secondItem="iqb-ZT-51B" secondAttribute="bottom" id="zGI-2y-WTG"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© happapp.info 2017, All Rights Reserved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMf-z4-tu5">
@@ -1522,7 +1466,7 @@ to become an Organizer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGM-fv-Hwp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1678" y="510"/>
+            <point key="canvasLocation" x="-1679.2" y="509.59520239880067"/>
         </scene>
     </scenes>
     <resources>

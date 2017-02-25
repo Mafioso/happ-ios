@@ -110,10 +110,10 @@ class SelectInterestController<T: SelectInterestViewModelProtocol>: UIViewContro
     func updateView(oldViewModel: T?) {
         guard self.isViewLoaded() else { return }
         print(".[V].update", self.viewModel.state.items.count)
-
+        self.updateHeader()
         self.collectionView.reloadData()
         self.updateNavItems()
-        self.updateHeader()
+        
 
         if oldViewModel?.state.opened != self.viewModel.state.opened {
             self.displayPopoverSelectSubinterestsIfNeeded()

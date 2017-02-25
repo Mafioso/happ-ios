@@ -18,19 +18,19 @@
 "H5r-Q2-Gb7.normalTitle" = "Создать учетную запись";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "IRe-yC-dG9"; */
-"IRe-yC-dG9.normalTitle" = "Правила";
+"IRe-yC-dG9.normalTitle" = "    Правила\nпользования";
 
 /* Class = "UILabel"; text = "•"; ObjectID = "Kjk-RP-n1T"; */
 "Kjk-RP-n1T.text" = "•";
 
 /* Class = "UITextField"; placeholder = "password"; ObjectID = "LOf-S3-3QF"; */
-"LOf-S3-3QF.placeholder" = "пароль";
+"LOf-S3-3QF.placeholder" = "Пароль";
 
 /* Class = "UILabel"; text = "Please confirm your email\nto become an Organizer"; ObjectID = "NNt-0F-KPj"; */
 "NNt-0F-KPj.text" = "Пожалуйста, подтвердите свой почтовый ящик";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "PVx-Mc-SX7"; */
-"PVx-Mc-SX7.normalTitle" = "Правила";
+"PVx-Mc-SX7.normalTitle" = "    Правила\nпользования";
 
 /* Class = "UITextField"; placeholder = "repeat password"; ObjectID = "QKE-ZV-Tp0"; */
 "QKE-ZV-Tp0.placeholder" = "Повторить пароль";
@@ -42,13 +42,13 @@
 "XNn-bu-0CE.text" = "Нет учетной записи?";
 
 /* Class = "UILabel"; text = "Detailed instructions will be sent to your email"; ObjectID = "bKj-q1-0Fc"; */
-"bKj-q1-0Fc.text" = "Инструкции высланы вам на email";
+"bKj-q1-0Fc.text" = "Инструкции будут отправлены вам на email";
 
 /* Class = "UITextField"; placeholder = "username"; ObjectID = "fDq-qh-Ps0"; */
 "fDq-qh-Ps0.placeholder" = "Имя пользователя";
 
 /* Class = "UIButton"; normalTitle = "Confirm Email"; ObjectID = "fgs-i2-UCU"; */
-"fgs-i2-UCU.normalTitle" = "Подтвердить Email";
+"fgs-i2-UCU.normalTitle" = "Подтвердить email";
 
 /* Class = "UIButton"; normalTitle = " Login with Facebook"; ObjectID = "fs2-36-Pk5"; */
 "fs2-36-Pk5.normalTitle" = "    Войти с Facebook";
@@ -60,7 +60,7 @@
 "gjJ-rh-YbR.text" = "•";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "jxt-IY-mOw"; */
-"jxt-IY-mOw.normalTitle" = "Политика";
+"jxt-IY-mOw.normalTitle" = "\t    Политика\n конфиденциальности";
 
 /* Class = "UILabel"; text = "© happapp.info 2016, All Rights Reserved"; ObjectID = "kMf-z4-tu5"; */
 "kMf-z4-tu5.text" = "© happapp.info 2017, Все права защищены";
@@ -69,15 +69,15 @@
 "lbL-la-kE3.placeholder" = "email";
 
 /* Class = "UIButton"; normalTitle = "Terms & Policy"; ObjectID = "pdk-1C-LhQ"; */
-"pdk-1C-LhQ.normalTitle" = "Правила";
+"pdk-1C-LhQ.normalTitle" = "    Правила\nпользования";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "sh1-bk-xZp"; */
-"sh1-bk-xZp.normalTitle" = "Политика";
+"sh1-bk-xZp.normalTitle" = "\t    Политика\n конфиденциальности";
 
 /* Class = "UITextField"; placeholder = "username"; ObjectID = "v59-X3-jNt"; */
 "v59-X3-jNt.placeholder" = "Имя пользователя";
 
 /* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "znt-xK-Cdw"; */
-"znt-xK-Cdw.normalTitle" = "Политика";
+"znt-xK-Cdw.normalTitle" = "\t    Политика\n конфиденциальности";
 
 "s1y-Be-wga.normalTitle" = "Зарегистрироваться сейчас";

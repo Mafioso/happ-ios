@@ -11,14 +11,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="2279.ttf">
-            <string>WienLight</string>
-        </array>
         <array key="SF-UI-Text-Light.otf">
             <string>SFUIText-Light</string>
         </array>
         <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
+        </array>
+        <array key="WienLight_Normal.ttf">
+            <string>WienLight</string>
         </array>
     </customFonts>
     <scenes>
@@ -572,13 +572,13 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only Free Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfV-sb-KNv">
-                                        <rect key="frame" x="16" y="153" width="123" height="20"/>
+                                        <rect key="frame" x="16" y="133" width="123" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.96793702401612935" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sPy-ks-Jf2">
-                                        <rect key="frame" x="310" y="148" width="51" height="31"/>
+                                        <rect key="frame" x="310" y="128" width="51" height="31"/>
                                         <color key="tintColor" red="1" green="0.92156862750000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="onTintColor" red="1" green="0.40784313725490196" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -672,24 +672,13 @@ TIME RANGE</string>
                                         <sections/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show popular first" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50K-ZA-IEl">
-                                        <rect key="frame" x="16" y="535" width="132" height="20"/>
+                                        <rect key="frame" x="16" y="175" width="132" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.96793702400000003" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="sza-NI-cE4">
-                                        <rect key="frame" x="310" y="530" width="51" height="31"/>
-                                        <color key="tintColor" red="1" green="0.92156862745098034" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="onTintColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convert currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yue-ql-8bg">
-                                        <rect key="frame" x="16" y="577" width="126" height="20"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" white="0.96793702400000003" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pDC-fq-VXh">
-                                        <rect key="frame" x="310" y="572" width="51" height="31"/>
+                                        <rect key="frame" x="310" y="170" width="51" height="31"/>
                                         <color key="tintColor" red="1" green="0.92156862745098034" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="onTintColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                     </switch>
@@ -747,15 +736,14 @@ TIME RANGE</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="RZo-Bm-VBQ" firstAttribute="top" secondItem="yue-ql-8bg" secondAttribute="bottom" constant="10" id="1K5-iL-j30"/>
                                     <constraint firstItem="elF-SS-3al" firstAttribute="top" secondItem="hxA-Ea-mnJ" secondAttribute="top" constant="30" id="4E7-if-MD6"/>
                                     <constraint firstItem="zfV-sb-KNv" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" constant="16" id="69m-hZ-CQU"/>
                                     <constraint firstAttribute="trailing" secondItem="Pyy-Ne-Oay" secondAttribute="trailing" id="6Hu-cg-Neb"/>
                                     <constraint firstItem="sPy-ks-Jf2" firstAttribute="centerY" secondItem="zfV-sb-KNv" secondAttribute="centerY" id="9gX-6i-Mhp"/>
                                     <constraint firstItem="B3X-xD-NfX" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" id="AUC-lg-ihm"/>
                                     <constraint firstItem="6Mc-1Y-mIJ" firstAttribute="top" secondItem="elF-SS-3al" secondAttribute="bottom" constant="30" id="BY1-Ox-flV"/>
-                                    <constraint firstItem="xjf-A8-Clc" firstAttribute="top" secondItem="zfV-sb-KNv" secondAttribute="bottom" constant="30" id="DUe-i3-VRE"/>
-                                    <constraint firstItem="zfV-sb-KNv" firstAttribute="top" secondItem="B3X-xD-NfX" secondAttribute="bottom" constant="40" id="EBN-uA-f4r"/>
+                                    <constraint firstItem="xjf-A8-Clc" firstAttribute="top" secondItem="zfV-sb-KNv" secondAttribute="bottom" constant="50" id="DUe-i3-VRE"/>
+                                    <constraint firstItem="zfV-sb-KNv" firstAttribute="top" secondItem="B3X-xD-NfX" secondAttribute="bottom" constant="20" id="EBN-uA-f4r"/>
                                     <constraint firstItem="50K-ZA-IEl" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" constant="16" id="Hkz-ic-7TI"/>
                                     <constraint firstAttribute="bottom" secondItem="Pyy-Ne-Oay" secondAttribute="bottom" constant="60" id="HqY-op-JrW"/>
                                     <constraint firstItem="B3X-xD-NfX" firstAttribute="top" secondItem="6Mc-1Y-mIJ" secondAttribute="bottom" constant="-1" id="LwJ-3w-ydQ"/>
@@ -765,19 +753,16 @@ TIME RANGE</string>
                                     <constraint firstAttribute="trailing" secondItem="sPy-ks-Jf2" secondAttribute="trailing" constant="16" id="TLG-mN-fgf"/>
                                     <constraint firstItem="RZo-Bm-VBQ" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" id="TY9-eN-LDS"/>
                                     <constraint firstAttribute="trailing" secondItem="xjf-A8-Clc" secondAttribute="trailing" id="Taw-Gy-FD7"/>
-                                    <constraint firstAttribute="trailing" secondItem="pDC-fq-VXh" secondAttribute="trailing" constant="16" id="V2w-vQ-aYu"/>
                                     <constraint firstItem="sza-NI-cE4" firstAttribute="centerY" secondItem="50K-ZA-IEl" secondAttribute="centerY" id="Vwh-Go-P51"/>
                                     <constraint firstAttribute="trailing" secondItem="RZo-Bm-VBQ" secondAttribute="trailing" id="c1q-bd-pWY"/>
-                                    <constraint firstItem="pDC-fq-VXh" firstAttribute="centerY" secondItem="yue-ql-8bg" secondAttribute="centerY" id="cQM-PE-O26"/>
                                     <constraint firstAttribute="trailing" secondItem="6Mc-1Y-mIJ" secondAttribute="trailing" constant="6" id="d7a-IE-Gq9"/>
                                     <constraint firstAttribute="trailing" secondItem="sza-NI-cE4" secondAttribute="trailing" constant="16" id="esU-rh-Xqn"/>
                                     <constraint firstAttribute="bottom" secondItem="RZo-Bm-VBQ" secondAttribute="bottom" id="g1p-Ig-J86"/>
                                     <constraint firstItem="elF-SS-3al" firstAttribute="centerX" secondItem="hxA-Ea-mnJ" secondAttribute="centerX" id="g4J-mh-dgW"/>
                                     <constraint firstItem="6Mc-1Y-mIJ" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" constant="6" id="hSe-Um-oHp"/>
-                                    <constraint firstItem="yue-ql-8bg" firstAttribute="top" secondItem="50K-ZA-IEl" secondAttribute="bottom" constant="22" id="hhB-V5-eFR"/>
                                     <constraint firstItem="6Mc-1Y-mIJ" firstAttribute="top" secondItem="MZE-97-DpK" secondAttribute="bottom" constant="-1" id="idg-5t-SUg"/>
-                                    <constraint firstItem="yue-ql-8bg" firstAttribute="leading" secondItem="50K-ZA-IEl" secondAttribute="leading" id="jdJ-8m-Yxi"/>
                                     <constraint firstItem="Pyy-Ne-Oay" firstAttribute="leading" secondItem="hxA-Ea-mnJ" secondAttribute="leading" id="q8C-DT-Ath"/>
+                                    <constraint firstItem="xjf-A8-Clc" firstAttribute="top" secondItem="50K-ZA-IEl" secondAttribute="bottom" constant="8" symbolic="YES" id="qre-pi-q5E"/>
                                     <constraint firstAttribute="trailing" secondItem="B3X-xD-NfX" secondAttribute="trailing" id="u44-tg-nJs"/>
                                     <constraint firstAttribute="trailing" secondItem="MZE-97-DpK" secondAttribute="trailing" id="xid-3d-kAo"/>
                                 </constraints>
@@ -797,7 +782,6 @@ TIME RANGE</string>
                         <outlet property="calendarView" destination="awb-2P-8qt" id="Wd7-E2-56B"/>
                         <outlet property="constraintsTableHeight" destination="iQW-gZ-boZ" id="SSs-I8-Fgi"/>
                         <outlet property="datetime" destination="Pyy-Ne-Oay" id="fTI-Vf-9rh"/>
-                        <outlet property="radioIsConvert" destination="pDC-fq-VXh" id="ExT-LG-vvS"/>
                         <outlet property="radioIsFree" destination="sPy-ks-Jf2" id="PEk-gV-mZ5"/>
                         <outlet property="radioIsPopular" destination="sza-NI-cE4" id="YeX-a4-eoE"/>
                         <outlet property="searchBar" destination="6Mc-1Y-mIJ" id="QpJ-NV-LaY"/>
@@ -807,7 +791,6 @@ TIME RANGE</string>
                         <outlet property="top" destination="4E7-if-MD6" id="hmK-rw-7VT"/>
                         <outletCollection property="radios" destination="sPy-ks-Jf2" collectionClass="NSMutableArray" id="7lZ-4c-iD6"/>
                         <outletCollection property="radios" destination="sza-NI-cE4" collectionClass="NSMutableArray" id="Hm0-Fg-WeE"/>
-                        <outletCollection property="radios" destination="pDC-fq-VXh" collectionClass="NSMutableArray" id="XxI-wa-jpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zww-yP-yra" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -818,7 +801,7 @@ TIME RANGE</string>
         <scene sceneID="r6Q-gs-EfQ">
             <objects>
                 <collectionViewController storyboardIdentifier="Explore" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V5t-Ey-1kH" customClass="EventsExploreViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WF8-24-nmu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WF8-24-nmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

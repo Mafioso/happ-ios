@@ -164,12 +164,12 @@ struct EventsListFiltersState {
     // for scope: .Feed, .Favourite
     var sortBy: EventsListSortType
     var onlyFree: Bool
-    var convertCurrency: Bool
+//    var convertCurrency: Bool
     // for scope: .MyEvents
     var statusMap: [EventModelStatusTypes: Bool]?
 
     static func getInitialState() -> EventsListFiltersState {
-        return EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, time: nil, sortBy: .ByDate, onlyFree: false, convertCurrency: false, statusMap: [.Active: true, .Inactive: true, .OnReview: true, .Rejected: true, .Finished: true])
+        return EventsListFiltersState(search: nil, dateFrom: nil, dateTo: nil, time: nil, sortBy: .ByDate, onlyFree: false,  statusMap: [.Active: true, .Inactive: true, .OnReview: true, .Rejected: true, .Finished: true])
     }
 }
 

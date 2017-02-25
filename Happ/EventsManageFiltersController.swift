@@ -120,7 +120,7 @@ protocol EventsManageFiltersDelegate {
             }
         }
         
-        let filters = EventsListFiltersState(search: "", dateFrom: beginDate, dateTo: finishDate, time: time, sortBy: .ByPopular, onlyFree: false, convertCurrency: false, statusMap: statusMap)
+        let filters = EventsListFiltersState(search: "", dateFrom: beginDate, dateTo: finishDate, time: time, sortBy: .ByPopular, onlyFree: false, statusMap: statusMap)
         self.delegate?.didChangeFilters(filters)
     }
 }
