@@ -308,6 +308,7 @@ class EventModel: Object, Mappable {
     dynamic var currency: CurrencyModel?
     dynamic var author: AuthorModel?
     var datetimes = List<EventDateModel>()
+    var event_datetimes = List<EventDateModel>()
     dynamic var is_active = false
     dynamic var is_upvoted = false
     dynamic var is_in_favourites = false
@@ -397,6 +398,7 @@ class EventModel: Object, Mappable {
         interests           <- (map["interests"], ArrayTransform<EventInterestModel>())
         currency            <- map["currency"]
         author              <- map["author"]
+        event_datetimes     <- (map["event_datetimes"], ArrayTransform<EventDateModel>())
         datetimes           <- (map["datetimes"], ArrayTransform<EventDateModel>())
         is_upvoted          <- map["is_upvoted"]
         is_active           <- map["is_active"]

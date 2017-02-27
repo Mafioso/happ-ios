@@ -46,6 +46,7 @@ class EventViewModel {
 
     var navigateBack: NavigationFunc
     var navigateEventDetailsMap: NavigationFuncWithID
+    var navigateEventDetailsDatetimes: NavigationFuncWithID
     var openWebPage: NavigationFuncWithURL
 
 
@@ -112,7 +113,9 @@ class EventViewModel {
     func onClickOpenMap() {
         self.navigateEventDetailsMap?(id: self.event.id)
     }
-
+    func onClickOpenDatetimes() {
+        self.navigateEventDetailsDatetimes?(id: self.event.id)
+    }
 
 }
 

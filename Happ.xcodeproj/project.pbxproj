@@ -18,6 +18,9 @@
 		5200970B1E2A74E600B34B30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5200970D1E2A74E600B34B30 /* InfoPlist.strings */; };
 		520097151E2A74EB00B34B30 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 520097171E2A74EB00B34B30 /* Localizable.strings */; };
 		52564E981E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */; };
+		52564E9C1E63FDAC009DB1C0 /* EventDetailsDatetimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52564E9B1E63FDAC009DB1C0 /* EventDetailsDatetimesViewController.swift */; };
+		52564E9E1E6402BB009DB1C0 /* EventDatetimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52564E9D1E6402BB009DB1C0 /* EventDatetimesViewModel.swift */; };
+		52564EA01E640605009DB1C0 /* EventDatetimesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52564E9F1E640605009DB1C0 /* EventDatetimesTableViewCell.swift */; };
 		9737E4D61E236717005AF7B7 /* ContextMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D5E9A1E1EBC1E006282A9 /* ContextMaker.m */; };
 		9737E4D71E236733005AF7B7 /* GMUClusterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D260B1E1409040069EBF1 /* GMUClusterManager.m */; };
 		9737E4D81E236733005AF7B7 /* GMUDefaultClusterIconGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 977D260F1E1409040069EBF1 /* GMUDefaultClusterIconGenerator.m */; };
@@ -196,6 +199,9 @@
 		525025451D801E2A0074E6B5 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedDataProtocol.swift; sourceTree = "<group>"; };
 		52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInterestCollectionViewCell.swift; sourceTree = "<group>"; };
+		52564E9B1E63FDAC009DB1C0 /* EventDetailsDatetimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsDatetimesViewController.swift; sourceTree = "<group>"; };
+		52564E9D1E6402BB009DB1C0 /* EventDatetimesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatetimesViewModel.swift; sourceTree = "<group>"; };
+		52564E9F1E640605009DB1C0 /* EventDatetimesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDatetimesTableViewCell.swift; sourceTree = "<group>"; };
 		525A8AA41D7D4023002C6F46 /* Happ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		525A8AA71D7D4023002C6F46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		525A8AA91D7D4023002C6F46 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
@@ -445,6 +451,7 @@
 				520AAFDC1DEB00C00002DE9E /* EventsListEmptyViewController.swift */,
 				52722F901DD4E49E00F31811 /* EventsExploreViewController.swift */,
 				52839C081DDAE9D200B6EBD8 /* EventsMapViewController.swift */,
+				52564E9B1E63FDAC009DB1C0 /* EventDetailsDatetimesViewController.swift */,
 				52136F031DE2BA1B00CECE3D /* EventDetailsMapController.swift */,
 				B4FE0CB01D9297B40081310F /* EventDetailsController.swift */,
 				529046B91D9BB40B00BFB06A /* SettingsController.swift */,
@@ -486,6 +493,7 @@
 				52CD94241DFFF5C2003D0B46 /* SelectCityCell.swift */,
 				52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */,
 				52564E971E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift */,
+				52564E9F1E640605009DB1C0 /* EventDatetimesTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -516,8 +524,9 @@
 				52ED3E591DB6852700B7E5B8 /* EventManageViewModel.swift */,
 				979D5E9E1E1F7A0D006282A9 /* EventsManageDeniedDetailsViewModel.swift */,
 				52A3C2CC1D8F330D00C31F3F /* EventViewModel.swift */,
-				97A7AE431E0E4FED00530421 /* SelectInterestsViewModels.swift */,
 				52136F051DE2BC7600CECE3D /* EventOnMapViewModel.swift */,
+				52564E9D1E6402BB009DB1C0 /* EventDatetimesViewModel.swift */,
+				97A7AE431E0E4FED00530421 /* SelectInterestsViewModels.swift */,
 				B4E7B7091D9B8E6E004B8B78 /* MenuViewModel.swift */,
 				527B43BA1D9E599600C6EAF2 /* SettingsViewModel.swift */,
 				527B43BC1D9EF0E800C6EAF2 /* ProfileViewModel.swift */,
@@ -881,6 +890,7 @@
 				9737E4DA1E236733005AF7B7 /* GMUGridBasedClusterAlgorithm.m in Sources */,
 				9737E4DB1E236733005AF7B7 /* GMUNonHierarchicalDistanceBasedAlgorithm.m in Sources */,
 				9737E4DC1E236733005AF7B7 /* GMUSimpleClusterAlgorithm.m in Sources */,
+				52564E9E1E6402BB009DB1C0 /* EventDatetimesViewModel.swift in Sources */,
 				9737E4DD1E236733005AF7B7 /* GMUStaticCluster.m in Sources */,
 				9737E4DE1E236733005AF7B7 /* GMUWrappingDictionaryKey.m in Sources */,
 				9737E4DF1E236733005AF7B7 /* GQTPointQuadTree.m in Sources */,
@@ -904,6 +914,7 @@
 				97C183CF1E22C0F9002CE294 /* AuthenticationViewModel.swift in Sources */,
 				97C183D01E22C0F9002CE294 /* SetupUserCity.swift in Sources */,
 				97C183D11E22C0F9002CE294 /* SelectCityViewModels.swift in Sources */,
+				52564EA01E640605009DB1C0 /* EventDatetimesTableViewCell.swift in Sources */,
 				97C183D21E22C0F9002CE294 /* SelectPlaceViewModel.swift in Sources */,
 				97C183D31E22C0F9002CE294 /* SelectCurrencyValueViewModel.swift in Sources */,
 				97C183D41E22C0F9002CE294 /* EventsListViewModel.swift in Sources */,
@@ -930,6 +941,7 @@
 				97C183F31E22C0F9002CE294 /* EventsListSectionHeader.swift in Sources */,
 				97C183F51E22C0F9002CE294 /* SelectInterestCollectionCell.swift in Sources */,
 				97C183F71E22C0F9002CE294 /* SelectInterestHeader.swift in Sources */,
+				52564E9C1E63FDAC009DB1C0 /* EventDetailsDatetimesViewController.swift in Sources */,
 				97C183F91E22C0F9002CE294 /* SelectMultipleInterestsHeader.swift in Sources */,
 				97C183FB1E22C0F9002CE294 /* SelectCell.swift in Sources */,
 				97C183FD1E22C0F9002CE294 /* SelectCityCell.swift in Sources */,

@@ -42,8 +42,9 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var imageAuthorPhoto: UIImageView!
 
     @IBOutlet weak var buttonInfoDate: UIButton!
-    @IBOutlet weak var viewHighlightInfoPrice: UIView!
+    @IBOutlet weak var viewHighlightInfoDate: UIView!
     @IBOutlet weak var buttonInfoPrice: UIButton!
+    @IBOutlet weak var viewHighlightInfoPrice: UIView!
     @IBOutlet weak var buttonInfoLocation: UIButton!
     @IBOutlet weak var viewHighlightInfoLocation: UIView!
     @IBOutlet weak var buttonUpvote: UIButton!
@@ -74,6 +75,7 @@ class EventDetailsController: UIViewController {
         self.openWebPage()
     }
     @IBAction func clickedDateRangeButton(sender: UIButton) {
+        self.viewModel.onClickOpenDatetimes()
     }
     @IBAction func clickedExpandImages(sender: UIButton) {
     }
@@ -115,7 +117,7 @@ class EventDetailsController: UIViewController {
     override func viewDidLayoutSubviews() {
         [buttonInfoDate, buttonInfoPrice, buttonInfoLocation]
             .forEach { $0.extMakeCircle() }
-        [viewHighlightInfoPrice, viewHighlightInfoLocation]
+        [viewHighlightInfoDate, viewHighlightInfoPrice, viewHighlightInfoLocation]
             .forEach { $0.extMakeCircle() }
         [buttonUpvote, buttonWantToGo]
             .forEach { $0.extMakeCircle() }
@@ -151,7 +153,7 @@ class EventDetailsController: UIViewController {
         }
 
         [viewContainerTitle, buttonUpvote, buttonInfoDate, buttonInfoPrice, buttonInfoLocation].forEach { $0.backgroundColor = color }
-        [viewHighlightInfoLocation, viewHighlightInfoPrice].forEach { v in v.backgroundColor = color; v.alpha = 0.2; }
+        [viewHighlightInfoDate, viewHighlightInfoLocation, viewHighlightInfoPrice].forEach { v in v.backgroundColor = color; v.alpha = 0.2; }
         [labelPriceMinimum, labelLocation, labelDateRange].forEach { $0.textColor = color }
 
         labelTitle.text = event.title
@@ -189,6 +191,7 @@ class EventDetailsController: UIViewController {
 
     func animateInfo() {
         var trans: [UIView] = []
+        trans.append(viewHighlightInfoDate)
         trans.append(viewHighlightInfoLocation)
         if self.viewModel.event.web_site != nil {
             trans.append(self.viewHighlightInfoPrice)

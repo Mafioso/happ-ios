@@ -523,6 +523,7 @@ class NavigationCoordinator {
         let viewModel = EventViewModel(forID: forID)
         viewModel.navigateBack = self.goBack
         viewModel.navigateEventDetailsMap = self.showEventDetailsMap
+        viewModel.navigateEventDetailsDatetimes = self.showEventDetailsDatetimes
         viewModel.openWebPage = self.openWebPage
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
@@ -536,6 +537,16 @@ class NavigationCoordinator {
         viewModel.navigateEventDetails = self.showEventDetails
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetailsMap") as! EventDetailsMapController
+        viewController.viewModel = viewModel
+        viewController.hidesBottomBarWhenPushed = true
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    func showEventDetailsDatetimes(forID: String) {
+        print(".nav.showEventDetailsDatetimes [forID=\(forID)]")
+        let viewModel = EventDatetimesViewModel(forID: forID)
+        viewModel.navigateBack = self.goBack
+
+        let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetailsDatetimes") as! EventDetailsDatetimesViewController
         viewController.viewModel = viewModel
         viewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(viewController, animated: true)

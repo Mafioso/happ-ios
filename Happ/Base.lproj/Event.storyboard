@@ -151,14 +151,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ujk-jm-TZ0" userLabel="3">
-                                        <rect key="frame" x="0.0" y="453" width="375" height="105"/>
+                                        <rect key="frame" x="0.0" y="453" width="375" height="104"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qae-4s-eQJ" userLabel="Left">
-                                                <rect key="frame" x="0.0" y="0.0" width="138" height="105"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="104"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-dG-y7s" userLabel="Date">
-                                                        <rect key="frame" x="24" y="0.0" width="90" height="105"/>
+                                                        <rect key="frame" x="24" y="0.0" width="90" height="104"/>
                                                         <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJN-Ve-8Ab">
+                                                                <rect key="frame" x="13" y="0.0" width="64" height="64"/>
+                                                            </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDb-Jv-Xgh">
                                                                 <rect key="frame" x="13" y="0.0" width="64" height="64"/>
                                                                 <color key="backgroundColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -172,7 +175,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="LTW-oM-Udx">
-                                                                <rect key="frame" x="0.0" y="76" width="90" height="29"/>
+                                                                <rect key="frame" x="0.0" y="76" width="90" height="28"/>
                                                                 <string key="text">DATE RANGE
 TIME RANGE</string>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
@@ -181,11 +184,15 @@ TIME RANGE</string>
                                                             </label>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="hJN-Ve-8Ab" firstAttribute="centerX" secondItem="fVy-dG-y7s" secondAttribute="centerX" id="Bdf-5P-zug"/>
+                                                            <constraint firstItem="hJN-Ve-8Ab" firstAttribute="width" secondItem="sDb-Jv-Xgh" secondAttribute="width" id="FBh-eA-eYE"/>
                                                             <constraint firstItem="LTW-oM-Udx" firstAttribute="leading" secondItem="fVy-dG-y7s" secondAttribute="leading" id="GaS-Ho-of1"/>
                                                             <constraint firstAttribute="width" constant="90" id="UqM-Ow-hFA"/>
+                                                            <constraint firstItem="hJN-Ve-8Ab" firstAttribute="top" secondItem="fVy-dG-y7s" secondAttribute="top" id="VZb-sj-oec"/>
                                                             <constraint firstItem="sDb-Jv-Xgh" firstAttribute="top" secondItem="fVy-dG-y7s" secondAttribute="top" id="Yog-rS-XU0"/>
                                                             <constraint firstAttribute="trailing" secondItem="LTW-oM-Udx" secondAttribute="trailing" id="Yt3-58-CsE"/>
                                                             <constraint firstItem="sDb-Jv-Xgh" firstAttribute="centerX" secondItem="fVy-dG-y7s" secondAttribute="centerX" id="ZH2-u9-L9V"/>
+                                                            <constraint firstItem="hJN-Ve-8Ab" firstAttribute="height" secondItem="sDb-Jv-Xgh" secondAttribute="height" id="g1c-9Q-deY"/>
                                                             <constraint firstAttribute="bottom" secondItem="LTW-oM-Udx" secondAttribute="bottom" id="uVY-gL-bHc"/>
                                                             <constraint firstItem="LTW-oM-Udx" firstAttribute="top" secondItem="sDb-Jv-Xgh" secondAttribute="bottom" constant="12" id="wab-4s-QK1"/>
                                                         </constraints>
@@ -198,10 +205,10 @@ TIME RANGE</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCf-A1-COP" userLabel="Center ">
-                                                <rect key="frame" x="138" y="0.0" width="100" height="105"/>
+                                                <rect key="frame" x="138" y="0.0" width="100" height="104"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XiV-ui-ram" userLabel="Price">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="105"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="104"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoT-gu-SqK">
                                                                 <rect key="frame" x="18" y="0.0" width="64" height="64"/>
@@ -219,7 +226,7 @@ TIME RANGE</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FREE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-6Z-ebi">
-                                                                <rect key="frame" x="0.0" y="76" width="100" height="29"/>
+                                                                <rect key="frame" x="0.0" y="76" width="100" height="28"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                 <color key="textColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -248,10 +255,10 @@ TIME RANGE</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akj-ad-Y6t" userLabel="Right">
-                                                <rect key="frame" x="238" y="0.0" width="137" height="105"/>
+                                                <rect key="frame" x="238" y="0.0" width="137" height="104"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz6-BO-BMx" userLabel="Place">
-                                                        <rect key="frame" x="19" y="0.0" width="100" height="105"/>
+                                                        <rect key="frame" x="19" y="0.0" width="100" height="104"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFv-Qg-kKP">
                                                                 <rect key="frame" x="18" y="0.0" width="64" height="64"/>
@@ -269,7 +276,7 @@ TIME RANGE</string>
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="jVj-n0-shs">
-                                                                <rect key="frame" x="0.0" y="76" width="100" height="29"/>
+                                                                <rect key="frame" x="0.0" y="76" width="100" height="28"/>
                                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                                 <color key="textColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -313,7 +320,7 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCl-hH-ZGu" userLabel="4">
-                                        <rect key="frame" x="25" y="577" width="325" height="41"/>
+                                        <rect key="frame" x="25" y="576" width="325" height="41"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zho-1E-hZh">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="41"/>
@@ -356,7 +363,7 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTS-jL-GqS" userLabel="5">
-                                        <rect key="frame" x="0.0" y="642" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="641" width="375" height="80"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Xob-5M-FaC">
                                                 <rect key="frame" x="8" y="16" width="359" height="48"/>
@@ -369,17 +376,17 @@ TIME RANGE</string>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Dqq-Zj-QUc" customClass="EventInterestCollectionViewCell" customModule="Happ" customModuleProvider="target">
-                                                        <rect key="frame" x="30" y="0.0" width="300" height="48"/>
+                                                        <rect key="frame" x="29.5" y="0.0" width="300" height="48"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="300" height="48"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-UY-cUB">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="170.5" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="169" height="48"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTEREST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh7-dr-xJG">
-                                                                            <rect key="frame" x="63" y="14.5" width="76.5" height="20"/>
+                                                                            <rect key="frame" x="63" y="15" width="75" height="19"/>
                                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -428,7 +435,7 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95e-aK-peQ" userLabel="6">
-                                        <rect key="frame" x="106" y="730" width="163" height="50"/>
+                                        <rect key="frame" x="105.5" y="729" width="164" height="50"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-persons" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-rO-GzQ">
                                                 <rect key="frame" x="0.0" y="15" width="20" height="20"/>
@@ -438,7 +445,7 @@ TIME RANGE</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGE RANGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAA-Op-0Y4">
-                                                <rect key="frame" x="36" y="15" width="91" height="20"/>
+                                                <rect key="frame" x="36" y="15.5" width="92" height="19"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                 <color key="textColor" red="0.71764705880000002" green="0.56470588239999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -455,10 +462,10 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eus-Wo-1oY" userLabel="7">
-                                        <rect key="frame" x="0.0" y="788" width="375" height="78"/>
+                                        <rect key="frame" x="0.0" y="787" width="375" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT MULTILINE DESCRIPTION" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPx-Xm-tKa">
-                                                <rect key="frame" x="17" y="10" width="338" height="58"/>
+                                                <rect key="frame" x="17" y="10" width="338" height="56"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.85999999999999999" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -528,7 +535,7 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dVj-4g-XZE">
-                                        <rect key="frame" x="0.0" y="866" width="375" height="161"/>
+                                        <rect key="frame" x="0.0" y="863" width="375" height="161"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="161" id="WZ9-0s-LgE"/>
@@ -624,6 +631,7 @@ TIME RANGE</string>
                         <outlet property="tableViewInfo" destination="dVj-4g-XZE" id="vhv-YO-r14"/>
                         <outlet property="viewContainerInterests" destination="jTS-jL-GqS" id="ozv-SE-3Wc"/>
                         <outlet property="viewContainerTitle" destination="SKq-8h-syE" id="vR5-lN-R08"/>
+                        <outlet property="viewHighlightInfoDate" destination="hJN-Ve-8Ab" id="4QQ-sj-MhA"/>
                         <outlet property="viewHighlightInfoLocation" destination="fFv-Qg-kKP" id="jQL-iN-uSJ"/>
                         <outlet property="viewHighlightInfoPrice" destination="qoT-gu-SqK" id="ggP-1c-2oJ"/>
                         <outlet property="viewImagesPlaceholder" destination="6Y8-jG-NeL" id="tCp-8m-Y35"/>
@@ -633,6 +641,147 @@ TIME RANGE</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npZ-qn-xhP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4621.6000000000004" y="2305.5472263868069"/>
+        </scene>
+        <!--Event Details Datetimes View Controller-->
+        <scene sceneID="x1j-VN-4Qz">
+            <objects>
+                <viewController storyboardIdentifier="EventDetailsDatetimes" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BIe-Wj-DJg" customClass="EventDetailsDatetimesViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ct4-P7-JxQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZGS-9n-9Ex"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UQB-X3-HPA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xbl-9b-G5Q">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="120" id="puI-vf-sXz" customClass="EventDatetimesTableViewCell" customModule="Happ" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="puI-vf-sXz" id="Pq4-hd-Kk1">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1r5-hG-m9G">
+                                                    <rect key="frame" x="16" y="8" width="343" height="25"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-calendar" translatesAutoresizingMaskIntoConstraints="NO" id="0GZ-8W-aBM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="heS-tw-B6t"/>
+                                                                <constraint firstAttribute="width" constant="24" id="nBE-Cs-Crw"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zl9-JY-cDP">
+                                                            <rect key="frame" x="36" y="2.5" width="295" height="21"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="0GZ-8W-aBM" firstAttribute="leading" secondItem="1r5-hG-m9G" secondAttribute="leading" id="XUK-jz-rNT"/>
+                                                        <constraint firstItem="Zl9-JY-cDP" firstAttribute="leading" secondItem="0GZ-8W-aBM" secondAttribute="trailing" constant="12" id="gGC-oM-zvQ"/>
+                                                        <constraint firstItem="0GZ-8W-aBM" firstAttribute="centerY" secondItem="1r5-hG-m9G" secondAttribute="centerY" id="q2F-2e-Ba6"/>
+                                                        <constraint firstItem="Zl9-JY-cDP" firstAttribute="centerY" secondItem="1r5-hG-m9G" secondAttribute="centerY" id="sgz-fW-Jcr"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Zl9-JY-cDP" secondAttribute="trailing" constant="12" id="yAR-75-KLx"/>
+                                                        <constraint firstAttribute="height" constant="25" id="yOC-5r-Q6U"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSF-dN-RvQ">
+                                                    <rect key="frame" x="16" y="41" width="343" height="25"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-clock" translatesAutoresizingMaskIntoConstraints="NO" id="okD-da-Qnq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="24" id="Zaa-Y7-a2e"/>
+                                                                <constraint firstAttribute="height" constant="24" id="wrq-C3-uCE"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cc9-WP-cqD">
+                                                            <rect key="frame" x="36" y="2.5" width="295" height="21"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="okD-da-Qnq" firstAttribute="leading" secondItem="KSF-dN-RvQ" secondAttribute="leading" id="5kK-G1-CCt"/>
+                                                        <constraint firstItem="cc9-WP-cqD" firstAttribute="centerY" secondItem="KSF-dN-RvQ" secondAttribute="centerY" id="Cby-09-19b"/>
+                                                        <constraint firstItem="okD-da-Qnq" firstAttribute="centerY" secondItem="KSF-dN-RvQ" secondAttribute="centerY" id="Ys1-Rn-ogQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cc9-WP-cqD" secondAttribute="trailing" constant="12" id="hbh-Qy-g3v"/>
+                                                        <constraint firstAttribute="height" constant="25" id="n2c-1Z-pmT"/>
+                                                        <constraint firstItem="cc9-WP-cqD" firstAttribute="leading" secondItem="okD-da-Qnq" secondAttribute="trailing" constant="12" id="wfG-ST-z7j"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUY-gK-WD3">
+                                                    <rect key="frame" x="16" y="74" width="343" height="25"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-lock-close" translatesAutoresizingMaskIntoConstraints="NO" id="KOH-65-xg9">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="EU4-UY-Roo"/>
+                                                                <constraint firstAttribute="width" constant="24" id="dNy-2p-XIA"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Qtx-0L-e6O">
+                                                            <rect key="frame" x="36" y="5.5" width="207" height="14"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                                            <color key="textColor" red="1" green="0.19607843137254902" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Qtx-0L-e6O" firstAttribute="leading" secondItem="KOH-65-xg9" secondAttribute="trailing" constant="12" id="9PI-Nd-l2O"/>
+                                                        <constraint firstItem="KOH-65-xg9" firstAttribute="leading" secondItem="nUY-gK-WD3" secondAttribute="leading" id="AC9-40-lUb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Qtx-0L-e6O" secondAttribute="trailing" constant="100" id="Jsj-2D-Dhc"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Z1w-1H-rHC"/>
+                                                        <constraint firstItem="Qtx-0L-e6O" firstAttribute="centerY" secondItem="nUY-gK-WD3" secondAttribute="centerY" id="gy9-7N-4ej"/>
+                                                        <constraint firstItem="KOH-65-xg9" firstAttribute="centerY" secondItem="nUY-gK-WD3" secondAttribute="centerY" id="vNl-2d-nHJ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="nUY-gK-WD3" firstAttribute="top" secondItem="KSF-dN-RvQ" secondAttribute="bottom" constant="8" id="3sZ-Wy-kaG"/>
+                                                <constraint firstItem="nUY-gK-WD3" firstAttribute="leading" secondItem="Pq4-hd-Kk1" secondAttribute="leading" constant="16" id="AgS-Ik-tbk"/>
+                                                <constraint firstItem="KSF-dN-RvQ" firstAttribute="top" secondItem="1r5-hG-m9G" secondAttribute="bottom" constant="8" id="IWP-oC-kgf"/>
+                                                <constraint firstAttribute="trailing" secondItem="1r5-hG-m9G" secondAttribute="trailing" constant="16" id="J6F-cF-xHY"/>
+                                                <constraint firstItem="1r5-hG-m9G" firstAttribute="top" secondItem="Pq4-hd-Kk1" secondAttribute="top" constant="8" id="aIw-Ci-kXU"/>
+                                                <constraint firstItem="KSF-dN-RvQ" firstAttribute="leading" secondItem="Pq4-hd-Kk1" secondAttribute="leading" constant="16" id="d8s-HY-iG4"/>
+                                                <constraint firstAttribute="trailing" secondItem="KSF-dN-RvQ" secondAttribute="trailing" constant="16" id="dnc-45-OKg"/>
+                                                <constraint firstItem="1r5-hG-m9G" firstAttribute="leading" secondItem="Pq4-hd-Kk1" secondAttribute="leading" constant="16" id="ovR-pj-Cbn"/>
+                                                <constraint firstAttribute="trailing" secondItem="nUY-gK-WD3" secondAttribute="trailing" constant="16" id="rHj-4k-COc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageCloseOnStartIcon" destination="KOH-65-xg9" id="tJB-pC-ArF"/>
+                                            <outlet property="labelCloseOnStart" destination="Qtx-0L-e6O" id="gDw-w0-hxC"/>
+                                            <outlet property="labelDateRange" destination="Zl9-JY-cDP" id="tBd-qC-41n"/>
+                                            <outlet property="labelTimeRange" destination="cc9-WP-cqD" id="oBL-DS-LvQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xbl-9b-G5Q" secondAttribute="trailing" id="1q5-Ke-xF7"/>
+                            <constraint firstItem="Xbl-9b-G5Q" firstAttribute="leading" secondItem="UQB-X3-HPA" secondAttribute="leading" id="Dw8-FY-o5u"/>
+                            <constraint firstItem="ZGS-9n-9Ex" firstAttribute="top" secondItem="Xbl-9b-G5Q" secondAttribute="bottom" id="Y5b-tV-xxk"/>
+                            <constraint firstItem="Xbl-9b-G5Q" firstAttribute="top" secondItem="ct4-P7-JxQ" secondAttribute="bottom" id="Yed-jp-URS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Xbl-9b-G5Q" id="XKQ-hc-D9C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3JN-L5-Kog" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5485.6000000000004" y="2061.3193403298351"/>
         </scene>
         <!--Feed Filters Controller-->
         <scene sceneID="e1v-SL-OhA">
@@ -909,7 +1058,7 @@ TIME RANGE</string>
         <scene sceneID="r6Q-gs-EfQ">
             <objects>
                 <collectionViewController storyboardIdentifier="Explore" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V5t-Ey-1kH" customClass="EventsExploreViewController" customModule="Happ" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="WF8-24-nmu">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WF8-24-nmu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -947,7 +1096,7 @@ TIME RANGE</string>
                                             <rect key="frame" x="0.0" y="99" width="124" height="65"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT TITLE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZK-U6-8Lv">
-                                                    <rect key="frame" x="0.0" y="25" width="124" height="15"/>
+                                                    <rect key="frame" x="0.0" y="25.5" width="124" height="14"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -978,7 +1127,7 @@ TIME RANGE</string>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellLoading" id="rbN-dO-2fN" customClass="EventExploreLoadingCollectionViewCell" customModule="Happ" customModuleProvider="target">
-                                <rect key="frame" x="126" y="0.0" width="124" height="164"/>
+                                <rect key="frame" x="125.5" y="0.0" width="124" height="164"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="124" height="164"/>
@@ -1185,20 +1334,20 @@ TIME RANGE</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGb-fk-WXW" userLabel="Location Info View">
-                                        <rect key="frame" x="141" y="42" width="218" height="15"/>
+                                        <rect key="frame" x="141" y="42" width="218" height="14"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aI-5H-u5O" userLabel="Distance">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="15"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="14"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-geo-orange" translatesAutoresizingMaskIntoConstraints="NO" id="LDP-s8-Dpy">
-                                                        <rect key="frame" x="0.0" y="2" width="9" height="11"/>
+                                                        <rect key="frame" x="0.0" y="1.5" width="9" height="11"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="11" id="Y1z-SS-Kbm"/>
                                                             <constraint firstAttribute="width" constant="8.3000000000000007" id="qal-9B-lWw"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT_DETAILS_MAP.DISTANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydf-yM-m83">
-                                                        <rect key="frame" x="13" y="0.0" width="35" height="15"/>
+                                                        <rect key="frame" x="13" y="0.0" width="35" height="14"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="35" id="Yx6-Gw-eob"/>
                                                         </constraints>
@@ -1217,7 +1366,7 @@ TIME RANGE</string>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="EVENT_DETAILS_MAP.ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qo-Sm-sgL">
-                                                <rect key="frame" x="40" y="0.0" width="178" height="15"/>
+                                                <rect key="frame" x="40" y="0.0" width="178" height="14"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1235,13 +1384,13 @@ TIME RANGE</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT_DETAILS_MAP.DATE_AND_TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KA-xZ-Ucf">
-                                        <rect key="frame" x="141" y="57" width="218" height="15"/>
+                                        <rect key="frame" x="141" y="56" width="218" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT_DETAILS_MAP.PRICE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTT-Pf-XpM">
-                                        <rect key="frame" x="141" y="72" width="218" height="15"/>
+                                        <rect key="frame" x="141" y="70" width="218" height="14"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.56419719830000004" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1482,10 +1631,13 @@ TIME RANGE</string>
     <resources>
         <image name="border-dotted" width="343" height="522"/>
         <image name="clock" width="20" height="22"/>
+        <image name="icon-calendar" width="18" height="20"/>
+        <image name="icon-clock" width="20" height="20"/>
         <image name="icon-expand-shadow" width="38" height="41"/>
         <image name="icon-geo-orange" width="14" height="20"/>
         <image name="icon-locate" width="24" height="23"/>
         <image name="icon-locate-active" width="25" height="25"/>
+        <image name="icon-lock-close" width="24" height="24"/>
         <image name="icon-persons" width="24" height="24"/>
         <image name="icon-route" width="24" height="22"/>
         <image name="icon-star" width="20" height="20"/>

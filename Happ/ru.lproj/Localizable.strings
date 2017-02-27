@@ -279,3 +279,11 @@
 
 /* Years */
 "years" = "годы";
+
+/* Text near the lock icon when is open on EventDetailsDatetime */
+"After the event, the entrance is open" = "После начала события вход открыт";
+
+/* Text near the lock icon when is closed on EventDetailsDatetime */
+"After the event, the entrance is closed" = "После начала события вход закрыт";
+
+
