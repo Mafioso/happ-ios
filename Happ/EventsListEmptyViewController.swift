@@ -12,6 +12,8 @@ import UIKit
 let loc_favourite = NSLocalizedString("Favourite", comment: "Title of NavBar for one of EventsListViewController")
 let loc_feed = NSLocalizedString("Feed", comment: "Title of NavBar for one of EventsListViewController")
 let loc_my_events = NSLocalizedString("My Events", comment: "Title of NavBar for one of EventsListViewController")
+let loc_chats = NSLocalizedString("Chats", comment: "Title of TabButton for ChatsController")
+let loc_chats_long = NSLocalizedString("Chats", comment: "Title of NavBar for ChatsController, for example: Список чатов")
 let loc_empty_list_help_favourite = NSLocalizedString("You don’t have any favourited event", comment: "Help message displayed when there is no events in Favourites")
 let loc_empty_list_help_feed = NSLocalizedString("There are no events for selected interests", comment: "Help message displayed when there is no events in Feed")
 let loc_empty_list_help_my_events = NSLocalizedString("You have not created any event yet", comment: "Help message displayed when there is no events in My Events")
@@ -70,6 +72,8 @@ class EventsListEmptyViewController: UIViewController, EventsListDelegate {
         buttonAction.setTitle(self.getActionTitle(), forState: .Normal)
         buttonAction.setImage(self.getActionIcon(), forState: .Normal)
         labelDescription.text = self.getDescription()
+        
+        self.extMakeStatusBarDefault()
     }
 
 

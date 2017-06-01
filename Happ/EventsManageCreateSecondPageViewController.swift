@@ -70,6 +70,8 @@ class EventsManageCreateSecondPageViewController: EventsManageCreateViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.extMakeStatusBarDefault()
+        
         eventContinuingSwitch.addTarget(self, action: #selector(self.switchContinuity), forControlEvents: .ValueChanged)
         
         navigationItem.leftBarButtonItem?.image = UIImage(named: "nav-back-gray")

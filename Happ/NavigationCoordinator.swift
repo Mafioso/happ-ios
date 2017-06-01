@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import SlideMenuControllerSwift
 import RealmSwift
-
+import Quickblox
 
 typealias NavigationFunc = (() -> Void)?
 typealias NavigationFuncWithID = ((id: String) -> Void)?
@@ -39,12 +39,14 @@ class HappMainTabBarController: UITabBarController {
     var navigateMapTab: NavigationFunc
     var navigateFeedTab: NavigationFunc
     var navigateFavouriteTab: NavigationFunc
+    var navigateChatTab: NavigationFunc
 
     enum Tabs: Int {
         case Feed = 0
         case Favourite = 1
         case Explore = 2
         case Map = 3
+        case Chat = 4
     }
 
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class HappMainTabBarController: UITabBarController {
         let tabFavourite = UINavigationController()
         let tabExplore = UINavigationController()
         let tabMap = UINavigationController()
-        // let tabChat = HappNavigationController()
+        let tabChat = UINavigationController()
 
         tabFeed.tabBarItem = UITabBarItem(title: loc_feed,
                                           image: UIImage(named: "tab-feed"),
@@ -70,13 +72,11 @@ class HappMainTabBarController: UITabBarController {
         tabMap.tabBarItem = UITabBarItem(title: loc_map,
                                       image: UIImage(named: "tab-map"),
                                       selectedImage: nil)
-
-        /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
+        tabChat.tabBarItem = UITabBarItem(title: "Chat",
                                        image: UIImage(named: "tab-chat"),
                                        selectedImage: nil)
-        */
 
-        self.viewControllers = [tabFeed, tabFavourite, tabExplore, tabMap]//, tabChat]
+        self.viewControllers = [tabFeed, tabFavourite, tabExplore, tabMap, tabChat]
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -91,6 +91,8 @@ class HappMainTabBarController: UITabBarController {
             self.navigateExploreTab?()
         case .Map:
             self.navigateMapTab?()
+        case .Chat:
+            self.navigateChatTab?()
         }
     }
 }
@@ -101,6 +103,7 @@ class HappManagerTabBarController: UITabBarController {
 
     var navigateMyEventsTab: NavigationFunc = nil
     var navigateAddEventTab: NavigationFunc = nil
+    var navigateChatTab: NavigationFunc = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +114,7 @@ class HappManagerTabBarController: UITabBarController {
         let tabProFunctions = HappNavigationController()
         let tabMyEvents = UINavigationController()
         let tabAddEvent = HappNavigationController()
-        // let tabChat = HappNavigationController()
+        let tabChat = HappNavigationController()
 
         tabAnalytics.tabBarItem = UITabBarItem(title: loc_analytics,
                                              image: UIImage(named: "tab-analytics"),
@@ -125,12 +128,11 @@ class HappManagerTabBarController: UITabBarController {
         tabAddEvent.tabBarItem = UITabBarItem(title: loc_my_events_create,
                                                image: UIImage(named: "tab-favourite"),
                                                selectedImage: nil)
-        /* tabChat.tabBarItem = UITabBarItem(title: "Chat",
-         image: UIImage(named: "tab-chat"),
-         selectedImage: nil)
-         */
+        tabChat.tabBarItem = UITabBarItem(title: loc_chats,
+                                      image: UIImage(named: "tab-chat"),
+                                      selectedImage: nil)
 
-        self.viewControllers = [tabAnalytics, tabProFunctions, tabMyEvents, tabAddEvent]//, tabChat]
+        self.viewControllers = [tabAnalytics, tabProFunctions, tabMyEvents, tabAddEvent, tabChat]
     }
 
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
@@ -140,6 +142,8 @@ class HappManagerTabBarController: UITabBarController {
             self.navigateMyEventsTab?()
         case 3:
             self.navigateAddEventTab?()
+        case 4:
+            self.navigateChatTab?()
         default:
             break
         }
@@ -161,6 +165,7 @@ class NavigationCoordinator {
     private let eventStoryboard: UIStoryboard
     private let profileStoryboard: UIStoryboard
     private let organizerStoryboard: UIStoryboard
+    private let chatStoryboard: UIStoryboard
 
     private let window: UIWindow
     private var navigationController: UINavigationController!
@@ -178,6 +183,7 @@ class NavigationCoordinator {
         self.eventStoryboard = UIStoryboard(name: "Event", bundle: nil)
         self.profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
         self.organizerStoryboard = UIStoryboard(name: "Organizer", bundle: nil)
+        self.chatStoryboard = UIStoryboard(name: "Chat", bundle: nil)
     }
 
     func start() {
@@ -196,6 +202,8 @@ class NavigationCoordinator {
                         }
                     }
             }
+        }.then { _ -> Promise<Void> in
+            return self.startChat()
         }.then { _ -> Promise<Void> in
             return ProfileService.checkCityExists()
         }.then { _ -> Promise<Void> in
@@ -239,6 +247,10 @@ class NavigationCoordinator {
         AuthenticationService.logOut()
         self.startSignIn()
     }
+    
+    func startChat() -> Promise<Void> {
+        return ChatService.startChat()
+    }
 
     func updateUserLanguageIfNeeded() -> Promise<Void> {
         return Promise { resolve, reject in
@@ -268,6 +280,10 @@ class NavigationCoordinator {
 
     func logOut() {
         print(".nav.LogOut")
+        QBChat.instance().disconnectWithCompletionBlock { _ in
+            QBRequest.destroySessionWithSuccessBlock({ _ in }, errorBlock: { _ in })
+        }
+        
         AuthenticationService.logOut()
         self.start()
     }
@@ -309,8 +325,19 @@ class NavigationCoordinator {
         return {
             print(".nav.showSignUp")
             let viewController = self.authStoryboard.instantiateViewControllerWithIdentifier("SignUpPage") as! SignUpController
+            parentViewModel.navigateSetup = self.startChatAndAfterSetup
             viewController.viewModel = parentViewModel
             self.navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func startChatAndAfterSetup() {
+        firstly {
+            ProfileService.fetchUserProfile()
+        }.then {
+            self.startChat()
+        }.then { _ -> Void in
+            self.startSetupCityAndInterests()
         }
     }
 
@@ -338,6 +365,7 @@ class NavigationCoordinator {
         mainTabBar.navigateMapTab = self.showMap
         mainTabBar.navigateFeedTab = self.showFeed
         mainTabBar.navigateFavouriteTab = self.showFavourite
+        mainTabBar.navigateChatTab = self.showChats
 
         self.tabBarController = mainTabBar
         self.navigationController = nil
@@ -348,6 +376,7 @@ class NavigationCoordinator {
         let managerTabBar = HappManagerTabBarController()
         managerTabBar.navigateMyEventsTab = self.showMyEvents
         managerTabBar.navigateAddEventTab = self.startEventManage
+        managerTabBar.navigateChatTab = self.showManagerChats
 
         self.tabBarController = managerTabBar
         self.navigationController = nil
@@ -495,6 +524,7 @@ class NavigationCoordinator {
 
         self.updateSlidebar() // to remove feedFilter
     }
+    
     func showMap() {
         var viewModel = EventsMapViewModel()
         viewModel.navigateEventDetailsMap = self.showEventDetailsMap
@@ -517,19 +547,75 @@ class NavigationCoordinator {
         self.updateSlidebar(filtersViewController)
     }
 
-
     func showEventDetails(forID: String) {
         print(".nav.showEventDetails [forID=\(forID)]")
         let viewModel = EventViewModel(forID: forID)
         viewModel.navigateBack = self.goBack
         viewModel.navigateEventDetailsMap = self.showEventDetailsMap
         viewModel.navigateEventDetailsDatetimes = self.showEventDetailsDatetimes
+        viewModel.navigateAsk = self.showChat
         viewModel.openWebPage = self.openWebPage
 
         let viewController = self.eventStoryboard.instantiateViewControllerWithIdentifier("EventDetails") as! EventDetailsController
         viewController.viewModel = viewModel
         self.navigationController.pushViewController(viewController, animated: true)
     }
+    
+    func showChats() {
+        var viewModel = ChatsViewModel()
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        viewModel.navigateEvents = self.showFeed
+        viewModel.navigateAsk = self.showChat
+        
+        let viewController = self.chatStoryboard.instantiateViewControllerWithIdentifier("Chats") as! ChatsController
+        viewController.viewModel = viewModel
+        
+        let tabIndex = HappMainTabBarController.Tabs.Chat.rawValue
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
+        self.navigationController.navigationBar.hidden = false
+    }
+    
+    func showManagerChats() {
+        var viewModel = ChatsViewModel()
+        viewModel.displaySlideMenu = self.displaySlideMenu
+        viewModel.displaySlideFilters = self.displaySlideFeedFilters
+        viewModel.navigateEventCreate = self.startEventManage
+        viewModel.navigateChat = self.showManagerChat
+        
+        viewModel.manager = true
+        
+        let viewController = self.chatStoryboard.instantiateViewControllerWithIdentifier("Chats") as! ChatsController
+        viewController.viewModel = viewModel
+        
+        let tabIndex = HappMainTabBarController.Tabs.Chat.rawValue
+        self.tabBarController.selectedIndex = tabIndex
+        self.navigationController = self.tabBarController.viewControllers![tabIndex] as! UINavigationController
+        self.navigationController.viewControllers = [viewController]
+    }
+    
+    func showChat(forObject: Object) {
+        let viewModel = ChatViewModel(forObject: forObject)
+        viewModel.navigateBack = self.goBack
+        
+        let viewController = ChatController()
+        viewController.viewModel = viewModel
+        
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func showManagerChat(forObject: Object) {
+        let viewModel = ChatViewModel(forObject: forObject, manager: true)
+        viewModel.navigateBack = self.goBack
+        
+        let viewController = ChatController()
+        viewController.viewModel = viewModel
+        
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
     func showEventDetailsMap(forID: String) {
         print(".nav.showEventDetailsMap [forID=\(forID)]")
         let viewModel = EventOnMapViewModel(forID: forID)
@@ -552,7 +638,6 @@ class NavigationCoordinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
 
-
     func showSelectEventInterest(parentViewController: SelectEventInterestDelegate) -> NavigationFunc {
         return {
             let viewController = SelectEventInterestController()
@@ -567,6 +652,7 @@ class NavigationCoordinator {
             self.navigationController.pushViewController(viewController, animated: true)
         }
     }
+    
     func showSelectUserInterests(loadInMenu: Bool, navigateAfterSave: NavigationFunc)  -> NavigationFunc {
         return {
             // init V
@@ -605,6 +691,7 @@ class NavigationCoordinator {
             }
         }
     }
+    
     func showPopupSelectSubinterests<T: SelectInterestViewModelProtocol>(target: SelectInterestController<T>) -> NavigationFunc {
         return {
             let viewController = self.mainStoryboard.instantiateViewControllerWithIdentifier("SelectSubinterests") as! SelectSubinterestsController

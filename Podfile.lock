@@ -14,17 +14,17 @@ PODS:
     - FacebookCore
     - FBSDKCoreKit (~> 4.14)
     - FBSDKLoginKit (~> 4.14)
-  - FBSDKCoreKit (4.18.0):
+  - FBSDKCoreKit (4.19.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.18.0):
+  - FBSDKLoginKit (4.19.0):
     - FBSDKCoreKit
-  - GoogleMaps (2.1.1):
-    - GoogleMaps/Maps (= 2.1.1)
-  - GoogleMaps/Base (2.1.1)
-  - GoogleMaps/Maps (2.1.1):
+  - GoogleMaps (2.2.0):
+    - GoogleMaps/Maps (= 2.2.0)
+  - GoogleMaps/Base (2.2.0)
+  - GoogleMaps/Maps (2.2.0):
     - GoogleMaps/Base
-  - GooglePlaces (2.1.1):
-    - GoogleMaps/Base (= 2.1.1)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
   - HanekeSwift (0.10.1)
   - IQKeyboardManagerSwift (4.0.5)
   - KeychainSwift (3.0.16)
@@ -53,14 +53,64 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.5.3):
     - PromiseKit/CorePromise
+  - QMChatViewController (0.4.1.2):
+    - QMChatViewController/Categories (= 0.4.1.2)
+    - QMChatViewController/Protocols (= 0.4.1.2)
+    - QMChatViewController/QMChatDataSource (= 0.4.1.2)
+    - QMChatViewController/QMChatLocationSnapshotter (= 0.4.1.2)
+    - QMChatViewController/Sections (= 0.4.1.2)
+    - QMChatViewController/Utils (= 0.4.1.2)
+    - QMChatViewController/Views (= 0.4.1.2)
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/Categories (0.4.1.2):
+    - QMChatViewController/QMChatLocationSnapshotter
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/Protocols (0.4.1.2):
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/QMChatDataSource (0.4.1.2):
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/QMChatLocationSnapshotter (0.4.1.2):
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/Sections (0.4.1.2):
+    - QMChatViewController/QMChatDataSource
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/Utils (0.4.1.2):
+    - QMChatViewController/Categories
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QMChatViewController/Views (0.4.1.2):
+    - QMChatViewController/Categories
+    - QMChatViewController/Protocols
+    - QMChatViewController/Utils
+    - QuickBlox (>= 2.0)
+    - SDWebImage (~> 3.6)
+    - TTTAttributedLabel (> 1.13)
+  - QuickBlox (2.9.2)
   - Realm (2.1.2):
     - Realm/Headers (= 2.1.2)
   - Realm/Headers (2.1.2)
   - RealmSwift (2.1.2):
     - Realm (= 2.1.2)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
   - Shimmer (1.0.2)
   - SlideMenuControllerSwift (2.3.0)
   - SwiftyJSON (2.4.0)
+  - TTTAttributedLabel (2.0.0)
   - UITextView+Placeholder (1.2.0)
   - WTLCalendarView (0.2.0)
 
@@ -77,7 +127,9 @@ DEPENDENCIES:
   - ObjectMapper+Realm (= 0.1)
   - PromiseKit (~> 3.5)
   - PromiseKit/CoreLocation
-  - RealmSwift
+  - QMChatViewController (from `https://github.com/lenyapugachev/QMChatViewController-ios.git`)
+  - QuickBlox
+  - RealmSwift (= 2.1.2)
   - Shimmer
   - SlideMenuControllerSwift (from `https://github.com/dekatotoro/SlideMenuControllerSwift.git`, branch `swift2.3`)
   - SwiftyJSON (= 2.4.0)
@@ -88,6 +140,8 @@ EXTERNAL SOURCES:
   KeychainSwift:
     :branch: swift_2_3
     :git: https://github.com/marketplacer/keychain-swift.git
+  QMChatViewController:
+    :git: https://github.com/lenyapugachev/QMChatViewController-ios.git
   SlideMenuControllerSwift:
     :branch: swift2.3
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
@@ -98,8 +152,11 @@ CHECKOUT OPTIONS:
   KeychainSwift:
     :commit: bd1f7dd023fb26f92a5a94d44e6450aa44dacc29
     :git: https://github.com/marketplacer/keychain-swift.git
+  QMChatViewController:
+    :commit: 5d794e5defc7cab57f1d71861956997df0c3190a
+    :git: https://github.com/lenyapugachev/QMChatViewController-ios.git
   SlideMenuControllerSwift:
-    :commit: cd6d807f5ee69091e9d1301779a05f6e9a2e5173
+    :commit: 06ed333bbcb3abbb5533aff89f2d326b888f3cbd
     :git: https://github.com/dekatotoro/SlideMenuControllerSwift.git
   WTLCalendarView:
     :commit: 918ffb08841bc7a36ef2e4a6dcf03c064664f22b
@@ -110,25 +167,29 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FacebookCore: 14f27add6888c27470d42a100374e6361f4e0f79
   FacebookLogin: 748f4e621e874da3e0bf63bccf6fd1542c786a1b
-  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
-  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
-  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
-  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
-  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  FBSDKCoreKit: 894b2b6eda6a4c8c4204e92e59cc355709ef045c
+  FBSDKLoginKit: 83ca4d8f12a2022570af9fd6aacf27f6b425b99f
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  HanekeSwift: '08e47d3d0f2899ec58e5d257beba0de619aca9e8'
   IQKeyboardManagerSwift: 41fd3a45a2cdb2a0e031af697708a95b865068a1
   KeychainSwift: a5bb85cd498ce2217b55e055ec59e9268d83384c
   ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
   ObjectMapper+Realm: dbcf666c2081d82dc527b054c574b9f3777df060
   OMGHTTPURLRQ: edb14c7d28add69226b79d826f930805927a0ffa
   PromiseKit: d3393df0dfd7ed208cec0267dce13c66d9c09d0a
+  QMChatViewController: a8b7d5bb73da16eb39110ec43baaf56325a08ad3
+  QuickBlox: 67cafa5d7b237db7344c506ca5dc38365180cacb
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
-  SlideMenuControllerSwift: 09ef91aa30464e7e517bce2f2ecc6e323e3fe866
+  SlideMenuControllerSwift: b04a4ca9e6978efa7137838ea398f17f4add1c92
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   WTLCalendarView: c7ee2e7f916cd069b131f75fcdc3cf3f7418f4ff
 
-PODFILE CHECKSUM: 2192369d3dceabf8be3f49bfa19121d47eb564ed
+PODFILE CHECKSUM: dadd79bf5c969404abb66f75cc906057cdae23e3
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

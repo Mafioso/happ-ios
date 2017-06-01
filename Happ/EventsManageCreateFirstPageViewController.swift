@@ -43,6 +43,8 @@ class EventsManageCreateFirstPageViewController: EventsManageCreateViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.extMakeStatusBarDefault()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         

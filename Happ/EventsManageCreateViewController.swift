@@ -34,6 +34,7 @@ class EventsManageCreateViewController: UIViewController, UIGestureRecognizerDel
         automaticallyAdjustsScrollViewInsets = false
         
         self.extHideKeyboardWhenTappedAround()
+        self.extMakeStatusBarDefault()
     }
     
     override func viewWillAppear(animated: Bool) {

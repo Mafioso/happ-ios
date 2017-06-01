@@ -33,8 +33,7 @@ protocol EventsManageSyncWithEmptyList: EventsEmptyListDelegate, EventsEmptyList
 
 
 
-class EventsManageViewControllerPrototype<T: EventsListSectionedViewModelProtocol>: UIViewController, UITableViewDataSource, UITableViewDelegate,
-FeedFiltersDelegate, EventsListSyncWithEmptyList {
+class EventsManageViewControllerPrototype<T: EventsListSectionedViewModelProtocol>: UIViewController, UITableViewDataSource, UITableViewDelegate, FeedFiltersDelegate, EventsListSyncWithEmptyList {
     
     var viewModel: T! {
         didSet {
@@ -60,8 +59,14 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
         
         self.initTableView()
         self.initDataLoading()
-        self.extMakeNavBarWhite()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.initNavBarItems()
+        self.extMakeNavBarVisible()
+        self.extMakeNavBarWhite()
     }
     
     private func initDataLoading() {
@@ -154,7 +159,6 @@ FeedFiltersDelegate, EventsListSyncWithEmptyList {
         
         if self.viewModel.isLoadingFirstDataPage() {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Loading.rawValue, forIndexPath: indexPath) as! EventManageLoadingTableCell
-            
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(ReuseIdentifier.Cell.rawValue, forIndexPath: indexPath) as! EventManageTableCell

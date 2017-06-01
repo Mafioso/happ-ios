@@ -40,6 +40,7 @@ class EventDetailsController: UIViewController {
     @IBOutlet weak var labelAuthorName: UILabel!
     @IBOutlet weak var labelAuthorDetails: UILabel!
     @IBOutlet weak var imageAuthorPhoto: UIImageView!
+    @IBOutlet weak var askAuthorButton: UIButton!
 
     @IBOutlet weak var buttonInfoDate: UIButton!
     @IBOutlet weak var viewHighlightInfoDate: UIView!
@@ -81,6 +82,9 @@ class EventDetailsController: UIViewController {
     }
     @IBAction func clickedShareButton(sender: UIButton) {
         self.shareEvent()
+    }
+    @IBAction func clickedAskButton(sender: UIButton) {
+        self.viewModel.navigateAsk?(object: self.viewModel.event.author!)
     }
 
 
@@ -159,6 +163,9 @@ class EventDetailsController: UIViewController {
         labelTitle.text = event.title
         labelDescription.text = event.description_text
         labelAuthorDetails.text = event.author?.fn
+        if event.author?.id == ProfileService.getUserProfile().id {
+            askAuthorButton.hidden = true
+        }
 
         // TODO
         labelDateRange.text = HappEventDateFormats.EventDetails(first_datetime: event.datetimes.first!, last_datetime: event.datetimes.last!).toString()

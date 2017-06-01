@@ -65,10 +65,8 @@ class SignInController: UIViewController, FacebookAuthProtocol {
             
             self.displayFormSpinner()
             self.viewModel.onSignIn(username, password: password)
-                .always {
-                    self.displayFormButton()
-                }
                 .error { e in
+                    self.displayFormButton()
                     self.extDisplayAlertView(e)
             }
         }

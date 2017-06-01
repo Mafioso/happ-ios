@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 import RealmSwift
-
+import Quickblox
 
 class SettingsDictModel: Object, Mappable {
     // notifications
@@ -46,7 +46,9 @@ class UserModel: Object, Mappable {
     dynamic var is_active = false
     dynamic var last_login: NSDate?
     dynamic var role = 0
-
+    dynamic var qbID = 0
+    dynamic var qbLogin = ""
+    dynamic var qbPassword = ""
 
     required convenience init?(_ map: Map) {
         self.init()
@@ -69,6 +71,9 @@ class UserModel: Object, Mappable {
         is_active       <- map["is_active"]
         last_login      <- (map["last_login"], HappDateTransformer)
         role            <- map["role"]
+        qbID            <- map["quickblox_id"]
+        qbLogin         <- map["quickblox_login"]
+        qbPassword      <- map["quickblox_password"]
     }
 
     override static func primaryKey() -> String? {
@@ -79,6 +84,7 @@ class UserModel: Object, Mappable {
 class AuthorModel: Object, Mappable {
     dynamic var id = ""
     dynamic var fn: String?
+    dynamic var qbID = 0
     let events = LinkingObjects(fromType: EventModel.self, property: "author")
 
     
@@ -89,6 +95,7 @@ class AuthorModel: Object, Mappable {
     func mapping(map: Map) {
         id  <- map["id"]
         fn  <- map["fn"]
+        qbID  <- map["quickblox_id"]
     }
 
     override static func primaryKey() -> String? {
@@ -463,5 +470,49 @@ class EventModel: Object, Mappable {
         } else {
             return UIImage(named: "icon-star")!
         }
+    }
+}
+
+class ChatModel: Object {
+    dynamic var id: String?
+    dynamic var author: AuthorModel?
+    dynamic var name: String?
+    dynamic var message: String?
+    dynamic var date: NSDate?
+    dynamic var unread = 0
+    
+    required convenience init?(_ chat: QBChatDialog, manager: Bool = false) {
+        self.init()
+        id = chat.ID
+        author = AuthorModel()
+        author?.id = chat.data?[manager ? "participator" : "author"] as! String
+        author?.fn = chat.data?[manager ? "participator_name" : "author_name"] as? String
+        name = chat.data?[manager ? "participator_name" : "author_name"] as? String
+        message = chat.lastMessageText
+        date = chat.lastMessageDate
+        unread = Int(chat.unreadMessagesCount)
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+class MessageModel: Object {
+    dynamic var message: String?
+    dynamic var incoming = false
+    dynamic var date: NSDate?
+    dynamic var id: String?
+    
+    required convenience init?(_ _message: QBChatMessage, _incoming: Bool) {
+        self.init()
+        id = _message.ID
+        date = _message.dateSent
+        message = _message.text
+        incoming = _incoming
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }

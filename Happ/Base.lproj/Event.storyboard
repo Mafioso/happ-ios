@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -493,28 +493,32 @@ TIME RANGE</string>
                                                 <rect key="frame" x="96" y="0.0" width="263" height="70"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Organizer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOE-NS-J8X">
-                                                        <rect key="frame" x="0.0" y="0.0" width="263" height="17"/>
+                                                        <rect key="frame" x="0.0" y="2" width="263" height="17"/>
                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.38" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="ORGANIZER NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Il-V7-S8q">
-                                                        <rect key="frame" x="0.0" y="23" width="263" height="19"/>
+                                                        <rect key="frame" x="0.0" y="24" width="263" height="19"/>
                                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.85999999999999999" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gq9-Al-0qS">
-                                                        <rect key="frame" x="0.0" y="49" width="160" height="22"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gq9-Al-0qS">
+                                                        <rect key="frame" x="0.0" y="49" width="139" height="20"/>
+                                                        <color key="tintColor" red="0.96470588239999999" green="0.46666666670000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <state key="normal" title="  Ask about event" image="message-bulb">
-                                                            <color key="titleColor" red="1" green="0.40784313729999999" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="titleColor" red="0.96470588239999999" green="0.46666666670000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="clickedAskButton:" destination="ONx-gR-b0p" eventType="touchUpInside" id="F2P-1y-Ggq"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="Gq9-Al-0qS" firstAttribute="top" secondItem="0Il-V7-S8q" secondAttribute="bottom" constant="7" id="9W0-S3-jO9"/>
-                                                    <constraint firstItem="0Il-V7-S8q" firstAttribute="top" secondItem="BOE-NS-J8X" secondAttribute="bottom" constant="6" id="Bn1-zO-wth"/>
-                                                    <constraint firstItem="BOE-NS-J8X" firstAttribute="top" secondItem="rWw-0q-s5P" secondAttribute="top" id="L8w-9Y-jvZ"/>
+                                                    <constraint firstItem="Gq9-Al-0qS" firstAttribute="top" secondItem="0Il-V7-S8q" secondAttribute="bottom" constant="6" id="9W0-S3-jO9"/>
+                                                    <constraint firstItem="0Il-V7-S8q" firstAttribute="top" secondItem="BOE-NS-J8X" secondAttribute="bottom" constant="5" id="Bn1-zO-wth"/>
+                                                    <constraint firstItem="BOE-NS-J8X" firstAttribute="top" secondItem="rWw-0q-s5P" secondAttribute="top" constant="2" id="L8w-9Y-jvZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="0Il-V7-S8q" secondAttribute="trailing" id="Ljg-Ij-gku"/>
                                                     <constraint firstAttribute="trailing" secondItem="BOE-NS-J8X" secondAttribute="trailing" id="Z9L-Ev-xjy"/>
                                                     <constraint firstItem="Gq9-Al-0qS" firstAttribute="leading" secondItem="rWw-0q-s5P" secondAttribute="leading" id="aQH-Sl-lz9"/>
@@ -582,7 +586,7 @@ TIME RANGE</string>
                                     <constraint firstItem="SKq-8h-syE" firstAttribute="leading" secondItem="uMw-s5-dcS" secondAttribute="leading" id="aT3-98-urS"/>
                                     <constraint firstItem="Eus-Wo-1oY" firstAttribute="top" secondItem="95e-aK-peQ" secondAttribute="bottom" constant="8" id="cIm-of-N5M"/>
                                     <constraint firstItem="SKq-8h-syE" firstAttribute="top" secondItem="yL6-8H-XO4" secondAttribute="bottom" id="cWD-3R-1px"/>
-                                    <constraint firstItem="dVj-4g-XZE" firstAttribute="top" secondItem="Eus-Wo-1oY" secondAttribute="bottom" id="dWW-T7-Jo2"/>
+                                    <constraint firstItem="dVj-4g-XZE" firstAttribute="top" secondItem="Eus-Wo-1oY" secondAttribute="bottom" constant="130" id="dWW-T7-Jo2"/>
                                     <constraint firstItem="Eus-Wo-1oY" firstAttribute="leading" secondItem="uMw-s5-dcS" secondAttribute="leading" id="hoq-Qr-7do"/>
                                     <constraint firstItem="dVj-4g-XZE" firstAttribute="trailing" secondItem="Eus-Wo-1oY" secondAttribute="trailing" id="odI-w3-XvJ"/>
                                     <constraint firstItem="973-zb-Iuh" firstAttribute="top" secondItem="Eus-Wo-1oY" secondAttribute="bottom" constant="20" id="qwz-j0-TG4"/>
@@ -593,11 +597,6 @@ TIME RANGE</string>
                                     <constraint firstAttribute="trailing" secondItem="yL6-8H-XO4" secondAttribute="trailing" id="xtc-YA-LXQ"/>
                                     <constraint firstItem="Ujk-jm-TZ0" firstAttribute="leading" secondItem="uMw-s5-dcS" secondAttribute="leading" id="y15-OB-YbY"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="973-zb-Iuh"/>
-                                    </mask>
-                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
@@ -611,6 +610,7 @@ TIME RANGE</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1200"/>
                     <connections>
+                        <outlet property="askAuthorButton" destination="Gq9-Al-0qS" id="azP-Af-5pJ"/>
                         <outlet property="buttonInfoDate" destination="sDb-Jv-Xgh" id="Tqq-mf-4Zl"/>
                         <outlet property="buttonInfoLocation" destination="9Iz-Pg-39D" id="pLp-nP-8cf"/>
                         <outlet property="buttonInfoPrice" destination="4pr-UL-M9G" id="fDq-21-Dhe"/>
@@ -640,7 +640,7 @@ TIME RANGE</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npZ-qn-xhP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4621.6000000000004" y="2305.5472263868069"/>
+            <point key="canvasLocation" x="4645.6000000000004" y="2170.6146926536735"/>
         </scene>
         <!--Event Details Datetimes View Controller-->
         <scene sceneID="x1j-VN-4Qz">
@@ -1224,7 +1224,7 @@ TIME RANGE</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozY-QV-QtM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="801" y="2068"/>
+            <point key="canvasLocation" x="388" y="2068"/>
         </scene>
         <!--Events Map View Controller-->
         <scene sceneID="Y05-8q-Qap">
@@ -1286,7 +1286,7 @@ TIME RANGE</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBr-g0-ZkQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="2068"/>
+            <point key="canvasLocation" x="1265" y="2068"/>
         </scene>
         <!--Event Details Map Controller-->
         <scene sceneID="DMZ-mi-eoZ">
@@ -1517,7 +1517,7 @@ TIME RANGE</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1o-Wf-5SQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2101.5999999999999" y="2065.8170914542729"/>
+            <point key="canvasLocation" x="2124" y="2066"/>
         </scene>
         <!--Events List Empty View Controller-->
         <scene sceneID="Fen-Ox-1rY">

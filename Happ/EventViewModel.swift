@@ -9,8 +9,6 @@
 import Foundation
 import PromiseKit
 
-
-
 class EventViewModel {
 
     enum Info: Int {
@@ -47,6 +45,7 @@ class EventViewModel {
     var navigateBack: NavigationFunc
     var navigateEventDetailsMap: NavigationFuncWithID
     var navigateEventDetailsDatetimes: NavigationFuncWithID
+    var navigateAsk: NavigationFuncWithObject
     var openWebPage: NavigationFuncWithURL
 
 

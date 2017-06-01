@@ -234,7 +234,15 @@ extension UIViewController {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         // set background color
         let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.mainScreen().bounds.width), height: 20))
-        statusBarBackground.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.2)
+        statusBarBackground.backgroundColor = UIColor(red:0, green:0, blue:0, alpha:0.2)
+        statusBarBackground.tag = 920
+        self.view.addSubview(statusBarBackground)
+    }
+    func extMakeStatusBarWhiteSolid() {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        // set background color
+        let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.mainScreen().bounds.width), height: 20))
+        statusBarBackground.backgroundColor = UIColor(red:0.8, green:0.8, blue:0.8, alpha:1)
         statusBarBackground.tag = 920
         self.view.addSubview(statusBarBackground)
     }

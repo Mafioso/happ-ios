@@ -72,6 +72,14 @@
 		9737E50C1E2368C6005AF7B7 /* SelectInterestCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52E0E4521DFC0E560073FAFF /* SelectInterestCollectionCell.xib */; };
 		9737E50F1E2368C6005AF7B7 /* SelectCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD94211DFFF1E6003D0B46 /* SelectCityViewController.xib */; };
 		9737E5101E2368C6005AF7B7 /* SelectCityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52CD94251DFFF5C2003D0B46 /* SelectCityCell.xib */; };
+		97B424061E588DA900B84B1F /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B424051E588DA900B84B1F /* ChatsViewModel.swift */; };
+		97B424081E58909E00B84B1F /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B424071E58909E00B84B1F /* ChatService.swift */; };
+		97B4240A1E5895A200B84B1F /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97B424091E5895A200B84B1F /* Chat.storyboard */; };
+		97B4240D1E58968B00B84B1F /* ChatsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4240C1E58968B00B84B1F /* ChatsController.swift */; };
+		97B4240F1E58B8E100B84B1F /* ChatTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B4240E1E58B8E100B84B1F /* ChatTableCell.swift */; };
+		97B424111E58B90900B84B1F /* ChatLoadingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B424101E58B90900B84B1F /* ChatLoadingTableCell.swift */; };
+		97B424131E59F17F00B84B1F /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B424121E59F17F00B84B1F /* ChatViewModel.swift */; };
+		97B424151E59FBB100B84B1F /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B424141E59FBB100B84B1F /* ChatController.swift */; };
 		97C183C11E22C0F9002CE294 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525025451D801E2A0074E6B5 /* Requests.swift */; };
 		97C183C21E22C0F9002CE294 /* UtilsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590D1D807E5D007E19E9 /* UtilsUI.swift */; };
 		97C183C31E22C0F9002CE294 /* UtilsCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DD590F1D812105007E19E9 /* UtilsCode.swift */; };
@@ -310,6 +318,14 @@
 		97A7AE4C1E0E840000530421 /* EventsManageCreateSecondPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageCreateSecondPageViewController.swift; sourceTree = "<group>"; };
 		97A7AE4E1E0EE17500530421 /* FilledPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledPageControl.swift; sourceTree = "<group>"; };
 		97A7AE501E0EE92500530421 /* EventsManageCreateThirdPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsManageCreateThirdPageViewController.swift; sourceTree = "<group>"; };
+		97B424051E588DA900B84B1F /* ChatsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
+		97B424071E58909E00B84B1F /* ChatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		97B424091E5895A200B84B1F /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		97B4240C1E58968B00B84B1F /* ChatsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsController.swift; sourceTree = "<group>"; };
+		97B4240E1E58B8E100B84B1F /* ChatTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableCell.swift; sourceTree = "<group>"; };
+		97B424101E58B90900B84B1F /* ChatLoadingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLoadingTableCell.swift; sourceTree = "<group>"; };
+		97B424121E59F17F00B84B1F /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		97B424141E59FBB100B84B1F /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		97ED9A6B1E0176C60037D37B /* UIAppearance+Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAppearance+Swift.h"; sourceTree = "<group>"; };
 		97ED9A6E1E0176DD0037D37B /* UIAppearance+Swift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAppearance+Swift.m"; sourceTree = "<group>"; };
 		97ED9A701E0176EE0037D37B /* Happ-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Happ-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -365,6 +381,7 @@
 				520096CB1E27ECE100B34B30 /* Organizer.storyboard */,
 				5239C3811D925D5D00F66E31 /* Authentication.storyboard */,
 				520096D21E27FC7D00B34B30 /* Profile.storyboard */,
+				97B424091E5895A200B84B1F /* Chat.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -435,6 +452,7 @@
 		525A8ABA1D7E87CE002C6F46 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				97B4240B1E58967D00B84B1F /* Chat */,
 				97A7AE491E0E831100530421 /* EventsManage */,
 				52941C2D1DB1E08B00A1CB57 /* SelectCityControllers.swift */,
 				977D26341E15156C0069EBF1 /* SelectPlaceViewController.swift */,
@@ -470,6 +488,8 @@
 			isa = PBXGroup;
 			children = (
 				97AA79F71E1A63FE004223F2 /* EventsManage */,
+				97B4240E1E58B8E100B84B1F /* ChatTableCell.swift */,
+				97B424101E58B90900B84B1F /* ChatLoadingTableCell.swift */,
 				5239C37C1D92434700F66E31 /* EventTableCell.swift */,
 				520096E11E28900900B34B30 /* EventTableCell.xib */,
 				520AAFE01DEC079E0002DE9E /* EventLoadingTableCell.swift */,
@@ -512,6 +532,8 @@
 			isa = PBXGroup;
 			children = (
 				977D26031E14023B0069EBF1 /* DataProtocol.swift */,
+				97B424051E588DA900B84B1F /* ChatsViewModel.swift */,
+				97B424121E59F17F00B84B1F /* ChatViewModel.swift */,
 				525344411DF5AE6F0086436B /* PaginatedDataProtocol.swift */,
 				52A3C2D01D8F8FA000C31F3F /* AuthenticationViewModel.swift */,
 				528159BB1DFD6BCF002DA272 /* SetupUserCity.swift */,
@@ -552,6 +574,7 @@
 				52C2EC671DC8B03500156652 /* InterestService.swift */,
 				52B37CA31DDF24D200CBDA1B /* CityService.swift */,
 				523EFED71DE994600075259D /* MapService.swift */,
+				97B424071E58909E00B84B1F /* ChatService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -639,6 +662,15 @@
 			name = EventsManage;
 			sourceTree = "<group>";
 		};
+		97B4240B1E58967D00B84B1F /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				97B4240C1E58968B00B84B1F /* ChatsController.swift */,
+				97B424141E59FBB100B84B1F /* ChatController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		97ED9A691E0176650037D37B /* UIAppearance+Swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,12 +747,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 525A8AB61D7D4023002C6F46 /* Build configuration list for PBXNativeTarget "Happ" */;
 			buildPhases = (
+				B50708809F6D27B4A46F8932 /* [CP] Check Pods Manifest.lock */,
 				56642773F2714D6931A9AC7B /* [CP] Check Pods Manifest.lock */,
 				97C183C01E22C0F1002CE294 /* Sources */,
 				A7246B1AB953424181610B15 /* Frameworks */,
 				9737E4E21E236795005AF7B7 /* Resources */,
 				64BDF2AA34D5E0AB9E7E775C /* [CP] Embed Pods Frameworks */,
 				B9F86B76805AE6EA78D4F4FF /* [CP] Copy Pods Resources */,
+				ED1A2E474F60276BDE01D532 /* 📦 Embed Pods Frameworks */,
+				8A23527481FCB1FD4A773907 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -745,9 +780,12 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = A7678VKUKQ;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -820,6 +858,7 @@
 				520096C01E27E70900B34B30 /* Event.storyboard in Resources */,
 				520096C91E27ECE100B34B30 /* Organizer.storyboard in Resources */,
 				9737E4EA1E2367FD005AF7B7 /* Authentication.storyboard in Resources */,
+				97B4240A1E5895A200B84B1F /* Chat.storyboard in Resources */,
 				520096D01E27FC7D00B34B30 /* Profile.storyboard in Resources */,
 				9737E4EC1E2367FD005AF7B7 /* LaunchScreen.storyboard in Resources */,
 				9737E4E31E2367C6005AF7B7 /* Assets.xcassets in Resources */,
@@ -862,6 +901,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8A23527481FCB1FD4A773907 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B50708809F6D27B4A46F8932 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		B9F86B76805AE6EA78D4F4FF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -875,6 +944,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED1A2E474F60276BDE01D532 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Happ/Pods-Happ-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -901,6 +985,7 @@
 				97C183C21E22C0F9002CE294 /* UtilsUI.swift in Sources */,
 				97C183C31E22C0F9002CE294 /* UtilsCode.swift in Sources */,
 				97C183C41E22C0F9002CE294 /* FilledPageControl.swift in Sources */,
+				97B4240D1E58968B00B84B1F /* ChatsController.swift in Sources */,
 				97C183C51E22C0F9002CE294 /* DataProtocol.swift in Sources */,
 				97C183C61E22C0F9002CE294 /* Services.swift in Sources */,
 				97C183C71E22C0F9002CE294 /* AuthenticationService.swift in Sources */,
@@ -908,11 +993,14 @@
 				97C183C91E22C0F9002CE294 /* ProfileService.swift in Sources */,
 				97C183CA1E22C0F9002CE294 /* InterestService.swift in Sources */,
 				97C183CB1E22C0F9002CE294 /* CityService.swift in Sources */,
+				97B4240F1E58B8E100B84B1F /* ChatTableCell.swift in Sources */,
 				97C183CC1E22C0F9002CE294 /* MapService.swift in Sources */,
 				97C183CD1E22C0F9002CE294 /* RealmModels.swift in Sources */,
+				97B424061E588DA900B84B1F /* ChatsViewModel.swift in Sources */,
 				97C183CE1E22C0F9002CE294 /* PaginatedDataProtocol.swift in Sources */,
 				97C183CF1E22C0F9002CE294 /* AuthenticationViewModel.swift in Sources */,
 				97C183D01E22C0F9002CE294 /* SetupUserCity.swift in Sources */,
+				97B424081E58909E00B84B1F /* ChatService.swift in Sources */,
 				97C183D11E22C0F9002CE294 /* SelectCityViewModels.swift in Sources */,
 				52564EA01E640605009DB1C0 /* EventDatetimesTableViewCell.swift in Sources */,
 				97C183D21E22C0F9002CE294 /* SelectPlaceViewModel.swift in Sources */,
@@ -920,6 +1008,7 @@
 				97C183D41E22C0F9002CE294 /* EventsListViewModel.swift in Sources */,
 				97C183D51E22C0F9002CE294 /* EventsExploreViewModel.swift in Sources */,
 				97C183D61E22C0F9002CE294 /* EventsMapViewModel.swift in Sources */,
+				97B424131E59F17F00B84B1F /* ChatViewModel.swift in Sources */,
 				97C183D71E22C0F9002CE294 /* EventManageViewModel.swift in Sources */,
 				97C183D81E22C0F9002CE294 /* EventsManageDeniedDetailsViewModel.swift in Sources */,
 				97C183D91E22C0F9002CE294 /* EventViewModel.swift in Sources */,
@@ -946,6 +1035,7 @@
 				97C183FB1E22C0F9002CE294 /* SelectCell.swift in Sources */,
 				97C183FD1E22C0F9002CE294 /* SelectCityCell.swift in Sources */,
 				97C183FF1E22C0F9002CE294 /* EventsManageViewController.swift in Sources */,
+				97B424111E58B90900B84B1F /* ChatLoadingTableCell.swift in Sources */,
 				97C184001E22C0F9002CE294 /* EventsManageFiltersController.swift in Sources */,
 				97C184011E22C0F9002CE294 /* EventsManageDeniedDetailsViewController.swift in Sources */,
 				97C184021E22C0F9002CE294 /* EventsManageCreateViewController.swift in Sources */,
@@ -969,6 +1059,7 @@
 				97C184141E22C0F9002CE294 /* EventsMapViewController.swift in Sources */,
 				97C184151E22C0F9002CE294 /* EventDetailsMapController.swift in Sources */,
 				97C184161E22C0F9002CE294 /* EventDetailsController.swift in Sources */,
+				97B424151E59FBB100B84B1F /* ChatController.swift in Sources */,
 				97C184171E22C0F9002CE294 /* SettingsController.swift in Sources */,
 				52564E981E619B7B009DB1C0 /* EventInterestCollectionViewCell.swift in Sources */,
 				97C184181E22C0F9002CE294 /* SelectCurrencyViewController.swift in Sources */,
@@ -1194,13 +1285,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Happ/Happ.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = A7678VKUKQ;
 				INFOPLIST_FILE = Happ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = YR.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4fa54e53-2158-4062-ad12-83e588372ea0";
+				PROVISIONING_PROFILE_SPECIFIER = "HAPP TF";
 				SWIFT_OBJC_BRIDGING_HEADER = "Happ/Happ-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -1215,12 +1308,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Happ/Happ.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = A7678VKUKQ;
 				INFOPLIST_FILE = Happ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = YR.Happ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4fa54e53-2158-4062-ad12-83e588372ea0";
+				PROVISIONING_PROFILE_SPECIFIER = "HAPP TF";
 				SWIFT_OBJC_BRIDGING_HEADER = "Happ/Happ-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};

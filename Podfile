@@ -8,7 +8,7 @@ target 'Happ' do
   # Pods for Happ
   pod 'PromiseKit', '~> 3.5'
   pod 'PromiseKit/CoreLocation'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '= 2.1.2'
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON', '2.4.0'
   pod 'ObjectMapper', '~> 1.3'
@@ -24,6 +24,8 @@ target 'Happ' do
   pod 'FacebookLogin', '0.1.1'
   pod 'IQKeyboardManagerSwift', '4.0.5'
   pod 'UITextView+Placeholder', '~> 1.2'
+  pod 'QuickBlox'
+  pod 'QMChatViewController', git: "https://github.com/lenyapugachev/QMChatViewController-ios.git"
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

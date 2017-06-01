@@ -18,6 +18,6 @@
     "git": "https://github.com/dekatotoro/SlideMenuControllerSwift.git",
     "tag": "2.3.0"
   },
-  "source_files": "Source/*",
+  "source_files": "Source/*.swift",
   "requires_arc": true
 }

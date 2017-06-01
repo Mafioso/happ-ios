@@ -35,6 +35,7 @@ class ProfileService {
     class func fetchUserProfile() -> Promise<Void> {
         return Get(endpointUser, parameters: nil)
             .then { data -> Void in
+                print(data)
                 let result = data
                 let realm = try! Realm()
                 try! realm.write {

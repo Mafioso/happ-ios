@@ -48,6 +48,8 @@ class EventsManageCreateThirdPageViewController: EventsManageCreateViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.extMakeStatusBarDefault()
+        
         self.navigationItem.leftBarButtonItem?.image = UIImage(named: "nav-back-gray")
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "000000")
         self.navigationItem.title = loc_my_events_submit
